@@ -1,12 +1,12 @@
-import {LitElement, html, css} from 'lit';
-import {LocationObject} from "./types";
+import { LitElement, html, css } from 'lit';
+// eslint-disable-next-line import/extensions
+import { property } from 'lit/decorators.js';
+import { LocationObject , FuroPage } from './types';
+
 
 interface FBPElement extends LitElement {
   _FBPTriggerWire(wire: string, detailData: any): void;
 }
-
-import {FuroPage} from "./types";
-import {property} from "lit/decorators.js";
 
 function isFuroPage(object: any): object is FuroPage {
   // check for method
@@ -63,43 +63,51 @@ function isFuroPage(object: any): object is FuroPage {
  * @customElement
  */
 export class FuroPages extends LitElement {
-  private _fallback: string ;
-  private _default: FBPElement | null;
-  private _attrForSelected: string;
+  @property({ type: String, attribute: 'default' })
+  private defaultPageName: string = 'default';
+
+  @property({ type: String, attribute: 'attribute-name-for-select-state' })
+  private _attrForSelected: string = 'selected';
+
   private _lastQP: Map<string, string>;
+
   private _lastHash: Map<string, string>;
-  private _lastPageName: string;
+
+  private _lastPageName: string = '';
+
   public urlSpaceRegex: string = '';
+
   private _lastPage: FBPElement | null = null;
 
-  private _page:string =''
+  private _page: string = '';
 
+  private _init: boolean = true; // used to send an activated instead of an updated on init
+
+  /**
+   * For simple pages like tabs, set the page by string
+   * @param p
+   */
   @property({ type: String })
-  set page(p:string){
-    this.activatePage(p)
-    this._page = p
+  set page(p: string) {
+    this.activatePage(p);
+    this._page = p;
   }
 
-  get page():string{
-    return this._page
+  get page(): string {
+    return this._page;
   }
-
 
   constructor() {
     super();
-
-    this._fallback = this.getAttribute('default') || 'default';
-
-    this._default = this.querySelector(`*[id=${this._fallback}]`);
-
-    this._attrForSelected = 'selected';
 
     this._lastQP = new Map<string, string>();
 
     this._lastHash = new Map<string, string>();
 
-    this._lastPageName = '';
+  }
 
+  connectedCallback() {
+    super.connectedCallback();
     // set all to aria-hidden
     let l = this.children.length - 1;
     for (l; l >= 0; l -= 1) {
@@ -107,13 +115,12 @@ export class FuroPages extends LitElement {
     }
   }
 
-
   override firstUpdated(_changedProperties: any) {
     super.firstUpdated(_changedProperties);
     setTimeout(() => {
       // Activate Default
-      if (!this._lastPageName && typeof this._fallback === 'string') {
-        this.activatePage(this._fallback);
+      if (!this._lastPageName) {
+        this.activatePage(this.defaultPageName);
       }
     }, 1);
   }
@@ -138,7 +145,7 @@ export class FuroPages extends LitElement {
       hashString,
       hash: {},
       query: {},
-      queryString
+      queryString,
     };
 
     // build the hash object
@@ -148,7 +155,6 @@ export class FuroPages extends LitElement {
         // eslint-disable-next-line prefer-destructuring
         pseudolocation.hash[p[0]] = p[1];
       });
-
     }
     // build the query object
     if (queryString.length > 0) {
@@ -173,11 +179,12 @@ export class FuroPages extends LitElement {
    *
    * @param location
    */
-  injectLocation(location: LocationObject) {
-    const page = location.pathSegments[0] || this._fallback;
+  injectLocation(location: LocationObject) :boolean {
+    const page = location.pathSegments[0] || this.defaultPageName;
     if (page === null) {
+      // eslint-disable-next-line no-console
       console.error('No page defined');
-      return
+      return false;
     }
     if (this._lastPage && page !== this._lastPageName) {
       if (this._lastPage._FBPTriggerWire !== undefined) {
@@ -185,18 +192,15 @@ export class FuroPages extends LitElement {
       }
 
       if (isFuroPage(this._lastPage)) {
-        const lp = this._lastPage as FuroPage
+        const lp = this._lastPage as FuroPage;
         customElements.whenDefined(this._lastPage.localName).then(() => {
-          lp.pageDeActivated(location);
-        })
+          lp.pageDeactivated(location);
+        });
       }
-
 
       this._lastPage.setAttribute('aria-hidden', '');
       this._lastPage.removeAttribute(this._attrForSelected);
-
     }
-
 
     this._lastPage = this.querySelector(`*[id="${page}"]`);
 
@@ -204,9 +208,11 @@ export class FuroPages extends LitElement {
       // 404
       this._lastPage = this.querySelector('*[id="404"]');
       if (!this._lastPage) {
-        this._lastPage = this._default;
+        // fallback is the default page
+        this._lastPage = this.querySelector(`*[id=${this.defaultPageName}]`);
       }
     }
+
     if (this._lastPage) {
       if (this._lastPage.hasAttribute('aria-hidden')) {
         this._lastPage.removeAttribute('aria-hidden');
@@ -216,71 +222,104 @@ export class FuroPages extends LitElement {
         this._lastPage?.setAttribute(this._attrForSelected, '');
       }, 1);
 
+      // send pageActivated on init
       // activate if a different page is selected, otherwise notify
+
       if (this._lastPageName !== page) {
-        if (this._lastPage._FBPTriggerWire !== undefined) {
-          this._lastPage._FBPTriggerWire('|--pageActivated', location);
+        this._notifyPageActivated(location);
+      } else if (this._init) {
+          this._notifyPageActivated(location);
+          this._init = false;
+        } else {
+          this._notifyPageUpdated(location);
         }
-        if (isFuroPage(this._lastPage)) {
-          const lp = this._lastPage as FuroPage
-          customElements.whenDefined(this._lastPage.localName).then(() => {
-            lp.pageActivated(location);
-          })
-        }
-      } else {
-        if (this._lastPage._FBPTriggerWire !== undefined) {
-          // for backward compatibility
-          this._lastPage._FBPTriggerWire('|--pageReActivated', location);
-          this._lastPage._FBPTriggerWire('|--pageUpdated', location);
-        }
-        if (isFuroPage(this._lastPage)) {
-          const lp = this._lastPage as FuroPage
-          customElements.whenDefined(this._lastPage.localName).then(() => {
-            lp.pageUpdated(location);
-          })
-        }
-      }
 
       this._lastPageName = page;
       // QP
       if (this._lastQP.get(page) !== location.queryString) {
         this._lastQP.set(page, location.queryString);
-        // fire --pageParamsChanged if we have a fbp component
-        if (this._lastPage._FBPTriggerWire !== undefined) {
-          this._lastPage._FBPTriggerWire('|--pageQueryChanged', location);
-        }
-        if (isFuroPage(this._lastPage)) {
-          const lp = this._lastPage as FuroPage
-          if (lp.pageQueryChanged) {
-            customElements.whenDefined(this._lastPage.localName).then(() => {
-              lp.pageQueryChanged!(location);
-            })
-          }
-        }
+        this._notifyPageQueryParamChanges(location);
       }
 
       // Hash
       if (this._lastHash.get(page) !== location.hashString) {
         this._lastHash.set(page, location.hashString);
-        // fire --pageParamsChanged if we have a fbp component
-        if (this._lastPage._FBPTriggerWire !== undefined) {
-          this._lastPage._FBPTriggerWire('|--pageHashChanged', location);
-        }
-        if (isFuroPage(this._lastPage)) {
-          const lp = this._lastPage as FuroPage
-          if (lp.pageHashChanged) {
-            customElements.whenDefined(this._lastPage.localName).then(() => {
-              lp.pageHashChanged!(location);
-            })
-          }
-        }
+        this._notifyPageHashChanges(location);
       }
 
-      return this._lastPage;
+      return true;
     }
     // eslint-disable-next-line no-console
     console.warn('default page not found and 404 page not found');
     return false;
+  }
+
+  private _notifyPageHashChanges(location: LocationObject) {
+    if (!this._lastPage) {
+      return;
+    }
+    // fire --pageParamsChanged if we have a fbp component
+    if (this._lastPage._FBPTriggerWire !== undefined) {
+      this._lastPage._FBPTriggerWire('|--pageHashChanged', location);
+    }
+    if (isFuroPage(this._lastPage)) {
+      const lp = this._lastPage as FuroPage;
+      if (lp.pageHashChanged) {
+        customElements.whenDefined(this._lastPage.localName).then(() => {
+          lp.pageHashChanged!(location);
+        });
+      }
+    }
+  }
+
+  private _notifyPageQueryParamChanges(location: LocationObject) {
+    if (!this._lastPage) {
+      return;
+    }
+    // fire --pageParamsChanged if we have a fbp component
+    if (this._lastPage._FBPTriggerWire !== undefined) {
+      this._lastPage._FBPTriggerWire('|--pageQueryChanged', location);
+    }
+    if (isFuroPage(this._lastPage)) {
+      const lp = this._lastPage as FuroPage;
+      if (lp.pageQueryChanged) {
+        customElements.whenDefined(this._lastPage.localName).then(() => {
+          lp.pageQueryChanged!(location);
+        });
+      }
+    }
+  }
+
+  private _notifyPageUpdated(location: LocationObject) {
+    if (!this._lastPage) {
+      return;
+    }
+    if (this._lastPage._FBPTriggerWire !== undefined) {
+      // for backward compatibility
+      this._lastPage._FBPTriggerWire('|--pageReActivated', location);
+      this._lastPage._FBPTriggerWire('|--pageUpdated', location);
+    }
+    if (isFuroPage(this._lastPage)) {
+      const lp = this._lastPage as FuroPage;
+      customElements.whenDefined(this._lastPage.localName).then(() => {
+        lp.pageUpdated(location);
+      });
+    }
+  }
+
+  private _notifyPageActivated(location: LocationObject) {
+    if (!this._lastPage) {
+      return;
+    }
+    if (this._lastPage._FBPTriggerWire !== undefined) {
+      this._lastPage._FBPTriggerWire('|--pageActivated', location);
+    }
+    if (isFuroPage(this._lastPage)) {
+      const lp = this._lastPage as FuroPage;
+      customElements.whenDefined(this._lastPage.localName).then(() => {
+        lp.pageActivated(location);
+      });
+    }
   }
 
   /**
@@ -305,8 +344,7 @@ export class FuroPages extends LitElement {
    */
   render() {
     // language=HTML
-    return html`
-      <slot></slot> `;
+    return html` <slot></slot> `;
   }
 }
 

@@ -1,19 +1,15 @@
-import {LocationObject} from "./types";
-
-
+import { LocationObject } from './types';
 
 type EventType =
-  'location-path-changed'
+  | 'location-path-changed'
   | 'location-hash-changed'
   | 'location-query-changed'
   | 'location-changed'
-  | 'url-space-entered'
-
+  | 'url-space-entered';
 
 interface CustomEventListener {
   (evt: CustomEvent<LocationObject>): void;
 }
-
 
 export class FuroLocation {
   /**
@@ -27,13 +23,13 @@ export class FuroLocation {
    * URL. So to match just URLs that start with /app/ do:
    *     url-space-regex="^/app/"
    *
-   * If you plan to work in subdirectories, you may set **url-space-regex="^${window.APPROOT}/additional/path"**.
+   * If you plan to work in subdirectories, you may set **url-space-regex="^${window.APP_ROOT}/additional/path"**.
    * Keep in mind to put an "url-space-regex" on every furo-location. Otherwise, you can not switch between apps in different
    * folders using a link.
    *
    * @type {string}
    */
-  private urlSpaceRegex: string = "";
+  private urlSpaceRegex: string = '';
 
   private __eventListener: Map<string, any[]> = new Map();
 
@@ -41,18 +37,16 @@ export class FuroLocation {
     host: window.location.host,
     query: {},
     hash: {},
-    path: "/detail",
+    path: '/detail',
     pathSegments: [],
-    hashString: "",
-    queryString: ""
-  }
+    hashString: '',
+    queryString: '',
+  };
 
   private locationChangeNotifier: () => void;
 
-
   constructor(urlSpaceRegex: string) {
     this.urlSpaceRegex = urlSpaceRegex;
-
 
     this.locationChangeNotifier = () => {
       let sendHashChanged = false;
@@ -70,11 +64,13 @@ export class FuroLocation {
           window.location.hash === '' &&
           window.location.pathname.match(`${this.urlSpaceRegex}$`)
         ) {
-          this.dispatchEvent(new CustomEvent('url-space-entered', {
-            composed: false,
-            bubbles: false,
-            detail: this.location
-          }));
+          this.dispatchEvent(
+            new CustomEvent('url-space-entered', {
+              composed: false,
+              bubbles: false,
+              detail: this.location,
+            })
+          );
         }
       }
 
@@ -95,7 +91,7 @@ export class FuroLocation {
       // path segments
       this.location.pathSegments = [];
       let m;
-      const rgx = new RegExp(/\/([^/]*)/gi);
+      const rgx =  /\/([^/]*)/gi
       // eslint-disable-next-line no-cond-assign
       while ((m = rgx.exec(newPath)) !== null) {
         this.location.pathSegments.push(m[1]);
@@ -132,39 +128,45 @@ export class FuroLocation {
       }
 
       if (sendPathChanged) {
-        this.dispatchEvent(new CustomEvent('location-path-changed', {
-          composed: true,
-          bubbles: false,
-          detail: this.location
-        }));
+        this.dispatchEvent(
+          new CustomEvent('location-path-changed', {
+            composed: true,
+            bubbles: false,
+            detail: this.location,
+          })
+        );
       }
 
       if (sendHashChanged) {
-        this.dispatchEvent(new CustomEvent('location-hash-changed', {
-          composed: true,
-          bubbles: false,
-          detail: this.location
-        }));
+        this.dispatchEvent(
+          new CustomEvent('location-hash-changed', {
+            composed: true,
+            bubbles: false,
+            detail: this.location,
+          })
+        );
       }
 
       if (sendQueryChanged) {
-        this.dispatchEvent(new CustomEvent('location-query-changed', {
-          composed: true,
-          bubbles: false,
-          detail: this.location
-        }));
+        this.dispatchEvent(
+          new CustomEvent('location-query-changed', {
+            composed: true,
+            bubbles: false,
+            detail: this.location,
+          })
+        );
       }
 
       // location-changed
-      this.dispatchEvent(new CustomEvent('location-changed', {
-        composed: true,
-        bubbles: false,
-        detail: this.location
-      }));
-
-
-    }
-    this.connect()
+      this.dispatchEvent(
+        new CustomEvent('location-changed', {
+          composed: true,
+          bubbles: false,
+          detail: this.location,
+        })
+      );
+    };
+    this.connect();
   }
 
   /**
@@ -173,11 +175,15 @@ export class FuroLocation {
    * @param handler
    * @param options
    */
-  public addEventListener(type: EventType, handler: CustomEventListener, options?: boolean | AddEventListenerOptions): void {
+  public addEventListener(
+    type: EventType,
+    handler: CustomEventListener,
+    options?: boolean | AddEventListenerOptions
+  ): void {
     if (!this.__eventListener.has(type)) {
       this.__eventListener.set(type, []);
     }
-    this.__eventListener.get(type)!.push({cb: handler, options: options});
+    this.__eventListener.get(type)!.push({ cb: handler, options });
   }
 
   public dispatchEvent(event: CustomEvent): void {
@@ -194,7 +200,6 @@ export class FuroLocation {
       });
     }
   }
-
 
   connect() {
     window.addEventListener(
@@ -218,6 +223,4 @@ export class FuroLocation {
     );
     window.removeEventListener('popstate', this.locationChangeNotifier, true);
   }
-
-
 }

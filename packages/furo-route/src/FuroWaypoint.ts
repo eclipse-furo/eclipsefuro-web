@@ -1,30 +1,28 @@
-import {
-  getIconData,
-  getIconDataSync,
-} from '@ui5/webcomponents-base/dist/asset-registries/Icons.js';
-import {IconData} from "@ui5/webcomponents-base/dist/asset-registries/Icons";
+import { DocumentTitle } from './types';
 
-import {DocumentTitle} from "./types";
-
-type EventType = 'waypoint-pushed' | 'waypoint-canceled'
+type EventType = 'waypoint-pushed' | 'waypoint-canceled';
 
 interface CustomEventListener {
   (evt: CustomEvent): void;
 }
 
-
-export class FuroDocumentTitle {
-
+export class FuroWaypoint {
   private _prefix: string = '';
+
   private _documentTitle: string = '';
+
   private _suffix: string = '';
-  private _icon: string | undefined;
+
   private _inPreStage: boolean = false;
+
   private __eventListener: Map<string, any[]> = new Map();
 
-  constructor(documentTitle: string, icon?: string, prefix?: string, suffix?: string) {
+  constructor(
+    documentTitle: string,
+    prefix?: string,
+    suffix?: string
+  ) {
     this._documentTitle = documentTitle;
-    this._icon = icon;
 
     if (prefix != null) {
       this._prefix = prefix;
@@ -62,13 +60,8 @@ export class FuroDocumentTitle {
     this._setDocumentTitle();
   }
 
-  get icon(): string | undefined {
-    return this._icon;
-  }
 
-  set icon(value: string | undefined) {
-    this._icon = value;
-  }
+  // setMarker() {}
 
   setWaypoint(stateData?: any) {
     /**
@@ -76,7 +69,6 @@ export class FuroDocumentTitle {
      * something in the url changes.
      */
     this._setDocumentTitle();
-
 
     /**
      * This will push the waypoint to the browser history and clear the listeners for cancelation and popstate
@@ -90,20 +82,24 @@ export class FuroDocumentTitle {
       this._inPreStage = false;
 
       this.dispatchEvent(
-        new CustomEvent('waypoint-pushed', {composed: true, bubbles: true, detail: stateData})
+        new CustomEvent('waypoint-pushed', {
+          composed: true,
+          bubbles: true,
+          detail: stateData,
+        })
       );
     };
 
     /**
      * This will cancel the staged waypoint
      */
-    const cancelPre = ( ) => {
+    const cancelPre = () => {
       window.removeEventListener('__beforeReplaceState', pushState, true);
       window.removeEventListener('popstate', cancelPre, true);
       this._inPreStage = false;
 
       this.dispatchEvent(
-        new CustomEvent('waypoint-canceled', {composed: true, bubbles: true})
+        new CustomEvent('waypoint-canceled', { composed: true, bubbles: true })
       );
     };
 
@@ -133,40 +129,21 @@ export class FuroDocumentTitle {
   async _setDocumentTitle() {
     document.title = this._prefix + this._documentTitle + this._suffix;
 
-    window.dispatchEvent(new CustomEvent<DocumentTitle>('document-title-changed', {
-      composed: true, bubbles: true, detail: {
-        prefix: this._prefix,
-        title: this._documentTitle,
-        suffix: this._suffix,
-        documentTitle: document.title,
-        iconName: this._icon
-      }
-    }));
+    window.dispatchEvent(
+      new CustomEvent<DocumentTitle>('document-title-changed', {
+        composed: true,
+        bubbles: true,
+        detail: {
+          prefix: this._prefix,
+          title: this._documentTitle,
+          suffix: this._suffix,
+          documentTitle: document.title,
+        },
+      })
+    );
 
-    if (this.icon) {
-      let link = document.querySelector("link[rel~='icon']") as HTMLLinkElement;
-      if (!link) {
-        link = document.createElement('link');
-        link.rel = 'icon';
 
-        document.getElementsByTagName('head')[0].appendChild(link);
-      }
-      let iconData: IconData | "ICON_NOT_FOUND" | undefined = getIconDataSync(this.icon);
-      if (!iconData) {
-        iconData = await getIconData(this.icon);
-      }
-      if (iconData !== undefined && iconData !== "ICON_NOT_FOUND") {
-        const color = getComputedStyle(document.body)
-          .getPropertyValue('--sapTextColor')
-          .replace('#', '%23');
-        link.href = `${
-          `data:image/svg+xml;utf8,<svg viewBox="0 0 512 512" fill="${color}" focusable="false" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">\n` +
-          `<g role="presentation"><path d="`
-        }${iconData?.pathData}"/></g></svg>`;
-      }
-    }
   }
-
 
   /**
    * Add a handler to a node
@@ -174,11 +151,15 @@ export class FuroDocumentTitle {
    * @param handler
    * @param options
    */
-  public addEventListener(type: EventType, handler: CustomEventListener, options?: boolean | AddEventListenerOptions): void {
+  public addEventListener(
+    type: EventType,
+    handler: CustomEventListener,
+    options?: boolean | AddEventListenerOptions
+  ): void {
     if (!this.__eventListener.has(type)) {
       this.__eventListener.set(type, []);
     }
-    this.__eventListener.get(type)!.push({cb: handler, options: options});
+    this.__eventListener.get(type)!.push({ cb: handler, options });
   }
 
   public dispatchEvent(event: CustomEvent): void {
@@ -195,6 +176,4 @@ export class FuroDocumentTitle {
       });
     }
   }
-
-
 }

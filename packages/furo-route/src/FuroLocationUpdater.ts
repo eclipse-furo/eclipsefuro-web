@@ -1,7 +1,6 @@
-import {HashParams, QueryParams} from "./types";
+import { HashParams, QueryParams } from './types';
 
-export class FuroLocationUpdater{
-
+export class FuroLocationUpdater {
   /**
    * Set query params by giving an object with key-value pairs.
    *
@@ -9,12 +8,15 @@ export class FuroLocationUpdater{
    * @param {QueryParams} queryParams
    * @param {string} queryParamsToRemove - Comma separated list of qp keys to clear/remove from the address
    */
-  static updateQueryParams(queryParams:QueryParams, queryParamsToRemove:string = "") {
+  static updateQueryParams(
+    queryParams: QueryParams,
+    queryParamsToRemove: string = ''
+  ) {
     // read currentPage qp and update incoming qp
 
     const newQuery = window.location.search.slice(1);
 
-    const queryObject :QueryParams = {};
+    const queryObject: QueryParams = {};
     if (newQuery.length > 0) {
       newQuery.split('&').forEach(qstr => {
         const p = qstr.split('=');
@@ -51,24 +53,21 @@ export class FuroLocationUpdater{
     const beforeReplace = new CustomEvent('__beforeReplaceState', {
       composed: true,
       bubbles: true,
-      detail: {cancel: false}
+      detail: { cancel: false },
     });
     window.dispatchEvent(beforeReplace);
 
     if (!beforeReplace.detail.cancel) {
       window.history.replaceState({}, '', location);
 
-
       const customEvent = new CustomEvent('__furoLocationChanged', {
         composed: true,
         bubbles: true,
-        detail: window.performance.now()
+        detail: window.performance.now(),
       });
       window.dispatchEvent(customEvent);
     }
   }
-
-
 
   /**
    * Set hash values by giving an object with key-value pairs.
@@ -76,12 +75,15 @@ export class FuroLocationUpdater{
    * Keep in mind, that this values goes to the url, so setting objects as values is not a good idea
    * @param hashParams
    */
-  static updateHashParams(hashParams:HashParams, hashParamsToRemove:string="") {
+  static updateHashParams(
+    hashParams: HashParams,
+    hashParamsToRemove: string = ''
+  ) {
     // read currentPage hash and update incoming hash
 
     const currentHash = window.location.hash.slice(1);
 
-    const hashObject:HashParams = {};
+    const hashObject: HashParams = {};
     if (currentHash.length > 0) {
       currentHash.split('&').forEach(qstr => {
         const p = qstr.split('=');
@@ -118,20 +120,18 @@ export class FuroLocationUpdater{
     const beforeReplace = new CustomEvent('__beforeReplaceState', {
       composed: true,
       bubbles: true,
-      detail: {cancel: false}
+      detail: { cancel: false },
     });
     window.dispatchEvent(beforeReplace);
-
 
     if (!beforeReplace.detail.cancel) {
       window.history.replaceState({}, '', location);
       const customEvent = new CustomEvent('__furoLocationChanged', {
         composed: true,
         bubbles: true,
-        detail:window.performance.now()
+        detail: window.performance.now(),
       });
       window.dispatchEvent(customEvent);
     }
   }
-
 }
