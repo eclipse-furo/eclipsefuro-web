@@ -1,7 +1,7 @@
 {
   "name": "@furo/route",
   "description": "Routing components",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-route",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "web-types": "./web-types.json",
@@ -25,7 +25,10 @@
     "custom-elements.json",
     "web-types.json"
   ],
-  "keywords": ["web-components", "routing"],
+  "keywords": [
+    "web-components",
+    "routing"
+  ],
   "license": "MIT",
   "scripts": {
     "build": "tsc",
@@ -49,7 +52,10 @@
   },
   "customElements": "custom-elements.json",
   "eslintConfig": {
-    "extends": ["@open-wc", "prettier"]
+    "extends": [
+      "@open-wc",
+      "prettier"
+    ]
   },
   "prettier": {
     "singleQuote": true,
@@ -61,7 +67,11 @@
     }
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "prettier --write",
+      "git add"
+    ]
   },
   "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
 }
