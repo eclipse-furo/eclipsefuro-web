@@ -1,6 +1,7 @@
 import { FlowEvent, QueryParams, Route } from './types';
 
-let furoAppFlowRouter: any;  // FuroAppFlowRouter
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let furoAppFlowRouter: any; // FuroAppFlowRouter
 
 /**
  * The job of the FuroAppFlowRouter is to update the url and manage the history state of the browser.
@@ -24,18 +25,19 @@ class FuroAppFlowRouter {
    * @param urlSpaceRegex {string} - A regexp pattern that defines the set of URLs that should be considered part of this web app. Clicking on a link that matches this regular expression won't result in a full page navigation, but will instead just update the URL state in place.
    */
   constructor(config: Route[], urlSpaceRegex?: string) {
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     furoAppFlowRouter = this;
 
     if (window.history.length <= 1) {
       window.history.replaceState(
         { HistoryStartingPoint: true },
         '',
-        window.location.href
+        window.location.href,
       );
     }
 
     config.forEach(route => {
-      this.configObject.set(`${route.currentPage  }::${  route.flowEvent}`, route);
+      this.configObject.set(`${route.currentPage}::${route.flowEvent}`, route);
     });
 
     if (urlSpaceRegex !== undefined) {
@@ -112,7 +114,7 @@ class FuroAppFlowRouter {
             composed: true,
             bubbles: true,
             detail: window.performance.now(),
-          })
+          }),
         );
       }
 
@@ -129,7 +131,7 @@ class FuroAppFlowRouter {
       .replace(new RegExp(this.urlSpaceRegex), '')
       .replace('/', '');
     const match = window.location.pathname.match(
-      new RegExp(this.urlSpaceRegex)
+      new RegExp(this.urlSpaceRegex),
     );
 
     // slash should be added to rewrite location
@@ -139,7 +141,7 @@ class FuroAppFlowRouter {
     }
 
     const selectedFlow =
-      this.configObject.get(`${currentPath  }::${  flowEvent.eventName}`) ||
+      this.configObject.get(`${currentPath}::${flowEvent.eventName}`) ||
       this.configObject.get(`*::${flowEvent.eventName}`);
 
     /**
@@ -246,7 +248,7 @@ class FuroAppFlowRouter {
             window.history.replaceState(
               window.history.state,
               '',
-              prefix + selectedFlow.target + search
+              prefix + selectedFlow.target + search,
             );
           }
         }

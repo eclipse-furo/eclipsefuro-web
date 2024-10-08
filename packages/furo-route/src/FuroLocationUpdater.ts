@@ -10,7 +10,7 @@ export class FuroLocationUpdater {
    */
   static updateQueryParams(
     queryParams: QueryParams,
-    queryParamsToRemove: string = ''
+    queryParamsToRemove: string = '',
   ) {
     // read currentPage qp and update incoming qp
 
@@ -77,7 +77,7 @@ export class FuroLocationUpdater {
    */
   static updateHashParams(
     hashParams: HashParams,
-    hashParamsToRemove: string = ''
+    hashParamsToRemove: string = '',
   ) {
     // read currentPage hash and update incoming hash
 

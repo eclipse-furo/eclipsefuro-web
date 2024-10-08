@@ -18,12 +18,12 @@ export class FuroNavigationLock {
       window.addEventListener(
         '__beforeReplaceState',
         this._lockHandler as EventListener,
-        true
+        true,
       );
       window.addEventListener(
         '__beforeHistoryBack',
         this._lockHandler as EventListener,
-        true
+        true,
       );
       window.addEventListener('beforeunload', this._unloadHandler, true);
       this._locked = true;
@@ -38,12 +38,12 @@ export class FuroNavigationLock {
       window.removeEventListener(
         '__beforeReplaceState',
         this._lockHandler as EventListener,
-        true
+        true,
       );
       window.removeEventListener(
         '__beforeHistoryBack',
         this._lockHandler as EventListener,
-        true
+        true,
       );
       window.removeEventListener('beforeunload', this._unloadHandler, true);
       this._locked = false;

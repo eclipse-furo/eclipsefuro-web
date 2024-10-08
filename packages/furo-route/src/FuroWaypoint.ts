@@ -6,6 +6,9 @@ interface CustomEventListener {
   (evt: CustomEvent): void;
 }
 
+// eslint-disable-next-line  no-use-before-define
+let ActivatedWaypoint: FuroWaypoint | undefined;
+
 export class FuroWaypoint {
   private _prefix: string = '';
 
@@ -15,13 +18,25 @@ export class FuroWaypoint {
 
   private _inPreStage: boolean = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private __eventListener: Map<string, any[]> = new Map();
 
-  constructor(
-    documentTitle: string,
-    prefix?: string,
-    suffix?: string
-  ) {
+  private _stateData: unknown;
+
+  set stateData(value: unknown) {
+    this._stateData = value;
+  }
+
+  /**
+   * The title of the document is built like following:
+   *
+   * prefix + documentTitle + suffix;
+   *
+   * @param {string} documentTitle
+   * @param {string} prefix
+   * @param {string} suffix
+   */
+  constructor(documentTitle: string, prefix?: string, suffix?: string) {
     this._documentTitle = documentTitle;
 
     if (prefix != null) {
@@ -60,10 +75,9 @@ export class FuroWaypoint {
     this._setDocumentTitle();
   }
 
-
   // setMarker() {}
-
-  setWaypoint(stateData?: any) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  setWaypoint() {
     /**
      * Waypoints are set in a staging (PreStage) and pushed to the history when
      * something in the url changes.
@@ -71,22 +85,26 @@ export class FuroWaypoint {
     this._setDocumentTitle();
 
     /**
-     * This will push the waypoint to the browser history and clear the listeners for cancelation and popstate
+     * This will push the waypoint to the browser history and clear the listeners for cancellation and popstate
      */
     const pushState = () => {
       window.removeEventListener('__beforeReplaceState', pushState, true);
       // eslint-disable-next-line no-use-before-define
       window.removeEventListener('popstate', cancelPre, true);
 
-      window.history.pushState(stateData, document.title, window.location.href);
+      window.history.pushState(
+        this._stateData,
+        document.title,
+        window.location.href,
+      );
       this._inPreStage = false;
 
       this.dispatchEvent(
         new CustomEvent('waypoint-pushed', {
           composed: true,
           bubbles: true,
-          detail: stateData,
-        })
+          detail: this._stateData,
+        }),
       );
     };
 
@@ -99,7 +117,7 @@ export class FuroWaypoint {
       this._inPreStage = false;
 
       this.dispatchEvent(
-        new CustomEvent('waypoint-canceled', { composed: true, bubbles: true })
+        new CustomEvent('waypoint-canceled', { composed: true, bubbles: true }),
       );
     };
 
@@ -120,13 +138,16 @@ export class FuroWaypoint {
    */
   activate() {
     this._setDocumentTitle();
+
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    ActivatedWaypoint = this;
   }
 
   /**
    * Renders the title and set it as document title
    * @private
    */
-  async _setDocumentTitle() {
+  _setDocumentTitle() {
     document.title = this._prefix + this._documentTitle + this._suffix;
 
     window.dispatchEvent(
@@ -139,10 +160,8 @@ export class FuroWaypoint {
           suffix: this._suffix,
           documentTitle: document.title,
         },
-      })
+      }),
     );
-
-
   }
 
   /**
@@ -154,7 +173,7 @@ export class FuroWaypoint {
   public addEventListener(
     type: EventType,
     handler: CustomEventListener,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void {
     if (!this.__eventListener.has(type)) {
       this.__eventListener.set(type, []);
@@ -174,6 +193,12 @@ export class FuroWaypoint {
           delete listenerArray[i];
         }
       });
+    }
+  }
+
+  static deepDive() {
+    if (ActivatedWaypoint) {
+      ActivatedWaypoint.setWaypoint();
     }
   }
 }

@@ -11,6 +11,11 @@ interface CustomEventListener {
   (evt: CustomEvent<LocationObject>): void;
 }
 
+interface EventStore {
+  handler: CustomEventListener;
+  options?: boolean | AddEventListenerOptions;
+}
+
 export class FuroLocation {
   /**
    * A regexp pattern that defines the set of URLs that should be considered part
@@ -31,7 +36,7 @@ export class FuroLocation {
    */
   private urlSpaceRegex: string = '';
 
-  private __eventListener: Map<string, any[]> = new Map();
+  private __eventListener: Map<string, EventStore[]> = new Map();
 
   private location: LocationObject = {
     host: window.location.host,
@@ -69,7 +74,7 @@ export class FuroLocation {
               composed: false,
               bubbles: false,
               detail: this.location,
-            })
+            }),
           );
         }
       }
@@ -91,7 +96,7 @@ export class FuroLocation {
       // path segments
       this.location.pathSegments = [];
       let m;
-      const rgx =  /\/([^/]*)/gi
+      const rgx = /\/([^/]*)/gi;
       // eslint-disable-next-line no-cond-assign
       while ((m = rgx.exec(newPath)) !== null) {
         this.location.pathSegments.push(m[1]);
@@ -133,7 +138,7 @@ export class FuroLocation {
             composed: true,
             bubbles: false,
             detail: this.location,
-          })
+          }),
         );
       }
 
@@ -143,7 +148,7 @@ export class FuroLocation {
             composed: true,
             bubbles: false,
             detail: this.location,
-          })
+          }),
         );
       }
 
@@ -153,7 +158,7 @@ export class FuroLocation {
             composed: true,
             bubbles: false,
             detail: this.location,
-          })
+          }),
         );
       }
 
@@ -163,7 +168,7 @@ export class FuroLocation {
           composed: true,
           bubbles: false,
           detail: this.location,
-        })
+        }),
       );
     };
     this.connect();
@@ -178,12 +183,12 @@ export class FuroLocation {
   public addEventListener(
     type: EventType,
     handler: CustomEventListener,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void {
     if (!this.__eventListener.has(type)) {
       this.__eventListener.set(type, []);
     }
-    this.__eventListener.get(type)!.push({ cb: handler, options });
+    this.__eventListener.get(type)!.push({ handler, options });
   }
 
   public dispatchEvent(event: CustomEvent): void {
@@ -192,8 +197,13 @@ export class FuroLocation {
       this.__eventListener.get(event.type)!.length > 0
     ) {
       this.__eventListener.get(event.type)!.forEach((t, i, listenerArray) => {
-        t.cb(event);
-        if (t.options?.once) {
+        t.handler(event);
+
+        if (
+          typeof t.options !== 'boolean' &&
+          undefined !== t.options &&
+          t.options.once
+        ) {
           // eslint-disable-next-line no-param-reassign
           delete listenerArray[i];
         }
@@ -201,11 +211,15 @@ export class FuroLocation {
     }
   }
 
-  connect() {
+  /**
+   *
+   * @private
+   */
+  private connect() {
     window.addEventListener(
       '__furoLocationChanged',
       this.locationChangeNotifier,
-      true
+      true,
     );
     window.addEventListener('popstate', this.locationChangeNotifier, true);
 
@@ -219,7 +233,7 @@ export class FuroLocation {
     window.removeEventListener(
       '__furoLocationChanged',
       this.locationChangeNotifier,
-      true
+      true,
     );
     window.removeEventListener('popstate', this.locationChangeNotifier, true);
   }

@@ -1,4 +1,3 @@
-
 export interface QueryParams {
   [key: string]: string | number;
 }
@@ -6,7 +5,6 @@ export interface QueryParams {
 export interface HashParams {
   [key: string]: string | number;
 }
-
 
 export interface LocationObject {
   host: string;
@@ -17,7 +15,6 @@ export interface LocationObject {
   hashString: string;
   queryString: string;
 }
-
 
 export interface FuroPage {
   /**
