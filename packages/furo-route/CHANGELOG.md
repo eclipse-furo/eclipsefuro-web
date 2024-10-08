@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@2.7.0...@furo/route@3.1.0) (2024-10-08)
+
+### Bug Fixes
+
+- update version for furo-route manually ([a8c7c96](https://github.com/eclipse/eclipsefuro-web/commit/a8c7c96d540d98f579c848d073979225db4a9a3b))
+
+### Features
+
+- DocumetTitle, LocationUpdater, NavigationLock ([7432f4c](https://github.com/eclipse/eclipsefuro-web/commit/7432f4cec73ac701a572b92244aea98600e12efb))
+- Waypoints ([cbe3551](https://github.com/eclipse/eclipsefuro-web/commit/cbe355129ef2b98636cd316d02cc1b1a2f5a2ab4))
+- Waypoints ([40b7b5d](https://github.com/eclipse/eclipsefuro-web/commit/40b7b5d47d50f61dee32f84558db0885e1206d50))
+
 # [2.7.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@2.6.14...@furo/route@2.7.0) (2024-04-10)
 
 ### Features
