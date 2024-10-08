@@ -4,22 +4,34 @@
   "version": "3.1.0",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-route",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
-  "web-types": "web-types.json",
+  "web-types": "./web-types.json",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/": "./dist/",
+    "./package.json": "./package.json"
+  },
   "author": {
     "name": "",
     "email": "",
     "url": ""
   },
-  "keywords": [
-    "web-components",
-    "routing"
+  "files": [
+    "./dist",
+    "./examples",
+    "icon.svg",
+    "README.md",
+    "custom-elements.json",
+    "web-types.json"
   ],
+  "keywords": ["web-components", "routing"],
   "license": "MIT",
-  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "clean": "rm -rf ./dist ",
     "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
+    "build:codecompletion": "cem analyze --config deep-cem.config.mjs && ./WebtypesPostprocessor.mjs",
     "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
     "lint": "../../node_modules/.bin/eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "../../node_modules/.bin/eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
@@ -37,10 +49,7 @@
   },
   "customElements": "custom-elements.json",
   "eslintConfig": {
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ]
+    "extends": ["@open-wc", "prettier"]
   },
   "prettier": {
     "singleQuote": true,
@@ -52,11 +61,7 @@
     }
   },
   "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+    "*.js": ["eslint --fix", "prettier --write", "git add"]
   },
   "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
 }

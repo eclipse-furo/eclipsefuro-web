@@ -12,11 +12,49 @@
           "name": "FuroAppFlowRouter",
           "members": [
             {
+              "kind": "field",
+              "name": "openBlankPage",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "urlSpaceRegex",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "configObject",
+              "type": {
+                "text": "Map<string, Route>"
+              },
+              "privacy": "private",
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "clickHandler",
+              "type": {
+                "text": "(e: MouseEvent) => void"
+              },
+              "privacy": "private"
+            },
+            {
               "kind": "method",
               "name": "trigger",
               "parameters": [
                 {
-                  "name": "flowEvent"
+                  "name": "flowEvent",
+                  "type": {
+                    "text": "FlowEvent"
+                  }
                 }
               ]
             },
@@ -33,47 +71,25 @@
             {
               "kind": "method",
               "name": "_findAtagInPath",
-              "parameters": [
-                {
-                  "name": "path"
-                }
-              ],
-              "description": "look for A tags in a path array from click events",
               "privacy": "private",
               "return": {
                 "type": {
                   "text": "boolean|*"
                 }
-              }
-            },
-            {
-              "kind": "field",
-              "name": "openBlankPage",
-              "type": {
-                "text": "boolean"
               },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "urlSpaceRegex",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "configObject",
-              "default": "new Map()"
+              "parameters": [
+                {
+                  "name": "path",
+                  "type": {
+                    "text": "EventTarget[]"
+                  }
+                }
+              ],
+              "description": "look for A tags in a path array from click events"
             },
             {
               "kind": "field",
               "default": "this"
-            },
-            {
-              "kind": "field",
-              "name": "clickHandler"
             }
           ]
         },
@@ -88,10 +104,17 @@
               "static": true,
               "parameters": [
                 {
-                  "name": "eventName"
+                  "name": "eventName",
+                  "type": {
+                    "text": "string"
+                  }
                 },
                 {
-                  "name": "queryParams"
+                  "name": "queryParams",
+                  "optional": true,
+                  "type": {
+                    "text": "QueryParams"
+                  }
                 }
               ]
             }
@@ -104,7 +127,7 @@
           "name": "FuroAppFlow",
           "declaration": {
             "name": "FuroAppFlow",
-            "module": "dist/FuroAppFlowRouter.js"
+            "module": "src/FuroAppFlowRouter.ts"
           }
         },
         {
@@ -112,7 +135,7 @@
           "name": "FuroAppFlowRouter",
           "declaration": {
             "name": "FuroAppFlowRouter",
-            "module": "dist/FuroAppFlowRouter.js"
+            "module": "src/FuroAppFlowRouter.ts"
           }
         }
       ]
@@ -127,17 +150,69 @@
           "name": "FuroLocation",
           "members": [
             {
+              "kind": "field",
+              "name": "urlSpaceRegex",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "urlSpaceRegex",
+              "description": "A regexp pattern that defines the set of URLs that should be considered part\nof this web app.\n\nClicking on a link that matches this pattern won't result in a full page\nnavigation, but will instead just update the URL state in place.\n\nThis regexp is given everything after the origin in an absolute\nURL. So to match just URLs that start with /app/ do:\n    url-space-regex=\"^/app/\"\n\nIf you plan to work in subdirectories, you may set **url-space-regex=\"^${window.APP_ROOT}/additional/path\"**.\nKeep in mind to put an \"url-space-regex\" on every furo-location. Otherwise, you can not switch between apps in different\nfolders using a link."
+            },
+            {
+              "kind": "field",
+              "name": "__eventListener",
+              "type": {
+                "text": "Map<string, EventStore[]>"
+              },
+              "privacy": "private",
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "location",
+              "type": {
+                "text": "LocationObject"
+              },
+              "privacy": "private",
+              "default": "{ host: window.location.host, query: {}, hash: {}, path: '/detail', pathSegments: [], hashString: '', queryString: '', }"
+            },
+            {
+              "kind": "field",
+              "name": "locationChangeNotifier",
+              "type": {
+                "text": "() => void"
+              },
+              "privacy": "private"
+            },
+            {
               "kind": "method",
               "name": "addEventListener",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "type"
+                  "name": "type",
+                  "type": {
+                    "text": "EventType"
+                  }
                 },
                 {
-                  "name": "handler"
+                  "name": "handler",
+                  "type": {
+                    "text": "CustomEventListener"
+                  }
                 },
                 {
-                  "name": "options"
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | AddEventListenerOptions"
+                  }
                 }
               ],
               "description": "Add a handler to a node"
@@ -145,9 +220,18 @@
             {
               "kind": "method",
               "name": "dispatchEvent",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "event"
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
                 }
               ]
             },
@@ -159,32 +243,6 @@
             {
               "kind": "method",
               "name": "disconnect"
-            },
-            {
-              "kind": "field",
-              "name": "urlSpaceRegex",
-              "type": {
-                "text": "string"
-              },
-              "description": "A regexp pattern that defines the set of URLs that should be considered part\nof this web app.\n\nClicking on a link that matches this pattern won't result in a full page\nnavigation, but will instead just update the URL state in place.\n\nThis regexp is given everything after the origin in an absolute\nURL. So to match just URLs that start with /app/ do:\n    url-space-regex=\"^/app/\"\n\nIf you plan to work in subdirectories, you may set **url-space-regex=\"^${window.APP_ROOT}/additional/path\"**.\nKeep in mind to put an \"url-space-regex\" on every furo-location. Otherwise, you can not switch between apps in different\nfolders using a link.",
-              "default": "urlSpaceRegex"
-            },
-            {
-              "kind": "field",
-              "name": "__eventListener",
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "location",
-              "type": {
-                "text": "object"
-              },
-              "default": "{\n            host: window.location.host,\n            query: {},\n            hash: {},\n            path: '/detail',\n            pathSegments: [],\n            hashString: '',\n            queryString: '',\n        }"
-            },
-            {
-              "kind": "field",
-              "name": "locationChangeNotifier"
             }
           ]
         }
@@ -195,7 +253,7 @@
           "name": "FuroLocation",
           "declaration": {
             "name": "FuroLocation",
-            "module": "dist/FuroLocation.js"
+            "module": "src/FuroLocation.ts"
           }
         }
       ]
@@ -223,10 +281,10 @@
                 {
                   "name": "queryParamsToRemove",
                   "default": "''",
-                  "description": "Comma separated list of qp keys to clear/remove from the address",
                   "type": {
                     "text": "string"
-                  }
+                  },
+                  "description": "Comma separated list of qp keys to clear/remove from the address"
                 }
               ],
               "description": "Set query params by giving an object with key-value pairs.\n\nKeep in mind, that this values goes to the url, so setting objects as values is not a good idea"
@@ -237,11 +295,17 @@
               "static": true,
               "parameters": [
                 {
-                  "name": "hashParams"
+                  "name": "hashParams",
+                  "type": {
+                    "text": "HashParams"
+                  }
                 },
                 {
                   "name": "hashParamsToRemove",
-                  "default": "''"
+                  "default": "''",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ],
               "description": "Set hash values by giving an object with key-value pairs.\n\nKeep in mind, that this values goes to the url, so setting objects as values is not a good idea"
@@ -255,7 +319,7 @@
           "name": "FuroLocationUpdater",
           "declaration": {
             "name": "FuroLocationUpdater",
-            "module": "dist/FuroLocationUpdater.js"
+            "module": "src/FuroLocationUpdater.ts"
           }
         }
       ]
@@ -270,6 +334,24 @@
           "name": "FuroNavigationLock",
           "members": [
             {
+              "kind": "field",
+              "name": "message",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "default": "'You have unsaved changes, proceed anyway?'"
+            },
+            {
+              "kind": "field",
+              "name": "_locked",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
               "kind": "method",
               "name": "lock",
               "description": "Blocks furo-location-updater and furo-app-flow-router from navigating away."
@@ -282,38 +364,28 @@
             {
               "kind": "method",
               "name": "_lockHandler",
+              "privacy": "private",
               "parameters": [
                 {
-                  "name": "event"
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent<{ cancel: boolean }>"
+                  }
                 }
-              ],
-              "privacy": "private"
+              ]
             },
             {
               "kind": "method",
               "name": "_unloadHandler",
               "parameters": [
                 {
-                  "name": "event"
+                  "name": "event",
+                  "type": {
+                    "text": "BeforeUnloadEvent"
+                  }
                 }
               ],
               "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "message",
-              "type": {
-                "text": "string"
-              },
-              "default": "'You have unsaved changes, proceed anyway?'"
-            },
-            {
-              "kind": "field",
-              "name": "_locked",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
             }
           ]
         }
@@ -324,7 +396,7 @@
           "name": "FuroNavigationLock",
           "declaration": {
             "name": "FuroNavigationLock",
-            "module": "dist/FuroNavigationLock.js"
+            "module": "src/FuroNavigationLock.ts"
           }
         }
       ]
@@ -349,13 +421,120 @@
           "members": [
             {
               "kind": "field",
+              "name": "defaultPageName",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "'default'",
+              "attribute": "default"
+            },
+            {
+              "kind": "field",
+              "name": "_attrForSelected",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "'selected'",
+              "attribute": "attribute-name-for-select-state"
+            },
+            {
+              "kind": "field",
+              "name": "_lastQP",
+              "type": {
+                "text": "Map<string, string>"
+              },
+              "privacy": "private",
+              "default": "new Map<string, string>()"
+            },
+            {
+              "kind": "field",
+              "name": "_lastHash",
+              "type": {
+                "text": "Map<string, string>"
+              },
+              "privacy": "private",
+              "default": "new Map<string, string>()"
+            },
+            {
+              "kind": "field",
+              "name": "_lastPageName",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "urlSpaceRegex",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_lastPage",
+              "type": {
+                "text": "FBPElement | null"
+              },
+              "privacy": "private",
+              "default": "null"
+            },
+            {
+              "kind": "field",
+              "name": "_page",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_init",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            },
+            {
+              "kind": "field",
+              "name": "_pageRef",
+              "type": {
+                "text": "Record<string, string>"
+              },
+              "privacy": "private",
+              "default": "{}"
+            },
+            {
+              "kind": "field",
               "name": "page",
               "description": "For simple pages like tabs, set the page by string",
               "parameters": [
                 {
                   "name": "p"
                 }
-              ]
+              ],
+              "type": {
+                "text": "string"
+              },
+              "attribute": "page"
+            },
+            {
+              "kind": "field",
+              "name": "mode",
+              "type": {
+                "text": "\"default\" | \"destructive\""
+              },
+              "default": "'default'",
+              "description": "The `default` mode (recommended) removes your node from the render tree and is the fastest mode. It uses more memory than the `destructive` mode.\n\nThe state of the disabled element is kept, form fields which are filled, are the same as before you left the page.\n\n---\n\nThe `destructive` mode removes and destroys the element which is deactivated from the dom\nand will insert it back to the dom when they are activated (insertAdjacentHTML).\n\nThe insertAdjacentHTML() method does not reparse the element it is being used on,\nand thus it does not corrupt the existing elements inside that element.\nThis avoids the extra step of serialization, making it much faster than direct innerHTML manipulation.\n\nThis `destructive` mode is uses less memory, but **looses the state** of the disabled element and is a little bit slower.\n\nUse this if you know what you are doing, because the connectedCallback and disconnectedCallback of every item in your page is also called and everything is built up freshly.",
+              "privacy": "public",
+              "attribute": "mode"
             },
             {
               "kind": "method",
@@ -373,9 +552,17 @@
             {
               "kind": "method",
               "name": "injectLocation",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
               "parameters": [
                 {
-                  "name": "location"
+                  "name": "location",
+                  "type": {
+                    "text": "LocationObject"
+                  }
                 }
               ],
               "description": "Inject the location Object from furo-location. The page which is defined in location.pathSegments[0] will get activated.\n\nTo meke \"sub\" pages do not forget to enable the `url-space-regex` property on the *furo-location* component which feeds this component.\n\nIf the page/view does not exist, and you have a page \"404\" defined, the 404 will be shown\n\nIf the page/view does not exist AND 404 does not exist, the default page gets activated.",
@@ -384,132 +571,72 @@
             {
               "kind": "method",
               "name": "_notifyPageHashChanges",
+              "privacy": "private",
               "parameters": [
                 {
-                  "name": "location"
+                  "name": "location",
+                  "type": {
+                    "text": "LocationObject"
+                  }
                 }
               ]
             },
             {
               "kind": "method",
               "name": "_notifyPageQueryParamChanges",
+              "privacy": "private",
               "parameters": [
                 {
-                  "name": "location"
+                  "name": "location",
+                  "type": {
+                    "text": "LocationObject"
+                  }
                 }
               ]
             },
             {
               "kind": "method",
               "name": "_notifyPageUpdated",
+              "privacy": "private",
               "parameters": [
                 {
-                  "name": "location"
+                  "name": "location",
+                  "type": {
+                    "text": "LocationObject"
+                  }
                 }
               ]
             },
             {
               "kind": "method",
               "name": "_notifyPageActivated",
+              "privacy": "private",
               "parameters": [
                 {
-                  "name": "location"
+                  "name": "location",
+                  "type": {
+                    "text": "LocationObject"
+                  }
                 }
               ]
             },
             {
               "kind": "method",
               "name": "isWebComponent",
+              "return": {
+                "type": {
+                  "text": "boolean"
+                }
+              },
               "parameters": [
                 {
-                  "name": "localName"
+                  "name": "localName",
+                  "type": {
+                    "text": "string"
+                  }
                 }
               ],
               "description": "Checks if a node is a web component."
-            },
-            {
-              "kind": "field",
-              "name": "defaultPageName",
-              "type": {
-                "text": "string"
-              },
-              "default": "'default'"
-            },
-            {
-              "kind": "field",
-              "name": "_attrForSelected",
-              "type": {
-                "text": "string"
-              },
-              "default": "'selected'"
-            },
-            {
-              "kind": "field",
-              "name": "_lastQP",
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "_lastHash",
-              "default": "new Map()"
-            },
-            {
-              "kind": "field",
-              "name": "_lastPageName",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "urlSpaceRegex",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_lastPage",
-              "type": {
-                "text": "null"
-              },
-              "default": "null"
-            },
-            {
-              "kind": "field",
-              "name": "_page",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_init",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "true"
-            },
-            {
-              "kind": "field",
-              "name": "_pageRef",
-              "type": {
-                "text": "object"
-              },
-              "default": "{}"
-            },
-            {
-              "kind": "field",
-              "name": "mode",
-              "type": {
-                "text": "string"
-              },
-              "description": "The `default` mode (recommended) removes your node from the render tree and is the fastest mode. It uses more memory than the `destructive` mode.\n\nThe state of the disabled element is kept, form fields which are filled, are the same as before you left the page.\n\n---\n\nThe `destructive` mode removes and destroys the element which is deactivated from the dom\nand will insert it back to the dom when they are activated (insertAdjacentHTML).\n\nThe insertAdjacentHTML() method does not reparse the element it is being used on,\nand thus it does not corrupt the existing elements inside that element.\nThis avoids the extra step of serialization, making it much faster than direct innerHTML manipulation.\n\nThis `destructive` mode is uses less memory, but **looses the state** of the disabled element and is a little bit slower.\n\nUse this if you know what you are doing, because the connectedCallback and disconnectedCallback of every item in your page is also called and everything is built up freshly.",
-              "privacy": "public",
-              "default": "'default'"
             }
           ],
           "attributes": [
@@ -518,7 +645,9 @@
                 "text": "string"
               },
               "description": "Set the default page to show.",
-              "name": "default"
+              "name": "default",
+              "default": "'default'",
+              "fieldName": "defaultPageName"
             },
             {
               "type": {
@@ -526,6 +655,36 @@
               },
               "description": "Enables the flex mode when used in a flex parent like vertical-flex.",
               "name": "flex"
+            },
+            {
+              "name": "attribute-name-for-select-state",
+              "type": {
+                "text": "string"
+              },
+              "default": "'selected'",
+              "fieldName": "_attrForSelected"
+            },
+            {
+              "name": "page",
+              "description": "For simple pages like tabs, set the page by string",
+              "parameters": [
+                {
+                  "name": "p"
+                }
+              ],
+              "type": {
+                "text": "string"
+              },
+              "fieldName": "page"
+            },
+            {
+              "name": "mode",
+              "type": {
+                "text": "\"default\" | \"destructive\""
+              },
+              "default": "'default'",
+              "description": "The `default` mode (recommended) removes your node from the render tree and is the fastest mode. It uses more memory than the `destructive` mode.\n\nThe state of the disabled element is kept, form fields which are filled, are the same as before you left the page.\n\n---\n\nThe `destructive` mode removes and destroys the element which is deactivated from the dom\nand will insert it back to the dom when they are activated (insertAdjacentHTML).\n\nThe insertAdjacentHTML() method does not reparse the element it is being used on,\nand thus it does not corrupt the existing elements inside that element.\nThis avoids the extra step of serialization, making it much faster than direct innerHTML manipulation.\n\nThis `destructive` mode is uses less memory, but **looses the state** of the disabled element and is a little bit slower.\n\nUse this if you know what you are doing, because the connectedCallback and disconnectedCallback of every item in your page is also called and everything is built up freshly.",
+              "fieldName": "mode"
             }
           ],
           "superclass": {
@@ -543,7 +702,7 @@
           "name": "FuroPages",
           "declaration": {
             "name": "FuroPages",
-            "module": "dist/FuroPages.js"
+            "module": "src/FuroPages.ts"
           }
         }
       ]
@@ -559,19 +718,81 @@
           "members": [
             {
               "kind": "field",
+              "name": "_prefix",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_documentTitle",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "documentTitle"
+            },
+            {
+              "kind": "field",
+              "name": "_suffix",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "private",
+              "default": "''"
+            },
+            {
+              "kind": "field",
+              "name": "_inPreStage",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "false"
+            },
+            {
+              "kind": "field",
+              "name": "__eventListener",
+              "type": {
+                "text": "Map<string, any[]>"
+              },
+              "privacy": "private",
+              "default": "new Map()"
+            },
+            {
+              "kind": "field",
+              "name": "_stateData",
+              "type": {
+                "text": "unknown"
+              },
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
               "name": "stateData"
             },
             {
               "kind": "field",
-              "name": "prefix"
+              "name": "prefix",
+              "type": {
+                "text": "string"
+              }
             },
             {
               "kind": "field",
-              "name": "documentTitle"
+              "name": "documentTitle",
+              "type": {
+                "text": "string"
+              }
             },
             {
               "kind": "field",
-              "name": "suffix"
+              "name": "suffix",
+              "type": {
+                "text": "string"
+              }
             },
             {
               "kind": "method",
@@ -591,15 +812,31 @@
             {
               "kind": "method",
               "name": "addEventListener",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "type"
+                  "name": "type",
+                  "type": {
+                    "text": "EventType"
+                  }
                 },
                 {
-                  "name": "handler"
+                  "name": "handler",
+                  "type": {
+                    "text": "CustomEventListener"
+                  }
                 },
                 {
-                  "name": "options"
+                  "name": "options",
+                  "optional": true,
+                  "type": {
+                    "text": "boolean | AddEventListenerOptions"
+                  }
                 }
               ],
               "description": "Add a handler to a node"
@@ -607,9 +844,18 @@
             {
               "kind": "method",
               "name": "dispatchEvent",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              },
               "parameters": [
                 {
-                  "name": "event"
+                  "name": "event",
+                  "type": {
+                    "text": "CustomEvent"
+                  }
                 }
               ]
             },
@@ -617,43 +863,6 @@
               "kind": "method",
               "name": "deepDive",
               "static": true
-            },
-            {
-              "kind": "field",
-              "name": "_prefix",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_documentTitle",
-              "type": {
-                "text": "string"
-              },
-              "default": "documentTitle"
-            },
-            {
-              "kind": "field",
-              "name": "_suffix",
-              "type": {
-                "text": "string"
-              },
-              "default": "''"
-            },
-            {
-              "kind": "field",
-              "name": "_inPreStage",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "__eventListener",
-              "default": "new Map()"
             }
           ],
           "events": [
@@ -678,7 +887,7 @@
           "name": "FuroWaypoint",
           "declaration": {
             "name": "FuroWaypoint",
-            "module": "dist/FuroWaypoint.js"
+            "module": "src/FuroWaypoint.ts"
           }
         }
       ]
@@ -693,7 +902,7 @@
           "name": "furo-pages",
           "declaration": {
             "name": "FuroPages",
-            "module": "/dist/FuroPages"
+            "module": "/src/FuroPages"
           }
         }
       ]
