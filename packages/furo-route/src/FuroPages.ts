@@ -11,7 +11,7 @@ interface FBPElement extends LitElement {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function isFuroPage(object: any): object is FuroPage {
   // check for method
-  return !!object.pageActivated;
+  return !!object.onPageActivated;
 }
 
 /**
@@ -47,19 +47,19 @@ function isFuroPage(object: any): object is FuroPage {
  * ## Lifecycle
  * If the inserted page implements the `FuroPage` interface, the following lifecycle method of your page are called:
  *
- * ### `pageActivated(location: LocationObject): void;`
+ * ### `onPageActivated(location: LocationObject): void;`
  * Triggered when the page is initialized, or you moved from another page to this page
  *
- * ### `pageDeactivated(newLocation: LocationObject): void;`
+ * ### `onPageDeactivated(newLocation: LocationObject): void;`
  * Triggered when you go to a different page.
  *
- * ### `pageUpdated(location: LocationObject): void;`
+ * ### `onPageUpdated(location: LocationObject): void;`
  * Triggered when something in the URL of the current page changes, query, hash or subpages path.
  *
- * ### `pageQueryChanged?(location: LocationObject): void;`
+ * ### `onPageQueryChanged?(location: LocationObject): void;`
  * Triggered when query params changed.
  *
- * ### `pageHashChanged?(location: LocationObject): void;`
+ * ### `onPageHashChanged?(location: LocationObject): void;`
  * Triggered when hash params change
  *
  * furo-pages provides auto wires, which are automatically triggered in the child elements if
@@ -239,7 +239,7 @@ export class FuroPages extends LitElement {
       ) {
         const lp = this._lastPage as FuroPage;
         customElements.whenDefined(this._lastPage.localName).then(() => {
-          lp.pageDeactivated(location);
+          lp.onPageDeactivated(location);
         });
       }
 
@@ -330,8 +330,8 @@ export class FuroPages extends LitElement {
       customElements.whenDefined(this._lastPage.localName).then(() => {
         if (isFuroPage(this._lastPage)) {
           const lp = this._lastPage as FuroPage;
-          if (lp.pageHashChanged !== undefined) {
-            lp.pageHashChanged(location);
+          if (lp.onPageHashChanged !== undefined) {
+            lp.onPageHashChanged(location);
           }
         }
       });
@@ -359,8 +359,8 @@ export class FuroPages extends LitElement {
       customElements.whenDefined(this._lastPage.localName).then(() => {
         if (isFuroPage(this._lastPage)) {
           const lp = this._lastPage as FuroPage;
-          if (lp.pageQueryChanged !== undefined) {
-            lp.pageQueryChanged(location);
+          if (lp.onPageQueryChanged !== undefined) {
+            lp.onPageQueryChanged(location);
           }
         }
       });
@@ -389,7 +389,7 @@ export class FuroPages extends LitElement {
       customElements.whenDefined(this._lastPage.localName).then(() => {
         if (isFuroPage(this._lastPage)) {
           const lp = this._lastPage as FuroPage;
-          lp.pageUpdated(location);
+          lp.onPageUpdated(location);
         }
       });
     }
@@ -412,7 +412,7 @@ export class FuroPages extends LitElement {
       customElements.whenDefined(this._lastPage.localName).then(() => {
         if (isFuroPage(this._lastPage)) {
           const lp = this._lastPage as FuroPage;
-          lp.pageActivated(location);
+          lp.onPageActivated(location);
         }
       });
     }

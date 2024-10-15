@@ -18,15 +18,37 @@ export interface LocationObject {
 
 export interface FuroPage {
   /**
-   * Triggered when the page is activated
+   * Triggered when the page is initialized, or you moved from another page to this page
    * @param location
    */
-  pageActivated(location: LocationObject): void;
-  pageDeactivated(newLocation: LocationObject): void;
-  pageUpdated(location: LocationObject): void;
-  pageQueryChanged?(location: LocationObject): void;
-  pageHashChanged?(location: LocationObject): void;
+  onPageActivated(location: LocationObject): void;
+
+  /**
+   * Triggered when you go to a different page.
+   * @param newLocation
+   */
+  onPageDeactivated(newLocation: LocationObject): void;
+
+  /**
+   * Triggered when something in the URL of the current page changes, query, hash or subpages path.
+   * @param location
+   */
+  onPageUpdated(location: LocationObject): void;
+
+  /**
+   * Triggered when query params changed.
+   * @param location
+   */
+  onPageQueryChanged?(location: LocationObject): void;
+
+  /**
+   * Triggered when hash params change
+   * @param location
+   */
+  onPageHashChanged?(location: LocationObject): void;
 }
+
+
 
 export interface QueryParamMap {
   from: string;
