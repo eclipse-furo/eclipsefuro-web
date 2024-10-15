@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.2.0...@furo/route@3.3.0) (2024-10-15)
+
+### Features
+
+- [furo-route] update the interface of a furo page ([15b5a80](https://github.com/eclipse/eclipsefuro-web/commit/15b5a80a05c0f2d910700b9f27aba1918af92b7b))
+
 # [3.2.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.1.0...@furo/route@3.2.0) (2024-10-08)
 
 ### Features
