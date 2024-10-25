@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.3.0...@furo/route@3.4.0) (2024-10-25)
+
+### Features
+
+- [furo-route] remove timeouts ([4d6f131](https://github.com/eclipse/eclipsefuro-web/commit/4d6f1312c542f43547ff3b0ac457fa9d96a2b335))
+
 # [3.3.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.2.0...@furo/route@3.3.0) (2024-10-15)
 
 ### Features
