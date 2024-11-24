@@ -1,0 +1,169 @@
+syntax = "proto3";
+package furo.fat;
+option csharp_namespace = "Furo.Fat";
+option go_package = "furo/fat;fatpb";
+option java_multiple_files = true;
+option java_outer_classname = "FatProto";
+option java_package = "pro.furo.fat";
+option objc_class_prefix = "FAT";
+
+import "furo/type/decimal.proto";
+
+
+
+// Represents a decimal range, encoded as a decimal start (inclusive) and a
+//  decimal end (exclusive).
+//
+//  The start must be less than or equal to the end.
+//  If a decimal is empty it means min for start and max for end.
+message DecimalRange {
+
+  // Optional. Inclusive start of the decimal range.
+  furo.type.Decimal start = 1;
+
+  // Optional. Exclusive end of the decimal range.
+  furo.type.Decimal end = 2;
+}
+
+
+// Furo annotated type wrapper message for `any`.
+// // Any contains an arbitrary serialized protocol buffer message along with a
+// // URL that describes the type of the serialized message. https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/any.proto
+message Any {
+
+    // The JSON representation for `AnyValue` is a JSON string? The client uses type `ArrayBuffer` for the value field.
+    bytes value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `bool`.
+message Bool {
+
+    // The JSON representation for `BoolValue` is a JSON boolean
+    bool value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `bytes`.
+message Bytes {
+
+    // The JSON representation for `BytesValue` is a JSON string
+    bytes value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `double`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations
+message Double {
+
+    // The JSON representation for `DoubleValue` is JSON number, range is set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER
+    double value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `empty`. Empty has no values and only contains the labels and attributes
+message Empty {
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `float`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations
+message Float {
+
+    // The JSON representation for `FloatValue` is JSON number
+    float value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `int32`.
+message Int32 {
+
+    // The JSON representation for `Int32Value` is JSON number
+    int32 value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `int64`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations
+message Int64 {
+
+    // The JSON representation for `Int64Value` is JSON number, range is set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER
+    int64 value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `string`.
+message String {
+
+    // The JSON representation for `StringValue` is a JSON string
+    string value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `uint32`.  https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto
+message Uint32 {
+
+    // The JSON representation for `Uint32Value` is JSON number
+    uint32 value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}
+
+// Furo annotated type wrapper message for `uint64`.  The range constraints are set to Number.MAX_SAFE_INTEGER because of browser limitations
+message Uint64 {
+
+    // The JSON representation for `Uint64Value` is JSON number, range is set to 0 - Number.MAX_SAFE_INTEGER
+    uint64 value = 1;
+
+    // Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
+    map<string,bool> labels = 2;
+
+    // Attributes for a value, something like confidential-msg: you are not allowed to see this value
+    map<string,string> attributes = 3;
+}

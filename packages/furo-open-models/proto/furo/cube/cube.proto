@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package furo.cube;
+
+option java_multiple_files = true;
+option java_package = "pro.furo.cube";
+option go_package = "furo/cube;cubepb";
+
+
+import "furo/cube/colours.proto";
+import "furo/cube/enums.proto";
+
+import "openapiv3/annotations.proto";
+
+message CubeDefinition {
+  option (openapi.v3.schema) = {required:['length', 'breadth','height']};
+  double length = 1 [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  double breadth = 2 [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  double height = 3  [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  cube.Colour colour = 4;
+  Materials material = 5;
+  oneof op{
+    string str = 6;
+    bool boo = 7;
+    int32 num = 8;
+  }
+
+}
+
+message CubeEntity {
+  string display_name = 1 [(openapi.v3.property) = {read_only:true}];
+  string description = 2;
+  CubeDefinition cube = 3 [(openapi.v3.property) = {default:{string:'{"length":222}'}}];
+}
+

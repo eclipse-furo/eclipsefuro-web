@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package furo.cube;
+
+option java_multiple_files = true;
+option java_package = "pro.furo.cube";
+option go_package = "furo/cube;cubepb";
+
+import "google/api/annotations.proto";
+import "openapiv3/annotations.proto";
+import "furo/cube/cube.proto";
+
+option (openapi.v3.document) = {
+  info: {
+    title: "Cube API";
+    version: "{{ .version }}";
+  };
+};
+
+// cube services
+service CubeService {
+  // Get a list of cubes
+  rpc GetList(CubeServiceGetListRequest) returns (CubeServiceGetListResponse) { // trailing
+    option(google.api.http) = {
+      get: "/v1/cubes", // comment on path
+    };
+  };
+
+  rpc Get(CubeServiceGetRequest) returns (CubeServiceGetResponse) {
+    option(google.api.http) = {
+      get: "/v1/cubes/{cube_id}"
+    };
+  };
+
+  rpc Update(CubeServiceUpdateRequest) returns (CubeServiceUpdateResponse) {
+    option(google.api.http) = {
+      put: "/v1/cubes/{cube_id}",
+      body: "entity"
+    };
+  };
+}
+
+message CubeServiceGetListRequest {
+  // searches for display_name or client_number
+  string query = 1;
+}
+
+message CubeServiceGetListResponse {
+  repeated CubeEntity entities = 1;
+}
+
+message CubeServiceGetRequest {
+  // ID of the cube
+  string cube_id = 1;
+  // Partial Response, https://cloud.google.com/apis/design/design_patterns#partial_response
+  // use wildcard * to get all fields
+  string fields = 2 [(openapi.v3.property) = {default:{string:"*"}}];
+}
+
+message CubeServiceGetResponse {
+  CubeEntity entity = 1;
+}
+
+message CubeServiceUpdateRequest {
+  // ID of the cube
+  string cube_id = 1;
+  CubeEntity entity = 2;
+}
+
+message CubeServiceUpdateResponse {
+  CubeEntity entity = 1;
+}
