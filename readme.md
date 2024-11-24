@@ -6,11 +6,10 @@ Enterprise ready set of web components which work best with [Eclipse Furo](https
 We have activated **conventionalCommits** in the lerna config. 
 [ConventionalCommits](https://www.conventionalcommits.org/en/v1.0.0-beta.2/) is a specification for adding human and machine readable meaning to commit messages. 
 
-## Quick start
+## Contribution
 
-> Note: This guide assumes you have npm installed locally.
 
-First run `npm run bootstrap`
+First run `npm run bootstrap`, this will also run a npm install.
 
 Then run `npm run serve`, this will start a server  http://127.0.0.1:7777
 
