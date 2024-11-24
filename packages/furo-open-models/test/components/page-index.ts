@@ -25,11 +25,8 @@ export class pageIndex extends LitFBP(LitElement) {
 
   private ftn: Numeric;
 
-
   @property({ type: Boolean, attribute: 'invalid', reflect: true })
   invalid: boolean = false;
-
-
 
   constructor() {
     super();
@@ -74,7 +71,6 @@ export class pageIndex extends LitFBP(LitElement) {
   validateAll() {
     this.ftd.__validate();
   }
-
 
   /**
    * FBP lifecycle
