@@ -1,4 +1,6 @@
 {
+  "$schema": "node_modules/lerna/schemas/lerna-schema.json",
+  "npmClient": "yarn",
   "packages": [
     "packages/*"
   ],
@@ -9,12 +11,6 @@
     },
     "version": {
       "message": "chore(release): release"
-    },
-    "bootstrap": {
-      "hoist": true,
-      "npmClientArgs": [
-        "--no-package-lock"
-      ]
     }
   },
   "publishConfig": {
