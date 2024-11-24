@@ -1,25 +1,40 @@
 {
   "name": "@furo/route",
   "description": "Routing components",
-  "version": "2.7.0",
+  "version": "3.4.0",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-route",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
-  "web-types": "web-types.json",
+  "web-types": "./web-types.json",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js",
+    "./dist/": "./dist/",
+    "./package.json": "./package.json"
+  },
   "author": {
     "name": "",
     "email": "",
     "url": ""
   },
+  "files": [
+    "./dist",
+    "./examples",
+    "icon.svg",
+    "README.md",
+    "custom-elements.json",
+    "web-types.json"
+  ],
   "keywords": [
     "web-components",
-    "flow based programming",
-    "flowbased",
     "routing"
   ],
   "license": "MIT",
-  "main": "src/furo-catalog.js",
   "scripts": {
-    "analyze": "../../node_modules/.bin/cem analyze --globs \"src/**/*.js\" --exclude **/furo-catalog.js --litelement",
+    "build": "tsc",
+    "clean": "rm -rf ./dist ",
+    "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
+    "build:codecompletion": "cem analyze --config deep-cem.config.mjs && ./WebtypesPostprocessor.mjs",
     "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
     "lint": "../../node_modules/.bin/eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "../../node_modules/.bin/eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
@@ -27,8 +42,6 @@
     "test:watch": "../../node_modules/.bin/web-test-runner  --watch"
   },
   "dependencies": {
-    "@furo/fbp": "^6.13.0",
-    "@furo/framework": "^2.4.11",
     "lit": "^3.1.0"
   },
   "publishConfig": {

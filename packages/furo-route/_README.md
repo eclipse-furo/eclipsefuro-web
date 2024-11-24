@@ -6,9 +6,5 @@
 - replace the demos, tests and the sample-component
 
 - change the catalog import in your demos to:
-```js
-// eslint-disable-next-line import/no-extraneous-dependencies
-import "@furo/route/src/furo-catalog.js";
 
-```
 

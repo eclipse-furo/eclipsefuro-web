@@ -1,7 +1,0 @@
-[
-    ["*", "unauthorized", "EXTERNAL_LINK: /auth.html"],
-    ["auth", "login-successfull", "dashboard"],
-    ["*", "view-dashboard-requested", "dashboard"],
-    ["*", "form-requested", "form"],
-    ["*", "search", "EXTERNAL_LINK: https://google.com/"]
-]

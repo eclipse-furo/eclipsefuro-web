@@ -1,3 +1,6 @@
+# DEPRECATED
+Please switch to @furo/open-models.
+
 # @furo/data
 
 This package contains the furo data components.

@@ -1,645 +1,102 @@
 {
   "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
   "name": "@furo/route",
-  "version": "2.6.8",
+  "version": "3.1.0",
   "description-markup": "markdown",
-  "js-types-syntax": "typescript",
   "default-icon": "icon.svg",
   "contributions": {
     "html": {
       "elements": [
-          {
-          "name": "furo-app-flow-router",
-          "source": {
-            "module": "./src/furo-app-flow-router.js",
-            "symbol": "FuroAppFlowRouter"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-app-flow-router`\n\nUse this component with app-flow and furo-pages to implement your application flow / routing\n\n\n```html\n   <app-flow-router set-config=\"--flowConfigLoaded\" fn-trigger=\"--flowEvent\" fn-back=\"--wire\" fn-forward=\"--wire\"></app-flow-router>\n```\n\n *Configuration Array\n\n| current   | flow-event-name      | target      | [mapping]          |\n|:----------|:---------------------|:------------|:-------------------|\n| view-main | form-complete        | detail-view | from => to         |\n| *         | menu-settings-click  | settings    |                    |\n| *         | all-fields-req       | all-qps     |        *           |\n| *         | some-fields-req      | some-qps    | a=>b,x=>id,c=>item |\n\n\n```json\n [\n   ['view-main', 'button-tap', 'detail-view',  'task => id],\n   [\"*\", \"search\", \"EXTERNAL_LINK: https://google.com/\"],\n   [\"*\", \"searchInNewWindow\", \"EXTERNAL_LINK_BLANK: https://google.com/\"]\n   [\"*\", \"searchInNewWindow\", \"EXTERNAL_LINK_BLANK:\", *],\n   [\"*\", \"activity-url\", \"URL\", \"*\"],\n ]\n ```\n\n\n if the current view is view-main and the flow-event-name is 'form-complete', the view switches to detail-view and data.from is mapped to \"to\".\n\n ## Special configurations:\n\n - Set a \"*\" to map all data 1:1 to the url.\n\n - You can set a wildcard for \"current\". If you check the example: menu-settings-click can be triggered from any current. If there is a \"current\" with menu-settings-click configured and you are there, the wildcard is not used.\n - if you want to link to a dynamic target outside your app add **URL** and use `fn-emit` on the furo-app-flow component with the url as data.\n - if you want to link to a target outside your app add **EXTERNAL_LINK:** followed by the link\n - if you want to close a page which was openend by a _blank click use the keyword **WINDOW-CLOSE**\n - if you want to trigger a history.back() use the **HISTORY-BACK**\n - if there is no history.back() possible use the **flow event!** **HISTORY-BACK** and define the target as usual",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-app-flow-router/",
-          "attributes": [{
-                        "name": "config",
-                        "type": "Array",
-              "priority": "highest",
-              "description": "build internal config for faster access"
-                      }, {
-                        "name": "url-space-regex",
-                        "type": "string",
-              "priority": "highest",
-              "description": "default value of urlSpaceRegex. this value can be rewritten via `url-space-regex` attribute",
-                        "default": "''"
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "config",
-                "type": "Array",
-                "priority": "high",
-                "description": "build internal config for faster access"
-              }, {
-                "name": "display",
-                "type": "string",
-                "priority": "high",
-                "description": "",
-                "default": "'none'"
-              }, {
-                "name": "urlSpaceRegex",
-                "type": "string",
-                "priority": "high",
-                "description": "default value of urlSpaceRegex. this value can be rewritten via `url-space-regex` attribute",
-                "default": "''"
-              }
-            ],
-            "methods": [
-            {
-              "name": "back",
-              "description": "trigger a history back",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "forward",
-              "description": "trigger a history forward",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "set-config",
-              "description": "Set the config",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "trigger",
-              "description": "Trigger the router",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
-              {
-                "name": "__beforeReplaceState",
-                "priority": "highest",
-                "description": " Fired when before the state will be updated.",
-                 "value": {
-                      "type": "void"
-                }
-              }
-              , 
-              {
-                "name": "view-changed",
-                "priority": "highest",
-                "description": " Fired when page was changed.",
-                 "value": {
-                      "type": "flowEvent"
-                }
-              }
-              , 
-              {
-                "name": "event-not-found",
-                "priority": "highest",
-                "description": " Fired when view was not found.",
-                 "value": {
-                      "type": "flowEvent"
-                }
-              } ]
-        }
-      }, 
-          {
-          "name": "furo-app-flow",
-          "source": {
-            "module": "./src/furo-app-flow.js",
-            "symbol": "FuroAppFlow"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-app-flow` triggers the flow events for the `app-flow-router`.",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-app-flow/",
-          "attributes": [{
-                        "name": "event",
-                        "type": "String",
-              "priority": "highest",
-              "description": "Name of your app-flow event object\n\ni.e. 'task-clicked', 'wizard-step1-completed',..."
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "qp",
-                "type": "",
-                "priority": "high",
-                "description": "Deprecated, use the setQp method instead"
-              }, {
-                "name": "display",
-                "type": "string",
-                "priority": "high",
-                "description": "",
-                "default": "'none'"
-              }, {
-                "name": "event",
-                "type": "String",
-                "priority": "high",
-                "description": "Name of your app-flow event object\n\ni.e. 'task-clicked', 'wizard-step1-completed',..."
-              }
-            ],
-            "methods": [
-            {
-              "name": "set-qp",
-              "description": "Use this to explicitly set the query params.\n\nThis is useful if you use the `trigger` method.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "trigger",
-              "description": "Triggers the flow event (with the qp that was set before)",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "emit",
-              "description": "fire the app-flow event",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
-              {
-                "name": "app-flow",
-                "priority": "highest",
-                "description": " App-flow event with app-flow object will be fired when you trigger the `emit` function.",
-                 "value": {
-                      "type": "data"
-                }
-              } ]
-        }
-      }, 
-          {
-          "name": "furo-document-title",
-          "source": {
-            "module": "./src/furo-document-title.js",
-            "symbol": "FuroDocumentTitle"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-document-title`\n\n Updates the document title and set navigation waypoints.\n\n ## Structure of the title\n The title is built up from 3 parts (`prefix`, `title`, `suffix`). Each of them can be set by attribute or a setter method. The `title` and `suffix` part can be set with a fieldnode from a `furo-data-object`.\n\n `document.title = prefix + title + suffix`\n\n ## Waypoints\n Waypoints are pushed to the browser history and allows you to navigate with the back and forward buttons of the browser.\n To return to the last waypoint within your app, you have to trigger a `history.back()`. Read more about the history API [here](https://developer.mozilla.org/en-US/docs/Web/API/History).\n\n If you use `furo-app-flow` you can send the **history-back** event.\n\n Views and pages without a waypoint are not stored in the history.\n\n ```\n [a]-->[b]-->[.]-->[.]-->[.]-->[c]\n        ▲                       │\n        └───────────────────────┘\n        By clicking the back button you will return to b\n\n ```\n\n ## Usage example\n\n ```html\n  <furo-document-title\n    prefix=\"${i18n.t('prefix.label')} [\"\n    fn-bind-title=\"--DataObject(*.display_name)\"\n    suffix=\"]\"\n    fn-set-waypoint=\"--pageActivated\"\n  ></furo-document-title>\n ```\n The document title will be set to: `PrefixLabel [display_name_value]`",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-document-title/",
-          "attributes": [{
-                        "name": "title",
-                        "type": "string",
-              "priority": "highest",
-              "description": "Title part, you can also use `setTitle()` or `bindTitle().`",
-                        "default": "''"
-                      }, {
-                        "name": "prefix",
-                        "type": "string",
-              "priority": "highest",
-              "description": "prefix part, you can also use `setPrefix()`.`",
-                        "default": "''"
-                      }, {
-                        "name": "suffix",
-                        "type": "string",
-              "priority": "highest",
-              "description": "Suffix part, you can also use `setSuffix()` or `bindSuffix().`",
-                        "default": "''"
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "prefix",
-                "type": "string",
-                "priority": "high",
-                "description": "prefix part, you can also use `setPrefix()`.`",
-                "default": "''"
-              }, {
-                "name": "title",
-                "type": "string",
-                "priority": "high",
-                "description": "Title part, you can also use `setTitle()` or `bindTitle().`",
-                "default": "''"
-              }, {
-                "name": "suffix",
-                "type": "string",
-                "priority": "high",
-                "description": "Suffix part, you can also use `setSuffix()` or `bindSuffix().`",
-                "default": "''"
-              }
-            ],
-            "methods": [
-            {
-              "name": "set-waypoint",
-              "description": "",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "activate",
-              "description": "Set the document title with the current prefix title suffix. Without setting a waypoint.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "set-suffix",
-              "description": "Updates the suffix",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "set-title",
-              "description": "Updates the title",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "bind-suffix",
-              "description": "Bind a fieldnode to auto update the suffix",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "bind-title",
-              "description": "Bind a fieldnode to auto update the title",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
-              {
-                "name": "waypoint-pushed",
-                "priority": "highest",
-                "description": " Fired when the waypoint is finaly pushed to the browser history.",
-                 "value": {
-                      "type": "Event"
-                }
-              }
-              , 
-              {
-                "name": "waypoint-canceled",
-                "priority": "highest",
-                "description": " Fired when the waypoint was set but not pushed to the history, because the user navigated back.",
-                 "value": {
-                      "type": "Event"
-                }
-              } ]
-        }
-      }, 
-          {
-          "name": "furo-location-updater",
-          "source": {
-            "module": "./src/furo-location-updater.js",
-            "symbol": "FuroLocationUpdater"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-location-updater`\nupdates parts of the url location with pushState\n\nYou can set query params and hashes. Use this component for proper deep linking.\nThe furo-location component will fire the location events as usual.\n\n```html\n\n <furo-location-updater\n    fn-set-qp=\"--QueryParamKeyValuePairs\"\n    fn-set-hash=\"--HashKeyValuePairs\"></furo-location-updater>\n\n```",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-location-updater/",
-          "attributes": [{
-                        "name": "clear-qp",
-                        "type": "String",
-              "priority": "highest",
-              "description": "Comma separated list of qp keys to clear if they are not explicitly set with `fn-set-qp`"
-                      }, {
-                        "name": "clear-hash",
-                        "type": "String",
-              "priority": "highest",
-              "description": "Comma separated list of hashes to clear if they are not explicitly set with `fn-set-hash`"
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "clearQp",
-                "type": "String",
-                "priority": "high",
-                "description": "Comma separated list of qp keys to clear if they are not explicitly set with `fn-set-qp`"
-              }, {
-                "name": "clearHash",
-                "type": "String",
-                "priority": "high",
-                "description": "Comma separated list of hashes to clear if they are not explicitly set with `fn-set-hash`"
-              }
-            ],
-            "methods": [
-            {
-              "name": "set-qp",
-              "description": "Set query params by giving an object with key-value pairs.\n\nKeep in mind, that this values goes to the url, so setting objects as values is not a good idea",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "set-hash",
-              "description": "Set hash values by giving an object with key-value pairs.\n\nKeep in mind, that this values goes to the url, so setting objects as values is not a good idea",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
-              {
-                "name": "__beforeReplaceState",
-                "priority": "highest",
-                "description": " Fired when before the state will be updated, with `window.performance.now()`.",
-                 "value": {
-                      "type": "Number"
-                }
-              } ]
-        }
-      }, 
-          {
-          "name": "furo-location",
-          "source": {
-            "module": "./src/furo-location.js",
-            "symbol": "FuroLocation"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-location` watches for URL changes and notifies you. The location object which is fired from furo-location can be used\n for page navigation in furo-pages or for deep link resolution.\n\n\n```html\n<furo-location at-location-changed=\"--pathChanged\"></furo-location>\n\n<furo-pages\n  fn-inject-location=\"--pathChanged\"\n  default=\"list\">\n    <view-list name=\"list\"></view-list>\n    <view-create name=\"create\"></view-create>\n    <view-detail name=\"detail\"></view-detail>\n</furo-pages>\n```\n\n\n### locationObject\n```json\n{\n    \"host\": \"localhost:8480\",\n    \"query\": {\"tsk\": 999},\n    \"hash\": {},\n    \"path\": \"/detail\",\n    \"pathSegments\": [\n        \"detail\"\n    ],\n    \"hashstring\": \"\",\n    \"querystring\": \"tsk=999\"\n}\n```",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-location/",
-          "attributes": [{
-                        "name": "url-space-regex",
-                        "type": "string|RegExp",
-              "priority": "highest",
-              "description": "A regexp that defines the set of URLs that should be considered part\nof this web app.\n\nClicking on a link that matches this regex won't result in a full page\nnavigation, but will instead just update the URL state in place.\n\nThis regexp is given everything after the origin in an absolute\nURL. So to match just URLs that start with /app/ do:\n    url-space-regex=\"^/app/\"\n\nIf you plan to work in sub directories, you may set **url-space-regex=\"^${window.APPROOT}/additional/path\"**.\nKeep in mind to put a \"url-space-regex\" on every furo-location. Otherwise you can not switch between apps in different\nfolders with a link.",
-                        "default": "''"
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "urlSpaceRegex",
-                "type": "string|RegExp",
-                "priority": "high",
-                "description": "A regexp that defines the set of URLs that should be considered part\nof this web app.\n\nClicking on a link that matches this regex won't result in a full page\nnavigation, but will instead just update the URL state in place.\n\nThis regexp is given everything after the origin in an absolute\nURL. So to match just URLs that start with /app/ do:\n    url-space-regex=\"^/app/\"\n\nIf you plan to work in sub directories, you may set **url-space-regex=\"^${window.APPROOT}/additional/path\"**.\nKeep in mind to put a \"url-space-regex\" on every furo-location. Otherwise you can not switch between apps in different\nfolders with a link.",
-                "default": "''"
-              }
-            ],
-            "methods": [],
-            "events": [
-              
-              {
-                "name": "location-path-changed",
-                "priority": "highest",
-                "description": " Fired when Path portion of the location changed",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "location-hash-changed",
-                "priority": "highest",
-                "description": " Fired when Hash portion of the location changed",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "location-query-changed",
-                "priority": "highest",
-                "description": " Fired when Query portion of the location changed",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "location-changed",
-                "priority": "highest",
-                "description": " Fired when something in the location changed",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "external-link-clicked",
-                "priority": "highest",
-                "description": " Fired when a external link was clicked",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "url-space-entered",
-                "priority": "highest",
-                "description": " Fired when the path matches the url-space-regex and neither a search query or hash was given, useful to detect if someone enters the current url",
-                 "value": {
-                      "type": "Location object"
-                }
-              }
-              , 
-              {
-                "name": "__beforeReplaceState",
-                "priority": "highest",
-                "description": " Fired when before the state will be updated",
-                 "value": {
-                      "type": "void"
-                }
-              } ]
-        }
-      }, 
-          {
-          "name": "furo-lock-navigation",
-          "source": {
-            "module": "./src/furo-lock-navigation.js",
-            "symbol": "FuroLockNavigation"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-lock-navigation`\n Blocks the furo-location-updater and furo-app-flow-router from navigating away if you have unsaved changes or work to do.\n\n This component also adds a listener to the unload event, which kicks in at a reload or close of the window.\n\n ```html\n <furo-lock-navigation fn-lock=\"--dataChanged\" fn-unlock=\"--saveSuccess\"></furo-lock-navigation>\n ```",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-lock-navigation/",
-          "attributes": [{
-                        "name": "message",
-                        "type": "string",
-              "priority": "highest",
-              "description": "The warning message, which is displayed at the prompt.",
-                        "default": "'You have unsaved changes, proceed anyway?'"
-                      }
-                    ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "message",
-                "type": "string",
-                "priority": "high",
-                "description": "The warning message, which is displayed at the prompt.",
-                "default": "'You have unsaved changes, proceed anyway?'"
-              }
-            ],
-            "methods": [
-            {
-              "name": "lock",
-              "description": "Blocks furo-location-updater and furo-app-flow-router from navigating away.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "unlock",
-              "description": "Removes the lock.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
-              {
-                "name": "furo-navigation-locked",
-                "priority": "highest",
-                "description": " Fired when the navigation was locked",
-                 "value": {
-                      "type": "void"
-                }
-              }
-              , 
-              {
-                "name": "furo-navigation-unlocked",
-                "priority": "highest",
-                "description": " Fired when the navigation was unlocked",
-                 "value": {
-                      "type": "void"
-                }
-              } ]
-        }
-      }, 
-          {
+        {
           "name": "furo-pages",
-          "source": {
-            "module": "./src/furo-pages.js",
-            "symbol": "FuroPages"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "\nUse `furo-pages` to build tabs, views, subviews,...\n\n\n## preconditions\nThe components used in a furo-page must implement a **hidden** attribute css to set itself to display none.\n\n```css\n:host([hidden]){\n   display:none\n }\n```\n\n## usage\n\n```html\n\n<furo-pages fn-inject-location=\"--locationChanged\" default=\"home\">\n   <page-home name=\"home\"></page-home>\n   <other-page name=\"more\"></other-page>\n   <view-404 name=\"404\"></view-404>\n</furo-pages>\n\n<furo-location at-location-changed=\"--locationChanged\"></furo-location>\n```\n*If the url is `/` or `/home`, page-home is displayed.*\n*If the url is `/more`,  other-page is displayed.*\n*If the url does not match any of the names and a 404 is available, the 404 is displayed.*\n\n## flowbased auto wires\nfuro-pages provides auto wires, which are automatically triggered in the child elements if\nthey support FBP. Each wire will forward a `locationObject`\n\n-  `|--pageActivated` : Is triggered when the element is activated.\n-  `|--pageDeActivated` : Is triggered when another page is activated. Empty wire.\n-  `|--pageQueryChanged` : Is triggered when the page query changes.\n-  `|--pageHashChanged` : Is triggered when the page hash changes.\n-  `|--pageReActivated` : Is triggered when the locatioin contains the same page which already was activated.\n\n-  `--pageActivated` : Is triggered when the element is activated.\n-  `--pageDeActivated` : Is triggered when another page is activated. Empty wire.\n-  `--pageQueryChanged` : Is triggered when the page query changes.\n-  `--pageHashChanged` : Is triggered when the page hash changes.\n-  `--pageReActivated` : Is triggered when the locatioin contains the same page which already was activated.",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-pages/",
-          "attributes": [{
-                        "name": "default",
-                        "type": "String",
-              "priority": "highest",
-              "description": "Set the default page to show."
-                      }
-                    ],
-                  "slots": [
-                      {
-                        "name": "default",
-                        "description": "default slot to add pages."
-                      } ]
-          ,
-          "js": {
-            "properties": [{
-                "name": "default",
-                "type": "String",
-                "priority": "high",
-                "description": "Set the default page to show."
-              }
-            ],
-            "methods": [
-            {
-              "name": "activate-page",
-              "description": "Activate a page by name",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "inject-location",
-              "description": "Inject the location Object from furo-location. The page which is defined in location.pathSegments[0] will get activated.\n\nTo meke  sub  pages do not forget to enable the `url-space-regex` property on the *furo-location* component which feeds this component.\n\nIf the page/view does not exist and you have a page  404  defined, the 404 will be shown\n\nIf the page/view does not exist AND 404 does not exist, the default page gets activated.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }]
-        }
-      }, 
-          {
-          "name": "furo-panel-coordinator",
-          "source": {
-            "module": "./src/furo-panel-coordinator.js",
-            "symbol": "FuroPanelCoordinator"
-          },
-          "deprecated": false,
-          "experimental": false,
-          "description": "`furo-panel-coordinator`",
-          "doc-url": "https://web-components.furo.pro/docs/modules/furo-route/furo-panel-coordinator/",
+          "description": "Simple content switcher\n---\n\n\n### **Methods:**\n - **activatePage(pageName: _string_)** - Activate a page by name\n- **injectLocation(location: _LocationObject_): _boolean_** - Inject the location Object from furo-location. The page which is defined in location.pathSegments[0] will get activated.\n\nTo meke \"sub\" pages do not forget to enable the `url-space-regex` property on the *furo-location* component which feeds this component.\n\nIf the page/view does not exist, and you have a page \"404\" defined, the 404 will be shown\n\nIf the page/view does not exist AND 404 does not exist, the default page gets activated.\n- **isWebComponent(localName: _string_): _boolean_** - Checks if a node is a web component.\n\n### **Slots:**\n - **default** - default slot to add pages.",
+          "doc-url": "",
           "attributes": [
-                    ]
-          ,
+            {
+              "name": "default",
+              "description": "Set the default page to show.",
+              "value": {
+                "type": "string",
+                "default": "'default'"
+              },
+              "priority": "high"
+            },
+            {
+              "name": "flex",
+              "description": "Enables the flex mode when used in a flex parent like vertical-flex.",
+              "value": {
+                "type": "boolean"
+              },
+              "priority": "high"
+            },
+            {
+              "name": "attribute-name-for-select-state",
+              "value": {
+                "type": "string",
+                "default": "'selected'"
+              },
+              "priority": "high"
+            },
+            {
+              "name": "page",
+              "description": "For simple pages like tabs, set the page by string",
+              "value": {
+                "type": "string"
+              },
+              "priority": "high"
+            },
+            {
+              "name": "mode",
+              "description": "The `default` mode (recommended) removes your node from the render tree and is the fastest mode. It uses more memory than the `destructive` mode.\n\nThe state of the disabled element is kept, form fields which are filled, are the same as before you left the page.\n\n---\n\nThe `destructive` mode removes and destroys the element which is deactivated from the dom\nand will insert it back to the dom when they are activated (insertAdjacentHTML).\n\nThe insertAdjacentHTML() method does not reparse the element it is being used on,\nand thus it does not corrupt the existing elements inside that element.\nThis avoids the extra step of serialization, making it much faster than direct innerHTML manipulation.\n\nThis `destructive` mode is uses less memory, but **looses the state** of the disabled element and is a little bit slower.\n\nUse this if you know what you are doing, because the connectedCallback and disconnectedCallback of every item in your page is also called and everything is built up freshly.",
+              "value": {
+                "type": "\"default\" | \"destructive\"",
+                "default": "'default'"
+              },
+              "priority": "high"
+            }
+          ],
+          "slots": [
+            {
+              "name": "default",
+              "description": "default slot to add pages."
+            }
+          ],
+          "events": [],
           "js": {
             "properties": [
-            ],
-            "methods": [
-            {
-              "name": "show-page",
-              "description": "Loads and shows the page based on the NavigationNode",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "close-all",
-              "description": "This will trigger a `close-request` event all panels. Which should close themself then.",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }
-            , {
-              "name": "force-close-all",
-              "description": "closes all open panels without asking",
-              "value": {
-                "type": "string",
-                "required": true
-              }
-            }],
-            "events": [
-              
               {
-                "name": "controls-ready",
-                "priority": "highest",
-                "description": "Fired when Controls for panels are ready, initially it starts with an empty set.",
-                 "value": {
-                      "type": "RepeaterNode"
+                "name": "urlSpaceRegex",
+                "type": "string"
+              },
+              {
+                "name": "page",
+                "description": "For simple pages like tabs, set the page by string",
+                "type": "string"
+              },
+              {
+                "name": "mode",
+                "description": "The `default` mode (recommended) removes your node from the render tree and is the fastest mode. It uses more memory than the `destructive` mode.\n\nThe state of the disabled element is kept, form fields which are filled, are the same as before you left the page.\n\n---\n\nThe `destructive` mode removes and destroys the element which is deactivated from the dom\nand will insert it back to the dom when they are activated (insertAdjacentHTML).\n\nThe insertAdjacentHTML() method does not reparse the element it is being used on,\nand thus it does not corrupt the existing elements inside that element.\nThis avoids the extra step of serialization, making it much faster than direct innerHTML manipulation.\n\nThis `destructive` mode is uses less memory, but **looses the state** of the disabled element and is a little bit slower.\n\nUse this if you know what you are doing, because the connectedCallback and disconnectedCallback of every item in your page is also called and everything is built up freshly.",
+                "type": "\"default\" | \"destructive\""
+              }
+            ],
+            "events": [],
+            "methods": [
+              {
+                "name": "inject-location",
+                "description": "Inject the location Object from furo-location. The page which is defined in location.pathSegments[0] will get activated.\n\nTo meke \"sub\" pages do not forget to enable the `url-space-regex` property on the *furo-location* component which feeds this component.\n\nIf the page/view does not exist, and you have a page \"404\" defined, the 404 will be shown\n\nIf the page/view does not exist AND 404 does not exist, the default page gets activated.",
+                "value": {
+                  "type": "string",
+                  "required": true
                 }
-              } ]
+              }
+            ]
+          }
         }
-      }]
+      ]
+    },
+    "css": {
+      "properties": [],
+      "pseudo-elements": []
     }
   }
 }
