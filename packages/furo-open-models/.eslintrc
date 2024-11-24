@@ -1,0 +1,58 @@
+{
+
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "project": [
+      "./tsconfig.json",
+      "./test/unit_tests/tsconfig.json",
+      "./tsconfig.test.components.json",
+      "./tsconfig.models.json",
+      "./tsconfig.transport.json"
+    ],
+    "sourceType": "module"
+  },
+  "parser": "@typescript-eslint/parser",
+  "extends": ["@open-wc", "prettier","eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"],
+  "plugins": ["@typescript-eslint"],
+  "env": {
+    "browser": true
+  },
+  "ignorePatterns": ["*.js", "*.html", "*.d.ts", "stories/*", "dist/*"],
+  "rules": {
+    "lit/no-classfield-shadowing": "warn",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "warn",
+    "wc/guard-super-call": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error"
+    ],
+    "no-use-before-define": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never",
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  },
+  "overrides": [
+    {
+      "files": [
+        "*"
+      ],
+      "rules": {
+        "require-jsdoc": "off",
+        "import/extensions": "off",
+        "import/no-extraneous-dependencies": ["error", {"devDependencies": true}]
+      }
+    }
+  ]
+}

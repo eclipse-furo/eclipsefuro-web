@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+package furo.cube;
+
+import "openapiv3/annotations.proto";
+
+option go_package = "furo/cube;cubepb";
+option java_multiple_files = true;
+option java_package = "pro.furo.cube";
+
+message Colour {
+  // multiline leading comment
+  // the red part
+  int32 red = 1 [(openapi.v3.property) = {
+    default: {number: 22}
+    maximum: 255
+    minimum: 0
+  }]; // with constraints
+
+  // the green part
+  int32 green = 2 [(openapi.v3.property) = {
+    default: {number: 34}
+    maximum: 255
+    minimum: 0
+  }];
+  int32 blue = 3 [(openapi.v3.property) = {
+    default: {number: 88}
+    maximum: 255
+    minimum: 0
+  }];
+
+  float alpha = 4 [(openapi.v3.property) = {
+    default: {number: 1}
+    maximum: 1
+    minimum: 0
+  }];
+}

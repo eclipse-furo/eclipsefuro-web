@@ -1,0 +1,43 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "rootDir": "src_transport/",
+    "outDir": "dist/transport",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "resolveJsonModule": true,
+    // Generate d.ts files
+    "declaration": true,
+    "module": "es2022",
+    "jsx": "react-jsx",
+    "lib": [
+      "es2022",
+      "dom",
+      "dom.iterable"
+    ],
+    "useDefineForClassFields": false,
+    "plugins": [
+      {
+        "name": "typescript-lit-html-plugin"
+      }
+    ]
+  },
+  "tsc-alias": {
+    "resolveFullPaths": true,
+    "verbose": false
+  },
+  "exclude": [
+    "dist",
+    "test",
+    "src",
+  ],
+  "include": [
+    "src_transport/**/*.ts",
+    "global.d.ts"
+  ]
+}

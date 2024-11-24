@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@furo/fbp": "^6.13.0",
-    "lit": "^3.1.0"
+    "lit": "^3.2.1"
   },
   "publishConfig": {
     "access": "public"

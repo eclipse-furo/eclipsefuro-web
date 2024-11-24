@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "strict": true,
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    // Generate d.ts files
+    "declaration": false,
+    // "rootDir": "src/",
+    "module": "es2022",
+    "lib": ["es2022", "dom", "dom.iterable"]
+  },
+  "exclude": [
+    "node_modules"
+  ],
+  "include": ["integration-tests/**/*","../playwright.config.ts"]
+}

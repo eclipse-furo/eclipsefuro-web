@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package furo.cube;
+
+option java_multiple_files = true;
+option java_package = "pro.furo.cube";
+option go_package = "furo/cube;cubepb";
+
+// Types of materials
+enum Materials {
+  // leading
+  MATERIALS_UNSPECIFIED = 0; // trailing
+  // glass is cool
+  MATERIALS_GLASS = 1;
+  // wood is warm
+  MATERIALS_WOOD = 2; // very warm
+  MATERIALS_CERAMICS = 3;
+  MATERIALS_METALS = 4;
+  MATERIALS_PLASTICS = 5;
+  MATERIALS_TEXTILES = 6; // are nice
+  MATERIALS_LEATHER = 7;
+  // paper beats
+  MATERIALS_PAPER = 8; // scissors
+  MATERIALS_RUBBER = 9;
+
+}

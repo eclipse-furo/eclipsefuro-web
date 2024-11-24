@@ -40,6 +40,9 @@
   "engines": {
     "node": ">=10.0"
   },
+  "dependencies": {
+    "lit": "^3.2.1"
+  },
   "customElements": "custom-elements.json",
   "eslintConfig": {
     "extends": [

@@ -1,0 +1,88 @@
+{
+  "name": "@furo/open-models",
+  "description": "open-models  ",
+  "license": "MIT",
+  "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages",
+  "repository": "git@github.com:eclipse/eclipsefuro-web.git",
+  "author": "eclipse furo",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "scripts": {
+    "start": "npm run build && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"tsc  -p ./tsconfig.test.components.json --watch --preserveWatchOutput\" \"web-dev-server\"",
+    "analyze": "cem analyze --litelement --globs ./dist/* --outdir ./",
+    "analyze:deep": "cem analyze --config deep-cem.config.mjs",
+    "build": "npm run build:src &&  npm run build:model && npm run analyze",
+    "build:src": "tsc && tsc-alias -p ./tsconfig.json",
+    "build:pages:components": "tsc  -p ./tsconfig.test.components.json && tsc-alias -p ./tsconfig.test.components.json",
+    "build:model": "tsc  -p ./tsconfig.models.json && tsc-alias -p ./tsconfig.models.json",
+
+    "protoc:gen": "./scripts/protoc-gen-open-models.sh",
+    "protoc:gen:lint": "npm run protoc:gen && eslint --ext .ts,.html ./protoc-gen-open-models --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "clean": "rm -rf ./dist && rm -rf ./test/.test && rm -rf ./coverage",
+    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
+    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "prepare": "husky",
+    "test": "rm -rf test/.unit_tests && npm run build && tsc -p ./test/unit_tests && wtr --coverage",
+    "test:watch": "rm -rf test/.unit_tests && npm run build && tsc -p ./test/unit_tests && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"tsc  -p ./tsconfig.models.json --watch --preserveWatchOutput\" \"tsc -p ./test/unit_tests --watch --preserveWatchOutput\" \"wtr --watch\"",
+    "bootstrap": "npm install && npm link && npm link @furo/open-models"
+  },
+  "dependencies": {
+
+  },
+  "files": [
+    "./dist/*",
+    "./dist/primitives",
+    "./dist/proxies",
+    "./dist/well_known",
+    "icon.svg",
+    "README.md",
+    "custom-elements.json",
+    "web-types.json"
+  ],
+  "devDependencies": {
+    "cem-plugin-vs-code-custom-data-generator": "^1.4.2",
+    "custom-element-jet-brains-integration": "^1.6.2",
+    "lit": "^3.2.1",
+    "@bufbuild/buf": "^1.38.0",
+    "@bufbuild/protobuf": "^2.0.0",
+    "@bufbuild/protoc-gen-es": "^2.0.0",
+    "@custom-elements-manifest/analyzer": "^0.10.3",
+    "@furo/fbp": "^6.13.0",
+    "@open-wc/eslint-config": "^12.0.3",
+    "@open-wc/testing": "^4.0.0",
+    "@rollup/plugin-json": "^6.1.0",
+    "@rollup/plugin-replace": "^5.0.7",
+    "@types/mocha": "^10.0.7",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.0",
+    "@web/dev-server": "^0.4.6",
+    "@web/test-runner": "^0.18.2",
+    "@web/test-runner-junit-reporter": "^0.7.1",
+    "@web/test-runner-playwright": "^0.11.0",
+    "concurrently": "^8.2.2",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+
+    "tslib": "^2.6.3",
+    "typescript": "^5.5.3"
+  },
+  "customElements": "custom-elements.json",
+  "publishConfig": {
+    "access": "public"
+  },
+  "prettier": {
+    "singleQuote": true,
+    "arrowParens": "avoid"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  }
+}
