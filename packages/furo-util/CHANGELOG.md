@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/util@2.1.23...@furo/util@2.2.0) (2024-11-24)
+
+### Features
+
+- lit 3.2.0 ([13de40a](https://github.com/eclipse/eclipsefuro-web/commit/13de40aa4893d731c28fff8d570f176faea9eb13))
+
 ## [2.1.23](https://github.com/eclipse/eclipsefuro-web/compare/@furo/util@2.1.22...@furo/util@2.1.23) (2024-04-10)
 
 **Note:** Version bump only for package @furo/util
