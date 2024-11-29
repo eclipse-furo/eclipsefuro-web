@@ -5,7 +5,7 @@
     "project": [
       "./tsconfig.json",
       "./test/unit_tests/tsconfig.json",
-      "./tsconfig.test.components.json",
+      "./test/components/tsconfig.json",
       "./tsconfig.models.json",
       "./tsconfig.transport.json"
     ],

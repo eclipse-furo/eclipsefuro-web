@@ -26,6 +26,7 @@ export class pageIndex extends LitFBP(LitElement) {
   private ftn: Numeric;
 
   @property({ type: Boolean, attribute: 'invalid', reflect: true })
+  // eslint-disable-next-line lit/no-classfield-shadowing
   invalid: boolean = false;
 
   constructor() {

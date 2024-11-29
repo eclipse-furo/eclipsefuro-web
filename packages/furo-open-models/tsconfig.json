@@ -14,7 +14,6 @@
     "declaration": true,
     // "rootDir": "src/",
     "module": "es2022",
-    "jsx": "react-jsx",
     "lib": [
       "es2022",
       "dom",

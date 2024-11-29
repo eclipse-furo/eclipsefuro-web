@@ -27,6 +27,7 @@ export class formFuroTypeDefaults extends LitElement {
    * @public
    */
   @property({ type: Defaults })
+  // eslint-disable-next-line lit/no-classfield-shadowing
   public data: Defaults = new Defaults();
 
   /**

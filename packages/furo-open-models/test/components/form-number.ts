@@ -21,11 +21,13 @@ export class formNumber extends LitFBP(LitElement) {
    * @public
    */
   @property({ type: String })
+  // eslint-disable-next-line lit/no-classfield-shadowing
   public value: string = '';
 
   private _fieldNode: Decimal | INT32 | undefined;
 
   @property({ type: String })
+  // eslint-disable-next-line lit/no-classfield-shadowing
   private stateMessage: string = '';
 
   get fieldNode(): Decimal | INT32 | undefined {

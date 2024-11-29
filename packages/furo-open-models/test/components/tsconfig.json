@@ -5,7 +5,7 @@
     "noEmitOnError": true,
     "strict": true,
     "experimentalDecorators": true,
-    "outDir": "dist/test_components",
+    "outDir": "../../dist/test_components",
     "skipLibCheck": true,
     "sourceMap": true,
     "inlineSources": true,
@@ -37,7 +37,7 @@
     "src",
   ],
   "include": [
-    "test/components/**/*",
+    "**/*",
     "global.d.ts"
   ]
 }
