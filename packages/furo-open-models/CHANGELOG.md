@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.1.0...@furo/open-models@1.1.1) (2024-11-29)
+
+### Bug Fixes
+
+- Uint8Array hint for typescript on BYTES.ts ([6726fbe](https://github.com/eclipse/eclipsefuro-web/commit/6726fbe7e007b04cf9d0cd9a637731a8e0f2c754))
+
 # 1.1.0 (2024-11-24)
 
 ### Features
