@@ -108,7 +108,7 @@ export class BYTES extends FieldNode {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  __toLiteral(): Uint8Array {
     return this._value;
   }
 
