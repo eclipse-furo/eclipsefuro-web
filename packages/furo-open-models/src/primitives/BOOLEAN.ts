@@ -14,6 +14,13 @@ export class BOOLEAN extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
+  /**
+   * Toggle the value of the bool.
+   */
+  toggle(){
+    this.value = !this._value;
+  }
+
   public _value: boolean;
 
   constructor(
@@ -33,6 +40,14 @@ export class BOOLEAN extends FieldNode {
 
   __updateWithLiteral(v: boolean) {
     this._value = v;
+    if (!this._value) {
+      this.__isEmpty = !(
+        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
+        OPEN_MODELS_OPTIONS.EmitUnpopulated
+      );
+    } else {
+      this.__isEmpty = false;
+    }
     this.__notifyFieldValueChange(false);
   }
 
