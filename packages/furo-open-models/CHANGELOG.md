@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.1.1...@furo/open-models@1.1.2) (2024-12-02)
+
+### Bug Fixes
+
+- [open-models] BOOLEAN primitive from literal init sets correct empty state. ([9873e87](https://github.com/eclipse/eclipsefuro-web/commit/9873e877c4ac9dd64fe82cc98e8c0c1c7a0ab8b6))
+
 ## [1.1.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.1.0...@furo/open-models@1.1.1) (2024-11-29)
 
 ### Bug Fixes
