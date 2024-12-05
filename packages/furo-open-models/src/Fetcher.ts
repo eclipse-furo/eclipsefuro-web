@@ -150,6 +150,7 @@ export class Fetcher<REQ, RES> {
       method: this.method,
       signal,
       headers: this.API_OPTIONS.headers,
+      redirect:'follow'
     };
 
     this.timeout = this.API_OPTIONS.timeout || 300000; // chrome default timeout
