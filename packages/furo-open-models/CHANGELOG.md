@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.1.2...@furo/open-models@1.2.0) (2024-12-05)
+
+### Features
+
+- [open-models] Init Options for fetcher with a default redirect:'follow' ([7331d2e](https://github.com/eclipse/eclipsefuro-web/commit/7331d2e13b24ec37c7c93c2f57fedc1be85ad5fb))
+
 ## [1.1.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.1.1...@furo/open-models@1.1.2) (2024-12-02)
 
 ### Bug Fixes
