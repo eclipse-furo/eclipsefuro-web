@@ -198,6 +198,11 @@ export class Fetcher<REQ, RES> {
   }
 
   public invoke(rqo: REQ, options?: RequestInit) {
+    // abort old request if it is still running
+    if (this.isLoading) {
+      this.abortPendingRequest('invoke triggered before response');
+    }
+
     this.abortController = new AbortController();
     const { signal } = this.abortController;
 
@@ -211,10 +216,6 @@ export class Fetcher<REQ, RES> {
       this.setRequestOptions(options);
     }
 
-    if (this.isLoading) {
-      this.isLoading = false;
-      this.abortPendingRequest('invoke triggered before response');
-    }
 
     this.isLoading = true;
 

@@ -19,7 +19,9 @@
   "license": "MIT",
   "main": "src/furo-catalog.js",
   "scripts": {
-    "analyze": "../../node_modules/.bin/cem analyze --globs \"src/**/*.js\" --exclude **/furo-catalog.js --litelement",
+    "build": "tsc",
+    "clean": "rm -rf ./dist ",
+    "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
     "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
     "lint": "../../node_modules/.bin/eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
     "format": "../../node_modules/.bin/eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
