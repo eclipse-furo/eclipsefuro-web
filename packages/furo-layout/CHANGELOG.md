@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/layout@2.3.0...@furo/layout@2.3.1) (2025-01-04)
+
+### Bug Fixes
+
+- [open-models] abort running requests when a req is triggered again and the old is not complete ([ae602c4](https://github.com/eclipse/eclipsefuro-web/commit/ae602c492aafaa0cebc8ec9b6b0352477687145c))
+
 # [2.3.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/layout@2.2.16...@furo/layout@2.3.0) (2024-11-24)
 
 ### Features

@@ -1,7 +1,7 @@
 {
   "name": "@furo/layout",
   "description": "Layout components for furo",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-layout",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "web-types": "web-types.json",
