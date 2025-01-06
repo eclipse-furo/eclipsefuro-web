@@ -97,7 +97,7 @@ describe('primitives ARRAY type', () => {
     const id = new Identifier(initData[1]);
 
     expect(id.repeatedDecimal.value[1].value.__label).to.eql(
-      'FURO_TYPE_IDENTIFIER_REPEATED_DECIMAL_VALUE',
+      'FURO_TYPE_IDENTIFIER_REPEATED_DECIMAL_VALUE_LABEL',
     );
   });
   it('must deeply generate the ARRAYS<something> from code', async () => {

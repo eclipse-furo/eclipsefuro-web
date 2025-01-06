@@ -124,10 +124,10 @@ describe('primitives ANY type', () => {
     const id = new Identifier(initData[0]);
 
     expect(id.bookingCenter.__label).to.equal(
-      'FURO_TYPE_IDENTIFIER_BOOKING_CENTER',
+      'FURO_TYPE_IDENTIFIER_BOOKING_CENTER_LABEL',
     );
     expect((id.any.value as Identifier).bookingCenter.__label).to.equal(
-      'FURO_TYPE_IDENTIFIER_BOOKING_CENTER',
+      'FURO_TYPE_IDENTIFIER_BOOKING_CENTER_LABEL',
     );
   });
 
