@@ -145,9 +145,9 @@ describe('Recursion', () => {
     expect(
       tree.recursion.value!.recursion.value!.recursion.value!.displayName
         .__label,
-    ).equal('FURO_TYPE_TREE_DISPLAY_NAME');
+    ).equal('FURO_TYPE_TREE_DISPLAY_NAME_LABEL');
     expect(tree.recursion.value!.recursion.value!.recursion.__label).equal(
-      'FURO_TYPE_TREE_RECURSION',
+      'FURO_TYPE_TREE_RECURSION_LABEL',
     );
     expect(tree.displayName.__fieldPath).equal('display_name');
     expect(
@@ -157,6 +157,6 @@ describe('Recursion', () => {
     expect(
       tree.recursion.value!.recursion.value!.recursion.value!.displayName
         .__label,
-    ).equal('FURO_TYPE_TREE_DISPLAY_NAME');
+    ).equal('FURO_TYPE_TREE_DISPLAY_NAME_LABEL');
   });
 });
