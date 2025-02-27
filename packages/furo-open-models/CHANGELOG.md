@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.3](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.2.2...@furo/open-models@1.2.3) (2025-02-27)
+
+### Bug Fixes
+
+- [open-models] Correct ValueStates ([24af399](https://github.com/eclipse/eclipsefuro-web/commit/24af399150ff4baddcfff1942af76d8ae8aeedfd))
+
 ## [1.2.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.2.1...@furo/open-models@1.2.2) (2025-01-06)
 
 ### Bug Fixes
