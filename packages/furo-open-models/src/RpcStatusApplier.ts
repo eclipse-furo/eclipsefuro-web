@@ -20,7 +20,7 @@ export class RpcStatusApplier {
       lm['@type'].includes('/google.rpc.LocalizedMessage'),
     )[0];
     if (localizedMessage) {
-      target.__setValueState(ValueState.Error, [
+      target.__setValueState(ValueState.Negative, [
         localizedMessage.message as string,
       ]);
     }
@@ -30,7 +30,7 @@ export class RpcStatusApplier {
     if (badRequest) {
       const v = (badRequest.fieldViolations as unknown[]).map(violation => ({
         field: (violation as Record<string, string>).field,
-        state: ValueState.Error,
+        state: ValueState.Negative,
         message: (violation as Record<string, string>).description,
       })) as ValueStateSummary[];
 

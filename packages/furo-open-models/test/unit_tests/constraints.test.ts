@@ -16,7 +16,7 @@ describe('Field Constraints', () => {
     expect(c.id.__isValid).to.be.true;
     c.id = '';
     expect(c.__isValid).to.be.false;
-    expect(c.id.__meta.valueState).to.equal('Error');
+    expect(c.id.__meta.valueState).to.equal('Negative');
     expect(c.id.__meta.stateMessage).to.equal(
       'constraint.violation.min_length 3 ',
     );
@@ -32,7 +32,7 @@ describe('Field Constraints', () => {
 
     c.id = '-';
     expect(c.__isValid).to.be.false;
-    expect(c.id.__meta.valueState).to.equal('Error');
+    expect(c.id.__meta.valueState).to.equal('Negative');
     expect(c.id.__meta.stateMessage).to.equal(
       'constraint.violation.min_length 3 -',
     );
@@ -48,7 +48,7 @@ describe('Field Constraints', () => {
 
     c.id = '1234567890-';
     expect(c.__isValid).to.be.false;
-    expect(c.id.__meta.valueState).to.equal('Error');
+    expect(c.id.__meta.valueState).to.equal('Negative');
     expect(c.id.__meta.stateMessage).to.equal(
       'constraint.violation.max_length 10 1234567890-',
     );
@@ -69,7 +69,7 @@ describe('Field Constraints', () => {
 
     c.id = '---3-';
     expect(c.__isValid).to.be.false;
-    expect(c.id.__meta.valueState).to.equal('Error');
+    expect(c.id.__meta.valueState).to.equal('Negative');
     expect(c.id.__meta.stateMessage).to.equal(
       'constraint.violation.pattern ^-*$ ---3-',
     );

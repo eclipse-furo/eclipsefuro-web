@@ -542,7 +542,7 @@ export abstract class FieldNode {
         const validStateBefore = fn.__meta.isValid;
         fn.__meta.valueState = state.state;
         fn.__meta.stateMessage = state.message;
-        fn.__meta.isValid = state.state !== ValueState.Error;
+        fn.__meta.isValid = state.state !== ValueState.Negative;
         fn.__meta.businessVaueState = state.state;
         if (fn.__meta.isValid !== validStateBefore) {
           fn.__dispatchEvent(
@@ -788,7 +788,7 @@ export abstract class FieldNode {
         node.__setValueState(ValueState.None, ['']);
       }
       if (constraintMessage !== undefined) {
-        node.__setValueState(ValueState.Error, constraintMessage);
+        node.__setValueState(ValueState.Negative, constraintMessage);
       }
     } else {
       node.__setValueState(ValueState.None, ['']);
@@ -829,7 +829,7 @@ export abstract class FieldNode {
     );
     // set invalid on error state
     // the event is sent from ...
-    this.__meta.isValid = state !== ValueState.Error;
+    this.__meta.isValid = state !== ValueState.Negative;
 
     this.__dispatchEvent(
       new CustomEvent('state-changed', {

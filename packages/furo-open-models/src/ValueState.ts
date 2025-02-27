@@ -14,28 +14,28 @@ export enum ValueState {
   /**
    *
    * @public
+   * @typeName {Positive}
+   */
+  Positive = 'Positive',
+
+  /**
+   *
+   * @public
+   * @typeName {Critical}
+   */
+  Critical = 'Critical',
+
+  /**
+   *
+   * @public
+   * @typeName {Negative}
+   */
+  Negative = 'Negative',
+
+  /**
+   *
+   * @public
    * @typeName {Information}
    */
   Information = 'Information',
-
-  /**
-   *
-   * @public
-   * @typeName {Success}
-   */
-  Success = 'Success',
-
-  /**
-   *
-   * @public
-   * @typeName {Warning}
-   */
-  Warning = 'Warning',
-
-  /**
-   *
-   * @public
-   * @typeName {Error}
-   */
-  Error = 'Error',
 }

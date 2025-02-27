@@ -11,7 +11,7 @@ Validators.set('furo.type.DecimalRange', (node: DecimalRange) => {
     parseFloat(node.start.value.toString()) >
     parseFloat(node.end.value.toString())
   ) {
-    node.__setValueState(ValueState.Error, [
+    node.__setValueState(ValueState.Negative, [
       'decimal.start.must.be.smaller.then.end',
     ]);
   } else {
@@ -21,7 +21,7 @@ Validators.set('furo.type.DecimalRange', (node: DecimalRange) => {
 
 Validators.set('furo.type.Defaults', (node: Defaults) => {
   if (node.id.value === '----') {
-    node.id.__setValueState(ValueState.Error, [
+    node.id.__setValueState(ValueState.Negative, [
       'defaults.id.can.not.be.4',
       '----',
     ]);
@@ -33,7 +33,7 @@ Validators.set('furo.type.Defaults', (node: Defaults) => {
 Validators.set('furo.type.Decimal', (node: Decimal) => {
   if (!node.value.value.match(/^[+-]?(\d*\.)?\d+$/)) {
     // maybe ^[+-]?(\d*\.)?\d*$   ???
-    node.__setValueState(ValueState.Error, [
+    node.__setValueState(ValueState.Negative, [
       'decimal.invalid.number',
       node.value.value,
     ]);
@@ -43,7 +43,7 @@ Validators.set('furo.type.Decimal', (node: Decimal) => {
       for (const [constraint, value] of Object.entries(fieldConstraints)) {
         if (constraint === 'minimum') {
           if (parseFloat(node.value.value) < value) {
-            node.__setValueState(ValueState.Error, [
+            node.__setValueState(ValueState.Negative, [
               'constraint.violation.minimum',
               value,
               node.value.value,
@@ -86,12 +86,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
         'Please consider to make this value bigger, to have a perfect cube';
     }
     if (cube.length.value < avg * 0.8) {
-      lengthState.state = ValueState.Warning;
+      lengthState.state = ValueState.Critical;
       lengthState.message =
         'A perfect cube should have the same length, breadth and height.\n It is strongly recommended to increase this value';
     }
     if (cube.length.value < avg * 0.7) {
-      lengthState.state = ValueState.Error;
+      lengthState.state = ValueState.Negative;
       lengthState.message =
         'A perfect cube should have the same length, breadth and height.\n Increase this value';
       isValid = false;
@@ -100,7 +100,7 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
       cube.length.value === cube.breadth.value &&
       cube.length.value === cube.height.value
     ) {
-      lengthState.state = ValueState.Success;
+      lengthState.state = ValueState.Positive;
     }
     if (cube.length.value > avg * 1.1) {
       lengthState.state = ValueState.Information;
@@ -108,12 +108,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
         'Please consider to make this value smaller, to have a perfect cube';
     }
     if (cube.length.value > avg * 1.2) {
-      lengthState.state = ValueState.Warning;
+      lengthState.state = ValueState.Critical;
       lengthState.message =
         'A perfect cube should have the same length, breadth and height.\n It is strongly recommended to decrease this value';
     }
     if (cube.length.value > avg * 1.3) {
-      lengthState.state = ValueState.Error;
+      lengthState.state = ValueState.Negative;
       lengthState.message =
         'A perfect cube should have the same length, breadth and height.\n Decrease this value';
       isValid = false;
@@ -135,12 +135,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
     }
 
     if (cube.breadth.value < avg * 0.8) {
-      breadthState.state = ValueState.Warning;
+      breadthState.state = ValueState.Critical;
       breadthState.message =
         'A perfect cube should have the same breadth, breadth and height.\n It is strongly recommended to increase this value';
     }
     if (cube.breadth.value < avg * 0.7) {
-      breadthState.state = ValueState.Error;
+      breadthState.state = ValueState.Negative;
       breadthState.message =
         'A perfect cube should have the same breadth, breadth and height.\n Increase this value';
       isValid = false;
@@ -149,7 +149,7 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
       cube.length.value === cube.breadth.value &&
       cube.length.value === cube.height.value
     ) {
-      breadthState.state = ValueState.Success;
+      breadthState.state = ValueState.Positive;
     }
     if (cube.breadth.value > avg * 1.1) {
       breadthState.state = ValueState.Information;
@@ -157,12 +157,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
         'Please consider to make this value smaller, to have a perfect cube';
     }
     if (cube.breadth.value > avg * 1.2) {
-      breadthState.state = ValueState.Warning;
+      breadthState.state = ValueState.Critical;
       breadthState.message =
         'A perfect cube should have the same breadth, breadth and height.\n It is strongly recommended to decrease this value';
     }
     if (cube.breadth.value > avg * 1.3) {
-      breadthState.state = ValueState.Error;
+      breadthState.state = ValueState.Negative;
       breadthState.message =
         'A perfect cube should have the same breadth, breadth and height.\n Decrease this value';
       isValid = false;
@@ -184,12 +184,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
     }
 
     if (cube.height.value < avg * 0.8) {
-      heightState.state = ValueState.Warning;
+      heightState.state = ValueState.Critical;
       heightState.message =
         'A perfect cube should have the same height, height and height.\n It is strongly recommended to increase this value';
     }
     if (cube.height.value < avg * 0.7) {
-      heightState.state = ValueState.Error;
+      heightState.state = ValueState.Negative;
       heightState.message =
         'A perfect cube should have the same height, height and height.\n Increase this value';
       isValid = false;
@@ -198,7 +198,7 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
       cube.length.value === cube.breadth.value &&
       cube.length.value === cube.height.value
     ) {
-      heightState.state = ValueState.Success;
+      heightState.state = ValueState.Positive;
     }
     if (cube.height.value > avg * 1.1) {
       heightState.state = ValueState.Information;
@@ -206,12 +206,12 @@ Validators.set('furo.cube.CubeDefinition', (cube: CubeDefinition) => {
         'Please consider to make this value smaller, to have a perfect cube';
     }
     if (cube.height.value > avg * 1.2) {
-      heightState.state = ValueState.Warning;
+      heightState.state = ValueState.Critical;
       heightState.message =
         'A perfect cube should have the same height, breadth and height.\n It is strongly recommended to decrease this value';
     }
     if (cube.height.value > avg * 1.3) {
-      heightState.state = ValueState.Error;
+      heightState.state = ValueState.Negative;
       heightState.message =
         'A perfect cube should have the same height, breadth and height.\n Decrease this value';
       isValid = false;

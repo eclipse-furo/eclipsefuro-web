@@ -12,12 +12,12 @@ describe('ValueStates', () => {
       {
         field: 'id',
         message: 'constraint.violation.pattern ^-*$ default',
-        state: 'Error',
+        state: 'Negative',
       },
       {
         field: 'repeated_decimal',
         message: 'constraint.violation.required',
-        state: 'Error',
+        state: 'Negative',
       },
     ]);
     defaults.repeatedDecimal.push({ value: '10' });
@@ -27,7 +27,7 @@ describe('ValueStates', () => {
       {
         field: 'id',
         message: 'constraint.violation.pattern ^-*$ default',
-        state: 'Error',
+        state: 'Negative',
       },
     ]);
   });
@@ -38,22 +38,22 @@ describe('ValueStates', () => {
     const s: ValueStateSummary[] = [
       {
         field: 'id',
-        state: ValueState.Error,
+        state: ValueState.Negative,
         message: 'constraint.violation.pattern ^-*$',
       },
       {
         field: 'repeated_decimal[0]',
-        state: ValueState.Error,
+        state: ValueState.Negative,
         message: 'DEC',
       },
     ];
     defaults.repeatedDecimal.push({ value: '10' });
     defaults.__applyValueStates(...s);
-    expect(defaults.id.__meta.valueState).to.eql('Error');
+    expect(defaults.id.__meta.valueState).to.eql('Negative');
     expect(defaults.id.__meta.stateMessage).to.eql(
       'constraint.violation.pattern ^-*$',
     );
-    expect(defaults.repeatedDecimal.at(0)!.__meta.valueState).to.eql('Error');
+    expect(defaults.repeatedDecimal.at(0)!.__meta.valueState).to.eql('Negative');
     expect(defaults.repeatedDecimal.at(0)!.__meta.stateMessage).to.eql('DEC');
     done();
   });
