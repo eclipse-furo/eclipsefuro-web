@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.2.3...@furo/open-models@1.3.0) (2025-03-25)
+
+### Features
+
+- [open-models] ARRAY sliceT ([313e284](https://github.com/eclipse/eclipsefuro-web/commit/313e284c2351f0e3c0afa5b643aa6183844d654b))
+
 ## [1.2.3](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.2.2...@furo/open-models@1.2.3) (2025-02-27)
 
 ### Bug Fixes
