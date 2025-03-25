@@ -197,83 +197,88 @@ export class Fetcher<REQ, RES> {
     }
   }
 
-  public invoke(rqo: REQ, options?: RequestInit) {
-    // abort old request if it is still running
-    if (this.isLoading) {
-      this.abortPendingRequest('invoke triggered before response');
-    }
-
-    this.abortController = new AbortController();
-    const { signal } = this.abortController;
-
-    this.requestInit = {
-      method: this.method,
-      signal,
-      headers: this.API_OPTIONS.headers,
-    };
-
-    if (options) {
-      this.setRequestOptions(options);
-    }
-
-
-    this.isLoading = true;
-
-    const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(
-      this.path,
-      this.bodyField,
-      rqo,
-    );
-    if (evaluatedBody) {
-      this.requestInit.body = evaluatedBody;
-    }
-
-    clearTimeout(this.timeoutId);
-    const request = new Request(evaluatedPath, this.requestInit);
-    this.timeoutId = setTimeout(() => {
-      this.abortController.abort(`Timeout of ${this.timeout}ms reached`);
-      if (this.onRequestAborted) {
-        this.onRequestAborted(rqo);
+  public invoke(rqo: REQ, options?: RequestInit):Promise<RES> {
+    return new Promise((resolve, reject) => {
+      // abort old request if it is still running
+      if (this.isLoading) {
+        this.abortPendingRequest('invoke triggered before response');
       }
-      // eslint-disable-next-line no-console
-      console.error(
-        `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
+
+      this.abortController = new AbortController();
+      const { signal } = this.abortController;
+
+      this.requestInit = {
+        method: this.method,
+        signal,
+        headers: this.API_OPTIONS.headers,
+      };
+
+      if (options) {
+        this.setRequestOptions(options);
+      }
+
+
+      this.isLoading = true;
+
+      const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(
+        this.path,
+        this.bodyField,
+        rqo,
       );
-    }, this.timeout);
+      if (evaluatedBody) {
+        this.requestInit.body = evaluatedBody;
+      }
 
-    if (this.onRequestStarted) {
-      this.onRequestStarted(rqo);
-    }
-
-    fetch(request)
-      .then(response => {
-        this._reworkRequest(response);
-        if (this.onRequestFinished) {
-          this.onRequestFinished(rqo);
+      clearTimeout(this.timeoutId);
+      const request = new Request(evaluatedPath, this.requestInit);
+      this.timeoutId = setTimeout(() => {
+        this.abortController.abort(`Timeout of ${this.timeout}ms reached`);
+        if (this.onRequestAborted) {
+          this.onRequestAborted(rqo);
         }
-      })
-      .catch(err => {
-        this.isLoading = false;
+        // eslint-disable-next-line no-console
+        console.error(
+          `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
+        );
+        reject(rqo)
+      }, this.timeout);
 
-        if (err.name === 'AbortError') {
-          if (this.onRequestAborted) {
-            this.onRequestAborted(rqo);
-          }
+      if (this.onRequestStarted) {
+        this.onRequestStarted(rqo);
+      }
+
+      fetch(request)
+        .then(response => {
+          this._reworkRequest(response).then(resolve).catch(reject);
           if (this.onRequestFinished) {
             this.onRequestFinished(rqo);
           }
-          // eslint-disable-next-line no-console
-          console.error('RequestService fetch aborted: ', err);
-        } else {
-          if (this.onRequestFinished) {
-            this.onRequestFinished(rqo);
-          }
+        })
+        .catch(err => {
+          this.isLoading = false;
 
-          if (this.onFatalError) {
-            this.onFatalError(err);
+          if (err.name === 'AbortError') {
+            if (this.onRequestAborted) {
+              this.onRequestAborted(rqo);
+            }
+            if (this.onRequestFinished) {
+              this.onRequestFinished(rqo);
+            }
+            // eslint-disable-next-line no-console
+            console.error('RequestService fetch aborted: ', err);
+          } else {
+            if (this.onRequestFinished) {
+              this.onRequestFinished(rqo);
+            }
+
+            if (this.onFatalError) {
+              this.onFatalError(err);
+            }
           }
-        }
-      });
+          reject(err)
+        });
+    })
+
   }
 
   /**
@@ -289,69 +294,76 @@ export class Fetcher<REQ, RES> {
    * Dispatches event `response-error` and a specific error event with status code
    * @private
    */
-  _reworkRequest(response: Response) {
-    /**
-     * The status code 0 is accepted as a success because some schemes - e.g.
-     * file:// - don't provide status codes.
-     */
-    this.isLoading = false;
-    clearTimeout(this.timeoutId);
-    const status = response.status || 0;
-
-    if (status === 0 || (status >= 200 && status < 300)) {
+  _reworkRequest(response: Response): Promise<RES> {
+    return new Promise((resolve, reject) => {
       /**
-       * Loaded without error, fires event `response` with full response object
+       * The status code 0 is accepted as a success because some schemes - e.g.
+       * file:// - don't provide status codes.
        */
-      this.lastResponse = response;
+      this.isLoading = false;
+      clearTimeout(this.timeoutId);
+      const status = response.status || 0;
 
-      if (this.onResponseRaw) {
-        this.onResponseRaw(response);
-      }
-
-      /**
-       * parses response object according to response heaader informationen `content-type`
-       * you will find the supported content-types in the declaration area
-       */
-
-      this._parseResponse(response)
-        .then(r => {
-          if (this.onResponse) {
-            this.onResponse(r as RES, response);
-          }
-        })
-        .catch(error => {
-          if (this.onResponseParseError) {
-            this.onResponseParseError(error, response);
-          }
-        });
-    } else {
-      /**
-       * Error detected
-       */
-      this.lastResponse = response;
-      if (this.onResponseErrorRaw) {
-        this.onResponseErrorRaw(response);
-      }
-
-      /**
-       * parses response object according to response heaader `content-type`
-       */
-      this._parseResponse(response)
-        .then(r => {
-          if (this.onResponseError) {
-            this.onResponseError(r, response);
-          }
-        })
+      if (status === 0 || (status >= 200 && status < 300)) {
         /**
-         * error parsing is not possible, empty response
-         * the dispatched event will have the raw error object in the event detail
+         * Loaded without error, fires event `response` with full response object
          */
-        .catch(error => {
-          if (this.onResponseErrorParseError) {
-            this.onResponseErrorParseError(error, response);
-          }
-        });
-    }
+        this.lastResponse = response;
+
+        if (this.onResponseRaw) {
+          this.onResponseRaw(response);
+        }
+
+        /**
+         * parses response object according to response heaader informationen `content-type`
+         * you will find the supported content-types in the declaration area
+         */
+
+        this._parseResponse(response)
+          .then(r => {
+            if (this.onResponse) {
+              this.onResponse(r as RES, response);
+              resolve(r as RES);
+            }
+          })
+          .catch(error => {
+            if (this.onResponseParseError) {
+              this.onResponseParseError(error, response);
+              reject(error);
+            }
+          });
+      } else {
+        /**
+         * Error detected
+         */
+        this.lastResponse = response;
+        if (this.onResponseErrorRaw) {
+          this.onResponseErrorRaw(response);
+        }
+
+        /**
+         * parses response object according to response heaader `content-type`
+         */
+        this._parseResponse(response)
+          .then(r => {
+            if (this.onResponseError) {
+              this.onResponseError(r, response);
+            }
+            reject(r);
+          })
+          /**
+           * error parsing is not possible, empty response
+           * the dispatched event will have the raw error object in the event detail
+           */
+          .catch(error => {
+            if (this.onResponseErrorParseError) {
+              this.onResponseErrorParseError(error, response);
+            }
+            reject(error);
+          });
+      }
+    })
+
   }
 
   /**
