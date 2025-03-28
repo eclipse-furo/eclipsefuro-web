@@ -1,70 +1,87 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
-import { FieldConstraints } from '../FieldConstraints';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { FieldNode } from '../FieldNode'
+import { Registry } from '../Registry'
+import { FieldConstraints } from '../FieldConstraints'
+import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS'
 
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | { [x: string]: JSONValue }
+  | Array<JSONValue>;
+
+export type JSONObject = { [x: string]: JSONValue };
+
+/**
+ * Struct represents a structured data value, consisting of fields which map to dynamically typed values. In some languages, Struct might be supported by a native representation. For example, in scripting languages like JS a struct is represented as an object. The details of that representation are described together with the proto support for the language.
+ *
+ * The JSON representation for Struct is JSON object.
+ *
+ * https://protobuf.dev/reference/protobuf/google.protobuf/#struct
+ */
 export class Struct extends FieldNode {
-  get value(): string {
-    return this._value;
+  get value(): JSONObject {
+    return this._value
   }
 
-  set value(value: string) {
-    this._value = value;
+  set value(value: JSONObject) {
+    this._value = value
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     ) {
-      this.__isEmpty = false;
+      this.__isEmpty = false
     } else {
-      this.__isEmpty = value === null;
+      this.__isEmpty = value === null
     }
 
-    this.__climbUpValidation();
-    this.__notifyFieldValueChange(true);
+    this.__climbUpValidation()
+    this.__notifyFieldValueChange(true)
   }
 
-  public _value: string = '';
+  public _value: JSONObject = {}
 
   constructor(
-    initData?: string,
+    initData?: JSONObject,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
-    super(undefined, parent, parentAttributeName);
+    super(undefined, parent, parentAttributeName)
 
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    )
 
-    this._value = initData || '';
-    this.__meta.typeName = 'google.protobuf.Struct';
+    this._value = initData || {}
+    this.__meta.typeName = 'google.protobuf.Struct'
   }
 
-  __updateWithLiteral(v: string) {
-    this._value = v;
+  __updateWithLiteral(v: JSONObject) {
+    this._value = v
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     ) {
-      this.__isEmpty = false;
+      this.__isEmpty = false
     } else {
-      this.__isEmpty = v === null;
+      this.__isEmpty = v === null
     }
-    this.__notifyFieldValueChange(false);
+    this.__notifyFieldValueChange(false)
   }
 
   // eslint-disable-next-line class-methods-use-this
   __mapProtoNameJsonToJson(data: string): string {
-    return data;
+    return data
   }
 
-  __toJson(): string | null {
-    return this.__toLiteral();
+  __toJson(): JSONObject | null {
+    return this.__toLiteral()
   }
 
   __toLiteral() {
-    return this._value;
+    return this._value
   }
 
   protected __checkConstraints(
@@ -74,28 +91,28 @@ export class Struct extends FieldNode {
     for (const [constraint] of Object.entries(fieldConstraints)) {
       if (constraint === 'required') {
         if (this._value === null) {
-          return ['constraint.violation.required'];
+          return ['constraint.violation.required']
         }
       }
     }
 
-    return undefined;
+    return undefined
   }
 
   toString(): string {
     if (this._value !== null) {
-      return this._value;
+      return JSON.stringify(this._value)
     }
-    return '';
+    return ''
   }
 
   __clear() {
-    this._value = '';
+    this._value = {}
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    )
   }
 }
 
-Registry.register('Struct', Struct);
+Registry.register('Struct', Struct)

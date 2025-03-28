@@ -196,7 +196,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   }
 
   // only used by direct invocation of the type
-  __toLiteral(): T[] {
+  __toLiteral(): I[] {
     return this.value.map((v: FieldNode) => v.__toLiteral())
   }
 
@@ -381,6 +381,19 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     return n
   }
 
+  /**
+   * Moves an item in the array
+   * @param fromIndex
+   * @param toIndex
+   */
+  moveItem(fromIndex:number, toIndex:number) {
+    const e = this._value[fromIndex];
+    this._value.splice(fromIndex, 1);
+    this._value.splice(toIndex, 0, e);
+    this._rebuildIndexAndFieldName()
+    this.__notifyArrayChanges(true)
+  }
+
   private __pushWithoutNotifications(items: I[]) {
     let n: number = 0
     const Constructor: new () => T = this.__getConstructor()
@@ -393,6 +406,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       fn.__meta.fieldName = `[${n - 1}]`
       fn.__meta.index = n - 1
       fn.__meta.isArrayNode = true
+      fn.__meta.isPristine = true
     })
 
     this.__isEmpty = false
