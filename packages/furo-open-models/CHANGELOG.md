@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.5.0...@furo/open-models@1.5.1) (2025-03-28)
+
+### Bug Fixes
+
+- expose JSONObject and JSONValue on index export ([77268c8](https://github.com/eclipse/eclipsefuro-web/commit/77268c8436056403938476128aad83a7949b0e13))
+
 # [1.5.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.3.0...@furo/open-models@1.5.0) (2025-03-28)
 
 ### Features
