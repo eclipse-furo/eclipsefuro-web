@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.3.0...@furo/open-models@1.5.0) (2025-03-28)
+
+### Features
+
+- [open-models] Struct type ([7143b11](https://github.com/eclipse/eclipsefuro-web/commit/7143b115fc93b349ef8d599e889e8929654c9467))
+- [open-models] Struct type ([3a19fa6](https://github.com/eclipse/eclipsefuro-web/commit/3a19fa6902dde2390e5743ee493810124487696a))
+
 # [1.3.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.2.3...@furo/open-models@1.3.0) (2025-03-25)
 
 ### Features
