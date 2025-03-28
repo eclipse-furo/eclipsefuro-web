@@ -31,7 +31,6 @@ export { BytesValue } from './well_known/BytesValue';
 export { StringValue } from './well_known/StringValue';
 export { Timestamp } from './well_known/Timestamp';
 export { Struct } from './well_known/Struct';
-
 export { JSONValue } from './well_known/Struct';
 export { JSONObject } from './well_known/Struct';
 export { Duration } from './well_known/Duration';
