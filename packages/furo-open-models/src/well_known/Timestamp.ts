@@ -89,12 +89,17 @@ export class Timestamp extends FieldNode {
     return '';
   }
 
-  __clear() {
+  public __clear(withoutNotification: boolean = false) {
+// only notify when they are changes
+    const shouldNotify = this._value.length;
     this._value = '';
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
+    if (shouldNotify && !withoutNotification) {
+      this.__notifyFieldValueChange(false);
+    }
   }
 }
 

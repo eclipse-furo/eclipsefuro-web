@@ -32,6 +32,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     fn.__meta.fieldName = `[${n}]`
     fn.__meta.index = n
     fn.__meta.isArrayNode = true
+    fn.__meta.isPristine = true
     fn.__rootNode = this.__rootNode
     if (before) {
       this._value.unshift(fn)

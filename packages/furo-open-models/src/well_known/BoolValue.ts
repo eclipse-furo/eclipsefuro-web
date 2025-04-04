@@ -92,13 +92,18 @@ export class BoolValue extends FieldNode {
     return '';
   }
 
-  __clear() {
+  public __clear(withoutNotification: boolean = false) {
+    const shouldNotify = this._value === true;
     this._value = false;
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
+    if (shouldNotify && !withoutNotification) {
+      this.__notifyFieldValueChange(false);
+    }
   }
+
 }
 
 Registry.register('BoolValue', BoolValue);

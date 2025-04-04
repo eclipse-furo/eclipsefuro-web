@@ -52,9 +52,10 @@ export class EMPTY extends FieldNode {
     return '';
   }
 
-  __clear() {
+  public __clear() {
     this._value = {};
     this.__isEmpty = true;
+    // empty never changes
   }
 }
 

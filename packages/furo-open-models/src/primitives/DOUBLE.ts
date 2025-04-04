@@ -121,8 +121,14 @@ export class DOUBLE extends FieldNode {
     return this._value.toString();
   }
 
-  __clear() {
+  public __clear(withoutNotification: boolean = false) {
+// only notify when they are changes
+    const shouldNotify = this._value !== 0;
     this._value = 0;
+
+    if (shouldNotify && !withoutNotification) {
+      this.__notifyFieldValueChange(false);
+    }
   }
 }
 
