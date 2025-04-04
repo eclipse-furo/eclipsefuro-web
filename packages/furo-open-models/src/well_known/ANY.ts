@@ -1,6 +1,6 @@
 // scalar and any typeName
-import { FieldNode } from '../FieldNode'
-import { Registry } from '../Registry'
+import { FieldNode } from '../FieldNode';
+import { Registry } from '../Registry';
 
 export interface IAny {
   '@type': string;
@@ -9,124 +9,124 @@ export interface IAny {
 }
 
 export class ANY extends FieldNode {
-  private _value: FieldNode | undefined
+  private _value: FieldNode | undefined;
 
-  private _typeName: string = ''
+  private _typeName: string = '';
 
-  private _originalTypeName: string = ''
+  private _originalTypeName: string = '';
 
   constructor(
     initData?: IAny,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
-    super(undefined, parent, parentAttributeName)
-    this.__meta.typeName = `google.protobuf.Any`
+    super(undefined, parent, parentAttributeName);
+    this.__meta.typeName = `google.protobuf.Any`;
   }
 
   public __clear(withoutNotification: boolean = false) {
-// only notify when they are changes
-    const shouldNotify = this._value !== undefined
-    this.__isEmpty = true
-    this._value = undefined
+    // only notify when they are changes
+    const shouldNotify = this._value !== undefined;
+    this.__isEmpty = true;
+    this._value = undefined;
     if (shouldNotify && !withoutNotification) {
-      this.__notifyFieldValueChange(false)
+      this.__notifyFieldValueChange(false);
     }
   }
 
   // used by broadcast
   public get __childNodes(): FieldNode[] {
     if (this._value) {
-      return [this._value]
+      return [this._value];
     }
-    return []
+    return [];
   }
 
   get value() {
-    return this._value
+    return this._value;
   }
 
   set value(a: FieldNode | undefined) {
-    this._value = a
+    this._value = a;
   }
 
   get typeName(): string {
-    return this._typeName
+    return this._typeName;
   }
 
   __toJson(): object | null {
     if (this._value !== undefined) {
-      const d = this._value?.__toJson()
-      d['@type'] = this._originalTypeName //  send back the original type name instead of this._value?.__meta.typeName;
-      return d
+      const d = this._value?.__toJson();
+      d['@type'] = this._originalTypeName; //  send back the original type name instead of this._value?.__meta.typeName;
+      return d;
     }
-    return null
+    return null;
   }
 
   __toLiteral(): object | null {
     if (this._value !== undefined) {
-      const d = this._value?.__toLiteral()
-      d['@type'] = this._originalTypeName //  send back the original type name instead of this._value?.__meta.typeName;
-      return d
+      const d = this._value?.__toLiteral();
+      d['@type'] = this._originalTypeName; //  send back the original type name instead of this._value?.__meta.typeName;
+      return d;
     }
-    return null
+    return null;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __mapProtoNameJsonToJson(data: any): any {
     if (data['@type'] === undefined) {
       // eslint-disable-next-line no-console
-      console.error(`@type is not defined: ${data['@type']}`, data)
-      return undefined
+      console.error(`@type is not defined: ${data['@type']}`, data);
+      return undefined;
     }
 
-    const originalTypeName = data['@type']
+    const originalTypeName = data['@type'];
     // create a dummy object
     const fn = Registry.createInstanceByTypeName(
       data['@type'].split('/').pop(), // typename
       data,
       this,
       'value',
-    )
+    );
 
-    const literal = fn.__mapProtoNameJsonToJson(data)
-    literal['@type'] = originalTypeName
+    const literal = fn.__mapProtoNameJsonToJson(data);
+    literal['@type'] = originalTypeName;
 
-    return literal
+    return literal;
   }
 
   __updateWithLiteral(data: IAny) {
     if (data['@type'] === undefined) {
       // eslint-disable-next-line no-console
-      console.error(`@type is not defined: ${data['@type']}`, data)
-      return
+      console.error(`@type is not defined: ${data['@type']}`, data);
+      return;
     }
-    this._originalTypeName = data['@type']
-    const typeName = data['@type'].split('/').pop()
+    this._originalTypeName = data['@type'];
+    const typeName = data['@type'].split('/').pop();
     if (typeName) {
-      this._typeName = typeName
+      this._typeName = typeName;
       try {
         this.value = Registry.createInstanceByTypeName(
           this._typeName,
           data,
           this,
           'value',
-        )
-        this.value.__meta.isAnyNode = true
-        this.__isEmpty = false
-        this.__notifyFieldValueChange(false)
+        );
+        this.value.__meta.isAnyNode = true;
+        this.__isEmpty = false;
+        this.__notifyFieldValueChange(false);
       } catch (err) {
         // eslint-disable-next-line
-        console.error(err)
-        this.__isEmpty = true
-        this.__notifyFieldValueChange(false)
+        console.error(err);
+        this.__isEmpty = true;
+        this.__notifyFieldValueChange(false);
       }
     } else {
       // eslint-disable-next-line no-console
       console.error(
         `Could not resolve type from empty type field: ${data['@type']}`,
         data,
-      )
+      );
     }
   }
 }

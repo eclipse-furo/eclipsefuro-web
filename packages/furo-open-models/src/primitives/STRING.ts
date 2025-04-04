@@ -117,7 +117,7 @@ export class STRING extends FieldNode {
   }
 
   public __clear(withoutNotification: boolean = false) {
-// only notify when they are changes
+    // only notify when they are changes
     const shouldNotify = this._value.length;
     this._value = '';
     this.__isEmpty = !(

@@ -103,7 +103,6 @@ export class BoolValue extends FieldNode {
       this.__notifyFieldValueChange(false);
     }
   }
-
 }
 
 Registry.register('BoolValue', BoolValue);

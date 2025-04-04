@@ -17,7 +17,7 @@ export class BOOLEAN extends FieldNode {
   /**
    * Toggle the value of the bool.
    */
-  toggle(){
+  toggle() {
     this.value = !this._value;
   }
 
@@ -92,7 +92,6 @@ export class BOOLEAN extends FieldNode {
       this.__notifyFieldValueChange(false);
     }
   }
-
 }
 
 Registry.register('boolean', BOOLEAN);

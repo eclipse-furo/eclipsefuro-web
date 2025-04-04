@@ -150,7 +150,7 @@ export class Fetcher<REQ, RES> {
       method: this.method,
       signal,
       headers: this.API_OPTIONS.headers,
-      redirect:'follow'
+      redirect: 'follow',
     };
 
     this.timeout = this.API_OPTIONS.timeout || 300000; // chrome default timeout
@@ -197,7 +197,7 @@ export class Fetcher<REQ, RES> {
     }
   }
 
-  public invoke(rqo: REQ, options?: RequestInit):Promise<RES> {
+  public invoke(rqo: REQ, options?: RequestInit): Promise<RES> {
     return new Promise((resolve, reject) => {
       // abort old request if it is still running
       if (this.isLoading) {
@@ -216,7 +216,6 @@ export class Fetcher<REQ, RES> {
       if (options) {
         this.setRequestOptions(options);
       }
-
 
       this.isLoading = true;
 
@@ -240,7 +239,7 @@ export class Fetcher<REQ, RES> {
         console.error(
           `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
         );
-        reject(rqo)
+        reject(rqo);
       }, this.timeout);
 
       if (this.onRequestStarted) {
@@ -275,10 +274,9 @@ export class Fetcher<REQ, RES> {
               this.onFatalError(err);
             }
           }
-          reject(err)
+          reject(err);
         });
-    })
-
+    });
   }
 
   /**
@@ -362,8 +360,7 @@ export class Fetcher<REQ, RES> {
             reject(error);
           });
       }
-    })
-
+    });
   }
 
   /**

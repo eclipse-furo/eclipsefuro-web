@@ -430,9 +430,7 @@ export abstract class FieldNode {
    * Returns the formated label using the `OPEN_MODELS_OPTIONS.labelFormatter`
    */
   get __label(): string {
-    return OPEN_MODELS_OPTIONS.labelFormatter(
-      `${this.__getBaseName()}.label`,
-      );
+    return OPEN_MODELS_OPTIONS.labelFormatter(`${this.__getBaseName()}.label`);
   }
 
   /**

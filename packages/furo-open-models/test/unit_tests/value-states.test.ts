@@ -53,7 +53,9 @@ describe('ValueStates', () => {
     expect(defaults.id.__meta.stateMessage).to.eql(
       'constraint.violation.pattern ^-*$',
     );
-    expect(defaults.repeatedDecimal.at(0)!.__meta.valueState).to.eql('Negative');
+    expect(defaults.repeatedDecimal.at(0)!.__meta.valueState).to.eql(
+      'Negative',
+    );
     expect(defaults.repeatedDecimal.at(0)!.__meta.stateMessage).to.eql('DEC');
     done();
   });
