@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.0...@furo/open-models@1.6.1) (2025-04-12)
+
+### Bug Fixes
+
+- do not put test files in to npm package ([9540581](https://github.com/eclipse/eclipsefuro-web/commit/9540581033e22707a04cda1d2edf25be540c8f5d))
+
 # [1.6.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.5.2...@furo/open-models@1.6.0) (2025-04-04)
 
 ### Features
