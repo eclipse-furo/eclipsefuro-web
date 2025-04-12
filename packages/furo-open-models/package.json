@@ -28,7 +28,8 @@
     "bootstrap": "npm install && npm link && npm link @furo/open-models"
   },
   "files": [
-    "./dist/*",
+    "./dist/*.js",
+    "./dist/*.ts",
     "./dist/primitives",
     "./dist/proxies",
     "./dist/well_known",
