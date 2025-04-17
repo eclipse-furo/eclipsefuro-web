@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.1...@furo/open-models@1.6.2) (2025-04-17)
+
+### Bug Fixes
+
+- publish map files ([e97cf93](https://github.com/eclipse/eclipsefuro-web/commit/e97cf9365ba2c76f582b4cd71207b46785c631a0))
+
 ## [1.6.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.0...@furo/open-models@1.6.1) (2025-04-12)
 
 ### Bug Fixes
