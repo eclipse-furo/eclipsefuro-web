@@ -29,6 +29,7 @@
   },
   "files": [
     "./dist/*.js",
+    "./dist/*.map",
     "./dist/*.ts",
     "./dist/primitives",
     "./dist/proxies",

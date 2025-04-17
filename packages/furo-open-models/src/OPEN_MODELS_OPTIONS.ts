@@ -47,10 +47,10 @@ export interface Options {
   EmitDefaultValues: boolean;
   /**
    * Use this method to translate the value state messages.
-   * @param key
+   * @param key - message key
+   * @param params - message params
    */
   valueStateMessageFormatter: (key: string, ...params: string[]) => string;
-  // todo convert to (key:string, ...params string)=>string
   // todo merge all formatters to one formatter
 }
 
