@@ -52,7 +52,7 @@ export interface Options {
    * @param params - message params
    */
   valueStateMessageFormatter: (key: string, ...params: string[]) => string;
-  // todo merge all formatters to one formatter
+  // todo merge all formatters to one formatter, maybe rename to "translate"
 }
 
 export const OPEN_MODELS_OPTIONS: Options = {
@@ -62,4 +62,4 @@ export const OPEN_MODELS_OPTIONS: Options = {
   EmitUnpopulated: false,
   valueStateMessageFormatter: (key, ...params) =>
     `${key}${params.length > 0 ? ` ${params.join(' ')}` : ''}`,
-}
+};

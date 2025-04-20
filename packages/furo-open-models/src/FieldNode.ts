@@ -478,7 +478,6 @@ export abstract class FieldNode {
    * ]
    * ```
    */
-  // eslint-disable-next-line class-methods-use-this
   public __getAllStates(): ValueStateSummary[] {
     return this.___getAllStates([]);
   }
