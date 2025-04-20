@@ -818,13 +818,13 @@ export abstract class FieldNode {
   /**
    * Set the value state
    * @param {ValueState} state - The state of the node.
-   * @param {string[]} message - Description for the formatter.
+   * @param {string[]} messageAndParams - Description for the formatter.
    */
-  __setValueState(state: ValueState, message: string[]) {
+  __setValueState(state: ValueState, messageAndParams: string[]) {
     this.__meta.valueState = state;
     this.__meta.stateMessage = OPEN_MODELS_OPTIONS.valueStateMessageFormatter(
-      message[0],
-      ...message.slice(1),
+      messageAndParams[0],
+      ...messageAndParams.slice(1),
     );
     // set invalid on error state
     // the event is sent from ...
