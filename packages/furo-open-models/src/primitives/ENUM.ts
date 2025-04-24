@@ -99,7 +99,7 @@ export class ENUM<T> extends FieldNode {
   }
 
   toString(): string {
-    return this._value as string;
+    return this.msg(this._value as string);
   }
 
   public __clear(withoutNotification: boolean = false) {
