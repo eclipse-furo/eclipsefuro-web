@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.2...@furo/open-models@1.7.0) (2025-04-24)
+
+### Features
+
+- display enum with translation ([336edfc](https://github.com/eclipse/eclipsefuro-web/commit/336edfc310b1fdb99a84d163ed3ef2c38a7bfac5))
+
 ## [1.6.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.1...@furo/open-models@1.6.2) (2025-04-17)
 
 ### Bug Fixes
