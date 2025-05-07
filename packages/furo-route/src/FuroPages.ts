@@ -78,6 +78,8 @@ function isFuroPage(object: any): object is FuroPage {
  * @attribute {boolean} flex - Enables the flex mode when used in a flex parent like vertical-flex.
  *
  * @slot {HTMLElement [0..n]} default - default slot to add pages.
+ * @slot {HTMLElement [0..n]}  - default slot to add pages.
+ *
  * @summary Simple content switcher
  * @tagname furo-pages
  * @customElement
