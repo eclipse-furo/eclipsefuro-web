@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.5.0...@furo/route@3.6.0) (2025-05-07)
+
+### Features
+
+- declare HTMLElementTagNameMap ([1b41871](https://github.com/eclipse/eclipsefuro-web/commit/1b41871f78e19c03a1b15ddf7f8404a21fa6d014))
+
 # [3.5.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.4.0...@furo/route@3.5.0) (2024-11-24)
 
 ### Features
