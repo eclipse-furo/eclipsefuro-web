@@ -299,7 +299,8 @@ export abstract class FieldNode {
         this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
       ).__meta.isPristine = true;
     });
-
+    // set the object itself to pristine
+    this.__meta.isPristine = true;
     this.__notifyFieldValueChange(false);
   }
 

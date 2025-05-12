@@ -34,6 +34,40 @@ describe('Pristine State', () => {
     expect(id.__isPristine).equal(false);
   });
 
+  it('should set pristine to true after a fromLiteral({})', async () => {
+    const id = new Identifier({ id: 'init' });
+    expect(id.__isPristine).equal(true);
+    // no changes, same value
+    id.id = 'init'
+    expect(id.__isPristine).equal(true);
+
+    id.id = 'xxx';
+    expect(id.__isPristine).equal(false);
+
+    id.fromLiteral({ id: 'other' })
+    expect(id.__isPristine).equal(true);
+
+    id.id = 'xxx';
+    expect(id.__isPristine).equal(false);
+  });
+
+  it('should set pristine to true after a reset', async () => {
+    const id = new Identifier({ id: 'init' });
+    expect(id.__isPristine).equal(true);
+    // no changes, same value
+    id.id = 'init'
+    expect(id.__isPristine).equal(true);
+
+    id.id = 'xxx';
+    expect(id.__isPristine).equal(false);
+
+    id.__reset()
+    expect(id.__isPristine).equal(true);
+
+  });
+
+
+
   it('should have a pristine object from start', async () => {
     const id = new Identifier({ id: 'init' });
     expect(id.__isPristine).equal(true);
