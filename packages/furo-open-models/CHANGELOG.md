@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.7.0...@furo/open-models@1.7.1) (2025-05-12)
+
+### Bug Fixes
+
+- objects should be pristine after a fromLiteral(), reset(), ([26f6609](https://github.com/eclipse/eclipsefuro-web/commit/26f660979d54b11596b03b0dd31d609d2176d046))
+
 # [1.7.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.6.2...@furo/open-models@1.7.0) (2025-04-24)
 
 ### Features
