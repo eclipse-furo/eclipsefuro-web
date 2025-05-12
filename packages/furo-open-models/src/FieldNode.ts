@@ -10,8 +10,9 @@ import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 import { FieldConstraints } from './FieldConstraints';
 
 type EventType =
-  | 'field-value-changed'
-  | 'this-field-value-changed'
+  | 'field-value-changed' // triggered on change or value assignment
+  | 'this-field-value-changed' // triggered on every change
+  | 'field-value-updated' // triggered on clear or fromLiteral
   | 'this-state-changed'
   | 'state-changed'
   | 'validity-changed'
@@ -19,7 +20,7 @@ type EventType =
   | 'this-array-changed'
   | 'map-changed'
   | 'this-map-changed'
-  | 'model-injected'; // fired before field-value-changed and this-field-value-changed
+  | 'model-injected'; // fired on the injection node before field-value-updated and this-field-value-changed
 
 type Meta = {
   businessVaueState: ValueState;
@@ -155,7 +156,6 @@ export abstract class FieldNode {
       this.___isEmpty = true;
     } else {
       this.___updateNotEmptyPath();
-      this.__rootNode.__meta.isPristine = false;
     }
   }
 
@@ -246,6 +246,8 @@ export abstract class FieldNode {
         detail: this,
       }),
     );
+
+    this.__meta.isPristine = true;
     // this.__notifyFieldValueChange(true);
   }
 
@@ -297,10 +299,13 @@ export abstract class FieldNode {
 
       (
         this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
-      ).__meta.isPristine = true;
+      ).__meta.isPristine = false;
     });
-    // set the object itself to pristine
-    this.__meta.isPristine = true;
+    // set the object itself to pristine on root nodes
+
+      this.__meta.isPristine = false;
+
+
     this.__notifyFieldValueChange(false);
   }
 
@@ -845,10 +850,12 @@ export abstract class FieldNode {
   public __reset() {
     if (this.__meta.initialValue !== undefined) {
       this.__updateWithLiteral(this.__meta.initialValue);
+      this.__meta.isPristine = true;
       return;
     }
     // else re init every field downwards
     this.__clear();
+    this.__meta.isPristine = true;
   }
 
   /**
@@ -934,6 +941,11 @@ export abstract class FieldNode {
     );
 
     if (bubbles) {
+      this.__rootNode.__meta.isPristine = false;
+      // todo check if nodes in between this and root should be set to false too
+      // check ARRAY.ts line 120 too
+      this.__meta.isPristine = false;
+
       //    console.log('bubble', this.__meta.typeName)
       this.__dispatchEvent(
         new CustomEvent('field-value-changed', {
@@ -942,9 +954,9 @@ export abstract class FieldNode {
         }),
       );
     } else {
-      //   console.log('non', this.__meta.typeName)
+      // triggered on clear or fromLiteral
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent('field-value-updated', {
           detail: this,
           bubbles: false,
         }),

@@ -35,13 +35,34 @@ describe('Pristine State', () => {
   });
 
   it('should set pristine to true after a fromLiteral({})', async () => {
-    const id = new Identifier({ id: 'init' });
+    const id = new Identifier({
+      id: 'deep',
+      attributes: { key: 'BBBB', value: 'stand' },
+      stringArray: ['------', '++++++'],
+      bookingCenter: BookingCenter.BBC_AT,
+      decRange: {
+        start: { value: '123' },
+        end: { value: '12335' },
+      },
+      any: {
+        '@type': 'x/furo.type.Identifier',
+        id: 'he',
+        bookingCenter: BookingCenter.BBC_SG,
+        attributes: { key: 'BBBB', value: 'stand' },
+      },
+      repeatedDecimal: [{ value: '1234' }, { value: '12324' }],
+      fatString: {
+        value: '123',
+        labels: { aaa: true, xxxx: false },
+        attributes: { key: 'BBBB', value: 'stand.' },
+      },
+    });
     expect(id.__isPristine).equal(true);
     // no changes, same value
-    id.id = 'init'
+    id.decRange.start.value = '123';
     expect(id.__isPristine).equal(true);
 
-    id.id = 'xxx';
+    id.decRange.start.value = '1234';
     expect(id.__isPristine).equal(false);
 
     id.fromLiteral({ id: 'other' })

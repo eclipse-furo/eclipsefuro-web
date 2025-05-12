@@ -116,6 +116,10 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       }),
     );
     if (bubbles) {
+      this.__rootNode.__meta.isPristine = false;
+      // todo check if nodes in between this and root should be set to false too
+      this.__meta.isPristine = false;
+
       this.__dispatchEvent(
         new CustomEvent('array-changed', {
           detail: this,
