@@ -52,6 +52,15 @@ export const RouteConfig: Route[] = [
     target: 'HISTORY-BACK',
     queryParamMapping: null,
   },
+  // emit event and set the qp to {url:'http://xxx.xxx.com/some?aaa=2&bb=33#hasc'}
+  {
+    currentPage: '*',
+    flowEvent: 'EXTERNAL_LINK',
+    target: 'EXTERNAL_LINK',
+    isExternalTarget: true,
+    queryParamMapping: '*',
+    internalDescription: 'Open external page',
+  },
   {
     currentPage: '*',
     flowEvent: 'HISTORY-BACK-FALLBACK',
@@ -68,6 +77,7 @@ class AppFlow {
   static emit(eventName: FlowEventName, queryParams?: QueryParams) {
     FuroAppFlow.emit(eventName, queryParams);
   }
+
 }
 
 export { AppFlow };

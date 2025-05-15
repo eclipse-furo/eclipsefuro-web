@@ -32,7 +32,7 @@ class FuroAppFlowRouter {
       window.history.replaceState(
         { HistoryStartingPoint: true },
         '',
-        window.location.href,
+        window.location.href
       );
     }
 
@@ -92,7 +92,7 @@ class FuroAppFlowRouter {
         const customEvent = new CustomEvent('external-link-clicked', {
           composed: true,
           bubbles: false,
-          detail: window.performance.now(),
+          detail: window.performance.now()
         });
         window.dispatchEvent(customEvent);
         return;
@@ -102,7 +102,7 @@ class FuroAppFlowRouter {
       const beforeReplace = new CustomEvent('__beforeReplaceState', {
         composed: true,
         bubbles: true,
-        detail: { cancel: false },
+        detail: { cancel: false }
       });
       window.dispatchEvent(beforeReplace);
 
@@ -113,8 +113,8 @@ class FuroAppFlowRouter {
           new CustomEvent('__furoLocationChanged', {
             composed: true,
             bubbles: true,
-            detail: window.performance.now(),
-          }),
+            detail: window.performance.now()
+          })
         );
       }
 
@@ -131,7 +131,7 @@ class FuroAppFlowRouter {
       .replace(new RegExp(this.urlSpaceRegex), '')
       .replace('/', '');
     const match = window.location.pathname.match(
-      new RegExp(this.urlSpaceRegex),
+      new RegExp(this.urlSpaceRegex)
     );
 
     // slash should be added to rewrite location
@@ -187,7 +187,7 @@ class FuroAppFlowRouter {
         const beforeHistoryBack = new CustomEvent('__beforeHistoryBack', {
           composed: true,
           bubbles: true,
-          detail: { cancel: false },
+          detail: { cancel: false }
         });
         window.dispatchEvent(beforeHistoryBack);
 
@@ -195,15 +195,21 @@ class FuroAppFlowRouter {
           this.back();
         }
       } else {
-        const sa = [];
-        // eslint-disable-next-line guard-for-in,no-restricted-syntax
-        for (const k in flowEvent.queryParams) {
-          sa.push(flowEvent.queryParams[k]);
-        }
 
         if (selectedFlow.isExternalTarget) {
           const url = document.createElement('a');
-          url.href = selectedFlow.target + search;
+          if (selectedFlow.target === 'EXTERNAL_LINK') {
+            if (flowEvent.queryParams?.url) {
+              url.href = flowEvent.queryParams.url as string;
+            } else {
+              console.error('url is missing');
+              return false;
+            }
+
+          } else {
+            url.href = selectedFlow.target + search;
+          }
+
 
           if (this.openBlankPage || selectedFlow.forceOpenBlank) {
             window.open(url.href);
@@ -211,7 +217,7 @@ class FuroAppFlowRouter {
             const beforeReplace = new CustomEvent('__beforeReplaceState', {
               composed: true,
               bubbles: true,
-              detail: { cancel: false },
+              detail: { cancel: false }
             });
             window.dispatchEvent(beforeReplace);
 
@@ -220,7 +226,7 @@ class FuroAppFlowRouter {
               const customEvent = new CustomEvent('__furoLocationChanged', {
                 composed: true,
                 bubbles: true,
-                detail: window.performance.now(),
+                detail: window.performance.now()
               });
               window.dispatchEvent(customEvent);
             }
@@ -232,7 +238,7 @@ class FuroAppFlowRouter {
         const beforeReplace = new CustomEvent('__beforeReplaceState', {
           composed: true,
           bubbles: true,
-          detail: { cancel: false },
+          detail: { cancel: false }
         });
         window.dispatchEvent(beforeReplace);
 
@@ -248,7 +254,7 @@ class FuroAppFlowRouter {
             window.history.replaceState(
               window.history.state,
               '',
-              prefix + selectedFlow.target + search,
+              prefix + selectedFlow.target + search
             );
           }
         }
@@ -261,7 +267,7 @@ class FuroAppFlowRouter {
         const customEvent = new CustomEvent('__furoLocationChanged', {
           composed: true,
           bubbles: true,
-          detail: window.performance.now(),
+          detail: window.performance.now()
         });
         window.dispatchEvent(customEvent);
       }
@@ -269,7 +275,7 @@ class FuroAppFlowRouter {
       const customEvent = new CustomEvent('page-changed', {
         composed: true,
         bubbles: true,
-        detail: flowEvent,
+        detail: flowEvent
       });
       window.dispatchEvent(customEvent);
       return true;
@@ -323,9 +329,14 @@ class FuroAppFlow {
   static emit(eventName: string, queryParams?: QueryParams) {
     const detail: FlowEvent = {
       eventName,
-      queryParams,
+      queryParams
     };
     furoAppFlowRouter.trigger(detail);
+  }
+
+  // helper to open a link by string
+  static openExternalLink(target: string) {
+    furoAppFlowRouter.trigger({ eventName: 'EXTERNAL_LINK', queryParams: { url: target } });
   }
 }
 
