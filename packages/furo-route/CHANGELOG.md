@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.6.0...@furo/route@3.7.0) (2025-05-15)
+
+### Features
+
+- EXTERNAL_LINK ([ea96da1](https://github.com/eclipse/eclipsefuro-web/commit/ea96da12923fa9101fe1e4912fabe16f87ca9a13))
+
 # [3.6.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.5.0...@furo/route@3.6.0) (2025-05-07)
 
 ### Features
