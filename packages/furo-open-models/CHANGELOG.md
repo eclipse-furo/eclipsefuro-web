@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.7.2...@furo/open-models@1.8.0) (2025-05-17)
+
+### Features
+
+- int64 support ([1722a2a](https://github.com/eclipse/eclipsefuro-web/commit/1722a2a624a34e9e7d4b13b2e9573ae75bc9662b))
+
 ## [1.7.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.7.1...@furo/open-models@1.7.2) (2025-05-12)
 
 ### Bug Fixes
