@@ -303,8 +303,7 @@ export abstract class FieldNode {
     });
     // set the object itself to pristine on root nodes
 
-      this.__meta.isPristine = false;
-
+    this.__meta.isPristine = false;
 
     this.__notifyFieldValueChange(false);
   }
@@ -624,10 +623,10 @@ export abstract class FieldNode {
   }
 
   /**
-   * The valueOf() method of Object instances converts the this value to an object.
+   * The valueOf() method of Object instances converts the this.value to an object.
    * This method is meant to be overridden by derived objects for custom type conversion logic.
    */
-  public valueOf(): number {
+  public valueOf(): number | bigint {
     const ts = ValueOf.get(this.__meta.typeName || '');
     if (ts) {
       return ts(this);

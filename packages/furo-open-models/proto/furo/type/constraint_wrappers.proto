@@ -14,7 +14,7 @@ message ConstraintWrappers {
   option (openapi.v3.schema) = {required:['string_value', 'int32_value','int64_value']};
   google.protobuf.StringValue string_value = 1 [(openapi.v3.property) ={default:{string:"default"},min_length:3, max_length:10, pattern:"^-*$"}];
   google.protobuf.Int32Value int32_value = 2 [(openapi.v3.property) ={default:{number:3},minimum:3, maximum:10, multiple_of:3}];
-  google.protobuf.Int64Value int64_value = 3 [(openapi.v3.property) ={default:{number:3},minimum:3, maximum:10, multiple_of:3}];
+  google.protobuf.Int64Value int64_value = 3 [(openapi.v3.property) ={default:{string:"3"},minimum:3, maximum:10, multiple_of:3}];
   google.protobuf.FloatValue float_value = 4;
   google.protobuf.DoubleValue double_value = 5;
   google.protobuf.BoolValue bool_value = 6;
@@ -23,6 +23,6 @@ message ConstraintWrappers {
   google.protobuf.BytesValue bytes_value = 9;
 
   google.protobuf.Int32Value excl_int32_value = 12 [(openapi.v3.property) ={default:{number:3},exclusive_minimum:true, exclusive_maximum:true, minimum:3, maximum:10, multiple_of:3}];
-  google.protobuf.Int64Value excl_int64_value = 13 [(openapi.v3.property) ={default:{number:3},exclusive_minimum:true, exclusive_maximum:true, minimum:3, maximum:10, multiple_of:3}];
+  google.protobuf.Int64Value excl_int64_value = 13 [(openapi.v3.property) ={default:{string:"3"},exclusive_minimum:true, exclusive_maximum:true, minimum:3, maximum:10, multiple_of:3}];
 
 }

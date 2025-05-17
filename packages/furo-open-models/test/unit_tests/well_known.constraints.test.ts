@@ -14,9 +14,9 @@ describe('well known constraints', () => {
       float_value: 0,
       double_value: 0,
       int32_value: 3,
-      int64_value: 3,
+      int64_value: '3',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
       uint32_value: 0,
       uint64_value: 0,
@@ -33,11 +33,11 @@ describe('well known constraints', () => {
       double_value: 0,
       float_value: 0,
       int32_value: 3,
-      int64_value: 3,
+      int64_value: '3',
       uint32_value: 0,
       uint64_value: 0,
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
     OPEN_MODELS_OPTIONS.EmitDefaultValues = false;
@@ -48,15 +48,15 @@ describe('well known constraints', () => {
     const wr = new ConstraintWrappers();
     expect(wr.__toJson()).to.eql({
       int32_value: 3,
-      int64_value: 3,
+      int64_value: '3',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
     wr.__clear();
     expect(wr.__toJson()).to.eql({
       int32_value: 0,
-      int64_value: 0,
+      int64_value: '0',
       string_value: '',
     });
     wr.__validate();
@@ -72,9 +72,9 @@ describe('well known constraints', () => {
     const wr = new ConstraintWrappers({ int32Value: 123 });
     expect(wr.__toJson()).to.eql({
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       int32_value: 123,
-      int64_value: 3,
+      int64_value: '3',
       string_value: 'default',
     });
   });
@@ -85,16 +85,16 @@ describe('well known constraints', () => {
     expect(wr.int32Value.toString()).to.equal('123');
     expect(wr.__toJson()).to.eql({
       int32_value: 123,
-      int64_value: 3,
+      int64_value: '3',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
     expect(wr.__toLiteral()).to.eql({
       int32Value: 123,
-      int64Value: 3,
+      int64Value: '3',
       exclInt32Value: 3,
-      exclInt64Value: 3,
+      exclInt64Value: '3',
       stringValue: 'default',
     });
     expect(wr.__isValid).to.be.true;
@@ -107,15 +107,15 @@ describe('well known constraints', () => {
     expect(wr.__isValid).to.be.true;
     expect(wr.__toJson()).to.eql({
       int32_value: 3,
-      int64_value: 3,
+      int64_value: '3',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
     wr.__validate();
     expect(wr.__isValid).to.be.false;
-    expect(wr.int64Value._value).to.equal(3);
-    wr.int64Value = 0;
+    expect(wr.int64Value._value.valueOf() === 3n).to.be.true;
+    wr.int64Value = 0n;
     expect(wr.int64Value.__isValid).to.be.false;
 
     wr.int32Value = 0;
@@ -127,7 +127,7 @@ describe('well known constraints', () => {
       'constraint.violation.exclusive_minimum 3 0',
     );
 
-    wr.exclInt64Value = 0;
+    wr.exclInt64Value = 0n;
     expect(wr.exclInt64Value.__meta.stateMessage).to.equal(
       'constraint.violation.exclusive_minimum 3 0',
     );
@@ -157,67 +157,68 @@ describe('well known constraints', () => {
     OPEN_MODELS_OPTIONS.EmitDefaultValues = false;
     const wr = new ConstraintWrappers({});
 
-    expect(wr.int64Value.value).to.equal(3);
+    expect(wr.int64Value.value === 3n).to.be.true;
+
     expect(wr.__isValid).to.be.true;
     expect(wr.__toJson()).to.eql({
       int32_value: 3,
-      int64_value: 3,
+      int64_value: '3',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
     wr.__validate();
     expect(wr.__isValid).to.be.false;
-    expect(wr.int64Value._value).to.equal(3);
-    wr.int64Value = 4;
+    expect(wr.int64Value._value === 3n).to.be.true;
+    wr.int64Value = 4n;
     expect(wr.int64Value.__isValid).to.be.false;
     expect(wr.int64Value.__meta.stateMessage).to.equal(
       'constraint.violation.multiple_of 3 4',
     );
 
-    wr.int64Value = 0;
+    wr.int64Value = 0n;
     expect(wr.int64Value.__meta.stateMessage).to.equal(
       'constraint.violation.minimum 3 0',
     );
-    wr.exclInt64Value = 0;
+    wr.exclInt64Value = 0n;
     expect(wr.exclInt64Value.__meta.stateMessage).to.equal(
       'constraint.violation.exclusive_minimum 3 0',
     );
-    wr.int64Value = 3;
+    wr.int64Value = 3n;
     expect(wr.int64Value.__meta.stateMessage).to.equal('');
 
-    wr.int64Value = 9;
+    wr.int64Value = 9n;
     expect(wr.int64Value.__meta.stateMessage).to.equal('');
 
-    wr.int64Value = 10;
+    wr.int64Value = 10n;
     expect(wr.int64Value.__meta.stateMessage).to.equal(
       'constraint.violation.multiple_of 3 10',
     );
 
     wr.int32Value = 12;
-    wr.int64Value = 12;
-    wr.int64Value.value = 12;
+    wr.int64Value = 12n;
+    wr.int64Value.value = 12n;
     expect(wr.int64Value.__meta.stateMessage).to.equal(
       'constraint.violation.maximum 10 12',
     );
-    wr.exclInt64Value.value = 12;
+    wr.exclInt64Value.value = 12n;
     expect(wr.exclInt64Value.__meta.stateMessage).to.equal(
       'constraint.violation.exclusive_maximum 10 12',
     );
     expect(wr.int64Value.toString()).to.equal('12');
-    expect(wr.int64Value.valueOf() * wr.int32Value.valueOf()).to.equal(144);
+    expect(wr.int64Value.value * 2n).to.equal(24n);
   });
 
   it('should send correct json', async () => {
     const wr = new ConstraintWrappers({
       int32Value: 123,
-      int64Value: 42,
+      int64Value: '42',
     });
     expect(wr.__toJson()).to.eql({
       int32_value: 123,
-      int64_value: 42,
+      int64_value: '42',
       excl_int32_value: 3,
-      excl_int64_value: 3,
+      excl_int64_value: '3',
       string_value: 'default',
     });
   });

@@ -21,15 +21,15 @@ import {
 export interface IConstraintWrappers {
   stringValue?: string;
   int32Value?: number;
-  int64Value?: number;
+  int64Value?: string;
   floatValue?: number;
   doubleValue?: number;
   boolValue?: boolean;
   uint32Value?: number;
-  uint64Value?: number;
+  uint64Value?: string;
   bytesValue?: string;
   exclInt32Value?: number;
-  exclInt64Value?: number;
+  exclInt64Value?: string;
 }
 
 /**
@@ -38,15 +38,15 @@ export interface IConstraintWrappers {
 export interface TConstraintWrappers {
   string_value?: string;
   int32_value?: number;
-  int64_value?: number;
+  int64_value?: string;
   float_value?: number;
   double_value?: number;
   bool_value?: boolean;
   uint32_value?: number;
-  uint64_value?: number;
+  uint64_value?: string;
   bytes_value?: string;
   excl_int32_value?: number;
-  excl_int64_value?: number;
+  excl_int64_value?: string;
 }
 
 /**
@@ -214,9 +214,9 @@ export class ConstraintWrappers extends FieldNode {
     // Default values from openAPI annotations
     this.__defaultValues = {
       exclInt32Value: 3.0,
-      exclInt64Value: 3.0,
+      exclInt64Value: '3',
       int32Value: 3.0,
-      int64Value: 3.0,
+      int64Value: '3',
       stringValue: 'default',
     };
 
@@ -256,7 +256,7 @@ export class ConstraintWrappers extends FieldNode {
     return this._int64Value;
   }
 
-  public set int64Value(v: number | null) {
+  public set int64Value(v: bigint | null) {
     this.__TypeSetter(this._int64Value, v);
   }
 
@@ -296,7 +296,7 @@ export class ConstraintWrappers extends FieldNode {
     return this._uint64Value;
   }
 
-  public set uint64Value(v: number | null) {
+  public set uint64Value(v: bigint | null) {
     this.__TypeSetter(this._uint64Value, v);
   }
 
@@ -320,7 +320,7 @@ export class ConstraintWrappers extends FieldNode {
     return this._exclInt64Value;
   }
 
-  public set exclInt64Value(v: number | null) {
+  public set exclInt64Value(v: bigint | null) {
     this.__TypeSetter(this._exclInt64Value, v);
   }
 

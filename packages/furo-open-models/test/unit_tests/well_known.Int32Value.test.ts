@@ -14,7 +14,7 @@ describe('well known Int32Value', () => {
       double_value: 0,
       float_value: 0,
       int32_value: 0,
-      int64_value: 0,
+      int64_value: '0',
       string_value: '',
       uint32_value: 0,
       uint64_value: 0,
@@ -31,7 +31,7 @@ describe('well known Int32Value', () => {
       double_value: 0,
       float_value: 0,
       int32_value: 0,
-      int64_value: 0,
+      int64_value: '0',
       string_value: '',
       uint32_value: 0,
       uint64_value: 0,
@@ -80,8 +80,8 @@ describe('well known Int32Value', () => {
   });
 
   it('should send correct json', async () => {
-    const wr = new Wrappers({ int32Value: 123, int64Value: 42 });
-    expect(wr.__toJson()).to.eql({ int32_value: 123, int64_value: 42 });
+    const wr = new Wrappers({ int32Value: 123, int64Value: '42' });
+    expect(wr.__toJson()).to.eql({ int32_value: 123, int64_value: '42' });
   });
 
   it('should send correct json on empty', async () => {

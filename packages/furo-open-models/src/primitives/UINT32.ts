@@ -75,7 +75,7 @@ export class UINT32 extends FieldNode {
           return ['constraint.violation.exclusive_maximum', value, this._value];
         }
         if (this._value > value) {
-          return ['constraint.violation.maximum', value];
+          return ['constraint.violation.maximum', value, this._value];
         }
       }
       if (constraint === 'minimum') {

@@ -13,7 +13,7 @@ export interface IUInt64Value {
   /**
    *  The uint64 value.
    */
-  value?: number;
+  value?: string;
 }
 
 /**
@@ -26,7 +26,7 @@ export interface TUInt64Value {
   /**
    *  The uint64 value.
    */
-  value?: number;
+  value?: string;
 }
 
 /**
@@ -91,7 +91,7 @@ export class UInt64Value extends FieldNode {
     return this._value;
   }
 
-  public set value(v: number) {
+  public set value(v: bigint) {
     this.__PrimitivesSetter(this._value, v);
   }
 

@@ -4,11 +4,11 @@ import { FieldConstraints } from '../FieldConstraints';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
 
 export class Int64Value extends FieldNode {
-  get value(): number {
+  get value(): bigint {
     return this._value;
   }
 
-  set value(value: number) {
+  set value(value: bigint) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,10 +23,10 @@ export class Int64Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: number = 0;
+  public _value: bigint = 0n;
 
   constructor(
-    initData?: number | undefined,
+    initData?: string | undefined,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -36,12 +36,12 @@ export class Int64Value extends FieldNode {
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
-    this._value = Number.isInteger(initData) ? (initData as number) : 0;
+    this._value = BigInt(initData || '0');
     this.__meta.typeName = 'google.protobuf.Int64Value';
   }
 
-  __updateWithLiteral(v: number) {
-    this._value = v;
+  __updateWithLiteral(v: string) {
+    this._value = BigInt(v);
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
@@ -58,33 +58,16 @@ export class Int64Value extends FieldNode {
     return data;
   }
 
-  __toJson(): number | null {
+  __toJson(): string | null {
     return this.__toLiteral();
   }
 
-  valueOf(): number {
+  valueOf() {
     return this._value || NaN;
   }
 
   __toLiteral() {
-    return this._value;
-  }
-
-  protected __checkTypeBoundaries(): string[] | undefined {
-    // check for int64 min max boundaries
-    if (this._value && this._value > Number.MAX_SAFE_INTEGER) {
-      return [
-        'constraint.violation.range.int64.max',
-        Number.MAX_SAFE_INTEGER.toString(),
-      ];
-    }
-    if (this._value && this._value < Number.MIN_SAFE_INTEGER) {
-      return [
-        'constraint.violation.range.int64.min',
-        Number.MIN_SAFE_INTEGER.toString(),
-      ];
-    }
-    return undefined;
+    return this._value.toString();
   }
 
   protected __checkConstraints(
@@ -121,7 +104,7 @@ export class Int64Value extends FieldNode {
       if (constraint === 'multiple_of') {
         // Use the multiple_of keyword to specify that a number must be the multiple of another number
         // use this to define the step ??
-        if (this._value !== null && this._value % value !== 0) {
+        if (this._value !== null && this._value % BigInt(value) !== 0n) {
           return ['constraint.violation.multiple_of', value, this._value];
         }
       }
@@ -144,8 +127,8 @@ export class Int64Value extends FieldNode {
 
   public __clear(withoutNotification: boolean = false) {
     // only notify when they are changes
-    const shouldNotify = this._value !== 0;
-    this._value = 0;
+    const shouldNotify = this._value !== 0n;
+    this._value = 0n;
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated

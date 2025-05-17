@@ -21,12 +21,12 @@ import {
 export interface IWrappers {
   stringValue?: string;
   int32Value?: number;
-  int64Value?: number;
+  int64Value?: string;
   floatValue?: number;
   doubleValue?: number;
   boolValue?: boolean;
   uint32Value?: number;
-  uint64Value?: number;
+  uint64Value?: string;
   bytesValue?: string;
 }
 
@@ -36,12 +36,12 @@ export interface IWrappers {
 export interface TWrappers {
   string_value?: string;
   int32_value?: number;
-  int64_value?: number;
+  int64_value?: string;
   float_value?: number;
   double_value?: number;
   bool_value?: boolean;
   uint32_value?: number;
-  uint64_value?: number;
+  uint64_value?: string;
   bytes_value?: string;
 }
 
@@ -196,7 +196,7 @@ export class Wrappers extends FieldNode {
     return this._int64Value;
   }
 
-  public set int64Value(v: number | null) {
+  public set int64Value(v: bigint | null) {
     this.__TypeSetter(this._int64Value, v);
   }
 
@@ -236,7 +236,7 @@ export class Wrappers extends FieldNode {
     return this._uint64Value;
   }
 
-  public set uint64Value(v: number | null) {
+  public set uint64Value(v: bigint | null) {
     this.__TypeSetter(this._uint64Value, v);
   }
 

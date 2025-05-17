@@ -4,38 +4,38 @@ import { FieldConstraints } from '../FieldConstraints';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
 
 export class INT64 extends FieldNode {
-  get value(): number {
+  get value(): bigint {
     return this._value;
   }
 
-  set value(value: number) {
+  set value(value: bigint) {
     this._value = value;
     this.__isEmpty = false;
     this.__climbUpValidation();
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: number;
+  public _value: bigint;
 
   constructor(
-    initData?: number,
+    initData?: string,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = Number.isInteger(initData) ? (initData as number) : 0;
+    this._value = BigInt(initData || '0');
     this.__meta.typeName = 'primitives.INT64';
   }
 
-  __updateWithLiteral(v: number) {
-    this._value = v;
+  __updateWithLiteral(v: string) {
+    this._value = BigInt(v);
     this.__isEmpty = false;
     this.__notifyFieldValueChange(false);
   }
 
   protected ___updateNotEmptyPath() {
-    if (this._value === 0) {
+    if (this._value === 0n) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
         OPEN_MODELS_OPTIONS.EmitUnpopulated
@@ -51,24 +51,6 @@ export class INT64 extends FieldNode {
     return data;
   }
 
-  protected __checkTypeBoundaries(): string[] | undefined {
-    // check for int64 min max boundaries
-
-    if (this._value > Number.MAX_SAFE_INTEGER) {
-      return [
-        'constraint.violation.range.int64.max',
-        Number.MAX_SAFE_INTEGER.toString(),
-      ];
-    }
-    if (this._value < Number.MIN_SAFE_INTEGER) {
-      return [
-        'constraint.violation.range.int64.min',
-        Number.MIN_SAFE_INTEGER.toString(),
-      ];
-    }
-    return undefined;
-  }
-
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
@@ -81,7 +63,7 @@ export class INT64 extends FieldNode {
           return ['constraint.violation.exclusive_maximum', value, this._value];
         }
         if (this._value > value) {
-          return ['constraint.violation.maximum', value];
+          return ['constraint.violation.maximum', value, this._value];
         }
       }
       if (constraint === 'minimum') {
@@ -96,7 +78,7 @@ export class INT64 extends FieldNode {
       if (constraint === 'multiple_of') {
         // Use the multiple_of keyword to specify that a number must be the multiple of another number
         // use this to define the step ??
-        if (this._value % value !== 0) {
+        if (this._value % BigInt(value) !== 0n) {
           return ['constraint.violation.multiple_of', value, this._value];
         }
       }
@@ -105,15 +87,15 @@ export class INT64 extends FieldNode {
     return undefined;
   }
 
-  __toJson(): number {
+  __toJson(): string {
     return this.__toLiteral();
   }
 
   __toLiteral() {
-    return this._value;
+    return this._value.toString();
   }
 
-  valueOf(): number {
+  valueOf(): bigint {
     return this._value;
   }
 
@@ -123,8 +105,8 @@ export class INT64 extends FieldNode {
 
   public __clear(withoutNotification: boolean = false) {
     // only notify when they are changes
-    const shouldNotify = this._value !== 0;
-    this._value = 0;
+    const shouldNotify = this._value !== 0n;
+    this._value = 0n;
     if (shouldNotify && !withoutNotification) {
       this.__notifyFieldValueChange(false);
     }

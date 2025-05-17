@@ -65,7 +65,7 @@ describe('Pristine State', () => {
     id.decRange.start.value = '1234';
     expect(id.__isPristine).equal(false);
 
-    id.fromLiteral({ id: 'other' })
+    id.fromLiteral({ id: 'other' });
     expect(id.__isPristine).equal(true);
 
     id.id = 'xxx';
@@ -76,18 +76,15 @@ describe('Pristine State', () => {
     const id = new Identifier({ id: 'init' });
     expect(id.__isPristine).equal(true);
     // no changes, same value
-    id.id = 'init'
+    id.id = 'init';
     expect(id.__isPristine).equal(true);
 
     id.id = 'xxx';
     expect(id.__isPristine).equal(false);
 
-    id.__reset()
+    id.__reset();
     expect(id.__isPristine).equal(true);
-
   });
-
-
 
   it('should have a pristine object from start', async () => {
     const id = new Identifier({ id: 'init' });

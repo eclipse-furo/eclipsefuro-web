@@ -18,7 +18,7 @@ export interface IUint64 {
   /**
    *  The JSON representation for `Uint64Value` is JSON number, range is set to 0 - Number.MAX_SAFE_INTEGER
    */
-  value?: number;
+  value?: string;
   /**
    *  Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
    */
@@ -37,7 +37,7 @@ export interface TUint64 {
   /**
    *  The JSON representation for `Uint64Value` is JSON number, range is set to 0 - Number.MAX_SAFE_INTEGER
    */
-  value?: number;
+  value?: string;
   /**
    *  Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...
    */
@@ -137,7 +137,7 @@ export class Uint64 extends FieldNode {
     return this._value;
   }
 
-  public set value(v: number) {
+  public set value(v: bigint) {
     this.__PrimitivesSetter(this._value, v);
   }
 

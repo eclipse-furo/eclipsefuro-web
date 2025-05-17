@@ -90,14 +90,14 @@ export interface ISchema {
   exclusiveMaximum?: boolean;
   minimum?: number;
   exclusiveMinimum?: boolean;
-  maxLength?: number;
-  minLength?: number;
+  maxLength?: string;
+  minLength?: string;
   pattern?: string;
-  maxItems?: number;
-  minItems?: number;
+  maxItems?: string;
+  minItems?: string;
   uniqueItems?: boolean;
-  maxProperties?: number;
-  minProperties?: number;
+  maxProperties?: string;
+  minProperties?: string;
   required?: string[];
   enum?: IOpenapiV3Any[];
   type?: string;
@@ -133,14 +133,14 @@ export interface TSchema {
   exclusive_maximum?: boolean;
   minimum?: number;
   exclusive_minimum?: boolean;
-  max_length?: number;
-  min_length?: number;
+  max_length?: string;
+  min_length?: string;
   pattern?: string;
-  max_items?: number;
-  min_items?: number;
+  max_items?: string;
+  min_items?: string;
   unique_items?: boolean;
-  max_properties?: number;
-  min_properties?: number;
+  max_properties?: string;
+  min_properties?: string;
   required?: string[];
   enum?: TOpenapiV3Any[];
   type?: string;
@@ -712,7 +712,7 @@ export class Schema extends FieldNode {
     return this._maxLength;
   }
 
-  public set maxLength(v: number) {
+  public set maxLength(v: bigint) {
     this.__PrimitivesSetter(this._maxLength, v);
   }
 
@@ -720,7 +720,7 @@ export class Schema extends FieldNode {
     return this._minLength;
   }
 
-  public set minLength(v: number) {
+  public set minLength(v: bigint) {
     this.__PrimitivesSetter(this._minLength, v);
   }
 
@@ -736,7 +736,7 @@ export class Schema extends FieldNode {
     return this._maxItems;
   }
 
-  public set maxItems(v: number) {
+  public set maxItems(v: bigint) {
     this.__PrimitivesSetter(this._maxItems, v);
   }
 
@@ -744,7 +744,7 @@ export class Schema extends FieldNode {
     return this._minItems;
   }
 
-  public set minItems(v: number) {
+  public set minItems(v: bigint) {
     this.__PrimitivesSetter(this._minItems, v);
   }
 
@@ -760,7 +760,7 @@ export class Schema extends FieldNode {
     return this._maxProperties;
   }
 
-  public set maxProperties(v: number) {
+  public set maxProperties(v: bigint) {
     this.__PrimitivesSetter(this._maxProperties, v);
   }
 
@@ -768,7 +768,7 @@ export class Schema extends FieldNode {
     return this._minProperties;
   }
 
-  public set minProperties(v: number) {
+  public set minProperties(v: bigint) {
     this.__PrimitivesSetter(this._minProperties, v);
   }
 

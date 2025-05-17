@@ -33,8 +33,8 @@ export interface IUninterpretedOption {
    *  identified it as during parsing. Exactly one of these should be set.
    */
   identifierValue?: string;
-  positiveIntValue?: number;
-  negativeIntValue?: number;
+  positiveIntValue?: string;
+  negativeIntValue?: string;
   doubleValue?: number;
   stringValue?: string;
   aggregateValue?: string;
@@ -56,8 +56,8 @@ export interface TUninterpretedOption {
    *  identified it as during parsing. Exactly one of these should be set.
    */
   identifier_value?: string;
-  positive_int_value?: number;
-  negative_int_value?: number;
+  positive_int_value?: string;
+  negative_int_value?: string;
   double_value?: number;
   string_value?: string;
   aggregate_value?: string;
@@ -218,7 +218,7 @@ export class UninterpretedOption extends FieldNode {
     return this._positiveIntValue;
   }
 
-  public set positiveIntValue(v: number) {
+  public set positiveIntValue(v: bigint) {
     this.__PrimitivesSetter(this._positiveIntValue, v);
   }
 
@@ -226,7 +226,7 @@ export class UninterpretedOption extends FieldNode {
     return this._negativeIntValue;
   }
 
-  public set negativeIntValue(v: number) {
+  public set negativeIntValue(v: bigint) {
     this.__PrimitivesSetter(this._negativeIntValue, v);
   }
 
