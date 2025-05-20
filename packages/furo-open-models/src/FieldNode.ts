@@ -60,7 +60,7 @@ interface CustomEventListener {
   (evt: CustomEvent): void;
 }
 
-type FieldDescriptor = {
+export type FieldDescriptor = {
   // camel case name of the field
   fieldName: string;
   // API name of the field, defined by contract.
@@ -1149,7 +1149,7 @@ export abstract class FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  private __toLowerCamelCaseWithoutXPrefix(string: string) {
+  protected __toLowerCamelCaseWithoutXPrefix(string: string) {
     if (OPEN_MODELS_OPTIONS.UseProtoNames) {
       const [start, ...rest] = (
         string[0] === '_' ? string.replace('_', 'X') : string

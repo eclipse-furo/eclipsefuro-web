@@ -20,11 +20,11 @@ export class FLOAT extends FieldNode {
   constructor(
     initData?: number,
     parent?: FieldNode,
-    parentAttributeName?: string,
+    parentAttributeName?: string
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = Number.isInteger(initData) ? (initData as number) : 0;
+    this._value = typeof initData === 'number' ? initData : 0;
     this.__meta.typeName = 'primitives.FLOAT';
   }
 
@@ -57,20 +57,20 @@ export class FLOAT extends FieldNode {
     if (this._value > Number.MAX_SAFE_INTEGER) {
       return [
         'constraint.violation.range.float.max',
-        Number.MAX_SAFE_INTEGER.toString(),
+        Number.MAX_SAFE_INTEGER.toString()
       ];
     }
     if (this._value < Number.MIN_SAFE_INTEGER) {
       return [
         'constraint.violation.range.float.min',
-        Number.MIN_SAFE_INTEGER.toString(),
+        Number.MIN_SAFE_INTEGER.toString()
       ];
     }
     return undefined;
   }
 
   protected __checkConstraints(
-    fieldConstraints: FieldConstraints,
+    fieldConstraints: FieldConstraints
   ): string[] | undefined {
     // eslint-disable-next-line guard-for-in
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
