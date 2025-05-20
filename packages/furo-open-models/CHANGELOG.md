@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.8.0...@furo/open-models@1.8.1) (2025-05-20)
+
+### Bug Fixes
+
+- FLOAT default, expose FieldDescriptor ([627d7e8](https://github.com/eclipse/eclipsefuro-web/commit/627d7e86e57e658603578ac2b9e89aa9f4d97887))
+
 # [1.8.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.7.2...@furo/open-models@1.8.0) (2025-05-17)
 
 ### Features
