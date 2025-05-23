@@ -95,6 +95,8 @@ class FuroAppFlowRouter {
           detail: window.performance.now()
         });
         window.dispatchEvent(customEvent);
+
+        this.handleAppExitReEnter();
         return;
       }
 
@@ -229,6 +231,10 @@ class FuroAppFlowRouter {
                 detail: window.performance.now()
               });
               window.dispatchEvent(customEvent);
+              this.handleAppExitReEnter();
+
+              // navigate to the target url
+              window.location.href = url.href;
             }
           }
 
@@ -284,6 +290,22 @@ class FuroAppFlowRouter {
     // eslint-disable-next-line no-console
     console.error('Flow event not found', flowEvent);
     return false;
+  }
+
+  private handleAppExitReEnter() {
+    window.dispatchEvent(new CustomEvent('before-app-left', {
+      composed: true,
+      bubbles: true,
+      detail: window.performance.now()
+    }));
+
+    setTimeout(() => {
+      window.dispatchEvent(new CustomEvent('app-reentered', {
+        composed: true,
+        bubbles: true,
+        detail: window.performance.now()
+      }));
+    }, 64); // safety time so this event is effectively triggered when the user returns to the app.
   }
 
   /**
