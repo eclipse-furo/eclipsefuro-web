@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.7.0...@furo/route@3.8.0) (2025-05-23)
+
+### Features
+
+- [furo-route] Events for leaving the app and re entering the app. ([2e03cdd](https://github.com/eclipse/eclipsefuro-web/commit/2e03cdd491025cfc3bc46e50ab3d8e7397e2b60c))
+
 # [3.7.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/route@3.6.0...@furo/route@3.7.0) (2025-05-15)
 
 ### Features
