@@ -10,6 +10,8 @@ export { BOOLEAN } from './primitives/BOOLEAN';
 export { ENUM } from './primitives/ENUM';
 export { INT32 } from './primitives/INT32';
 export { INT64 } from './primitives/INT64';
+export { SINT32 } from './primitives/SINT32';
+export { SINT64 } from './primitives/SINT64';
 export { UINT32 } from './primitives/UINT32';
 export { UINT64 } from './primitives/UINT64';
 export { STRING } from './primitives/STRING';
