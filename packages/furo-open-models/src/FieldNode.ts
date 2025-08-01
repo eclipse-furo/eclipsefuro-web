@@ -10,9 +10,10 @@ import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 import { FieldConstraints } from './FieldConstraints';
 
 type EventType =
+  // | 'changed'
   | 'field-value-changed' // triggered on change or value assignment
-  | 'this-field-value-changed' // triggered on every change
-  | 'field-value-updated' // triggered on clear or fromLiteral
+  | 'this-field-value-changed' // triggered on every direct change on the field, not from children
+  | 'field-value-updated' // triggered on clear or fromLiteral => model-injected
   | 'this-state-changed'
   | 'state-changed'
   | 'validity-changed'
