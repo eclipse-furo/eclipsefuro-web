@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.1...@furo/open-models@1.9.2) (2025-08-01)
+
+### Bug Fixes
+
+- [furo-open-models] internal docs ([e6287d4](https://github.com/eclipse/eclipsefuro-web/commit/e6287d473faed698340703465bbcffc65193b32d))
+
 ## [1.9.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.0...@furo/open-models@1.9.1) (2025-08-01)
 
 ### Bug Fixes
