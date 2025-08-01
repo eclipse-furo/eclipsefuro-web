@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/fbp@6.14.0...@furo/fbp@6.15.0) (2025-08-01)
+
+### Features
+
+- [furo-open-models] SINT32, SINT64 support ([7b722d7](https://github.com/eclipse/eclipsefuro-web/commit/7b722d73161f70381f4f11022f7ec3a36512e102))
+
 # [6.14.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/fbp@6.13.0...@furo/fbp@6.14.0) (2024-11-24)
 
 ### Features
