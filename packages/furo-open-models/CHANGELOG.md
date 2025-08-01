@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.0...@furo/open-models@1.9.1) (2025-08-01)
+
+### Bug Fixes
+
+- [furo-open-models] export SINT32, SINT64 in index ([e670762](https://github.com/eclipse/eclipsefuro-web/commit/e670762cd34d1729d1905c951333beeb753a12c4))
+
 # [1.9.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.8.1...@furo/open-models@1.9.0) (2025-08-01)
 
 ### Features
