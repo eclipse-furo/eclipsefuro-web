@@ -248,7 +248,12 @@ export class Fetcher<REQ, RES> {
 
       fetch(request)
         .then(response => {
-          this._reworkRequest(response).then(resolve).catch(reject);
+          this._reworkRequest(response).then(
+            (data)=>{
+              resolve(data);
+            }
+
+          ).catch(reject);
           if (this.onRequestFinished) {
             this.onRequestFinished(rqo);
           }
@@ -319,15 +324,15 @@ export class Fetcher<REQ, RES> {
 
         this._parseResponse(response)
           .then(r => {
+            resolve(r as RES);
             if (this.onResponse) {
               this.onResponse(r as RES, response);
-              resolve(r as RES);
             }
           })
           .catch(error => {
+            reject(error);
             if (this.onResponseParseError) {
               this.onResponseParseError(error, response);
-              reject(error);
             }
           });
       } else {
@@ -344,20 +349,21 @@ export class Fetcher<REQ, RES> {
          */
         this._parseResponse(response)
           .then(r => {
+            reject(r);
             if (this.onResponseError) {
               this.onResponseError(r, response);
             }
-            reject(r);
+
           })
           /**
            * error parsing is not possible, empty response
            * the dispatched event will have the raw error object in the event detail
            */
           .catch(error => {
+            reject(error);
             if (this.onResponseErrorParseError) {
               this.onResponseErrorParseError(error, response);
             }
-            reject(error);
           });
       }
     });
