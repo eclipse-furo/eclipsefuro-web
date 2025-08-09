@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.3](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.2...@furo/open-models@1.9.3) (2025-08-09)
+
+### Bug Fixes
+
+- [furo-open-models] Fetcher resolves on promis usage only ([8722988](https://github.com/eclipse/eclipsefuro-web/commit/872298801c4189b4daf8925b6be27d041f1a9786))
+- [furo-open-models] Fetcher resolves on promise only usage ([6ae45ed](https://github.com/eclipse/eclipsefuro-web/commit/6ae45edb1e79bf403d944dafd2166e65a7cc2af7))
+
 ## [1.9.2](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.1...@furo/open-models@1.9.2) (2025-08-01)
 
 ### Bug Fixes
