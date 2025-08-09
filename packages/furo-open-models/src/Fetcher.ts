@@ -300,7 +300,7 @@ export class Fetcher<REQ, RES> {
   _reworkRequest(response: Response): Promise<RES> {
     return new Promise((resolve, reject) => {
       /**
-       * The status code 0 is accepted as a success because some schemes - e.g.
+       * Status code 0 is accepted as a success because some schemes - e.g.,
        * file:// - don't provide status codes.
        */
       this.isLoading = false;
