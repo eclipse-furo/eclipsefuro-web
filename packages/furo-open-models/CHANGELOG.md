@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.3...@furo/open-models@1.10.0) (2025-08-23)
+
+### Features
+
+- [furo-open-models] delete array nodes on node itself via \_\_meta ([dd52bb2](https://github.com/eclipse/eclipsefuro-web/commit/dd52bb2d7fb243cd2ceec460a543039de50e3ca7))
+
 ## [1.9.3](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.2...@furo/open-models@1.9.3) (2025-08-09)
 
 ### Bug Fixes
