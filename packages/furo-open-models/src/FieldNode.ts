@@ -36,7 +36,7 @@ type Meta = {
   readonly: boolean;
   required: boolean;
   isArrayNode: boolean; // set by array and used by baseName resolver to omit the index in the names
-  // deleteArrayNode: () => void, // only available on array nodes
+  deleteArrayNode?: () => void, // only available on array nodes
   isRecursionNode: boolean;
   isAnyNode: boolean;
   isValid: boolean;
@@ -159,6 +159,8 @@ export abstract class FieldNode {
       this.___updateNotEmptyPath();
     }
   }
+
+
 
   constructor(
     _initData: undefined,

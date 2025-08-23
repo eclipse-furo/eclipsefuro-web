@@ -31,6 +31,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     fn.__parentNode = this;
     fn.__meta.fieldName = `[${n}]`;
     fn.__meta.index = n;
+    fn.__meta.deleteArrayNode = ()=>{this.delete(n)}
     fn.__meta.isArrayNode = true;
     fn.__meta.isPristine = true;
     fn.__rootNode = this.__rootNode;
@@ -402,7 +403,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   private __pushWithoutNotifications(items: I[]) {
     let n: number = 0;
     const Constructor: new () => T = this.__getConstructor();
-    items.forEach((literal: I) => {
+    items.forEach((literal: I,i) => {
       const fn = new Constructor();
       fn.__updateWithLiteral(literal);
       n = this._value.push(fn);
@@ -410,6 +411,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       fn.__parentNode = this;
       fn.__meta.fieldName = `[${n - 1}]`;
       fn.__meta.index = n - 1;
+      fn.__meta.deleteArrayNode = ()=>{this.delete(i)}
       fn.__meta.isArrayNode = true;
       fn.__meta.isPristine = true;
     });
@@ -530,6 +532,8 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       fn.__meta.fieldName = `[${i}]`;
       // eslint-disable-next-line no-param-reassign
       fn.__meta.index = i;
+      // eslint-disable-next-line no-param-reassign
+      fn.__meta.deleteArrayNode = ()=>{this.delete(i)}
     });
   }
 }
