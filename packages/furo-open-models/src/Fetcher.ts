@@ -197,6 +197,7 @@ export class Fetcher<REQ, RES> {
     }
   }
 
+
   public invoke(rqo: REQ, options?: RequestInit): Promise<RES> {
     return new Promise((resolve, reject) => {
       // abort old request if it is still running
@@ -369,8 +370,10 @@ export class Fetcher<REQ, RES> {
     });
   }
 
+
+
   /**
-   * parses response object according to lastRequest heaader informationen `content-type`
+   * parses response object according to lastRequest header informationen `content-type`
    * you will find the supported content-types in the declaration area
    * response Fetch API response object [https://developer.mozilla.org/en-US/docs/Web/API/Response]
    * Default response handler is json!
@@ -379,6 +382,8 @@ export class Fetcher<REQ, RES> {
    */
   // eslint-disable-next-line class-methods-use-this
   _parseResponse(response: Response) {
+
+
     return new Promise((resolve, reject) => {
       if (response) {
         this.responseHandler.set('text/plain', r => {
@@ -390,6 +395,7 @@ export class Fetcher<REQ, RES> {
               reject(err);
             });
         });
+
 
         this.responseHandler.set('text/html', r => {
           r.text()
@@ -414,6 +420,72 @@ export class Fetcher<REQ, RES> {
               reject(err);
             });
         });
+
+        this.responseHandler.set('application/x-ndjson', r => {
+
+          const preserveProtoNames = this.API_OPTIONS.PreserveProtoNames;
+
+          const reader = r.body?.getReader();
+          if (!reader) {
+            throw new Error('NDJSON response has no readable body');
+          }
+
+          const decoder = new TextDecoder();
+          let buffer = '';
+
+          // Async generator that yields parsed NDJSON objects.
+          const iterator = {
+            async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
+              while (true) {
+                // eslint-disable-next-line no-await-in-loop
+                const { done, value } = await reader.read();
+                if (done) break;
+
+                buffer += decoder.decode(value, { stream: true });
+
+                // Split the buffer into lines. The last line may be incomplete.
+                const lines = buffer.split('\n');
+                buffer = lines.pop() ?? '';
+
+                for (const line of lines) {
+                  const trimmed = line.trim();
+                  if (trimmed === ''){
+                    // eslint-disable-next-line no-continue
+                    continue; // skip empty lines
+                  }
+
+                  // Parse the JSON line and yield the result.
+                  let parsed: RES;
+                  try {
+                    parsed = JSON.parse(trimmed) as RES;
+                  } catch (e) {
+                    // If parsing fails, we can choose to throw, skip, or yield an error object.
+                    // Here we simply rethrow to fail fast.
+                    throw new Error(`Failed to parse NDJSON line: ${trimmed}`);
+                  }
+
+                  yield  preserveProtoNames ? deepProtoNameToJsonName(parsed) as RES : parsed;
+                }
+              }
+
+              // Emit any remaining data after the last chunk.
+              if (buffer.trim() !== '') {
+                try {
+                  yield JSON.parse(buffer.trim()) as RES;
+                } catch (e) {
+                  throw new Error(`Failed to parse final NDJSON line: ${buffer.trim()}`);
+                }
+              }
+            },
+          };
+
+          // Return the async iterator that satisfies the Symbol.asyncIterator contract.
+          // as unknown as AsyncIterable<RES>
+          resolve( iterator );
+
+        });
+
+
         this.responseHandler.set('application/octet-stream', r => {
           r.arrayBuffer()
             .then(buffer => {
