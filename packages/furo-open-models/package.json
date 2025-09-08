@@ -5,7 +5,7 @@
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": "eclipse furo",
-  "version": "1.10.0",
+  "version": "1.11.0",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",

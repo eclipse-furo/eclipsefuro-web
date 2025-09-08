@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.10.0...@furo/open-models@1.11.0) (2025-09-08)
+
+### Features
+
+- [furo-open-models] handle application/x-ndjson from server response streams ([9a38582](https://github.com/eclipse/eclipsefuro-web/commit/9a38582b610b2de94a46919474fa772bcfb023d2))
+
 # [1.10.0](https://github.com/eclipse/eclipsefuro-web/compare/@furo/open-models@1.9.3...@furo/open-models@1.10.0) (2025-08-23)
 
 ### Features
