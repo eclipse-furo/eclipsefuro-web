@@ -197,7 +197,6 @@ export class Fetcher<REQ, RES> {
     }
   }
 
-
   public invoke(rqo: REQ, options?: RequestInit): Promise<RES> {
     return new Promise((resolve, reject) => {
       // abort old request if it is still running
@@ -249,12 +248,11 @@ export class Fetcher<REQ, RES> {
 
       fetch(request)
         .then(response => {
-          this._reworkRequest(response).then(
-            (data)=>{
+          this._reworkRequest(response)
+            .then(data => {
               resolve(data);
-            }
-
-          ).catch(reject);
+            })
+            .catch(reject);
           if (this.onRequestFinished) {
             this.onRequestFinished(rqo);
           }
@@ -354,7 +352,6 @@ export class Fetcher<REQ, RES> {
             if (this.onResponseError) {
               this.onResponseError(r, response);
             }
-
           })
           /**
            * error parsing is not possible, empty response
@@ -370,8 +367,6 @@ export class Fetcher<REQ, RES> {
     });
   }
 
-
-
   /**
    * parses response object according to lastRequest header informationen `content-type`
    * you will find the supported content-types in the declaration area
@@ -382,8 +377,6 @@ export class Fetcher<REQ, RES> {
    */
   // eslint-disable-next-line class-methods-use-this
   _parseResponse(response: Response) {
-
-
     return new Promise((resolve, reject) => {
       if (response) {
         this.responseHandler.set('text/plain', r => {
@@ -395,7 +388,6 @@ export class Fetcher<REQ, RES> {
               reject(err);
             });
         });
-
 
         this.responseHandler.set('text/html', r => {
           r.text()
@@ -422,7 +414,6 @@ export class Fetcher<REQ, RES> {
         });
 
         this.responseHandler.set('application/x-ndjson', r => {
-
           const preserveProtoNames = this.API_OPTIONS.PreserveProtoNames;
 
           const reader = r.body?.getReader();
@@ -449,7 +440,7 @@ export class Fetcher<REQ, RES> {
 
                 for (const line of lines) {
                   const trimmed = line.trim();
-                  if (trimmed === ''){
+                  if (trimmed === '') {
                     // eslint-disable-next-line no-continue
                     continue; // skip empty lines
                   }
@@ -464,7 +455,9 @@ export class Fetcher<REQ, RES> {
                     throw new Error(`Failed to parse NDJSON line: ${trimmed}`);
                   }
 
-                  yield  preserveProtoNames ? deepProtoNameToJsonName(parsed) as RES : parsed;
+                  yield preserveProtoNames
+                    ? (deepProtoNameToJsonName(parsed) as RES)
+                    : parsed;
                 }
               }
 
@@ -473,7 +466,9 @@ export class Fetcher<REQ, RES> {
                 try {
                   yield JSON.parse(buffer.trim()) as RES;
                 } catch (e) {
-                  throw new Error(`Failed to parse final NDJSON line: ${buffer.trim()}`);
+                  throw new Error(
+                    `Failed to parse final NDJSON line: ${buffer.trim()}`,
+                  );
                 }
               }
             },
@@ -481,10 +476,8 @@ export class Fetcher<REQ, RES> {
 
           // Return the async iterator that satisfies the Symbol.asyncIterator contract.
           // as unknown as AsyncIterable<RES>
-          resolve( iterator );
-
+          resolve(iterator);
         });
-
 
         this.responseHandler.set('application/octet-stream', r => {
           r.arrayBuffer()
