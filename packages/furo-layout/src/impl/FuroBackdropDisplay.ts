@@ -1,6 +1,8 @@
-import { LitElement, html, css } from 'lit'
+import { LitFBP } from '@furo/fbp/dist/LitFBP';
+import { css,html, LitElement } from 'lit'
+import { property } from "lit/decorators.js";
 
-import { FBP } from '@furo/fbp'
+import { type BackdropEvent, FuroBackdrop } from "./FuroBackdrop";
 
 /**
  * `furo-backdrop-display`
@@ -24,60 +26,47 @@ import { FBP } from '@furo/fbp'
  * @demo demo-furo-backdrop Basic usage
  * @appliesMixin FBP
  */
-export class FuroBackdropDisplay extends FBP(LitElement) {
-  constructor() {
-    super()
-    /**
-     * timeout duration
-     * @type {number}
-     */
-    this.toDuration = 100
-  }
+export class FuroBackdropDisplay extends LitFBP(LitElement) {
 
   /**
+   * Needed to start the animation.
    * @private
-   * @return {Object}
    */
-  static get properties() {
-    return {
-      /**
-       * Needed to start the animation.
-       * @private
-       */
-      start: { type: Boolean, reflect: true },
-      /**
-       * Indicates that the backdrop is shown.
-       * @private
-       */
-      show: { type: Boolean, reflect: true },
-      /**
-       * Timeout duration, to wait to notify the changes.
-       *
-       * Note: the animations in the css are set with 250ms.
-       *
-       * If you are interested to use at-opened to load some data, set this value lower. This gives you 250 ms extra time to load content, without feeling slow.
-       *
-       * If you are interested to use at-opened to show some ui stuff, set this value higher or equal 250.
-       *
-       * @type Number
-       */
-      toDuration: {
-        type: Number,
-        attribute: 'to-duration',
-      },
-    }
-  }
+  @property({ type: Boolean, reflect: true })
+  start:boolean = false
+
+  /**
+   * Indicates that the backdrop is shown.
+   * @private
+   */
+@property({ type: Boolean, reflect: true })
+  show:boolean = false
+
+  /**
+   * Timeout duration, to wait to notify the changes.
+   *
+   * Note: the animations in the css are set with 250ms.
+   *
+   * If you are interested to use at-opened to load some data, set this value lower. This gives you 250 ms extra time to load content, without feeling slow.
+   *
+   * If you are interested to use at-opened to show some ui stuff, set this value higher or equal 250.
+   *
+   * @type Number
+   */
+  @property({ type: Number, attribute: 'to-duration', })
+  toDuration: number = 100;
+
+  private contentSource: FuroBackdrop | undefined;
 
   /**
    * flow is ready lifecycle method
    * @private
    */
-  _FBPReady() {
+  override _FBPReady() {
     super._FBPReady()
-    // this._FBPTraceWires()
 
     // listen on clicks on backdrop to close it
-    this.shadowRoot.getElementById('backdrop').addEventListener('click', () => {
+    this.shadowRoot!.getElementById('backdrop')!.addEventListener('click', () => {
       this.close()
     })
 
@@ -85,28 +74,27 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
      * items which should be shown in the backdrop must be registered
      * Otherwise we trigger a lot of connected and disconnected callbacks
      */
-    this.parentNode.addEventListener('register-backdrop', e => {
+    this.parentNode!.addEventListener('register-backdrop', ((e:CustomEvent<BackdropEvent>) => {
       this.contentSource = e.detail.handle
-      this.contentSource.displayHandle = this.shadowRoot
-        .getElementById('ctnt')
-        .appendChild(this.contentSource.children[0])
-    })
+      this.contentSource!.displayHandle = this.shadowRoot!.getElementById('ctnt')!
+        .appendChild(this.contentSource.children[0])  as HTMLDivElement
+    }) as EventListener);
 
     /**
      * Listen to close requests
      */
-    this.parentNode.addEventListener('close-backdrop-requested', e => {
+    this.parentNode!.addEventListener('close-backdrop-requested', ((e:CustomEvent<BackdropEvent>) => {
       this.contentSource = e.detail.handle
       this.close()
-    })
+    }) as EventListener);
 
     /**
      * Listen to show requests
      */
-    this.parentNode.addEventListener('show-backdrop-requested', e => {
+    this.parentNode!.addEventListener('show-backdrop-requested', ((e:CustomEvent<BackdropEvent>) => {
       this.contentSource = e.detail.handle
       // set registered item to _active
-      this.contentSource.displayHandle.classList.toggle('_active')
+      this.contentSource!.displayHandle?.classList.toggle('_active')
 
       // start backdrop animation with a timeout of 1
       this.start = true
@@ -114,10 +102,10 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
         this.show = true
         setTimeout(() => {
           // notify via furo-backdrop that it is opened
-          this.contentSource.dispatchEvent(new Event('opened', { composed: true, bubbles: true }))
+          this.contentSource!.dispatchEvent(new CustomEvent('opened', { composed: true, bubbles: true }))
         }, this.toDuration)
       }, 1)
-    })
+    }) as EventListener);
   }
 
   /**
@@ -125,7 +113,7 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
    * You can close the backdrop on the display element, this is useful when you want to close the backdrops on page
    * changes.
    *
-   * Usualy the component which triggers the backdrop or is displayed closes it.
+   * Usually the component which triggers the backdrop or is displayed closes it.
    */
   close() {
     // start animation => look at the css
@@ -134,10 +122,10 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
       // end animation
       this.start = false
       // deactivate the backdrop visibility
-      this.contentSource.displayHandle.classList.toggle('_active')
+      this.contentSource!.displayHandle?.classList.toggle('_active')
 
       // notify furo-backdrop that it is closed now
-      this.contentSource.dispatchEvent(new Event('closed', { composed: true, bubbles: true }))
+      this.contentSource!.dispatchEvent(new CustomEvent('closed', { composed: true, bubbles: true }))
     }, this.toDuration)
   }
 
@@ -146,7 +134,7 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
    * @private
    * @return {CSSResult}
    */
-  static get styles() {
+  static override get styles() {
     // language=CSS
     return (
 
@@ -220,7 +208,7 @@ export class FuroBackdropDisplay extends FBP(LitElement) {
    * @returns {TemplateResult}
    * @private
    */
-  render() {
+  override render() {
     // language=HTML
     return html`
       <div id='backdrop'></div>

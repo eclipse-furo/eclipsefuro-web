@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  ISecuritySchemeOrReference as IOpenapiV3SecuritySchemeOrReference,
   SecuritySchemeOrReference as OpenapiV3SecuritySchemeOrReference,
-  TSecuritySchemeOrReference as TOpenapiV3SecuritySchemeOrReference,
+  type ISecuritySchemeOrReference as IOpenapiV3SecuritySchemeOrReference,
+  type TSecuritySchemeOrReference as TOpenapiV3SecuritySchemeOrReference,
 } from './SecuritySchemeOrReference';
 
 /**

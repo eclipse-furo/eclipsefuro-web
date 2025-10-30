@@ -4,8 +4,8 @@
 import { FieldNode, INT32, Registry } from '@furo/open-models/dist/index';
 import {
   ExtensionRangeOptions as GoogleProtobufExtensionRangeOptions,
-  IExtensionRangeOptions as IGoogleProtobufExtensionRangeOptions,
-  TExtensionRangeOptions as TGoogleProtobufExtensionRangeOptions,
+  type IExtensionRangeOptions as IGoogleProtobufExtensionRangeOptions,
+  type TExtensionRangeOptions as TGoogleProtobufExtensionRangeOptions,
 } from './ExtensionRangeOptions';
 
 /**

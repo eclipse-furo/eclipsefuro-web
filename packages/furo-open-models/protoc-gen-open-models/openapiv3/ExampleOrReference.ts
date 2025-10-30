@@ -4,14 +4,14 @@
 import { FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   Example as OpenapiV3Example,
-  IExample as IOpenapiV3Example,
-  TExample as TOpenapiV3Example,
+  type IExample as IOpenapiV3Example,
+  type TExample as TOpenapiV3Example,
 } from './Example';
 
 import {
-  IReference as IOpenapiV3Reference,
   Reference as OpenapiV3Reference,
-  TReference as TOpenapiV3Reference,
+  type IReference as IOpenapiV3Reference,
+  type TReference as TOpenapiV3Reference,
 } from './Reference';
 
 /**

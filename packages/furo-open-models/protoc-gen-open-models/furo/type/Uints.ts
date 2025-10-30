@@ -14,9 +14,6 @@ import {
  *   Regex pattern: ^[&#43;-]?(\d*\.)?\d&#43;$
  */
 export interface IUints {
-  /**
-   *  Value is set as a quoted number, use your numeric parser of choice
-   */
   uint64?: string;
   uint32?: number;
   uint64Excl?: string;
@@ -29,9 +26,6 @@ export interface IUints {
  *   Regex pattern: ^[&#43;-]?(\d*\.)?\d&#43;$
  */
 export interface TUints {
-  /**
-   *  Value is set as a quoted number, use your numeric parser of choice
-   */
   uint64?: string;
   uint32?: number;
   uint64Excl?: string;
@@ -44,7 +38,6 @@ export interface TUints {
  *   Regex pattern: ^[&#43;-]?(\d*\.)?\d&#43;$
  */
 export class Uints extends FieldNode {
-  //  Value is set as a quoted number, use your numeric parser of choice
   private _uint64: UINT64;
 
   private _uint32: UINT32;
@@ -103,7 +96,6 @@ export class Uints extends FieldNode {
     ];
 
     // Initialize the fields
-    //  Value is set as a quoted number, use your numeric parser of choice
     this._uint64 = new UINT64(undefined, this, 'uint64');
 
     this._uint32 = new UINT32(undefined, this, 'uint32');
@@ -135,7 +127,6 @@ export class Uints extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  Value is set as a quoted number, use your numeric parser of choice
   public get uint64(): UINT64 {
     return this._uint64;
   }

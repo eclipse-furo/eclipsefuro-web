@@ -15,8 +15,8 @@ import { FieldDescriptorProtoType as GoogleProtobufFieldDescriptorProtoType } fr
 
 import {
   FieldOptions as GoogleProtobufFieldOptions,
-  IFieldOptions as IGoogleProtobufFieldOptions,
-  TFieldOptions as TGoogleProtobufFieldOptions,
+  type IFieldOptions as IGoogleProtobufFieldOptions,
+  type TFieldOptions as TGoogleProtobufFieldOptions,
 } from './FieldOptions';
 
 /**

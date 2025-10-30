@@ -9,20 +9,20 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   Contact as OpenapiV3Contact,
-  IContact as IOpenapiV3Contact,
-  TContact as TOpenapiV3Contact,
+  type IContact as IOpenapiV3Contact,
+  type TContact as TOpenapiV3Contact,
 } from './Contact';
 
 import {
-  ILicense as IOpenapiV3License,
   License as OpenapiV3License,
-  TLicense as TOpenapiV3License,
+  type ILicense as IOpenapiV3License,
+  type TLicense as TOpenapiV3License,
 } from './License';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 /**

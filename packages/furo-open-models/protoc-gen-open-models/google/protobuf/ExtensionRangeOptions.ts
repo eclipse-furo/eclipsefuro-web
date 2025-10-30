@@ -4,22 +4,22 @@
 import { ARRAY, ENUM, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   ExtensionRangeOptionsDeclaration as GoogleProtobufExtensionRangeOptionsDeclaration,
-  IExtensionRangeOptionsDeclaration as IGoogleProtobufExtensionRangeOptionsDeclaration,
-  TExtensionRangeOptionsDeclaration as TGoogleProtobufExtensionRangeOptionsDeclaration,
+  type IExtensionRangeOptionsDeclaration as IGoogleProtobufExtensionRangeOptionsDeclaration,
+  type TExtensionRangeOptionsDeclaration as TGoogleProtobufExtensionRangeOptionsDeclaration,
 } from './ExtensionRangeOptions.Declaration';
 
 import { ExtensionRangeOptionsVerificationState as GoogleProtobufExtensionRangeOptionsVerificationState } from './ExtensionRangeOptions.VerificationState';
 
 import {
   FeatureSet as GoogleProtobufFeatureSet,
-  IFeatureSet as IGoogleProtobufFeatureSet,
-  TFeatureSet as TGoogleProtobufFeatureSet,
+  type IFeatureSet as IGoogleProtobufFeatureSet,
+  type TFeatureSet as TGoogleProtobufFeatureSet,
 } from './FeatureSet';
 
 import {
-  IUninterpretedOption as IGoogleProtobufUninterpretedOption,
-  TUninterpretedOption as TGoogleProtobufUninterpretedOption,
   UninterpretedOption as GoogleProtobufUninterpretedOption,
+  type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
+  type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
 } from './UninterpretedOption';
 
 /**

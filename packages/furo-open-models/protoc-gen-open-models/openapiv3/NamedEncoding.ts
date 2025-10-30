@@ -4,8 +4,8 @@
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
   Encoding as OpenapiV3Encoding,
-  IEncoding as IOpenapiV3Encoding,
-  TEncoding as TOpenapiV3Encoding,
+  type IEncoding as IOpenapiV3Encoding,
+  type TEncoding as TOpenapiV3Encoding,
 } from './Encoding';
 
 /**

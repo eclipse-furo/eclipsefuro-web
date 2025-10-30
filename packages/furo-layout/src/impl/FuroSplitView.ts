@@ -1,9 +1,6 @@
-import { LitElement, html, css } from 'lit';
-import { FBP } from '@furo/fbp';
-
-
-import './furo-horizontal-flex.js';
-import './furo-vertical-scroller.js';
+import { LitFBP } from "@furo/fbp/dist/LitFBP";
+import { css, html, LitElement } from "lit";
+import { property } from "lit/decorators.js";
 
 /**
  * `furo-split-view`
@@ -27,24 +24,22 @@ import './furo-vertical-scroller.js';
  * @demo demo-furo-split-view Basic usage
  * @appliesMixin FBP
  */
-export class FuroSplitView extends FBP(LitElement) {
-  static get properties() {
-    return {
-      /**
-       * flip the left and right side
-       *
-       * @type Boolean
-       */
-      reverse: { type: Boolean },
-    };
-  }
+export class FuroSplitView extends LitFBP(LitElement) {
+
+  @property({ type: Boolean })
+  /**
+   * flip the left and right side
+   *
+   * @type Boolean
+   */
+  reverse: boolean = false;
 
   /**
    *
    * @private
    * @return {CSSResult}
    */
-  static get styles() {
+  static override get styles() {
     // language=CSS
     return (
 
@@ -53,9 +48,11 @@ export class FuroSplitView extends FBP(LitElement) {
           display: block;
           height: inherit;
         }
+
         :host([hidden]) {
           display: none;
         }
+
         .master {
           height: inherit;
           width: var(--split-master-width, 270px);
@@ -70,6 +67,7 @@ export class FuroSplitView extends FBP(LitElement) {
         furo-horizontal-flex {
           height: 100%;
         }
+
         ::slotted([scroll]) {
           height: 100%;
           overflow-y: auto;
@@ -82,14 +80,14 @@ export class FuroSplitView extends FBP(LitElement) {
    * @private
    * @returns {TemplateResult}
    */
-  render() {
+  override render() {
     // language=HTML
     return html`
-      <furo-horizontal-flex ?reverse="${this.reverse}">
-        <div class="master">
-          <slot name="master"></slot>
+      <furo-horizontal-flex ?reverse='${this.reverse}'>
+        <div class='master'>
+          <slot name='master'></slot>
         </div>
-        <div flex class="detail">
+        <div flex class='detail'>
           <slot></slot>
         </div>
       </furo-horizontal-flex>
@@ -97,4 +95,4 @@ export class FuroSplitView extends FBP(LitElement) {
   }
 }
 
-window.customElements.define('furo-split-view', FuroSplitView);
+window.customElements.define("furo-split-view", FuroSplitView);

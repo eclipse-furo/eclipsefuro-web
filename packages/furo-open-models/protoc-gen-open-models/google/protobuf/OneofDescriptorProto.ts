@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  IOneofOptions as IGoogleProtobufOneofOptions,
   OneofOptions as GoogleProtobufOneofOptions,
-  TOneofOptions as TGoogleProtobufOneofOptions,
+  type IOneofOptions as IGoogleProtobufOneofOptions,
+  type TOneofOptions as TGoogleProtobufOneofOptions,
 } from './OneofOptions';
 
 /**

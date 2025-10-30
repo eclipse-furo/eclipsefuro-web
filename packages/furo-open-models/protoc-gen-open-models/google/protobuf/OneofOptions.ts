@@ -4,14 +4,14 @@
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   FeatureSet as GoogleProtobufFeatureSet,
-  IFeatureSet as IGoogleProtobufFeatureSet,
-  TFeatureSet as TGoogleProtobufFeatureSet,
+  type IFeatureSet as IGoogleProtobufFeatureSet,
+  type TFeatureSet as TGoogleProtobufFeatureSet,
 } from './FeatureSet';
 
 import {
-  IUninterpretedOption as IGoogleProtobufUninterpretedOption,
-  TUninterpretedOption as TGoogleProtobufUninterpretedOption,
   UninterpretedOption as GoogleProtobufUninterpretedOption,
+  type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
+  type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
 } from './UninterpretedOption';
 
 /**

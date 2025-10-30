@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedServerVariable as IOpenapiV3NamedServerVariable,
   NamedServerVariable as OpenapiV3NamedServerVariable,
-  TNamedServerVariable as TOpenapiV3NamedServerVariable,
+  type INamedServerVariable as IOpenapiV3NamedServerVariable,
+  type TNamedServerVariable as TOpenapiV3NamedServerVariable,
 } from './NamedServerVariable';
 
 /**

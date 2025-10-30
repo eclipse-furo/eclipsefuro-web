@@ -12,8 +12,8 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   Colour as FuroCubeColour,
-  IColour as IFuroCubeColour,
-  TColour as TFuroCubeColour,
+  type IColour as IFuroCubeColour,
+  type TColour as TFuroCubeColour,
 } from './Colour';
 
 import { Materials as FuroCubeMaterials } from './Materials';

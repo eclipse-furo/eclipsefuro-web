@@ -4,8 +4,8 @@
 import { FieldNode, RECURSION, Registry } from '@furo/open-models/dist/index';
 import {
   DeepRecursion as FuroTypeDeepRecursion,
-  IDeepRecursion as IFuroTypeDeepRecursion,
-  TDeepRecursion as TFuroTypeDeepRecursion,
+  type IDeepRecursion as IFuroTypeDeepRecursion,
+  type TDeepRecursion as TFuroTypeDeepRecursion,
 } from './DeepRecursion';
 
 /**

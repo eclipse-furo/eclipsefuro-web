@@ -4,8 +4,8 @@
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
   CallbackOrReference as OpenapiV3CallbackOrReference,
-  ICallbackOrReference as IOpenapiV3CallbackOrReference,
-  TCallbackOrReference as TOpenapiV3CallbackOrReference,
+  type ICallbackOrReference as IOpenapiV3CallbackOrReference,
+  type TCallbackOrReference as TOpenapiV3CallbackOrReference,
 } from './CallbackOrReference';
 
 /**

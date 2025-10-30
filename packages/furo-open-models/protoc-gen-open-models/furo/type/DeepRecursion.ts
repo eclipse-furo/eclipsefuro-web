@@ -8,9 +8,9 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  IOther as IFuroTypeOther,
   Other as FuroTypeOther,
-  TOther as TFuroTypeOther,
+  type IOther as IFuroTypeOther,
+  type TOther as TFuroTypeOther,
 } from './Other';
 
 /**

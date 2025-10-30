@@ -4,62 +4,62 @@
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   CallbacksOrReferences as OpenapiV3CallbacksOrReferences,
-  ICallbacksOrReferences as IOpenapiV3CallbacksOrReferences,
-  TCallbacksOrReferences as TOpenapiV3CallbacksOrReferences,
+  type ICallbacksOrReferences as IOpenapiV3CallbacksOrReferences,
+  type TCallbacksOrReferences as TOpenapiV3CallbacksOrReferences,
 } from './CallbacksOrReferences';
 
 import {
   ExamplesOrReferences as OpenapiV3ExamplesOrReferences,
-  IExamplesOrReferences as IOpenapiV3ExamplesOrReferences,
-  TExamplesOrReferences as TOpenapiV3ExamplesOrReferences,
+  type IExamplesOrReferences as IOpenapiV3ExamplesOrReferences,
+  type TExamplesOrReferences as TOpenapiV3ExamplesOrReferences,
 } from './ExamplesOrReferences';
 
 import {
   HeadersOrReferences as OpenapiV3HeadersOrReferences,
-  IHeadersOrReferences as IOpenapiV3HeadersOrReferences,
-  THeadersOrReferences as TOpenapiV3HeadersOrReferences,
+  type IHeadersOrReferences as IOpenapiV3HeadersOrReferences,
+  type THeadersOrReferences as TOpenapiV3HeadersOrReferences,
 } from './HeadersOrReferences';
 
 import {
-  ILinksOrReferences as IOpenapiV3LinksOrReferences,
   LinksOrReferences as OpenapiV3LinksOrReferences,
-  TLinksOrReferences as TOpenapiV3LinksOrReferences,
+  type ILinksOrReferences as IOpenapiV3LinksOrReferences,
+  type TLinksOrReferences as TOpenapiV3LinksOrReferences,
 } from './LinksOrReferences';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IParametersOrReferences as IOpenapiV3ParametersOrReferences,
   ParametersOrReferences as OpenapiV3ParametersOrReferences,
-  TParametersOrReferences as TOpenapiV3ParametersOrReferences,
+  type IParametersOrReferences as IOpenapiV3ParametersOrReferences,
+  type TParametersOrReferences as TOpenapiV3ParametersOrReferences,
 } from './ParametersOrReferences';
 
 import {
-  IRequestBodiesOrReferences as IOpenapiV3RequestBodiesOrReferences,
   RequestBodiesOrReferences as OpenapiV3RequestBodiesOrReferences,
-  TRequestBodiesOrReferences as TOpenapiV3RequestBodiesOrReferences,
+  type IRequestBodiesOrReferences as IOpenapiV3RequestBodiesOrReferences,
+  type TRequestBodiesOrReferences as TOpenapiV3RequestBodiesOrReferences,
 } from './RequestBodiesOrReferences';
 
 import {
-  IResponsesOrReferences as IOpenapiV3ResponsesOrReferences,
   ResponsesOrReferences as OpenapiV3ResponsesOrReferences,
-  TResponsesOrReferences as TOpenapiV3ResponsesOrReferences,
+  type IResponsesOrReferences as IOpenapiV3ResponsesOrReferences,
+  type TResponsesOrReferences as TOpenapiV3ResponsesOrReferences,
 } from './ResponsesOrReferences';
 
 import {
-  ISchemasOrReferences as IOpenapiV3SchemasOrReferences,
   SchemasOrReferences as OpenapiV3SchemasOrReferences,
-  TSchemasOrReferences as TOpenapiV3SchemasOrReferences,
+  type ISchemasOrReferences as IOpenapiV3SchemasOrReferences,
+  type TSchemasOrReferences as TOpenapiV3SchemasOrReferences,
 } from './SchemasOrReferences';
 
 import {
-  ISecuritySchemesOrReferences as IOpenapiV3SecuritySchemesOrReferences,
   SecuritySchemesOrReferences as OpenapiV3SecuritySchemesOrReferences,
-  TSecuritySchemesOrReferences as TOpenapiV3SecuritySchemesOrReferences,
+  type ISecuritySchemesOrReferences as IOpenapiV3SecuritySchemesOrReferences,
+  type TSecuritySchemesOrReferences as TOpenapiV3SecuritySchemesOrReferences,
 } from './SecuritySchemesOrReferences';
 
 /**

@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedCallbackOrReference as IOpenapiV3NamedCallbackOrReference,
   NamedCallbackOrReference as OpenapiV3NamedCallbackOrReference,
-  TNamedCallbackOrReference as TOpenapiV3NamedCallbackOrReference,
+  type INamedCallbackOrReference as IOpenapiV3NamedCallbackOrReference,
+  type TNamedCallbackOrReference as TOpenapiV3NamedCallbackOrReference,
 } from './NamedCallbackOrReference';
 
 /**

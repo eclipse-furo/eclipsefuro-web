@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedEncoding as IOpenapiV3NamedEncoding,
   NamedEncoding as OpenapiV3NamedEncoding,
-  TNamedEncoding as TOpenapiV3NamedEncoding,
+  type INamedEncoding as IOpenapiV3NamedEncoding,
+  type TNamedEncoding as TOpenapiV3NamedEncoding,
 } from './NamedEncoding';
 
 /**

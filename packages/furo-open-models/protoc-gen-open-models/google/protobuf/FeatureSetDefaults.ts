@@ -6,8 +6,8 @@ import { Edition as GoogleProtobufEdition } from './Edition';
 
 import {
   FeatureSetDefaultsFeatureSetEditionDefault as GoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
-  IFeatureSetDefaultsFeatureSetEditionDefault as IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
-  TFeatureSetDefaultsFeatureSetEditionDefault as TGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
+  type IFeatureSetDefaultsFeatureSetEditionDefault as IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
+  type TFeatureSetDefaultsFeatureSetEditionDefault as TGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
 } from './FeatureSetDefaults.FeatureSetEditionDefault';
 
 /**

@@ -8,27 +8,27 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IOperation as IOpenapiV3Operation,
   Operation as OpenapiV3Operation,
-  TOperation as TOpenapiV3Operation,
+  type IOperation as IOpenapiV3Operation,
+  type TOperation as TOpenapiV3Operation,
 } from './Operation';
 
 import {
-  IParameterOrReference as IOpenapiV3ParameterOrReference,
   ParameterOrReference as OpenapiV3ParameterOrReference,
-  TParameterOrReference as TOpenapiV3ParameterOrReference,
+  type IParameterOrReference as IOpenapiV3ParameterOrReference,
+  type TParameterOrReference as TOpenapiV3ParameterOrReference,
 } from './ParameterOrReference';
 
 import {
-  IServer as IOpenapiV3Server,
   Server as OpenapiV3Server,
-  TServer as TOpenapiV3Server,
+  type IServer as IOpenapiV3Server,
+  type TServer as TOpenapiV3Server,
 } from './Server';
 
 /**

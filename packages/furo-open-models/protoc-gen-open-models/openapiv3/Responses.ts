@@ -3,21 +3,21 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  INamedResponseOrReference as IOpenapiV3NamedResponseOrReference,
   NamedResponseOrReference as OpenapiV3NamedResponseOrReference,
-  TNamedResponseOrReference as TOpenapiV3NamedResponseOrReference,
+  type INamedResponseOrReference as IOpenapiV3NamedResponseOrReference,
+  type TNamedResponseOrReference as TOpenapiV3NamedResponseOrReference,
 } from './NamedResponseOrReference';
 
 import {
-  IResponseOrReference as IOpenapiV3ResponseOrReference,
   ResponseOrReference as OpenapiV3ResponseOrReference,
-  TResponseOrReference as TOpenapiV3ResponseOrReference,
+  type IResponseOrReference as IOpenapiV3ResponseOrReference,
+  type TResponseOrReference as TOpenapiV3ResponseOrReference,
 } from './ResponseOrReference';
 
 /**

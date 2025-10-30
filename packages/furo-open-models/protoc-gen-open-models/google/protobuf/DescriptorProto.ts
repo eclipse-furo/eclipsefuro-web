@@ -9,38 +9,38 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   DescriptorProtoExtensionRange as GoogleProtobufDescriptorProtoExtensionRange,
-  IDescriptorProtoExtensionRange as IGoogleProtobufDescriptorProtoExtensionRange,
-  TDescriptorProtoExtensionRange as TGoogleProtobufDescriptorProtoExtensionRange,
+  type IDescriptorProtoExtensionRange as IGoogleProtobufDescriptorProtoExtensionRange,
+  type TDescriptorProtoExtensionRange as TGoogleProtobufDescriptorProtoExtensionRange,
 } from './DescriptorProto.ExtensionRange';
 
 import {
   DescriptorProtoReservedRange as GoogleProtobufDescriptorProtoReservedRange,
-  IDescriptorProtoReservedRange as IGoogleProtobufDescriptorProtoReservedRange,
-  TDescriptorProtoReservedRange as TGoogleProtobufDescriptorProtoReservedRange,
+  type IDescriptorProtoReservedRange as IGoogleProtobufDescriptorProtoReservedRange,
+  type TDescriptorProtoReservedRange as TGoogleProtobufDescriptorProtoReservedRange,
 } from './DescriptorProto.ReservedRange';
 
 import {
   EnumDescriptorProto as GoogleProtobufEnumDescriptorProto,
-  IEnumDescriptorProto as IGoogleProtobufEnumDescriptorProto,
-  TEnumDescriptorProto as TGoogleProtobufEnumDescriptorProto,
+  type IEnumDescriptorProto as IGoogleProtobufEnumDescriptorProto,
+  type TEnumDescriptorProto as TGoogleProtobufEnumDescriptorProto,
 } from './EnumDescriptorProto';
 
 import {
   FieldDescriptorProto as GoogleProtobufFieldDescriptorProto,
-  IFieldDescriptorProto as IGoogleProtobufFieldDescriptorProto,
-  TFieldDescriptorProto as TGoogleProtobufFieldDescriptorProto,
+  type IFieldDescriptorProto as IGoogleProtobufFieldDescriptorProto,
+  type TFieldDescriptorProto as TGoogleProtobufFieldDescriptorProto,
 } from './FieldDescriptorProto';
 
 import {
-  IMessageOptions as IGoogleProtobufMessageOptions,
   MessageOptions as GoogleProtobufMessageOptions,
-  TMessageOptions as TGoogleProtobufMessageOptions,
+  type IMessageOptions as IGoogleProtobufMessageOptions,
+  type TMessageOptions as TGoogleProtobufMessageOptions,
 } from './MessageOptions';
 
 import {
-  IOneofDescriptorProto as IGoogleProtobufOneofDescriptorProto,
   OneofDescriptorProto as GoogleProtobufOneofDescriptorProto,
-  TOneofDescriptorProto as TGoogleProtobufOneofDescriptorProto,
+  type IOneofDescriptorProto as IGoogleProtobufOneofDescriptorProto,
+  type TOneofDescriptorProto as TGoogleProtobufOneofDescriptorProto,
 } from './OneofDescriptorProto';
 
 /**

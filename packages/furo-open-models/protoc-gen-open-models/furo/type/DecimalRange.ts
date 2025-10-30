@@ -4,8 +4,8 @@
 import { FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   Decimal as FuroTypeDecimal,
-  IDecimal as IFuroTypeDecimal,
-  TDecimal as TFuroTypeDecimal,
+  type IDecimal as IFuroTypeDecimal,
+  type TDecimal as TFuroTypeDecimal,
 } from './Decimal';
 
 /**

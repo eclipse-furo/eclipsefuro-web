@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { FBP } from '@furo/fbp';
-import '@furo/layout/src/furo-vertical-flex.js';
+import '@furo/layout/VerticalFlex';
 import '../furo-markdown.js';
 import '@furo/fbp/src/empty-fbp-node.js';
 import './graph/furo-show-flow.js';

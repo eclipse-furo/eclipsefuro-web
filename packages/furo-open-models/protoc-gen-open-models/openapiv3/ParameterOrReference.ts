@@ -3,15 +3,15 @@
 
 import { FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  IParameter as IOpenapiV3Parameter,
   Parameter as OpenapiV3Parameter,
-  TParameter as TOpenapiV3Parameter,
+  type IParameter as IOpenapiV3Parameter,
+  type TParameter as TOpenapiV3Parameter,
 } from './Parameter';
 
 import {
-  IReference as IOpenapiV3Reference,
   Reference as OpenapiV3Reference,
-  TReference as TOpenapiV3Reference,
+  type IReference as IOpenapiV3Reference,
+  type TReference as TOpenapiV3Reference,
 } from './Reference';
 
 /**

@@ -9,14 +9,14 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   ExternalDocs as OpenapiV3ExternalDocs,
-  IExternalDocs as IOpenapiV3ExternalDocs,
-  TExternalDocs as TOpenapiV3ExternalDocs,
+  type IExternalDocs as IOpenapiV3ExternalDocs,
+  type TExternalDocs as TOpenapiV3ExternalDocs,
 } from './ExternalDocs';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 /**

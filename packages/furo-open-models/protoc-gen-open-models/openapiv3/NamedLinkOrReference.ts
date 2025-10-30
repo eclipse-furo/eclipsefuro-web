@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  ILinkOrReference as IOpenapiV3LinkOrReference,
   LinkOrReference as OpenapiV3LinkOrReference,
-  TLinkOrReference as TOpenapiV3LinkOrReference,
+  type ILinkOrReference as IOpenapiV3LinkOrReference,
+  type TLinkOrReference as TOpenapiV3LinkOrReference,
 } from './LinkOrReference';
 
 /**

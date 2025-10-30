@@ -10,16 +10,16 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   FeatureSet as GoogleProtobufFeatureSet,
-  IFeatureSet as IGoogleProtobufFeatureSet,
-  TFeatureSet as TGoogleProtobufFeatureSet,
+  type IFeatureSet as IGoogleProtobufFeatureSet,
+  type TFeatureSet as TGoogleProtobufFeatureSet,
 } from './FeatureSet';
 
 import { FieldOptionsCType as GoogleProtobufFieldOptionsCType } from './FieldOptions.CType';
 
 import {
   FieldOptionsEditionDefault as GoogleProtobufFieldOptionsEditionDefault,
-  IFieldOptionsEditionDefault as IGoogleProtobufFieldOptionsEditionDefault,
-  TFieldOptionsEditionDefault as TGoogleProtobufFieldOptionsEditionDefault,
+  type IFieldOptionsEditionDefault as IGoogleProtobufFieldOptionsEditionDefault,
+  type TFieldOptionsEditionDefault as TGoogleProtobufFieldOptionsEditionDefault,
 } from './FieldOptions.EditionDefault';
 
 import { FieldOptionsJSType as GoogleProtobufFieldOptionsJSType } from './FieldOptions.JSType';
@@ -29,9 +29,9 @@ import { FieldOptionsOptionRetention as GoogleProtobufFieldOptionsOptionRetentio
 import { FieldOptionsOptionTargetType as GoogleProtobufFieldOptionsOptionTargetType } from './FieldOptions.OptionTargetType';
 
 import {
-  IUninterpretedOption as IGoogleProtobufUninterpretedOption,
-  TUninterpretedOption as TGoogleProtobufUninterpretedOption,
   UninterpretedOption as GoogleProtobufUninterpretedOption,
+  type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
+  type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
 } from './UninterpretedOption';
 
 /**

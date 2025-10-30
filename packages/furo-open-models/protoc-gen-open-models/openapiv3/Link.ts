@@ -9,20 +9,20 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   AnyOrExpression as OpenapiV3AnyOrExpression,
-  IAnyOrExpression as IOpenapiV3AnyOrExpression,
-  TAnyOrExpression as TOpenapiV3AnyOrExpression,
+  type IAnyOrExpression as IOpenapiV3AnyOrExpression,
+  type TAnyOrExpression as TOpenapiV3AnyOrExpression,
 } from './AnyOrExpression';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IServer as IOpenapiV3Server,
   Server as OpenapiV3Server,
-  TServer as TOpenapiV3Server,
+  type IServer as IOpenapiV3Server,
+  type TServer as TOpenapiV3Server,
 } from './Server';
 
 /**

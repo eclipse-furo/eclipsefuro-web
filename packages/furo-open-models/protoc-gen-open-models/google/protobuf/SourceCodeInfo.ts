@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  ISourceCodeInfoLocation as IGoogleProtobufSourceCodeInfoLocation,
   SourceCodeInfoLocation as GoogleProtobufSourceCodeInfoLocation,
-  TSourceCodeInfoLocation as TGoogleProtobufSourceCodeInfoLocation,
+  type ISourceCodeInfoLocation as IGoogleProtobufSourceCodeInfoLocation,
+  type TSourceCodeInfoLocation as TGoogleProtobufSourceCodeInfoLocation,
 } from './SourceCodeInfo.Location';
 
 /**

@@ -4,8 +4,8 @@
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
   HeaderOrReference as OpenapiV3HeaderOrReference,
-  IHeaderOrReference as IOpenapiV3HeaderOrReference,
-  THeaderOrReference as TOpenapiV3HeaderOrReference,
+  type IHeaderOrReference as IOpenapiV3HeaderOrReference,
+  type THeaderOrReference as TOpenapiV3HeaderOrReference,
 } from './HeaderOrReference';
 
 /**

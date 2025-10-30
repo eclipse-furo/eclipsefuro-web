@@ -8,15 +8,15 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IServerVariables as IOpenapiV3ServerVariables,
   ServerVariables as OpenapiV3ServerVariables,
-  TServerVariables as TOpenapiV3ServerVariables,
+  type IServerVariables as IOpenapiV3ServerVariables,
+  type TServerVariables as TOpenapiV3ServerVariables,
 } from './ServerVariables';
 
 /**

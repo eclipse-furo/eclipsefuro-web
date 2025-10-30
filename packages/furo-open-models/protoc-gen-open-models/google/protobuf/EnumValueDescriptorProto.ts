@@ -9,8 +9,8 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   EnumValueOptions as GoogleProtobufEnumValueOptions,
-  IEnumValueOptions as IGoogleProtobufEnumValueOptions,
-  TEnumValueOptions as TGoogleProtobufEnumValueOptions,
+  type IEnumValueOptions as IGoogleProtobufEnumValueOptions,
+  type TEnumValueOptions as TGoogleProtobufEnumValueOptions,
 } from './EnumValueOptions';
 
 /**

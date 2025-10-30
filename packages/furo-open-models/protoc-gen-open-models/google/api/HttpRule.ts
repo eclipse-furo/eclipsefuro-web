@@ -9,8 +9,8 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   CustomHttpPattern as GoogleApiCustomHttpPattern,
-  ICustomHttpPattern as IGoogleApiCustomHttpPattern,
-  TCustomHttpPattern as TGoogleApiCustomHttpPattern,
+  type ICustomHttpPattern as IGoogleApiCustomHttpPattern,
+  type TCustomHttpPattern as TGoogleApiCustomHttpPattern,
 } from './CustomHttpPattern';
 
 /**

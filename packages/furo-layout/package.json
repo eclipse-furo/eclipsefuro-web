@@ -4,7 +4,6 @@
   "version": "2.3.2",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-layout",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
-  "web-types": "web-types.json",
   "author": {
     "name": "",
     "email": "",
@@ -13,20 +12,44 @@
   "keywords": [
     "web-components",
     "flow based programming",
-    "flowbased",
-    "flow"
+    "fbp"
   ],
   "license": "MIT",
-  "main": "src/furo-catalog.js",
+  "main": "dist/index.js",
+  "type": "module",
+  "exports": {
+    "./src/*": "./src/*",
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./custom-elements.json",
+    "./web-types.json": "./web-types.json",
+    "./jsx/*": "./dist/intrinsicElements/*",
+    "./*": "./dist/*"
+  },
+  "files": [
+    "./dist",
+    "icon.svg",
+    "README.md",
+    "custom-elements.json",
+    "web-types.json"
+  ],
   "scripts": {
-    "build": "tsc",
-    "clean": "rm -rf ./dist ",
-    "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
-    "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
-    "lint": "../../node_modules/.bin/eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
-    "format": "../../node_modules/.bin/eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
-    "test": "../../node_modules/.bin/web-test-runner  --coverage",
-    "test:watch": "../../node_modules/.bin/web-test-runner  --watch"
+    "start": "tsc && concurrently -k -r 'vite dev' 'tsc --watch'",
+    "test": "vitest run --coverage",
+    "test:debug": "vitest run --inspect-brk --no-file-parallelism --isolate false",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "build": "rimraf dist && npm run analyze && npm run analyze:internal && npm run analyze:deep && npm run gen:intrinsic && tsc && tsc-alias",
+    "gen:intrinsic": "node ../../scripts/IntrinsicElements/main.js @furo/layout && eslint --version && eslint --fix --ext .ts src/JSX && prettier src/JSX/*.ts --write",
+    "lint": "eslint --ext .ts,.html ./src --ignore-path .gitignore",
+    "lint:fix": "eslint --ext .ts,.html ./src --fix --ignore-path .gitignore",
+    "lint:fix:tests": "eslint --ext .ts,.html ./test --fix --ignore-path .gitignore",
+    "format": "prettier './src/**/*.ts' --write --ignore-path .gitignore",
+    "format:tests": "prettier './test/**/*.ts' --write --ignore-path .gitignore",
+    "analyze": "cem analyze --litelement --globs ./src/* --outdir ./dist",
+    "analyze:internal": "cem analyze --config scripts/internal-cem.config.mjs && mv tmp/custom-elements.json dist/custom-elements-internal.json",
+    "analyze:deep": "cem analyze --config ./scripts/deep-cem.config.mjs &&  ./scripts/WebtypesPostprocessor.mjs && ./scripts/CheckWebtypes.mjs",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@furo/fbp": "^6.15.0",
@@ -35,31 +58,11 @@
   "publishConfig": {
     "access": "public"
   },
-  "engines": {
-    "node": ">=10.0"
-  },
   "customElements": "custom-elements.json",
-  "eslintConfig": {
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ]
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
+  "web-types": "./web-types.json",
+  "engines": {
+    "node": ">=21.7.3",
+    "npm": ">=10.2.5"
   },
   "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
 }

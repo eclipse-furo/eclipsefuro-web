@@ -10,50 +10,50 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   CallbacksOrReferences as OpenapiV3CallbacksOrReferences,
-  ICallbacksOrReferences as IOpenapiV3CallbacksOrReferences,
-  TCallbacksOrReferences as TOpenapiV3CallbacksOrReferences,
+  type ICallbacksOrReferences as IOpenapiV3CallbacksOrReferences,
+  type TCallbacksOrReferences as TOpenapiV3CallbacksOrReferences,
 } from './CallbacksOrReferences';
 
 import {
   ExternalDocs as OpenapiV3ExternalDocs,
-  IExternalDocs as IOpenapiV3ExternalDocs,
-  TExternalDocs as TOpenapiV3ExternalDocs,
+  type IExternalDocs as IOpenapiV3ExternalDocs,
+  type TExternalDocs as TOpenapiV3ExternalDocs,
 } from './ExternalDocs';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IParameterOrReference as IOpenapiV3ParameterOrReference,
   ParameterOrReference as OpenapiV3ParameterOrReference,
-  TParameterOrReference as TOpenapiV3ParameterOrReference,
+  type IParameterOrReference as IOpenapiV3ParameterOrReference,
+  type TParameterOrReference as TOpenapiV3ParameterOrReference,
 } from './ParameterOrReference';
 
 import {
-  IRequestBodyOrReference as IOpenapiV3RequestBodyOrReference,
   RequestBodyOrReference as OpenapiV3RequestBodyOrReference,
-  TRequestBodyOrReference as TOpenapiV3RequestBodyOrReference,
+  type IRequestBodyOrReference as IOpenapiV3RequestBodyOrReference,
+  type TRequestBodyOrReference as TOpenapiV3RequestBodyOrReference,
 } from './RequestBodyOrReference';
 
 import {
-  IResponses as IOpenapiV3Responses,
   Responses as OpenapiV3Responses,
-  TResponses as TOpenapiV3Responses,
+  type IResponses as IOpenapiV3Responses,
+  type TResponses as TOpenapiV3Responses,
 } from './Responses';
 
 import {
-  ISecurityRequirement as IOpenapiV3SecurityRequirement,
   SecurityRequirement as OpenapiV3SecurityRequirement,
-  TSecurityRequirement as TOpenapiV3SecurityRequirement,
+  type ISecurityRequirement as IOpenapiV3SecurityRequirement,
+  type TSecurityRequirement as TOpenapiV3SecurityRequirement,
 } from './SecurityRequirement';
 
 import {
-  IServer as IOpenapiV3Server,
   Server as OpenapiV3Server,
-  TServer as TOpenapiV3Server,
+  type IServer as IOpenapiV3Server,
+  type TServer as TOpenapiV3Server,
 } from './Server';
 
 /**

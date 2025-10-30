@@ -1,11 +1,19 @@
 node_modules
 coverage
 CHANGELOG.md
-dist
+src
+external-web-types
 .divshot-cache
 .idea
 .DS_Store
+.husky
 test
+hugo
+docs
+tmp
+furo-specs
+mockdata
+scripts
 .editorconfig
 .gitignore
 .npmignore
@@ -27,3 +35,5 @@ rollup.config.js
 rollup.config.modern.js
 service-worker.js
 workbox-config.js
+web-dev-server.config.mjs
+web-test-runner.config.mjs

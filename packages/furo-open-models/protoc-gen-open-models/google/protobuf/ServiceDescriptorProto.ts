@@ -8,15 +8,15 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  IMethodDescriptorProto as IGoogleProtobufMethodDescriptorProto,
   MethodDescriptorProto as GoogleProtobufMethodDescriptorProto,
-  TMethodDescriptorProto as TGoogleProtobufMethodDescriptorProto,
+  type IMethodDescriptorProto as IGoogleProtobufMethodDescriptorProto,
+  type TMethodDescriptorProto as TGoogleProtobufMethodDescriptorProto,
 } from './MethodDescriptorProto';
 
 import {
-  IServiceOptions as IGoogleProtobufServiceOptions,
   ServiceOptions as GoogleProtobufServiceOptions,
-  TServiceOptions as TGoogleProtobufServiceOptions,
+  type IServiceOptions as IGoogleProtobufServiceOptions,
+  type TServiceOptions as TGoogleProtobufServiceOptions,
 } from './ServiceOptions';
 
 /**

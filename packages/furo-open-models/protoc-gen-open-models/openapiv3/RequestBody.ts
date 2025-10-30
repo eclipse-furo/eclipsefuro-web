@@ -9,15 +9,15 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  IMediaTypes as IOpenapiV3MediaTypes,
   MediaTypes as OpenapiV3MediaTypes,
-  TMediaTypes as TOpenapiV3MediaTypes,
+  type IMediaTypes as IOpenapiV3MediaTypes,
+  type TMediaTypes as TOpenapiV3MediaTypes,
 } from './MediaTypes';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 /**

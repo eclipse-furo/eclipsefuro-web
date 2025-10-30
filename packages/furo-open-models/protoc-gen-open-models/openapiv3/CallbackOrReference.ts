@@ -4,14 +4,14 @@
 import { FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   Callback as OpenapiV3Callback,
-  ICallback as IOpenapiV3Callback,
-  TCallback as TOpenapiV3Callback,
+  type ICallback as IOpenapiV3Callback,
+  type TCallback as TOpenapiV3Callback,
 } from './Callback';
 
 import {
-  IReference as IOpenapiV3Reference,
   Reference as OpenapiV3Reference,
-  TReference as TOpenapiV3Reference,
+  type IReference as IOpenapiV3Reference,
+  type TReference as TOpenapiV3Reference,
 } from './Reference';
 
 /**

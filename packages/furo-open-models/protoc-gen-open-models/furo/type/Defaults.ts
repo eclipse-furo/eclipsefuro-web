@@ -13,23 +13,23 @@ import {
   type IAny,
 } from '@furo/open-models/dist/index';
 import {
-  IXString as IFuroFatString,
-  TXString as TFuroFatString,
   XString as FuroFatString,
+  type IXString as IFuroFatString,
+  type TXString as TFuroFatString,
 } from '../fat/String';
 
 import { BookingCenter as FuroTypeBookingCenter } from './BookingCenter';
 
 import {
   Decimal as FuroTypeDecimal,
-  IDecimal as IFuroTypeDecimal,
-  TDecimal as TFuroTypeDecimal,
+  type IDecimal as IFuroTypeDecimal,
+  type TDecimal as TFuroTypeDecimal,
 } from './Decimal';
 
 import {
   DecimalRange as FuroTypeDecimalRange,
-  IDecimalRange as IFuroTypeDecimalRange,
-  TDecimalRange as TFuroTypeDecimalRange,
+  type IDecimalRange as IFuroTypeDecimalRange,
+  type TDecimalRange as TFuroTypeDecimalRange,
 } from './DecimalRange';
 
 import { RefSystem as FuroTypeRefSystem } from './RefSystem';

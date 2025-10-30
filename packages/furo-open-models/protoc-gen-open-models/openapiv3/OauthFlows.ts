@@ -3,15 +3,15 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IOauthFlow as IOpenapiV3OauthFlow,
   OauthFlow as OpenapiV3OauthFlow,
-  TOauthFlow as TOpenapiV3OauthFlow,
+  type IOauthFlow as IOpenapiV3OauthFlow,
+  type TOauthFlow as TOpenapiV3OauthFlow,
 } from './OauthFlow';
 
 /**

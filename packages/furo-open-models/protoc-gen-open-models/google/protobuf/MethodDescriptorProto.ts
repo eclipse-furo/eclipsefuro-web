@@ -8,9 +8,9 @@ import {
   STRING,
 } from '@furo/open-models/dist/index';
 import {
-  IMethodOptions as IGoogleProtobufMethodOptions,
   MethodOptions as GoogleProtobufMethodOptions,
-  TMethodOptions as TGoogleProtobufMethodOptions,
+  type IMethodOptions as IGoogleProtobufMethodOptions,
+  type TMethodOptions as TGoogleProtobufMethodOptions,
 } from './MethodOptions';
 
 /**

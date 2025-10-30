@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  IRequestBodyOrReference as IOpenapiV3RequestBodyOrReference,
   RequestBodyOrReference as OpenapiV3RequestBodyOrReference,
-  TRequestBodyOrReference as TOpenapiV3RequestBodyOrReference,
+  type IRequestBodyOrReference as IOpenapiV3RequestBodyOrReference,
+  type TRequestBodyOrReference as TOpenapiV3RequestBodyOrReference,
 } from './RequestBodyOrReference';
 
 /**

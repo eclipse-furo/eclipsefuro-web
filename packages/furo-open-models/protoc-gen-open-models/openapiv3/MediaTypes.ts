@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedMediaType as IOpenapiV3NamedMediaType,
   NamedMediaType as OpenapiV3NamedMediaType,
-  TNamedMediaType as TOpenapiV3NamedMediaType,
+  type INamedMediaType as IOpenapiV3NamedMediaType,
+  type TNamedMediaType as TOpenapiV3NamedMediaType,
 } from './NamedMediaType';
 
 /**

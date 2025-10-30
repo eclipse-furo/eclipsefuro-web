@@ -1,6 +1,5 @@
-import { LitElement, html, css } from 'lit';
-
-import { FBP } from '@furo/fbp';
+import { LitFBP } from "@furo/fbp/dist/LitFBP";
+import { css,html, LitElement } from 'lit';
 
 /**
  * `furo-vertical-scroller`
@@ -20,13 +19,13 @@ import { FBP } from '@furo/fbp';
  * @demo demo-furo-vertical-scroller Basic usage
  * @appliesMixin FBP
  */
-export class FuroVerticalScroller extends FBP(LitElement) {
+export class FuroVerticalScroller extends LitFBP(LitElement) {
   /**
    *
    * @private
    * @return {CSSResult}
    */
-  static get styles() {
+  static override get styles() {
     // language=CSS
     return (
 
@@ -48,7 +47,7 @@ export class FuroVerticalScroller extends FBP(LitElement) {
    * @private
    * @returns {TemplateResult}
    */
-  render() {
+  override render() {
     // language=HTML
     return html`
       <slot></slot>

@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  IStringArray as IOpenapiV3StringArray,
   StringArray as OpenapiV3StringArray,
-  TStringArray as TOpenapiV3StringArray,
+  type IStringArray as IOpenapiV3StringArray,
+  type TStringArray as TOpenapiV3StringArray,
 } from './StringArray';
 
 /**

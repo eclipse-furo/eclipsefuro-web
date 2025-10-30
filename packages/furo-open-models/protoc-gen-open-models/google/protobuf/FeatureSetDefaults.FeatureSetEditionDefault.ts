@@ -6,8 +6,8 @@ import { Edition as GoogleProtobufEdition } from './Edition';
 
 import {
   FeatureSet as GoogleProtobufFeatureSet,
-  IFeatureSet as IGoogleProtobufFeatureSet,
-  TFeatureSet as TGoogleProtobufFeatureSet,
+  type IFeatureSet as IGoogleProtobufFeatureSet,
+  type TFeatureSet as TGoogleProtobufFeatureSet,
 } from './FeatureSet';
 
 /**

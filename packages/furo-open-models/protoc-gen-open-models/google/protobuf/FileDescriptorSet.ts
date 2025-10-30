@@ -4,8 +4,8 @@
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   FileDescriptorProto as GoogleProtobufFileDescriptorProto,
-  IFileDescriptorProto as IGoogleProtobufFileDescriptorProto,
-  TFileDescriptorProto as TGoogleProtobufFileDescriptorProto,
+  type IFileDescriptorProto as IGoogleProtobufFileDescriptorProto,
+  type TFileDescriptorProto as TGoogleProtobufFileDescriptorProto,
 } from './FileDescriptorProto';
 
 /**

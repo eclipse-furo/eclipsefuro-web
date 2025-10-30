@@ -11,40 +11,40 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   DescriptorProto as GoogleProtobufDescriptorProto,
-  IDescriptorProto as IGoogleProtobufDescriptorProto,
-  TDescriptorProto as TGoogleProtobufDescriptorProto,
+  type IDescriptorProto as IGoogleProtobufDescriptorProto,
+  type TDescriptorProto as TGoogleProtobufDescriptorProto,
 } from './DescriptorProto';
 
 import { Edition as GoogleProtobufEdition } from './Edition';
 
 import {
   EnumDescriptorProto as GoogleProtobufEnumDescriptorProto,
-  IEnumDescriptorProto as IGoogleProtobufEnumDescriptorProto,
-  TEnumDescriptorProto as TGoogleProtobufEnumDescriptorProto,
+  type IEnumDescriptorProto as IGoogleProtobufEnumDescriptorProto,
+  type TEnumDescriptorProto as TGoogleProtobufEnumDescriptorProto,
 } from './EnumDescriptorProto';
 
 import {
   FieldDescriptorProto as GoogleProtobufFieldDescriptorProto,
-  IFieldDescriptorProto as IGoogleProtobufFieldDescriptorProto,
-  TFieldDescriptorProto as TGoogleProtobufFieldDescriptorProto,
+  type IFieldDescriptorProto as IGoogleProtobufFieldDescriptorProto,
+  type TFieldDescriptorProto as TGoogleProtobufFieldDescriptorProto,
 } from './FieldDescriptorProto';
 
 import {
   FileOptions as GoogleProtobufFileOptions,
-  IFileOptions as IGoogleProtobufFileOptions,
-  TFileOptions as TGoogleProtobufFileOptions,
+  type IFileOptions as IGoogleProtobufFileOptions,
+  type TFileOptions as TGoogleProtobufFileOptions,
 } from './FileOptions';
 
 import {
-  IServiceDescriptorProto as IGoogleProtobufServiceDescriptorProto,
   ServiceDescriptorProto as GoogleProtobufServiceDescriptorProto,
-  TServiceDescriptorProto as TGoogleProtobufServiceDescriptorProto,
+  type IServiceDescriptorProto as IGoogleProtobufServiceDescriptorProto,
+  type TServiceDescriptorProto as TGoogleProtobufServiceDescriptorProto,
 } from './ServiceDescriptorProto';
 
 import {
-  ISourceCodeInfo as IGoogleProtobufSourceCodeInfo,
   SourceCodeInfo as GoogleProtobufSourceCodeInfo,
-  TSourceCodeInfo as TGoogleProtobufSourceCodeInfo,
+  type ISourceCodeInfo as IGoogleProtobufSourceCodeInfo,
+  type TSourceCodeInfo as TGoogleProtobufSourceCodeInfo,
 } from './SourceCodeInfo';
 
 /**

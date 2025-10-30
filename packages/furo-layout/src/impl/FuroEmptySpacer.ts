@@ -1,3 +1,6 @@
+import { css, LitElement } from "lit";
+import { property } from "lit/decorators.js";
+
 /**
  * `furo-empty-spacer` Takes the place in furo-horizontal-flex or a furo-vertical-flex.
  *
@@ -19,31 +22,36 @@
  * @appliesMixin FBP
  */
 export class FuroEmptySpacer extends LitElement {
-    static get properties(): {
-        /**
-         * Attribute flex for furo-horizontal-flex and furo-vertical-flex
-         *
-         * @type Boolean
-         */
-        flex: boolean;
-        /**
-         * Set to true to hide the spacer
-         *
-         * @type Boolean
-         */
-        hidden: boolean;
-    };
-    /**
-     *
-     * @private
-     * @return {CSSResult}
-     */
-    private static get styles();
-    flex: boolean;
-    /**
-     * @private
-     * @returns {*}
-     */
-    private render;
+
+  /**
+   * Attribute flex for furo-horizontal-flex and furo-vertical-flex
+   *
+   * @type Boolean
+   */
+  @property({ type: Boolean, reflect: true })
+  flex:boolean = true;
+
+  /**
+   *
+   * @private
+   * @return {CSSResult}
+   */
+  static override get styles() {
+    // language=CSS
+    return (
+
+      css`
+        :host {
+          display: block;
+        }
+
+        :host([hidden]) {
+          display: none;
+        }
+      `
+    );
+  }
+
 }
-import { LitElement } from 'lit';
+
+window.customElements.define('furo-empty-spacer', FuroEmptySpacer);

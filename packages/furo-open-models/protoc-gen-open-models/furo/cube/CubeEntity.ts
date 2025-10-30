@@ -4,8 +4,8 @@
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
   CubeDefinition as FuroCubeCubeDefinition,
-  ICubeDefinition as IFuroCubeCubeDefinition,
-  TCubeDefinition as TFuroCubeCubeDefinition,
+  type ICubeDefinition as IFuroCubeCubeDefinition,
+  type TCubeDefinition as TFuroCubeCubeDefinition,
 } from './CubeDefinition';
 
 /**

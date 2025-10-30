@@ -9,20 +9,20 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   EnumDescriptorProtoEnumReservedRange as GoogleProtobufEnumDescriptorProtoEnumReservedRange,
-  IEnumDescriptorProtoEnumReservedRange as IGoogleProtobufEnumDescriptorProtoEnumReservedRange,
-  TEnumDescriptorProtoEnumReservedRange as TGoogleProtobufEnumDescriptorProtoEnumReservedRange,
+  type IEnumDescriptorProtoEnumReservedRange as IGoogleProtobufEnumDescriptorProtoEnumReservedRange,
+  type TEnumDescriptorProtoEnumReservedRange as TGoogleProtobufEnumDescriptorProtoEnumReservedRange,
 } from './EnumDescriptorProto.EnumReservedRange';
 
 import {
   EnumOptions as GoogleProtobufEnumOptions,
-  IEnumOptions as IGoogleProtobufEnumOptions,
-  TEnumOptions as TGoogleProtobufEnumOptions,
+  type IEnumOptions as IGoogleProtobufEnumOptions,
+  type TEnumOptions as TGoogleProtobufEnumOptions,
 } from './EnumOptions';
 
 import {
   EnumValueDescriptorProto as GoogleProtobufEnumValueDescriptorProto,
-  IEnumValueDescriptorProto as IGoogleProtobufEnumValueDescriptorProto,
-  TEnumValueDescriptorProto as TGoogleProtobufEnumValueDescriptorProto,
+  type IEnumValueDescriptorProto as IGoogleProtobufEnumValueDescriptorProto,
+  type TEnumValueDescriptorProto as TGoogleProtobufEnumValueDescriptorProto,
 } from './EnumValueDescriptorProto';
 
 /**

@@ -4,8 +4,8 @@
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   GeneratedCodeInfoAnnotation as GoogleProtobufGeneratedCodeInfoAnnotation,
-  IGeneratedCodeInfoAnnotation as IGoogleProtobufGeneratedCodeInfoAnnotation,
-  TGeneratedCodeInfoAnnotation as TGoogleProtobufGeneratedCodeInfoAnnotation,
+  type IGeneratedCodeInfoAnnotation as IGoogleProtobufGeneratedCodeInfoAnnotation,
+  type TGeneratedCodeInfoAnnotation as TGoogleProtobufGeneratedCodeInfoAnnotation,
 } from './GeneratedCodeInfo.Annotation';
 
 /**

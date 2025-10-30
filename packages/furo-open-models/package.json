@@ -19,6 +19,7 @@
     "build:model": "tsc  -p ./tsconfig.models.json && tsc-alias -p ./tsconfig.models.json",
     "protoc:gen": "./scripts/protoc-gen-open-models.sh",
     "protoc:gen:lint": "npm run protoc:gen && eslint --ext .ts,.html ./protoc-gen-open-models --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "protoc:lint": " eslint --ext .ts,.html ./protoc-gen-open-models --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "clean": "rm -rf ./dist && rm -rf ./test/.test && rm -rf ./coverage",
     "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
     "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",

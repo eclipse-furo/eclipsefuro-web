@@ -1,8 +1,26 @@
-.furo
+# Ignore editor specific directories
 .idea
+*.iml
+*.iws
+*.ipr
+
+/.vscode
+/tmp
+
+# Ignore web-specific directories and files
 coverage
-build
 dist
 node_modules/
-_specbuild
-__tmp
+
+# tests
+/test/.specs/
+
+# Playwright
+/test-results/
+test-results.json
+/playwright-report/
+/playwright/.cache/
+/playwright-transform-cache-0
+
+/tmp/
+/out-tsc/

@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  IXAny as IOpenapiV3Any,
-  TXAny as TOpenapiV3Any,
   XAny as OpenapiV3Any,
+  type IXAny as IOpenapiV3Any,
+  type TXAny as TOpenapiV3Any,
 } from './Any';
 
 /**

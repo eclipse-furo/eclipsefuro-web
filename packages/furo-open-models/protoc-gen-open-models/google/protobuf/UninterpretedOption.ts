@@ -12,9 +12,9 @@ import {
   UINT64,
 } from '@furo/open-models/dist/index';
 import {
-  IUninterpretedOptionNamePart as IGoogleProtobufUninterpretedOptionNamePart,
-  TUninterpretedOptionNamePart as TGoogleProtobufUninterpretedOptionNamePart,
   UninterpretedOptionNamePart as GoogleProtobufUninterpretedOptionNamePart,
+  type IUninterpretedOptionNamePart as IGoogleProtobufUninterpretedOptionNamePart,
+  type TUninterpretedOptionNamePart as TGoogleProtobufUninterpretedOptionNamePart,
 } from './UninterpretedOption.NamePart';
 
 /**

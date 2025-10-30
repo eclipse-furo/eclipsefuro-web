@@ -3,33 +3,33 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  IXAny as IOpenapiV3Any,
-  TXAny as TOpenapiV3Any,
   XAny as OpenapiV3Any,
+  type IXAny as IOpenapiV3Any,
+  type TXAny as TOpenapiV3Any,
 } from './Any';
 
 import {
   Encodings as OpenapiV3Encodings,
-  IEncodings as IOpenapiV3Encodings,
-  TEncodings as TOpenapiV3Encodings,
+  type IEncodings as IOpenapiV3Encodings,
+  type TEncodings as TOpenapiV3Encodings,
 } from './Encodings';
 
 import {
   ExamplesOrReferences as OpenapiV3ExamplesOrReferences,
-  IExamplesOrReferences as IOpenapiV3ExamplesOrReferences,
-  TExamplesOrReferences as TOpenapiV3ExamplesOrReferences,
+  type IExamplesOrReferences as IOpenapiV3ExamplesOrReferences,
+  type TExamplesOrReferences as TOpenapiV3ExamplesOrReferences,
 } from './ExamplesOrReferences';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  ISchemaOrReference as IOpenapiV3SchemaOrReference,
   SchemaOrReference as OpenapiV3SchemaOrReference,
-  TSchemaOrReference as TOpenapiV3SchemaOrReference,
+  type ISchemaOrReference as IOpenapiV3SchemaOrReference,
+  type TSchemaOrReference as TOpenapiV3SchemaOrReference,
 } from './SchemaOrReference';
 
 /**

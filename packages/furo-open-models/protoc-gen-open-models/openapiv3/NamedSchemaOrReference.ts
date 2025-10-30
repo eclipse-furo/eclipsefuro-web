@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  ISchemaOrReference as IOpenapiV3SchemaOrReference,
   SchemaOrReference as OpenapiV3SchemaOrReference,
-  TSchemaOrReference as TOpenapiV3SchemaOrReference,
+  type ISchemaOrReference as IOpenapiV3SchemaOrReference,
+  type TSchemaOrReference as TOpenapiV3SchemaOrReference,
 } from './SchemaOrReference';
 
 /**

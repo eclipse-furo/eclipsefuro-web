@@ -4,8 +4,8 @@
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
   ExampleOrReference as OpenapiV3ExampleOrReference,
-  IExampleOrReference as IOpenapiV3ExampleOrReference,
-  TExampleOrReference as TOpenapiV3ExampleOrReference,
+  type IExampleOrReference as IOpenapiV3ExampleOrReference,
+  type TExampleOrReference as TOpenapiV3ExampleOrReference,
 } from './ExampleOrReference';
 
 /**

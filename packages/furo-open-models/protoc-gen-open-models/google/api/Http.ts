@@ -9,8 +9,8 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   HttpRule as GoogleApiHttpRule,
-  IHttpRule as IGoogleApiHttpRule,
-  THttpRule as TGoogleApiHttpRule,
+  type IHttpRule as IGoogleApiHttpRule,
+  type THttpRule as TGoogleApiHttpRule,
 } from './HttpRule';
 
 /**

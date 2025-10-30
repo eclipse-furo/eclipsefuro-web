@@ -3,9 +3,9 @@
 
 import { FieldNode, Registry, STRING } from '@furo/open-models/dist/index';
 import {
-  IPathItem as IOpenapiV3PathItem,
   PathItem as OpenapiV3PathItem,
-  TPathItem as TOpenapiV3PathItem,
+  type IPathItem as IOpenapiV3PathItem,
+  type TPathItem as TOpenapiV3PathItem,
 } from './PathItem';
 
 /**

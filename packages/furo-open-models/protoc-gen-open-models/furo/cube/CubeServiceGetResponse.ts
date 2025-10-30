@@ -4,8 +4,8 @@
 import { FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
   CubeEntity as FuroCubeCubeEntity,
-  ICubeEntity as IFuroCubeCubeEntity,
-  TCubeEntity as TFuroCubeCubeEntity,
+  type ICubeEntity as IFuroCubeCubeEntity,
+  type TCubeEntity as TFuroCubeCubeEntity,
 } from './CubeEntity';
 
 /**

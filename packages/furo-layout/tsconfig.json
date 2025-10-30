@@ -1,31 +1,72 @@
 {
   "compilerOptions": {
     "target": "ES2022",
-    "module": "ESNext",
-    "moduleResolution": "node",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
     "noEmitOnError": true,
     "strict": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
+    "importHelpers": true,
     "outDir": "dist",
     "skipLibCheck": true,
     "sourceMap": true,
     "inlineSources": true,
     "resolveJsonModule": true,
-    "allowJs": true,
-    // Generate d.ts files
     "declaration": true,
-    "lib": ["es2019", "dom", "dom.iterable"],
+    "jsx": "react-jsx",
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
     "useDefineForClassFields": false,
     "plugins": [
       {
-        "name": "typescript-lit-html-plugin"
+        "name": "ts-lit-plugin",
+        "strict": true,
+        "rules": {
+          "no-incompatible-type-binding": "warn",
+          "no-incompatible-property-type": "off",
+          "no-unknown-event": "off",
+          "no-unknown-attribute": "off",
+          "no-complex-attribute-binding": "off"
+        }
       }
-    ]
+    ],
+    "allowArbitraryExtensions": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+
+    "resolvePackageJsonExports": true,
+    "resolvePackageJsonImports": true,
+    "rootDir": "./src/",
+
+
+    "stripInternal": true,
+
+
+    "types": [
+      "mocha"
+    ],
+
+    "verbatimModuleSyntax": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
-  "tsc-alias": {
-    "resolveFullPaths": true,
-    "verbose": false
-  },
-  "exclude": ["dist", "test"],
-  "include": ["src/**/*", "global.d.ts"]
+
+  "include": [
+    "src/**/*.ts",
+    "global.d.ts"
+  ],
+
+
 }

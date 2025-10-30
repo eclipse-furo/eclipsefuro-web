@@ -4,17 +4,17 @@
 import { Fetcher } from '@furo/open-models/dist/Fetcher';
 import { API_OPTIONS } from '../../API_OPTIONS';
 
-import { ICubeServiceGetListRequest as IFuroCubeCubeServiceGetListRequest } from './CubeServiceGetListRequest';
+import { type ICubeServiceGetListRequest as IFuroCubeCubeServiceGetListRequest } from './CubeServiceGetListRequest';
 
-import { ICubeServiceGetListResponse as IFuroCubeCubeServiceGetListResponse } from './CubeServiceGetListResponse';
+import { type ICubeServiceGetListResponse as IFuroCubeCubeServiceGetListResponse } from './CubeServiceGetListResponse';
 
-import { ICubeServiceGetRequest as IFuroCubeCubeServiceGetRequest } from './CubeServiceGetRequest';
+import { type ICubeServiceGetRequest as IFuroCubeCubeServiceGetRequest } from './CubeServiceGetRequest';
 
-import { ICubeServiceGetResponse as IFuroCubeCubeServiceGetResponse } from './CubeServiceGetResponse';
+import { type ICubeServiceGetResponse as IFuroCubeCubeServiceGetResponse } from './CubeServiceGetResponse';
 
-import { ICubeServiceUpdateRequest as IFuroCubeCubeServiceUpdateRequest } from './CubeServiceUpdateRequest';
+import { type ICubeServiceUpdateRequest as IFuroCubeCubeServiceUpdateRequest } from './CubeServiceUpdateRequest';
 
-import { ICubeServiceUpdateResponse as IFuroCubeCubeServiceUpdateResponse } from './CubeServiceUpdateResponse';
+import { type ICubeServiceUpdateResponse as IFuroCubeCubeServiceUpdateResponse } from './CubeServiceUpdateResponse';
 
 //  cube services
 

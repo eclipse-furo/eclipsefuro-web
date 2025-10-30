@@ -3,9 +3,9 @@
 
 import { ARRAY, FieldNode, Registry } from '@furo/open-models/dist/index';
 import {
-  INamedSecuritySchemeOrReference as IOpenapiV3NamedSecuritySchemeOrReference,
   NamedSecuritySchemeOrReference as OpenapiV3NamedSecuritySchemeOrReference,
-  TNamedSecuritySchemeOrReference as TOpenapiV3NamedSecuritySchemeOrReference,
+  type INamedSecuritySchemeOrReference as IOpenapiV3NamedSecuritySchemeOrReference,
+  type TNamedSecuritySchemeOrReference as TOpenapiV3NamedSecuritySchemeOrReference,
 } from './NamedSecuritySchemeOrReference';
 
 /**

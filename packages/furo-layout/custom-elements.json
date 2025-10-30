@@ -4,7 +4,174 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "src/furo-backdrop-display.js",
+      "path": "dist/furo-backdrop.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-backdrop",
+          "declaration": {
+            "name": "FuroBackdrop",
+            "module": "/src/impl/FuroBackdrop"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/furo-horizontal-flex.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-horizontal-flex",
+          "declaration": {
+            "name": "FuroHorizontalFlex",
+            "module": "/src/impl/FuroHorizontalFlex"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/furo-layout-indent.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-layout-indent",
+          "declaration": {
+            "name": "FuroLayoutIndent",
+            "module": "/src/impl/FuroLayoutIndent"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/furo-resizer.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-resizer",
+          "declaration": {
+            "name": "FuroResizer",
+            "module": "/src/impl/FuroResizer"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/furo-responsive-layout.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-responsive-layout",
+          "declaration": {
+            "name": "FuroResponsiveLayout",
+            "module": "/src/impl/FuroResponsiveLayout"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/furo-vertical-flex.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-vertical-flex",
+          "declaration": {
+            "name": "FuroVerticalFlex",
+            "module": "/src/impl/FuroVerticalFlex"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/impl/FuroBackdrop.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "`furo-backdrop`\n\nDisplays content with a backdrop.\n\nThe element you place in to furo-backdrop will be displayed centered.\n\n\n```html\n<furo-backdrop at-opened=\"--BackdropFocus\" at-closed=\"--backdropClosed\"\n  fn-show=\"--expandIconClicked\"\n  fn-close=\"--closeRequested, --recordSelected\">\n     <any-component at-item-selected=\"--recordSelected\" style=\"width: 90vw; height: 90vh\"></any-component>\n</furo-backdrop>\n\n```\n\nYou can wire and use the elements in furo-backrop as if they were local elements.\n\nDo not forget to add the furo-backdrop-display somewhere in the parent dom.",
+          "name": "FuroBackdrop",
+          "members": [
+            {
+              "kind": "method",
+              "name": "_FBPReady",
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "close",
+              "description": "Hides the display.\n\n**Note:** The display will also get closed when the user clicks on the backdrop."
+            },
+            {
+              "kind": "field",
+              "name": "displayHandle",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              }
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "description": "Initiates the backdrop and shows the content on top of the backdrop area."
+            }
+          ],
+          "events": [
+            {
+              "type": {
+                "text": "FuroBackdrop"
+              },
+              "description": "The **closed** event will be fired when the displayed content is invisible and the backdrop is closed. Tipp: Maybe you want to use this event to refocus the initiator. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
+              "name": "closed"
+            },
+            {
+              "type": {
+                "text": "FuroBackdrop"
+              },
+              "description": "The **opened** event will be fired when the content is visible on the backdrop. Tipp: you can use this to focus something on the shown content. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
+              "name": "opened"
+            },
+            {
+              "type": {
+                "text": "FuroBackdrop"
+              },
+              "description": "Internal event to move the contents to the backdrop-display. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
+              "name": "register-backdrop"
+            }
+          ],
+          "mixins": [
+            {
+              "name": "LitFBP",
+              "package": "@furo/fbp/dist/LitFBP"
+            }
+          ],
+          "tagName": "furo-backdrop",
+          "customElement": true,
+          "summary": "show content with backdrop"
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FuroBackdrop",
+          "declaration": {
+            "name": "FuroBackdrop",
+            "module": "src/impl/FuroBackdrop.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/impl/FuroBackdropDisplay.js",
       "declarations": [
         {
           "kind": "class",
@@ -30,188 +197,113 @@
             {
               "kind": "method",
               "name": "close",
-              "description": "closes the backdrop.\nYou can close the backdrop on the display element, this is useful when you want to close the backdrops on page\nchanges.\n\nUsualy the component which triggers the backdrop or is displayed closes it."
+              "description": "closes the backdrop.\nYou can close the backdrop on the display element, this is useful when you want to close the backdrops on page\nchanges.\n\nUsually the component which triggers the backdrop or is displayed closes it."
             },
             {
               "kind": "field",
-              "name": "toDuration",
-              "privacy": "public",
+              "name": "contentSource",
               "type": {
-                "text": "number"
+                "text": "FuroBackdrop | undefined"
               },
-              "description": "timeout duration",
-              "default": "100",
-              "attribute": "to-duration"
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Indicates that the backdrop is shown.",
+              "privacy": "private",
+              "attribute": "show",
+              "reflects": true
             },
             {
               "kind": "field",
               "name": "start",
-              "privacy": "private",
               "type": {
                 "text": "boolean"
               },
+              "default": "false",
               "description": "Needed to start the animation.",
+              "privacy": "private",
               "attribute": "start",
               "reflects": true
             },
             {
               "kind": "field",
-              "name": "show",
-              "privacy": "private",
+              "name": "toDuration",
               "type": {
-                "text": "boolean"
+                "text": "Number"
               },
-              "description": "Indicates that the backdrop is shown.",
-              "attribute": "show",
-              "reflects": true
+              "default": "100",
+              "description": "Timeout duration, to wait to notify the changes.\n\nNote: the animations in the css are set with 250ms.\n\nIf you are interested to use at-opened to load some data, set this value lower. This gives you 250 ms extra time to load content, without feeling slow.\n\nIf you are interested to use at-opened to show some ui stuff, set this value higher or equal 250.",
+              "attribute": "to-duration"
             }
           ],
           "attributes": [
+            {
+              "name": "show",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Indicates that the backdrop is shown.",
+              "fieldName": "show"
+            },
             {
               "name": "start",
               "type": {
                 "text": "boolean"
               },
+              "default": "false",
               "description": "Needed to start the animation.",
               "fieldName": "start"
             },
             {
-              "name": "show",
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Indicates that the backdrop is shown.",
-              "fieldName": "show"
-            },
-            {
               "name": "to-duration",
               "type": {
-                "text": "number"
+                "text": "Number"
               },
-              "description": "timeout duration",
               "default": "100",
+              "description": "Timeout duration, to wait to notify the changes.\n\nNote: the animations in the css are set with 250ms.\n\nIf you are interested to use at-opened to load some data, set this value lower. This gives you 250 ms extra time to load content, without feeling slow.\n\nIf you are interested to use at-opened to show some ui stuff, set this value higher or equal 250.",
               "fieldName": "toDuration"
             }
           ],
           "mixins": [
             {
-              "name": "FBP",
-              "package": "@furo/fbp"
+              "name": "LitFBP",
+              "package": "@furo/fbp/dist/LitFBP"
             }
           ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "Display component for furo-backdrop",
           "tagName": "furo-backdrop-display",
-          "customElement": true
+          "customElement": true,
+          "summary": "Display component for furo-backdrop"
         }
       ],
       "exports": [
-        {
-          "kind": "js",
-          "name": "FuroBackdropDisplay",
-          "declaration": {
-            "name": "FuroBackdropDisplay",
-            "module": "src/furo-backdrop-display.js"
-          }
-        },
         {
           "kind": "custom-element-definition",
           "name": "furo-backdrop-display",
           "declaration": {
             "name": "FuroBackdropDisplay",
-            "module": "src/furo-backdrop-display.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/furo-backdrop.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "`furo-backdrop`\n\nDisplays content with a backdrop.\n\nThe element you place in to furo-backdrop will be displayed centered.\n\n\n```html\n<furo-backdrop at-opened=\"--BackdropFocus\" at-closed=\"--backdropClosed\"\n  fn-show=\"--expandIconClicked\"\n  fn-close=\"--closeRequested, --recordSelected\">\n     <any-component at-item-selected=\"--recordSelected\" style=\"width: 90vw; height: 90vh\"></any-component>\n</furo-backdrop>\n\n```\n\nYou can wire and use the elements in furo-backrop as if they were local elements.\n\nDo not forget to add the furo-backdrop-display somewhere in the parent dom.",
-          "name": "FuroBackdrop",
-          "members": [
-            {
-              "kind": "method",
-              "name": "_FBPReady",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "show",
-              "description": "Initiates the backdrop and shows the content on top of the backdrop area."
-            },
-            {
-              "kind": "method",
-              "name": "close",
-              "description": "Hides the display.\n\n**Note:** The display will also get closed when the user clicks on the backdrop."
-            }
-          ],
-          "events": [
-            {
-              "type": {
-                "text": "FuroBackdrop"
-              },
-              "description": "The **opened** event will be fired when the content is visible on the backdrop. Tipp: you can use this to focus something on the shown content. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
-              "name": "opened"
-            },
-            {
-              "type": {
-                "text": "FuroBackdrop"
-              },
-              "description": "The **closed** event will be fired when the displayed content is invisible and the backdrop is closed. Tipp: Maybe you want to use this event to refocus the initiator. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
-              "name": "closed"
-            },
-            {
-              "type": {
-                "text": "FuroBackdrop"
-              },
-              "description": "Internal event to move the contents to the backdrop-display. Event.details {FuroBackdrop} is the reference to the emiting DOM node.",
-              "name": "register-backdrop"
-            }
-          ],
-          "mixins": [
-            {
-              "name": "FBP",
-              "package": "@furo/fbp"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "show content with backdrop",
-          "tagName": "furo-backdrop",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FuroBackdrop",
-          "declaration": {
-            "name": "FuroBackdrop",
-            "module": "src/furo-backdrop.js"
+            "module": "src/impl/FuroBackdropDisplay.ts"
           }
         },
         {
-          "kind": "custom-element-definition",
-          "name": "furo-backdrop",
+          "kind": "js",
+          "name": "FuroBackdropDisplay",
           "declaration": {
-            "name": "FuroBackdrop",
-            "module": "src/furo-backdrop.js"
+            "name": "FuroBackdropDisplay",
+            "module": "src/impl/FuroBackdropDisplay.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-empty-spacer.js",
+      "path": "dist/impl/FuroEmptySpacer.js",
       "declarations": [
         {
           "kind": "class",
@@ -221,25 +313,12 @@
             {
               "kind": "field",
               "name": "flex",
-              "privacy": "public",
               "type": {
-                "text": "boolean"
+                "text": "Boolean"
               },
-              "description": "Attribute flex for furo-horizontal-flex and furo-vertical-flex",
               "default": "true",
+              "description": "Attribute flex for furo-horizontal-flex and furo-vertical-flex",
               "attribute": "flex",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "hidden",
-              "privacy": "public",
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Set to true to hide the spacer",
-              "default": "false",
-              "attribute": "hidden",
               "reflects": true
             }
           ],
@@ -247,326 +326,196 @@
             {
               "name": "flex",
               "type": {
-                "text": "boolean"
+                "text": "Boolean"
               },
-              "description": "Attribute flex for furo-horizontal-flex and furo-vertical-flex",
               "default": "true",
+              "description": "Attribute flex for furo-horizontal-flex and furo-vertical-flex",
               "fieldName": "flex"
-            },
-            {
-              "name": "hidden",
-              "type": {
-                "text": "boolean"
-              },
-              "description": "Set to true to hide the spacer",
-              "default": "false",
-              "fieldName": "hidden"
             }
           ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "fill the space in a furo-xxxx-flex",
           "tagName": "furo-empty-spacer",
-          "customElement": true
+          "customElement": true,
+          "summary": "fill the space in a furo-xxxx-flex"
         }
       ],
       "exports": [
-        {
-          "kind": "js",
-          "name": "FuroEmptySpacer",
-          "declaration": {
-            "name": "FuroEmptySpacer",
-            "module": "src/furo-empty-spacer.js"
-          }
-        },
         {
           "kind": "custom-element-definition",
           "name": "furo-empty-spacer",
           "declaration": {
             "name": "FuroEmptySpacer",
-            "module": "src/furo-empty-spacer.js"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "src/furo-form-layouter.js",
-      "declarations": [
-        {
-          "kind": "class",
-          "description": "`furo-form-layouter`\n\nUse furo-form-layouter to structure your forms.\nIt is based on a grid system with the following properties:\n- full-width row (Standard)\n- two columns\n- four columns\n\nThe required variant is set using an attribute.\ne.g. two, three, four and six\n\n```html\n<!-- four coulumn layout -->\n<furo-form-layouter four>\n   <input-element></input-element>\n   <input-element double></input-element>\n   <input-element newline></input-element>\n   <input-element full></input-element>\n</furo-form-layouter>\n```\n\n\nTo customize the slotted elements inside furo-form-layouter there are several attributes.\n- double | stretches the element over two units\n- full | stretches the element to full width\n- newline | forces a new line\n\n### Responsiveness\nColumns | narrow | narrower  |\n----------------|-------------|-------------|\n`one` | one | one |\n`two` | one | one |\n`three` | one | one |\n`four` | two | one |\n`six` | three | one |",
-          "name": "FuroFormLayouter",
-          "cssProperties": [
-            {
-              "type": {
-                "text": "0px"
-              },
-              "description": "width of row gap",
-              "name": "--furo-form-layouter-row-gap",
-              "default": "0px"
-            },
-            {
-              "type": {
-                "text": "0px"
-              },
-              "description": "width of column gap",
-              "name": "--furo-form-layouter-column-gap",
-              "default": "0px"
-            }
-          ],
-          "slots": [
-            {
-              "type": {
-                "text": "HTMLElement [0..n]"
-              },
-              "description": "default slot to add content.",
-              "name": ""
-            }
-          ],
-          "members": [
-            {
-              "kind": "method",
-              "name": "_checkSize",
-              "parameters": [
-                {
-                  "name": "width"
-                }
-              ],
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "_fireResize",
-              "privacy": "private"
-            },
-            {
-              "kind": "method",
-              "name": "_FBPReady",
-              "description": "flow is ready lifecycle method",
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "narrow",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "narrower",
-              "type": {
-                "text": "boolean"
-              },
-              "default": "false"
-            },
-            {
-              "kind": "field",
-              "name": "breakpointBig",
-              "privacy": "public",
-              "type": {
-                "text": "number"
-              },
-              "description": "Set custom breakpoint big\nDefault: \"810\"",
-              "default": "810",
-              "attribute": "breakpoint-big",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "breakpointSmall",
-              "privacy": "public",
-              "type": {
-                "text": "number"
-              },
-              "description": "Set custom breakpoints small\nDefault: \"405\"",
-              "default": "405",
-              "attribute": "breakpoint-small",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "narrowFix",
-              "privacy": "public",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "Set narrow-fix attribute to force\nthe layout analog to breakpoint big",
-              "attribute": "narrow-fix",
-              "reflects": true
-            },
-            {
-              "kind": "field",
-              "name": "narrowerFix",
-              "privacy": "public",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "Set narrower-fix attribute to force\n1 column view (analog breakpoint small)",
-              "attribute": "narrower-fix",
-              "reflects": true
-            }
-          ],
-          "events": [
-            {
-              "name": "layout-changed",
-              "type": {
-                "text": "CustomEvent"
-              }
-            }
-          ],
-          "attributes": [
-            {
-              "type": {
-                "text": "bool"
-              },
-              "description": "One column layout.",
-              "name": "one"
-            },
-            {
-              "type": {
-                "text": "bool"
-              },
-              "description": "Two column layout, switches to one when breakpoint is reached.",
-              "name": "two"
-            },
-            {
-              "type": {
-                "text": "bool"
-              },
-              "description": "Three column layout, switches to one when breakpoint is reached.",
-              "name": "three"
-            },
-            {
-              "type": {
-                "text": "bool"
-              },
-              "description": "Three column layout, switches to two when breakpoint-big is reached and to one if breakpoint-small is reached.",
-              "name": "four"
-            },
-            {
-              "type": {
-                "text": "bool"
-              },
-              "description": "Three column layout, switches to three when breakpoint-big is reached and to one if breakpoint-small is reached. Tags: form",
-              "name": "six"
-            },
-            {
-              "name": "breakpoint-big",
-              "type": {
-                "text": "number"
-              },
-              "description": "Set custom breakpoint big\nDefault: \"810\"",
-              "default": "810",
-              "fieldName": "breakpointBig"
-            },
-            {
-              "name": "breakpoint-small",
-              "type": {
-                "text": "number"
-              },
-              "description": "Set custom breakpoints small\nDefault: \"405\"",
-              "default": "405",
-              "fieldName": "breakpointSmall"
-            },
-            {
-              "name": "narrow-fix",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "Set narrow-fix attribute to force\nthe layout analog to breakpoint big",
-              "fieldName": "narrowFix"
-            },
-            {
-              "name": "narrower-fix",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "Set narrower-fix attribute to force\n1 column view (analog breakpoint small)",
-              "fieldName": "narrowerFix"
-            }
-          ],
-          "mixins": [
-            {
-              "name": "FBP",
-              "package": "@furo/fbp"
-            }
-          ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "Grid based form field row",
-          "tagName": "furo-form-layouter",
-          "customElement": true
-        }
-      ],
-      "exports": [
-        {
-          "kind": "js",
-          "name": "FuroFormLayouter",
-          "declaration": {
-            "name": "FuroFormLayouter",
-            "module": "src/furo-form-layouter.js"
+            "module": "src/impl/FuroEmptySpacer.ts"
           }
         },
         {
-          "kind": "custom-element-definition",
-          "name": "furo-form-layouter",
+          "kind": "js",
+          "name": "FuroEmptySpacer",
           "declaration": {
-            "name": "FuroFormLayouter",
-            "module": "src/furo-form-layouter.js"
+            "name": "FuroEmptySpacer",
+            "module": "src/impl/FuroEmptySpacer.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-horizontal-flex.js",
+      "path": "dist/impl/FuroHorizontalFlex.js",
       "declarations": [
         {
           "kind": "class",
-          "description": "`furo-horizontal-flex`\n\nWith this component, any elements can be aligned horizontally. Similar to css flex.\nThe attribute \"flex\" must be set for growing elements.\nThe component takes up 100% of the space.\n\n```html\n<furo-horizontal-flex>\n  <div>small</div>\n  <div flex>full width</div>\n  <div>small</div>\n</furo-horizontal-flex>\n```",
+          "description": "\n### Overview\nWith the HorizontalFlex component, any elements can be aligned horizontally. Similar to css flex.\nThe attribute \"flex\" must be set for growing elements.\nThe component takes up 100% of the space.\n\n\n\n Tags: layout\n\nFor the `furo-horizontal-flex`\n### ES6 Module Import\n\n`import \"@furo/layout/dist/HorizontalFlex.js\";`",
           "name": "FuroHorizontalFlex",
           "cssProperties": [
             {
               "type": {
                 "text": "N/A"
               },
-              "description": "default padding (space)",
+              "description": "default spacing. If not set --MediaSizeIndentationBottom is used.",
               "name": "--furo-horizontal-flex-space",
               "default": "0.5rem"
             },
             {
               "type": {
-                "text": "N/A"
+                "text": "0.5rem"
               },
-              "description": "big padding (bigspace) Tags: layout",
-              "name": "--furo-horizontal-flex-bigspace",
-              "default": "3rem"
+              "description": "Spacing between the elements.",
+              "name": "--furo-horizontal-flex-space"
             }
           ],
           "slots": [
             {
               "type": {
-                "text": "HTMLElement [0..n]"
+                "text": "HTMLElement[]"
               },
-              "description": "default slot to add content.",
+              "description": "slot to add content.",
+              "name": "default"
+            },
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "slot to add content.",
+              "name": ""
+            },
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "slot to add content.",
               "name": ""
             }
           ],
-          "members": [],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "horizontal alignment",
+          "members": [
+            {
+              "kind": "field",
+              "name": "navigationItemSelector",
+              "type": {
+                "text": "string"
+              },
+              "privacy": "public",
+              "default": "\"*\"",
+              "description": "A query selector which should match with navigation items.\n\"button, furo-ui5-button, icon\"",
+              "attribute": "navigation-item-selector"
+            },
+            {
+              "kind": "field",
+              "name": "space",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Set this to true, to add spacing between the elements. The default value of the spacing is 0.5 rem. Use the `--furo-horizontal-flex-space` css prop to override.",
+              "attribute": "space"
+            },
+            {
+              "kind": "field",
+              "name": "vAlignCenter",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `center`",
+              "attribute": "v-align-center"
+            },
+            {
+              "kind": "field",
+              "name": "vAlignEnd",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `end`",
+              "attribute": "v-align-end"
+            },
+            {
+              "kind": "field",
+              "name": "vAlignStart",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `start`",
+              "attribute": "v-align-start"
+            }
+          ],
+          "attributes": [
+            {
+              "name": "navigation-item-selector",
+              "type": {
+                "text": "string"
+              },
+              "default": "\"*\"",
+              "description": "A query selector which should match with navigation items.\n\"button, furo-ui5-button, icon\"",
+              "fieldName": "navigationItemSelector",
+              "attribute": "navigation-item-selector"
+            },
+            {
+              "type": {
+                "text": "boolean"
+              },
+              "description": "Set this to true, to add spacing between the elements. The default value of the spacing is 0.5 rem. Use the `--furo-horizontal-flex-space` css prop to override.",
+              "name": "space",
+              "default": "false",
+              "fieldName": "space"
+            },
+            {
+              "name": "v-align-center",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `center`",
+              "fieldName": "vAlignCenter",
+              "attribute": "v-align-center"
+            },
+            {
+              "name": "v-align-end",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `end`",
+              "fieldName": "vAlignEnd",
+              "attribute": "v-align-end"
+            },
+            {
+              "name": "v-align-start",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Aligns the elements vertically at the position `start`",
+              "fieldName": "vAlignStart",
+              "attribute": "v-align-start"
+            }
+          ],
           "tagName": "furo-horizontal-flex",
-          "customElement": true
+          "customElement": true,
+          "summary": "horizontal alignment"
         }
       ],
       "exports": [
@@ -575,22 +524,258 @@
           "name": "FuroHorizontalFlex",
           "declaration": {
             "name": "FuroHorizontalFlex",
-            "module": "src/furo-horizontal-flex.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-horizontal-flex",
-          "declaration": {
-            "name": "FuroHorizontalFlex",
-            "module": "src/furo-horizontal-flex.js"
+            "module": "src/impl/FuroHorizontalFlex.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-resizer.js",
+      "path": "dist/impl/FuroLayoutIndent.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "### Description\n`furo-layout-indent` is a layout component for adding the responsive spacing.\n\nBy default, the indentation are set for block and inline.\n\n#### ES6 Module Import\n\n`import \"@furo/webcomponents/dist/LayoutIndent.js\";`",
+          "name": "FuroLayoutIndent",
+          "slots": [
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "Place your components here",
+              "name": "default"
+            },
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "Place your components here",
+              "name": ""
+            }
+          ],
+          "members": [
+            {
+              "kind": "field",
+              "name": "backgroundDesign",
+              "type": {
+                "text": "BackgroundDesign",
+                "references": [
+                  {
+                    "name": "BackgroundDesign",
+                    "package": "../types",
+                    "module": "BackgroundDesign"
+                  }
+                ]
+              },
+              "description": "Chose a background design.",
+              "privacy": "public",
+              "attribute": "background-design",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on block (top/bottom) only.",
+              "attribute": "block",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "blockEnd",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on block-end  only.",
+              "attribute": "block-end",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "blockStart",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on block-start  only.",
+              "attribute": "block-start",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "flex",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Set flex behaviour if used inside a `furo-vertical-flex` / `furo-horizontal-flex`",
+              "attribute": "flex",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on inline (left/right) only.",
+              "attribute": "inline",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inlineEnd",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on inline-start only.",
+              "attribute": "inline-end",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "inlineStart",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds indentation on inline-start only.",
+              "attribute": "inline-start",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "scrolls",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "public",
+              "default": "false",
+              "description": "Adds scrolling behaviour if used inside a `furo-vertical-flex`",
+              "attribute": "scroll",
+              "reflects": true
+            }
+          ],
+          "attributes": [
+            {
+              "name": "background-design",
+              "type": {
+                "text": "BackgroundDesign",
+                "references": [
+                  {
+                    "name": "BackgroundDesign",
+                    "package": "../types",
+                    "module": "BackgroundDesign"
+                  }
+                ]
+              },
+              "description": "Chose a background design.",
+              "fieldName": "backgroundDesign"
+            },
+            {
+              "name": "block",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on block (top/bottom) only.",
+              "fieldName": "block"
+            },
+            {
+              "name": "block-end",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on block-end  only.",
+              "fieldName": "blockEnd"
+            },
+            {
+              "name": "block-start",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on block-start  only.",
+              "fieldName": "blockStart"
+            },
+            {
+              "name": "flex",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Set flex behaviour if used inside a `furo-vertical-flex` / `furo-horizontal-flex`",
+              "fieldName": "flex"
+            },
+            {
+              "name": "inline",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on inline (left/right) only.",
+              "fieldName": "inline"
+            },
+            {
+              "name": "inline-end",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on inline-start only.",
+              "fieldName": "inlineEnd"
+            },
+            {
+              "name": "inline-start",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds indentation on inline-start only.",
+              "fieldName": "inlineStart"
+            },
+            {
+              "name": "scroll",
+              "type": {
+                "text": "boolean"
+              },
+              "default": "false",
+              "description": "Adds scrolling behaviour if used inside a `furo-vertical-flex`",
+              "fieldName": "scrolls"
+            }
+          ],
+          "tagName": "furo-layout-indent",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FuroLayoutIndent",
+          "declaration": {
+            "name": "FuroLayoutIndent",
+            "module": "src/impl/FuroLayoutIndent.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/impl/FuroResizer.js",
       "declarations": [
         {
           "kind": "class",
@@ -614,140 +799,159 @@
             },
             {
               "kind": "field",
-              "name": "_unregister",
-              "description": "remove the listeners",
-              "privacy": "private"
+              "name": "_handleLRM",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "1"
             },
             {
               "kind": "field",
               "name": "_movementHandler",
+              "privacy": "private",
               "description": "capture the mouse movement and resize the width",
               "parameters": [
                 {
                   "description": "MouseEvent",
                   "name": "e"
                 }
-              ],
-              "privacy": "private"
+              ]
             },
             {
               "kind": "field",
-              "name": "_startTrackingLeft",
-              "description": "register the left handler",
-              "parameters": [
-                {
-                  "name": "e"
-                }
-              ],
-              "privacy": "private"
-            },
-            {
-              "kind": "field",
-              "name": "_startTrackingRight",
-              "description": "register the right handler",
-              "parameters": [
-                {
-                  "name": "e"
-                }
-              ],
-              "privacy": "private"
+              "name": "_positions",
+              "type": {
+                "text": "{x: number }"
+              },
+              "privacy": "private",
+              "default": "{x:0}"
             },
             {
               "kind": "field",
               "name": "_startTracking",
+              "privacy": "private",
               "description": "Start mouse move tracking",
               "parameters": [
                 {
                   "name": "e"
                 }
+              ]
+            },
+            {
+              "kind": "method",
+              "name": "_startTrackingLeft",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
               ],
+              "description": "register the left handler"
+            },
+            {
+              "kind": "method",
+              "name": "_startTrackingRight",
+              "privacy": "private",
+              "parameters": [
+                {
+                  "name": "e",
+                  "type": {
+                    "text": "MouseEvent"
+                  }
+                }
+              ],
+              "description": "register the right handler"
+            },
+            {
+              "kind": "field",
+              "name": "_startwidth",
+              "type": {
+                "text": "number"
+              },
+              "privacy": "private",
+              "default": "0"
+            },
+            {
+              "kind": "field",
+              "name": "_unregister",
+              "privacy": "private",
+              "description": "remove the listeners"
+            },
+            {
+              "kind": "field",
+              "name": "initialWidthSetByStyle",
+              "type": {
+                "text": "string |undefined"
+              },
               "privacy": "private"
             },
             {
               "kind": "field",
-              "name": "resetSize",
-              "description": "removes remember and set to the initial size"
-            },
-            {
-              "kind": "field",
-              "name": "lefthandle",
-              "privacy": "public",
+              "name": "leftHandle",
               "type": {
-                "text": "Boolean"
+                "text": "HTMLDivElement | undefined"
               },
-              "description": "add a handle to the left side",
-              "attribute": "lefthandle"
-            },
-            {
-              "kind": "field",
-              "name": "righthandle",
-              "privacy": "public",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "add a handle to the right side",
-              "attribute": "righthandle"
-            },
-            {
-              "kind": "field",
-              "name": "remember",
-              "privacy": "public",
-              "type": {
-                "text": "String"
-              },
-              "description": "remember the size after resizing.\nGive the id for the rememberer, you can use the id on different views",
-              "attribute": "remember"
+              "privacy": "private"
             },
             {
               "kind": "field",
               "name": "maxwidth",
-              "privacy": "public",
               "type": {
-                "text": "Number"
+                "text": "number| undefined"
               },
+              "privacy": "public",
               "description": "Set the maximal width of the resizer",
               "attribute": "maxwidth"
             },
             {
               "kind": "field",
               "name": "minwidth",
-              "privacy": "public",
               "type": {
-                "text": "Number"
+                "text": "number| undefined"
               },
               "description": "Set the minimal width of the resizer",
               "attribute": "minwidth"
+            },
+            {
+              "kind": "field",
+              "name": "remember",
+              "type": {
+                "text": "string | undefined"
+              },
+              "privacy": "public",
+              "description": "remember the size after resizing.\nGive the id for the rememberer, you can use the id on different views",
+              "attribute": "remember"
+            },
+            {
+              "kind": "method",
+              "name": "resetSize",
+              "description": "removes remember and set to the initial size"
+            },
+            {
+              "kind": "field",
+              "name": "rightHandle",
+              "type": {
+                "text": "HTMLDivElement | undefined"
+              },
+              "privacy": "private"
             }
           ],
           "attributes": [
             {
-              "name": "lefthandle",
               "type": {
-                "text": "Boolean"
+                "text": "void"
               },
-              "description": "add a handle to the left side",
-              "fieldName": "lefthandle"
-            },
-            {
-              "name": "righthandle",
-              "type": {
-                "text": "Boolean"
-              },
-              "description": "add a handle to the right side",
-              "fieldName": "righthandle"
-            },
-            {
-              "name": "remember",
-              "type": {
-                "text": "String"
-              },
-              "description": "remember the size after resizing.\nGive the id for the rememberer, you can use the id on different views",
-              "fieldName": "remember"
+              "description": "add a handle to the left side.",
+              "name": "lefthandle"
             },
             {
               "name": "maxwidth",
               "type": {
-                "text": "Number"
+                "text": "number| undefined"
               },
               "description": "Set the maximal width of the resizer",
               "fieldName": "maxwidth"
@@ -755,25 +959,36 @@
             {
               "name": "minwidth",
               "type": {
-                "text": "Number"
+                "text": "number| undefined"
               },
               "description": "Set the minimal width of the resizer",
               "fieldName": "minwidth"
+            },
+            {
+              "name": "remember",
+              "type": {
+                "text": "string | undefined"
+              },
+              "description": "remember the size after resizing.\nGive the id for the rememberer, you can use the id on different views",
+              "fieldName": "remember"
+            },
+            {
+              "type": {
+                "text": "void"
+              },
+              "description": "add a handle to the right side.",
+              "name": "righthandle"
             }
           ],
           "mixins": [
             {
-              "name": "FBP",
-              "package": "@furo/fbp"
+              "name": "LitFBP",
+              "package": "@furo/fbp/dist/LitFBP"
             }
           ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "resizable box",
           "tagName": "furo-resizer",
-          "customElement": true
+          "customElement": true,
+          "summary": "resizable box"
         }
       ],
       "exports": [
@@ -782,22 +997,201 @@
           "name": "FuroResizer",
           "declaration": {
             "name": "FuroResizer",
-            "module": "src/furo-resizer.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-resizer",
-          "declaration": {
-            "name": "FuroResizer",
-            "module": "src/furo-resizer.js"
+            "module": "src/impl/FuroResizer.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-split-view.js",
+      "path": "dist/impl/FuroResponsiveLayout.js",
+      "declarations": [
+        {
+          "kind": "class",
+          "description": "\n### Overview\n\nUse the furo-responsive-layout to structure your forms or other content.\n\nThe heights are given by the highest `cell` in a `row`.\n\n> **Deprecation Warning:** The short form attributes (`tripple` instead of `layout-tripple`) will be removed in near future **(end of Q3/24)**\n\nIt is based on a grid system with the following properties:\n\n#### Layout one\n\n```html\n<furo-responsive-layout layout=\"one\">\n  <div>Item</div>\n  <div>Item</div>\n  <div layout-double>layout-double</div>\n  <div>Item</div>\n  <div>Item</div>\n</furo-responsive-layout>\n```\n<img src=\"assets/layout-one.png\">\n\n#### Layout two\nIf the container size is smaller than `breakpoint-big` the layout will collapse in a layout one.\n\n<img src=\"assets/layout-two.png\">\n\n#### Layout three\nIf the container size is smaller than `breakpoint-big` the layout will collapse in a layout one.\n\n<img src=\"assets/layout-three.png\">\n\n\n#### Layout four\nIf the container size is smaller than `breakpoint-big` the layout will collapse in a layout two.\nIf the container size is smaller than `breakpoint-small` the layout will collapse in a layout one.\n\n<img src=\"assets/layout-four.png\">\n\n\n#### Layout six\nIf the container size is smaller than `breakpoint-big` the layout will collapse in a layout three.\nIf the container size is smaller than `breakpoint-small` the layout will collapse in a layout one.\n\n<img src=\"assets/layout-six.png\">\n\nThe ResponsiveLayout component is nestable, this means that you can put 2 six column ResponsiveLayouters in a two column ResponsiveLayout component.\n\n### How to set the sizes\nSet the following  **attributes**  to set the space your item should take.\n\n- **layout-double**   Uses 2 columns.\n\n- **layout-tripple**   Uses 3 columns.\n\n- **layout-full**  Uses the full width.\n\n- **layout-newline**   Starts always on a new line.\n\n- **layout-end**   Sticks to the end.\n\n\n> This layouter is a clone of the furo-form-layouter component with a slightly different API.\n\n### ES6 Module Import\n\n`import \"@furo/layout/dist/furo-responsive-layout.js\";`",
+          "name": "FuroResponsiveLayout",
+          "cssProperties": [
+            {
+              "type": {
+                "text": "1rem"
+              },
+              "description": "width of row gap",
+              "name": "--GridRowGapSize"
+            },
+            {
+              "type": {
+                "text": "1rem"
+              },
+              "description": "width of column gap",
+              "name": "--GridColumnGapSize"
+            }
+          ],
+          "slots": [
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "slot to add content.",
+              "name": "default"
+            }
+          ],
+          "members": [
+            {
+              "kind": "method",
+              "name": "_checkSize",
+              "parameters": [
+                {
+                  "name": "width",
+                  "type": {
+                    "text": "number"
+                  }
+                }
+              ],
+              "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "_fireResize",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "_resizeListener",
+              "privacy": "private"
+            },
+            {
+              "kind": "field",
+              "name": "breakpointBig",
+              "type": {
+                "text": "number"
+              },
+              "default": "810",
+              "description": "Defines the size for when to switch from six to three and four to two column layout.",
+              "privacy": "public",
+              "attribute": "breakpoint-big",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "breakpointSix",
+              "type": {
+                "text": "number"
+              },
+              "default": "1250",
+              "description": "Defines the size for when to switch from six to four.",
+              "privacy": "public",
+              "attribute": "breakpoint-six",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "breakpointSixSmall",
+              "type": {
+                "text": "number"
+              },
+              "default": "650"
+            },
+            {
+              "kind": "field",
+              "name": "breakpointSmall",
+              "type": {
+                "text": "number"
+              },
+              "default": "405",
+              "description": "Defines the size for when to switch from three to one or two to one.",
+              "privacy": "public",
+              "attribute": "breakpoint-small",
+              "reflects": true
+            },
+            {
+              "kind": "field",
+              "name": "layout",
+              "type": {
+                "text": "ResponsiveLayoutSize",
+                "references": [
+                  {
+                    "name": "ResponsiveLayoutSize",
+                    "package": "@furo/layout",
+                    "module": "dist/types/ResponsiveLayoutSize.js"
+                  }
+                ]
+              },
+              "description": "Defines the layout of the component.\nSupported values are: one, two, three, four and six.",
+              "privacy": "public",
+              "attribute": "layout",
+              "reflects": true
+            }
+          ],
+          "events": [
+            {
+              "name": "layout-changed",
+              "type": {
+                "text": "CustomEvent"
+              }
+            }
+          ],
+          "attributes": [
+            {
+              "name": "breakpoint-big",
+              "type": {
+                "text": "number"
+              },
+              "default": "810",
+              "description": "Defines the size for when to switch from six to three and four to two column layout.",
+              "fieldName": "breakpointBig"
+            },
+            {
+              "name": "breakpoint-six",
+              "type": {
+                "text": "number"
+              },
+              "default": "1250",
+              "description": "Defines the size for when to switch from six to four.",
+              "fieldName": "breakpointSix"
+            },
+            {
+              "name": "breakpoint-small",
+              "type": {
+                "text": "number"
+              },
+              "default": "405",
+              "description": "Defines the size for when to switch from three to one or two to one.",
+              "fieldName": "breakpointSmall"
+            },
+            {
+              "name": "layout",
+              "type": {
+                "text": "ResponsiveLayoutSize",
+                "references": [
+                  {
+                    "name": "ResponsiveLayoutSize",
+                    "package": "@furo/layout",
+                    "module": "dist/types/ResponsiveLayoutSize.js"
+                  }
+                ]
+              },
+              "description": "Defines the layout of the component.\nSupported values are: one, two, three, four and six.",
+              "fieldName": "layout"
+            }
+          ],
+          "tagName": "furo-responsive-layout",
+          "customElement": true
+        }
+      ],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "FuroResponsiveLayout",
+          "declaration": {
+            "name": "FuroResponsiveLayout",
+            "module": "src/impl/FuroResponsiveLayout.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/impl/FuroSplitView.js",
       "declarations": [
         {
           "kind": "class",
@@ -833,11 +1227,10 @@
             {
               "kind": "field",
               "name": "reverse",
-              "privacy": "public",
               "type": {
-                "text": "Boolean"
+                "text": "boolean"
               },
-              "description": "flip the left and right side",
+              "default": "false",
               "attribute": "reverse"
             }
           ],
@@ -845,69 +1238,83 @@
             {
               "name": "reverse",
               "type": {
-                "text": "Boolean"
+                "text": "boolean"
               },
-              "description": "flip the left and right side",
+              "default": "false",
               "fieldName": "reverse"
             }
           ],
           "mixins": [
             {
-              "name": "FBP",
-              "package": "@furo/fbp"
+              "name": "LitFBP",
+              "package": "@furo/fbp/dist/LitFBP"
             }
           ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "splitted layout",
           "tagName": "furo-split-view",
-          "customElement": true
+          "customElement": true,
+          "summary": "splitted layout"
         }
       ],
       "exports": [
-        {
-          "kind": "js",
-          "name": "FuroSplitView",
-          "declaration": {
-            "name": "FuroSplitView",
-            "module": "src/furo-split-view.js"
-          }
-        },
         {
           "kind": "custom-element-definition",
           "name": "furo-split-view",
           "declaration": {
             "name": "FuroSplitView",
-            "module": "src/furo-split-view.js"
+            "module": "src/impl/FuroSplitView.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FuroSplitView",
+          "declaration": {
+            "name": "FuroSplitView",
+            "module": "src/impl/FuroSplitView.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-vertical-flex.js",
+      "path": "dist/impl/FuroVerticalFlex.js",
       "declarations": [
         {
           "kind": "class",
-          "description": "`furo-vertical-flex`\n\nWith this component, any elements can be aligned vertically. Similar to css flex.\nThe attribute \"flex\" must be set for growing elements.\nThe component takes up 100% of the space\n\n\n```html\n<furo-vertical-flex>\n  <div>small</div>\n  <div flex>full width</div>\n  <div>small</div>\n</furo-vertical-flex>\n```\n\n Tags: layout",
+          "description": "\n### Overview\n\nUse this to arrange your content vertically.\n\n### Usage\n\nThe Elements you place inside the default slot can have the following attributes:\n\n - <b>flex</b>: Makes the element use the \"rest\" of the space (flex: 1).\n - <b>scroll</b>: Makes the element scrollable.\n - <b>padding-inline</b>: Applies inline padding.\n\n\n### Component Import\n`import \"@furo/layout/dist/VerticalFlex.js\";`",
           "name": "FuroVerticalFlex",
           "slots": [
             {
               "type": {
-                "text": "HTMLElement [0..n]"
+                "text": "HTMLElement[]"
               },
-              "description": "default slot to add content.",
+              "description": "slot to add content.",
+              "name": "default"
+            },
+            {
+              "type": {
+                "text": "HTMLElement[]"
+              },
+              "description": "slot to add content.",
               "name": ""
             }
           ],
           "members": [],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "vertical alignment",
+          "events": [
+            {
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired when the scroll area scrolls down",
+              "name": "scroll-down"
+            },
+            {
+              "type": {
+                "text": "CustomEvent"
+              },
+              "description": "Fired when the scroll area scrolls up",
+              "name": "scroll-up"
+            }
+          ],
           "tagName": "furo-vertical-flex",
           "customElement": true
         }
@@ -918,22 +1325,14 @@
           "name": "FuroVerticalFlex",
           "declaration": {
             "name": "FuroVerticalFlex",
-            "module": "src/furo-vertical-flex.js"
-          }
-        },
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-vertical-flex",
-          "declaration": {
-            "name": "FuroVerticalFlex",
-            "module": "src/furo-vertical-flex.js"
+            "module": "src/impl/FuroVerticalFlex.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "src/furo-vertical-scroller.js",
+      "path": "dist/impl/FuroVerticalScroller.js",
       "declarations": [
         {
           "kind": "class",
@@ -969,34 +1368,213 @@
           "members": [],
           "mixins": [
             {
-              "name": "FBP",
-              "package": "@furo/fbp"
+              "name": "LitFBP",
+              "package": "@furo/fbp/dist/LitFBP"
             }
           ],
-          "superclass": {
-            "name": "LitElement",
-            "package": "lit"
-          },
-          "summary": "vertical scroll",
           "tagName": "furo-vertical-scroller",
-          "customElement": true
+          "customElement": true,
+          "summary": "vertical scroll"
         }
       ],
       "exports": [
-        {
-          "kind": "js",
-          "name": "FuroVerticalScroller",
-          "declaration": {
-            "name": "FuroVerticalScroller",
-            "module": "src/furo-vertical-scroller.js"
-          }
-        },
         {
           "kind": "custom-element-definition",
           "name": "furo-vertical-scroller",
           "declaration": {
             "name": "FuroVerticalScroller",
-            "module": "src/furo-vertical-scroller.js"
+            "module": "src/impl/FuroVerticalScroller.ts"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FuroVerticalScroller",
+          "declaration": {
+            "name": "FuroVerticalScroller",
+            "module": "src/impl/FuroVerticalScroller.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroBackdrop"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroBackdropDisplay"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroEmptySpacer"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroHorizontalFlex"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroLayoutIndent"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroResizer"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroResponsiveLayout"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroSplitView"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroVerticalFlex"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "*",
+          "declaration": {
+            "name": "*",
+            "module": "src/impl/FuroVerticalScroller"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroBackdrop.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroBackdropDisplay.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroEmptySpacer.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroHorizontalFlex.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroLayoutIndent.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroResizer.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroResponsiveLayout.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroSplitView.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroVerticalFlex.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/FuroVerticalScroller.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/JSX/index.js",
+      "declarations": [],
+      "exports": []
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/types/BackgroundDesign.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "BackgroundDesign",
+          "declaration": {
+            "name": "BackgroundDesign",
+            "module": "src/types/BackgroundDesign.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/types/ResponsiveLayoutSize.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "js",
+          "name": "ResponsiveLayoutSize",
+          "declaration": {
+            "name": "ResponsiveLayoutSize",
+            "module": "src/types/ResponsiveLayoutSize.ts"
           }
         }
       ]

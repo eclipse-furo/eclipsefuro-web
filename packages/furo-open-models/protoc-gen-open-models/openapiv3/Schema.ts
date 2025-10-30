@@ -13,62 +13,62 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   AdditionalPropertiesItem as OpenapiV3AdditionalPropertiesItem,
-  IAdditionalPropertiesItem as IOpenapiV3AdditionalPropertiesItem,
-  TAdditionalPropertiesItem as TOpenapiV3AdditionalPropertiesItem,
+  type IAdditionalPropertiesItem as IOpenapiV3AdditionalPropertiesItem,
+  type TAdditionalPropertiesItem as TOpenapiV3AdditionalPropertiesItem,
 } from './AdditionalPropertiesItem';
 
 import {
-  IXAny as IOpenapiV3Any,
-  TXAny as TOpenapiV3Any,
   XAny as OpenapiV3Any,
+  type IXAny as IOpenapiV3Any,
+  type TXAny as TOpenapiV3Any,
 } from './Any';
 
 import {
   DefaultType as OpenapiV3DefaultType,
-  IDefaultType as IOpenapiV3DefaultType,
-  TDefaultType as TOpenapiV3DefaultType,
+  type IDefaultType as IOpenapiV3DefaultType,
+  type TDefaultType as TOpenapiV3DefaultType,
 } from './DefaultType';
 
 import {
   Discriminator as OpenapiV3Discriminator,
-  IDiscriminator as IOpenapiV3Discriminator,
-  TDiscriminator as TOpenapiV3Discriminator,
+  type IDiscriminator as IOpenapiV3Discriminator,
+  type TDiscriminator as TOpenapiV3Discriminator,
 } from './Discriminator';
 
 import {
   ExternalDocs as OpenapiV3ExternalDocs,
-  IExternalDocs as IOpenapiV3ExternalDocs,
-  TExternalDocs as TOpenapiV3ExternalDocs,
+  type IExternalDocs as IOpenapiV3ExternalDocs,
+  type TExternalDocs as TOpenapiV3ExternalDocs,
 } from './ExternalDocs';
 
 import {
-  IItemsItem as IOpenapiV3ItemsItem,
   ItemsItem as OpenapiV3ItemsItem,
-  TItemsItem as TOpenapiV3ItemsItem,
+  type IItemsItem as IOpenapiV3ItemsItem,
+  type TItemsItem as TOpenapiV3ItemsItem,
 } from './ItemsItem';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IProperties as IOpenapiV3Properties,
   Properties as OpenapiV3Properties,
-  TProperties as TOpenapiV3Properties,
+  type IProperties as IOpenapiV3Properties,
+  type TProperties as TOpenapiV3Properties,
 } from './Properties';
 
 import {
-  ISchemaOrReference as IOpenapiV3SchemaOrReference,
   SchemaOrReference as OpenapiV3SchemaOrReference,
-  TSchemaOrReference as TOpenapiV3SchemaOrReference,
+  type ISchemaOrReference as IOpenapiV3SchemaOrReference,
+  type TSchemaOrReference as TOpenapiV3SchemaOrReference,
 } from './SchemaOrReference';
 
 import {
-  IXml as IOpenapiV3Xml,
-  TXml as TOpenapiV3Xml,
   Xml as OpenapiV3Xml,
+  type IXml as IOpenapiV3Xml,
+  type TXml as TOpenapiV3Xml,
 } from './Xml';
 
 /**

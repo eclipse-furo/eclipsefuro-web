@@ -9,50 +9,50 @@ import {
 } from '@furo/open-models/dist/index';
 import {
   Components as OpenapiV3Components,
-  IComponents as IOpenapiV3Components,
-  TComponents as TOpenapiV3Components,
+  type IComponents as IOpenapiV3Components,
+  type TComponents as TOpenapiV3Components,
 } from './Components';
 
 import {
   ExternalDocs as OpenapiV3ExternalDocs,
-  IExternalDocs as IOpenapiV3ExternalDocs,
-  TExternalDocs as TOpenapiV3ExternalDocs,
+  type IExternalDocs as IOpenapiV3ExternalDocs,
+  type TExternalDocs as TOpenapiV3ExternalDocs,
 } from './ExternalDocs';
 
 import {
-  IInfo as IOpenapiV3Info,
   Info as OpenapiV3Info,
-  TInfo as TOpenapiV3Info,
+  type IInfo as IOpenapiV3Info,
+  type TInfo as TOpenapiV3Info,
 } from './Info';
 
 import {
-  INamedAny as IOpenapiV3NamedAny,
   NamedAny as OpenapiV3NamedAny,
-  TNamedAny as TOpenapiV3NamedAny,
+  type INamedAny as IOpenapiV3NamedAny,
+  type TNamedAny as TOpenapiV3NamedAny,
 } from './NamedAny';
 
 import {
-  IPaths as IOpenapiV3Paths,
   Paths as OpenapiV3Paths,
-  TPaths as TOpenapiV3Paths,
+  type IPaths as IOpenapiV3Paths,
+  type TPaths as TOpenapiV3Paths,
 } from './Paths';
 
 import {
-  ISecurityRequirement as IOpenapiV3SecurityRequirement,
   SecurityRequirement as OpenapiV3SecurityRequirement,
-  TSecurityRequirement as TOpenapiV3SecurityRequirement,
+  type ISecurityRequirement as IOpenapiV3SecurityRequirement,
+  type TSecurityRequirement as TOpenapiV3SecurityRequirement,
 } from './SecurityRequirement';
 
 import {
-  IServer as IOpenapiV3Server,
   Server as OpenapiV3Server,
-  TServer as TOpenapiV3Server,
+  type IServer as IOpenapiV3Server,
+  type TServer as TOpenapiV3Server,
 } from './Server';
 
 import {
-  ITag as IOpenapiV3Tag,
-  TTag as TOpenapiV3Tag,
   Tag as OpenapiV3Tag,
+  type ITag as IOpenapiV3Tag,
+  type TTag as TOpenapiV3Tag,
 } from './Tag';
 
 /**

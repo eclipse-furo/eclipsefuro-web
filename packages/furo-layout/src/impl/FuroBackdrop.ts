@@ -1,6 +1,8 @@
-import { LitElement, css } from 'lit';
+import { LitFBP } from '@furo/fbp/dist/LitFBP';
+import { css,LitElement } from 'lit';
 
-import { FBP } from '@furo/fbp';
+// eslint-disable-next-line no-use-before-define
+export type BackdropEvent = { handle: FuroBackdrop }
 
 /**
  * `furo-backdrop`
@@ -40,16 +42,17 @@ import { FBP } from '@furo/fbp';
  * @customElement
  * @appliesMixin FBP
  */
-export class FuroBackdrop extends FBP(LitElement) {
+export class FuroBackdrop extends LitFBP(LitElement) {
+
+  displayHandle:HTMLDivElement | undefined
 
   /**
    *
    * @private
    */
-  _FBPReady() {
+  override _FBPReady() {
     // move the content to the backdrop display
-    const customEvent = new Event('register-backdrop', { composed: true, bubbles: true });
-    customEvent.detail = { handle: this }; // handle is neeeded for returning the content back
+    const customEvent = new CustomEvent<BackdropEvent>('register-backdrop', { composed: true, bubbles: true, detail: { handle: this } });
     this.dispatchEvent(customEvent);
 
     super._FBPReady();
@@ -59,8 +62,7 @@ export class FuroBackdrop extends FBP(LitElement) {
    * Initiates the backdrop and shows the content on top of the backdrop area.
    */
   show() {
-    const customEvent = new Event('show-backdrop-requested', { composed: true, bubbles: true });
-    customEvent.detail = { handle: this }; // handle is neeeded for returning the content back
+    const customEvent = new CustomEvent<BackdropEvent>('show-backdrop-requested', { composed: true, bubbles: true, detail: { handle: this }  });
     this.dispatchEvent(customEvent);
   }
 
@@ -70,8 +72,7 @@ export class FuroBackdrop extends FBP(LitElement) {
    * **Note:** The display will also get closed when the user clicks on the backdrop.
    */
   close() {
-    const customEvent = new Event('close-backdrop-requested', { composed: true, bubbles: true });
-    customEvent.detail = { handle: this }; // handle is neeeded for returning the content back
+    const customEvent = new CustomEvent<BackdropEvent>('close-backdrop-requested', { composed: true, bubbles: true, detail: { handle: this }  });
     this.dispatchEvent(customEvent);
   }
 
@@ -80,7 +81,7 @@ export class FuroBackdrop extends FBP(LitElement) {
    * @private
    * @return {CSSResult}
    */
-  static get styles() {
+  static override get styles() {
     // language=CSS
     return (
 
@@ -93,4 +94,3 @@ export class FuroBackdrop extends FBP(LitElement) {
   }
 }
 
-window.customElements.define('furo-backdrop', FuroBackdrop);
