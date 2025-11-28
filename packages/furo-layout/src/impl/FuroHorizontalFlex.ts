@@ -17,8 +17,6 @@ import { property } from "lit/decorators.js";
  *
  * `import "@furo/layout/dist/HorizontalFlex.js";`
  *
- * @slot {HTMLElement[]} default - slot to add content.
- * @slot {HTMLElement[]}  - slot to add content.
  * @slot {HTMLElement[]}  - slot to add content.
  *
  * @cssprop {N/A} [--furo-horizontal-flex-space=0.5rem] - default spacing. If not set --MediaSizeIndentationBottom is used.
@@ -156,8 +154,3 @@ export class FuroHorizontalFlex extends LitElement {
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "furo-horizontal-flex": FuroHorizontalFlex;
-  }
-}

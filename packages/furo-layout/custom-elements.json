@@ -388,20 +388,6 @@
                 "text": "HTMLElement[]"
               },
               "description": "slot to add content.",
-              "name": "default"
-            },
-            {
-              "type": {
-                "text": "HTMLElement[]"
-              },
-              "description": "slot to add content.",
-              "name": ""
-            },
-            {
-              "type": {
-                "text": "HTMLElement[]"
-              },
-              "description": "slot to add content.",
               "name": ""
             }
           ],
@@ -538,13 +524,6 @@
           "description": "### Description\n`furo-layout-indent` is a layout component for adding the responsive spacing.\n\nBy default, the indentation are set for block and inline.\n\n#### ES6 Module Import\n\n`import \"@furo/webcomponents/dist/LayoutIndent.js\";`",
           "name": "FuroLayoutIndent",
           "slots": [
-            {
-              "type": {
-                "text": "HTMLElement[]"
-              },
-              "description": "Place your components here",
-              "name": "default"
-            },
             {
               "type": {
                 "text": "HTMLElement[]"
@@ -1032,7 +1011,7 @@
                 "text": "HTMLElement[]"
               },
               "description": "slot to add content.",
-              "name": "default"
+              "name": ""
             }
           ],
           "members": [
@@ -1288,13 +1267,6 @@
                 "text": "HTMLElement[]"
               },
               "description": "slot to add content.",
-              "name": "default"
-            },
-            {
-              "type": {
-                "text": "HTMLElement[]"
-              },
-              "description": "slot to add content.",
               "name": ""
             }
           ],
@@ -1482,72 +1454,6 @@
           }
         }
       ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroBackdrop.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroBackdropDisplay.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroEmptySpacer.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroHorizontalFlex.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroLayoutIndent.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroResizer.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroResponsiveLayout.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroSplitView.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroVerticalFlex.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/FuroVerticalScroller.js",
-      "declarations": [],
-      "exports": []
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/JSX/index.js",
-      "declarations": [],
-      "exports": []
     },
     {
       "kind": "javascript-module",

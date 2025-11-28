@@ -1,7 +1,7 @@
 import {
   deepJsonNameToProtoName,
-  deepProtoNameToJsonName,
-  protoNameToJsonName,
+  deepProtoNameToJsonName, jsonNameToProtoName,
+  protoNameToJsonName
 } from './Mapper';
 
 export interface IApiOptions {
@@ -551,7 +551,6 @@ export class Fetcher<REQ, RES> {
     // replace url templates with values
     // /v1/cube/{id} => /v1/cube/12
     fields.forEach(field => {
-      // TODO: check if qp is always set as proto name
       const rqoKey = protoNameToJsonName(field[1]) as keyof REQ;
       const rqoValue = rqo[rqoKey];
       evaluatedPath = evaluatedPath.replace(field[0], `${rqoValue}`);
@@ -574,10 +573,11 @@ export class Fetcher<REQ, RES> {
       keysForBodyOrQueryParams.forEach(key => {
         if (Array.isArray(rqo[key])) {
           (rqo[key] as unknown[]).forEach(e => {
-            params.push(`${key as string}=${e}`);
+            params.push(`${this.API_OPTIONS.PreserveProtoNames? jsonNameToProtoName(key as string):(key as string)}=${e}`);
           });
         } else {
-          params.push(`${key as string}=${rqo[key]}`);
+
+          params.push(`${this.API_OPTIONS.PreserveProtoNames? jsonNameToProtoName(key as string):(key as string)}=${rqo[key]}`);
         }
       });
       if (params.length) {

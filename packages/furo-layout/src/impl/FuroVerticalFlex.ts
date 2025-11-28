@@ -19,7 +19,6 @@ import { css, html, LitElement } from "lit";
  * `import "@furo/layout/dist/VerticalFlex.js";`
  *
  *
- * @slot {HTMLElement[]} default - slot to add content.
  * @slot {HTMLElement[]}  - slot to add content.
  *
  * @event {CustomEvent} scroll-down - Fired when the scroll area scrolls down
@@ -110,8 +109,3 @@ export class FuroVerticalFlex extends LitElement {
   }
 }
 
-declare global {
-  interface HTMLElementTagNameMap {
-    "furo-vertical-flex": FuroVerticalFlex;
-  }
-}

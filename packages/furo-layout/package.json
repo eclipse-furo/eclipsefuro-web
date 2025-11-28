@@ -1,7 +1,7 @@
 {
   "name": "@furo/layout",
   "description": "Layout components for furo",
-  "version": "2.3.2",
+  "version": "3.0.0-RC.5",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-layout",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": {
@@ -17,15 +17,6 @@
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
-  "exports": {
-    "./src/*": "./src/*",
-    "./dist/*": "./dist/*",
-    "./package.json": "./package.json",
-    "./custom-elements.json": "./custom-elements.json",
-    "./web-types.json": "./web-types.json",
-    "./jsx/*": "./dist/intrinsicElements/*",
-    "./*": "./dist/*"
-  },
   "files": [
     "./dist",
     "icon.svg",
@@ -39,7 +30,7 @@
     "test:debug": "vitest run --inspect-brk --no-file-parallelism --isolate false",
     "test:watch": "vitest watch",
     "test:ui": "vitest --ui",
-    "build": "rimraf dist && npm run analyze && npm run analyze:internal && npm run analyze:deep && npm run gen:intrinsic && tsc && tsc-alias",
+    "build": "rimraf dist  &&rimraf src/JSX/*  && npm run analyze && npm run analyze:internal && npm run analyze:deep &&   tsc && tsc-alias",
     "gen:intrinsic": "node ../../scripts/IntrinsicElements/main.js @furo/layout && eslint --version && eslint --fix --ext .ts src/JSX && prettier src/JSX/*.ts --write",
     "lint": "eslint --ext .ts,.html ./src --ignore-path .gitignore",
     "lint:fix": "eslint --ext .ts,.html ./src --fix --ignore-path .gitignore",
