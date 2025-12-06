@@ -1,0 +1,70 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ES2022",
+    "moduleResolution": "Bundler",
+    "noEmitOnError": true,
+    "strict": true,
+    "esModuleInterop": false,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "outDir": "dist",
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "inlineSources": true,
+    "resolveJsonModule": true,
+    "declaration": true,
+    "jsx": "react-jsx",
+    "lib": [
+      "es2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "useDefineForClassFields": false,
+    "plugins": [
+      {
+        "name": "@jackolope/ts-lit-plugin",
+        "strict": true,
+        "rules": {
+          "no-incompatible-type-binding": "error",
+          "no-incompatible-property-type": "error",
+          "no-unknown-event": "off",
+          "no-unknown-attribute": "off",
+          "no-unknown-property": "off",
+          "no-complex-attribute-binding": "error"
+        }
+      }
+    ],
+    "allowArbitraryExtensions": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "resolvePackageJsonExports": true,
+    "resolvePackageJsonImports": true,
+    "rootDir": "./src/",
+    "stripInternal": true,
+    "types": [
+      "mocha"
+    ],
+    "verbatimModuleSyntax": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "global.d.ts"
+  ],
+  "exclude": [
+    "src/stories/**/*.tsx",
+    "src/typerenderer/**/*.ts"
+  ]
+}

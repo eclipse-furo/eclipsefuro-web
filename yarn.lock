@@ -1191,6 +1191,14 @@
   dependencies:
     "@types/chai" "^4.2.12"
 
+"@furo/layout@^2.3.2":
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/@furo/layout/-/layout-2.3.2.tgz#29f355f806eb42237e4e852b3ce1eb8e75d6236a"
+  integrity sha512-AkjJvfljrn9QjRZc3zfkeZ1JK6MXDzCmgPNwPZvIpeDRTeCIO7yQ0oqAfp0shxDhkORL1U+zjvFGzCux9FgayA==
+  dependencies:
+    "@furo/fbp" "^6.15.0"
+    lit "^3.2.1"
+
 "@github/catalyst@^1.6.0":
   version "1.6.0"
   resolved "https://registry.npmjs.org/@github/catalyst/-/catalyst-1.6.0.tgz"
@@ -5880,6 +5888,11 @@ eslint-config-prettier@^9.1.0:
   version "9.1.0"
   resolved "https://registry.npmjs.org/eslint-config-prettier/-/eslint-config-prettier-9.1.0.tgz"
   integrity sha512-NSWl5BFQWEPi1j4TjVNItzYV7dZXZ+wP6I6ZhrBGpChQhZRUaElihE9uRRkcbRnNb76UMKDF3r+WTmNcGPKsqw==
+
+eslint-import-resolver-alias@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-alias/-/eslint-import-resolver-alias-1.1.2.tgz#297062890e31e4d6651eb5eba9534e1f6e68fc97"
+  integrity sha512-WdviM1Eu834zsfjHtcGHtGfcu+F30Od3V7I9Fi57uhBEwPkjDcii7/yW8jAT+gOhn4P/vOxxNAXbFAKsrrc15w==
 
 eslint-import-resolver-node@^0.3.9:
   version "0.3.9"

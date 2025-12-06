@@ -1,0 +1,53 @@
+{
+  "name": "@furo/channels",
+  "description": "A typed channel system to pass data across your application",
+  "version": "0.0.1",
+  "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-channels",
+  "repository": "git@github.com:eclipse/eclipsefuro-web.git",
+  "author": {
+    "name": "veith",
+    "email": "",
+    "url": "https://github.com/theNorstroem/"
+  },
+  "keywords": [
+    "channels",
+    "pub sub like"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "type": "module",
+  "files": [
+    "./dist",
+    "icon.svg",
+    "README.md"
+  ],
+  "scripts": {
+    "start": "vite dev",
+    "test": "vitest run --coverage",
+    "test:watch": "vitest watch",
+    "test:ui": "vitest --ui",
+    "build": "rimraf dist && tsc && tsc-alias",
+    "lint": "eslint --ext .ts,.html ./src ./dev-playground --ignore-path .gitignore",
+    "lint:fix": "eslint --ext .ts ./src ./dev-playground --fix --ignore-path .gitignore",
+    "lint:fix:tests": "eslint --ext .ts,.html ./test --fix --ignore-path .gitignore",
+    "format": "prettier './src/**/*.ts' --write --ignore-path .gitignore",
+    "format:tests": "prettier './test/**/*.ts' --write --ignore-path .gitignore"
+  },
+  "peerDependencies": {
+
+  },
+  "dependencies": {
+
+  },
+  "devDependencies": {
+
+
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=21.7.3",
+    "npm": ">=10.2.5"
+  }
+}

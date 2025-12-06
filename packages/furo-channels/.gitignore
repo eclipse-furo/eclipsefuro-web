@@ -1,0 +1,30 @@
+# Ignore editor specific directories
+.idea
+*.iml
+*.iws
+*.ipr
+*.tgz
+
+/.vscode
+/tmp
+
+# Ignore web-specific directories and files
+coverage
+dist
+node_modules/
+
+# tests
+/test/.specs/
+
+# Playwright
+/test-results/
+test-results.json
+/playwright-report/
+/playwright/.cache/
+/playwright-transform-cache-0
+
+/tmp/
+/out-tsc/
+
+*storybook.log
+storybook-static
