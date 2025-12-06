@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,  initial-scale=1.0">
+  <title>Title</title>
+  <link rel="icon" type="image/svg+xml" href="./icon.svg">
+
+  <script type="module">
+
+    // import components here
+    import "../src/furo-resizer.js";
+    import "../src/furo-horizontal-flex.js";
+    import "../src/furo-responsive-layout.js";
+
+  </script>
+
+  <style>
+    body {
+      background-color: var(--sapBackgroundColor);
+      padding: 1rem;
+    }
+    *:not(:defined) {
+      display: none;
+    }
+  </style>
+</head>
+<body class="sapUiSizeCompact">
+
+<main style='height:100vh;'>
+  <h1>Title</h1>
+  <furo-horizontal-flex style='height: 100%'>
+    <div flex> the flexible part </div>
+    <!-- you have to set at leas one handle to resize the content -->
+    <furo-resizer lefthandle   remember="logv" minwidth="280"  style='border: 1px solid;'>
+      <div><-- drag here
+      <furo-responsive-layout layout='six'>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+        <div>A</div>
+      </furo-responsive-layout>
+      </div>
+    </furo-resizer>
+
+  </furo-horizontal-flex>
+
+</main>
+
+</body>
+
+
+<script type="module">
+  import { DOMFBP } from "@furo/fbp/src/DOMFBP";
+  // append fbp to the body
+  const fbproot = new DOMFBP(document.body);
+  fbproot._FBPTraceWires();
+</script>
+</html>
