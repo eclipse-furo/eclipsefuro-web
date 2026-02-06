@@ -2,7 +2,7 @@
   "parserOptions": {
     "project": [
       "./tsconfig.json",
-      "./test/tsconfig.json",
+
       "./dev-playground/tsconfig.json"
     ],
     "ecmaVersion": 2020,
@@ -100,13 +100,14 @@
   "overrides": [
     {
       "files": [
-        "src/JSX/*",
-        "src/JSX/**/*"
+        "dev-playground/*",
+        "dev-playground/**/*"
       ],
       "rules": {
 
         "import/extensions": "off",
-        "simple-import-sort/imports": "off"
+        "simple-import-sort/imports": "off",
+        "import/no-extraneous-dependencies": "off"
       }
     },{
       "files": [

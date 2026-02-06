@@ -4,7 +4,7 @@ export class Message<T> {
   /**
    * A list of listeners, each containing a callback function and a flag indicating whether it should be triggered only once.
    */
-  public listeners: { callback: (data: T) => void; once: boolean, token: SubscriptionToken }[] = [];
+  public listeners: { callback: (data: T) => void; once: boolean; token: SubscriptionToken }[] = [];
 }
 
 /**
@@ -52,7 +52,7 @@ export class ChannelAPI<CHANNELS> {
    */
   unsubscribe(token: SubscriptionToken) {
     for (const channel of Object.values(this.channels as ArrayLike<Message<never>>)) {
-      const {listeners} = channel;
+      const { listeners } = channel;
       const index = listeners.findIndex(l => l.token === token);
       if (index !== -1) {
         listeners.splice(index, 1);

@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-import {css, html, LitElement} from "lit";
+import { css, html, LitElement } from "lit";
 
 import { InputElementChannels } from "./channelsConfig";
 
@@ -12,7 +11,6 @@ import { InputElementChannels } from "./channelsConfig";
  * @public
  */
 export class ChanProduce extends LitElement {
-
   /**
    * Styles
    * @private
@@ -22,7 +20,7 @@ export class ChanProduce extends LitElement {
       display: block;
     }
 
-    :host([hidden]){
+    :host([hidden]) {
       display: none;
     }
     /* do not show components which are not defined */
@@ -32,8 +30,8 @@ export class ChanProduce extends LitElement {
   `;
 
   // eslint-disable-next-line class-methods-use-this
-  publish(e:KeyboardEvent){
-    InputElementChannels.publish("textEntered",(e.target as HTMLInputElement).value)
+  publish(e: KeyboardEvent) {
+    InputElementChannels.publish("textEntered", (e.target as HTMLInputElement).value);
   }
 
   /**
@@ -41,15 +39,14 @@ export class ChanProduce extends LitElement {
    * @private
    */
   override render() {
-    return html`<input type='text' @input='${this.publish}'>`;
+    return html`<input type="text" @input="${this.publish}" />`;
   }
-
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'chan-produce': ChanProduce;
+    "chan-produce": ChanProduce;
   }
 }
 
-window.customElements.define('chan-produce', ChanProduce);
+window.customElements.define("chan-produce", ChanProduce);

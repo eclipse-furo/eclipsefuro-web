@@ -1,7 +1,8 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import {css, html, LitElement} from "lit";
+import { css, html, LitElement } from "lit";
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { property } from "lit/decorators.js";
+
 import { InputElementChannels } from "./channelsConfig";
 
 /**
@@ -29,7 +30,7 @@ export class ChanTrigger extends LitElement {
       display: block;
     }
 
-    :host([hidden]){
+    :host([hidden]) {
       display: none;
     }
     /* do not show components which are not defined */
@@ -40,7 +41,7 @@ export class ChanTrigger extends LitElement {
 
   // eslint-disable-next-line class-methods-use-this
   sendClear(): void {
-    InputElementChannels.publish("ChannelAsTrigger",undefined)
+    InputElementChannels.publish("ChannelAsTrigger", undefined);
   }
 
   /**
@@ -48,15 +49,14 @@ export class ChanTrigger extends LitElement {
    * @private
    */
   override render() {
-    return html`<button @click='${this.sendClear}'>clear</button>`;
+    return html`<button @click="${this.sendClear}">clear</button>`;
   }
-
 }
 
 declare global {
   interface HTMLElementTagNameMap {
-    'chan-trigger': ChanTrigger;
+    "chan-trigger": ChanTrigger;
   }
 }
 
-window.customElements.define('chan-trigger', ChanTrigger);
+window.customElements.define("chan-trigger", ChanTrigger);

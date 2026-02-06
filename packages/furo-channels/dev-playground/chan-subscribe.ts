@@ -1,11 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { css, html, LitElement } from "lit";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { state } from "lit/decorators.js";
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { repeat } from "lit/directives/repeat.js";
 
 import { InputElementChannels } from "./channelsConfig";
+
 import type { SubscriptionToken } from "@/ChannelAPI";
 
 /**
@@ -17,7 +16,6 @@ import type { SubscriptionToken } from "@/ChannelAPI";
  * @public
  */
 export class ChanSubscribe extends LitElement {
-
   /**
    * Styles
    * @private
@@ -60,7 +58,7 @@ export class ChanSubscribe extends LitElement {
 
   subscribe() {
     if (this.token === undefined) {
-      this.token = InputElementChannels.subscribe("textEntered", (data) => {
+      this.token = InputElementChannels.subscribe("textEntered", data => {
         this.dataChunks.unshift(data);
         this.requestUpdate();
       });
@@ -73,16 +71,17 @@ export class ChanSubscribe extends LitElement {
    */
   override render() {
     return html`
-      <button @click='${this.unsubscribe}'>unsubscribe</button>
-      <button @click='${this.subscribe}'>subscribe</button>
+      <button @click="${this.unsubscribe}">unsubscribe</button>
+      <button @click="${this.subscribe}">subscribe</button>
       <ul>
-        ${repeat(this.dataChunks, (_, index) => index, (st) => html`
-          <li>${st}</li>
-        `)}
+        ${repeat(
+          this.dataChunks,
+          (_, index) => index,
+          st => html` <li>${st}</li> `
+        )}
       </ul>
     `;
   }
-
 }
 
 declare global {

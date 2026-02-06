@@ -1,7 +1,7 @@
 {
   "name": "@furo/layout",
   "description": "Layout components for furo",
-  "version": "3.0.0-RC.5",
+  "version": "3.0.0-RC.7",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-layout",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": {
