@@ -3,6 +3,7 @@
 *.iml
 *.iws
 *.ipr
+*.tgz
 
 /.vscode
 /tmp
