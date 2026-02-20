@@ -19,6 +19,9 @@
       "dom",
       "dom.iterable"
     ],
+    "paths": {
+      "@/*": ["./src/*"]
+    },
     "useDefineForClassFields": false,
     "plugins": [
       {

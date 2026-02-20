@@ -10,7 +10,7 @@ import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 import { FieldConstraints } from './FieldConstraints';
 
 type EventType =
-// | 'changed'
+  | 'update' // triggered on any change,update,array changes, map changes, reset, model injections, from literal. Listen to this if you do not need specialized update notifications.
   | 'field-value-changed' // triggered on change or value assignment
   | 'this-field-value-changed' // triggered on every direct change on the field, not from children
   | 'field-value-updated' // triggered on clear or fromLiteral => model-injected
@@ -104,7 +104,7 @@ export abstract class FieldNode {
   public __parentNode: FieldNode | undefined;
 
   /**
-   * Meta data of a field node.
+   * Metadata of a field node.
    */
   public __meta: Meta = {
     businessVaueState: ValueState.None,
@@ -890,7 +890,7 @@ export abstract class FieldNode {
     this.__meta.nodeFields.forEach(descriptor => {
       (
         this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode
-      ).__clear();
+      ).__clear(withoutNotification);
     });
     if (!withoutNotification) {
       this.__notifyFieldValueChange(false);
@@ -973,13 +973,26 @@ export abstract class FieldNode {
           bubbles: true
         })
       );
+      this.__dispatchEvent(
+        new CustomEvent('update', {
+          detail: this,
+          bubbles: true,
+        }),
+      );
     } else {
       // triggered on clear or fromLiteral
       this.__dispatchEvent(
         new CustomEvent('field-value-updated', {
           detail: this,
-          bubbles: false
-        })
+          bubbles: false,
+        }),
+      );
+
+      this.__dispatchEvent(
+        new CustomEvent('update', {
+          detail: this,
+          bubbles: false,
+        }),
       );
     }
   }

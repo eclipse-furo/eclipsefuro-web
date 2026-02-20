@@ -115,6 +115,14 @@ export class MAP<
           bubbles: true,
         }),
       );
+
+      this.__dispatchEvent(
+        new CustomEvent('update', {
+          detail: this,
+          bubbles: true,
+        }),
+      );
+
       this.__dispatchEvent(
         new CustomEvent('field-value-changed', {
           detail: this,
@@ -124,6 +132,12 @@ export class MAP<
     } else {
       this.__dispatchEvent(
         new CustomEvent('map-changed', {
+          detail: this,
+          bubbles: false,
+        }),
+      );
+      this.__dispatchEvent(
+        new CustomEvent('update', {
           detail: this,
           bubbles: false,
         }),
@@ -149,7 +163,7 @@ export class MAP<
       const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
         f => f.fieldName === this.__meta.fieldName,
       );
-      const Constructor = fieldDescriptor?.ValueConstructor as new () => T;
+      const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       this.initFromLiteral(Constructor, initData);
     }
   }
@@ -162,7 +176,7 @@ export class MAP<
       const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
         f => f.fieldName === this.__meta.fieldName,
       );
-      const Constructor = fieldDescriptor?.ValueConstructor as new () => T;
+      const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       const dummy = new Constructor();
 
       // eslint-disable-next-line guard-for-in

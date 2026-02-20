@@ -3,9 +3,12 @@
   "description": "open-models  ",
   "license": "MIT",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages",
-  "repository": "git@github.com:eclipse/eclipsefuro-web.git",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
+  },
   "author": "eclipse furo",
-  "version": "1.11.2",
+  "version": "1.12.1",
   "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",

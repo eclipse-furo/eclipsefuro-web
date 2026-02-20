@@ -130,6 +130,12 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
         }),
       );
       this.__dispatchEvent(
+        new CustomEvent('update', {
+          detail: this,
+          bubbles: true,
+        }),
+      );
+      this.__dispatchEvent(
         new CustomEvent('field-value-changed', {
           detail: this,
           bubbles: true,
@@ -138,6 +144,12 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     } else {
       this.__dispatchEvent(
         new CustomEvent('array-changed', {
+          detail: this,
+          bubbles: false,
+        }),
+      );
+      this.__dispatchEvent(
+        new CustomEvent('update', {
           detail: this,
           bubbles: false,
         }),
