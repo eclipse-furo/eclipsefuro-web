@@ -40,6 +40,7 @@ export class Strings extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Strings';
+    this.__meta.description = 'Strings';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class Strings extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedString,
         constraints: {},
+        description: '',
       },
     ];
 

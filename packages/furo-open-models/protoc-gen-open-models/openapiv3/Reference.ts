@@ -43,6 +43,8 @@ export class Reference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Reference';
+    this.__meta.description =
+      'Reference A simple object to allow referencing other components in the specification, internally and externally.  The Reference Object is defined by JSON Reference and follows the same structure, behavior and rules.   For this specification, reference resolution is accomplished as defined by the JSON Reference specification and not by the JSON Schema specification.';
 
     this.__meta.nodeFields = [
       {
@@ -50,18 +52,21 @@ export class Reference extends FieldNode {
         protoName: '_ref',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'summary',
         protoName: 'summary',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

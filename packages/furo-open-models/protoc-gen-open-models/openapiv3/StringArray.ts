@@ -37,6 +37,7 @@ export class StringArray extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.StringArray';
+    this.__meta.description = 'StringArray';
 
     this.__meta.nodeFields = [
       {
@@ -44,6 +45,7 @@ export class StringArray extends FieldNode {
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -47,6 +47,7 @@ export class LinkOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.LinkOrReference';
+    this.__meta.description = 'LinkOrReference';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class LinkOrReference extends FieldNode {
         protoName: 'link',
         FieldConstructor: OpenapiV3Link,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reference',
         protoName: 'reference',
         FieldConstructor: OpenapiV3Reference,
         constraints: {},
+        description: '',
       },
     ];
 

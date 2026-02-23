@@ -42,6 +42,7 @@ export class FieldOptionsEditionDefault extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FieldOptions.EditionDefault';
+    this.__meta.description = 'FieldOptionsEditionDefault';
 
     this.__meta.nodeFields = [
       {
@@ -49,12 +50,14 @@ export class FieldOptionsEditionDefault extends FieldNode {
         protoName: 'edition',
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

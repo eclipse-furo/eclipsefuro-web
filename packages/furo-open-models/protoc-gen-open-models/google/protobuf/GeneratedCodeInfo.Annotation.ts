@@ -96,6 +96,7 @@ export class GeneratedCodeInfoAnnotation extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.GeneratedCodeInfo.Annotation';
+    this.__meta.description = 'GeneratedCodeInfoAnnotation';
 
     this.__meta.nodeFields = [
       {
@@ -103,24 +104,32 @@ export class GeneratedCodeInfoAnnotation extends FieldNode {
         protoName: 'path',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          "Represents the identified object's effect on the element in the original\n .proto file.",
       },
       {
         fieldName: 'sourceFile',
         protoName: 'source_file',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Identifies the filesystem path to the original source .proto.',
       },
       {
         fieldName: 'begin',
         protoName: 'begin',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          'Identifies the starting offset in bytes in the generated code\n that relates to the identified object.',
       },
       {
         fieldName: 'end',
         protoName: 'end',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          'Identifies the ending offset in bytes in the generated code that\n relates to the identified object. The end offset should be one past\n the last relevant byte (so the length of the text = end - begin).',
       },
       {
         fieldName: 'semantic',
@@ -128,6 +137,7 @@ export class GeneratedCodeInfoAnnotation extends FieldNode {
         FieldConstructor:
           ENUM<GoogleProtobufGeneratedCodeInfoAnnotationSemantic>,
         constraints: {},
+        description: '',
       },
     ];
 

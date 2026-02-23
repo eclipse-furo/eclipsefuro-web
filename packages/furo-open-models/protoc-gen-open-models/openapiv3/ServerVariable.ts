@@ -57,6 +57,8 @@ export class ServerVariable extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.ServerVariable';
+    this.__meta.description =
+      'ServerVariable An object representing a Server Variable for server URL template substitution.';
 
     this.__meta.nodeFields = [
       {
@@ -64,24 +66,28 @@ export class ServerVariable extends FieldNode {
         protoName: 'enum',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'default',
         protoName: 'default',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -10,51 +10,56 @@ import {
 
 /**
  * @interface IColour
+ *  Colour is a rgba color
  */
 export interface IColour {
   /**
-   *  multiline leading comment
-   *  the red part
+   *  the red part of the color
    */
-  red?: number; //  with constraints
-
+  red?: number;
   /**
-   *  the green part
+   *  the green part of the color
    */
   green?: number;
+  /**
+   *  the blue part of the color
+   */
   blue?: number;
   alpha?: number;
 }
 
 /**
  * @interface TColour
+ *  Colour is a rgba color
  */
 export interface TColour {
   /**
-   *  multiline leading comment
-   *  the red part
+   *  the red part of the color
    */
-  red?: number; //  with constraints
-
+  red?: number;
   /**
-   *  the green part
+   *  the green part of the color
    */
   green?: number;
+  /**
+   *  the blue part of the color
+   */
   blue?: number;
   alpha?: number;
 }
 
 /**
  * Colour
+ *  Colour is a rgba color
  */
 export class Colour extends FieldNode {
-  //  multiline leading comment
-  //  the red part
-  private _red: INT32; //  with constraints
+  //  the red part of the color
+  private _red: INT32;
 
-  //  the green part
+  //  the green part of the color
   private _green: INT32;
 
+  //  the blue part of the color
   private _blue: INT32;
 
   private _alpha: FLOAT;
@@ -68,6 +73,7 @@ export class Colour extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.Colour';
+    this.__meta.description = 'Colour Colour is a rgba color';
 
     this.__meta.nodeFields = [
       {
@@ -75,35 +81,39 @@ export class Colour extends FieldNode {
         protoName: 'red',
         FieldConstructor: INT32,
         constraints: { maximum: 255 },
+        description: 'the red part of the color',
       },
       {
         fieldName: 'green',
         protoName: 'green',
         FieldConstructor: INT32,
         constraints: { maximum: 255 },
+        description: 'the green part of the color',
       },
       {
         fieldName: 'blue',
         protoName: 'blue',
         FieldConstructor: INT32,
         constraints: { maximum: 255 },
+        description: 'the blue part of the color',
       },
       {
         fieldName: 'alpha',
         protoName: 'alpha',
         FieldConstructor: FLOAT,
         constraints: { maximum: 1 },
+        description: '',
       },
     ];
 
     // Initialize the fields
-    //  multiline leading comment
-    //  the red part
+    //  the red part of the color
     this._red = new INT32(undefined, this, 'red');
 
-    //  the green part
+    //  the green part of the color
     this._green = new INT32(undefined, this, 'green');
 
+    //  the blue part of the color
     this._blue = new INT32(undefined, this, 'blue');
 
     this._alpha = new FLOAT(undefined, this, 'alpha');
@@ -136,8 +146,7 @@ export class Colour extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  multiline leading comment
-  //  the red part
+  //  the red part of the color
   public get red(): INT32 {
     return this._red;
   }
@@ -146,7 +155,7 @@ export class Colour extends FieldNode {
     this.__PrimitivesSetter(this._red, v);
   }
 
-  //  the green part
+  //  the green part of the color
   public get green(): INT32 {
     return this._green;
   }
@@ -155,6 +164,7 @@ export class Colour extends FieldNode {
     this.__PrimitivesSetter(this._green, v);
   }
 
+  //  the blue part of the color
   public get blue(): INT32 {
     return this._blue;
   }

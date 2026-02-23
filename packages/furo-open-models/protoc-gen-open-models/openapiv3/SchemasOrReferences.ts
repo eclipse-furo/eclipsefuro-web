@@ -40,6 +40,7 @@ export class SchemasOrReferences extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.SchemasOrReferences';
+    this.__meta.description = 'SchemasOrReferences';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class SchemasOrReferences extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedSchemaOrReference,
         constraints: {},
+        description: '',
       },
     ];
 

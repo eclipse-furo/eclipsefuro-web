@@ -63,6 +63,7 @@ export class Server extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Server';
+    this.__meta.description = 'Server An object representing a Server.';
 
     this.__meta.nodeFields = [
       {
@@ -70,24 +71,28 @@ export class Server extends FieldNode {
         protoName: 'url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'variables',
         protoName: 'variables',
         FieldConstructor: OpenapiV3ServerVariables,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

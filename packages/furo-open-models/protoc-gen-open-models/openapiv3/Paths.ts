@@ -50,6 +50,8 @@ export class Paths extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Paths';
+    this.__meta.description =
+      'Paths Holds the relative paths to the individual endpoints and their operations. The path is appended to the URL from the `Server Object` in order to construct the full URL.  The Paths MAY be empty, due to ACL constraints.';
 
     this.__meta.nodeFields = [
       {
@@ -57,12 +59,14 @@ export class Paths extends FieldNode {
         protoName: 'path',
         FieldConstructor: OpenapiV3NamedPathItem,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

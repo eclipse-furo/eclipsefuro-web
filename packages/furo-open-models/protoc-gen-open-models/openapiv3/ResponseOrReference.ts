@@ -47,6 +47,7 @@ export class ResponseOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.ResponseOrReference';
+    this.__meta.description = 'ResponseOrReference';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class ResponseOrReference extends FieldNode {
         protoName: 'response',
         FieldConstructor: OpenapiV3Response,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reference',
         protoName: 'reference',
         FieldConstructor: OpenapiV3Reference,
         constraints: {},
+        description: '',
       },
     ];
 

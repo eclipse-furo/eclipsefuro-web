@@ -58,6 +58,8 @@ export class NamedLinkOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedLinkOrReference';
+    this.__meta.description =
+      'NamedLinkOrReference Automatically-generated message used to represent maps of LinkOrReference as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedLinkOrReference extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3LinkOrReference,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

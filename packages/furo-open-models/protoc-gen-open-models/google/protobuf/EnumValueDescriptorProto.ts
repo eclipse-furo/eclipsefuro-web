@@ -53,6 +53,8 @@ export class EnumValueDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.EnumValueDescriptorProto';
+    this.__meta.description =
+      'EnumValueDescriptorProto Describes a value within an enum.';
 
     this.__meta.nodeFields = [
       {
@@ -60,18 +62,21 @@ export class EnumValueDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'number',
         protoName: 'number',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufEnumValueOptions,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -58,6 +58,8 @@ export class Numeric64 extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Numeric64';
+    this.__meta.description =
+      'Numeric64 Decimal numbers\n  Regex pattern: ^[&#43;-]?(\\d*\\.)?\\d&#43;$';
 
     this.__meta.nodeFields = [
       {
@@ -71,18 +73,22 @@ export class Numeric64 extends FieldNode {
           exclusive_minimum: true,
           multiple_of: 5,
         },
+        description:
+          'Value is set as a quoted number, use your numeric parser of choice',
       },
       {
         fieldName: 'repeatedPrimitiveInt64',
         protoName: 'repeated_primitive_int64',
         FieldConstructor: INT64,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'primitiveInt64Excl',
         protoName: 'primitive_int64_excl',
         FieldConstructor: INT64,
         constraints: { maximum: 1000, minimum: 5, multiple_of: 5 },
+        description: '',
       },
     ];
 

@@ -58,6 +58,8 @@ export class NamedSchemaOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedSchemaOrReference';
+    this.__meta.description =
+      'NamedSchemaOrReference Automatically-generated message used to represent maps of SchemaOrReference as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedSchemaOrReference extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

@@ -55,6 +55,7 @@ export class Uint32LabelsEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Uint32.LabelsEntry';
+    this.__meta.description = 'Uint32LabelsEntry';
 
     this.__meta.nodeFields = [
       {
@@ -62,12 +63,16 @@ export class Uint32LabelsEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `uint32`.  https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `uint32`.  https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/wrappers.proto',
       },
     ];
 

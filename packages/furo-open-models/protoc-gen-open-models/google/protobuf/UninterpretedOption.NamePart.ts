@@ -41,6 +41,7 @@ export class UninterpretedOptionNamePart extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.UninterpretedOption.NamePart';
+    this.__meta.description = 'UninterpretedOptionNamePart';
 
     this.__meta.nodeFields = [
       {
@@ -48,12 +49,14 @@ export class UninterpretedOptionNamePart extends FieldNode {
         protoName: 'name_part',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'isExtension',
         protoName: 'is_extension',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
     ];
 

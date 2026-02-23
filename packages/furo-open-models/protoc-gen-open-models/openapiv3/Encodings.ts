@@ -40,6 +40,7 @@ export class Encodings extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Encodings';
+    this.__meta.description = 'Encodings';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class Encodings extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedEncoding,
         constraints: {},
+        description: '',
       },
     ];
 

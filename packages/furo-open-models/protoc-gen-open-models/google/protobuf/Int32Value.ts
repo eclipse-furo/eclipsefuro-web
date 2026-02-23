@@ -48,6 +48,8 @@ export class Int32Value extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.Int32Value';
+    this.__meta.description =
+      'Int32Value Wrapper message for `int32`.\n\n The JSON representation for `Int32Value` is JSON number.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class Int32Value extends FieldNode {
         protoName: 'value',
         FieldConstructor: INT32,
         constraints: {},
+        description: 'The int32 value.',
       },
     ];
 

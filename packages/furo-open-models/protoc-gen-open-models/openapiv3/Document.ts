@@ -119,6 +119,7 @@ export class Document extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Document';
+    this.__meta.description = 'Document';
 
     this.__meta.nodeFields = [
       {
@@ -126,54 +127,63 @@ export class Document extends FieldNode {
         protoName: 'openapi',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'info',
         protoName: 'info',
         FieldConstructor: OpenapiV3Info,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'servers',
         protoName: 'servers',
         FieldConstructor: OpenapiV3Server,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'paths',
         protoName: 'paths',
         FieldConstructor: OpenapiV3Paths,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'components',
         protoName: 'components',
         FieldConstructor: OpenapiV3Components,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'security',
         protoName: 'security',
         FieldConstructor: OpenapiV3SecurityRequirement,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'tags',
         protoName: 'tags',
         FieldConstructor: OpenapiV3Tag,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'externalDocs',
         protoName: 'external_docs',
         FieldConstructor: OpenapiV3ExternalDocs,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

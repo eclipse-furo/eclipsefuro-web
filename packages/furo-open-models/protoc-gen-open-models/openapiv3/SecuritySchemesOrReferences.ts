@@ -40,6 +40,7 @@ export class SecuritySchemesOrReferences extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.SecuritySchemesOrReferences';
+    this.__meta.description = 'SecuritySchemesOrReferences';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class SecuritySchemesOrReferences extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedSecuritySchemeOrReference,
         constraints: {},
+        description: '',
       },
     ];
 

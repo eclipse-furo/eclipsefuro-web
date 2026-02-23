@@ -36,6 +36,7 @@ export class IdentifierAttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Identifier.AttributesEntry';
+    this.__meta.description = 'IdentifierAttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -43,12 +44,14 @@ export class IdentifierAttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

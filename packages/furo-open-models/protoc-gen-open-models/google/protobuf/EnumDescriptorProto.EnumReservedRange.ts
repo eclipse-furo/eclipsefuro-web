@@ -39,6 +39,7 @@ export class EnumDescriptorProtoEnumReservedRange extends FieldNode {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName =
       'google.protobuf.EnumDescriptorProto.EnumReservedRange';
+    this.__meta.description = 'EnumDescriptorProtoEnumReservedRange';
 
     this.__meta.nodeFields = [
       {
@@ -46,12 +47,14 @@ export class EnumDescriptorProtoEnumReservedRange extends FieldNode {
         protoName: 'start',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'end',
         protoName: 'end',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
     ];
 

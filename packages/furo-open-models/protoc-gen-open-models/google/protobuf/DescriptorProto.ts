@@ -139,6 +139,7 @@ export class DescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.DescriptorProto';
+    this.__meta.description = 'DescriptorProto Describes a message type.';
 
     this.__meta.nodeFields = [
       {
@@ -146,60 +147,71 @@ export class DescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'field',
         protoName: 'field',
         FieldConstructor: GoogleProtobufFieldDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'extension',
         protoName: 'extension',
         FieldConstructor: GoogleProtobufFieldDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'nestedType',
         protoName: 'nested_type',
         FieldConstructor: DescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'enumType',
         protoName: 'enum_type',
         FieldConstructor: GoogleProtobufEnumDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'extensionRange',
         protoName: 'extension_range',
         FieldConstructor: GoogleProtobufDescriptorProtoExtensionRange,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'oneofDecl',
         protoName: 'oneof_decl',
         FieldConstructor: GoogleProtobufOneofDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufMessageOptions,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reservedRange',
         protoName: 'reserved_range',
         FieldConstructor: GoogleProtobufDescriptorProtoReservedRange,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reservedName',
         protoName: 'reserved_name',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Reserved field names, which may not be used by fields in the same message.\n A given name may only be reserved once.',
       },
     ];
 

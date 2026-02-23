@@ -8,21 +8,22 @@ option go_package = "furo/cube;cubepb";
 option java_multiple_files = true;
 option java_package = "pro.furo.cube";
 
+// Colour is a rgba color
 message Colour {
-  // multiline leading comment
-  // the red part
+  // the red part of the color
   int32 red = 1 [(openapi.v3.property) = {
     default: {number: 22}
     maximum: 255
     minimum: 0
-  }]; // with constraints
+  }];
 
-  // the green part
+  // the green part of the color
   int32 green = 2 [(openapi.v3.property) = {
     default: {number: 34}
     maximum: 255
     minimum: 0
   }];
+  // the blue part of the color
   int32 blue = 3 [(openapi.v3.property) = {
     default: {number: 88}
     maximum: 255

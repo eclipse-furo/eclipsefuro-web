@@ -46,6 +46,8 @@ export class FileDescriptorSet extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FileDescriptorSet';
+    this.__meta.description =
+      'FileDescriptorSet The protocol compiler can output a FileDescriptorSet containing the .proto\n files it parses.';
 
     this.__meta.nodeFields = [
       {
@@ -53,6 +55,7 @@ export class FileDescriptorSet extends FieldNode {
         protoName: 'file',
         FieldConstructor: GoogleProtobufFileDescriptorProto,
         constraints: {},
+        description: '',
       },
     ];
 

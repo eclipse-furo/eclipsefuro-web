@@ -48,6 +48,8 @@ export class DoubleValue extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.DoubleValue';
+    this.__meta.description =
+      'DoubleValue Wrapper message for `double`.\n\n The JSON representation for `DoubleValue` is JSON number.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class DoubleValue extends FieldNode {
         protoName: 'value',
         FieldConstructor: DOUBLE,
         constraints: {},
+        description: 'The double value.',
       },
     ];
 

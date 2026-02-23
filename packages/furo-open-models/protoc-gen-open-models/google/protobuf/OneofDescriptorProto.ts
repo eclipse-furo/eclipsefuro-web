@@ -44,6 +44,7 @@ export class OneofDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.OneofDescriptorProto';
+    this.__meta.description = 'OneofDescriptorProto Describes a oneof.';
 
     this.__meta.nodeFields = [
       {
@@ -51,12 +52,14 @@ export class OneofDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufOneofOptions,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -12,24 +12,28 @@ import "furo/cube/enums.proto";
 
 import "openapiv3/annotations.proto";
 
+// CubeDefinition is a definition of a cube.
 message CubeDefinition {
   option (openapi.v3.schema) = {required:['length', 'breadth','height']};
+  // the length of the cube in cm
   double length = 1 [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  // the breadth / width of the cube in cm
   double breadth = 2 [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  // the height of the cube in cm
   double height = 3  [(openapi.v3.property) ={default:{number:100}, maximum: 1000, minimum: 100}];
+  // the color of the cube
   cube.Colour colour = 4;
+  // The material the cube is made of
   Materials material = 5;
-  oneof op{
-    string str = 6;
-    bool boo = 7;
-    int32 num = 8;
-  }
-
 }
 
+// CubeEntity
 message CubeEntity {
+  // human-readable name for the cube entity
   string display_name = 1 [(openapi.v3.property) = {read_only:true}];
+  // short and nice description of the cube
   string description = 2;
+  // Definition of the cube
   CubeDefinition cube = 3 [(openapi.v3.property) = {default:{string:'{"length":222}'}}];
 }
 

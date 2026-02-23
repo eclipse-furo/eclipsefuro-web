@@ -53,6 +53,8 @@ export class NamedString extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedString';
+    this.__meta.description =
+      'NamedString Automatically-generated message used to represent maps of string as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -60,12 +62,14 @@ export class NamedString extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

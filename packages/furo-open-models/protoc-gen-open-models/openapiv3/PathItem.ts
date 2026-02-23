@@ -118,6 +118,8 @@ export class PathItem extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.PathItem';
+    this.__meta.description =
+      'PathItem Describes the operations available on a single path. A Path Item MAY be empty, due to ACL constraints. The path itself is still exposed to the documentation viewer but they will not know which operations and parameters are available.';
 
     this.__meta.nodeFields = [
       {
@@ -125,84 +127,98 @@ export class PathItem extends FieldNode {
         protoName: '_ref',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'summary',
         protoName: 'summary',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'get',
         protoName: 'get',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'put',
         protoName: 'put',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'post',
         protoName: 'post',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'delete',
         protoName: 'delete',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'head',
         protoName: 'head',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'patch',
         protoName: 'patch',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'trace',
         protoName: 'trace',
         FieldConstructor: OpenapiV3Operation,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'servers',
         protoName: 'servers',
         FieldConstructor: OpenapiV3Server,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'parameters',
         protoName: 'parameters',
         FieldConstructor: OpenapiV3ParameterOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

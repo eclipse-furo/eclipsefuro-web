@@ -53,6 +53,7 @@ export class CubeServiceGetRequest extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.CubeServiceGetRequest';
+    this.__meta.description = 'CubeServiceGetRequest';
 
     this.__meta.nodeFields = [
       {
@@ -60,12 +61,15 @@ export class CubeServiceGetRequest extends FieldNode {
         protoName: 'cube_id',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'ID of the cube',
       },
       {
         fieldName: 'fields',
         protoName: 'fields',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Partial Response, https://cloud.google.com/apis/design/design_patterns#partial_response\n use wildcard * to get all fields',
       },
     ];
 

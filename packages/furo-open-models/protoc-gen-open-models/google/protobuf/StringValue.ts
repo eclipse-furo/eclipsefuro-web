@@ -48,6 +48,8 @@ export class StringValue extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.StringValue';
+    this.__meta.description =
+      'StringValue Wrapper message for `string`.\n\n The JSON representation for `StringValue` is JSON string.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class StringValue extends FieldNode {
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'The string value.',
       },
     ];
 

@@ -77,6 +77,8 @@ export class XAny extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Any';
+    this.__meta.description =
+      'XAny Furo annotated type wrapper message for `any`.\n // Any contains an arbitrary serialized protocol buffer message along with a\n // URL that describes the type of the serialized message. https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/any.proto';
 
     this.__meta.nodeFields = [
       {
@@ -84,6 +86,8 @@ export class XAny extends FieldNode {
         protoName: 'value',
         FieldConstructor: BYTES,
         constraints: {},
+        description:
+          'The JSON representation for `AnyValue` is a JSON string? The client uses type `ArrayBuffer` for the value field.',
       },
       {
         fieldName: 'labels',
@@ -91,6 +95,8 @@ export class XAny extends FieldNode {
         FieldConstructor: MAP<string, BOOLEAN, boolean>,
         ValueConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...',
       },
       {
         fieldName: 'attributes',
@@ -98,6 +104,8 @@ export class XAny extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
     ];
 

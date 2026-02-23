@@ -85,6 +85,8 @@ export class FeatureSet extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FeatureSet';
+    this.__meta.description =
+      "FeatureSet TODO Enums in C++ gencode (and potentially other languages) are\n not well scoped.  This means that each of the feature enums below can clash\n with each other.  The short names we've chosen maximize call-site\n readability, but leave us very open to this scenario.  A future feature will\n be designed and implemented to handle this, hopefully before we ever hit a\n conflict here.";
 
     this.__meta.nodeFields = [
       {
@@ -92,36 +94,42 @@ export class FeatureSet extends FieldNode {
         protoName: 'field_presence',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetFieldPresence>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'enumType',
         protoName: 'enum_type',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetEnumType>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'repeatedFieldEncoding',
         protoName: 'repeated_field_encoding',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetRepeatedFieldEncoding>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'utf8Validation',
         protoName: 'utf8_validation',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetUtf8Validation>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'messageEncoding',
         protoName: 'message_encoding',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetMessageEncoding>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'jsonFormat',
         protoName: 'json_format',
         FieldConstructor: ENUM<GoogleProtobufFeatureSetJsonFormat>,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -53,6 +53,8 @@ export class ExternalDocs extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.ExternalDocs';
+    this.__meta.description =
+      'ExternalDocs Allows referencing an external resource for extended documentation.';
 
     this.__meta.nodeFields = [
       {
@@ -60,18 +62,21 @@ export class ExternalDocs extends FieldNode {
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'url',
         protoName: 'url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -47,6 +47,7 @@ export class HeaderOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.HeaderOrReference';
+    this.__meta.description = 'HeaderOrReference';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class HeaderOrReference extends FieldNode {
         protoName: 'header',
         FieldConstructor: OpenapiV3Header,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reference',
         protoName: 'reference',
         FieldConstructor: OpenapiV3Reference,
         constraints: {},
+        description: '',
       },
     ];
 

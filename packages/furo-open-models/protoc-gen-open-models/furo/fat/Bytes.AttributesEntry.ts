@@ -50,6 +50,7 @@ export class BytesAttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Bytes.AttributesEntry';
+    this.__meta.description = 'BytesAttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -57,12 +58,14 @@ export class BytesAttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `bytes`.',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `bytes`.',
       },
     ];
 

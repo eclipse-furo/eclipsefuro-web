@@ -62,6 +62,7 @@ export class ServiceDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.ServiceDescriptorProto';
+    this.__meta.description = 'ServiceDescriptorProto Describes a service.';
 
     this.__meta.nodeFields = [
       {
@@ -69,18 +70,21 @@ export class ServiceDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'method',
         protoName: 'method',
         FieldConstructor: GoogleProtobufMethodDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufServiceOptions,
         constraints: {},
+        description: '',
       },
     ];
 

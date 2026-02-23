@@ -70,6 +70,8 @@ export class XString extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.String';
+    this.__meta.description =
+      'XString Furo annotated type wrapper message for `string`.';
 
     this.__meta.nodeFields = [
       {
@@ -77,6 +79,8 @@ export class XString extends FieldNode {
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'The JSON representation for `StringValue` is a JSON string',
       },
       {
         fieldName: 'labels',
@@ -84,6 +88,8 @@ export class XString extends FieldNode {
         FieldConstructor: MAP<string, BOOLEAN, boolean>,
         ValueConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...',
       },
       {
         fieldName: 'attributes',
@@ -91,6 +97,8 @@ export class XString extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
     ];
 

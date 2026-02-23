@@ -81,6 +81,8 @@ export class Link extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Link';
+    this.__meta.description =
+      "Link The `Link object` represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.  Unlike _dynamic_ links (i.e. links provided **in** the response payload), the OAS linking mechanism does not require link information in the runtime response.  For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them as parameters while invoking the linked operation.";
 
     this.__meta.nodeFields = [
       {
@@ -88,42 +90,49 @@ export class Link extends FieldNode {
         protoName: 'operation_ref',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'operationId',
         protoName: 'operation_id',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'parameters',
         protoName: 'parameters',
         FieldConstructor: OpenapiV3AnyOrExpression,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'requestBody',
         protoName: 'request_body',
         FieldConstructor: OpenapiV3AnyOrExpression,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'server',
         protoName: 'server',
         FieldConstructor: OpenapiV3Server,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

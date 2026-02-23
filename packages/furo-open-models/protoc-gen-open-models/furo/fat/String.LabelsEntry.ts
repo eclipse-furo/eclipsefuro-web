@@ -55,6 +55,7 @@ export class StringLabelsEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.String.LabelsEntry';
+    this.__meta.description = 'StringLabelsEntry';
 
     this.__meta.nodeFields = [
       {
@@ -62,12 +63,14 @@ export class StringLabelsEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `string`.',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `string`.',
       },
     ];
 

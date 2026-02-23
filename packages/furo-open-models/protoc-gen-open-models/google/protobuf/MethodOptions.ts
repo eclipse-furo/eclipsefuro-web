@@ -96,6 +96,7 @@ export class MethodOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.MethodOptions';
+    this.__meta.description = 'MethodOptions';
 
     this.__meta.nodeFields = [
       {
@@ -103,24 +104,30 @@ export class MethodOptions extends FieldNode {
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Is this method deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the method, or it will be completely ignored; in the very least,\n this is a formalization for deprecating methods.',
       },
       {
         fieldName: 'idempotencyLevel',
         protoName: 'idempotency_level',
         FieldConstructor: ENUM<GoogleProtobufMethodOptionsIdempotencyLevel>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

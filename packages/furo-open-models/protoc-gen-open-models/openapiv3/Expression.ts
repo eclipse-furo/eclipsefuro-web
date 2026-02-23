@@ -37,6 +37,7 @@ export class Expression extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Expression';
+    this.__meta.description = 'Expression';
 
     this.__meta.nodeFields = [
       {
@@ -44,6 +45,7 @@ export class Expression extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

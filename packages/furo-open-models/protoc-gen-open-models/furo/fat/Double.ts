@@ -71,6 +71,8 @@ export class Double extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Double';
+    this.__meta.description =
+      'Double Furo annotated type wrapper message for `double`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations';
 
     this.__meta.nodeFields = [
       {
@@ -78,6 +80,8 @@ export class Double extends FieldNode {
         protoName: 'value',
         FieldConstructor: DOUBLE,
         constraints: {},
+        description:
+          'The JSON representation for `DoubleValue` is JSON number, range is set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER',
       },
       {
         fieldName: 'labels',
@@ -85,6 +89,8 @@ export class Double extends FieldNode {
         FieldConstructor: MAP<string, BOOLEAN, boolean>,
         ValueConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...',
       },
       {
         fieldName: 'attributes',
@@ -92,6 +98,8 @@ export class Double extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
     ];
 

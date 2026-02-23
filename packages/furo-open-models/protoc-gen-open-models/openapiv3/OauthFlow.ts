@@ -67,6 +67,8 @@ export class OauthFlow extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.OauthFlow';
+    this.__meta.description =
+      'OauthFlow Configuration details for a supported OAuth Flow';
 
     this.__meta.nodeFields = [
       {
@@ -74,30 +76,35 @@ export class OauthFlow extends FieldNode {
         protoName: 'authorization_url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'tokenUrl',
         protoName: 'token_url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'refreshUrl',
         protoName: 'refresh_url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'scopes',
         protoName: 'scopes',
         FieldConstructor: OpenapiV3Strings,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

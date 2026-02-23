@@ -72,6 +72,8 @@ export class Encoding extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Encoding';
+    this.__meta.description =
+      'Encoding A single encoding definition applied to a single schema property.';
 
     this.__meta.nodeFields = [
       {
@@ -79,36 +81,42 @@ export class Encoding extends FieldNode {
         protoName: 'content_type',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'headers',
         protoName: 'headers',
         FieldConstructor: OpenapiV3HeadersOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'style',
         protoName: 'style',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'explode',
         protoName: 'explode',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'allowReserved',
         protoName: 'allow_reserved',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

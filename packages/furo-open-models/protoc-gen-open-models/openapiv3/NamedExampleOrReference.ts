@@ -58,6 +58,8 @@ export class NamedExampleOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedExampleOrReference';
+    this.__meta.description =
+      'NamedExampleOrReference Automatically-generated message used to represent maps of ExampleOrReference as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedExampleOrReference extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3ExampleOrReference,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

@@ -59,6 +59,8 @@ export class Empty extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Empty';
+    this.__meta.description =
+      'Empty Furo annotated type wrapper message for `empty`. Empty has no values and only contains the labels and attributes';
 
     this.__meta.nodeFields = [
       {
@@ -67,6 +69,8 @@ export class Empty extends FieldNode {
         FieldConstructor: MAP<string, BOOLEAN, boolean>,
         ValueConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...',
       },
       {
         fieldName: 'attributes',
@@ -74,6 +78,8 @@ export class Empty extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
     ];
 

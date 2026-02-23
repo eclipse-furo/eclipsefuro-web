@@ -79,6 +79,8 @@ export class Response extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Response';
+    this.__meta.description =
+      'Response Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response.';
 
     this.__meta.nodeFields = [
       {
@@ -86,30 +88,35 @@ export class Response extends FieldNode {
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'headers',
         protoName: 'headers',
         FieldConstructor: OpenapiV3HeadersOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'content',
         protoName: 'content',
         FieldConstructor: OpenapiV3MediaTypes,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'links',
         protoName: 'links',
         FieldConstructor: OpenapiV3LinksOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -58,6 +58,8 @@ export class NamedSecuritySchemeOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedSecuritySchemeOrReference';
+    this.__meta.description =
+      'NamedSecuritySchemeOrReference Automatically-generated message used to represent maps of SecuritySchemeOrReference as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedSecuritySchemeOrReference extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3SecuritySchemeOrReference,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

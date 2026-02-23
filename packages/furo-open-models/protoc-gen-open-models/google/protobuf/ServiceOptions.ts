@@ -89,6 +89,7 @@ export class ServiceOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.ServiceOptions';
+    this.__meta.description = 'ServiceOptions';
 
     this.__meta.nodeFields = [
       {
@@ -96,18 +97,23 @@ export class ServiceOptions extends FieldNode {
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'deprecated',
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Is this service deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the service, or it will be completely ignored; in the very least,\n this is a formalization for deprecating services.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

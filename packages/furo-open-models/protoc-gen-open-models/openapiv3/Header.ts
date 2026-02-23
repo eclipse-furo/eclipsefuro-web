@@ -114,6 +114,8 @@ export class Header extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Header';
+    this.__meta.description =
+      'Header The Header Object follows the structure of the Parameter Object with the following changes:  1. `name` MUST NOT be specified, it is given in the corresponding `headers` map. 1. `in` MUST NOT be specified, it is implicitly in `header`. 1. All traits that are affected by the location MUST be applicable to a location of `header` (for example, `style`).';
 
     this.__meta.nodeFields = [
       {
@@ -121,72 +123,84 @@ export class Header extends FieldNode {
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'required',
         protoName: 'required',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'deprecated',
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'allowEmptyValue',
         protoName: 'allow_empty_value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'style',
         protoName: 'style',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'explode',
         protoName: 'explode',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'allowReserved',
         protoName: 'allow_reserved',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'schema',
         protoName: 'schema',
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'example',
         protoName: 'example',
         FieldConstructor: OpenapiV3Any,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'examples',
         protoName: 'examples',
         FieldConstructor: OpenapiV3ExamplesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'content',
         protoName: 'content',
         FieldConstructor: OpenapiV3MediaTypes,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

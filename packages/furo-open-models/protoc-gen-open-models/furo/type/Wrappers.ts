@@ -76,6 +76,7 @@ export class Wrappers extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Wrappers';
+    this.__meta.description = 'Wrappers';
 
     this.__meta.nodeFields = [
       {
@@ -83,54 +84,63 @@ export class Wrappers extends FieldNode {
         protoName: 'string_value',
         FieldConstructor: StringValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'int32Value',
         protoName: 'int32_value',
         FieldConstructor: Int32Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'int64Value',
         protoName: 'int64_value',
         FieldConstructor: Int64Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'floatValue',
         protoName: 'float_value',
         FieldConstructor: FloatValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'doubleValue',
         protoName: 'double_value',
         FieldConstructor: DoubleValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'boolValue',
         protoName: 'bool_value',
         FieldConstructor: BoolValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'uint32Value',
         protoName: 'uint32_value',
         FieldConstructor: UInt32Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'uint64Value',
         protoName: 'uint64_value',
         FieldConstructor: UInt64Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'bytesValue',
         protoName: 'bytes_value',
         FieldConstructor: BytesValue,
         constraints: {},
+        description: '',
       },
     ];
 

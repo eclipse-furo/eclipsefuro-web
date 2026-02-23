@@ -59,6 +59,8 @@ export class GeneratedCodeInfo extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.GeneratedCodeInfo';
+    this.__meta.description =
+      'GeneratedCodeInfo Describes the relationship between generated code and its original source\n file. A GeneratedCodeInfo message is associated with only one generated\n source file, but may contain references to different source .proto files.';
 
     this.__meta.nodeFields = [
       {
@@ -66,6 +68,8 @@ export class GeneratedCodeInfo extends FieldNode {
         protoName: 'annotation',
         FieldConstructor: GoogleProtobufGeneratedCodeInfoAnnotation,
         constraints: {},
+        description:
+          'An Annotation connects some span of text in generated code to an element\n of its generating .proto file.',
       },
     ];
 

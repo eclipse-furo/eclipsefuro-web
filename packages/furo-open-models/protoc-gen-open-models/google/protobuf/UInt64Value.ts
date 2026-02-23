@@ -48,6 +48,8 @@ export class UInt64Value extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.UInt64Value';
+    this.__meta.description =
+      'UInt64Value Wrapper message for `uint64`.\n\n The JSON representation for `UInt64Value` is JSON string.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class UInt64Value extends FieldNode {
         protoName: 'value',
         FieldConstructor: UINT64,
         constraints: {},
+        description: 'The uint64 value.',
       },
     ];
 

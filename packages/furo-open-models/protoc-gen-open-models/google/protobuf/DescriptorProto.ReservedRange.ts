@@ -38,6 +38,7 @@ export class DescriptorProtoReservedRange extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.DescriptorProto.ReservedRange';
+    this.__meta.description = 'DescriptorProtoReservedRange';
 
     this.__meta.nodeFields = [
       {
@@ -45,12 +46,14 @@ export class DescriptorProtoReservedRange extends FieldNode {
         protoName: 'start',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'end',
         protoName: 'end',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
     ];
 

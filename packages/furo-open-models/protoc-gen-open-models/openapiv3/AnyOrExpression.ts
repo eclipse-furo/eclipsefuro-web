@@ -47,6 +47,7 @@ export class AnyOrExpression extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.AnyOrExpression';
+    this.__meta.description = 'AnyOrExpression';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class AnyOrExpression extends FieldNode {
         protoName: 'any',
         FieldConstructor: OpenapiV3Any,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'expression',
         protoName: 'expression',
         FieldConstructor: OpenapiV3Expression,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -239,6 +239,8 @@ export class FieldDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FieldDescriptorProto';
+    this.__meta.description =
+      'FieldDescriptorProto Describes a field within a message.';
 
     this.__meta.nodeFields = [
       {
@@ -246,66 +248,84 @@ export class FieldDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'number',
         protoName: 'number',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'label',
         protoName: 'label',
         FieldConstructor: ENUM<GoogleProtobufFieldDescriptorProtoLabel>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'type',
         protoName: 'type',
         FieldConstructor: ENUM<GoogleProtobufFieldDescriptorProtoType>,
         constraints: {},
+        description:
+          'If type_name is set, this need not be set.  If both this and type_name\n are set, this must be one of TYPE_ENUM, TYPE_MESSAGE or TYPE_GROUP.',
       },
       {
         fieldName: 'typeName',
         protoName: 'type_name',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          "For message and enum types, this is the name of the type.  If the name\n starts with a '.', it is fully-qualified.  Otherwise, C++-like scoping\n rules are used to find the type (i.e. first the nested types within this\n message are searched, then within the parent, on up to the root\n namespace).",
       },
       {
         fieldName: 'extendee',
         protoName: 'extendee',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'For extensions, this is the name of the type being extended.  It is\n resolved in the same manner as type_name.',
       },
       {
         fieldName: 'defaultValue',
         protoName: 'default_value',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'For numeric types, contains the original text representation of the value.\n For booleans, "true" or "false".\n For strings, contains the default text contents (not escaped in any way).\n For bytes, contains the C escaped value.  All bytes >= 128 are escaped.',
       },
       {
         fieldName: 'oneofIndex',
         protoName: 'oneof_index',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          "If set, gives the index of a oneof in the containing type's oneof_decl\n list.  This field is a member of that oneof.",
       },
       {
         fieldName: 'jsonName',
         protoName: 'json_name',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          "JSON name of this field. The value is set by protocol compiler. If the\n user has set a \"json_name\" option on this field, that option's value\n will be used. Otherwise, it's deduced from the field's name by converting\n it to camelCase.",
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufFieldOptions,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'proto3Optional',
         protoName: 'proto3_optional',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'If true, this is a proto3 "optional". When a proto3 field is optional, it\n tracks presence regardless of field type.\n\n When proto3_optional is true, this field must be belong to a oneof to\n signal to old proto3 clients that presence is tracked for this field. This\n oneof is known as a "synthetic" oneof, and this field must be its sole\n member (each proto3 optional field gets its own synthetic oneof). Synthetic\n oneofs exist in the descriptor only, and do not generate any API. Synthetic\n oneofs must be ordered after all "real" oneofs.\n\n For message fields, proto3_optional doesn\'t create any semantic change,\n since non-repeated message fields always track presence. However it still\n indicates the semantic detail of whether the user wrote "optional" or not.\n This can be useful for round-tripping the .proto file. For consistency we\n give message fields a synthetic oneof also, even though it is not required\n to track presence. This is especially important because the parser can\'t\n tell if a field is a message or an enum, so it must always create a\n synthetic oneof.\n\n Proto2 optional fields do not set this flag, because they already indicate\n optional with `LABEL_OPTIONAL`.',
       },
     ];
 

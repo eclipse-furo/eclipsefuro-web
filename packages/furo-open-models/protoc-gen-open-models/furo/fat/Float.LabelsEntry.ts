@@ -55,6 +55,7 @@ export class FloatLabelsEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Float.LabelsEntry';
+    this.__meta.description = 'FloatLabelsEntry';
 
     this.__meta.nodeFields = [
       {
@@ -62,12 +63,16 @@ export class FloatLabelsEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `float`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `float`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations',
       },
     ];
 

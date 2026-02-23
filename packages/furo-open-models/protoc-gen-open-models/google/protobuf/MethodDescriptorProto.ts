@@ -89,6 +89,8 @@ export class MethodDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.MethodDescriptorProto';
+    this.__meta.description =
+      'MethodDescriptorProto Describes a method of a service.';
 
     this.__meta.nodeFields = [
       {
@@ -96,36 +98,43 @@ export class MethodDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'inputType',
         protoName: 'input_type',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Input and output type names.  These are resolved in the same way as\n FieldDescriptorProto.type_name, but must refer to a message type.',
       },
       {
         fieldName: 'outputType',
         protoName: 'output_type',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufMethodOptions,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'clientStreaming',
         protoName: 'client_streaming',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: 'Identifies if client streams multiple client messages',
       },
       {
         fieldName: 'serverStreaming',
         protoName: 'server_streaming',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: 'Identifies if server streams multiple server messages',
       },
     ];
 

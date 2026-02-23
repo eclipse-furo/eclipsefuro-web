@@ -84,6 +84,7 @@ export class ConstraintWrappers extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.ConstraintWrappers';
+    this.__meta.description = 'ConstraintWrappers';
 
     this.__meta.nodeFields = [
       {
@@ -96,6 +97,7 @@ export class ConstraintWrappers extends FieldNode {
           pattern: '^-*$',
           required: true,
         },
+        description: '',
       },
       {
         fieldName: 'int32Value',
@@ -107,6 +109,7 @@ export class ConstraintWrappers extends FieldNode {
           multiple_of: 3,
           required: true,
         },
+        description: '',
       },
       {
         fieldName: 'int64Value',
@@ -118,42 +121,49 @@ export class ConstraintWrappers extends FieldNode {
           multiple_of: 3,
           required: true,
         },
+        description: '',
       },
       {
         fieldName: 'floatValue',
         protoName: 'float_value',
         FieldConstructor: FloatValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'doubleValue',
         protoName: 'double_value',
         FieldConstructor: DoubleValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'boolValue',
         protoName: 'bool_value',
         FieldConstructor: BoolValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'uint32Value',
         protoName: 'uint32_value',
         FieldConstructor: UInt32Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'uint64Value',
         protoName: 'uint64_value',
         FieldConstructor: UInt64Value,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'bytesValue',
         protoName: 'bytes_value',
         FieldConstructor: BytesValue,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'exclInt32Value',
@@ -166,6 +176,7 @@ export class ConstraintWrappers extends FieldNode {
           exclusive_minimum: true,
           multiple_of: 3,
         },
+        description: '',
       },
       {
         fieldName: 'exclInt64Value',
@@ -178,6 +189,7 @@ export class ConstraintWrappers extends FieldNode {
           exclusive_minimum: true,
           multiple_of: 3,
         },
+        description: '',
       },
     ];
 

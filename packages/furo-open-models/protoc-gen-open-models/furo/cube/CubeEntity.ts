@@ -10,30 +10,54 @@ import {
 
 /**
  * @interface ICubeEntity
+ *  CubeEntity
  */
 export interface ICubeEntity {
+  /**
+   *  human-readable name for the cube entity
+   */
   displayName?: string;
+  /**
+   *  short and nice description of the cube
+   */
   description?: string;
+  /**
+   *  Definition of the cube
+   */
   cube?: IFuroCubeCubeDefinition;
 }
 
 /**
  * @interface TCubeEntity
+ *  CubeEntity
  */
 export interface TCubeEntity {
+  /**
+   *  human-readable name for the cube entity
+   */
   display_name?: string;
+  /**
+   *  short and nice description of the cube
+   */
   description?: string;
+  /**
+   *  Definition of the cube
+   */
   cube?: TFuroCubeCubeDefinition;
 }
 
 /**
  * CubeEntity
+ *  CubeEntity
  */
 export class CubeEntity extends FieldNode {
+  //  human-readable name for the cube entity
   private _displayName: STRING;
 
+  //  short and nice description of the cube
   private _description: STRING;
 
+  //  Definition of the cube
   private _cube: FuroCubeCubeDefinition;
 
   public __defaultValues: ICubeEntity;
@@ -45,6 +69,7 @@ export class CubeEntity extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.CubeEntity';
+    this.__meta.description = 'CubeEntity CubeEntity';
 
     this.__meta.nodeFields = [
       {
@@ -52,26 +77,32 @@ export class CubeEntity extends FieldNode {
         protoName: 'display_name',
         FieldConstructor: STRING,
         constraints: { read_only: true },
+        description: 'human-readable name for the cube entity',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'short and nice description of the cube',
       },
       {
         fieldName: 'cube',
         protoName: 'cube',
         FieldConstructor: FuroCubeCubeDefinition,
         constraints: {},
+        description: 'Definition of the cube',
       },
     ];
 
     // Initialize the fields
+    //  human-readable name for the cube entity
     this._displayName = new STRING(undefined, this, 'displayName');
 
+    //  short and nice description of the cube
     this._description = new STRING(undefined, this, 'description');
 
+    //  Definition of the cube
     this._cube = new FuroCubeCubeDefinition(undefined, this, 'cube');
 
     // Set required fields
@@ -99,6 +130,7 @@ export class CubeEntity extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  //  human-readable name for the cube entity
   public get displayName(): STRING {
     return this._displayName;
   }
@@ -107,6 +139,7 @@ export class CubeEntity extends FieldNode {
     this.__PrimitivesSetter(this._displayName, v);
   }
 
+  //  short and nice description of the cube
   public get description(): STRING {
     return this._description;
   }
@@ -115,6 +148,7 @@ export class CubeEntity extends FieldNode {
     this.__PrimitivesSetter(this._description, v);
   }
 
+  //  Definition of the cube
   public get cube(): FuroCubeCubeDefinition {
     return this._cube;
   }

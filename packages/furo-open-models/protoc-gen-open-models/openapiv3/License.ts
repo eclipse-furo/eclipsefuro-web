@@ -53,6 +53,8 @@ export class License extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.License';
+    this.__meta.description =
+      'License License information for the exposed API.';
 
     this.__meta.nodeFields = [
       {
@@ -60,18 +62,21 @@ export class License extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'url',
         protoName: 'url',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

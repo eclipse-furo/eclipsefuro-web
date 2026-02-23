@@ -48,6 +48,8 @@ export class BytesValue extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.BytesValue';
+    this.__meta.description =
+      'BytesValue Wrapper message for `bytes`.\n\n The JSON representation for `BytesValue` is JSON string.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class BytesValue extends FieldNode {
         protoName: 'value',
         FieldConstructor: BYTES,
         constraints: {},
+        description: 'The bytes value.',
       },
     ];
 

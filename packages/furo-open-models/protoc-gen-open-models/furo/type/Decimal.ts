@@ -45,6 +45,8 @@ export class Decimal extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Decimal';
+    this.__meta.description =
+      'Decimal Decimal numbers\n  Regex pattern: ^[+-]?(\\d*\\.)?\\d+$';
 
     this.__meta.nodeFields = [
       {
@@ -52,6 +54,8 @@ export class Decimal extends FieldNode {
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Value is set as a quoted number, use your numeric parser of choice',
       },
     ];
 

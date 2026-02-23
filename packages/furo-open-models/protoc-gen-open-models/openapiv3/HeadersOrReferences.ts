@@ -40,6 +40,7 @@ export class HeadersOrReferences extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.HeadersOrReferences';
+    this.__meta.description = 'HeadersOrReferences';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class HeadersOrReferences extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedHeaderOrReference,
         constraints: {},
+        description: '',
       },
     ];
 

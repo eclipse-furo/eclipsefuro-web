@@ -40,6 +40,7 @@ export class CallbacksOrReferences extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.CallbacksOrReferences';
+    this.__meta.description = 'CallbacksOrReferences';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class CallbacksOrReferences extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedCallbackOrReference,
         constraints: {},
+        description: '',
       },
     ];
 

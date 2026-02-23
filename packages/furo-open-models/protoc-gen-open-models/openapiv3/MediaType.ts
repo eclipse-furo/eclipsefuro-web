@@ -80,6 +80,8 @@ export class MediaType extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.MediaType';
+    this.__meta.description =
+      'MediaType Each Media Type Object provides schema and examples for the media type identified by its key.';
 
     this.__meta.nodeFields = [
       {
@@ -87,30 +89,35 @@ export class MediaType extends FieldNode {
         protoName: 'schema',
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'example',
         protoName: 'example',
         FieldConstructor: OpenapiV3Any,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'examples',
         protoName: 'examples',
         FieldConstructor: OpenapiV3ExamplesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'encoding',
         protoName: 'encoding',
         FieldConstructor: OpenapiV3Encodings,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

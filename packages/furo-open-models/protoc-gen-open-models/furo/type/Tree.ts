@@ -66,6 +66,7 @@ export class Tree extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Tree';
+    this.__meta.description = 'Tree *\n Tree is for checking recursive types';
 
     this.__meta.nodeFields = [
       {
@@ -73,18 +74,21 @@ export class Tree extends FieldNode {
         protoName: 'display_name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'nodes',
         protoName: 'nodes',
         FieldConstructor: Tree,
         constraints: {},
+        description: 'Array recursion',
       },
       {
         fieldName: 'recursion',
         protoName: 'recursion',
         FieldConstructor: Tree,
         constraints: {},
+        description: 'direct recursion',
       },
     ];
 

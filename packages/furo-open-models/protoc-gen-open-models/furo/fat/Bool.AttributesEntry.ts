@@ -50,6 +50,7 @@ export class BoolAttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Bool.AttributesEntry';
+    this.__meta.description = 'BoolAttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -57,12 +58,14 @@ export class BoolAttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `bool`.',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `bool`.',
       },
     ];
 

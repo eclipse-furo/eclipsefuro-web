@@ -129,6 +129,7 @@ export class EnumOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.EnumOptions';
+    this.__meta.description = 'EnumOptions';
 
     this.__meta.nodeFields = [
       {
@@ -136,30 +137,39 @@ export class EnumOptions extends FieldNode {
         protoName: 'allow_alias',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Set this option to true to allow mapping different tag names to the same\n value.',
       },
       {
         fieldName: 'deprecated',
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Is this enum deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the enum, or it will be completely ignored; in the very least, this\n is a formalization for deprecating enums.',
       },
       {
         fieldName: 'deprecatedLegacyJsonFieldConflicts',
         protoName: 'deprecated_legacy_json_field_conflicts',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Enable the legacy handling of JSON field name conflicts.  This lowercases\n and strips underscored from the fields before comparison in proto3 only.\n The new behavior takes `json_name` into account and applies to proto2 as\n well.\n TODO Remove this legacy behavior once downstream teams have\n had time to migrate.',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

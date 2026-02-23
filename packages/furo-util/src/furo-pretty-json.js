@@ -1,6 +1,6 @@
 import { LitElement, html, css } from 'lit';
 import { FBP } from '@furo/fbp';
-//TODO: Add bind-data method
+// TODO: Add bind-data method
 
 /**
  * `furo-pretty-json`

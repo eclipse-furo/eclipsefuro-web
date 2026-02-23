@@ -106,6 +106,7 @@ export class EnumValueOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.EnumValueOptions';
+    this.__meta.description = 'EnumValueOptions';
 
     this.__meta.nodeFields = [
       {
@@ -113,24 +114,31 @@ export class EnumValueOptions extends FieldNode {
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Is this enum value deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the enum value, or it will be completely ignored; in the very least,\n this is a formalization for deprecating enum values.',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'debugRedact',
         protoName: 'debug_redact',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Indicate that fields annotated with this enum value should not be printed\n out when using debug formats, e.g. when the field contains sensitive\n credentials.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

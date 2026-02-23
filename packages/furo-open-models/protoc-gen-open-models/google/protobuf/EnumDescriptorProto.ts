@@ -102,6 +102,7 @@ export class EnumDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.EnumDescriptorProto';
+    this.__meta.description = 'EnumDescriptorProto Describes an enum type.';
 
     this.__meta.nodeFields = [
       {
@@ -109,30 +110,37 @@ export class EnumDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: GoogleProtobufEnumValueDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufEnumOptions,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reservedRange',
         protoName: 'reserved_range',
         FieldConstructor: GoogleProtobufEnumDescriptorProtoEnumReservedRange,
         constraints: {},
+        description:
+          'Range of reserved numeric values. Reserved numeric values may not be used\n by enum values in the same enum declaration. Reserved ranges may not\n overlap.',
       },
       {
         fieldName: 'reservedName',
         protoName: 'reserved_name',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Reserved enum value names, which may not be reused. A given name may only\n be reserved once.',
       },
     ];
 

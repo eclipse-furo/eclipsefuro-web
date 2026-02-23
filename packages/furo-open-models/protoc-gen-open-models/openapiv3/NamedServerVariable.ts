@@ -58,6 +58,8 @@ export class NamedServerVariable extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedServerVariable';
+    this.__meta.description =
+      'NamedServerVariable Automatically-generated message used to represent maps of ServerVariable as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedServerVariable extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3ServerVariable,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

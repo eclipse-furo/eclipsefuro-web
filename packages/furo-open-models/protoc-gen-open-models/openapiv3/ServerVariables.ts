@@ -40,6 +40,7 @@ export class ServerVariables extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.ServerVariables';
+    this.__meta.description = 'ServerVariables';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class ServerVariables extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedServerVariable,
         constraints: {},
+        description: '',
       },
     ];
 

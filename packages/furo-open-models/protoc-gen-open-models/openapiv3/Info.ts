@@ -85,6 +85,8 @@ export class Info extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Info';
+    this.__meta.description =
+      'Info The object provides metadata about the API. The metadata MAY be used by the clients if needed, and MAY be presented in editing or documentation generation tools for convenience.';
 
     this.__meta.nodeFields = [
       {
@@ -92,48 +94,56 @@ export class Info extends FieldNode {
         protoName: 'title',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'termsOfService',
         protoName: 'terms_of_service',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'contact',
         protoName: 'contact',
         FieldConstructor: OpenapiV3Contact,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'license',
         protoName: 'license',
         FieldConstructor: OpenapiV3License,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'version',
         protoName: 'version',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'summary',
         protoName: 'summary',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

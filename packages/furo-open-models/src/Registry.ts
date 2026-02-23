@@ -30,6 +30,16 @@ export class Registry {
   }
 
   /**
+   * Checks whether a given type is registered.
+   *
+   * @param {string} type - The name of the type to check for registration.
+   * @returns {boolean} `true` if the specified type is registered; otherwise, `false`.
+   */
+  public static isRegistered(type:string): boolean {
+    return registry.has(type);
+  }
+
+  /**
    * Internal method to create instances for Any
    * @param typename
    * @param initData

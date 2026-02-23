@@ -37,6 +37,7 @@ export class Other extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Other';
+    this.__meta.description = 'Other';
 
     this.__meta.nodeFields = [
       {
@@ -44,6 +45,7 @@ export class Other extends FieldNode {
         protoName: 'recursion',
         FieldConstructor: FuroTypeDeepRecursion,
         constraints: {},
+        description: '',
       },
     ];
 

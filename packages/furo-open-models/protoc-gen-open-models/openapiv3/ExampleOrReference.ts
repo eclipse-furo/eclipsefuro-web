@@ -47,6 +47,7 @@ export class ExampleOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.ExampleOrReference';
+    this.__meta.description = 'ExampleOrReference';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class ExampleOrReference extends FieldNode {
         protoName: 'example',
         FieldConstructor: OpenapiV3Example,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reference',
         protoName: 'reference',
         FieldConstructor: OpenapiV3Reference,
         constraints: {},
+        description: '',
       },
     ];
 

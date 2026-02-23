@@ -42,6 +42,7 @@ export class XAny extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Any';
+    this.__meta.description = 'XAny';
 
     this.__meta.nodeFields = [
       {
@@ -49,12 +50,14 @@ export class XAny extends FieldNode {
         protoName: 'value',
         FieldConstructor: ANY,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'yaml',
         protoName: 'yaml',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

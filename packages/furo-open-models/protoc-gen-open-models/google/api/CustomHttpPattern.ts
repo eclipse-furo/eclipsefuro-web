@@ -53,6 +53,8 @@ export class CustomHttpPattern extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.api.CustomHttpPattern';
+    this.__meta.description =
+      'CustomHttpPattern A custom pattern is used for defining custom HTTP verb.';
 
     this.__meta.nodeFields = [
       {
@@ -60,12 +62,14 @@ export class CustomHttpPattern extends FieldNode {
         protoName: 'kind',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'The name of this custom HTTP verb.',
       },
       {
         fieldName: 'path',
         protoName: 'path',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'The path matched by this custom verb.',
       },
     ];
 

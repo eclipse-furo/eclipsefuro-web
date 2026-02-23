@@ -37,6 +37,7 @@ export class XObject extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Object';
+    this.__meta.description = 'XObject';
 
     this.__meta.nodeFields = [
       {
@@ -44,6 +45,7 @@ export class XObject extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

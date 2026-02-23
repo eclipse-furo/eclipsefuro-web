@@ -109,6 +109,7 @@ export class ExtensionRangeOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.ExtensionRangeOptions';
+    this.__meta.description = 'ExtensionRangeOptions';
 
     this.__meta.nodeFields = [
       {
@@ -116,18 +117,23 @@ export class ExtensionRangeOptions extends FieldNode {
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
       {
         fieldName: 'declaration',
         protoName: 'declaration',
         FieldConstructor: GoogleProtobufExtensionRangeOptionsDeclaration,
         constraints: {},
+        description:
+          'For external users: DO NOT USE. We are in the process of open sourcing\n extension declaration and executing internal cleanups before it can be\n used externally.',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'verification',
@@ -135,6 +141,8 @@ export class ExtensionRangeOptions extends FieldNode {
         FieldConstructor:
           ENUM<GoogleProtobufExtensionRangeOptionsVerificationState>,
         constraints: {},
+        description:
+          'The verification state of the range.\n TODO: flip the default to DECLARATION once all empty ranges\n are marked as UNVERIFIED.',
       },
     ];
 

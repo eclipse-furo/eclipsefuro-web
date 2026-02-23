@@ -82,6 +82,8 @@ export class FeatureSetDefaults extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FeatureSetDefaults';
+    this.__meta.description =
+      'FeatureSetDefaults A compiled specification for the defaults of a set of features.  These\n messages are generated from FeatureSet extensions and can be used to seed\n feature resolution. The resolution with this object becomes a simple search\n for the closest matching edition, followed by proto merges.';
 
     this.__meta.nodeFields = [
       {
@@ -90,18 +92,23 @@ export class FeatureSetDefaults extends FieldNode {
         FieldConstructor:
           GoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'minimumEdition',
         protoName: 'minimum_edition',
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
+        description:
+          'The minimum supported edition (inclusive) when this was constructed.\n Editions before this will not have defaults.',
       },
       {
         fieldName: 'maximumEdition',
         protoName: 'maximum_edition',
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
+        description:
+          'The maximum known edition (inclusive) when this was constructed. Editions\n after this will not have reliable defaults.',
       },
     ];
 

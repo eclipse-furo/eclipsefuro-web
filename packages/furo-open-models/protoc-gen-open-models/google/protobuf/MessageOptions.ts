@@ -277,6 +277,7 @@ export class MessageOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.MessageOptions';
+    this.__meta.description = 'MessageOptions';
 
     this.__meta.nodeFields = [
       {
@@ -284,42 +285,55 @@ export class MessageOptions extends FieldNode {
         protoName: 'message_set_wire_format',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          "Set true to use the old proto1 MessageSet wire format for extensions.\n This is provided for backwards-compatibility with the MessageSet wire\n format.  You should not use this for any other reason:  It's less\n efficient, has fewer features, and is more complicated.\n\n The message must be defined exactly as follows:\n   message Foo {\n     option message_set_wire_format = true;\n     extensions 4 to max;\n   }\n Note that the message cannot have any defined fields; MessageSets only\n have extensions.\n\n All extensions of your type must be singular messages; e.g. they cannot\n be int32s, enums, or repeated messages.\n\n Because this is an option, the above two restrictions are not enforced by\n the protocol compiler.",
       },
       {
         fieldName: 'noStandardDescriptorAccessor',
         protoName: 'no_standard_descriptor_accessor',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Disables the generation of the standard "descriptor()" accessor, which can\n conflict with a field of the same name.  This is meant to make migration\n from proto1 easier; new code should avoid fields named "descriptor".',
       },
       {
         fieldName: 'deprecated',
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Is this message deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the message, or it will be completely ignored; in the very least,\n this is a formalization for deprecating messages.',
       },
       {
         fieldName: 'mapEntry',
         protoName: 'map_entry',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'NOTE: Do not set the option in .proto files. Always use the maps syntax\n instead. The option should only be implicitly set by the proto compiler\n parser.\n\n Whether the message is an automatically generated map entry type for the\n maps field.\n\n For maps fields:\n     map<KeyType, ValueType> map_field = 1;\n The parsed descriptor looks like:\n     message MapFieldEntry {\n         option map_entry = true;\n         optional KeyType key = 1;\n         optional ValueType value = 2;\n     }\n     repeated MapFieldEntry map_field = 1;\n\n Implementations may choose not to generate the map_entry=true message, but\n use a native map in the target language to hold the keys and values.\n The reflection APIs in such implementations still need to work as\n if the field is a repeated message field.',
       },
       {
         fieldName: 'deprecatedLegacyJsonFieldConflicts',
         protoName: 'deprecated_legacy_json_field_conflicts',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Enable the legacy handling of JSON field name conflicts.  This lowercases\n and strips underscored from the fields before comparison in proto3 only.\n The new behavior takes `json_name` into account and applies to proto2 as\n well.\n\n This should only be used as a temporary measure against broken builds due\n to the change in behavior for JSON field name conflicts.\n\n TODO This is legacy behavior we plan to remove once downstream\n teams have had time to migrate.',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

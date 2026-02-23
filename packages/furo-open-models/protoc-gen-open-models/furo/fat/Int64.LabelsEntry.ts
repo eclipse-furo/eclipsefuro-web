@@ -55,6 +55,7 @@ export class Int64LabelsEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Int64.LabelsEntry';
+    this.__meta.description = 'Int64LabelsEntry';
 
     this.__meta.nodeFields = [
       {
@@ -62,12 +63,16 @@ export class Int64LabelsEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `int64`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `int64`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations',
       },
     ];
 

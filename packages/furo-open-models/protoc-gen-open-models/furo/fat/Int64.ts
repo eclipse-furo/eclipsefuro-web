@@ -71,6 +71,8 @@ export class Int64 extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Int64';
+    this.__meta.description =
+      'Int64 Furo annotated type wrapper message for `int64`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitations';
 
     this.__meta.nodeFields = [
       {
@@ -78,6 +80,8 @@ export class Int64 extends FieldNode {
         protoName: 'value',
         FieldConstructor: INT64,
         constraints: {},
+        description:
+          'The JSON representation for `Int64Value` is JSON number, range is set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER',
       },
       {
         fieldName: 'labels',
@@ -85,6 +89,8 @@ export class Int64 extends FieldNode {
         FieldConstructor: MAP<string, BOOLEAN, boolean>,
         ValueConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...',
       },
       {
         fieldName: 'attributes',
@@ -92,6 +98,8 @@ export class Int64 extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
     ];
 

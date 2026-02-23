@@ -66,6 +66,8 @@ export class Xml extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Xml';
+    this.__meta.description =
+      'Xml A metadata object that allows for more fine-tuned XML model definitions.  When using arrays, XML element names are *not* inferred (for singular/plural forms) and the `name` property SHOULD be used to add that information. See examples for expected behavior.';
 
     this.__meta.nodeFields = [
       {
@@ -73,36 +75,42 @@ export class Xml extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'namespace',
         protoName: 'namespace',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'prefix',
         protoName: 'prefix',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'attribute',
         protoName: 'attribute',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'wrapped',
         protoName: 'wrapped',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

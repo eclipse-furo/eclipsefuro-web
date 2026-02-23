@@ -40,6 +40,7 @@ export class MediaTypes extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.MediaTypes';
+    this.__meta.description = 'MediaTypes';
 
     this.__meta.nodeFields = [
       {
@@ -47,6 +48,7 @@ export class MediaTypes extends FieldNode {
         protoName: 'additional_properties',
         FieldConstructor: OpenapiV3NamedMediaType,
         constraints: {},
+        description: '',
       },
     ];
 

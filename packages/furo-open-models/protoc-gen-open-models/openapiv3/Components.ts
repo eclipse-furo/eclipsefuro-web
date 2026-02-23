@@ -130,6 +130,8 @@ export class Components extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Components';
+    this.__meta.description =
+      'Components Holds a set of reusable objects for different aspects of the OAS. All objects defined within the components object will have no effect on the API unless they are explicitly referenced from properties outside the components object.';
 
     this.__meta.nodeFields = [
       {
@@ -137,60 +139,70 @@ export class Components extends FieldNode {
         protoName: 'schemas',
         FieldConstructor: OpenapiV3SchemasOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'responses',
         protoName: 'responses',
         FieldConstructor: OpenapiV3ResponsesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'parameters',
         protoName: 'parameters',
         FieldConstructor: OpenapiV3ParametersOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'examples',
         protoName: 'examples',
         FieldConstructor: OpenapiV3ExamplesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'requestBodies',
         protoName: 'request_bodies',
         FieldConstructor: OpenapiV3RequestBodiesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'headers',
         protoName: 'headers',
         FieldConstructor: OpenapiV3HeadersOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'securitySchemes',
         protoName: 'security_schemes',
         FieldConstructor: OpenapiV3SecuritySchemesOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'links',
         protoName: 'links',
         FieldConstructor: OpenapiV3LinksOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'callbacks',
         protoName: 'callbacks',
         FieldConstructor: OpenapiV3CallbacksOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

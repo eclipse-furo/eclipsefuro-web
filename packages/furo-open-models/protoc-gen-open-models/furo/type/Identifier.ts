@@ -140,6 +140,7 @@ export class Identifier extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Identifier';
+    this.__meta.description = 'Identifier';
 
     this.__meta.nodeFields = [
       {
@@ -147,18 +148,21 @@ export class Identifier extends FieldNode {
         protoName: 'ref_system',
         FieldConstructor: ENUM<FuroTypeRefSystem>,
         constraints: {},
+        description: 'related to the master of the object - who gives the id',
       },
       {
         fieldName: 'refType',
         protoName: 'ref_type',
         FieldConstructor: ENUM<FuroTypeRefType>,
         constraints: {},
+        description: 'Type from the master objects system',
       },
       {
         fieldName: 'bookingCenter',
         protoName: 'booking_center',
         FieldConstructor: ENUM<FuroTypeBookingCenter>,
         constraints: {},
+        description: 'booking center',
       },
       {
         fieldName: 'attributes',
@@ -166,48 +170,58 @@ export class Identifier extends FieldNode {
         FieldConstructor: MAP<string, STRING, string>,
         ValueConstructor: STRING,
         constraints: {},
+        description:
+          'Attributes for a value, something like confidential-msg: you are not allowed to see this value',
       },
       {
         fieldName: 'id',
         protoName: 'id',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'for example obj_id or your own uuid - the unique id for the source system (together with type)',
       },
       {
         fieldName: 'stringArray',
         protoName: 'string_array',
         FieldConstructor: STRING,
         constraints: { read_only: true, max_items: 4, required: true },
+        description: '',
       },
       {
         fieldName: 'repeatedDecimal',
         protoName: 'repeated_decimal',
         FieldConstructor: FuroTypeDecimal,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'decRange',
         protoName: 'dec_range',
         FieldConstructor: FuroTypeDecimalRange,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'any',
         protoName: 'any',
         FieldConstructor: ANY,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'fatString',
         protoName: 'fat_string',
         FieldConstructor: FuroFatString,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'trueFalse',
         protoName: 'true_false',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
     ];
 

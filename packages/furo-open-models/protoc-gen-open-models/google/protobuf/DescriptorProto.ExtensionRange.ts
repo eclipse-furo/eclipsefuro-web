@@ -49,6 +49,7 @@ export class DescriptorProtoExtensionRange extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.DescriptorProto.ExtensionRange';
+    this.__meta.description = 'DescriptorProtoExtensionRange';
 
     this.__meta.nodeFields = [
       {
@@ -56,18 +57,21 @@ export class DescriptorProtoExtensionRange extends FieldNode {
         protoName: 'start',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'end',
         protoName: 'end',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufExtensionRangeOptions,
         constraints: {},
+        description: '',
       },
     ];
 

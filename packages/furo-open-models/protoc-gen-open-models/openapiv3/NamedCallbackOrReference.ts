@@ -58,6 +58,8 @@ export class NamedCallbackOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedCallbackOrReference';
+    this.__meta.description =
+      'NamedCallbackOrReference Automatically-generated message used to represent maps of CallbackOrReference as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedCallbackOrReference extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3CallbackOrReference,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

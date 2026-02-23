@@ -47,6 +47,7 @@ export class RequestBodyOrReference extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.RequestBodyOrReference';
+    this.__meta.description = 'RequestBodyOrReference';
 
     this.__meta.nodeFields = [
       {
@@ -54,12 +55,14 @@ export class RequestBodyOrReference extends FieldNode {
         protoName: 'request_body',
         FieldConstructor: OpenapiV3RequestBody,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'reference',
         protoName: 'reference',
         FieldConstructor: OpenapiV3Reference,
         constraints: {},
+        description: '',
       },
     ];
 

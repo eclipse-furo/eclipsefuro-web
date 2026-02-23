@@ -64,6 +64,7 @@ export class OneofOptions extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.OneofOptions';
+    this.__meta.description = 'OneofOptions';
 
     this.__meta.nodeFields = [
       {
@@ -71,12 +72,15 @@ export class OneofOptions extends FieldNode {
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: 'Any features defined in the specific edition.',
       },
       {
         fieldName: 'uninterpretedOption',
         protoName: 'uninterpreted_option',
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
+        description:
+          "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 

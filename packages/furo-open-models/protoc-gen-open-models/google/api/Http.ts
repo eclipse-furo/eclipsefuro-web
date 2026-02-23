@@ -90,6 +90,8 @@ export class Http extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.api.Http';
+    this.__meta.description =
+      'Http Defines the HTTP configuration for an API service. It contains a list of\n [HttpRule][google.api.HttpRule], each specifying the mapping of an RPC method\n to one or more HTTP REST API methods.';
 
     this.__meta.nodeFields = [
       {
@@ -97,12 +99,16 @@ export class Http extends FieldNode {
         protoName: 'rules',
         FieldConstructor: GoogleApiHttpRule,
         constraints: {},
+        description:
+          'A list of HTTP configuration rules that apply to individual API methods.\n\n **NOTE:** All service configuration rules follow "last one wins" order.',
       },
       {
         fieldName: 'fullyDecodeReservedExpansion',
         protoName: 'fully_decode_reserved_expansion',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'When set to true, URL path parameters will be fully URI-decoded except in\n cases of single segment matches in reserved expansion, where "%2F" will be\n left encoded.\n\n The default behavior is to not decode RFC 6570 reserved characters in multi\n segment matches.',
       },
     ];
 

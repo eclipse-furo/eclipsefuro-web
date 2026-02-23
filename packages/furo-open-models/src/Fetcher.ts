@@ -1,7 +1,8 @@
 import {
   deepJsonNameToProtoName,
-  deepProtoNameToJsonName, jsonNameToProtoName,
-  protoNameToJsonName
+  deepProtoNameToJsonName,
+  jsonNameToProtoName,
+  protoNameToJsonName,
 } from './Mapper';
 
 export interface IApiOptions {
@@ -573,11 +574,14 @@ export class Fetcher<REQ, RES> {
       keysForBodyOrQueryParams.forEach(key => {
         if (Array.isArray(rqo[key])) {
           (rqo[key] as unknown[]).forEach(e => {
-            params.push(`${this.API_OPTIONS.PreserveProtoNames? jsonNameToProtoName(key as string):(key as string)}=${e}`);
+            params.push(
+              `${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${e}`,
+            );
           });
         } else {
-
-          params.push(`${this.API_OPTIONS.PreserveProtoNames? jsonNameToProtoName(key as string):(key as string)}=${rqo[key]}`);
+          params.push(
+            `${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${rqo[key]}`,
+          );
         }
       });
       if (params.length) {

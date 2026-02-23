@@ -37,6 +37,7 @@ export class CubeServiceGetResponse extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.CubeServiceGetResponse';
+    this.__meta.description = 'CubeServiceGetResponse';
 
     this.__meta.nodeFields = [
       {
@@ -44,6 +45,7 @@ export class CubeServiceGetResponse extends FieldNode {
         protoName: 'entity',
         FieldConstructor: FuroCubeCubeEntity,
         constraints: {},
+        description: '',
       },
     ];
 

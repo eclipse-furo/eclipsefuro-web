@@ -50,6 +50,7 @@ export class EmptyAttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Empty.AttributesEntry';
+    this.__meta.description = 'EmptyAttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -57,12 +58,16 @@ export class EmptyAttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `empty`. Empty has no values and only contains the labels and attributes',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `empty`. Empty has no values and only contains the labels and attributes',
       },
     ];
 

@@ -67,6 +67,7 @@ export class AnyLabelsEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Any.LabelsEntry';
+    this.__meta.description = 'AnyLabelsEntry';
 
     this.__meta.nodeFields = [
       {
@@ -74,12 +75,16 @@ export class AnyLabelsEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `any`.\n // Any contains an arbitrary serialized protocol buffer message along with a\n // URL that describes the type of the serialized message. https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/any.proto',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'Furo annotated type wrapper message for `any`.\n // Any contains an arbitrary serialized protocol buffer message along with a\n // URL that describes the type of the serialized message. https://github.com/protocolbuffers/protobuf/blob/master/src/google/protobuf/any.proto',
       },
     ];
 

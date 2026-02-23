@@ -2,13 +2,10 @@
 // protoc-gen-open-models version: ????
 
 import {
-  BOOLEAN,
   DOUBLE,
   ENUM,
   FieldNode,
-  INT32,
   Registry,
-  STRING,
 } from '@furo/open-models/dist/index';
 import {
   Colour as FuroCubeColour,
@@ -20,51 +17,77 @@ import { Materials as FuroCubeMaterials } from './Materials';
 
 /**
  * @interface ICubeDefinition
+ *  CubeDefinition is a definition of a cube.
  */
 export interface ICubeDefinition {
+  /**
+   *  the length of the cube in cm
+   */
   length?: number;
+  /**
+   *  the breadth / width of the cube in cm
+   */
   breadth?: number;
+  /**
+   *  the height of the cube in cm
+   */
   height?: number;
+  /**
+   *  the color of the cube
+   */
   colour?: IFuroCubeColour;
+  /**
+   *  The material the cube is made of
+   */
   material?: FuroCubeMaterials | string;
-  str?: string;
-  boo?: boolean;
-  num?: number;
 }
 
 /**
  * @interface TCubeDefinition
+ *  CubeDefinition is a definition of a cube.
  */
 export interface TCubeDefinition {
+  /**
+   *  the length of the cube in cm
+   */
   length?: number;
+  /**
+   *  the breadth / width of the cube in cm
+   */
   breadth?: number;
+  /**
+   *  the height of the cube in cm
+   */
   height?: number;
+  /**
+   *  the color of the cube
+   */
   colour?: TFuroCubeColour;
+  /**
+   *  The material the cube is made of
+   */
   material?: FuroCubeMaterials | string;
-  str?: string;
-  boo?: boolean;
-  num?: number;
 }
 
 /**
  * CubeDefinition
+ *  CubeDefinition is a definition of a cube.
  */
 export class CubeDefinition extends FieldNode {
+  //  the length of the cube in cm
   private _length: DOUBLE;
 
+  //  the breadth / width of the cube in cm
   private _breadth: DOUBLE;
 
+  //  the height of the cube in cm
   private _height: DOUBLE;
 
+  //  the color of the cube
   private _colour: FuroCubeColour;
 
+  //  The material the cube is made of
   private _material: ENUM<FuroCubeMaterials>;
-
-  private _str: STRING;
-
-  private _boo: BOOLEAN;
-
-  private _num: INT32;
 
   public __defaultValues: ICubeDefinition;
 
@@ -75,6 +98,8 @@ export class CubeDefinition extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.CubeDefinition';
+    this.__meta.description =
+      'CubeDefinition CubeDefinition is a definition of a cube.';
 
     this.__meta.nodeFields = [
       {
@@ -82,60 +107,52 @@ export class CubeDefinition extends FieldNode {
         protoName: 'length',
         FieldConstructor: DOUBLE,
         constraints: { maximum: 1000, minimum: 100, required: true },
+        description: 'the length of the cube in cm',
       },
       {
         fieldName: 'breadth',
         protoName: 'breadth',
         FieldConstructor: DOUBLE,
         constraints: { maximum: 1000, minimum: 100, required: true },
+        description: 'the breadth / width of the cube in cm',
       },
       {
         fieldName: 'height',
         protoName: 'height',
         FieldConstructor: DOUBLE,
         constraints: { maximum: 1000, minimum: 100, required: true },
+        description: 'the height of the cube in cm',
       },
       {
         fieldName: 'colour',
         protoName: 'colour',
         FieldConstructor: FuroCubeColour,
         constraints: {},
+        description: 'the color of the cube',
       },
       {
         fieldName: 'material',
         protoName: 'material',
         FieldConstructor: ENUM<FuroCubeMaterials>,
         constraints: {},
-      },
-      {
-        fieldName: 'str',
-        protoName: 'str',
-        FieldConstructor: STRING,
-        constraints: {},
-      },
-      {
-        fieldName: 'boo',
-        protoName: 'boo',
-        FieldConstructor: BOOLEAN,
-        constraints: {},
-      },
-      {
-        fieldName: 'num',
-        protoName: 'num',
-        FieldConstructor: INT32,
-        constraints: {},
+        description: 'The material the cube is made of',
       },
     ];
 
     // Initialize the fields
+    //  the length of the cube in cm
     this._length = new DOUBLE(undefined, this, 'length');
 
+    //  the breadth / width of the cube in cm
     this._breadth = new DOUBLE(undefined, this, 'breadth');
 
+    //  the height of the cube in cm
     this._height = new DOUBLE(undefined, this, 'height');
 
+    //  the color of the cube
     this._colour = new FuroCubeColour(undefined, this, 'colour');
 
+    //  The material the cube is made of
     this._material = new ENUM<FuroCubeMaterials>(
       undefined,
       FuroCubeMaterials,
@@ -143,12 +160,6 @@ export class CubeDefinition extends FieldNode {
       this,
       'material',
     );
-
-    this._str = new STRING(undefined, this, 'str');
-
-    this._boo = new BOOLEAN(undefined, this, 'boo');
-
-    this._num = new INT32(undefined, this, 'num');
 
     // Set required fields
     ['length', 'breadth', 'height'].forEach(fieldName => {
@@ -178,6 +189,7 @@ export class CubeDefinition extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  //  the length of the cube in cm
   public get length(): DOUBLE {
     return this._length;
   }
@@ -186,6 +198,7 @@ export class CubeDefinition extends FieldNode {
     this.__PrimitivesSetter(this._length, v);
   }
 
+  //  the breadth / width of the cube in cm
   public get breadth(): DOUBLE {
     return this._breadth;
   }
@@ -194,6 +207,7 @@ export class CubeDefinition extends FieldNode {
     this.__PrimitivesSetter(this._breadth, v);
   }
 
+  //  the height of the cube in cm
   public get height(): DOUBLE {
     return this._height;
   }
@@ -202,6 +216,7 @@ export class CubeDefinition extends FieldNode {
     this.__PrimitivesSetter(this._height, v);
   }
 
+  //  the color of the cube
   public get colour(): FuroCubeColour {
     return this._colour;
   }
@@ -210,36 +225,13 @@ export class CubeDefinition extends FieldNode {
     this.__TypeSetter(this._colour, v);
   }
 
+  //  The material the cube is made of
   public get material(): ENUM<FuroCubeMaterials> {
     return this._material;
   }
 
   public set material(v: FuroCubeMaterials) {
     this.__TypeSetter(this._material, v);
-  }
-
-  public get str(): STRING {
-    return this._str;
-  }
-
-  public set str(v: string) {
-    this.__PrimitivesSetter(this._str, v);
-  }
-
-  public get boo(): BOOLEAN {
-    return this._boo;
-  }
-
-  public set boo(v: boolean) {
-    this.__PrimitivesSetter(this._boo, v);
-  }
-
-  public get num(): INT32 {
-    return this._num;
-  }
-
-  public set num(v: number) {
-    this.__PrimitivesSetter(this._num, v);
   }
 
   fromLiteral(data: ICubeDefinition) {

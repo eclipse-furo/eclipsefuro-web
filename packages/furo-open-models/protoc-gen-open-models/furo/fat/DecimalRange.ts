@@ -70,6 +70,8 @@ export class DecimalRange extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.DecimalRange';
+    this.__meta.description =
+      'DecimalRange Represents a decimal range, encoded as a decimal start (inclusive) and a\n  decimal end (exclusive).\n\n  The start must be less than or equal to the end.\n  If a decimal is empty it means min for start and max for end.';
 
     this.__meta.nodeFields = [
       {
@@ -77,12 +79,14 @@ export class DecimalRange extends FieldNode {
         protoName: 'start',
         FieldConstructor: FuroTypeDecimal,
         constraints: {},
+        description: 'Optional. Inclusive start of the decimal range.',
       },
       {
         fieldName: 'end',
         protoName: 'end',
         FieldConstructor: FuroTypeDecimal,
         constraints: {},
+        description: 'Optional. Exclusive end of the decimal range.',
       },
     ];
 

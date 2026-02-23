@@ -50,6 +50,7 @@ export class Int32AttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.fat.Int32.AttributesEntry';
+    this.__meta.description = 'Int32AttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -57,12 +58,14 @@ export class Int32AttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `int32`.',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Furo annotated type wrapper message for `int32`.',
       },
     ];
 

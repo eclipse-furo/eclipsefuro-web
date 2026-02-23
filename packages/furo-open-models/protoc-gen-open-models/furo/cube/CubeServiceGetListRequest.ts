@@ -39,6 +39,7 @@ export class CubeServiceGetListRequest extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.cube.CubeServiceGetListRequest';
+    this.__meta.description = 'CubeServiceGetListRequest';
 
     this.__meta.nodeFields = [
       {
@@ -46,6 +47,7 @@ export class CubeServiceGetListRequest extends FieldNode {
         protoName: 'query',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'searches for display_name or client_number',
       },
     ];
 

@@ -100,6 +100,7 @@ export class ExtensionRangeOptionsDeclaration extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.ExtensionRangeOptions.Declaration';
+    this.__meta.description = 'ExtensionRangeOptionsDeclaration';
 
     this.__meta.nodeFields = [
       {
@@ -107,30 +108,39 @@ export class ExtensionRangeOptionsDeclaration extends FieldNode {
         protoName: 'number',
         FieldConstructor: INT32,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'fullName',
         protoName: 'full_name',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'The fully-qualified name of the extension field. There must be a leading\n dot in front of the full name.',
       },
       {
         fieldName: 'type',
         protoName: 'type',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'The fully-qualified type name of the extension field. Unlike\n Metadata.type, Declaration.type must have a leading dot for messages\n and enums.',
       },
       {
         fieldName: 'reserved',
         protoName: 'reserved',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'If true, indicates that the number is reserved in the extension range,\n and any extension field with the number will fail to compile. Set this\n when a declared extension field is deleted.',
       },
       {
         fieldName: 'repeated',
         protoName: 'repeated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description:
+          'If true, indicates that the extension must be defined as repeated.\n Otherwise the extension must be defined as optional.',
       },
     ];
 

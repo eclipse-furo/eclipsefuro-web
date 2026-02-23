@@ -101,6 +101,8 @@ export class UninterpretedOption extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.UninterpretedOption';
+    this.__meta.description =
+      'UninterpretedOption A message representing a option the parser does not recognize. This only\n appears in options protos created by the compiler::Parser class.\n DescriptorPool resolves these when building Descriptor objects. Therefore,\n options protos in descriptor objects (e.g. returned by Descriptor::options(),\n or produced by Descriptor::CopyTo()) will never have UninterpretedOptions\n in them.';
 
     this.__meta.nodeFields = [
       {
@@ -108,42 +110,50 @@ export class UninterpretedOption extends FieldNode {
         protoName: 'name',
         FieldConstructor: GoogleProtobufUninterpretedOptionNamePart,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'identifierValue',
         protoName: 'identifier_value',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'The value of the uninterpreted option, in whatever type the tokenizer\n identified it as during parsing. Exactly one of these should be set.',
       },
       {
         fieldName: 'positiveIntValue',
         protoName: 'positive_int_value',
         FieldConstructor: UINT64,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'negativeIntValue',
         protoName: 'negative_int_value',
         FieldConstructor: INT64,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'doubleValue',
         protoName: 'double_value',
         FieldConstructor: DOUBLE,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'stringValue',
         protoName: 'string_value',
         FieldConstructor: BYTES,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'aggregateValue',
         protoName: 'aggregate_value',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

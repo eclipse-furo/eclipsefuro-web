@@ -52,6 +52,8 @@ type Meta = {
       options?: AddEventListenerOptions | boolean;
     }[]
   >;
+  // Description of the message type itself. Used for AI jsonschema generation.
+  description?: string;
 };
 
 /**
@@ -75,6 +77,8 @@ export type FieldDescriptor = {
   FieldConstructor: any; // (new(_initData: any, parent?: FieldNode, parentAttributeName?: string) => FieldNode);
   ValueConstructor?: new () => FieldNode; // used by MAP
   constraints?: FieldConstraints;
+  // Optional description to generate AI friendly jsonschema
+  description?: string;
 };
 
 export interface ValueStateSummary {
@@ -120,7 +124,7 @@ export abstract class FieldNode {
     isArrayNode: false,
     isRecursionNode: false,
     isAnyNode: false,
-    eventListener: new Map<string, []>()
+    eventListener: new Map<string, []>(),
   };
 
   private ___rootNode: FieldNode;
@@ -167,7 +171,7 @@ export abstract class FieldNode {
   constructor(
     _initData: undefined,
     parent?: FieldNode,
-    parentAttributeName?: string
+    parentAttributeName?: string,
   ) {
     this.__parentNode = parent;
 
@@ -239,8 +243,8 @@ export abstract class FieldNode {
     this.__broadcastEvent(
       new CustomEvent(v ? 'parent-readonly-set' : 'parent-readonly-unset', {
         detail: this,
-        bubbles: false
-      })
+        bubbles: false,
+      }),
     );
   }
 
@@ -261,8 +265,8 @@ export abstract class FieldNode {
       new CustomEvent('model-injected', {
         composed: true,
         bubbles: false,
-        detail: this
-      })
+        detail: this,
+      }),
     );
 
     this.__meta.isPristine = true;
@@ -312,7 +316,7 @@ export abstract class FieldNode {
       (
         this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
       ).__updateWithLiteral(
-        (data as FieldNode)[field.fieldName as keyof FieldNode]
+        (data as FieldNode)[field.fieldName as keyof FieldNode],
       );
 
       (
@@ -358,11 +362,11 @@ export abstract class FieldNode {
       } else if (
         ((this as FieldNode)[`_${f.fieldName}` as keyof FieldNode] &&
           (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode)
-              .__isEmpty ||
+            .__isEmpty ||
             (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta
               .required)) ||
         ((this[`_${f.fieldName}` as keyof FieldNode] as FieldNode)
-            .__isPrimitive &&
+          .__isPrimitive &&
           OPEN_MODELS_OPTIONS.EmitDefaultValues)
       ) {
         d[jsonName] = (
@@ -442,7 +446,7 @@ export abstract class FieldNode {
       parts.unshift(
         OPEN_MODELS_OPTIONS.UseProtoNames
           ? this.__toSnakeCase(this.__meta.fieldName)
-          : this.__meta.fieldName
+          : this.__meta.fieldName,
       );
       this.__parentNode?.___pathBuilder(parts);
     }
@@ -470,7 +474,7 @@ export abstract class FieldNode {
    */
   get __placeholder(): string {
     return OPEN_MODELS_OPTIONS.labelFormatter(
-      `${this.__getBaseName()}.placeholder`
+      `${this.__getBaseName()}.placeholder`,
     );
   }
 
@@ -479,7 +483,7 @@ export abstract class FieldNode {
    */
   get __ariaDescription(): string {
     return OPEN_MODELS_OPTIONS.labelFormatter(
-      `${this.__getBaseName()}.description`
+      `${this.__getBaseName()}.description`,
     );
   }
 
@@ -510,7 +514,7 @@ export abstract class FieldNode {
       carrier.push({
         field: this.__fieldPath,
         state: this.__meta.valueState,
-        message: this.__meta.stateMessage
+        message: this.__meta.stateMessage,
       });
     }
     this.__childNodes.forEach(child => {
@@ -536,8 +540,8 @@ export abstract class FieldNode {
     this.__dispatchEvent(
       new CustomEvent('state-changed', {
         detail: this,
-        bubbles: false
-      })
+        bubbles: false,
+      }),
     );
   }
 
@@ -569,16 +573,16 @@ export abstract class FieldNode {
           fn.__dispatchEvent(
             new CustomEvent('validity-changed', {
               detail: fn,
-              bubbles: true
-            })
+              bubbles: true,
+            }),
           );
         }
 
         fn.__dispatchEvent(
           new CustomEvent('state-changed', {
             detail: fn,
-            bubbles: false
-          })
+            bubbles: false,
+          }),
         );
       }
     });
@@ -628,12 +632,12 @@ export abstract class FieldNode {
       return ts(this);
     }
     const found = this.__meta.nodeFields.find(
-      fieldDescriptor => fieldDescriptor.fieldName === 'displayName'
+      fieldDescriptor => fieldDescriptor.fieldName === 'displayName',
     );
     if (
       found &&
       (this['displayName' as keyof FieldNode] as FieldNode).__meta.typeName ===
-      'primitives.STRING'
+        'primitives.STRING'
     ) {
       return (this['displayName' as keyof FieldNode] as FieldNode).toString();
     }
@@ -681,7 +685,7 @@ export abstract class FieldNode {
             ? OPEN_MODELS_OPTIONS.UseProtoNames
               ? this.__toSnakeCase(this.__meta.fieldName)
               : this.__meta.fieldName
-            : this.__meta.typeName || ''
+            : this.__meta.typeName || '',
         );
       }
       this.__parentNode?.___fieldNameBuilder(parts);
@@ -719,8 +723,8 @@ export abstract class FieldNode {
       this.__dispatchEvent(
         new CustomEvent('validity-changed', {
           detail: this,
-          bubbles: false
-        })
+          bubbles: false,
+        }),
       );
     }
   }
@@ -758,8 +762,8 @@ export abstract class FieldNode {
       this.__dispatchEvent(
         new CustomEvent('validity-changed', {
           detail: this,
-          bubbles: false
-        })
+          bubbles: false,
+        }),
       );
     }
 
@@ -823,14 +827,14 @@ export abstract class FieldNode {
     if (this.__meta.isArrayNode && this.__parentNode?.__parentNode) {
       const fieldDescriptor =
         this.__parentNode.__parentNode.__meta.nodeFields.find(
-          f => f.fieldName === this.__parentNode!.__meta.fieldName
+          f => f.fieldName === this.__parentNode!.__meta.fieldName,
         );
       return fieldDescriptor?.constraints;
     }
 
     if (this.__parentNode) {
       const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
-        f => f.fieldName === this.__meta.fieldName
+        f => f.fieldName === this.__meta.fieldName,
       );
       return fieldDescriptor?.constraints;
     }
@@ -843,11 +847,11 @@ export abstract class FieldNode {
    * @param {string[]} messageAndParams - Description for the formatter.
    */
   __setValueState(state: ValueState, messageAndParams: string[]) {
-    const shouldNotify = (this.__meta.valueState !== state);
+    const shouldNotify = this.__meta.valueState !== state;
     this.__meta.valueState = state;
     this.__meta.stateMessage = OPEN_MODELS_OPTIONS.valueStateMessageFormatter(
       messageAndParams[0],
-      ...messageAndParams.slice(1)
+      ...messageAndParams.slice(1),
     );
     // set invalid on error state
     // the event is sent from ...
@@ -857,8 +861,8 @@ export abstract class FieldNode {
       this.__dispatchEvent(
         new CustomEvent('state-changed', {
           detail: this,
-          bubbles: false
-        })
+          bubbles: false,
+        }),
       );
     }
   }
@@ -931,7 +935,7 @@ export abstract class FieldNode {
   // eslint-disable-next-line class-methods-use-this
   protected __TypeSetter(
     targetNode: FieldNode,
-    literalData: unknown | undefined | null
+    literalData: unknown | undefined | null,
   ) {
     if (literalData === undefined || literalData === null) {
       targetNode.__clear();
@@ -956,8 +960,8 @@ export abstract class FieldNode {
     this.__dispatchEvent(
       new CustomEvent('this-field-value-changed', {
         detail: this,
-        bubbles: false
-      })
+        bubbles: false,
+      }),
     );
 
     if (bubbles) {
@@ -970,8 +974,8 @@ export abstract class FieldNode {
       this.__dispatchEvent(
         new CustomEvent('field-value-changed', {
           detail: this,
-          bubbles: true
-        })
+          bubbles: true,
+        }),
       );
       this.__dispatchEvent(
         new CustomEvent('update', {
@@ -1003,7 +1007,7 @@ export abstract class FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get __childNodes(): any[] {
     return this.__meta.nodeFields.map(
-      field => this[field.fieldName as keyof FieldNode]
+      field => this[field.fieldName as keyof FieldNode],
     );
   }
 
@@ -1073,7 +1077,7 @@ export abstract class FieldNode {
   public __addEventListener(
     type: EventType,
     listener: CustomEventListener,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void {
     if (!this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(type, []);
@@ -1088,7 +1092,7 @@ export abstract class FieldNode {
   public __addCustomEventListener(
     type: string,
     handler: CustomEventListener,
-    options?: boolean | AddEventListenerOptions
+    options?: boolean | AddEventListenerOptions,
   ): void {
     if (!this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(type, []);
@@ -1106,14 +1110,14 @@ export abstract class FieldNode {
     type: EventType,
     handler: CustomEventListener,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    options?: boolean | EventListenerOptions
+    options?: boolean | EventListenerOptions,
   ): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
         type,
         this.__meta.eventListener
           .get(type)!
-          .filter(e => e.callbackfn !== handler)
+          .filter(e => e.callbackfn !== handler),
       );
     }
   }
@@ -1128,14 +1132,14 @@ export abstract class FieldNode {
     type: string,
     handler: CustomEventListener,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    options?: boolean | EventListenerOptions
+    options?: boolean | EventListenerOptions,
   ): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
         type,
         this.__meta.eventListener
           .get(type)!
-          .filter(e => e.callbackfn !== handler)
+          .filter(e => e.callbackfn !== handler),
       );
     }
   }
@@ -1153,7 +1157,7 @@ export abstract class FieldNode {
 
   // eslint-disable-next-line class-methods-use-this
   protected __checkConstraints(
-    fieldConstraints: FieldConstraints
+    fieldConstraints: FieldConstraints,
   ): string[] | undefined {
     if (fieldConstraints.required) {
       if (this.__isEmpty) {

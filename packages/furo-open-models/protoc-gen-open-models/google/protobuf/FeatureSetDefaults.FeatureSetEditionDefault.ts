@@ -44,6 +44,7 @@ export class FeatureSetDefaultsFeatureSetEditionDefault extends FieldNode {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName =
       'google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault';
+    this.__meta.description = 'FeatureSetDefaultsFeatureSetEditionDefault';
 
     this.__meta.nodeFields = [
       {
@@ -51,12 +52,14 @@ export class FeatureSetDefaultsFeatureSetEditionDefault extends FieldNode {
         protoName: 'edition',
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'features',
         protoName: 'features',
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
+        description: '',
       },
     ];
 

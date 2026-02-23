@@ -49,6 +49,8 @@ export class SpecificationExtension extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.SpecificationExtension';
+    this.__meta.description =
+      'SpecificationExtension Any property starting with x- is valid.';
 
     this.__meta.nodeFields = [
       {
@@ -56,18 +58,21 @@ export class SpecificationExtension extends FieldNode {
         protoName: 'number',
         FieldConstructor: DOUBLE,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'boolean',
         protoName: 'boolean',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'string',
         protoName: 'string',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

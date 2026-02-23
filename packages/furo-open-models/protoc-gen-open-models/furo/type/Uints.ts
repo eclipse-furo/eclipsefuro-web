@@ -55,6 +55,8 @@ export class Uints extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Uints';
+    this.__meta.description =
+      'Uints Decimal numbers\n  Regex pattern: ^[&#43;-]?(\\d*\\.)?\\d&#43;$';
 
     this.__meta.nodeFields = [
       {
@@ -62,12 +64,14 @@ export class Uints extends FieldNode {
         protoName: 'uint64',
         FieldConstructor: UINT64,
         constraints: { maximum: 1000, minimum: 5, multiple_of: 5 },
+        description: '',
       },
       {
         fieldName: 'uint32',
         protoName: 'uint32',
         FieldConstructor: UINT32,
         constraints: { maximum: 1000, minimum: 5, multiple_of: 5 },
+        description: '',
       },
       {
         fieldName: 'uint64Excl',
@@ -80,6 +84,7 @@ export class Uints extends FieldNode {
           exclusive_minimum: true,
           multiple_of: 5,
         },
+        description: '',
       },
       {
         fieldName: 'uint32Excl',
@@ -92,6 +97,7 @@ export class Uints extends FieldNode {
           exclusive_minimum: true,
           multiple_of: 5,
         },
+        description: '',
       },
     ];
 

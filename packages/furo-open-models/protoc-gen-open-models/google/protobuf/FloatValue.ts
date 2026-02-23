@@ -48,6 +48,8 @@ export class FloatValue extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FloatValue';
+    this.__meta.description =
+      'FloatValue Wrapper message for `float`.\n\n The JSON representation for `FloatValue` is JSON number.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class FloatValue extends FieldNode {
         protoName: 'value',
         FieldConstructor: FLOAT,
         constraints: {},
+        description: 'The float value.',
       },
     ];
 

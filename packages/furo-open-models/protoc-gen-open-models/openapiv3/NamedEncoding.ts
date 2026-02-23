@@ -58,6 +58,8 @@ export class NamedEncoding extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.NamedEncoding';
+    this.__meta.description =
+      'NamedEncoding Automatically-generated message used to represent maps of Encoding as ordered (name,value) pairs.';
 
     this.__meta.nodeFields = [
       {
@@ -65,12 +67,14 @@ export class NamedEncoding extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Map key',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: OpenapiV3Encoding,
         constraints: {},
+        description: 'Mapped value',
       },
     ];
 

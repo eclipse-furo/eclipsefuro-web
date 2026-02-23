@@ -64,6 +64,7 @@ export class RequestBody extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.RequestBody';
+    this.__meta.description = 'RequestBody Describes a single request body.';
 
     this.__meta.nodeFields = [
       {
@@ -71,24 +72,28 @@ export class RequestBody extends FieldNode {
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'content',
         protoName: 'content',
         FieldConstructor: OpenapiV3MediaTypes,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'required',
         protoName: 'required',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

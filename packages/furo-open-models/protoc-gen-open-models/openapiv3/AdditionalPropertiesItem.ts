@@ -41,6 +41,7 @@ export class AdditionalPropertiesItem extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.AdditionalPropertiesItem';
+    this.__meta.description = 'AdditionalPropertiesItem';
 
     this.__meta.nodeFields = [
       {
@@ -48,12 +49,14 @@ export class AdditionalPropertiesItem extends FieldNode {
         protoName: 'schema_or_reference',
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'boolean',
         protoName: 'boolean',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
     ];
 

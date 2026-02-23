@@ -213,6 +213,8 @@ export class FileDescriptorProto extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.FileDescriptorProto';
+    this.__meta.description =
+      'FileDescriptorProto Describes a complete .proto file.';
 
     this.__meta.nodeFields = [
       {
@@ -220,78 +222,95 @@ export class FileDescriptorProto extends FieldNode {
         protoName: 'name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'package',
         protoName: 'package',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'dependency',
         protoName: 'dependency',
         FieldConstructor: STRING,
         constraints: {},
+        description: 'Names of files imported by this file.',
       },
       {
         fieldName: 'publicDependency',
         protoName: 'public_dependency',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          'Indexes of the public imported files in the dependency list above.',
       },
       {
         fieldName: 'weakDependency',
         protoName: 'weak_dependency',
         FieldConstructor: INT32,
         constraints: {},
+        description:
+          'Indexes of the weak imported files in the dependency list.\n For Google-internal migration only. Do not use.',
       },
       {
         fieldName: 'messageType',
         protoName: 'message_type',
         FieldConstructor: GoogleProtobufDescriptorProto,
         constraints: {},
+        description: 'All top-level definitions in this file.',
       },
       {
         fieldName: 'enumType',
         protoName: 'enum_type',
         FieldConstructor: GoogleProtobufEnumDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'service',
         protoName: 'service',
         FieldConstructor: GoogleProtobufServiceDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'extension',
         protoName: 'extension',
         FieldConstructor: GoogleProtobufFieldDescriptorProto,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'options',
         protoName: 'options',
         FieldConstructor: GoogleProtobufFileOptions,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'sourceCodeInfo',
         protoName: 'source_code_info',
         FieldConstructor: GoogleProtobufSourceCodeInfo,
         constraints: {},
+        description:
+          'This field contains optional information about the original source code.\n You may safely remove this entire field without harming runtime\n functionality of the descriptors -- the information is needed only by\n development tools.',
       },
       {
         fieldName: 'syntax',
         protoName: 'syntax',
         FieldConstructor: STRING,
         constraints: {},
+        description:
+          'The syntax of the proto file.\n The supported values are "proto2", "proto3", and "editions".\n\n If `edition` is present, this value must be "editions".',
       },
       {
         fieldName: 'edition',
         protoName: 'edition',
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
+        description: 'The edition of the proto file.',
       },
     ];
 

@@ -59,6 +59,8 @@ export class Discriminator extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Discriminator';
+    this.__meta.description =
+      'Discriminator When request bodies or response payloads may be one of a number of different schemas, a `discriminator` object can be used to aid in serialization, deserialization, and validation.  The discriminator is a specific object in a schema which is used to inform the consumer of the specification of an alternative schema based on the value associated with it.  When using the discriminator, _inline_ schemas will not be considered.';
 
     this.__meta.nodeFields = [
       {
@@ -66,18 +68,21 @@ export class Discriminator extends FieldNode {
         protoName: 'property_name',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'mapping',
         protoName: 'mapping',
         FieldConstructor: OpenapiV3Strings,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

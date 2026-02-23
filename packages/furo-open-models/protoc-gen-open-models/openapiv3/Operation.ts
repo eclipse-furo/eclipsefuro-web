@@ -142,6 +142,8 @@ export class Operation extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.Operation';
+    this.__meta.description =
+      'Operation Describes a single API operation on a path.';
 
     this.__meta.nodeFields = [
       {
@@ -149,78 +151,91 @@ export class Operation extends FieldNode {
         protoName: 'tags',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'summary',
         protoName: 'summary',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'description',
         protoName: 'description',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'externalDocs',
         protoName: 'external_docs',
         FieldConstructor: OpenapiV3ExternalDocs,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'operationId',
         protoName: 'operation_id',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'parameters',
         protoName: 'parameters',
         FieldConstructor: OpenapiV3ParameterOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'requestBody',
         protoName: 'request_body',
         FieldConstructor: OpenapiV3RequestBodyOrReference,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'responses',
         protoName: 'responses',
         FieldConstructor: OpenapiV3Responses,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'callbacks',
         protoName: 'callbacks',
         FieldConstructor: OpenapiV3CallbacksOrReferences,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'deprecated',
         protoName: 'deprecated',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'security',
         protoName: 'security',
         FieldConstructor: OpenapiV3SecurityRequirement,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'servers',
         protoName: 'servers',
         FieldConstructor: OpenapiV3Server,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'specificationExtension',
         protoName: 'specification_extension',
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
+        description: '',
       },
     ];
 

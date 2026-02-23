@@ -46,6 +46,7 @@ export class DefaultType extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'openapi.v3.DefaultType';
+    this.__meta.description = 'DefaultType';
 
     this.__meta.nodeFields = [
       {
@@ -53,18 +54,21 @@ export class DefaultType extends FieldNode {
         protoName: 'number',
         FieldConstructor: DOUBLE,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'boolean',
         protoName: 'boolean',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'string',
         protoName: 'string',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 

@@ -48,6 +48,8 @@ export class BoolValue extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'google.protobuf.BoolValue';
+    this.__meta.description =
+      'BoolValue Wrapper message for `bool`.\n\n The JSON representation for `BoolValue` is JSON `true` and `false`.';
 
     this.__meta.nodeFields = [
       {
@@ -55,6 +57,7 @@ export class BoolValue extends FieldNode {
         protoName: 'value',
         FieldConstructor: BOOLEAN,
         constraints: {},
+        description: 'The bool value.',
       },
     ];
 

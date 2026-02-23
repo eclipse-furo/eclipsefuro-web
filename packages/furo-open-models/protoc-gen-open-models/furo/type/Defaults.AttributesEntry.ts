@@ -36,6 +36,7 @@ export class DefaultsAttributesEntry extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__meta.typeName = 'furo.type.Defaults.AttributesEntry';
+    this.__meta.description = 'DefaultsAttributesEntry';
 
     this.__meta.nodeFields = [
       {
@@ -43,12 +44,14 @@ export class DefaultsAttributesEntry extends FieldNode {
         protoName: 'key',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
       {
         fieldName: 'value',
         protoName: 'value',
         FieldConstructor: STRING,
         constraints: {},
+        description: '',
       },
     ];
 
