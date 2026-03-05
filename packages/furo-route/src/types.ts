@@ -77,3 +77,51 @@ export interface DocumentTitle {
   documentTitle: string;
   iconName?: string;
 }
+
+// ─────────────────────────────────────────────────────────────────
+// TabController Types
+// ─────────────────────────────────────────────────────────────────
+
+/**
+ * Tab definition for TabController.
+ */
+export interface TabDefinition {
+  /** Unique ID, used in URL query param and furo-pages page attribute */
+  id: string;
+  /** Display label for the tab */
+  label: string;
+  /** Optional: Tab design variant */
+  design?: "Default" | "Positive" | "Negative" | "Critical" | "Neutral";
+  /** Optional: Icon name (SAP icon) */
+  icon?: string;
+  /** Optional: Whether tab is disabled */
+  disabled?: boolean;
+}
+
+/**
+ * Configuration for TabController.
+ */
+export interface TabControllerConfig {
+  /** URL query parameter name (e.g., "tab", "subtab", "sideTab") */
+  urlParam: string;
+  /** Tab definitions */
+  tabs: readonly TabDefinition[];
+  /** Default tab ID when none specified in URL */
+  defaultTab: string;
+  /** Optional: CSS selector for the lgt-tabcontainer to sync visual selection */
+  tabContainerSelector?: string;
+}
+
+/**
+ * Event detail from lgt-tabcontainer tab-select event.
+ */
+export interface TabSelectEventDetail {
+  tab: { id: string };
+}
+
+/**
+ * Interface for lgt-tabcontainer element.
+ */
+export interface TabContainerElement extends HTMLElement {
+  selectTabById(tabId: string): void;
+}

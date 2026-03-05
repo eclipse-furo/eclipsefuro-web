@@ -1,5 +1,4 @@
-import { LitFBP } from '@furo/fbp/dist/LitFBP';
-import { css,html, LitElement } from 'lit';
+import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
 /**
@@ -7,7 +6,7 @@ import { property } from "lit/decorators.js";
  *  container which let you resize its width.
  *
  *  Double-click on the handler to reset the width.
- *  You need a counter part which flexes.
+ *  You need a counterpart which flexes.
  *
  *
  *```html
@@ -28,38 +27,37 @@ import { property } from "lit/decorators.js";
  * @customElement
  * @appliesMixin FBP
  */
-export class FuroResizer extends LitFBP(LitElement) {
-
+export class FuroResizer extends LitElement {
   /**
    * remember the size after resizing.
    * Give the id for the rememberer, you can use the id on different views
    *
    */
-  @property({ type: String, attribute: 'remember' })
- public remember: string | undefined;
+  @property({ type: String, attribute: "remember-id" })
+  public remember: string | undefined;
 
   /**
    * Set the maximal width of the resizer
    */
   @property({ type: Number })
-  public maxwidth: number| undefined;
+  public maxwidth: number | undefined;
 
   /**
    * Set the minimal width of the resizer
    */
   @property({ type: Number })
-  minwidth: number| undefined;
+  minwidth: number | undefined;
 
-  private _positions: {x: number } = {x:0};
+  private _positions: { x: number } = { x: 0 };
 
   /**
    * remove the listeners
    */
   private _unregister = () => {
-    window.removeEventListener('mousemove', this._movementHandler);
-    window.removeEventListener('mouseup', this._unregister);
+    window.removeEventListener("mousemove", this._movementHandler);
+    window.removeEventListener("mouseup", this._unregister);
     // set cursor to avoid flickering
-    (this.parentNode as HTMLElement).style.cursor = '';
+    (this.parentNode as HTMLElement).style.cursor = "";
   };
 
   /**
@@ -67,33 +65,44 @@ export class FuroResizer extends LitFBP(LitElement) {
    * @param e MouseEvent
    * @private
    */
-  private _movementHandler = (e:MouseEvent) => {
+  private _movementHandler = (e: MouseEvent) => {
     const delta = (e.screenX - this._positions.x) * this._handleLRM;
 
-    // todo request animation frame
-    let width = this._startwidth + delta;
+    requestAnimationFrame(() => {
+      let width = this._startwidth + delta;
 
-    if (this.minwidth && width + 3 < this.minwidth) {
-      width = this.minwidth;
-      this._unregister();
-    }
-    if (this.maxwidth && width - 3 > this.maxwidth) {
-      width = this.maxwidth;
-      this._unregister();
-    }
+      if (this.minwidth && width + 3 < this.minwidth) {
+        width = this.minwidth;
+        this._unregister();
+        this.style.opacity = "0.6";
+        setTimeout(() => {
+          this.style.opacity = "1";
+        }, 200);
+      }
+      if (this.maxwidth && width - 3 > this.maxwidth) {
+        width = this.maxwidth;
+        this._unregister();
+        this.style.opacity = "0.6";
+        setTimeout(() => {
+          this.style.opacity = "1";
+        }, 200);
+      }
 
-    this.style.width = `${width}px`;
-    if (this.remember) {
-      sessionStorage.setItem(this.remember, `${width}`);
-    }
+      this.style.width = `${width}px`;
+      if (this.remember) {
+        localStorage.setItem(this.remember, `${width}`);
+      }
+    });
   };
+
+  private contentVisible: boolean = true;
 
   /**
    * register the left handler
    * @param e
    * @private
    */
-  private _startTrackingLeft   (e:MouseEvent)  {
+  private _startTrackingLeft(e: MouseEvent) {
     this._handleLRM = -1;
     this._startTracking(e);
   }
@@ -103,7 +112,7 @@ export class FuroResizer extends LitFBP(LitElement) {
    * @param e
    * @private
    */
-  private _startTrackingRight (e:MouseEvent)   {
+  private _startTrackingRight(e: MouseEvent) {
     this._handleLRM = 1;
     this._startTracking(e);
   }
@@ -113,29 +122,29 @@ export class FuroResizer extends LitFBP(LitElement) {
    * @param e
    * @private
    */
-  private _startTracking = (e:MouseEvent) => {
+  private _startTracking = (e: MouseEvent) => {
     e.preventDefault();
-    window.addEventListener('mousemove', this._movementHandler);
-    window.addEventListener('mouseup', this._unregister);
+    window.addEventListener("mousemove", this._movementHandler);
+    window.addEventListener("mouseup", this._unregister);
     this._positions.x = e.screenX;
     this._startwidth = this.getBoundingClientRect().width;
 
     // set cursor to avoid flickering
-    (this.parentNode as HTMLElement).style.cursor = 'col-resize';
+    (this.parentNode as HTMLElement).style.cursor = "col-resize";
   };
 
   /**
    * removes remember and set to the initial size
    */
-  resetSize ()  {
+  resetSize() {
     if (this.initialWidthSetByStyle) {
       this.style.width = `${this.initialWidthSetByStyle}`;
     } else {
-      this.style.removeProperty('width');
+      this.style.removeProperty("width");
     }
 
     if (this.remember) {
-      sessionStorage.removeItem(this.remember);
+      localStorage.removeItem(this.remember);
     }
   }
 
@@ -143,41 +152,101 @@ export class FuroResizer extends LitFBP(LitElement) {
 
   private rightHandle: HTMLDivElement | undefined;
 
-  private initialWidthSetByStyle: string |undefined;
+  private initialWidthSetByStyle: string | undefined;
 
   private _startwidth: number = 0;
 
   private _handleLRM: number = 1;
 
-  /**
-   * flow is ready lifecycle method
-   * @private
-   */
-  override _FBPReady() {
-    super._FBPReady();
-    // this._FBPTraceWires()
+  override connectedCallback() {
+    // eslint-disable-next-line wc/guard-super-call
+    super.connectedCallback();
+    let startClosed = false;
+    const openCloseState = localStorage.getItem(`${this.remember}_oc`);
+    if (openCloseState === "show") {
+      startClosed = false;
+      this.removeAttribute("hide");
+    } else {
+      startClosed = this.getAttribute("hide") !== null;
+    }
 
-    this.leftHandle = this.shadowRoot!.getElementById('lefthandle') as HTMLDivElement;
-    this.leftHandle.addEventListener('mousedown', this._startTrackingLeft.bind(this));
-    this.leftHandle.addEventListener('dblclick', this.resetSize.bind(this));
+    if (openCloseState === "hide" || startClosed) {
+      this.contentVisible = false;
+      const w = this.style.width || `${this.getAttribute("minwidth")}px`;
+      this.style.width = "0";
+      this.setAttribute("hide", "");
 
-    this.rightHandle = this.shadowRoot!.getElementById('righthandle') as HTMLDivElement;
-    this.rightHandle.addEventListener('mousedown', this._startTrackingRight.bind(this));
-    this.rightHandle.addEventListener('dblclick', this.resetSize.bind(this));
+      this.updateComplete.then(() => {
+        const contentArea = this.shadowRoot!.getElementById("content")!;
+        contentArea.style.width = w;
+        this.initialWidthSetByStyle = w;
+        contentArea.setAttribute("hide", "");
+      });
+    }
+  }
+
+  override firstUpdated(){
+    this.leftHandle = this.shadowRoot!.getElementById("lefthandle") as HTMLDivElement;
+    this.leftHandle.addEventListener("mousedown", this._startTrackingLeft.bind(this));
+    this.leftHandle.addEventListener("dblclick", this.resetSize.bind(this));
+
+    this.rightHandle = this.shadowRoot!.getElementById("righthandle") as HTMLDivElement;
+    this.rightHandle.addEventListener("mousedown", this._startTrackingRight.bind(this));
+    this.rightHandle.addEventListener("dblclick", this.resetSize.bind(this));
 
     this.initialWidthSetByStyle = this.style.width;
-
-    if(this.minwidth){
-      this.style.minWidth = `${this.minwidth}px`;
-    }
+    /**
+     if (this.minwidth) {
+     this.style.minWidth = `${this.minwidth}px`;
+     }
+     */
 
     // restore remembered value
     if (this.remember) {
-      const width = sessionStorage.getItem(this.remember);
-      if (width) {
+      const width = localStorage.getItem(this.remember);
+      const oc = localStorage.getItem(`${this.remember}_oc`);
+      if (width && !(oc === "hide")) {
         this.style.width = `${width}px`;
       }
     }
+  }
+
+  public toggle() {
+    if (this.contentVisible) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
+  public show(): void {
+    this.contentVisible = true;
+    const contentArea = this.shadowRoot!.getElementById("content")!;
+    this.style.width = `${contentArea.clientWidth}px`;
+    contentArea.removeAttribute("hide");
+    setTimeout(() => {
+      this.removeAttribute("hide");
+      contentArea.style.removeProperty("width");
+      if (this.remember) {
+        localStorage.setItem(`${this.remember}_oc`, `show`);
+      }
+    }, 450);
+  }
+
+  public hide() {
+    this.contentVisible = false;
+    const contentArea = this.shadowRoot!.getElementById("content")!;
+    contentArea.style.width = `${contentArea.clientWidth}px`;
+    contentArea.setAttribute("hide", "");
+    // for the width anim duration
+    this.setAttribute("hide", "");
+    this.style.width = "0";
+
+    setTimeout(() => {
+      if (this.remember) {
+        localStorage.setItem(`${this.remember}_oc`, `hide`);
+      }
+    }, 450);
   }
 
   /**
@@ -187,47 +256,74 @@ export class FuroResizer extends LitFBP(LitElement) {
    */
   static override get styles() {
     // language=CSS
-    return (
+    return css`
+      :host {
+        display: block;
+        position: relative;
 
-      css`
-        :host {
-          display: block;
-          position: relative;
-        }
+        transition:
+          opacity 150ms linear,
+          width 75ms linear;
+      }
 
-        :host([hidden]) {
-          display: none;
-        }
+      :host([hide]) {
+        transition:
+          opacity 150ms linear,
+          width 450ms linear;
+      }
 
-        #lefthandle {
-          position: absolute;
-          left: -3px;
-          width: 6px;
-          top: 0;
-          bottom: 0;
-          cursor: col-resize;
-          display: none;
-        }
+      :host([hidden]) {
+        display: none;
+      }
 
-        #righthandle {
-          position: absolute;
-          right: -3px;
-          width: 6px;
-          top: 0;
-          bottom: 0;
-          cursor: col-resize;
-          display: none;
-        }
+      #content {
+        height: 100%;
+        transition: transform 450ms linear;
+      }
 
-        :host([lefthandle]) #lefthandle {
-          display: block;
-        }
+      :host([lefthandle][hide]) #lefthandle {
+        display: none;
+      }
 
-        :host([righthandle]) #righthandle {
-          display: block;
-        }
-      `
-    );
+      :host([righthandle][hide]) #righthandle {
+        display: none;
+      }
+
+      :host([righthandle]) #content[hide] {
+        transform: translateX(-100%);
+      }
+
+      #lefthandle:hover,
+      #righthandle:hover {
+        cursor: col-resize;
+      }
+
+      #lefthandle {
+        position: absolute;
+        left: -1rem;
+        width: 1rem;
+        top: 0;
+        bottom: 0;
+        display: none;
+      }
+
+      #righthandle {
+        position: absolute;
+        right: -1rem;
+        width: 1rem;
+        top: 0;
+        bottom: 0;
+        display: none;
+      }
+
+      :host([lefthandle]) #lefthandle {
+        display: block;
+      }
+
+      :host([righthandle]) #righthandle {
+        display: block;
+      }
+    `;
   }
 
   /**
@@ -238,10 +334,11 @@ export class FuroResizer extends LitFBP(LitElement) {
   override render() {
     // language=HTML
     return html`
-      <div id="lefthandle" ></div>
-      <slot></slot>
+      <div id="lefthandle"></div>
+      <div style="overflow: hidden; height: 100%">
+        <div id="content"><slot></slot></div>
+      </div>
       <div id="righthandle"></div>
     `;
   }
 }
-

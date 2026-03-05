@@ -1,7 +1,7 @@
 {
   "name": "@furo/channels",
   "description": "A typed channel system to pass data across your application",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-channels",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": {

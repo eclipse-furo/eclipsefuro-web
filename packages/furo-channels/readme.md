@@ -1,7 +1,7 @@
 ### `ChannelAPI` – A TypeScript Pub/Sub Utility
 The `ChannelAPI` class is a lightweight, type‑safe publish/subscribe implementation that works with any object describing your channels.
 
-It’s designed for use in a Lit‑based front‑end (or any TypeScript project) where you want to:
+### Methods
 
 - **Publish** events to named channels.
 - **Subscribe** to those events with optional “once” semantics.

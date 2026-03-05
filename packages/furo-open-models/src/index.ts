@@ -44,6 +44,17 @@ export { ARRAY } from './proxies/ARRAY';
 export { MAP } from './proxies/MAP';
 export { RECURSION } from './proxies/RECURSION';
 
+// Decorators
+export { ServiceBindings } from './decorators/ServiceDecorators';
+export { ModelBindings } from './decorators/ModelDecorators';
+export type { ModelEventType } from './decorators/ModelDecorators';
+export { fieldBindings } from './decorators/FieldBindings';
+export type { BindableComponent, FieldNodeLike } from './decorators/FieldBindings';
+export { SchemaBuilder } from './decorators/SchemaBuilder';
+export { DefaultServiceEventHandlers, CreateDispatch } from './decorators/DefaultServiceEventHandlers';
+export type { EntityServiceEventType, TypedEntityService } from './decorators/EntityServiceTypes';
+export type { EntityServiceEventMap } from './decorators/EntityServiceTypes';
+
 export interface IAny {
   '@type': string;
   [key: string]: unknown;
