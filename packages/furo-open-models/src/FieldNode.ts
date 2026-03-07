@@ -9,7 +9,7 @@ import { CustomConstraints, Validators } from './Validator';
 import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 import { FieldConstraints } from './FieldConstraints';
 
-type EventType =
+export type ModelEventType =
   | 'update' // triggered on any change,update,array changes, map changes, reset, model injections, from literal. Listen to this if you do not need specialized update notifications.
   | 'field-value-changed' // triggered on change or value assignment
   | 'this-field-value-changed' // triggered on every direct change on the field, not from children
@@ -1075,7 +1075,7 @@ export abstract class FieldNode {
    * @param {} options - An object that specifies characteristics about the event listener. \n\nThe available option is `once:boolean`
    */
   public __addEventListener(
-    type: EventType,
+    type: ModelEventType,
     listener: CustomEventListener,
     options?: boolean | AddEventListenerOptions,
   ): void {
@@ -1107,7 +1107,7 @@ export abstract class FieldNode {
    * @param options
    */
   public __removeEventListener(
-    type: EventType,
+    type: ModelEventType,
     handler: CustomEventListener,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     options?: boolean | EventListenerOptions,

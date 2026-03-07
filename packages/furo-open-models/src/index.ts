@@ -1,4 +1,4 @@
-export { FieldNode, ValueStateSummary } from './FieldNode';
+export { FieldNode, ValueStateSummary, type ModelEventType } from './FieldNode';
 export { Registry } from './Registry';
 export { ValueState } from './ValueState';
 export { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
@@ -47,7 +47,6 @@ export { RECURSION } from './proxies/RECURSION';
 // Decorators
 export { ServiceBindings } from './decorators/ServiceDecorators';
 export { ModelBindings } from './decorators/ModelDecorators';
-export type { ModelEventType } from './decorators/ModelDecorators';
 export { fieldBindings } from './decorators/FieldBindings';
 export type { BindableComponent, FieldNodeLike } from './decorators/FieldBindings';
 export { SchemaBuilder } from './decorators/SchemaBuilder';
