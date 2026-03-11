@@ -8,6 +8,28 @@
     "html": {
       "attributes": [
         {
+          "name": "Lit Event listeners",
+          "description": "Lit's `@event` syntax for adding event listeners in templates.",
+          "virtual": true,
+          "value": {
+            "kind": "expression",
+            "type": "any",
+            "required": true
+          },
+          "pattern": {
+            "or": [
+              {
+                "items": "/js/events",
+                "template": ["@", "#item:event name"],
+                "priority": "high"
+              },
+              {
+                "template": [{ "regex": "@[-a-z0-9]+" }]
+              }
+            ]
+          }
+        },
+        {
           "name": "Event listeners",
           "description": "The **at-** keyword let you put the event detail of an event on a wire. This can be any browser event or custom event. \n\n\n To put the event root on the wire, use an asterisk like `at-click=\"--wireName(*)\"`.\n\n",
           "virtual": true,
