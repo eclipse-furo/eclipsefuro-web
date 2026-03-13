@@ -1,15 +1,8 @@
-import { LocationObject } from './types';
+import type { LocationObject } from "./types";
 
-type EventType =
-  | 'location-path-changed'
-  | 'location-hash-changed'
-  | 'location-query-changed'
-  | 'location-changed'
-  | 'url-space-entered';
+type EventType = "location-path-changed" | "location-hash-changed" | "location-query-changed" | "location-changed" | "url-space-entered";
 
-interface CustomEventListener {
-  (evt: CustomEvent<LocationObject>): void;
-}
+type CustomEventListener = (evt: CustomEvent<LocationObject>) => void;
 
 interface EventStore {
   handler: CustomEventListener;
@@ -34,18 +27,18 @@ export class FuroLocation {
    *
    * @type {string}
    */
-  private urlSpaceRegex: string = '';
+  private urlSpaceRegex = "";
 
-  private __eventListener: Map<string, EventStore[]> = new Map();
+  private __eventListener = new Map<string, EventStore[]>();
 
   private location: LocationObject = {
     host: window.location.host,
     query: {},
     hash: {},
-    path: '/detail',
+    path: "/detail",
     pathSegments: [],
-    hashString: '',
-    queryString: '',
+    hashString: "",
+    queryString: "",
   };
 
   private locationChangeNotifier: () => void;
@@ -53,28 +46,24 @@ export class FuroLocation {
   constructor(urlSpaceRegex: string) {
     this.urlSpaceRegex = urlSpaceRegex;
 
-    this.locationChangeNotifier = () => {
+    this.locationChangeNotifier = (): void => {
       let sendHashChanged = false;
       let sendQueryChanged = false;
       let sendPathChanged = false;
 
       // ignore links outside urlSpaceRegex
-      if (this.urlSpaceRegex !== '') {
+      if (this.urlSpaceRegex !== "") {
         if (window.location.pathname.match(this.urlSpaceRegex) === null) {
           return;
         }
 
-        if (
-          window.location.search === '' &&
-          window.location.hash === '' &&
-          window.location.pathname.match(`${this.urlSpaceRegex}$`)
-        ) {
+        if (window.location.search === "" && window.location.hash === "" && window.location.pathname.match(`${this.urlSpaceRegex}$`)) {
           this.dispatchEvent(
-            new CustomEvent('url-space-entered', {
+            new CustomEvent("url-space-entered", {
               composed: false,
               bubbles: false,
               detail: this.location,
-            }),
+            })
           );
         }
       }
@@ -85,9 +74,7 @@ export class FuroLocation {
 
       // path-changed
       // cut of urlSpaceRegex
-      const newPath = window
-        .decodeURIComponent(window.location.pathname)
-        .replace(new RegExp(this.urlSpaceRegex), '');
+      const newPath = window.decodeURIComponent(window.location.pathname).replace(new RegExp(this.urlSpaceRegex), "");
       if (this.location.path !== newPath) {
         sendPathChanged = true;
       }
@@ -97,7 +84,7 @@ export class FuroLocation {
       this.location.pathSegments = [];
       let m;
       const rgx = /\/([^/]*)/gi;
-      // eslint-disable-next-line no-cond-assign
+
       while ((m = rgx.exec(newPath)) !== null) {
         this.location.pathSegments.push(m[1]);
       }
@@ -110,9 +97,9 @@ export class FuroLocation {
       this.location.hashString = newHash;
       this.location.hash = {};
       if (newHash.length > 0) {
-        newHash.split('&').forEach(qstr => {
-          const p = qstr.split('=');
-          // eslint-disable-next-line prefer-destructuring
+        newHash.split("&").forEach((qstr) => {
+          const p = qstr.split("=");
+
           this.location.hash[p[0]] = p[1];
         });
       }
@@ -125,50 +112,50 @@ export class FuroLocation {
       this.location.queryString = newQuery;
       this.location.query = {};
       if (newQuery.length > 0) {
-        newQuery.split('&').forEach(qstr => {
-          const p = qstr.split('=');
-          // eslint-disable-next-line prefer-destructuring
+        newQuery.split("&").forEach((qstr) => {
+          const p = qstr.split("=");
+
           this.location.query[p[0]] = p[1];
         });
       }
 
       if (sendPathChanged) {
         this.dispatchEvent(
-          new CustomEvent('location-path-changed', {
+          new CustomEvent("location-path-changed", {
             composed: true,
             bubbles: false,
             detail: this.location,
-          }),
+          })
         );
       }
 
       if (sendHashChanged) {
         this.dispatchEvent(
-          new CustomEvent('location-hash-changed', {
+          new CustomEvent("location-hash-changed", {
             composed: true,
             bubbles: false,
             detail: this.location,
-          }),
+          })
         );
       }
 
       if (sendQueryChanged) {
         this.dispatchEvent(
-          new CustomEvent('location-query-changed', {
+          new CustomEvent("location-query-changed", {
             composed: true,
             bubbles: false,
             detail: this.location,
-          }),
+          })
         );
       }
 
       // location-changed
       this.dispatchEvent(
-        new CustomEvent('location-changed', {
+        new CustomEvent("location-changed", {
           composed: true,
           bubbles: false,
           detail: this.location,
-        }),
+        })
       );
     };
     this.connect();
@@ -180,32 +167,20 @@ export class FuroLocation {
    * @param handler
    * @param options
    */
-  public addEventListener(
-    type: EventType,
-    handler: CustomEventListener,
-    options?: boolean | AddEventListenerOptions,
-  ): void {
+  public addEventListener(type: EventType, handler: CustomEventListener, options?: boolean | AddEventListenerOptions): void {
     if (!this.__eventListener.has(type)) {
       this.__eventListener.set(type, []);
     }
     this.__eventListener.get(type)!.push({ handler, options });
   }
 
-  public dispatchEvent(event: CustomEvent): void {
-    if (
-      this.__eventListener.has(event.type) &&
-      this.__eventListener.get(event.type)!.length > 0
-    ) {
+  public dispatchEvent(event: CustomEvent<LocationObject>): void {
+    if (this.__eventListener.has(event.type) && this.__eventListener.get(event.type)!.length > 0) {
       this.__eventListener.get(event.type)!.forEach((t, i, listenerArray) => {
         t.handler(event);
 
-        if (
-          typeof t.options !== 'boolean' &&
-          undefined !== t.options &&
-          t.options.once
-        ) {
-          // eslint-disable-next-line no-param-reassign
-          delete listenerArray[i];
+        if (typeof t.options !== "boolean" && t.options?.once) {
+          listenerArray.splice(i, 1);
         }
       });
     }
@@ -216,12 +191,8 @@ export class FuroLocation {
    * @private
    */
   private connect() {
-    window.addEventListener(
-      '__furoLocationChanged',
-      this.locationChangeNotifier,
-      true,
-    );
-    window.addEventListener('popstate', this.locationChangeNotifier, true);
+    window.addEventListener("__furoLocationChanged", this.locationChangeNotifier, true);
+    window.addEventListener("popstate", this.locationChangeNotifier, true);
 
     // initial notyfier
     setTimeout(() => {
@@ -230,11 +201,7 @@ export class FuroLocation {
   }
 
   disconnect() {
-    window.removeEventListener(
-      '__furoLocationChanged',
-      this.locationChangeNotifier,
-      true,
-    );
-    window.removeEventListener('popstate', this.locationChangeNotifier, true);
+    window.removeEventListener("__furoLocationChanged", this.locationChangeNotifier, true);
+    window.removeEventListener("popstate", this.locationChangeNotifier, true);
   }
 }

@@ -1,10 +1,6 @@
-export interface QueryParams {
-  [key: string]: string | number;
-}
+export type QueryParams = Record<string, string | number>;
 
-export interface HashParams {
-  [key: string]: string | number;
-}
+export type HashParams = Record<string, string | number>;
 
 export interface LocationObject {
   host: string;
@@ -48,25 +44,24 @@ export interface FuroPage {
   onPageHashChanged?(location: LocationObject): void;
 }
 
-
-
 export interface QueryParamMap {
   from: string;
   to: string;
 }
 
-export interface Route {
-  readonly currentPage: string;
-  readonly flowEvent: string;
-  readonly target: 'HISTORY-BACK' | 'WINDOW-CLOSE' | string;
-  readonly queryParamMapping: undefined | null | '*' | QueryParamMap[];
+export interface ViewRequest {
+  readonly target: string;
+  readonly queryParamMapping?: null | "*" | QueryParamMap[];
+  readonly description?: string;
   readonly isExternalTarget?: boolean;
   readonly forceOpenBlank?: boolean;
-  readonly internalDescription?: string;
+  readonly pageOverrides?: Record<string, Partial<Omit<ViewRequest, "pageOverrides">>>;
 }
 
-export interface FlowEvent {
-  eventName: string;
+export type RouteMap = Record<string, ViewRequest>;
+
+export interface PageRequest {
+  requestName: string;
   queryParams?: QueryParams;
 }
 

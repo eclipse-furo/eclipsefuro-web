@@ -1,7 +1,7 @@
 import type { LitElement, ReactiveController, ReactiveControllerHost } from "lit";
 
 import { FuroLocationUpdater } from "./FuroLocationUpdater";
-import type { LocationObject, TabContainerElement, TabControllerConfig, TabDefinition, TabSelectEventDetail } from "./types";
+import type { LocationObject, TabControllerConfig, TabDefinition, TabSelectEventDetail } from "./types";
 
 /**
  * ### TabController
@@ -191,10 +191,10 @@ export class TabController implements ReactiveController {
     if (!host.renderRoot) return;
 
     // Use whenDefined to ensure the tabcontainer is ready
-    customElements.whenDefined("lgt-tabcontainer").then(() => {
-      const tabContainer = host.renderRoot.querySelector(this.config.tabContainerSelector!) as TabContainerElement | null;
+    void customElements.whenDefined("lgt-tabcontainer").then(() => {
+      const tabContainer = host.renderRoot.querySelector(this.config.tabContainerSelector!);
       if (tabContainer) {
-        tabContainer.selectTabById(this._current);
+        (tabContainer as unknown as { selectTabById(id: string): void }).selectTabById(this._current);
       }
     });
   }
@@ -207,8 +207,7 @@ export class TabController implements ReactiveController {
    */
   selectTab(tabId: string): void {
     if (!this.isValidTab(tabId)) {
-      // eslint-disable-next-line no-console
-      console.warn(`TabController: Invalid tab ID "${tabId}". Valid tabs: ${this.config.tabs.map(t => t.id).join(", ")}`);
+      console.warn(`TabController: Invalid tab ID "${tabId}". Valid tabs: ${this.config.tabs.map((t) => t.id).join(", ")}`);
       return;
     }
 
@@ -238,7 +237,7 @@ export class TabController implements ReactiveController {
    * @returns true if tab exists in config
    */
   isValidTab(tabId: string): boolean {
-    return this.config.tabs.some(tab => tab.id === tabId);
+    return this.config.tabs.some((tab) => tab.id === tabId);
   }
 
   /**
@@ -248,6 +247,6 @@ export class TabController implements ReactiveController {
    * @returns Tab definition or undefined
    */
   getTab(tabId: string): TabDefinition | undefined {
-    return this.config.tabs.find(tab => tab.id === tabId);
+    return this.config.tabs.find((tab) => tab.id === tabId);
   }
 }

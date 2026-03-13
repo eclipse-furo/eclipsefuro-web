@@ -1,7 +1,7 @@
 {
   "name": "@furo/route",
   "description": "Routing components",
-  "version": "3.9.1",
+  "version": "4.0.0-RC.1",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-route",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "web-types": "./web-types.json",

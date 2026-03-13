@@ -1,5 +1,6 @@
 export type SubscriptionToken = symbol;
 
+// eslint-disable-next-line @typescript-eslint/no-unnecessary-type-parameters
 export class Message<T> {
   /**
    * A list of listeners, each containing a callback function and a flag indicating whether it should be triggered only once.
@@ -35,10 +36,10 @@ export class ChannelAPI<CHANNELS> {
    * @param channel - The name of the channel to subscribe to.
    * @param callback - The function to call when a message is received on the channel.
    * @param once - Set to `true` if you want to unsubscribe after receiving one message. Defaults to `false`.   */
-  subscribe<K extends keyof CHANNELS, C extends CHANNELS[K]>(
+  subscribe<K extends keyof CHANNELS>(
     channel: K & string,
-    callback: (data: C extends Message<infer X> ? X : undefined) => void,
-    once: boolean = false
+    callback: (data: CHANNELS[K] extends Message<infer X> ? X : undefined) => void,
+    once = false
   ): SubscriptionToken {
     const token = Symbol(channel);
     (this.channels[channel] as Message<never>).listeners.push({ callback, once, token });
@@ -53,7 +54,7 @@ export class ChannelAPI<CHANNELS> {
   unsubscribe(token: SubscriptionToken) {
     for (const channel of Object.values(this.channels as ArrayLike<Message<never>>)) {
       const { listeners } = channel;
-      const index = listeners.findIndex(l => l.token === token);
+      const index = listeners.findIndex((l) => l.token === token);
       if (index !== -1) {
         listeners.splice(index, 1);
         return;
@@ -66,18 +67,18 @@ export class ChannelAPI<CHANNELS> {
    * @param channel - The name of the channel to send the message to.
    * @param data - The data to be sent as a message.
    */
-  publish<K extends keyof CHANNELS, C extends CHANNELS[K]>(channel: K & string, data: C extends Message<infer X> ? X : undefined) {
+  publish<K extends keyof CHANNELS>(channel: K & string, data: CHANNELS[K] extends Message<infer X> ? X : undefined) {
     const { listeners } = this.channels[channel] as Message<unknown>;
     if (!listeners.length) return; // <-- guard
     for (let i = 0; i < listeners.length; i += 1) {
       const listener = listeners[i];
-      if (listener) {
+
         listener.callback(data);
         if (listener.once) {
           listeners.splice(i, 1);
           i -= 1; // Adjust the index after removal
         }
-      }
+
     }
   }
 }

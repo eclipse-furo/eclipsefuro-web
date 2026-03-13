@@ -1,4 +1,4 @@
-import { FuroPages } from './FuroPages';
+import { FuroPages } from "./FuroPages";
 
 /**
  * Page routing component
@@ -6,7 +6,7 @@ import { FuroPages } from './FuroPages';
  * @extends FuroPages
  * @tagname furo-pages
  */
-window.customElements.define('furo-pages', FuroPages);
+window.customElements.define("furo-pages", FuroPages);
 
 declare global {
   interface HTMLElementTagNameMap {
