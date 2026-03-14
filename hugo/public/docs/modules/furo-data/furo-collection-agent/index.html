@@ -1,0 +1,2490 @@
+<!DOCTYPE html>
+<html lang="en" dir=ZgotmplZ>
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="interface component to handle collection requests">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:url" content="http://localhost:1313/docs/modules/furo-data/furo-collection-agent/">
+  <meta property="og:site_name" content="フロー Furo Web">
+  <meta property="og:title" content="furo-collection-agent">
+  <meta property="og:description" content="interface component to handle collection requests">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:modified_time" content="2024-03-08T14:07:31+01:00">
+<title>furo-collection-agent | フロー Furo Web</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.9cf05710651e8f9a974123fc1a656fbb5eb2f912dba4c022b69792d2f93e1c40.css" integrity="sha256-nPBXEGUej5qXQSP8GmVvu16y&#43;RLbpMAitpeS0vk&#43;HEA=">
+<script defer src="/en.search.min.b0bf84841deec51ff6f5057e68d3262d4265b55605be890ebf7c38b97b2fe329.js" integrity="sha256-sL&#43;EhB3uxR/29QV&#43;aNMmLUJltVYFvokOv3w4uXsv4yk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+
+  <link href="/main.css" rel="stylesheet"/>
+</head>
+
+<body dir=ZgotmplZ>
+<fixed-tooltip-display></fixed-tooltip-display>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <div ></div>
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>フロー Furo Web</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-73e73cd69dd9e7c0f9a1192228055a0d" class="toggle"  />
+    <label for="section-73e73cd69dd9e7c0f9a1192228055a0d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/" class="">Guides</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/dealing-w-data/" class="">Dealing with data</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-00998f71914cda1e9ad17295c769918d" class="toggle"  />
+    <label for="section-00998f71914cda1e9ad17295c769918d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/routing/" class="">Routing</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/routing/subrouting/" class="">Sub routing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/app-flow/" class="">Application Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/FNA/" class="">Extending a UI lib</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/type-renderer/" class="">Type Renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/featuretoggle/" class="">Feature Toggles</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0ec807a1e943360927b3f5b67f73fb1f" class="toggle" checked />
+    <label for="section-0ec807a1e943360927b3f5b67f73fb1f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/" class="">Packages</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9380a63e67ced80eac73c3af8fb8c23d" class="toggle" checked />
+    <label for="section-9380a63e67ced80eac73c3af8fb8c23d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-data/" class="">@furo/data</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-api-fetch/" class="">furo-api-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-collection-agent/" class=" active">furo-collection-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-custom-method/" class="">furo-custom-method</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-flow-repeat/" class="">furo-data-flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-hide-content/" class="">furo-data-hide-content</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-object/" class="">furo-data-object</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-deep-link/" class="">furo-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-agent/" class="">furo-entity-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-field/" class="">furo-entity-field</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-hateoas-state/" class="">furo-hateoas-state</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-message-container-handler/" class="">furo-message-container-handler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-rel-exists/" class="">furo-rel-exists</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-reverse-deep-link/" class="">furo-reverse-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-type-renderer/" class="">furo-type-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/AgentHelper/" class="">AgentHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/DataObject/" class="">DataObject</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNode/" class="">FieldNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNodeAdapter/" class="">FieldNodeAdapter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/RepeaterNode/" class="">RepeaterNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ScalarTypeHelper/" class="">ScalarTypeHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorDefaultTypes/" class="">ValidatorDefaultTypes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorNumericTypes/" class="">ValidatorNumericTypes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-57b41e981b764a86d3ac12bc39ede402" class="toggle"  />
+    <label for="section-57b41e981b764a86d3ac12bc39ede402" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-fbp/" class="">@furo/fbp</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/empty-fbp-node/" class="">empty-fbp-node</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-bind/" class="">flow-bind</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-repeat/" class="">flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/DOMFBP/" class="">DOMFBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FBP/" class="">FBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FbpBreakpoints/" class="">FbpBreakpoints</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="toggle"  />
+    <label for="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-framework/" class="">@furo/framework</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/BaseSpecValidators/" class="">BaseSpecValidators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Env/" class="">Env</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/FuroFeatureToggle/" class="">FuroFeatureToggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/i18n/" class="">i18n</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Init/" class="">Init</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/KeyState/" class="">KeyState</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/NodeEvent/" class="">NodeEvent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatNumeric/" class="">ValidatorFuroFatNumeric</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatString/" class="">ValidatorFuroFatString</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufTimestamp/" class="">ValidatorGoogleProtobufTimestamp</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorRegistry/" class="">ValidatorRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-33dc2edb96aa3156541dfa4259289ac4" class="toggle"  />
+    <label for="section-33dc2edb96aa3156541dfa4259289ac4" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-layout/" class="">@furo/layout</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop/" class="">furo-backdrop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop-display/" class="">furo-backdrop-display</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-empty-spacer/" class="">furo-empty-spacer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-form-layouter/" class="">furo-form-layouter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-horizontal-flex/" class="">furo-horizontal-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-resizer/" class="">furo-resizer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-split-view/" class="">furo-split-view</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-flex/" class="">furo-vertical-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-scroller/" class="">furo-vertical-scroller</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8784ee5251b6ff25766e4ce74770c3cc" class="toggle"  />
+    <label for="section-8784ee5251b6ff25766e4ce74770c3cc" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-route/" class="">@furo/route</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow/" class="">furo-app-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow-router/" class="">furo-app-flow-router</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-document-title/" class="">furo-document-title</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location/" class="">furo-location</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location-updater/" class="">furo-location-updater</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-lock-navigation/" class="">furo-lock-navigation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-pages/" class="">furo-pages</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-panel-coordinator/" class="">furo-panel-coordinator</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/BasePanel/" class="">BasePanel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/panelRegistry/" class="">panelRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="toggle"  />
+    <label for="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-util/" class="">@furo/util</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config/" class="">furo-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config-loader/" class="">furo-config-loader</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-de-bounce/" class="">furo-de-bounce</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-demo-snippet/" class="">furo-demo-snippet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-feature-toggle/" class="">furo-feature-toggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-fetch-json/" class="">furo-fetch-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-forth-stack/" class="">furo-forth-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-get-clipboard/" class="">furo-get-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-graph-renderer/" class="">furo-graph-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-head-tail/" class="">furo-head-tail</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-hp-35/" class="">furo-hp-35</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-interval-pulse/" class="">furo-interval-pulse</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-key-filter/" class="">furo-key-filter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-keydown/" class="">furo-keydown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-markdown/" class="">furo-markdown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-navigation-pad/" class="">furo-navigation-pad</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-pretty-json/" class="">furo-pretty-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-put-clipboard/" class="">furo-put-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-show-flow/" class="">furo-show-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/light-bulb/" class="">light-bulb</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/Config/" class="">Config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/ConfigTree/" class="">ConfigTree</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/EmptyStackError/" class="">EmptyStackError</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-09bfaa06443a156d3831aea914959af5" class="toggle"  />
+    <label for="section-09bfaa06443a156d3831aea914959af5" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-webtypes/" class="">@furo/web-types</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://ui5.furo.pro" target="_blank" rel="noopener">
+        SAP UI5 Integration
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://furo.pro" target="_blank" rel="noopener">
+        フロー Furo
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>furo-collection-agent</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a>
+      <ul>
+        <li><a href="#view"><strong>view</strong></a></li>
+        <li><a href="#filter"><strong>filter</strong></a></li>
+        <li><a href="#service"><strong>service</strong></a></li>
+        <li><a href="#pagesize"><strong>pageSize</strong></a></li>
+        <li><a href="#fields"><strong>fields</strong></a></li>
+        <li><a href="#orderby"><strong>orderBy</strong></a></li>
+        <li><a href="#listonhtsin"><strong>listOnHtsIn</strong></a></li>
+        <li><a href="#loadrelonhtsin"><strong>loadRelOnHtsIn</strong></a></li>
+        <li><a href="#rel"><strong>rel</strong></a></li>
+        <li><a href="#method"><strong>method</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#request-aborted"><strong>request-aborted</strong></a></li>
+        <li><a href="#request-started"><strong>request-started</strong></a></li>
+        <li><a href="#response-raw"><strong>response-raw</strong></a></li>
+        <li><a href="#response-error"><strong>response-error</strong></a></li>
+        <li><a href="#response-error-status-code"><strong>response-error-[status-code]</strong></a></li>
+        <li><a href="#fatal-error"><strong>fatal-error</strong></a></li>
+        <li><a href="#response-error-4xx"><strong>response-error-4xx</strong></a></li>
+        <li><a href="#response-error-5xx"><strong>response-error-5xx</strong></a></li>
+        <li><a href="#response-error-raw"><strong>response-error-raw</strong></a></li>
+        <li><a href="#response"><strong>response</strong></a></li>
+        <li><a href="#response-hts-updated"><strong>response-hts-updated</strong></a></li>
+        <li><a href="#filter-changed"><strong>filter-changed</strong></a></li>
+        <li><a href="#hts-updated"><strong>hts-updated</strong></a></li>
+        <li><a href="#hts-injected"><strong>hts-injected</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#setfields"><strong>setFields</strong></a></li>
+        <li><a href="#bindrequestdata"><strong>bindRequestData</strong></a></li>
+        <li><a href="#setorderby"><strong>setOrderBy</strong></a></li>
+        <li><a href="#clearfilter"><strong>clearFilter</strong></a></li>
+        <li><a href="#setfilter"><strong>setFilter</strong></a></li>
+        <li><a href="#setpagesize"><strong>setPageSize</strong></a></li>
+        <li><a href="#updateqp"><strong>updateQp</strong></a></li>
+        <li><a href="#setqp"><strong>setQp</strong></a></li>
+        <li><a href="#clearqp"><strong>clearQp</strong></a></li>
+        <li><a href="#list"><strong>list</strong></a></li>
+        <li><a href="#load"><strong>load</strong></a></li>
+        <li><a href="#loadrel"><strong>loadRel</strong></a></li>
+        <li><a href="#searchrel"><strong>searchRel</strong></a></li>
+        <li><a href="#search"><strong>search</strong></a></li>
+        <li><a href="#first"><strong>first</strong></a></li>
+        <li><a href="#prev"><strong>prev</strong></a></li>
+        <li><a href="#next"><strong>next</strong></a></li>
+        <li><a href="#last"><strong>last</strong></a></li>
+        <li><a href="#htsin"><strong>htsIn</strong></a></li>
+        <li><a href="#abortpendingrequest"><strong>abortPendingRequest</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="furo-collection-agent">
+  furo-collection-agent
+  <a class="anchor" href="#furo-collection-agent">#</a>
+</h1>
+<p><strong>@furo/data</strong> <small>v2.18.0</small>
+<br><code>import '@furo/data/src/furo-collection-agent.js';</code><small>
+<br>exports <em>FuroCollectionAgent</em> js
+<br>exports <code>&lt;furo-collection-agent&gt;</code> custom-element-definition
+<br>superclass <em>LitElement</em>
+<br> mixes <em>FBP</em></small>
+<br><small>summary <em>interface component to handle collection requests</em></small></p>
+<p><code>furo-collection-agent</code> is an interface component to handle collection requests.</p>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-html" data-lang="html"><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">furo-collection-agent</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#1f2328">service</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Servicename&#34;</span>
+</span></span><span style="display:flex;"><span>   <span style="color:#1f2328">fn-hts-in</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;--hts&#34;</span><span style="color:#1f2328">&gt;&lt;/</span><span style="color:#0550ae">furo-collection-agent</span><span style="color:#1f2328">&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">&lt;!-- produces a hateoas link array --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">&lt;</span><span style="color:#0550ae">furo-deep-link</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#1f2328">service</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;Servicename&#34;</span> <span style="color:#1f2328">at-hts-out</span><span style="color:#0550ae">=</span><span style="color:#0a3069">&#34;--hts&#34;</span><span style="color:#1f2328">&gt;&lt;/</span><span style="color:#0550ae">furo-deep-link</span><span style="color:#1f2328">&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><em>before you can do any requests, the service and the HATEOAS must be defined</em></p>
+<h2 id="attributes-and-properties">
+  Attributes and Properties
+  <a class="anchor" href="#attributes-and-properties">#</a>
+</h2>
+<h3 id="view">
+  <strong>view</strong>
+  <a class="anchor" href="#view">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">view</span>
+<small><code>String</code> </small></p>
+<p>Parameter for contextual representations</p>
+<p>To reduce network traffic, it is sometimes useful to allow the client to limit which parts of the resource the server should return in its responses,
+returning a view of the resource (i.e. specialized version for dropdowns ) instead of the full resource representation.</p>
+<p>
+  <a href="https://cloud.google.com/apis/design/design_patterns#resource_view">https://cloud.google.com/apis/design/design_patterns#resource_view</a></p>
+<p>view=smallcards</p>
+<p>Only useable if your service has implemented this feature.
+<br><br></p>
+<h3 id="filter">
+  <strong>filter</strong>
+  <a class="anchor" href="#filter">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">filter</span>
+<small><code>String</code> </small></p>
+<p>Set the filter.</p>
+<p>Hint: use the FieldNode._base64 property to send complex objects as a filter and decode it on the server side.</p>
+<p>Only useable if your service has implemented this feature.
+<br><br></p>
+<h3 id="service">
+  <strong>service</strong>
+  <a class="anchor" href="#service">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">service</span>
+<small><code>String</code> </small></p>
+<p>Setze den Service
+<br><br></p>
+<h3 id="pagesize">
+  <strong>pageSize</strong>
+  <a class="anchor" href="#pagesize">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">page-size</span>
+<small><code>Number</code> </small></p>
+<p>Sets pagination size in the List request.</p>
+<p>Only useful if your service supports pagination.
+<br><br></p>
+<h3 id="fields">
+  <strong>fields</strong>
+  <a class="anchor" href="#fields">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">fields</span>
+<small><code>String</code> </small></p>
+<p>Comma separated list of fields (like a fieldmask)
+used for partial representation / partial responses.</p>
+<p>If your services supports this feature, you will receive a subset of the fields.
+<br><br></p>
+<h3 id="orderby">
+  <strong>orderBy</strong>
+  <a class="anchor" href="#orderby">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">order-by</span>
+<small><code>String</code> </small></p>
+<p>Sorting order</p>
+<p>order-by=&ldquo;foo,-bar&rdquo;  means foo asc and bar desc</p>
+<p>
+  <a href="https://cloud.google.com/apis/design/design_patterns#sorting_order">https://cloud.google.com/apis/design/design_patterns#sorting_order</a></p>
+<p>To avoid sql injection errors we do not send any sql like syntax!</p>
+<p>Only useable if your service has implemented this feature.
+<br><br></p>
+<h3 id="listonhtsin">
+  <strong>listOnHtsIn</strong>
+  <a class="anchor" href="#listonhtsin">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">list-on-hts-in</span>
+<small><code>Boolean</code> </small></p>
+<p>Executes a list when a rel=&ldquo;list&rdquo; is injected.
+<br><br></p>
+<h3 id="loadrelonhtsin">
+  <strong>loadRelOnHtsIn</strong>
+  <a class="anchor" href="#loadrelonhtsin">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">load-rel-on-hts-in</span>
+<small><code>Boolean</code> </small></p>
+<p>Executes a loadRel when a rel=&ldquo;XXXX&rdquo; is injected.</p>
+<p>You have to set the attributes <em>rel</em> and <em>method</em> to have this working.</p>
+<p>This is useful for getting &ldquo;custom&rdquo; collections.
+<br><br></p>
+<h3 id="rel">
+  <strong>rel</strong>
+  <a class="anchor" href="#rel">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">rel</span>
+<small><code>String</code> </small></p>
+<p>rel which should be used on load rel
+<br><br></p>
+<h3 id="method">
+  <strong>method</strong>
+  <a class="anchor" href="#method">#</a>
+</h3>
+<p><span  style="border-width:2px; border-style: solid;border-color:  rgb(255, 182, 91);font-family:monospace; padding:2px 4px;">method</span>
+<small><code>String</code> </small></p>
+<p>for compatibility reasons you have to specify the method inside of the service.</p>
+<p>This attribute should not be needed in future versions, because the rel already contains all relevant information.
+<br><br></p>
+<h2 id="events">
+  Events
+  <a class="anchor" href="#events">#</a>
+</h2>
+<h3 id="request-aborted">
+  <strong>request-aborted</strong>
+  <a class="anchor" href="#request-aborted">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-request-aborted</span>
+→ <small><code>Request</code></small></p>
+<p>Fired if the request was successfully cancelled
+<br><br></p>
+<h3 id="request-started">
+  <strong>request-started</strong>
+  <a class="anchor" href="#request-started">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-request-started</span>
+→ <small><code>Request</code></small></p>
+<p>Fired when a request is sent.
+<br><br></p>
+<h3 id="response-raw">
+  <strong>response-raw</strong>
+  <a class="anchor" href="#response-raw">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-raw</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when a response is received.
+<br><br></p>
+<h3 id="response-error">
+  <strong>response-error</strong>
+  <a class="anchor" href="#response-error">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-error</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when an error has occoured. This is a general error event. The specific error events are fired additionally.
+<br><br></p>
+<h3 id="response-error-status-code">
+  <strong>response-error-[status-code]</strong>
+  <a class="anchor" href="#response-error-status-code">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-error-[status-code]</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when an error has occoured. This is a specific error event.
+<br><br></p>
+<h3 id="fatal-error">
+  <strong>fatal-error</strong>
+  <a class="anchor" href="#fatal-error">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-fatal-error</span>
+→ <small><code>Request</code></small></p>
+<p>Requests are made via the Fetch API if possible.Fallback XMLHttpRequest
+<br><br></p>
+<h3 id="response-error-4xx">
+  <strong>response-error-4xx</strong>
+  <a class="anchor" href="#response-error-4xx">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-error-4xx</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when an error has occoured. This is a group error event. E.g. response-error-5xx, response-error-4xx
+<br><br></p>
+<h3 id="response-error-5xx">
+  <strong>response-error-5xx</strong>
+  <a class="anchor" href="#response-error-5xx">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-error-5xx</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when an error has occoured. This is a group error event. E.g. response-error-5xx, response-error-4xx
+<br><br></p>
+<h3 id="response-error-raw">
+  <strong>response-error-raw</strong>
+  <a class="anchor" href="#response-error-raw">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-error-raw</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when a error has occoured.
+<br><br></p>
+<h3 id="response">
+  <strong>response</strong>
+  <a class="anchor" href="#response">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response</span>
+→ <small><code>Object</code></small></p>
+<p>Fired when a response is received.
+<br><br></p>
+<h3 id="response-hts-updated">
+  <strong>response-hts-updated</strong>
+  <a class="anchor" href="#response-hts-updated">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-response-hts-updated</span>
+→ <small><code>hts</code></small></p>
+<p>Fired when the hts was updated by the received response.
+<br><br></p>
+<h3 id="filter-changed">
+  <strong>filter-changed</strong>
+  <a class="anchor" href="#filter-changed">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-filter-changed</span>
+→ <small>``</small></p>
+<p>Fired when filter was updated with <code>fn-set-filter</code>.
+<br><br></p>
+<h3 id="hts-updated">
+  <strong>hts-updated</strong>
+  <a class="anchor" href="#hts-updated">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-hts-updated</span>
+→ <small><code>Array|HATEOAS</code></small></p>
+<p>Fired when hateoas was updated from response.
+<br><br></p>
+<h3 id="hts-injected">
+  <strong>hts-injected</strong>
+  <a class="anchor" href="#hts-injected">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-hts-injected</span>
+→ <small><code>Hateoas links</code></small></p>
+<p>Fired when hateoas was updated
+<br><br></p>
+<h2 id="methods">
+  Methods
+  <a class="anchor" href="#methods">#</a>
+</h2>
+<h3 id="setfields">
+  <strong>setFields</strong>
+  <a class="anchor" href="#setfields">#</a>
+</h3>
+<p><small><strong>setFields</strong>(<em>fields</em> <code>String</code> ) ⟹ <code>void</code></small></p>
+<p><small><code>String</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-set-fields</span></p>
+<p>Comma separated list of fields (like a fieldmask)
+used for partial representation / partial responses.</p>
+<p>If your services supports this feature, you will receive a subset of the fields.</p>
+<ul>
+<li><small><em>fields</em> Comma separated list of fields</small>
+<br><br></li>
+</ul>
+<h3 id="bindrequestdata">
+  <strong>bindRequestData</strong>
+  <a class="anchor" href="#bindrequestdata">#</a>
+</h3>
+<p><small><strong>bindRequestData</strong>(<em>dataObject</em> `` ) ⟹ <code>void</code></small></p>
+<p><small>`` </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-bind-request-data</span></p>
+<p>Binds a furo-data-object type. Use this if you want save data.</p>
+<ul>
+<li><small><em>dataObject</em> </small>
+<br><br></li>
+</ul>
+<h3 id="setorderby">
+  <strong>setOrderBy</strong>
+  <a class="anchor" href="#setorderby">#</a>
+</h3>
+<p><small><strong>setOrderBy</strong>(<em>order</em> <code>String</code> ) ⟹ <code>void</code></small></p>
+<p><small><code>String</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-set-order-by</span></p>
+<p>Sorting order</p>
+<p>order-by=&ldquo;foo,-bar&rdquo;  means foo asc and bar desc</p>
+<p>
+  <a href="https://cloud.google.com/apis/design/design_patterns#sorting_order">https://cloud.google.com/apis/design/design_patterns#sorting_order</a></p>
+<p>To avoid sql injection errors we do not send any sql like syntax!</p>
+<p>Only useable if your service has implemented this feature.</p>
+<ul>
+<li><small><em>order</em> Comma separated list of sort orders</small>
+<br><br></li>
+</ul>
+<h3 id="clearfilter">
+  <strong>clearFilter</strong>
+  <a class="anchor" href="#clearfilter">#</a>
+</h3>
+<p><small><strong>clearFilter</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-clear-filter</span></p>
+<p>clear the setted filter</p>
+<p><br><br></p>
+<h3 id="setfilter">
+  <strong>setFilter</strong>
+  <a class="anchor" href="#setfilter">#</a>
+</h3>
+<p><small><strong>setFilter</strong>(<em>filterstring</em> <code>String</code> ) ⟹ <code>void</code></small></p>
+<p><small><code>String</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-set-filter</span></p>
+<p>Set the filter.</p>
+<p>Hint: use the FieldNode._base64 property to send complex objects as a filter and decode it on the server side.</p>
+<p>Only useable if your service has implemented this feature.</p>
+<ul>
+<li><small><em>filterstring</em> String for your filter.</small>
+<br><br></li>
+</ul>
+<h3 id="setpagesize">
+  <strong>setPageSize</strong>
+  <a class="anchor" href="#setpagesize">#</a>
+</h3>
+<p><small><strong>setPageSize</strong>(<em>size</em> <code>Number</code> ) ⟹ <code>void</code></small></p>
+<p><small><code>Number</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-set-page-size</span></p>
+<p>Sets pagination size in the List request.</p>
+<p>Only useful if your service supports pagination.</p>
+<ul>
+<li><small><em>size</em> requested size of a page.</small>
+<br><br></li>
+</ul>
+<h3 id="updateqp">
+  <strong>updateQp</strong>
+  <a class="anchor" href="#updateqp">#</a>
+</h3>
+<p><small><strong>updateQp</strong>(<em>qp</em> `` <em>key</em> <code>Object</code> ) ⟹ <code>void</code></small></p>
+<p><small>`` <code>Object</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-update-qp</span></p>
+<p>Update query params
+a qp like {&ldquo;active&rdquo;:true} will just update the qp <em>active</em></p>
+<p>If the current value of the qp is not the same like the injected value, a qp-changed event will be fired</p>
+<ul>
+<li><small><em>qp</em> </small></li>
+<li><small><em>key</em> value pairs</small>
+<br><br></li>
+</ul>
+<h3 id="setqp">
+  <strong>setQp</strong>
+  <a class="anchor" href="#setqp">#</a>
+</h3>
+<p><small><strong>setQp</strong>(<em>qp</em> `` <em>key</em> <code>Object</code> ) ⟹ <code>void</code></small></p>
+<p><small>`` <code>Object</code> </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-set-qp</span></p>
+<p>Set query params
+All existing query params are replaced by the transferred parameters
+If the transferred object is empty, all the values will be removed!
+The AgentHelper fires a qp-set event after the query params are replaced.</p>
+<ul>
+<li><small><em>qp</em> </small></li>
+<li><small><em>key</em> value pairs</small>
+<br><br></li>
+</ul>
+<h3 id="clearqp">
+  <strong>clearQp</strong>
+  <a class="anchor" href="#clearqp">#</a>
+</h3>
+<p><small><strong>clearQp</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-clear-qp</span></p>
+<p>clear the query params that you have setted before</p>
+<p><br><br></p>
+<h3 id="list">
+  <strong>list</strong>
+  <a class="anchor" href="#list">#</a>
+</h3>
+<p><small><strong>list</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-list</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="load">
+  <strong>load</strong>
+  <a class="anchor" href="#load">#</a>
+</h3>
+<p><small><strong>load</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-load</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="loadrel">
+  <strong>loadRel</strong>
+  <a class="anchor" href="#loadrel">#</a>
+</h3>
+<p><small><strong>loadRel</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-load-rel</span></p>
+<p>loads the entity following the link which is specified on the attribute <strong>rel</strong> if it is available.</p>
+<p><br><br></p>
+<h3 id="searchrel">
+  <strong>searchRel</strong>
+  <a class="anchor" href="#searchrel">#</a>
+</h3>
+<p><small><strong>searchRel</strong>(<em>term</em> `` ) ⟹ <code>void</code></small></p>
+<p><small>`` </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-search-rel</span></p>
+<p>search for a term following the link which is specified on the attribute <strong>rel</strong></p>
+<p>This will set the query param q and execute the query.</p>
+<ul>
+<li><small><em>term</em> </small>
+<br><br></li>
+</ul>
+<h3 id="search">
+  <strong>search</strong>
+  <a class="anchor" href="#search">#</a>
+</h3>
+<p><small><strong>search</strong>(<em>term</em> `` ) ⟹ <code>void</code></small></p>
+<p><small>`` </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-search</span></p>
+<p>search for a term.</p>
+<p>This will set the query param q and triggers a list()</p>
+<ul>
+<li><small><em>term</em> </small>
+<br><br></li>
+</ul>
+<h3 id="first">
+  <strong>first</strong>
+  <a class="anchor" href="#first">#</a>
+</h3>
+<p><small><strong>first</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-first</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="prev">
+  <strong>prev</strong>
+  <a class="anchor" href="#prev">#</a>
+</h3>
+<p><small><strong>prev</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-prev</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="next">
+  <strong>next</strong>
+  <a class="anchor" href="#next">#</a>
+</h3>
+<p><small><strong>next</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-next</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="last">
+  <strong>last</strong>
+  <a class="anchor" href="#last">#</a>
+</h3>
+<p><small><strong>last</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-last</span></p>
+<p>loads the entity if hts is available</p>
+<p><br><br></p>
+<h3 id="htsin">
+  <strong>htsIn</strong>
+  <a class="anchor" href="#htsin">#</a>
+</h3>
+<p><small><strong>htsIn</strong>(<em>hts</em> `` ) ⟹ <code>void</code></small></p>
+<p><small>`` </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-hts-in</span></p>
+<p>Inject HATEOAS links.</p>
+<ul>
+<li><small><em>hts</em> </small>
+<br><br></li>
+</ul>
+<h3 id="abortpendingrequest">
+  <strong>abortPendingRequest</strong>
+  <a class="anchor" href="#abortpendingrequest">#</a>
+</h3>
+<p><small><strong>abortPendingRequest</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-abort-pending-request</span></p>
+<p>Aborts a pending request</p>
+<p><br><br></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/theNorstroem/furo/documentation/commit/3dfbb74790d69f910ee942bea25b01d013daa2ae" title='Last modified by veith | March 8, 2024' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>March 8, 2024</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a>
+      <ul>
+        <li><a href="#view"><strong>view</strong></a></li>
+        <li><a href="#filter"><strong>filter</strong></a></li>
+        <li><a href="#service"><strong>service</strong></a></li>
+        <li><a href="#pagesize"><strong>pageSize</strong></a></li>
+        <li><a href="#fields"><strong>fields</strong></a></li>
+        <li><a href="#orderby"><strong>orderBy</strong></a></li>
+        <li><a href="#listonhtsin"><strong>listOnHtsIn</strong></a></li>
+        <li><a href="#loadrelonhtsin"><strong>loadRelOnHtsIn</strong></a></li>
+        <li><a href="#rel"><strong>rel</strong></a></li>
+        <li><a href="#method"><strong>method</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#request-aborted"><strong>request-aborted</strong></a></li>
+        <li><a href="#request-started"><strong>request-started</strong></a></li>
+        <li><a href="#response-raw"><strong>response-raw</strong></a></li>
+        <li><a href="#response-error"><strong>response-error</strong></a></li>
+        <li><a href="#response-error-status-code"><strong>response-error-[status-code]</strong></a></li>
+        <li><a href="#fatal-error"><strong>fatal-error</strong></a></li>
+        <li><a href="#response-error-4xx"><strong>response-error-4xx</strong></a></li>
+        <li><a href="#response-error-5xx"><strong>response-error-5xx</strong></a></li>
+        <li><a href="#response-error-raw"><strong>response-error-raw</strong></a></li>
+        <li><a href="#response"><strong>response</strong></a></li>
+        <li><a href="#response-hts-updated"><strong>response-hts-updated</strong></a></li>
+        <li><a href="#filter-changed"><strong>filter-changed</strong></a></li>
+        <li><a href="#hts-updated"><strong>hts-updated</strong></a></li>
+        <li><a href="#hts-injected"><strong>hts-injected</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#setfields"><strong>setFields</strong></a></li>
+        <li><a href="#bindrequestdata"><strong>bindRequestData</strong></a></li>
+        <li><a href="#setorderby"><strong>setOrderBy</strong></a></li>
+        <li><a href="#clearfilter"><strong>clearFilter</strong></a></li>
+        <li><a href="#setfilter"><strong>setFilter</strong></a></li>
+        <li><a href="#setpagesize"><strong>setPageSize</strong></a></li>
+        <li><a href="#updateqp"><strong>updateQp</strong></a></li>
+        <li><a href="#setqp"><strong>setQp</strong></a></li>
+        <li><a href="#clearqp"><strong>clearQp</strong></a></li>
+        <li><a href="#list"><strong>list</strong></a></li>
+        <li><a href="#load"><strong>load</strong></a></li>
+        <li><a href="#loadrel"><strong>loadRel</strong></a></li>
+        <li><a href="#searchrel"><strong>searchRel</strong></a></li>
+        <li><a href="#search"><strong>search</strong></a></li>
+        <li><a href="#first"><strong>first</strong></a></li>
+        <li><a href="#prev"><strong>prev</strong></a></li>
+        <li><a href="#next"><strong>next</strong></a></li>
+        <li><a href="#last"><strong>last</strong></a></li>
+        <li><a href="#htsin"><strong>htsIn</strong></a></li>
+        <li><a href="#abortpendingrequest"><strong>abortPendingRequest</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/doc-helper.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/furo-fbp.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

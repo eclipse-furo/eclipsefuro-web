@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="en" dir=ZgotmplZ>
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Init
+  #
+
+@furo/furo-framework v2.4.11
+import &#39;@furo/framework/src/system.js&#39;;
+exports Init js
+exports Sys js
+
+The init class is used to init your Env, the API services and the API types.
+Use the init package in the init phase of your application
+
+  example init
+  #
+
+
+
+ 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+
+
+// -- initialize application env, theme, api
+import  {Init,Iconset} from &#34;@furo/framework/src/furo.js&#34;;
+import {Services, Types} from &#34;@furo/specs/build/data_environment.js&#34;
+Init.registerApiServices(Services);
+Init.registerApiTypes(Types);
+//Attention: Styling is defined in main-stage
+import {FuroBaseIcons} from &#34;@furo/icon/assets/iconsets/baseIcons&#34;;
+import {MapsIcons} from &#34;@furo/icon/assets/iconsets/mapsIcons&#34;;
+import {PlacesIcons} from &#34;@furo/icon/assets/iconsets/placesIcons&#34;;
+import {CommunicationIcons} from &#34;@furo/icon/assets/iconsets/communicationIcons&#34;;
+import {NotificationIcons} from &#34;@furo/icon/assets/iconsets/notificationIcons&#34;;
+import {FuroDocIcons} from &#34;./assets/iconset&#34;;
+import {AvIcons} from &#34;@furo/icon/assets/iconsets/avIcons&#34;;
+import {DeviceIcons} from &#34;@furo/icon/assets/iconsets/deviceIcons&#34;;
+import {EditorIcons} from &#34;@furo/icon/assets/iconsets/editorIcons&#34;;
+import {SocialIcons} from &#34;@furo/icon/assets/iconsets/socialIcons&#34;;
+import {HardwareIcons} from &#34;@furo/icon/assets/iconsets/hardwareIcons&#34;;
+import {ImageIcons} from &#34;@furo/icon/assets/iconsets/imageIcons&#34;;
+
+
+Iconset.registerIconset(&#34;furo&#34;, FuroDocIcons);
+Iconset.registerIconset(&#34;default&#34;, FuroBaseIcons);
+Iconset.registerIconset(&#34;av&#34;, AvIcons);
+Iconset.registerIconset(&#34;communication&#34;, CommunicationIcons);
+Iconset.registerIconset(&#34;device&#34;, DeviceIcons);
+Iconset.registerIconset(&#34;editor&#34;, EditorIcons);
+Iconset.registerIconset(&#34;social&#34;, SocialIcons);
+Iconset.registerIconset(&#34;places&#34;, PlacesIcons);
+Iconset.registerIconset(&#34;notification&#34;, NotificationIcons);
+Iconset.registerIconset(&#34;map&#34;, MapsIcons);
+Iconset.registerIconset(&#34;hardware&#34;, HardwareIcons);
+Iconset.registerIconset(&#34;image&#34;, ImageIcons);
+
+
+
+  Attributes and Properties
+  #
+
+
+  Methods
+  #
+
+
+  registerEnv
+  #
+
+registerEnv(section *data* ) ⟹ void">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:url" content="http://localhost:1313/docs/modules/furo-framework/Init/">
+  <meta property="og:site_name" content="フロー Furo Web">
+  <meta property="og:title" content="Init">
+  <meta property="og:description" content="Init # @furo/furo-framework v2.4.11 import &#39;@furo/framework/src/system.js&#39;; exports Init js exports Sys js
+The init class is used to init your Env, the API services and the API types.
+Use the init package in the init phase of your application
+example init # 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 // -- initialize application env, theme, api import {Init,Iconset} from &#34;@furo/framework/src/furo.js&#34;; import {Services, Types} from &#34;@furo/specs/build/data_environment.js&#34; Init.registerApiServices(Services); Init.registerApiTypes(Types); //Attention: Styling is defined in main-stage import {FuroBaseIcons} from &#34;@furo/icon/assets/iconsets/baseIcons&#34;; import {MapsIcons} from &#34;@furo/icon/assets/iconsets/mapsIcons&#34;; import {PlacesIcons} from &#34;@furo/icon/assets/iconsets/placesIcons&#34;; import {CommunicationIcons} from &#34;@furo/icon/assets/iconsets/communicationIcons&#34;; import {NotificationIcons} from &#34;@furo/icon/assets/iconsets/notificationIcons&#34;; import {FuroDocIcons} from &#34;./assets/iconset&#34;; import {AvIcons} from &#34;@furo/icon/assets/iconsets/avIcons&#34;; import {DeviceIcons} from &#34;@furo/icon/assets/iconsets/deviceIcons&#34;; import {EditorIcons} from &#34;@furo/icon/assets/iconsets/editorIcons&#34;; import {SocialIcons} from &#34;@furo/icon/assets/iconsets/socialIcons&#34;; import {HardwareIcons} from &#34;@furo/icon/assets/iconsets/hardwareIcons&#34;; import {ImageIcons} from &#34;@furo/icon/assets/iconsets/imageIcons&#34;; Iconset.registerIconset(&#34;furo&#34;, FuroDocIcons); Iconset.registerIconset(&#34;default&#34;, FuroBaseIcons); Iconset.registerIconset(&#34;av&#34;, AvIcons); Iconset.registerIconset(&#34;communication&#34;, CommunicationIcons); Iconset.registerIconset(&#34;device&#34;, DeviceIcons); Iconset.registerIconset(&#34;editor&#34;, EditorIcons); Iconset.registerIconset(&#34;social&#34;, SocialIcons); Iconset.registerIconset(&#34;places&#34;, PlacesIcons); Iconset.registerIconset(&#34;notification&#34;, NotificationIcons); Iconset.registerIconset(&#34;map&#34;, MapsIcons); Iconset.registerIconset(&#34;hardware&#34;, HardwareIcons); Iconset.registerIconset(&#34;image&#34;, ImageIcons); Attributes and Properties # Methods # registerEnv # registerEnv(section *data* ) ⟹ void">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:modified_time" content="2024-03-08T14:07:31+01:00">
+<title>Init | フロー Furo Web</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.9cf05710651e8f9a974123fc1a656fbb5eb2f912dba4c022b69792d2f93e1c40.css" integrity="sha256-nPBXEGUej5qXQSP8GmVvu16y&#43;RLbpMAitpeS0vk&#43;HEA=">
+<script defer src="/en.search.min.b0bf84841deec51ff6f5057e68d3262d4265b55605be890ebf7c38b97b2fe329.js" integrity="sha256-sL&#43;EhB3uxR/29QV&#43;aNMmLUJltVYFvokOv3w4uXsv4yk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+
+  <link href="/main.css" rel="stylesheet"/>
+</head>
+
+<body dir=ZgotmplZ>
+<fixed-tooltip-display></fixed-tooltip-display>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <div ></div>
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>フロー Furo Web</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-73e73cd69dd9e7c0f9a1192228055a0d" class="toggle"  />
+    <label for="section-73e73cd69dd9e7c0f9a1192228055a0d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/" class="">Guides</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/dealing-w-data/" class="">Dealing with data</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-00998f71914cda1e9ad17295c769918d" class="toggle"  />
+    <label for="section-00998f71914cda1e9ad17295c769918d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/routing/" class="">Routing</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/routing/subrouting/" class="">Sub routing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/app-flow/" class="">Application Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/FNA/" class="">Extending a UI lib</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/type-renderer/" class="">Type Renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/featuretoggle/" class="">Feature Toggles</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0ec807a1e943360927b3f5b67f73fb1f" class="toggle" checked />
+    <label for="section-0ec807a1e943360927b3f5b67f73fb1f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/" class="">Packages</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9380a63e67ced80eac73c3af8fb8c23d" class="toggle"  />
+    <label for="section-9380a63e67ced80eac73c3af8fb8c23d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-data/" class="">@furo/data</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-api-fetch/" class="">furo-api-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-collection-agent/" class="">furo-collection-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-custom-method/" class="">furo-custom-method</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-flow-repeat/" class="">furo-data-flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-hide-content/" class="">furo-data-hide-content</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-object/" class="">furo-data-object</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-deep-link/" class="">furo-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-agent/" class="">furo-entity-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-field/" class="">furo-entity-field</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-hateoas-state/" class="">furo-hateoas-state</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-message-container-handler/" class="">furo-message-container-handler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-rel-exists/" class="">furo-rel-exists</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-reverse-deep-link/" class="">furo-reverse-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-type-renderer/" class="">furo-type-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/AgentHelper/" class="">AgentHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/DataObject/" class="">DataObject</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNode/" class="">FieldNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNodeAdapter/" class="">FieldNodeAdapter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/RepeaterNode/" class="">RepeaterNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ScalarTypeHelper/" class="">ScalarTypeHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorDefaultTypes/" class="">ValidatorDefaultTypes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorNumericTypes/" class="">ValidatorNumericTypes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-57b41e981b764a86d3ac12bc39ede402" class="toggle"  />
+    <label for="section-57b41e981b764a86d3ac12bc39ede402" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-fbp/" class="">@furo/fbp</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/empty-fbp-node/" class="">empty-fbp-node</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-bind/" class="">flow-bind</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-repeat/" class="">flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/DOMFBP/" class="">DOMFBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FBP/" class="">FBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FbpBreakpoints/" class="">FbpBreakpoints</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="toggle" checked />
+    <label for="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-framework/" class="">@furo/framework</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/BaseSpecValidators/" class="">BaseSpecValidators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Env/" class="">Env</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/FuroFeatureToggle/" class="">FuroFeatureToggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/i18n/" class="">i18n</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Init/" class=" active">Init</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/KeyState/" class="">KeyState</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/NodeEvent/" class="">NodeEvent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatNumeric/" class="">ValidatorFuroFatNumeric</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatString/" class="">ValidatorFuroFatString</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufTimestamp/" class="">ValidatorGoogleProtobufTimestamp</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorRegistry/" class="">ValidatorRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-33dc2edb96aa3156541dfa4259289ac4" class="toggle"  />
+    <label for="section-33dc2edb96aa3156541dfa4259289ac4" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-layout/" class="">@furo/layout</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop/" class="">furo-backdrop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop-display/" class="">furo-backdrop-display</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-empty-spacer/" class="">furo-empty-spacer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-form-layouter/" class="">furo-form-layouter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-horizontal-flex/" class="">furo-horizontal-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-resizer/" class="">furo-resizer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-split-view/" class="">furo-split-view</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-flex/" class="">furo-vertical-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-scroller/" class="">furo-vertical-scroller</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8784ee5251b6ff25766e4ce74770c3cc" class="toggle"  />
+    <label for="section-8784ee5251b6ff25766e4ce74770c3cc" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-route/" class="">@furo/route</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow/" class="">furo-app-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow-router/" class="">furo-app-flow-router</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-document-title/" class="">furo-document-title</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location/" class="">furo-location</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location-updater/" class="">furo-location-updater</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-lock-navigation/" class="">furo-lock-navigation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-pages/" class="">furo-pages</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-panel-coordinator/" class="">furo-panel-coordinator</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/BasePanel/" class="">BasePanel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/panelRegistry/" class="">panelRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="toggle"  />
+    <label for="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-util/" class="">@furo/util</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config/" class="">furo-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config-loader/" class="">furo-config-loader</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-de-bounce/" class="">furo-de-bounce</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-demo-snippet/" class="">furo-demo-snippet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-feature-toggle/" class="">furo-feature-toggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-fetch-json/" class="">furo-fetch-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-forth-stack/" class="">furo-forth-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-get-clipboard/" class="">furo-get-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-graph-renderer/" class="">furo-graph-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-head-tail/" class="">furo-head-tail</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-hp-35/" class="">furo-hp-35</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-interval-pulse/" class="">furo-interval-pulse</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-key-filter/" class="">furo-key-filter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-keydown/" class="">furo-keydown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-markdown/" class="">furo-markdown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-navigation-pad/" class="">furo-navigation-pad</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-pretty-json/" class="">furo-pretty-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-put-clipboard/" class="">furo-put-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-show-flow/" class="">furo-show-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/light-bulb/" class="">light-bulb</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/Config/" class="">Config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/ConfigTree/" class="">ConfigTree</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/EmptyStackError/" class="">EmptyStackError</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-09bfaa06443a156d3831aea914959af5" class="toggle"  />
+    <label for="section-09bfaa06443a156d3831aea914959af5" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-webtypes/" class="">@furo/web-types</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://ui5.furo.pro" target="_blank" rel="noopener">
+        SAP UI5 Integration
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://furo.pro" target="_blank" rel="noopener">
+        フロー Furo
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>Init</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#example-init">example init</a></li>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a></li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#registerenv"><strong>registerEnv</strong></a></li>
+        <li><a href="#registerapiservices"><strong>registerApiServices</strong></a></li>
+        <li><a href="#registerapitypes"><strong>registerApiTypes</strong></a></li>
+        <li><a href="#registercustomvalidator"><strong>registerCustomValidator</strong></a></li>
+        <li><a href="#addapitypespec"><strong>addApiTypeSpec</strong></a></li>
+        <li><a href="#addapiservicespec"><strong>addApiServiceSpec</strong></a></li>
+        <li><a href="#applycustomapiprefixtoservicesandtypes"><strong>applyCustomApiPrefixToServicesAndTypes</strong></a></li>
+        <li><a href="#translatestatictypemessages"><strong>translateStaticTypeMessages</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="init">
+  Init
+  <a class="anchor" href="#init">#</a>
+</h1>
+<p><strong>@furo/furo-framework</strong> <small>v2.4.11</small>
+<br><code>import '@furo/framework/src/system.js';</code><small>
+<br>exports <em>Init</em> js
+<br>exports <em>Sys</em> js</small></p>
+<hr>
+<p>The init class is used to init your <em>Env</em>, the API services and the API types.</p>
+<p>Use the init package in the init phase of your application</p>
+<h2 id="example-init">
+  example init
+  <a class="anchor" href="#example-init">#</a>
+</h2>
+<div class="highlight"><div style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-javascript" data-lang="javascript"><span style="display:flex;"><span><span style="color:#57606a">// -- initialize application env, theme, api
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">import</span>  <span style="color:#1f2328">{</span><span style="color:#1f2328">Init</span><span style="color:#1f2328">,</span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/framework/src/furo.js&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">Services</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">Types</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/specs/build/data_environment.js&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Init</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerApiServices</span><span style="color:#1f2328">(</span><span style="color:#1f2328">Services</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Init</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerApiTypes</span><span style="color:#1f2328">(</span><span style="color:#1f2328">Types</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#57606a">//Attention: Styling is defined in main-stage
+</span></span></span><span style="display:flex;"><span><span style="color:#57606a"></span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">FuroBaseIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/baseIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">MapsIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/mapsIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">PlacesIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/placesIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">CommunicationIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/communicationIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">NotificationIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/notificationIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">FuroDocIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;./assets/iconset&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">AvIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/avIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">DeviceIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/deviceIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">EditorIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/editorIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">SocialIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/socialIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">HardwareIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/hardwareIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span><span style="color:#cf222e">import</span> <span style="color:#1f2328">{</span><span style="color:#1f2328">ImageIcons</span><span style="color:#1f2328">}</span> <span style="color:#1f2328">from</span> <span style="color:#0a3069">&#34;@furo/icon/assets/iconsets/imageIcons&#34;</span><span style="color:#1f2328">;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;furo&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">FuroDocIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;default&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">FuroBaseIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;av&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">AvIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;communication&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">CommunicationIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;device&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">DeviceIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;editor&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">EditorIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;social&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">SocialIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;places&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">PlacesIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;notification&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">NotificationIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;map&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">MapsIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;hardware&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">HardwareIcons</span><span style="color:#1f2328">);</span>
+</span></span><span style="display:flex;"><span><span style="color:#1f2328">Iconset</span><span style="color:#1f2328">.</span><span style="color:#1f2328">registerIconset</span><span style="color:#1f2328">(</span><span style="color:#0a3069">&#34;image&#34;</span><span style="color:#1f2328">,</span> <span style="color:#1f2328">ImageIcons</span><span style="color:#1f2328">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="attributes-and-properties">
+  Attributes and Properties
+  <a class="anchor" href="#attributes-and-properties">#</a>
+</h2>
+<h2 id="methods">
+  Methods
+  <a class="anchor" href="#methods">#</a>
+</h2>
+<h3 id="registerenv">
+  <strong>registerEnv</strong>
+  <a class="anchor" href="#registerenv">#</a>
+</h3>
+<p><small><strong>registerEnv</strong>(<em>section</em> <code>*data*</code> ) ⟹ <code>void</code></small></p>
+<ul>
+<li><small><em>section</em> </small></li>
+<li><small><em>data</em> </small>
+<br><br></li>
+</ul>
+<h3 id="registerapiservices">
+  <strong>registerApiServices</strong>
+  <a class="anchor" href="#registerapiservices">#</a>
+</h3>
+<p><small><strong>registerApiServices</strong>(<em>services</em> `` ) ⟹ <code>void</code></small></p>
+<ul>
+<li><small><em>services</em> </small>
+<br><br></li>
+</ul>
+<h3 id="registerapitypes">
+  <strong>registerApiTypes</strong>
+  <a class="anchor" href="#registerapitypes">#</a>
+</h3>
+<p><small><strong>registerApiTypes</strong>(<em>types</em> `` ) ⟹ <code>void</code></small></p>
+<ul>
+<li><small><em>types</em> </small>
+<br><br></li>
+</ul>
+<h3 id="registercustomvalidator">
+  <strong>registerCustomValidator</strong>
+  <a class="anchor" href="#registercustomvalidator">#</a>
+</h3>
+<p><small><strong>registerCustomValidator</strong>(<em>typename</em> <code>String</code> <em>ValidatorClass</em> <code>Class</code> ) ⟹ <code>void</code></small></p>
+<p>Register a validator for a specific type.</p>
+<ul>
+<li><small><em>typename</em> </small></li>
+<li><small><em>ValidatorClass</em> </small>
+<br><br></li>
+</ul>
+<h3 id="addapitypespec">
+  <strong>addApiTypeSpec</strong>
+  <a class="anchor" href="#addapitypespec">#</a>
+</h3>
+<p><small><strong>addApiTypeSpec</strong>(<em>typename</em> <code>*spec*</code> ) ⟹ <code>void</code></small></p>
+<p>Add a single type spec to the registry</p>
+<p>Attention: If the name already exist, the old entry is overwritten.</p>
+<ul>
+<li><small><em>typename</em> </small></li>
+<li><small><em>spec</em> </small>
+<br><br></li>
+</ul>
+<h3 id="addapiservicespec">
+  <strong>addApiServiceSpec</strong>
+  <a class="anchor" href="#addapiservicespec">#</a>
+</h3>
+<p><small><strong>addApiServiceSpec</strong>(<em>servicename</em> <code>*spec*</code> ) ⟹ <code>void</code></small></p>
+<p>Add a single service spec to the registry</p>
+<p>Attention: If the name already exist, the old entry is overwritten.</p>
+<ul>
+<li><small><em>servicename</em> </small></li>
+<li><small><em>spec</em> </small>
+<br><br></li>
+</ul>
+<h3 id="applycustomapiprefixtoservicesandtypes">
+  <strong>applyCustomApiPrefixToServicesAndTypes</strong>
+  <a class="anchor" href="#applycustomapiprefixtoservicesandtypes">#</a>
+</h3>
+<p><small><strong>applyCustomApiPrefixToServicesAndTypes</strong>(<em>prefix</em> `` ) ⟹ <code>void</code></small></p>
+<p>Apply the prefix to all service deeplinks and to all furo.Reference types with defaults</p>
+<ul>
+<li><small><em>prefix</em> </small>
+<br><br></li>
+</ul>
+<h3 id="translatestatictypemessages">
+  <strong>translateStaticTypeMessages</strong>
+  <a class="anchor" href="#translatestatictypemessages">#</a>
+</h3>
+<p><small><strong>translateStaticTypeMessages</strong>() ⟹ <code>void</code></small></p>
+<p>Translates spec content like meta.label, hints</p>
+<p><br><br></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/theNorstroem/furo/documentation/commit/3dfbb74790d69f910ee942bea25b01d013daa2ae" title='Last modified by veith | March 8, 2024' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>March 8, 2024</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#example-init">example init</a></li>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a></li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#registerenv"><strong>registerEnv</strong></a></li>
+        <li><a href="#registerapiservices"><strong>registerApiServices</strong></a></li>
+        <li><a href="#registerapitypes"><strong>registerApiTypes</strong></a></li>
+        <li><a href="#registercustomvalidator"><strong>registerCustomValidator</strong></a></li>
+        <li><a href="#addapitypespec"><strong>addApiTypeSpec</strong></a></li>
+        <li><a href="#addapiservicespec"><strong>addApiServiceSpec</strong></a></li>
+        <li><a href="#applycustomapiprefixtoservicesandtypes"><strong>applyCustomApiPrefixToServicesAndTypes</strong></a></li>
+        <li><a href="#translatestatictypemessages"><strong>translateStaticTypeMessages</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/doc-helper.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/furo-fbp.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

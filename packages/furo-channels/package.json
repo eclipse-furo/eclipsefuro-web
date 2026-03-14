@@ -1,7 +1,7 @@
 {
   "name": "@furo/channels",
   "description": "A typed channel system to pass data across your application",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-channels",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": {
@@ -16,6 +16,17 @@
   "license": "MIT",
   "main": "dist/index.js",
   "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./dist/*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./package.json": "./package.json"
+  },
   "files": [
     "./dist",
     "icon.svg",
@@ -45,9 +56,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "engines": {
-    "node": ">=21.7.3",
-    "npm": ">=10.2.5"
   }
 }

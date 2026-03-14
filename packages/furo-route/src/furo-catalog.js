@@ -1,1 +1,1 @@
-import './furo-pages.js';
+import './furo-pages/index.ts';

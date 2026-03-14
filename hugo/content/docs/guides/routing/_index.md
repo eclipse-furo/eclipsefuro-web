@@ -36,7 +36,7 @@ You need the following building blocks to implement the example:
 
 
 ## Implementation
-[Furo FBP](fbp.furo.pro) syntax is used in this example.
+[Furo FBP](https://fbp.furo.pro) syntax is used in this example.
 
 ```html
 <furo-location

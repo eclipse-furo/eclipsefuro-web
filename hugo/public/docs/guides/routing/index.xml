@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Routing on フロー Furo Web</title>
+    <link>http://localhost:1313/docs/guides/routing/</link>
+    <description>Recent content in Routing on フロー Furo Web</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/docs/guides/routing/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Sub routing</title>
+      <link>http://localhost:1313/docs/guides/routing/subrouting/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/guides/routing/subrouting/</guid>
+      <description>&lt;h1 id=&#34;sub-routing&#34;&gt;&#xA;  Sub Routing&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#sub-routing&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h1&gt;&#xA;&lt;p&gt;For applications which just have one view, routing is not needed. As soon you need multiple views, routing is needed.&lt;/p&gt;&#xA;&lt;p&gt;Even in a small &lt;em&gt;todo app&lt;/em&gt; you will quickly have more than one view  (list, create, details,&amp;hellip;). Having the possibility&#xA;to display only one of them at a time, is a nice feature.&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;Routing is just the procedure to display a view based on some conditions.&#xA;The most known condition for routing, is the path URL of your app.&#xA;&lt;em&gt;Another well known condition could also be a tab bar, this variant is mostly used&#xA;to display different sub parts of a view/page.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

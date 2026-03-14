@@ -1,7 +1,7 @@
 {
   "name": "@furo/route",
   "description": "Routing components",
-  "version": "4.0.0-RC.1",
+  "version": "4.0.0",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-route",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "web-types": "./web-types.json",
@@ -11,6 +11,10 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./dist/index.js"
+    },
+    "./furo-pages": {
+      "types": "./dist/furo-pages/index.d.ts",
+      "default": "./dist/furo-pages/index.js"
     },
     "./dist/*": {
       "types": "./dist/*.d.ts",

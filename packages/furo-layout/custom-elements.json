@@ -758,7 +758,7 @@
       "declarations": [
         {
           "kind": "class",
-          "description": "`furo-resizer`\n container which let you resize its width.\n\n Double-click on the handler to reset the width.\n You need a counter part which flexes.\n\n\n```html\n  <furo-horizontal-flex>\n    <div flex> the flexible part </div>\n    <!-- you have to set at leas one handle to resize the content -->\n    <furo-resizer righthandle remember=\"logv\" minwidth=\"280\" maxwidth=\"780\">\n      <some-content></some-content>\n    </furo-resizer>\n  </furo-horizontal-flex>\n```",
+          "description": "`furo-resizer`\n container which let you resize its width.\n\n Double-click on the handler to reset the width.\n You need a counterpart which flexes.\n\n\n```html\n  <furo-horizontal-flex>\n    <div flex> the flexible part </div>\n    <!-- you have to set at leas one handle to resize the content -->\n    <furo-resizer righthandle remember=\"logv\" minwidth=\"280\" maxwidth=\"780\">\n      <some-content></some-content>\n    </furo-resizer>\n  </furo-horizontal-flex>\n```",
           "name": "FuroResizer",
           "slots": [
             {
@@ -770,12 +770,6 @@
             }
           ],
           "members": [
-            {
-              "kind": "method",
-              "name": "_FBPReady",
-              "description": "flow is ready lifecycle method",
-              "privacy": "private"
-            },
             {
               "kind": "field",
               "name": "_handleLRM",
@@ -801,10 +795,10 @@
               "kind": "field",
               "name": "_positions",
               "type": {
-                "text": "{x: number }"
+                "text": "{ x: number }"
               },
               "privacy": "private",
-              "default": "{x:0}"
+              "default": "{ x: 0 }"
             },
             {
               "kind": "field",
@@ -862,9 +856,23 @@
             },
             {
               "kind": "field",
+              "name": "contentVisible",
+              "type": {
+                "text": "boolean"
+              },
+              "privacy": "private",
+              "default": "true"
+            },
+            {
+              "kind": "method",
+              "name": "hide",
+              "privacy": "public"
+            },
+            {
+              "kind": "field",
               "name": "initialWidthSetByStyle",
               "type": {
-                "text": "string |undefined"
+                "text": "string | undefined"
               },
               "privacy": "private"
             },
@@ -880,7 +888,7 @@
               "kind": "field",
               "name": "maxwidth",
               "type": {
-                "text": "number| undefined"
+                "text": "number | undefined"
               },
               "privacy": "public",
               "description": "Set the maximal width of the resizer",
@@ -890,7 +898,7 @@
               "kind": "field",
               "name": "minwidth",
               "type": {
-                "text": "number| undefined"
+                "text": "number | undefined"
               },
               "description": "Set the minimal width of the resizer",
               "attribute": "minwidth"
@@ -903,7 +911,7 @@
               },
               "privacy": "public",
               "description": "remember the size after resizing.\nGive the id for the rememberer, you can use the id on different views",
-              "attribute": "remember"
+              "attribute": "remember-id"
             },
             {
               "kind": "method",
@@ -917,6 +925,21 @@
                 "text": "HTMLDivElement | undefined"
               },
               "privacy": "private"
+            },
+            {
+              "kind": "method",
+              "name": "show",
+              "privacy": "public",
+              "return": {
+                "type": {
+                  "text": "void"
+                }
+              }
+            },
+            {
+              "kind": "method",
+              "name": "toggle",
+              "privacy": "public"
             }
           ],
           "attributes": [
@@ -930,7 +953,7 @@
             {
               "name": "maxwidth",
               "type": {
-                "text": "number| undefined"
+                "text": "number | undefined"
               },
               "description": "Set the maximal width of the resizer",
               "fieldName": "maxwidth"
@@ -938,13 +961,13 @@
             {
               "name": "minwidth",
               "type": {
-                "text": "number| undefined"
+                "text": "number | undefined"
               },
               "description": "Set the minimal width of the resizer",
               "fieldName": "minwidth"
             },
             {
-              "name": "remember",
+              "name": "remember-id",
               "type": {
                 "text": "string | undefined"
               },
@@ -957,12 +980,6 @@
               },
               "description": "add a handle to the right side.",
               "name": "righthandle"
-            }
-          ],
-          "mixins": [
-            {
-              "name": "LitFBP",
-              "package": "@furo/fbp/dist/LitFBP"
             }
           ],
           "tagName": "furo-resizer",

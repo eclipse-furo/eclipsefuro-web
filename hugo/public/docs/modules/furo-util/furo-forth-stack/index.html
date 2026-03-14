@@ -1,0 +1,2125 @@
+<!DOCTYPE html>
+<html lang="en" dir=ZgotmplZ>
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="forth like stack">
+<meta name="theme-color" content="#FFFFFF"><meta property="og:url" content="http://localhost:1313/docs/modules/furo-util/furo-forth-stack/">
+  <meta property="og:site_name" content="フロー Furo Web">
+  <meta property="og:title" content="furo-forth-stack">
+  <meta property="og:description" content="forth like stack">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+    <meta property="article:modified_time" content="2024-03-08T14:07:31+01:00">
+<title>furo-forth-stack | フロー Furo Web</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.9cf05710651e8f9a974123fc1a656fbb5eb2f912dba4c022b69792d2f93e1c40.css" integrity="sha256-nPBXEGUej5qXQSP8GmVvu16y&#43;RLbpMAitpeS0vk&#43;HEA=">
+<script defer src="/en.search.min.b0bf84841deec51ff6f5057e68d3262d4265b55605be890ebf7c38b97b2fe329.js" integrity="sha256-sL&#43;EhB3uxR/29QV&#43;aNMmLUJltVYFvokOv3w4uXsv4yk="></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+  
+
+  <link href="/main.css" rel="stylesheet"/>
+</head>
+
+<body dir=ZgotmplZ>
+<fixed-tooltip-display></fixed-tooltip-display>
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <div ></div>
+  <main class="container flex">
+    <aside class="book-menu">
+      
+  <nav>
+<h2 class="book-brand">
+  <a href="/"><span>フロー Furo Web</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-73e73cd69dd9e7c0f9a1192228055a0d" class="toggle"  />
+    <label for="section-73e73cd69dd9e7c0f9a1192228055a0d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/" class="">Guides</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/dealing-w-data/" class="">Dealing with data</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-00998f71914cda1e9ad17295c769918d" class="toggle"  />
+    <label for="section-00998f71914cda1e9ad17295c769918d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/guides/routing/" class="">Routing</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/routing/subrouting/" class="">Sub routing</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/app-flow/" class="">Application Flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/FNA/" class="">Extending a UI lib</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/type-renderer/" class="">Type Renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/guides/featuretoggle/" class="">Feature Toggles</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0ec807a1e943360927b3f5b67f73fb1f" class="toggle" checked />
+    <label for="section-0ec807a1e943360927b3f5b67f73fb1f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/" class="">Packages</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9380a63e67ced80eac73c3af8fb8c23d" class="toggle"  />
+    <label for="section-9380a63e67ced80eac73c3af8fb8c23d" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-data/" class="">@furo/data</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-api-fetch/" class="">furo-api-fetch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-collection-agent/" class="">furo-collection-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-custom-method/" class="">furo-custom-method</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-flow-repeat/" class="">furo-data-flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-hide-content/" class="">furo-data-hide-content</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-data-object/" class="">furo-data-object</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-deep-link/" class="">furo-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-agent/" class="">furo-entity-agent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-entity-field/" class="">furo-entity-field</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-hateoas-state/" class="">furo-hateoas-state</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-message-container-handler/" class="">furo-message-container-handler</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-rel-exists/" class="">furo-rel-exists</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-reverse-deep-link/" class="">furo-reverse-deep-link</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/furo-type-renderer/" class="">furo-type-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/AgentHelper/" class="">AgentHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/DataObject/" class="">DataObject</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNode/" class="">FieldNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/FieldNodeAdapter/" class="">FieldNodeAdapter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/RepeaterNode/" class="">RepeaterNode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ScalarTypeHelper/" class="">ScalarTypeHelper</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorDefaultTypes/" class="">ValidatorDefaultTypes</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-data/ValidatorNumericTypes/" class="">ValidatorNumericTypes</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-57b41e981b764a86d3ac12bc39ede402" class="toggle"  />
+    <label for="section-57b41e981b764a86d3ac12bc39ede402" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-fbp/" class="">@furo/fbp</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/empty-fbp-node/" class="">empty-fbp-node</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-bind/" class="">flow-bind</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/flow-repeat/" class="">flow-repeat</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/DOMFBP/" class="">DOMFBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FBP/" class="">FBP</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-fbp/FbpBreakpoints/" class="">FbpBreakpoints</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="toggle"  />
+    <label for="section-61efa46dfb0ac8ba6b3b053abfaca94f" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-framework/" class="">@furo/framework</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/BaseSpecValidators/" class="">BaseSpecValidators</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Env/" class="">Env</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/FuroFeatureToggle/" class="">FuroFeatureToggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/i18n/" class="">i18n</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/Init/" class="">Init</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/KeyState/" class="">KeyState</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/NodeEvent/" class="">NodeEvent</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroBigDecimal/" class="">ValidatorFuroBigDecimal</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatNumeric/" class="">ValidatorFuroFatNumeric</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroFatString/" class="">ValidatorFuroFatString</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorFuroReference/" class="">ValidatorFuroReference</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufBoolValue/" class="">ValidatorGoogleProtobufBoolValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufFloatValue/" class="">ValidatorGoogleProtobufFloatValue</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufInt64Value/" class="">ValidatorGoogleProtobufInt64Value</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleProtobufTimestamp/" class="">ValidatorGoogleProtobufTimestamp</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeDate/" class="">ValidatorGoogleTypeDate</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorGoogleTypeMoney/" class="">ValidatorGoogleTypeMoney</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-framework/ValidatorRegistry/" class="">ValidatorRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-33dc2edb96aa3156541dfa4259289ac4" class="toggle"  />
+    <label for="section-33dc2edb96aa3156541dfa4259289ac4" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-layout/" class="">@furo/layout</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop/" class="">furo-backdrop</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-backdrop-display/" class="">furo-backdrop-display</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-empty-spacer/" class="">furo-empty-spacer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-form-layouter/" class="">furo-form-layouter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-horizontal-flex/" class="">furo-horizontal-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-resizer/" class="">furo-resizer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-split-view/" class="">furo-split-view</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-flex/" class="">furo-vertical-flex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-layout/furo-vertical-scroller/" class="">furo-vertical-scroller</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8784ee5251b6ff25766e4ce74770c3cc" class="toggle"  />
+    <label for="section-8784ee5251b6ff25766e4ce74770c3cc" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-route/" class="">@furo/route</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow/" class="">furo-app-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-app-flow-router/" class="">furo-app-flow-router</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-document-title/" class="">furo-document-title</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location/" class="">furo-location</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-location-updater/" class="">furo-location-updater</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-lock-navigation/" class="">furo-lock-navigation</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-pages/" class="">furo-pages</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/furo-panel-coordinator/" class="">furo-panel-coordinator</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/BasePanel/" class="">BasePanel</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-route/panelRegistry/" class="">panelRegistry</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="toggle" checked />
+    <label for="section-c888d9d7b3f48356c6996ecc67bb7ee3" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-util/" class="">@furo/util</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config/" class="">furo-config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-config-loader/" class="">furo-config-loader</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-de-bounce/" class="">furo-de-bounce</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-demo-snippet/" class="">furo-demo-snippet</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-feature-toggle/" class="">furo-feature-toggle</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-fetch-json/" class="">furo-fetch-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-forth-stack/" class=" active">furo-forth-stack</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-get-clipboard/" class="">furo-get-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-graph-renderer/" class="">furo-graph-renderer</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-head-tail/" class="">furo-head-tail</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-hp-35/" class="">furo-hp-35</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-interval-pulse/" class="">furo-interval-pulse</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-key-filter/" class="">furo-key-filter</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-keydown/" class="">furo-keydown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-markdown/" class="">furo-markdown</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-navigation-pad/" class="">furo-navigation-pad</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-pretty-json/" class="">furo-pretty-json</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-put-clipboard/" class="">furo-put-clipboard</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/furo-show-flow/" class="">furo-show-flow</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/light-bulb/" class="">light-bulb</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/Config/" class="">Config</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/ConfigTree/" class="">ConfigTree</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="http://localhost:1313/docs/modules/furo-util/EmptyStackError/" class="">EmptyStackError</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-09bfaa06443a156d3831aea914959af5" class="toggle"  />
+    <label for="section-09bfaa06443a156d3831aea914959af5" class="flex justify-between">
+      <a href="http://localhost:1313/docs/modules/furo-webtypes/" class="">@furo/web-types</a>
+      <span>▾</span>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="https://ui5.furo.pro" target="_blank" rel="noopener">
+        SAP UI5 Integration
+      </a>
+  </li>
+  
+  <li>
+    <a href="https://furo.pro" target="_blank" rel="noopener">
+        フロー Furo
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside.book-menu nav");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>furo-forth-stack</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a>
+      <ul>
+        <li><a href="#size"><strong>size</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#stack-size-changed"><strong>stack-size-changed</strong></a></li>
+        <li><a href="#rotated"><strong>rotated</strong></a></li>
+        <li><a href="#stack-changed"><strong>stack-changed</strong></a></li>
+        <li><a href="#swapped"><strong>swapped</strong></a></li>
+        <li><a href="#empty"><strong>empty</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#clearstack"><strong>clearStack</strong></a></li>
+        <li><a href="#put"><strong>put</strong></a></li>
+        <li><a href="#swap"><strong>swap</strong></a></li>
+        <li><a href="#drop"><strong>drop</strong></a></li>
+        <li><a href="#dup"><strong>dup</strong></a></li>
+        <li><a href="#over"><strong>over</strong></a></li>
+        <li><a href="#rot"><strong>rot</strong></a></li>
+        <li><a href="#rrot"><strong>rrot</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h1 id="furo-forth-stack">
+  furo-forth-stack
+  <a class="anchor" href="#furo-forth-stack">#</a>
+</h1>
+<p><strong>@furo/util</strong> <small>v2.1.19</small>
+<br><code>import '@furo/util/src/furo-forth-stack.js';</code><small>
+<br>exports <em>FuroForthStack</em> js
+<br>exports <code>&lt;furo-forth-stack&gt;</code> custom-element-definition
+<br>superclass <em>LitElement</em></small>
+<br><small>summary <em>forth like stack</em></small></p>
+<p><code>furo-forth-stack</code> is a declarative stack, inspired by the forth stack.</p>
+<p>
+  <a href="https://hackaday.com/2017/01/27/forth-the-hackers-language/">https://hackaday.com/2017/01/27/forth-the-hackers-language/</a>
+
+  <a href="http://wiki.laptop.org/go/Forth_stack_operators">http://wiki.laptop.org/go/Forth_stack_operators</a>
+
+  <a href="http://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm#stacks">http://galileo.phys.virginia.edu/classes/551.jvn.fall01/primer.htm#stacks</a></p>
+<h2 id="attributes-and-properties">
+  Attributes and Properties
+  <a class="anchor" href="#attributes-and-properties">#</a>
+</h2>
+<h3 id="size">
+  <strong>size</strong>
+  <a class="anchor" href="#size">#</a>
+</h3>
+<p>default: <strong>0</strong></small></p>
+<p>Current size of the stack
+<br><br></p>
+<h2 id="events">
+  Events
+  <a class="anchor" href="#events">#</a>
+</h2>
+<h3 id="stack-size-changed">
+  <strong>stack-size-changed</strong>
+  <a class="anchor" href="#stack-size-changed">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-stack-size-changed</span>
+→ <small><code>Number</code></small></p>
+<p>Fired when the stack size changes with Integer with the current size of the stack.
+<br><br></p>
+<h3 id="rotated">
+  <strong>rotated</strong>
+  <a class="anchor" href="#rotated">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-rotated</span>
+→ <small><code>the top element</code></small></p>
+<p>Fired when stack was rotated
+<br><br></p>
+<h3 id="stack-changed">
+  <strong>stack-changed</strong>
+  <a class="anchor" href="#stack-changed">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-stack-changed</span>
+→ <small><code>the top element</code></small></p>
+<p>Fired when the stack contents changes after put, drop,&hellip;
+<br><br></p>
+<h3 id="swapped">
+  <strong>swapped</strong>
+  <a class="anchor" href="#swapped">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-swapped</span>
+→ <small><code>void</code></small></p>
+<p>Fired when stack was swapped
+<br><br></p>
+<h3 id="empty">
+  <strong>empty</strong>
+  <a class="anchor" href="#empty">#</a>
+</h3>
+<p><span  style="border-width:2px 10px 2px 2px; border-style: solid;border-color:  rgb(2, 168, 244);font-family:monospace; padding:2px 4px;">at-empty</span>
+→ <small><code>void</code></small></p>
+<p>Fired when stack gets empty
+<br><br></p>
+<h2 id="methods">
+  Methods
+  <a class="anchor" href="#methods">#</a>
+</h2>
+<h3 id="clearstack">
+  <strong>clearStack</strong>
+  <a class="anchor" href="#clearstack">#</a>
+</h3>
+<p><small><strong>clearStack</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-clear-stack</span></p>
+<p>Empties the stack and set the stack-size to 0</p>
+<p><br><br></p>
+<h3 id="put">
+  <strong>put</strong>
+  <a class="anchor" href="#put">#</a>
+</h3>
+<p><small><strong>put</strong>(<em>e</em> `` ) ⟹ <code>void</code></small></p>
+<p><small>`` </small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-put</span></p>
+<p>Add an element to the stack</p>
+<ul>
+<li><small><em>e</em> </small>
+<br><br></li>
+</ul>
+<h3 id="swap">
+  <strong>swap</strong>
+  <a class="anchor" href="#swap">#</a>
+</h3>
+<p><small><strong>swap</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-swap</span></p>
+<p>swap <strong>( n1 n2 &ndash; n2 n1 )</strong></p>
+<p>swap, as you may have guessed, swaps the top two elements of the stack. For example:</p>
+<p>1 2 3 4 swap
+will give you:</p>
+<p>1 2 4 3 &lt;- Top</p>
+<p><br><br></p>
+<h3 id="drop">
+  <strong>drop</strong>
+  <a class="anchor" href="#drop">#</a>
+</h3>
+<p><small><strong>drop</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-drop</span></p>
+<p>drop <strong>( n &ndash; )</strong></p>
+<p>drop simply drops the top element of the stack. Running:</p>
+<p>1 2 3 drop
+gives you a stack of:</p>
+<p>1 2 &lt;- Top</p>
+<p><br><br></p>
+<h3 id="dup">
+  <strong>dup</strong>
+  <a class="anchor" href="#dup">#</a>
+</h3>
+<p><small><strong>dup</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-dup</span></p>
+<p>dup <strong>( n &ndash; n n )</strong></p>
+<pre><code>dup is short for “duplicate” – it duplicates the top element of the stack. For example, try this out:
+
+1 2 3 dup
+
+You should end up with the following stack:
+
+1 2 3 3 &lt;- Top
+</code></pre>
+<p><br><br></p>
+<h3 id="over">
+  <strong>over</strong>
+  <a class="anchor" href="#over">#</a>
+</h3>
+<p><small><strong>over</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-over</span></p>
+<p>over <strong>( n1 n2 &ndash; n1 n2 n1 )</strong></p>
+<p>over is a bit less obvious: it takes the second element from the top of the stack and duplicates it to the top of the stack. Running this:</p>
+<p>1 2 3 over
+will result in this:</p>
+<p>1 2 3 2 &lt;- Top</p>
+<p><br><br></p>
+<h3 id="rot">
+  <strong>rot</strong>
+  <a class="anchor" href="#rot">#</a>
+</h3>
+<p><small><strong>rot</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-rot</span></p>
+<p>rot <strong>( n1 n2 n3 &ndash; n2 n3 n1 )</strong></p>
+<p>Finally, rot “rotates” the top three elements of the stack. The third element from the top of the stack gets moved to the top of the stack, pushing the other two elements down.</p>
+<p>1 2 3 rot
+gives you:</p>
+<p>2 3 1 &lt;- Top</p>
+<p><br><br></p>
+<h3 id="rrot">
+  <strong>rrot</strong>
+  <a class="anchor" href="#rrot">#</a>
+</h3>
+<p><small><strong>rrot</strong>() ⟹ <code>void</code></small></p>
+<p><small><code>*</code></small> →
+<span  style="border-width:2px 2px 2px 10px; border-style: solid;border-color:  rgb(76, 175, 80);font-family:monospace; padding:2px 4px;">fn-rrot</span></p>
+<p>rrot <strong>( n1 n2 n3 &ndash; n3 n1 n2 )</strong></p>
+<p>Reverse rotation or right rotation rrot “rotates” the elements of the stack inverse to rot.
+The top elemen the stack gets moved to the bottom of the stack.</p>
+<p>1 2 3 rot
+gives you:</p>
+<p>3 1 2 &lt;- Top</p>
+<p><br><br></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+  <div><a class="flex align-center" href="https://github.com/theNorstroem/furo/documentation/commit/3dfbb74790d69f910ee942bea25b01d013daa2ae" title='Last modified by veith | March 8, 2024' target="_blank" rel="noopener">
+      <img src="/svg/calendar.svg" class="book-icon" alt="Calendar" />
+      <span>March 8, 2024</span>
+    </a>
+  </div>
+
+
+
+</div>
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      
+  <nav id="TableOfContents">
+  <ul>
+    <li><a href="#attributes-and-properties">Attributes and Properties</a>
+      <ul>
+        <li><a href="#size"><strong>size</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#events">Events</a>
+      <ul>
+        <li><a href="#stack-size-changed"><strong>stack-size-changed</strong></a></li>
+        <li><a href="#rotated"><strong>rotated</strong></a></li>
+        <li><a href="#stack-changed"><strong>stack-changed</strong></a></li>
+        <li><a href="#swapped"><strong>swapped</strong></a></li>
+        <li><a href="#empty"><strong>empty</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#methods">Methods</a>
+      <ul>
+        <li><a href="#clearstack"><strong>clearStack</strong></a></li>
+        <li><a href="#put"><strong>put</strong></a></li>
+        <li><a href="#swap"><strong>swap</strong></a></li>
+        <li><a href="#drop"><strong>drop</strong></a></li>
+        <li><a href="#dup"><strong>dup</strong></a></li>
+        <li><a href="#over"><strong>over</strong></a></li>
+        <li><a href="#rot"><strong>rot</strong></a></li>
+        <li><a href="#rrot"><strong>rrot</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+ 
+    </aside>
+    
+  </main>
+
+  
+</body>
+
+
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/doc-helper.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@furo/precompiled@2.6.0/dist/furo-fbp.js"></script>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

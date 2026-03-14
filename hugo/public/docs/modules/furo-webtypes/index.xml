@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>@furo/web-types on フロー Furo Web</title>
+    <link>http://localhost:1313/docs/modules/furo-webtypes/</link>
+    <description>Recent content in @furo/web-types on フロー Furo Web</description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="http://localhost:1313/docs/modules/furo-webtypes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>http://localhost:1313/docs/modules/furo-webtypes/_furo-webtypes-inside/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/docs/modules/furo-webtypes/_furo-webtypes-inside/</guid>
+      <description>&lt;h3 id=&#34;components&#34;&gt;&#xA;  Components&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#components&#34;&gt;#&lt;/a&gt;&#xA;&lt;/h3&gt;</description>
+    </item>
+  </channel>
+</rss>

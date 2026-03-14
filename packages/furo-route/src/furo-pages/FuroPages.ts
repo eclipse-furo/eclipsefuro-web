@@ -1,7 +1,7 @@
 import { css, html, LitElement } from "lit";
 import { property } from "lit/decorators.js";
 
-import type { FuroPage, LocationObject } from "./types";
+import type { FuroPage, LocationObject } from "../types";
 
 interface FBPElement extends LitElement {
   _FBPTriggerWire(wire: string, detailData: unknown): void;
