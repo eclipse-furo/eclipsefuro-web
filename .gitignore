@@ -5,3 +5,5 @@ build
 .DS_Store
 packages/experiments
 tmp
+/packages/furo-open-models/test-results/
+/packages/furo-open-models/test/unit_tests/__screenshots__/
