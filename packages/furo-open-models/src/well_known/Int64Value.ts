@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class Int64Value extends FieldNode {
   get value(): bigint {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: bigint) {
+  set value(value: bigint | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class Int64Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = 0n;
+  public _value: bigint | null = 0n;
 
   constructor(
     initData?: string  ,
@@ -40,8 +40,8 @@ export class Int64Value extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Int64Value';
   }
 
-  override __updateWithLiteral(v: string) {
-    this._value = BigInt(v);
+  override __updateWithLiteral(v: string | null) {
+    this._value = v !== null ? BigInt(v) : null;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
@@ -67,7 +67,7 @@ export class Int64Value extends FieldNode {
   }
 
   override __toLiteral() {
-    return this._value.toString();
+    return this._value!.toString();
   }
 
   protected override __checkConstraints(

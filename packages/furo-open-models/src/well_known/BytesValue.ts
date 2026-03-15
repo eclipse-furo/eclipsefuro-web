@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class BytesValue extends FieldNode {
   get value(): string {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: string) {
+  set value(value: string | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class BytesValue extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = '';
+  public _value: string | null = '';
 
   constructor(
     initData?: string,
@@ -40,7 +40,7 @@ export class BytesValue extends FieldNode {
     this.__meta.typeName = 'google.protobuf.BytesValue';
   }
 
-  override __updateWithLiteral(v: string) {
+  override __updateWithLiteral(v: string | null) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -58,7 +58,7 @@ export class BytesValue extends FieldNode {
     return data;
   }
 
-  override __toJson(): string {
+  override __toJson(): string | null {
     return this.__toLiteral();
   }
 
@@ -94,7 +94,10 @@ export class BytesValue extends FieldNode {
   }
 
   override toString(): string {
-    return this._value;
+    if (this._value !== null) {
+      return this._value;
+    }
+    return '';
   }
 
   public override __clear(withoutNotification = false) {

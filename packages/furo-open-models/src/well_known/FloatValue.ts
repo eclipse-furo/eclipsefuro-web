@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class FloatValue extends FieldNode {
   get value(): number {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: number) {
+  set value(value: number | null) {
     this._value = value;
     if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;
@@ -20,7 +20,7 @@ export class FloatValue extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = 0;
+  public _value: number | null = 0;
 
   constructor(initData?: number, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
@@ -30,7 +30,7 @@ export class FloatValue extends FieldNode {
     this.__meta.typeName = "google.protobuf.FloatValue";
   }
 
-  override __updateWithLiteral(v: number) {
+  override __updateWithLiteral(v: number | null) {
     this._value = v;
     if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;

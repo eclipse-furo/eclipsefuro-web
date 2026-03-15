@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class Timestamp extends FieldNode {
   get value(): string {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: string) {
+  set value(value: string | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class Timestamp extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = '';
+  public _value: string | null = '';
 
   constructor(
     initData?: string,
@@ -41,7 +41,7 @@ export class Timestamp extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Timestamp';
   }
 
-  override __updateWithLiteral(v: string) {
+  override __updateWithLiteral(v: string | null) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -91,7 +91,7 @@ export class Timestamp extends FieldNode {
 
   public override __clear(withoutNotification = false) {
     // only notify when they are changes
-    const shouldNotify = this._value.length;
+    const shouldNotify = this._value?.length;
     this._value = '';
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

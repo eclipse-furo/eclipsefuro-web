@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class BoolValue extends FieldNode {
   get value(): boolean {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: boolean) {
+  set value(value: boolean | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class BoolValue extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = false;
+  public _value: boolean | null = false;
 
   constructor(
     initData?: boolean,
@@ -40,7 +40,7 @@ export class BoolValue extends FieldNode {
     this.__meta.typeName = 'google.protobuf.BoolValue';
   }
 
-  override __updateWithLiteral(v: boolean) {
+  override __updateWithLiteral(v: boolean | null) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

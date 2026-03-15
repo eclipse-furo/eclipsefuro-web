@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class Int32Value extends FieldNode {
   get value(): number {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: number) {
+  set value(value: number | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class Int32Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = 0;
+  public _value: number | null = 0;
 
   constructor(
     initData?: number  ,
@@ -40,7 +40,7 @@ export class Int32Value extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Int32Value';
   }
 
-  override __updateWithLiteral(v: number) {
+  override __updateWithLiteral(v: number | null) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -63,7 +63,7 @@ export class Int32Value extends FieldNode {
   }
 
   override valueOf(): number {
-    return this._value || NaN;
+    return this._value ?? NaN;
   }
 
   override __toLiteral() {
@@ -84,7 +84,7 @@ export class Int32Value extends FieldNode {
   protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-     
+
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       if (constraint === 'maximum') {
         // By default, the minimum and maximum values are included in the range. ">" is used to check.

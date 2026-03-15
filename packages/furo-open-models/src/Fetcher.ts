@@ -154,7 +154,7 @@ export class Fetcher<REQ, RES> {
       redirect: 'follow',
     };
 
-    this.timeout = this.API_OPTIONS.timeout || 300000; // chrome default timeout
+    this.timeout = this.API_OPTIONS.timeout ?? 300000; // chrome default timeout
   }
 
   public setRequestOptions(ri: RequestInit) {
@@ -236,7 +236,7 @@ export class Fetcher<REQ, RES> {
         if (this.onRequestAborted) {
           this.onRequestAborted(rqo);
         }
-         
+
         console.error(
           `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
         );
@@ -268,7 +268,7 @@ export class Fetcher<REQ, RES> {
             if (this.onRequestFinished) {
               this.onRequestFinished(rqo);
             }
-             
+
             console.error('RequestService fetch aborted: ', err);
           } else {
             if (this.onRequestFinished) {
@@ -376,7 +376,7 @@ export class Fetcher<REQ, RES> {
    * @param response
    * @private
    */
-   
+
   _parseResponse(response: Response) {
     return new Promise((resolve, reject) => {
       if (response) {
@@ -429,7 +429,7 @@ export class Fetcher<REQ, RES> {
           const iterator = {
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
               while (true) {
-                 
+
                 const { done, value } = await reader.read();
                 if (done) break;
 
@@ -442,7 +442,7 @@ export class Fetcher<REQ, RES> {
                 for (const line of lines) {
                   const trimmed = line.trim();
                   if (trimmed === '') {
-                     
+
                     continue; // skip empty lines
                   }
 
@@ -516,7 +516,7 @@ export class Fetcher<REQ, RES> {
         let typeHandler = this.responseHandler.get(handler);
 
         if (typeHandler === undefined) {
-           
+
           console.error('No parser for', handler);
           typeHandler = this.responseHandler.get('application/json');
         }

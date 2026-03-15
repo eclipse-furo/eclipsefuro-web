@@ -5,10 +5,10 @@ import { Registry } from '../Registry';
 
 export class UInt32Value extends FieldNode {
   get value(): number {
-    return this._value;
+    return this._value!;
   }
 
-  set value(value: number) {
+  set value(value: number | null) {
     this._value = value;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -23,7 +23,7 @@ export class UInt32Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value = 0;
+  public _value: number | null = 0;
 
   constructor(
     initData?: number  ,
@@ -40,7 +40,7 @@ export class UInt32Value extends FieldNode {
     this.__meta.typeName = 'google.protobuf.UInt32Value';
   }
 
-  override __updateWithLiteral(v: number) {
+  override __updateWithLiteral(v: number | null) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
