@@ -1,4 +1,4 @@
-import { EntityServiceEventMap, EntityServiceEventType } from "./EntityServiceTypes";
+import type { EntityServiceEventMap, EntityServiceEventType } from "./EntityServiceTypes";
 
 /**
  * Dispatch function type for entity service events.

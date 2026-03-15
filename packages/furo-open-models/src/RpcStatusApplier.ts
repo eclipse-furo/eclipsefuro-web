@@ -1,5 +1,5 @@
-import { FieldNode, ValueStateSummary } from './FieldNode';
-import { IAny } from './index';
+import { FieldNode, type ValueStateSummary } from './FieldNode';
+import type { IAny } from './index';
 import { ValueState } from './ValueState';
 
 export interface IStatus {

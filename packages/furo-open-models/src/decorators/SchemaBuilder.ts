@@ -1,6 +1,6 @@
 import type { JSONSchema7, JSONSchema7Definition } from "json-schema";
 
-import { FieldConstraints } from "../FieldConstraints";
+import type { FieldConstraints } from "../FieldConstraints";
 import { FieldNode } from "../FieldNode";
 import type { FieldDescriptor } from "../FieldNode";
 import { ENUM } from "../primitives/ENUM";

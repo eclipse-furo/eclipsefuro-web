@@ -1,4 +1,4 @@
-import { FieldConstraints } from '../FieldConstraints';
+import type { FieldConstraints } from '../FieldConstraints';
 import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
 import { Registry } from '../Registry';

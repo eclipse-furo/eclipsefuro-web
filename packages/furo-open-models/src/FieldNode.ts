@@ -3,7 +3,7 @@
  * notes: i18n is not part of the api anymore
  */
 import { ToString, ValueOf } from './CustomPrototypes';
-import { FieldConstraints } from './FieldConstraints';
+import type { FieldConstraints } from './FieldConstraints';
 import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 import { CustomConstraints, Validators } from './Validator';
 import { ValueState } from './ValueState';

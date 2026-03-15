@@ -1,5 +1,5 @@
 // Full qualified type name
-import { FieldConstraints } from './FieldConstraints';
+import type { FieldConstraints } from './FieldConstraints';
 
 type typeName = string;
 
