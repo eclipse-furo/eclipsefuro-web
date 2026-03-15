@@ -38,9 +38,9 @@
     "test:watch": "vitest watch",
     "test:ui": "vitest --ui",
     "build": "rimraf dist && tsc && tsc-alias",
-    "lint": "eslint --ext .ts,.html ./src ./dev-playground --ignore-path .gitignore",
-    "lint:fix": "eslint --ext .ts ./src ./dev-playground --fix --ignore-path .gitignore",
-    "lint:fix:tests": "eslint --ext .ts,.html ./test --fix --ignore-path .gitignore",
+    "lint": "eslint ./src ./dev-playground",
+    "lint:fix": "eslint ./src ./dev-playground --fix",
+    "lint:fix:tests": "eslint ./test --fix",
     "format": "prettier './src/**/*.ts' './dev-playground/**/*.ts' --write --ignore-path .gitignore",
     "format:tests": "prettier './test/**/*.ts' --write --ignore-path .gitignore"
   },

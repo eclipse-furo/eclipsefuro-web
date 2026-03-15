@@ -1,0 +1,5 @@
+{
+  "extends": "../../tsconfig-ts-base.json",
+  "compilerOptions": { "outDir": "dist", "paths": { "@/*": ["./src/*"] }, "noEmit": true },
+  "include": ["src/**/*", "dev-playground/**/*", "test/**/*", "global.d.ts"]
+}

@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig-ts-base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "paths": { "@components/*": ["./src/components/*"], "@x/*": ["./src/x/*"], "@/*": ["./src/*"] },
+    "noEmit": true
+  },
+  "include": ["src/**/*", "global.d.ts"]
+}

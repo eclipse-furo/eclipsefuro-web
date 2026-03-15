@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig-ts-base.json",
+  "compilerOptions": { "outDir": "dist", "paths": { "@/*": ["./src/*"] }, "jsx": "react-jsx", "noEmit": true },
+  "include": ["src/**/*", "protoc-gen-open-models/**/*.ts", "src_transport/**/*.ts", "test/unit_tests/**/*", "test/components/**/*", "global.d.ts"],
+  "exclude": ["dist", "src/generated"]
+}

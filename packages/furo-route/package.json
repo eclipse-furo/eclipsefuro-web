@@ -46,7 +46,7 @@
     "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
     "build:codecompletion": "cem analyze --config deep-cem.config.mjs && ./WebtypesPostprocessor.mjs",
     "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
-    "lint": "../../node_modules/.bin/eslint --ext .ts ./src",
+    "lint": "eslint ./src",
     "format": "prettier './src/**/*.ts' --write",
     "test": "../../node_modules/.bin/web-test-runner  --coverage",
     "test:watch": "../../node_modules/.bin/web-test-runner  --watch"
