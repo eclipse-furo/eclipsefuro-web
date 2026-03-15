@@ -72,26 +72,26 @@ export class INT32 extends FieldNode {
       if (constraint === 'maximum') {
         // By default, the minimum and maximum values are included in the range. ">" is used to check.
         if (fieldConstraints.exclusive_maximum && this._value >= value) {
-          return ['constraint.violation.exclusive_maximum', value, this._value];
+          return ['constraint.violation.exclusive_maximum', String(value), String(this._value)];
         }
         if (this._value > value) {
-          return ['constraint.violation.maximum', value, this._value];
+          return ['constraint.violation.maximum', String(value), String(this._value)];
         }
       }
       if (constraint === 'minimum') {
         // By default, the minimum and maximum values are included in the range. "<" is used to check.
         if (fieldConstraints.exclusive_minimum && this._value <= value) {
-          return ['constraint.violation.exclusive_minimum', value, this._value];
+          return ['constraint.violation.exclusive_minimum', String(value), String(this._value)];
         }
         if (this._value < value) {
-          return ['constraint.violation.minimum', value, this._value];
+          return ['constraint.violation.minimum', String(value), String(this._value)];
         }
       }
       if (constraint === 'multiple_of') {
         // Use the multiple_of keyword to specify that a number must be the multiple of another number
         // use this to define the step ??
         if (this._value % value !== 0) {
-          return ['constraint.violation.multiple_of', value, this._value];
+          return ['constraint.violation.multiple_of', String(value), String(this._value)];
         }
       }
     }
