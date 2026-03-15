@@ -1,8 +1,8 @@
-import { Identifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import type { IIdentifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/BookingCenter';
-import '@furo/open-models/dist/protoc-gen-open-models/CustomPrototypes';
-import '@furo/open-models/dist/protoc-gen-open-models/BusinessValidators';
+import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
+import '../../protoc-gen-open-models/CustomPrototypes';
+import '../../protoc-gen-open-models/BusinessValidators';
 
 import { expect } from '@open-wc/testing';
 

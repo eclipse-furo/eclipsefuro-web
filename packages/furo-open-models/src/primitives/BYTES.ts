@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
+import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class BYTES extends FieldNode {
   get value(): Uint8Array {
@@ -72,7 +72,7 @@ export class BYTES extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       if (constraint === 'required') {
         if (this._value.length === 0) {
@@ -116,7 +116,7 @@ export class BYTES extends FieldNode {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value.length;
     this._value = new Uint8Array();

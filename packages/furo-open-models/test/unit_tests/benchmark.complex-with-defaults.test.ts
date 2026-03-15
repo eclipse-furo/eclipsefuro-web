@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 
-import { Defaults } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 
 describe('Benchmark', () => {
   it('should create 1000 COLD very complex deep object with default values and constraints set in less then 200ms', async () => {

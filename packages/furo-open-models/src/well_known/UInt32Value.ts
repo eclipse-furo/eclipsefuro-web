@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class UInt32Value extends FieldNode {
   get value(): number {
@@ -23,10 +23,10 @@ export class UInt32Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: number = 0;
+  public _value = 0;
 
   constructor(
-    initData?: number | undefined,
+    initData?: number  ,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -36,7 +36,7 @@ export class UInt32Value extends FieldNode {
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
-    this._value = Number.isInteger(initData) ? (initData as number) : 0;
+    this._value = Number.isInteger(initData) ? (initData!) : 0;
     this.__meta.typeName = 'google.protobuf.UInt32Value';
   }
 
@@ -84,7 +84,7 @@ export class UInt32Value extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       if (constraint === 'maximum') {
         // By default, the minimum and maximum values are included in the range. ">" is used to check.
@@ -131,7 +131,7 @@ export class UInt32Value extends FieldNode {
     return '';
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0;
     this._value = 0;

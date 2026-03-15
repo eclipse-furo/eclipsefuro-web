@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
-import { Decimal } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Decimal';
-import { DecimalRange } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/DecimalRange';
-import '@furo/open-models/dist/protoc-gen-open-models/CustomPrototypes';
+import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
+import { DecimalRange } from '../../protoc-gen-open-models/furo/type/DecimalRange';
+import '../../protoc-gen-open-models/CustomPrototypes';
 
 describe('Scenario: Custom type casting', () => {
   it('Complex type can define a custom toString', async () => {

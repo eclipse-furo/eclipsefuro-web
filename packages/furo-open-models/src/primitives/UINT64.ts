@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class UINT64 extends FieldNode {
   get value(): bigint {
@@ -61,7 +61,7 @@ export class UINT64 extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       // An uint64 has always a value if (constraint === 'required') {}
       if (constraint === 'maximum') {
@@ -110,7 +110,7 @@ export class UINT64 extends FieldNode {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0n;
     this._value = 0n;

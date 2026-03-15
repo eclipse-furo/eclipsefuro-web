@@ -3,9 +3,8 @@ import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { LitFBP } from '@furo/fbp/dist/LitFBP';
-// import { INT32 } from '@furo/open-models/dist/';
-import { Decimal } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Decimal';
-import { INT32 } from '@furo/open-models/dist';
+import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
+import { INT32 } from '@furo/open-models';
 
 /**
  * ### Description

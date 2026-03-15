@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
-import type { IIdentifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import { Identifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/BookingCenter';
+import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
 
 describe('root node', () => {
   it('must have the correct root node', async () => {

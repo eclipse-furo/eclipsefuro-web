@@ -1,8 +1,7 @@
-/* eslint-disable no-param-reassign */
+ 
 import { LitElement, ReactiveElement } from "lit";
+
 import type { ModelEventType } from '@/FieldNode';
-
-
 
 /**
  * Event map for FieldNode model events.
@@ -192,7 +191,7 @@ function getFieldForPath(model: FieldNodeLike, path: string): FieldNodeLike {
   }
   // Navigate to nested field (we trust the field exists per user guarantee)
   if (model.__getFieldNodeByPath) {
-    return model.__getFieldNodeByPath(path) as FieldNodeLike;
+    return model.__getFieldNodeByPath(path)!;
   }
   return model;
 }

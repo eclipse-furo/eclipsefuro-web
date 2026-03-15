@@ -46,8 +46,8 @@
     "analyze": "../../node_modules/.bin/cem analyze --globs \"dist/**/*.js\" --exclude **/furo-catalog.js --litelement",
     "build:codecompletion": "cem analyze --config deep-cem.config.mjs && ./WebtypesPostprocessor.mjs",
     "start": "../../node_modules/.bin/web-dev-server --app-index demos/index.html --open",
-    "lint": "../../node_modules/.bin/eslint --ext .js,.html . --ignore-path .gitignore && prettier \"**/*.js\" --check --ignore-path .gitignore",
-    "format": "../../node_modules/.bin/eslint --ext .js,.html . --fix --ignore-path .gitignore && prettier \"**/*.js\" --write --ignore-path .gitignore",
+    "lint": "../../node_modules/.bin/eslint --ext .ts ./src",
+    "format": "prettier './src/**/*.ts' --write",
     "test": "../../node_modules/.bin/web-test-runner  --coverage",
     "test:watch": "../../node_modules/.bin/web-test-runner  --watch"
   },
@@ -61,27 +61,5 @@
     "node": ">=10.0"
   },
   "customElements": "custom-elements.json",
-  "eslintConfig": {
-    "extends": [
-      "@open-wc",
-      "prettier"
-    ]
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  },
   "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
 }

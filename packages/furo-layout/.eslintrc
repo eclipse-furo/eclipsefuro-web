@@ -1,103 +1,14 @@
 {
+  "extends": "../../.eslintrc-ts-base.json",
   "parserOptions": {
     "project": [
       "./tsconfig.json",
       "./test/tsconfig.json"
-    ],
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "@open-wc",
-    "prettier",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:lit/all",
-    "plugin:wc/best-practice"
-  ],
-  "plugins": [
-    "unused-imports",
-    "@typescript-eslint",
-    "lit",
-    "import",
-    "simple-import-sort"
-  ],
-  "env": {
-    "es2020": true,
-    "browser": true,
-    "node": true,
-    "mocha": true
-  },
-  "ignorePatterns": [
-    "*.js",
-    "*.html",
-    "*.d.ts",
-    "stories/*",
-    "dist/*"
-  ],
-  "rules": {
-    "unused-imports/no-unused-imports": "error",
-    "lit/quoted-expressions": ["error", "always"],
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "warn",
-    "wc/guard-super-call": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "": "never",
-        "js": "always",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "max-classes-per-file": [
-      "error",
-      {
-        "ignoreExpressions": true,
-        "max": 2
-      }
-    ],
-    "@typescript-eslint/no-namespace": "off",
-    "no-prototype-builtins": "off",
-    "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-empty-object-type": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          ["builtin", "external"],
-          ["internal", "parent", "index"],
-          ["sibling"]
-        ],
-        "newlines-between": "always",
-        "alphabetize": { "order": "asc", "caseInsensitive": true }
-      }
     ]
   },
   "overrides": [
     {
-      "files": [
-        "src/JSX/*"
-      ],
+      "files": ["src/JSX/*"],
       "rules": {
         "require-jsdoc": "off",
         "import/extensions": "off",
@@ -105,37 +16,18 @@
       }
     },
     {
-      "files": [
-        "test/pages/*"
-      ],
+      "files": ["test/pages/*"],
       "rules": {
         "require-jsdoc": "off",
         "import/extensions": "off"
       }
     },
     {
-      "files": [
-        "test/specs/*"
-      ],
+      "files": ["test/specs/*"],
       "rules": {
         "require-jsdoc": "off",
         "import/extensions": "off"
       }
     }
-  ],
-  "settings": {
-    "wc": {
-      "elementBaseClasses": [
-        "LitElement",
-        "LitFBP"
-      ]
-    },
-
-      "import/resolver": {
-        "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"] // Add all relevant extensions
-        }
-      }
-
-  }
+  ]
 }

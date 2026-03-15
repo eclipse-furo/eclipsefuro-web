@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing';
 
-import { Tree } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Tree';
+import { Tree } from '../../protoc-gen-open-models/furo/type/Tree';
 
 describe('Benchmark', () => {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

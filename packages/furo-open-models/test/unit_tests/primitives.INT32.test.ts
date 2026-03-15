@@ -1,9 +1,9 @@
 import { expect } from '@open-wc/testing';
-import type { INumeric } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Numeric';
-import { Numeric } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Numeric';
+import type { INumeric } from '../../protoc-gen-open-models/furo/type/Numeric';
+import { Numeric } from '../../protoc-gen-open-models/furo/type/Numeric';
 
 import { OPEN_MODELS_OPTIONS } from '@furo/open-models/dist/OPEN_MODELS_OPTIONS';
-import { INT32 } from '@furo/open-models/dist';
+import { INT32 } from '@furo/open-models';
 
 const initData: INumeric[] = [
   {

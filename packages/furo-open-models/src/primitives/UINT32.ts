@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class UINT32 extends FieldNode {
   get value(): number {
@@ -24,7 +24,7 @@ export class UINT32 extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = Number.isInteger(initData) ? (initData as number) : 0;
+    this._value = Number.isInteger(initData) ? (initData!) : 0;
     this.__meta.typeName = 'primitives.UINT32';
   }
 
@@ -66,7 +66,7 @@ export class UINT32 extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       // An uint32 has always a value if (constraint === 'required') {}
       if (constraint === 'maximum') {
@@ -115,7 +115,7 @@ export class UINT32 extends FieldNode {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0;
     this._value = 0;

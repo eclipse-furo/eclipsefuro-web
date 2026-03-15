@@ -104,7 +104,7 @@ export class Fetcher<REQ, RES> {
   /**
    * Indicator for a pending request. Maybe you are also interested on the `onRequestStarted` and `onRequestFinished` callback methods.
    */
-  public isLoading: boolean = false;
+  public isLoading = false;
 
   private path: string;
 
@@ -236,7 +236,7 @@ export class Fetcher<REQ, RES> {
         if (this.onRequestAborted) {
           this.onRequestAborted(rqo);
         }
-        // eslint-disable-next-line no-console
+         
         console.error(
           `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
         );
@@ -248,9 +248,9 @@ export class Fetcher<REQ, RES> {
       }
 
       fetch(request)
-        .then(response => {
+        .then((response) => {
           this._reworkRequest(response)
-            .then(data => {
+            .then((data) => {
               resolve(data);
             })
             .catch(reject);
@@ -258,7 +258,7 @@ export class Fetcher<REQ, RES> {
             this.onRequestFinished(rqo);
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.isLoading = false;
 
           if (err.name === 'AbortError') {
@@ -268,7 +268,7 @@ export class Fetcher<REQ, RES> {
             if (this.onRequestFinished) {
               this.onRequestFinished(rqo);
             }
-            // eslint-disable-next-line no-console
+             
             console.error('RequestService fetch aborted: ', err);
           } else {
             if (this.onRequestFinished) {
@@ -323,13 +323,13 @@ export class Fetcher<REQ, RES> {
          */
 
         this._parseResponse(response)
-          .then(r => {
+          .then((r) => {
             resolve(r as RES);
             if (this.onResponse) {
               this.onResponse(r as RES, response);
             }
           })
-          .catch(error => {
+          .catch((error) => {
             reject(error);
             if (this.onResponseParseError) {
               this.onResponseParseError(error, response);
@@ -348,7 +348,7 @@ export class Fetcher<REQ, RES> {
          * parses response object according to response heaader `content-type`
          */
         this._parseResponse(response)
-          .then(r => {
+          .then((r) => {
             reject(r);
             if (this.onResponseError) {
               this.onResponseError(r, response);
@@ -358,7 +358,7 @@ export class Fetcher<REQ, RES> {
            * error parsing is not possible, empty response
            * the dispatched event will have the raw error object in the event detail
            */
-          .catch(error => {
+          .catch((error) => {
             reject(error);
             if (this.onResponseErrorParseError) {
               this.onResponseErrorParseError(error, response);
@@ -376,32 +376,32 @@ export class Fetcher<REQ, RES> {
    * @param response
    * @private
    */
-  // eslint-disable-next-line class-methods-use-this
+   
   _parseResponse(response: Response) {
     return new Promise((resolve, reject) => {
       if (response) {
-        this.responseHandler.set('text/plain', r => {
+        this.responseHandler.set('text/plain', (r) => {
           r.text()
-            .then(text => {
+            .then((text) => {
               resolve(text);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
 
-        this.responseHandler.set('text/html', r => {
+        this.responseHandler.set('text/html', (r) => {
           r.text()
-            .then(text => {
+            .then((text) => {
               resolve(text);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
-        this.responseHandler.set('application/json', r => {
+        this.responseHandler.set('application/json', (r) => {
           r.json()
-            .then(json => {
+            .then((json) => {
               // convert to literal type when needed
               resolve(
                 this.API_OPTIONS.PreserveProtoNames
@@ -409,12 +409,12 @@ export class Fetcher<REQ, RES> {
                   : json,
               );
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
 
-        this.responseHandler.set('application/x-ndjson', r => {
+        this.responseHandler.set('application/x-ndjson', (r) => {
           const preserveProtoNames = this.API_OPTIONS.PreserveProtoNames;
 
           const reader = r.body?.getReader();
@@ -429,7 +429,7 @@ export class Fetcher<REQ, RES> {
           const iterator = {
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
               while (true) {
-                // eslint-disable-next-line no-await-in-loop
+                 
                 const { done, value } = await reader.read();
                 if (done) break;
 
@@ -442,7 +442,7 @@ export class Fetcher<REQ, RES> {
                 for (const line of lines) {
                   const trimmed = line.trim();
                   if (trimmed === '') {
-                    // eslint-disable-next-line no-continue
+                     
                     continue; // skip empty lines
                   }
 
@@ -480,30 +480,30 @@ export class Fetcher<REQ, RES> {
           resolve(iterator);
         });
 
-        this.responseHandler.set('application/octet-stream', r => {
+        this.responseHandler.set('application/octet-stream', (r) => {
           r.arrayBuffer()
-            .then(buffer => {
+            .then((buffer) => {
               resolve(buffer);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
-        this.responseHandler.set('application/pdf', r => {
+        this.responseHandler.set('application/pdf', (r) => {
           r.blob()
-            .then(blob => {
+            .then((blob) => {
               resolve(blob);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
-        this.responseHandler.set('image/jpeg', r => {
+        this.responseHandler.set('image/jpeg', (r) => {
           r.blob()
-            .then(blob => {
+            .then((blob) => {
               resolve(blob);
             })
-            .catch(err => {
+            .catch((err) => {
               reject(err);
             });
         });
@@ -516,7 +516,7 @@ export class Fetcher<REQ, RES> {
         let typeHandler = this.responseHandler.get(handler);
 
         if (typeHandler === undefined) {
-          // eslint-disable-next-line no-console
+           
           console.error('No parser for', handler);
           typeHandler = this.responseHandler.get('application/json');
         }
@@ -543,15 +543,15 @@ export class Fetcher<REQ, RES> {
     let evaluatedPath = path;
     let evaluatedBody;
 
-    const keysForBodyOrQueryParams: Map<string, keyof REQ> = new Map();
-    Object.keys(rqo as object).forEach(key => {
+    const keysForBodyOrQueryParams = new Map<string, keyof REQ>();
+    Object.keys(rqo as object).forEach((key) => {
       keysForBodyOrQueryParams.set(key, key as keyof REQ);
     });
 
     const fields = [...path.matchAll(/\{([^}]+)}/g)];
     // replace url templates with values
     // /v1/cube/{id} => /v1/cube/12
-    fields.forEach(field => {
+    fields.forEach((field) => {
       const rqoKey = protoNameToJsonName(field[1]) as keyof REQ;
       const rqoValue = rqo[rqoKey];
       evaluatedPath = evaluatedPath.replace(field[0], `${rqoValue}`);
@@ -560,8 +560,8 @@ export class Fetcher<REQ, RES> {
 
     if (bodyField === '*') {
       // build body object
-      const body: { [key: string]: unknown } = {};
-      keysForBodyOrQueryParams.forEach(key => {
+      const body: Record<string, unknown> = {};
+      keysForBodyOrQueryParams.forEach((key) => {
         body[key as string] = rqo[key];
       });
       evaluatedBody = JSON.stringify(body);
@@ -571,9 +571,9 @@ export class Fetcher<REQ, RES> {
       if (bodyField !== undefined) {
         keysForBodyOrQueryParams.delete(bodyField as string);
       }
-      keysForBodyOrQueryParams.forEach(key => {
+      keysForBodyOrQueryParams.forEach((key) => {
         if (Array.isArray(rqo[key])) {
-          (rqo[key] as unknown[]).forEach(e => {
+          (rqo[key] as unknown[]).forEach((e) => {
             params.push(
               `${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${e}`,
             );

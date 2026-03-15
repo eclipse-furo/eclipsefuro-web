@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
-import { Defaults } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 
-import { type ValueStateSummary, ValueState } from '@furo/open-models/dist';
+import { type ValueStateSummary, ValueState } from '@furo/open-models';
 
 describe('ValueStates', () => {
   it('should return all states', async () => {

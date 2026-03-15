@@ -5,7 +5,7 @@
 export default function DebounceBuilder(
   // eslint-disable-next-line @typescript-eslint/ban-types
   func: Function,
-  delay: number = 10,
+  delay = 10,
   option = { leading: false, trailing: true },
 ) {
   let timer: ReturnType<typeof setTimeout> | number | undefined; // same like basic debounce

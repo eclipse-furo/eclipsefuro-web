@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class Int64Value extends FieldNode {
   get value(): bigint {
@@ -23,10 +23,10 @@ export class Int64Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: bigint = 0n;
+  public _value = 0n;
 
   constructor(
-    initData?: string | undefined,
+    initData?: string  ,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -73,7 +73,7 @@ export class Int64Value extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       if (constraint === 'maximum') {
         // By default, the minimum and maximum values are included in the range. ">" is used to check.
@@ -125,7 +125,7 @@ export class Int64Value extends FieldNode {
     return '';
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0n;
     this._value = 0n;

@@ -22,8 +22,7 @@ export class EMPTY extends FieldNode {
     this.__isEmpty = true;
     this.__meta.typeName = 'google.protobuf.Empty';
   }
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+   
   __updateWithLiteral(_: Record<string, never>) {
     this.__isEmpty = false;
   }

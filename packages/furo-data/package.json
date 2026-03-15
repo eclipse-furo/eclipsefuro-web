@@ -48,17 +48,5 @@
     "singleQuote": true,
     "arrowParens": "avoid"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "*.js": [
-      "eslint --fix",
-      "prettier --write",
-      "git add"
-    ]
-  },
   "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
 }

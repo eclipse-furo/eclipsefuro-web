@@ -36,9 +36,9 @@
     "protoc:gen:lint": "npm run protoc:gen && eslint --ext .ts,.html ./protoc-gen-open-models --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "protoc:lint": " eslint --ext .ts,.html ./protoc-gen-open-models --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "clean": "rm -rf ./dist && rm -rf ./test/.test && rm -rf ./coverage",
-    "lint": "eslint --ext .ts,.html . --ignore-path .gitignore && prettier \"**/*.ts\" --check --ignore-path .gitignore",
-    "format": "eslint --ext .ts,.html . --fix --ignore-path .gitignore && prettier \"**/*.ts\" --write --ignore-path .gitignore",
-    "prepare": "husky",
+    "lint": "eslint './src/**/*.{ts,html}'",
+    "lint:fix": "eslint './src/**/*.{ts,html}' --fix",
+    "format": "prettier './src/**/*.ts' --write --ignore-path .gitignore",
     "test": "rm -rf test/.unit_tests && npm run build && tsc -p ./test/unit_tests && wtr --coverage",
     "test:watch": "rm -rf test/.unit_tests && npm run build && tsc -p ./test/unit_tests && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"tsc  -p ./tsconfig.models.json --watch --preserveWatchOutput\" \"tsc -p ./test/unit_tests --watch --preserveWatchOutput\" \"wtr --watch\"",
     "bootstrap": "npm install && npm link && npm link @furo/open-models"
@@ -85,15 +85,5 @@
   "customElements": "custom-elements.json",
   "publishConfig": {
     "access": "public"
-  },
-  "prettier": {
-    "singleQuote": true,
-    "arrowParens": "avoid"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "eslint --fix",
-      "prettier --write"
-    ]
   }
 }

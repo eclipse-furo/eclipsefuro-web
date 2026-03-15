@@ -1,7 +1,8 @@
 import { css, LitElement } from 'lit';
 import { property, state } from 'lit/decorators.js';
-import { ARRAY } from '@/proxies/ARRAY';
+
 import { FieldNode } from '@/FieldNode';
+import { ARRAY } from '@/proxies/ARRAY';
 import { ANY } from '@/well_known/ANY';
 
 interface Bindable<T = FieldNode> extends HTMLElement {
@@ -100,11 +101,11 @@ export class TypeRenderer extends LitElement {
    * (`"display"`, `"form"`, `"edit"`, `"cell-display"`, `"cell-edit"`),
    * or any other string for having custom context.
    *
-   * @type {('display' | 'form' | 'edit' | 'cell-display' | 'cell-edit' | string)}
+   * @type {('display' | 'form' | 'edit' | 'cell-display' | 'cell-edit' | (string & {}))}
    * @default "display"
    */
   @property()
-  context: 'display' | 'form' | 'edit' | 'cell-display' | 'cell-edit' | string =
+  context: 'display' | 'form' | 'edit' | 'cell-display' | 'cell-edit' | (string & {}) =
     'display';
 
   @property({ type: Boolean })
@@ -113,7 +114,7 @@ export class TypeRenderer extends LitElement {
   @state()
   _field: FieldNode | null = null;
 
-  private renderName: string = '';
+  private renderName = '';
 
   /**
    * Reference to the element that was inserted into the DOM.
@@ -207,7 +208,7 @@ export class TypeRenderer extends LitElement {
     Promise.race([
       window.customElements.whenDefined(this.renderName),
       new Promise((_, reject) => {
-        setTimeout(() => reject(new Error('Timeout')), 1500);
+        setTimeout(() => { reject(new Error('Timeout')); }, 1500);
       }),
     ])
       .then(() => {
@@ -232,7 +233,7 @@ export class TypeRenderer extends LitElement {
    */
   _createRepeatedDisplay() {
     const fieldDescriptor = this._field!.__parentNode!.__meta.nodeFields.find(
-      f => f.fieldName === this._field!.__meta.fieldName,
+      (f) => f.fieldName === this._field!.__meta.fieldName,
     );
     const Constructor: new () => unknown = fieldDescriptor?.FieldConstructor;
     const fn = new Constructor() as FieldNode;
@@ -247,7 +248,7 @@ export class TypeRenderer extends LitElement {
       Promise.race([
         window.customElements.whenDefined(this.renderName),
         new Promise((_, reject) => {
-          setTimeout(() => reject(new Error('Timeout')), 1500);
+          setTimeout(() => { reject(new Error('Timeout')); }, 1500);
         }),
       ])
         .then(() => {
@@ -291,7 +292,7 @@ export class TypeRenderer extends LitElement {
     const l = this.attributes.length;
 
     for (let i = 0; i < l; i += 1) {
-      const nodeName = this.attributes.item(i)!.nodeName!;
+      const nodeName = this.attributes.item(i)!.nodeName;
       const nodeValue = this.attributes.item(i)?.nodeValue;
       if (
         !(
@@ -332,7 +333,7 @@ export class TypeRenderer extends LitElement {
     if (this.insertedElementRef) {
       this.insertedElementRef.remove();
     }
-    // eslint-disable-next-line wc/guard-super-call
+     
     super.disconnectedCallback();
   }
 
@@ -344,8 +345,7 @@ export class TypeRenderer extends LitElement {
     if (this.insertedElementRef) {
       this.parentNode!.insertBefore(this.insertedElementRef, this);
     }
-
-    // eslint-disable-next-line wc/guard-super-call
+     
     super.connectedCallback();
   }
 

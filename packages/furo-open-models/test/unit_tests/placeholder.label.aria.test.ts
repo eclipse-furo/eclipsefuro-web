@@ -1,4 +1,4 @@
-import { Identifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
 import { expect } from '@open-wc/testing';
 
 describe('Placeholders and labels', () => {

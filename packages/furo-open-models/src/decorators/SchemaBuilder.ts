@@ -1,11 +1,12 @@
-import { ENUM } from "../primitives/ENUM";
+import type { JSONSchema7, JSONSchema7Definition } from "json-schema";
+
 import { FieldConstraints } from "../FieldConstraints";
 import { FieldNode } from "../FieldNode";
 import type { FieldDescriptor } from "../FieldNode";
+import { ENUM } from "../primitives/ENUM";
 import { Registry } from "../Registry";
-import type { JSONSchema7, JSONSchema7Definition } from "json-schema";
 
-const primitivesMap: Map<string, string> = new Map([
+const primitivesMap = new Map<string, string>([
   ["primitives.BOOLEAN", "boolean"],
   ["primitives.BYTES", "string"],
   ["primitives.DOUBLE", "number"],
@@ -48,12 +49,12 @@ export class SchemaBuilder {
 
   private static getProps(model: FieldNode): Record<string, JSONSchema7Definition> {
     return Object.fromEntries(
-      model.__meta.nodeFields.map(fieldDescriptor => {
-        const field = model.__getFieldNodeByPath(fieldDescriptor.fieldName) as FieldNode;
+      model.__meta.nodeFields.map((fieldDescriptor) => {
+        const field = model.__getFieldNodeByPath(fieldDescriptor.fieldName)!;
 
         if (field.__isPrimitive && field.__meta.typeName !== "primitives.ENUM") {
           const spec = {
-            type: primitivesMap.get(field.__meta.typeName!)!,
+            type: primitivesMap.get(field.__meta.typeName)!,
             description: [fieldDescriptor.description, field.__meta.description].join(""),
             ...SchemaBuilder.getConstraints(fieldDescriptor.constraints),
           };
@@ -67,7 +68,7 @@ export class SchemaBuilder {
           return [
             fieldDescriptor.fieldName,
             {
-              type: primitivesMap.get(field.__meta.typeName!),
+              type: primitivesMap.get(field.__meta.typeName),
               description: [fieldDescriptor.description, field.__meta.description].join(""),
               enum: Array.from(Object.keys(eargs)),
             },
@@ -92,7 +93,7 @@ export class SchemaBuilder {
 
   private static getRequiredFields(descriptors: FieldDescriptor[]): string[] {
     const req: string[] = [];
-    descriptors.forEach(descriptor => {
+    descriptors.forEach((descriptor) => {
       if (descriptor.constraints?.required) {
         req.push(descriptor.fieldName);
       }

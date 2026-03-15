@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class BoolValue extends FieldNode {
   get value(): boolean {
@@ -23,7 +23,7 @@ export class BoolValue extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: boolean = false;
+  public _value = false;
 
   constructor(
     initData?: boolean,
@@ -73,10 +73,10 @@ export class BoolValue extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint] of Object.entries(fieldConstraints)) {
       if (constraint === 'required') {
-        if (this._value === false) {
+        if (!this._value) {
           return ['constraint.violation.required'];
         }
       }
@@ -92,8 +92,8 @@ export class BoolValue extends FieldNode {
     return '';
   }
 
-  public __clear(withoutNotification: boolean = false) {
-    const shouldNotify = this._value === true;
+  public __clear(withoutNotification = false) {
+    const shouldNotify = this._value;
     this._value = false;
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

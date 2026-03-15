@@ -10,7 +10,7 @@ export const protoNameToJsonName = (input: string): string => {
   }
   return transform
     .toLowerCase()
-    .replace(/([-_][a-z])/g, group =>
+    .replace(/([-_][a-z])/g, (group) =>
       group.toUpperCase().replace('-', '').replace('_', ''),
     );
 };
@@ -32,7 +32,7 @@ export const deepProtoNameToJsonName = (obj: unknown): unknown => {
   const entries = Object.entries(obj);
   const mappedEntries = entries.map(
     ([k, v]) =>
-      [`${protoNameToJsonName(k)}`, deepProtoNameToJsonName(v)] as const,
+      [protoNameToJsonName(k), deepProtoNameToJsonName(v)] as const,
   );
   return Object.fromEntries(mappedEntries);
 };
@@ -41,7 +41,7 @@ export const jsonNameToProtoName = (input: string) => {
   if (transform.startsWith('X')) {
     transform = `_${transform.slice(1)}`;
   }
-  return transform.replace(/[A-Z]/g, letter => `_${letter.toLowerCase()}`);
+  return transform.replace(/[A-Z]/g, (letter) => `_${letter.toLowerCase()}`);
 };
 /**
  * proto names are like display_name, name, _some
@@ -61,7 +61,7 @@ export const deepJsonNameToProtoName = (obj: unknown): unknown => {
   const entries = Object.entries(obj);
   const mappedEntries = entries.map(
     ([k, v]) =>
-      [`${jsonNameToProtoName(k)}`, deepJsonNameToProtoName(v)] as const,
+      [jsonNameToProtoName(k), deepJsonNameToProtoName(v)] as const,
   );
   return Object.fromEntries(mappedEntries);
 };

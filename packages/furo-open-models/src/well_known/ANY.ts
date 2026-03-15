@@ -11,9 +11,9 @@ export interface IAny {
 export class ANY extends FieldNode {
   private _value: FieldNode | undefined;
 
-  private _typeName: string = '';
+  private _typeName = '';
 
-  private _originalTypeName: string = '';
+  private _originalTypeName = '';
 
   constructor(
     initData?: IAny,
@@ -24,7 +24,7 @@ export class ANY extends FieldNode {
     this.__meta.typeName = `google.protobuf.Any`;
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== undefined;
     this.__isEmpty = true;
@@ -75,7 +75,7 @@ export class ANY extends FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __mapProtoNameJsonToJson(data: any): any {
     if (data['@type'] === undefined) {
-      // eslint-disable-next-line no-console
+       
       console.error(`@type is not defined: ${data['@type']}`, data);
       return undefined;
     }
@@ -97,7 +97,7 @@ export class ANY extends FieldNode {
 
   __updateWithLiteral(data: IAny) {
     if (data['@type'] === undefined) {
-      // eslint-disable-next-line no-console
+       
       console.error(`@type is not defined: ${data['@type']}`, data);
       return;
     }
@@ -116,13 +116,13 @@ export class ANY extends FieldNode {
         this.__isEmpty = false;
         this.__notifyFieldValueChange(false);
       } catch (err) {
-        // eslint-disable-next-line
+         
         console.error(err);
         this.__isEmpty = true;
         this.__notifyFieldValueChange(false);
       }
     } else {
-      // eslint-disable-next-line no-console
+       
       console.error(
         `Could not resolve type from empty type field: ${data['@type']}`,
         data,

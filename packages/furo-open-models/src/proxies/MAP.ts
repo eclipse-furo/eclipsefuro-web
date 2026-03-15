@@ -16,7 +16,7 @@ export class MAP<
   public value: Map<K, T> = new Map<K, T>();
 
   constructor(
-    initData?: { [key: string | number]: I },
+    initData?: Record<string | number, I>,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -24,7 +24,7 @@ export class MAP<
 
     if (initData !== undefined) {
       if (initData !== undefined) {
-        // eslint-disable-next-line no-console
+         
         console.error('Use the MAP.Builder()');
       }
     }
@@ -34,7 +34,7 @@ export class MAP<
 
   static Builder<K extends string | number, T extends FieldNode, I>(
     TConstructor: new () => T,
-    initData: { [key: string | number]: I },
+    initData: Record<string | number, I>,
   ): MAP<K, T, I> {
     const m = new MAP<K, T, I>();
     m.initFromLiteral(TConstructor, initData);
@@ -53,13 +53,13 @@ export class MAP<
    * @param {{ [key: string | number]: I }} initData - initial map interface type
    */
   initFromLiteral(
-    Constructor: { new (): T },
-    initData: { [key: string | number]: I },
+    Constructor: new () => T,
+    initData: Record<string | number, I>,
   ) {
     // empty the map but keep the ref.
     this.value.clear();
 
-    Object.keys(initData).forEach(k => {
+    Object.keys(initData).forEach((k) => {
       const fieldnode = new Constructor();
       fieldnode.__updateWithLiteral(initData[k]);
       fieldnode.__parentNode = this;
@@ -70,10 +70,10 @@ export class MAP<
     this.__notifyMapChanges(false);
   }
 
-  __getFieldNodeByPath(deepPath: string = ''): FieldNode | undefined {
+  __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
     const path = deepPath.split('.');
     if (path.length > 0 && path[0] !== '') {
-      // eslint-disable-next-line no-param-reassign
+       
       deepPath = path.slice(1).join('.');
       if (deepPath === '') {
         if (this.value.has(path[0] as K)) {
@@ -91,7 +91,7 @@ export class MAP<
 
   public get __childNodes(): T[] {
     const children: T[] = [];
-    this.value.forEach(v => children.push(v));
+    this.value.forEach((v) => children.push(v));
     return children;
   }
 
@@ -155,13 +155,13 @@ export class MAP<
    *
    * @param initData
    */
-  __updateWithLiteral(initData: { [key: string | number]: I }) {
+  __updateWithLiteral(initData: Record<string | number, I>) {
     // empty the map but keep the ref.
     this.value.clear();
     this.__meta.initialValue = initData;
     if (this.__parentNode !== undefined) {
-      const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
-        f => f.fieldName === this.__meta.fieldName,
+      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
+        (f) => f.fieldName === this.__meta.fieldName,
       );
       const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       this.initFromLiteral(Constructor, initData);
@@ -170,17 +170,16 @@ export class MAP<
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __mapProtoNameJsonToJson(data: any): any {
-    const literal: { [key: string | number]: I } = {};
+    const literal: Record<string | number, I> = {};
 
     if (this.__parentNode !== undefined) {
-      const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
-        f => f.fieldName === this.__meta.fieldName,
+      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
+        (f) => f.fieldName === this.__meta.fieldName,
       );
       const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       const dummy = new Constructor();
-
-      // eslint-disable-next-line guard-for-in
-      Object.entries(data).forEach(v => {
+       
+      Object.entries(data).forEach((v) => {
         literal[v[0]] = dummy.__mapProtoNameJsonToJson(v[1]);
       });
     }
@@ -188,12 +187,12 @@ export class MAP<
     return literal;
   }
 
-  __toJson(): { [key: string | number]: I } {
+  __toJson(): Record<string | number, I> {
     return this.__toLiteral();
   }
 
-  __toLiteral(): { [key: string | number]: I } {
-    const d: { [key: string | number]: I } = {};
+  __toLiteral(): Record<string | number, I> {
+    const d: Record<string | number, I> = {};
     this.value.forEach((item: T, k: K) => {
       d[k] = item.__toLiteral();
     });
@@ -256,7 +255,7 @@ export class MAP<
     callbackfn: (value: T, key: K, map: Map<K, T>) => void,
     thisArg?: unknown,
   ): void {
-    return this.value.forEach(callbackfn, thisArg);
+    this.value.forEach(callbackfn, thisArg);
   }
 
   /**

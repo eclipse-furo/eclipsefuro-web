@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export type JSONValue =
   | string
@@ -9,9 +9,9 @@ export type JSONValue =
   | boolean
   | null
   | { [x: string]: JSONValue }
-  | Array<JSONValue>;
+  | JSONValue[];
 
-export type JSONObject = { [x: string]: JSONValue };
+export type JSONObject = Record<string, JSONValue>;
 
 /**
  * Struct represents a structured data value, consisting of fields which map to dynamically typed values. In some languages, Struct might be supported by a native representation. For example, in scripting languages like JS a struct is represented as an object. The details of that representation are described together with the proto support for the language.
@@ -87,7 +87,7 @@ export class Struct extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint] of Object.entries(fieldConstraints)) {
       if (constraint === 'required') {
         if (this._value === null) {
@@ -106,7 +106,7 @@ export class Struct extends FieldNode {
     return '';
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = JSON.stringify(this._value) !== '{}';
     this._value = {};

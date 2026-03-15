@@ -1,7 +1,7 @@
-/* eslint-disable no-param-reassign */
+
 import { LitElement, ReactiveElement } from "lit";
 
-import { EntityServiceEventMap } from "./EntityServiceTypes";
+import type { EntityServiceEventMap } from "./EntityServiceTypes";
 
 /**
  * Metadata storage for property bindings
@@ -97,7 +97,7 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
      * @param eventType - The event name to listen for
      * @param detailKey - Optional key to extract from event.detail (defaults to inferring from event type)
      */
-    bindToEvent<K extends keyof TEventMap & string>(eventType: K, detailKey?: string) {
+    bindToEvent(eventType: keyof TEventMap & string, detailKey?: string) {
       return function bindToEventDecorator(target: object, propertyKey: string) {
         // Infer detailKey from event type if not provided
         // e.g., "busy-changed" -> "busy"
@@ -128,7 +128,7 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
      * @typeParam K - The event type (constrained to valid event names)
      * @param eventType - The event name to listen for
      */
-    onEvent<K extends keyof TEventMap & string>(eventType: K) {
+    onEvent(eventType: keyof TEventMap & string) {
       return function onEventDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
         const originalMethod = descriptor.value;
         const ctor = target.constructor as typeof ReactiveElement;
@@ -153,7 +153,7 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
  */
 function inferDetailKey(eventType: string, propertyKey: string): string {
   // Common patterns: "busy-changed" -> "busy", "validity-changed" -> check property
-  const match = eventType.match(/^(.+)-changed$/);
+  const match = /^(.+)-changed$/.exec(eventType);
   if (match) {
     return match[1];
   }

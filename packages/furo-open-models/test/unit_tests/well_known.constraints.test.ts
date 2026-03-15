@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
 
 import { Int32Value } from '@furo/open-models/dist/well_known/Int32Value';
-import { ConstraintWrappers } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/ConstraintWrappers';
+import { ConstraintWrappers } from '../../protoc-gen-open-models/furo/type/ConstraintWrappers';
 import { OPEN_MODELS_OPTIONS } from '@furo/open-models/dist/OPEN_MODELS_OPTIONS';
 
 describe('well known constraints', () => {

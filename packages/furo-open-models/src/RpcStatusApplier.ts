@@ -1,6 +1,6 @@
 import { FieldNode, ValueStateSummary } from './FieldNode';
-import { ValueState } from './ValueState';
 import { IAny } from './index';
+import { ValueState } from './ValueState';
 
 export interface IStatus {
   error: string;
@@ -11,12 +11,12 @@ export interface IStatus {
 
 export class RpcStatusApplier {
   public static apply(target: FieldNode, status: IStatus) {
-    if (status === undefined || status.details === undefined) {
+    if (status?.details === undefined) {
       return;
     }
     target.__clearAllValueStates();
 
-    const localizedMessage = status.details.filter(lm =>
+    const localizedMessage = status.details.filter((lm) =>
       lm['@type'].includes('/google.rpc.LocalizedMessage'),
     )[0];
     if (localizedMessage) {
@@ -24,11 +24,11 @@ export class RpcStatusApplier {
         localizedMessage.message as string,
       ]);
     }
-    const badRequest = status.details.filter(lm =>
+    const badRequest = status.details.filter((lm) =>
       lm['@type'].includes('/google.rpc.BadRequest'),
     )[0];
     if (badRequest) {
-      const v = (badRequest.fieldViolations as unknown[]).map(violation => ({
+      const v = (badRequest.fieldViolations as unknown[]).map((violation) => ({
         field: (violation as Record<string, string>).field,
         state: ValueState.Negative,
         message: (violation as Record<string, string>).description,

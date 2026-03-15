@@ -1,8 +1,8 @@
 import { expect } from '@open-wc/testing';
 import { MAP, STRING } from '@furo/open-models/dist/index';
-import type { IIdentifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import { Identifier } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/BookingCenter';
+import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
 
 describe('primitives MAP type', () => {
   it('must deep generate the MAPs', async () => {

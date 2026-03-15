@@ -125,5 +125,5 @@ export interface EntityServiceEventMap {
  * const myService: TypedEntityService<MyEventMap> = myEntityService;
  * ```
  */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+ 
 export type TypedEntityService<_TEventMap extends EntityServiceEventMap = EntityServiceEventMap> = EventTarget;

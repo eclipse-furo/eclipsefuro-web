@@ -57,7 +57,7 @@ export interface Options {
 
 export const OPEN_MODELS_OPTIONS: Options = {
   UseProtoNames: true,
-  labelFormatter: key => key.replaceAll('.', '_').toUpperCase(),
+  labelFormatter: (key) => key.replaceAll('.', '_').toUpperCase(),
   EmitDefaultValues: false,
   EmitUnpopulated: false,
   valueStateMessageFormatter: (key, ...params) =>

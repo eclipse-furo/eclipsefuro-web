@@ -1,48 +1,13 @@
 {
+  "extends": "../../tsconfig-ts-base.json",
   "compilerOptions": {
     "outDir": "dist",
-    "target": "ES2022",
-    "module": "ES2022",
-    "moduleResolution": "Bundler",
-    "noEmitOnError": true,
-    "strict": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "skipLibCheck": true,
-    "sourceMap": true,
-    "inlineSources": true,
-    "strictNullChecks": true,
-    "resolveJsonModule": true,
-    "allowJs": true,
-    "declaration": true,
-    "lib": ["es2022", "dom", "dom.iterable"],
-    "useDefineForClassFields": false,
-    "allowArbitraryExtensions": true,
-    "forceConsistentCasingInFileNames": true,
-    "noFallthroughCasesInSwitch": true,
-    "noImplicitAny": true,
-    "noImplicitOverride": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "resolvePackageJsonExports": false,
-    "resolvePackageJsonImports": false,
-    "stripInternal": true,
-    "verbatimModuleSyntax": true,
     "paths": {
       "@components/*": ["./src/components/*"],
       "@x/*": ["./src/x/*"],
       "@/*": ["./src/*"]
-    },
-    "plugins": []
+    }
   },
-  "tsc-alias": {
-    "resolveFullPaths": true,
-    "verbose": false
-  },
-  "exclude": ["dist", "test"],
-  "include": ["src/**/*", "global.d.ts"]
+  "include": ["src/**/*", "global.d.ts"],
+  "exclude": ["dist", "test"]
 }

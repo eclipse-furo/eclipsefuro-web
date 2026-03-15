@@ -102,7 +102,7 @@ export class ENUM<T> extends FieldNode {
     return this.msg(this._value as string);
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== this._nullValue;
     this._value = this._nullValue;

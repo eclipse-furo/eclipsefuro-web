@@ -1,4 +1,4 @@
-import { ToString, ValueOf } from '@furo/open-models/dist';
+import { ToString, ValueOf } from '@furo/open-models';
 import { CubeEntity } from './furo/cube/CubeEntity';
 import { Colour } from './furo/cube/Colour';
 import { Decimal } from './furo/type/Decimal';

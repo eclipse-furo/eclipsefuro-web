@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing';
 
-import { Defaults } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Defaults';
-import { Decimal } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Decimal';
+import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
+import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
 
 describe('getFieldNodeByPath', () => {
   it('should return the fieldNode', async () => {

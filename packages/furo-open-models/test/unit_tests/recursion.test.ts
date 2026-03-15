@@ -1,9 +1,9 @@
 import { expect } from '@open-wc/testing';
 
-import { Tree } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Tree';
-import type { ITree } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Tree';
-import { DeepRecursion } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/DeepRecursion';
-import type { IDeepRecursion } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/DeepRecursion';
+import { Tree } from '../../protoc-gen-open-models/furo/type/Tree';
+import type { ITree } from '../../protoc-gen-open-models/furo/type/Tree';
+import { DeepRecursion } from '../../protoc-gen-open-models/furo/type/DeepRecursion';
+import type { IDeepRecursion } from '../../protoc-gen-open-models/furo/type/DeepRecursion';
 
 const initData: ITree[] = [
   {

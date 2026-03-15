@@ -1,6 +1,6 @@
 import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class BOOLEAN extends FieldNode {
   get value(): boolean {
@@ -52,7 +52,7 @@ export class BOOLEAN extends FieldNode {
   }
 
   protected ___updateNotEmptyPath() {
-    if (this._value === false) {
+    if (!this._value) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
         OPEN_MODELS_OPTIONS.EmitUnpopulated
@@ -80,9 +80,9 @@ export class BOOLEAN extends FieldNode {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
-    const shouldNotify = this._value === true;
+    const shouldNotify = this._value;
     this._value = false;
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

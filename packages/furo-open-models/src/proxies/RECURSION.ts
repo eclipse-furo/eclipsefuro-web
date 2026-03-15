@@ -39,7 +39,7 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
 
   ___pathBuilder(parts: string[]): string[] {
     // pass to parents
-    return (this.__parentNode as FieldNode).___pathBuilder(parts);
+    return (this.__parentNode!).___pathBuilder(parts);
   }
 
   __updateWithLiteral(initData: I[]) {
@@ -56,7 +56,7 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
 
   private __getConstructor(): new () => T {
     const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
-      f => f.fieldName === this.__meta.fieldName,
+      (f) => f.fieldName === this.__meta.fieldName,
     );
 
     return fieldDescriptor?.FieldConstructor as new () => T;

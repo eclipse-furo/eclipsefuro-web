@@ -1,4 +1,4 @@
-/* eslint-disable no-param-reassign */
+ 
 import { LitElement, ReactiveElement } from "lit";
 
 import type { ModelEventType } from '@/FieldNode';
@@ -145,7 +145,7 @@ export const fieldBindings = {
               try {
                 writeFn();
               } catch (e) {
-                // eslint-disable-next-line no-console
+                 
                 console.error("Failed to write to model:", e);
               }
             }
@@ -182,7 +182,7 @@ export const fieldBindings = {
             if (reader) {
               this[MODEL_READ_FN] = reader.bind(this);
             } else {
-              // eslint-disable-next-line no-console
+               
               console.warn(`No modelReader for type "${typeName}". Available: ${[...(this.modelReaders?.keys() ?? [])].join(", ")}`);
               this[MODEL_READ_FN] = undefined;
             }
@@ -192,7 +192,7 @@ export const fieldBindings = {
             if (writer) {
               this[MODEL_WRITE_FN] = writer.bind(this);
             } else {
-              // eslint-disable-next-line no-console
+               
               console.warn(`No modelWriter for type "${typeName}". Available: ${[...(this.modelWriters?.keys() ?? [])].join(", ")}`);
               this[MODEL_WRITE_FN] = undefined;
             }
@@ -302,7 +302,6 @@ function bindToModel(component: ComponentWithListeners, model: FieldNodeLike): v
       readFn();
     };
 
-    // We listen to update, because it makes no speed difference on any literal type when using this-field-value-changed, and on complex types it is relevant to know if something in the type changed.
     listeners.set("value", { eventType: "update", listener: valueListener });
     model.__addEventListener("update", valueListener);
 

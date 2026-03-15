@@ -1,7 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
 import { FieldConstraints } from '../FieldConstraints';
+import { FieldNode } from '../FieldNode';
 import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { Registry } from '../Registry';
 
 export class BytesValue extends FieldNode {
   get value(): string {
@@ -23,7 +23,7 @@ export class BytesValue extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: string = '';
+  public _value = '';
 
   constructor(
     initData?: string,
@@ -69,7 +69,7 @@ export class BytesValue extends FieldNode {
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
-    // eslint-disable-next-line guard-for-in
+     
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       if (constraint === 'required') {
         if (this._value === '') {
@@ -97,7 +97,7 @@ export class BytesValue extends FieldNode {
     return this._value;
   }
 
-  public __clear(withoutNotification: boolean = false) {
+  public __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== '';
     this._value = '';

@@ -1,156 +1,40 @@
 {
+  "extends": "../../.eslintrc-ts-base.json",
   "parserOptions": {
     "project": [
       "./tsconfig.json",
-
       "./dev-playground/tsconfig.json"
-    ],
-    "ecmaVersion": 2020,
-    "sourceType": "module"
-  },
-  "parser": "@typescript-eslint/parser",
-  "extends": [
-    "@open-wc",
-    "prettier",
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "plugin:lit/all",
-    "plugin:wc/best-practice"
-  ],
-  "plugins": [
-    "lit",
-    "unused-imports",
-    "@typescript-eslint",
-    "import",
-    "simple-import-sort"
-  ],
-  "env": {
-    "es2020": true,
-    "browser": true,
-    "node": true,
-    "mocha": true
-  },
-  "ignorePatterns": [
-    "*.js",
-    "*.html",
-    "*.d.ts",
-    "stories/*",
-    "dist/*"
-  ],
-  "rules": {
-    "lit/quoted-expressions": ["error", "always"],
-    "simple-import-sort/imports": "error",
-    "simple-import-sort/exports": "error",
-    "import/first": "error",
-    "import/newline-after-import": "error",
-    "import/no-duplicates": "error",
-    "unused-imports/no-unused-imports": "error",
-    "no-shadow": "off",
-    "@typescript-eslint/no-shadow": "warn",
-    "wc/guard-super-call": "off",
-    "import/no-unresolved": "off",
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "": "never",
-        "js": "always",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ],
-    "no-multiple-empty-lines": ["error", { "max": 1 }],
-    "max-classes-per-file": [
-      "error",
-      {
-        "ignoreExpressions": true,
-        "max": 2
-      }
-    ],
-    "@typescript-eslint/no-namespace": "off",
-    "no-prototype-builtins": "off",
-    "@typescript-eslint/ban-types": "off",
-    "@typescript-eslint/explicit-function-return-type": "off",
-    "@typescript-eslint/explicit-module-boundary-types": "off",
-    "@typescript-eslint/no-explicit-any": "error",
-    "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-non-null-assertion": "off",
-    "@typescript-eslint/no-empty-object-type": "off",
-    "@typescript-eslint/no-unused-vars": [
-      "warn",
-      {
-        "argsIgnorePattern": "^_"
-      }
-    ],
-    "import/order": [
-      "error",
-      {
-        "groups": [
-          ["builtin", "external"],
-          ["internal", "parent", "index"],
-          ["sibling"]
-        ],
-        "newlines-between": "always",
-        "alphabetize": { "order": "asc", "caseInsensitive": true }
-      }
     ]
   },
   "overrides": [
     {
-      "files": [
-        "dev-playground/*",
-        "dev-playground/**/*"
-      ],
+      "files": ["dev-playground/*", "dev-playground/**/*"],
       "rules": {
-
         "import/extensions": "off",
         "simple-import-sort/imports": "off",
         "import/no-extraneous-dependencies": "off"
       }
-    },{
-      "files": [
-        "src/models/*",
-        "src/models/**/*"
-      ],
+    },
+    {
+      "files": ["src/models/*", "src/models/**/*"],
       "rules": {
         "no-use-before-define": "off",
         "import/no-cycle": "off",
         "simple-import-sort/imports": "off"
       }
     },
-
     {
-      "files": [
-        "test/specs/*"
-      ],
+      "files": ["test/specs/*"],
       "rules": {
         "import/extensions": "off"
       }
     },
     {
-      "files": [
-        "src/JSX/Link.ts"
-      ],
+      "files": ["src/JSX/Link.ts"],
       "rules": {
         "import/extensions": "off",
         "@typescript-eslint/no-explicit-any": "off"
       }
     }
-  ],
-  "settings": {
-    "wc": {
-      "elementBaseClasses": [
-        "LitElement",
-        "LitFBP"
-      ]
-    },
-      "import/resolver": {
-        "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx", ".json"] // Add all relevant extensions
-        }
-      }
-
-  }
+  ]
 }

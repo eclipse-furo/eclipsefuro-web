@@ -16,8 +16,8 @@ export class Registry {
     typename: string,
   ): new (
     initData?: object,
-    parent?: FieldNode | undefined,
-    attributeName?: string | undefined,
+    parent?: FieldNode  ,
+    attributeName?: string  ,
   ) => FieldNode {
     const clazz = registry.get(typename);
     if (clazz !== undefined) {

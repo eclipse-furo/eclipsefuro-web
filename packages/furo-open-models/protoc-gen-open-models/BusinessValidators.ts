@@ -1,5 +1,5 @@
 import { Validators } from '@furo/open-models/dist/Validator';
-import { ValueState, type ValueStateSummary } from '@furo/open-models/dist';
+import { ValueState, type ValueStateSummary } from '@furo/open-models';
 import { CubeDefinition } from './furo/cube/CubeDefinition';
 
 import { DecimalRange } from './furo/type/DecimalRange';

@@ -1,7 +1,7 @@
 import { html, css, LitElement } from 'lit';
 // eslint-disable-next-line import/extensions
 import { property } from 'lit/decorators.js';
-import { Defaults } from '@furo/open-models/dist/protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 
 /**
  * ### Description

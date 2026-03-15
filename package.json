@@ -58,7 +58,18 @@
     "@open-wc/testing-helpers": "^3.0.1",
     "chai-a11y-axe": "^1.5.0"
   },
+  "lint-staged": {
+    "packages/furo-{layout,channels,route,open-models}/**/*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "packages/furo-{fbp,framework,data,util}/**/*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ]
+  },
   "scripts": {
+    "prepare": "husky",
     "bootstrap": "yarn install && ./scripts/bootstrap.sh",
     "test:all": "web-test-runner --files packages/**/*.test.js --coverage",
     "test:all:watch": "web-test-runner --files packages/**/*.test.js --watch",
