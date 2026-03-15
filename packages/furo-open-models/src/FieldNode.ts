@@ -196,7 +196,7 @@ export abstract class FieldNode {
     const path = deepPath.replaceAll(/[[\]]/g, '.').split('.');
     if (path.length > 0 && path[0] !== '') {
       // rest wieder in error reinwerfen
-       
+
       deepPath = path.slice(1).join('.');
       // convert to camel
       const fieldName = this.__toLowerCamelCase(path[0]) as keyof FieldNode;
@@ -677,7 +677,7 @@ export abstract class FieldNode {
       if (!this.__meta.isArrayNode) {
         // the root node does not have a fieldName, so we use the typeName
         parts.unshift(
-           
+
           this.__meta.fieldName
             ? OPEN_MODELS_OPTIONS.UseProtoNames
               ? this.__toSnakeCase(this.__meta.fieldName)
@@ -783,7 +783,7 @@ export abstract class FieldNode {
    * @param node
    * @protected
    */
-   
+
   protected __validationExecuter(node: FieldNode) {
     const validatorFunc = Validators.get(node.__meta.typeName);
     const customConstraintsFunc = CustomConstraints.get(node.__meta.typeName);
@@ -909,13 +909,13 @@ export abstract class FieldNode {
    * @param {string | boolean | number} value - The value you want to set
    * @protected
    */
-   
+
   protected __PrimitivesSetter(targetNode: IPrimitive, value: unknown) {
     // do not do anything if current value equals val
     if (targetNode._value !== value) {
-      targetNode._value = value;  
+      targetNode._value = value;
 
-      targetNode.__isEmpty = false;  
+      targetNode.__isEmpty = false;
       this.__validateBottomUp(targetNode);
       targetNode.__notifyFieldValueChange(true);
     }
@@ -929,7 +929,7 @@ export abstract class FieldNode {
    * @param {} literalData - The literal type matches the interface from ITypeName.
    * @protected
    */
-   
+
   protected __TypeSetter(
     targetNode: FieldNode,
     literalData: unknown | undefined | null,
@@ -1058,7 +1058,7 @@ export abstract class FieldNode {
             typeof t.options !== 'boolean' &&
             t.options.once
           ) {
-             
+
             delete listenerArray[i];
           }
         });
@@ -1101,13 +1101,12 @@ export abstract class FieldNode {
    * Removes the handler from a node
    * @param type
    * @param handler
-   * @param options
+   * @param _options
    */
   public __removeEventListener(
     type: ModelEventType,
     handler: CustomEventListener,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    options?: boolean | EventListenerOptions,
+    _options?: boolean | EventListenerOptions,
   ): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
@@ -1123,13 +1122,12 @@ export abstract class FieldNode {
    * Removes the handler from a node
    * @param type
    * @param handler
-   * @param options
+   * @param _options
    */
   public __removeCustomEventListener(
     type: string,
     handler: CustomEventListener,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    options?: boolean | EventListenerOptions,
+    _options?: boolean | EventListenerOptions,
   ): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
@@ -1151,7 +1149,7 @@ export abstract class FieldNode {
       this.__parentNode.___updateNotEmptyPath();
     }
   }
-   
+
   protected __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {

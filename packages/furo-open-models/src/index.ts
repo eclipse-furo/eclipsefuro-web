@@ -1,9 +1,9 @@
-export { FieldNode, ValueStateSummary, type ModelEventType } from './FieldNode';
+export { FieldNode, type ValueStateSummary, type ModelEventType } from './FieldNode';
 export { Registry } from './Registry';
 export { ValueState } from './ValueState';
 export { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
 export { ToString, ValueOf } from './CustomPrototypes';
-export { FieldConstraints } from './FieldConstraints';
+export type { FieldConstraints } from './FieldConstraints';
 
 // Primitives
 export { BOOLEAN } from './primitives/BOOLEAN';
@@ -34,8 +34,8 @@ export { StringValue } from './well_known/StringValue';
 export { Timestamp } from './well_known/Timestamp';
 export { Struct } from './well_known/Struct';
 
-export { JSONValue } from './well_known/Struct';
-export { JSONObject } from './well_known/Struct';
+export type { JSONValue } from './well_known/Struct';
+export type { JSONObject } from './well_known/Struct';
 export { Duration } from './well_known/Duration';
 export { FieldMask } from './well_known/FieldMask';
 

@@ -6,14 +6,14 @@ export class EMPTY extends FieldNode {
     return this._value;
   }
 
-  set value(value: Record<string, never>) {
+  set value(_value: Record<string, never>) {
     this.__isEmpty = true;
   }
 
   public _value: Record<string, never> = {};
 
   constructor(
-    initData?: Record<string, never>,
+    _initData?: Record<string, never>,
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -22,7 +22,7 @@ export class EMPTY extends FieldNode {
     this.__isEmpty = true;
     this.__meta.typeName = 'google.protobuf.Empty';
   }
-   
+
   override __updateWithLiteral(_: Record<string, never>) {
     this.__isEmpty = false;
   }
