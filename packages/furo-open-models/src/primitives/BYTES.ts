@@ -39,7 +39,7 @@ export class BYTES extends FieldNode {
     );
   }
 
-  __updateWithLiteral(v: Uint8Array) {
+  override __updateWithLiteral(v: Uint8Array) {
     this._value = v;
     if (this._value.length === 0) {
       this.__isEmpty = !(
@@ -52,7 +52,7 @@ export class BYTES extends FieldNode {
     this.__notifyFieldValueChange(false);
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (this._value.length === 0) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -65,11 +65,11 @@ export class BYTES extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: Uint8Array): Uint8Array {
+  override __mapProtoNameJsonToJson(data: Uint8Array): Uint8Array {
     return data;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -104,19 +104,19 @@ export class BYTES extends FieldNode {
     return undefined;
   }
 
-  __toJson(): Uint8Array {
+  override __toJson(): Uint8Array {
     return this.__toLiteral();
   }
 
-  __toLiteral(): Uint8Array {
+  override __toLiteral(): Uint8Array {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value.length;
     this._value = new Uint8Array();

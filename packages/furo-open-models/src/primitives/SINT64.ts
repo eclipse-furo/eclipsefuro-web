@@ -28,13 +28,13 @@ export class SINT64 extends FieldNode {
     this.__meta.typeName = 'primitives.SINT64';
   }
 
-  __updateWithLiteral(v: string) {
+  override __updateWithLiteral(v: string) {
     this._value = BigInt(v);
     this.__isEmpty = false;
     this.__notifyFieldValueChange(false);
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (this._value === 0n) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -47,11 +47,11 @@ export class SINT64 extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -87,23 +87,23 @@ export class SINT64 extends FieldNode {
     return undefined;
   }
 
-  __toJson(): string {
+  override __toJson(): string {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value.toString();
   }
 
-  valueOf(): bigint {
+  override valueOf(): bigint {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0n;
     this._value = 0n;

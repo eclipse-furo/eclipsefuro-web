@@ -38,7 +38,7 @@ export class BOOLEAN extends FieldNode {
     );
   }
 
-  __updateWithLiteral(v: boolean) {
+  override __updateWithLiteral(v: boolean) {
     this._value = v;
     if (!this._value) {
       this.__isEmpty = !(
@@ -51,7 +51,7 @@ export class BOOLEAN extends FieldNode {
     this.__notifyFieldValueChange(false);
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (!this._value) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -64,23 +64,23 @@ export class BOOLEAN extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: boolean): boolean {
+  override __mapProtoNameJsonToJson(data: boolean): boolean {
     return data;
   }
 
-  __toJson(): boolean {
+  override __toJson(): boolean {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value;
     this._value = false;

@@ -23,35 +23,35 @@ export class EMPTY extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Empty';
   }
    
-  __updateWithLiteral(_: Record<string, never>) {
+  override __updateWithLiteral(_: Record<string, never>) {
     this.__isEmpty = false;
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  __toJson(): Record<string, never> | null {
+  override __toJson(): Record<string, never> | null {
     return this.__toLiteral();
   }
 
-  valueOf(): number {
+  override valueOf(): number {
     return this._value ? 1 : 0;
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     if (this._value !== null) {
       return this._value.toString();
     }
     return '';
   }
 
-  public __clear() {
+  public override __clear() {
     this._value = {};
     this.__isEmpty = true;
     // empty never changes

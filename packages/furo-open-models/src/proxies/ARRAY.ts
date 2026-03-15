@@ -64,7 +64,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    *
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  __mapProtoNameJsonToJson(data: any): any {
+  override __mapProtoNameJsonToJson(data: any): any {
     const literal: I[] = [];
     // create a dummy object
     const Constructor = this.__getConstructor();
@@ -76,13 +76,13 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     return literal;
   }
 
-  __updateWithLiteral(initData: I[]) {
+  override __updateWithLiteral(initData: I[]) {
     if (this.__parentNode !== undefined) {
       this.initFromLiteral(this.__getConstructor(), initData);
     }
   }
 
-  __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
+  override __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
     const path = deepPath
       .replaceAll(/[[\]]/g, '.')
       .split('.')
@@ -164,7 +164,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   }
 
   // used by broadcast
-  public get __childNodes(): T[] {
+  public override get __childNodes(): T[] {
     return this._value;
   }
 
@@ -197,7 +197,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     return a;
   }
 
-  toString(): string {
+  override toString(): string {
     // resolve parent
     const innerType = this.__parentNode?.__meta.nodeFields.find(
       (f) => f.fieldName === this.__meta.fieldName,
@@ -206,21 +206,21 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   }
 
   // only used by direct invocation of the type
-  __stringify(): string {
+  override __stringify(): string {
     return JSON.stringify(this.__toJson());
   }
 
   // only used by direct invocation of the type
-  __toJson(): T[] {
+  override __toJson(): T[] {
     return this.value.map((v: FieldNode) => v.__toJson());
   }
 
   // only used by direct invocation of the type
-  __toLiteral(): I[] {
+  override __toLiteral(): I[] {
     return this.value.map((v: FieldNode) => v.__toLiteral());
   }
 
-  __clear() {
+  override __clear() {
     this._value.length = 0;
     this.__isEmpty = true;
     this.__notifyArrayChanges(false);

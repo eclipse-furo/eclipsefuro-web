@@ -40,7 +40,7 @@ export class UInt32Value extends FieldNode {
     this.__meta.typeName = 'google.protobuf.UInt32Value';
   }
 
-  __updateWithLiteral(v: number) {
+  override __updateWithLiteral(v: number) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -54,23 +54,23 @@ export class UInt32Value extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  __toJson(): number | null {
+  override __toJson(): number | null {
     return this.__toLiteral();
   }
 
-  valueOf(): number {
+  override valueOf(): number {
     return this._value || NaN;
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  protected __checkTypeBoundaries(): string[] | undefined {
+  protected override __checkTypeBoundaries(): string[] | undefined {
     // check for int32 min max boundaries
     if (this._value && this._value > 4294967295) {
       return ['constraint.violation.range.uint32.max', '4294967295'];
@@ -81,7 +81,7 @@ export class UInt32Value extends FieldNode {
     return undefined;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -124,14 +124,14 @@ export class UInt32Value extends FieldNode {
     return undefined;
   }
 
-  toString(): string {
+  override toString(): string {
     if (this._value !== null && !Number.isNaN(this._value)) {
       return this._value.toString();
     }
     return '';
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0;
     this._value = 0;

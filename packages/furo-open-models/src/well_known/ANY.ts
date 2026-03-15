@@ -24,7 +24,7 @@ export class ANY extends FieldNode {
     this.__meta.typeName = `google.protobuf.Any`;
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== undefined;
     this.__isEmpty = true;
@@ -35,7 +35,7 @@ export class ANY extends FieldNode {
   }
 
   // used by broadcast
-  public get __childNodes(): FieldNode[] {
+  public override get __childNodes(): FieldNode[] {
     if (this._value) {
       return [this._value];
     }
@@ -54,7 +54,7 @@ export class ANY extends FieldNode {
     return this._typeName;
   }
 
-  __toJson(): object | null {
+  override __toJson(): object | null {
     if (this._value !== undefined) {
       const d = this._value?.__toJson();
       d['@type'] = this._originalTypeName; //  send back the original type name instead of this._value?.__meta.typeName;
@@ -63,7 +63,7 @@ export class ANY extends FieldNode {
     return null;
   }
 
-  __toLiteral(): object | null {
+  override __toLiteral(): object | null {
     if (this._value !== undefined) {
       const d = this._value?.__toLiteral();
       d['@type'] = this._originalTypeName; //  send back the original type name instead of this._value?.__meta.typeName;
@@ -73,7 +73,7 @@ export class ANY extends FieldNode {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  __mapProtoNameJsonToJson(data: any): any {
+  override __mapProtoNameJsonToJson(data: any): any {
     if (data['@type'] === undefined) {
        
       console.error(`@type is not defined: ${data['@type']}`, data);
@@ -95,7 +95,7 @@ export class ANY extends FieldNode {
     return literal;
   }
 
-  __updateWithLiteral(data: IAny) {
+  override __updateWithLiteral(data: IAny) {
     if (data['@type'] === undefined) {
        
       console.error(`@type is not defined: ${data['@type']}`, data);

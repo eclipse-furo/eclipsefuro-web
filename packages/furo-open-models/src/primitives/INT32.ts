@@ -28,13 +28,13 @@ export class INT32 extends FieldNode {
     this.__meta.typeName = 'primitives.INT32';
   }
 
-  __updateWithLiteral(v: number) {
+  override __updateWithLiteral(v: number) {
     this._value = v;
     this.__isEmpty = false;
     this.__notifyFieldValueChange(false);
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (this._value === 0) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -47,11 +47,11 @@ export class INT32 extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  protected __checkTypeBoundaries(): string[] | undefined {
+  protected override __checkTypeBoundaries(): string[] | undefined {
     // check for int32 min max boundaries
 
     if (this._value > 2147483647) {
@@ -63,7 +63,7 @@ export class INT32 extends FieldNode {
     return undefined;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -99,23 +99,23 @@ export class INT32 extends FieldNode {
     return undefined;
   }
 
-  __toJson(): number {
+  override __toJson(): number {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  valueOf(): number {
+  override valueOf(): number {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     return this._value.toString();
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0;
     this._value = 0;

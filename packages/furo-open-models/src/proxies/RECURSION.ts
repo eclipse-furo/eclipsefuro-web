@@ -10,7 +10,7 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
     this.__meta.typeName = `primitives.RECURSION`;
   }
 
-  __clear() {
+  override __clear() {
     this.__isEmpty = true;
     this._value = undefined;
   }
@@ -23,26 +23,26 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
     this._value = a;
   }
 
-  __toJson(): object | null {
+  override __toJson(): object | null {
     if (this._value !== undefined) {
       return this._value?.__toJson();
     }
     return null;
   }
 
-  __toLiteral(): object | null {
+  override __toLiteral(): object | null {
     if (this._value !== undefined) {
       return this._value?.__toLiteral();
     }
     return null;
   }
 
-  ___pathBuilder(parts: string[]): string[] {
+  override ___pathBuilder(parts: string[]): string[] {
     // pass to parents
     return (this.__parentNode!).___pathBuilder(parts);
   }
 
-  __updateWithLiteral(initData: I[]) {
+  override __updateWithLiteral(initData: I[]) {
     if (this.__parentNode !== undefined) {
       this._value = new (this.__getConstructor())();
       this._value.__parentNode = this;

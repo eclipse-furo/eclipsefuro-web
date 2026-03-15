@@ -42,7 +42,7 @@ export class MAP<
   }
 
   // eslint-disable-next-line class-methods-use-this
-  toString(): string {
+  override toString(): string {
     // resolve parent
     return `[object MAP<..., ...>]`;
   }
@@ -70,7 +70,7 @@ export class MAP<
     this.__notifyMapChanges(false);
   }
 
-  __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
+  override __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
     const path = deepPath.split('.');
     if (path.length > 0 && path[0] !== '') {
        
@@ -89,7 +89,7 @@ export class MAP<
     return undefined;
   }
 
-  public get __childNodes(): T[] {
+  public override get __childNodes(): T[] {
     const children: T[] = [];
     this.value.forEach((v) => children.push(v));
     return children;
@@ -155,7 +155,7 @@ export class MAP<
    *
    * @param initData
    */
-  __updateWithLiteral(initData: Record<string | number, I>) {
+  override __updateWithLiteral(initData: Record<string | number, I>) {
     // empty the map but keep the ref.
     this.value.clear();
     this.__meta.initialValue = initData;
@@ -169,7 +169,7 @@ export class MAP<
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  __mapProtoNameJsonToJson(data: any): any {
+  override __mapProtoNameJsonToJson(data: any): any {
     const literal: Record<string | number, I> = {};
 
     if (this.__parentNode !== undefined) {
@@ -187,11 +187,11 @@ export class MAP<
     return literal;
   }
 
-  __toJson(): Record<string | number, I> {
+  override __toJson(): Record<string | number, I> {
     return this.__toLiteral();
   }
 
-  __toLiteral(): Record<string | number, I> {
+  override __toLiteral(): Record<string | number, I> {
     const d: Record<string | number, I> = {};
     this.value.forEach((item: T, k: K) => {
       d[k] = item.__toLiteral();
@@ -226,7 +226,7 @@ export class MAP<
    * The __clear() method of Map instances removes all elements from this map.
    * @public
    */
-  __clear(): void {
+  override __clear(): void {
     this.__isEmpty = true;
     this.value.clear();
     this.__notifyMapChanges(false);

@@ -55,7 +55,7 @@ export class ENUM<T> extends FieldNode {
   }
 
   // use the initial value if a value out of range was set
-  __updateWithLiteral(v: T) {
+  override __updateWithLiteral(v: T) {
     if (isEnumMember(v, this.enumArg)) {
       this._value = v;
       this._initialValue = v;
@@ -73,11 +73,11 @@ export class ENUM<T> extends FieldNode {
     this.__notifyFieldValueChange(false);
   }
 
-  __toJson(): string {
+  override __toJson(): string {
     return this.__toLiteral();
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (this._value === this._nullValue) {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -90,19 +90,19 @@ export class ENUM<T> extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: string): string {
+  override __mapProtoNameJsonToJson(data: string): string {
     return data;
   }
 
-  __toLiteral(): string {
+  override __toLiteral(): string {
     return this._value as string;
   }
 
-  toString(): string {
+  override toString(): string {
     return this.msg(this._value as string);
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== this._nullValue;
     this._value = this._nullValue;

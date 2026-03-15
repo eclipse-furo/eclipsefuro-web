@@ -58,7 +58,7 @@ export class Struct extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Struct';
   }
 
-  __updateWithLiteral(v: JSONObject) {
+  override __updateWithLiteral(v: JSONObject) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -72,19 +72,19 @@ export class Struct extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: string): string {
+  override __mapProtoNameJsonToJson(data: string): string {
     return data;
   }
 
-  __toJson(): JSONObject | null {
+  override __toJson(): JSONObject | null {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -99,14 +99,14 @@ export class Struct extends FieldNode {
     return undefined;
   }
 
-  toString(): string {
+  override toString(): string {
     if (this._value !== null) {
       return JSON.stringify(this._value);
     }
     return '';
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = JSON.stringify(this._value) !== '{}';
     this._value = {};

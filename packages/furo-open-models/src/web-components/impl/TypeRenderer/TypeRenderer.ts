@@ -86,7 +86,7 @@ function isBindable(elem: unknown): elem is Bindable {
  * @template T - The FieldNode type this renderer expects (usually inferred)
  */
 export class TypeRenderer extends LitElement {
-  static styles = css`
+  static override styles = css`
     :host {
       display: none;
     }
@@ -129,7 +129,7 @@ export class TypeRenderer extends LitElement {
   /**
    *@private
    */
-  static get properties() {
+  static override get properties() {
     return {
       /**
        * A Boolean attribute which, if present, means this field is displayed in disabled state.
@@ -317,7 +317,7 @@ export class TypeRenderer extends LitElement {
   /**
    * forward the focus to the created element
    */
-  focus() {
+  override focus() {
     setTimeout(() => {
       if (this.insertedElementRef) {
         this.insertedElementRef.focus();
@@ -329,7 +329,7 @@ export class TypeRenderer extends LitElement {
    * Remove the inserted element, if the type renderer itself is removed
    * @private
    */
-  disconnectedCallback() {
+  override disconnectedCallback() {
     if (this.insertedElementRef) {
       this.insertedElementRef.remove();
     }
@@ -340,7 +340,7 @@ export class TypeRenderer extends LitElement {
   /**
    * Append when reconnect
    */
-  connectedCallback() {
+  override connectedCallback() {
     // reconnect
     if (this.insertedElementRef) {
       this.parentNode!.insertBefore(this.insertedElementRef, this);

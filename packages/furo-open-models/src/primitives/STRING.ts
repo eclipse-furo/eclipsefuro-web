@@ -39,7 +39,7 @@ export class STRING extends FieldNode {
     );
   }
 
-  __updateWithLiteral(v: string) {
+  override __updateWithLiteral(v: string) {
     this._value = v;
     if (this._value === '') {
       this.__isEmpty = !(
@@ -52,7 +52,7 @@ export class STRING extends FieldNode {
     this.__notifyFieldValueChange(false);
   }
 
-  protected ___updateNotEmptyPath() {
+  protected override ___updateNotEmptyPath() {
     if (this._value === '') {
       this.___isEmpty = !(
         OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -65,11 +65,11 @@ export class STRING extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: string): string {
+  override __mapProtoNameJsonToJson(data: string): string {
     return data;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -104,19 +104,19 @@ export class STRING extends FieldNode {
     return undefined;
   }
 
-  __toJson(): string {
+  override __toJson(): string {
     return this.__toLiteral();
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  toString(): string {
+  override toString(): string {
     return this._value;
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value.length;
     this._value = '';

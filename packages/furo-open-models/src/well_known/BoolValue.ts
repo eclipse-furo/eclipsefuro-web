@@ -40,7 +40,7 @@ export class BoolValue extends FieldNode {
     this.__meta.typeName = 'google.protobuf.BoolValue';
   }
 
-  __updateWithLiteral(v: boolean) {
+  override __updateWithLiteral(v: boolean) {
     this._value = v;
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -54,23 +54,23 @@ export class BoolValue extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  __toJson(): boolean | null {
+  override __toJson(): boolean | null {
     return this.__toLiteral();
   }
 
-  valueOf(): number {
+  override valueOf(): number {
     return this._value ? 1 : 0;
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value;
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -85,14 +85,14 @@ export class BoolValue extends FieldNode {
     return undefined;
   }
 
-  toString(): string {
+  override toString(): string {
     if (this._value !== null) {
       return this._value.toString();
     }
     return '';
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     const shouldNotify = this._value;
     this._value = false;
     this.__isEmpty = !(

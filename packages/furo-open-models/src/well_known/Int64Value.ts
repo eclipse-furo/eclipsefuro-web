@@ -40,7 +40,7 @@ export class Int64Value extends FieldNode {
     this.__meta.typeName = 'google.protobuf.Int64Value';
   }
 
-  __updateWithLiteral(v: string) {
+  override __updateWithLiteral(v: string) {
     this._value = BigInt(v);
     if (
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
@@ -54,23 +54,23 @@ export class Int64Value extends FieldNode {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  __mapProtoNameJsonToJson(data: number): number {
+  override __mapProtoNameJsonToJson(data: number): number {
     return data;
   }
 
-  __toJson(): string | null {
+  override __toJson(): string | null {
     return this.__toLiteral();
   }
 
-  valueOf() {
+  override valueOf() {
     return this._value || NaN;
   }
 
-  __toLiteral() {
+  override __toLiteral() {
     return this._value.toString();
   }
 
-  protected __checkConstraints(
+  protected override __checkConstraints(
     fieldConstraints: FieldConstraints,
   ): string[] | undefined {
      
@@ -118,14 +118,14 @@ export class Int64Value extends FieldNode {
     return undefined;
   }
 
-  toString(): string {
+  override toString(): string {
     if (this._value !== null && !Number.isNaN(this._value)) {
       return this._value.toString();
     }
     return '';
   }
 
-  public __clear(withoutNotification = false) {
+  public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value !== 0n;
     this._value = 0n;
