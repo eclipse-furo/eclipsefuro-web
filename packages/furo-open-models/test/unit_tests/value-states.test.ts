@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
 
 import { type ValueStateSummary, ValueState } from '@furo/open-models';
 

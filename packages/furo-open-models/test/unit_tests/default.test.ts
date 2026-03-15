@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
 import { STRING } from '@furo/open-models';
 
 describe('Default Values', () => {

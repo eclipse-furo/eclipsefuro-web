@@ -3,7 +3,7 @@ import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 
 import { LitFBP } from '@furo/fbp/dist/LitFBP';
-import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
+import { Decimal } from '../protoc-gen-open-models/furo/type/Decimal';
 import { INT32 } from '@furo/open-models';
 
 /**

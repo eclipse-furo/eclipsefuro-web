@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Numeric } from '../../protoc-gen-open-models/furo/type/Numeric';
+import { Numeric } from '../protoc-gen-open-models/furo/type/Numeric';
 
 describe('Benchmark', () => {
   it('should create 10.000 a simple object with an array and primitive in less then 200ms', async () => {

@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
-import type { INumeric64 } from '../../protoc-gen-open-models/furo/type/Numeric64';
-import { Numeric64 } from '../../protoc-gen-open-models/furo/type/Numeric64';
+import type { INumeric64 } from '../protoc-gen-open-models/furo/type/Numeric64';
+import { Numeric64 } from '../protoc-gen-open-models/furo/type/Numeric64';
 
 import { OPEN_MODELS_OPTIONS } from '@furo/open-models/dist/OPEN_MODELS_OPTIONS';
 

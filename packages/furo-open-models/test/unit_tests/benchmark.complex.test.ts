@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
 
 describe('Benchmark', () => {
   it('should create COLD 1.000 complex deep object  in less then 200ms', async () => {

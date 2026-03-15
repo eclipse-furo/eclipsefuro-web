@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
 
 describe('Field Constraints', () => {
   it('should trigger a error on empty types when required', async () => {

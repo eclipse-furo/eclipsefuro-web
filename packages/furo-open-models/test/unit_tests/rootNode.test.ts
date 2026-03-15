@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
-import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
+import type { IIdentifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../protoc-gen-open-models/furo/type/BookingCenter';
 
 describe('root node', () => {
   it('must have the correct root node', async () => {

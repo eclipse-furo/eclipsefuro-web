@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
-import '../../protoc-gen-open-models/CustomPrototypes.js';
-import '../../protoc-gen-open-models/BusinessValidators.js';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import '../protoc-gen-open-models/CustomPrototypes.js';
+import '../protoc-gen-open-models/BusinessValidators.js';
 
 describe('Custom Field  Constraints', () => {
   it('should trigger a error on child of array nodes', async () => {

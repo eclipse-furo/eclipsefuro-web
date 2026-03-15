@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
-import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import { Decimal } from '../protoc-gen-open-models/furo/type/Decimal';
 
 describe('getFieldNodeByPath', () => {
   it('should return the fieldNode', async () => {

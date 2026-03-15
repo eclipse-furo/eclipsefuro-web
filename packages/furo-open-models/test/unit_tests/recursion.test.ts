@@ -1,9 +1,9 @@
 import { expect } from 'vitest';
 
-import { Tree } from '../../protoc-gen-open-models/furo/type/Tree';
-import type { ITree } from '../../protoc-gen-open-models/furo/type/Tree';
-import { DeepRecursion } from '../../protoc-gen-open-models/furo/type/DeepRecursion';
-import type { IDeepRecursion } from '../../protoc-gen-open-models/furo/type/DeepRecursion';
+import { Tree } from '../protoc-gen-open-models/furo/type/Tree';
+import type { ITree } from '../protoc-gen-open-models/furo/type/Tree';
+import { DeepRecursion } from '../protoc-gen-open-models/furo/type/DeepRecursion';
+import type { IDeepRecursion } from '../protoc-gen-open-models/furo/type/DeepRecursion';
 
 const initData: ITree[] = [
   {

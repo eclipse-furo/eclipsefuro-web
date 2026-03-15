@@ -1,6 +1,6 @@
 import { expect } from 'vitest';
 
-import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
 import { OPEN_MODELS_OPTIONS } from '@furo/open-models/dist/OPEN_MODELS_OPTIONS';
 
 describe('EmitUnpopulated.test.ts', () => {

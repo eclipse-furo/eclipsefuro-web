@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 
-import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
+import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../protoc-gen-open-models/furo/type/BookingCenter';
 
 describe('Pristine State', () => {
   it('should create an empty object', async () => {

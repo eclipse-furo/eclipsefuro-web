@@ -1,7 +1,7 @@
 import { expect } from 'vitest';
 
 import { Int32Value } from '@furo/open-models/dist/well_known/Int32Value';
-import { Wrappers } from '../../protoc-gen-open-models/furo/type/Wrappers';
+import { Wrappers } from '../protoc-gen-open-models/furo/type/Wrappers';
 import { OPEN_MODELS_OPTIONS } from '@furo/open-models/dist/OPEN_MODELS_OPTIONS';
 
 describe('well known Int32Value', () => {

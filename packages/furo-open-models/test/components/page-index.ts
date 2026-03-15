@@ -3,13 +3,13 @@ import { html, css, LitElement } from 'lit';
 import { property } from 'lit/decorators.js';
 import { LitFBP } from '@furo/fbp/dist/LitFBP';
 
-import '../../protoc-gen-open-models/init';
+import '../protoc-gen-open-models/init';
 
 import './form-string.js';
 import './form-furo-type-defaults';
 import './form-number';
-import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
-import { Numeric } from '../../protoc-gen-open-models/furo/type/Numeric';
+import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import { Numeric } from '../protoc-gen-open-models/furo/type/Numeric';
 
 /**
  * ### Description

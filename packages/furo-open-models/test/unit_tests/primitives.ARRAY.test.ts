@@ -1,10 +1,10 @@
 import { expect } from 'vitest';
-import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
+import type { IIdentifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { BookingCenter } from '../protoc-gen-open-models/furo/type/BookingCenter';
 import { ARRAY } from '@furo/open-models';
-import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
-import type { IDecimal } from '../../protoc-gen-open-models/furo/type/Decimal';
+import { Decimal } from '../protoc-gen-open-models/furo/type/Decimal';
+import type { IDecimal } from '../protoc-gen-open-models/furo/type/Decimal';
 
 const initData: IIdentifier[] = [
   {
