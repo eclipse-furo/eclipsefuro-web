@@ -1,4 +1,3 @@
-
 import { LitElement, ReactiveElement } from "lit";
 
 import type { EntityServiceEventMap } from "./EntityServiceTypes";
@@ -22,8 +21,7 @@ interface EventBindingMeta {
   propertyKey: string;
   service: EventTarget;
   eventType: string;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
-  method: Function;
+  method: (...args: unknown[]) => unknown;
 }
 
 // Symbol keys for instance storage
@@ -130,11 +128,12 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
      */
     onEvent(eventType: keyof TEventMap & string) {
       return function onEventDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- descriptor.value is untyped by design
+        const originalMethod: EventBindingMeta["method"] = descriptor.value;
         const ctor = target.constructor as typeof ReactiveElement;
 
         // Store method metadata on the constructor
-        let methods = (ctor as unknown as Record<symbol, EventBindingMeta[]>)[EVENT_METHODS];
+        let methods = (ctor as unknown as Record<symbol, EventBindingMeta[] | undefined>)[EVENT_METHODS];
         if (!methods) {
           methods = [];
           (ctor as unknown as Record<symbol, EventBindingMeta[]>)[EVENT_METHODS] = methods;
@@ -170,15 +169,18 @@ function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
   }
   (ctor as unknown as Record<symbol, boolean>)[PROPERTY_PATCHED] = true;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalConnected = ctor.prototype.connectedCallback;
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalDisconnected = ctor.prototype.disconnectedCallback;
 
   ctor.prototype.connectedCallback = function connectedCallback(
     this: LitElement & Record<symbol, Map<string, { listener: EventListener; service: EventTarget; eventType: string }>>
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
-    const metadata = propertyBindingsMetadata.get(Object.getPrototypeOf(this));
+    const metadata = propertyBindingsMetadata.get(Object.getPrototypeOf(this) as object);
     if (!metadata) return;
 
     const listeners = new Map<string, { listener: EventListener; service: EventTarget; eventType: string }>();
@@ -186,8 +188,8 @@ function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
 
     metadata.forEach(({ service, eventType, detailKey }, propKey) => {
       const listener = ((e: CustomEvent) => {
-        if (e.detail && detailKey in e.detail) {
-          (this as unknown as Record<string, unknown>)[propKey] = e.detail[detailKey];
+        if (e.detail && detailKey in (e.detail as Record<string, unknown>)) {
+          (this as unknown as Record<string, unknown>)[propKey] = (e.detail as Record<string, unknown>)[detailKey];
         }
       }) as EventListener;
 
@@ -200,6 +202,7 @@ function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
     this: LitElement & Record<symbol, Map<string, { listener: EventListener; service: EventTarget; eventType: string }>>
   ) {
     const listeners = this[PROPERTY_LISTENERS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (listeners) {
       listeners.forEach(({ listener, service, eventType }) => {
         service.removeEventListener(eventType, listener);
@@ -207,6 +210,7 @@ function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
       listeners.clear();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalDisconnected?.call(this);
   };
 }
@@ -220,15 +224,19 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
   }
   (ctor as unknown as Record<symbol, boolean>)[EVENT_PATCHED] = true;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalConnected = ctor.prototype.connectedCallback;
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalDisconnected = ctor.prototype.disconnectedCallback;
 
   ctor.prototype.connectedCallback = function connectedCallback(
     this: LitElement & Record<symbol, Map<string, { listener: EventListener; service: EventTarget; eventType: string }>>
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
     const methods = (this.constructor as unknown as Record<symbol, EventBindingMeta[]>)[EVENT_METHODS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (!methods) return;
 
     const listeners = new Map<string, { listener: EventListener; service: EventTarget; eventType: string }>();
@@ -248,6 +256,7 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
     this: LitElement & Record<symbol, Map<string, { listener: EventListener; service: EventTarget; eventType: string }>>
   ) {
     const listeners = this[EVENT_LISTENERS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (listeners) {
       listeners.forEach(({ listener, service, eventType }) => {
         service.removeEventListener(eventType, listener);
@@ -255,6 +264,7 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
       listeners.clear();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalDisconnected?.call(this);
   };
 }

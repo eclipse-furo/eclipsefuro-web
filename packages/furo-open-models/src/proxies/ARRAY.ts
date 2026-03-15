@@ -1,4 +1,4 @@
-import { FieldNode } from '../FieldNode';
+import { FieldNode } from "../FieldNode";
 
 export class ARRAY<T extends FieldNode, I> extends FieldNode {
   private _value: T[] = [];
@@ -9,8 +9,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     super(undefined, parent, parentATributeName);
     this.__isPrimitive = true;
     if (initData !== undefined) {
-
-      console.error('Use the ARRAY.Builder()');
+      console.error("Use the ARRAY.Builder()");
     }
     this.__meta.typeName = `primitives.ARRAY<>`;
   }
@@ -29,7 +28,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     }
     const n = before ? 0 : this.length;
     fn.__parentNode = this;
-    fn.__meta.fieldName = `[${n}]`;
+    fn.__meta.fieldName = `[${String(n)}]`;
     fn.__meta.index = n;
     fn.__meta.deleteArrayNode = () => {
       this.delete(n);
@@ -53,7 +52,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    * @param initData
    */
 
-  initFromLiteral( initData: I[]) {
+  initFromLiteral(initData: I[]) {
     this.__clear();
     this.__meta.initialValue = initData;
     this.__pushWithoutNotifications(initData);
@@ -70,36 +69,32 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     // create a dummy object
     const Constructor = this.__getConstructor();
     const fn = new Constructor();
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    data.forEach((row: any) => {
-      literal.push(fn.__mapProtoNameJsonToJson(row));
+    (data as unknown[]).forEach((row: unknown) => {
+      literal.push(fn.__mapProtoNameJsonToJson(row) as I);
     });
     return literal;
   }
 
   override __updateWithLiteral(initData: I[]) {
     if (this.__parentNode !== undefined) {
-      this.initFromLiteral( initData);
+      this.initFromLiteral(initData);
     }
   }
 
-  override __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
+  override __getFieldNodeByPath(deepPath = ""): FieldNode | undefined {
     const path = deepPath
-      .replaceAll(/[[\]]/g, '.')
-      .split('.')
-      .filter((p) => p !== '');
+      .replaceAll(/[[\]]/g, ".")
+      .split(".")
+      .filter(p => p !== "");
 
-    if (path.length > 0 && path[0] !== '') {
-
-      deepPath = path.slice(1).join('.');
-      if (deepPath === '') {
+    if (path.length > 0 && path[0] !== "") {
+      deepPath = path.slice(1).join(".");
+      if (deepPath === "") {
         if (this.value[parseInt(path[0], 10)]) {
           return this.value[parseInt(path[0], 10)] as FieldNode;
         }
       } else if (this.value[parseInt(path[0], 10)]) {
-        return (
-          this.value[parseInt(path[0], 10)] as FieldNode
-        ).__getFieldNodeByPath(deepPath);
+        return (this.value[parseInt(path[0], 10)] as FieldNode).__getFieldNodeByPath(deepPath);
       }
       return undefined;
     }
@@ -108,16 +103,16 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   private __notifyArrayChanges(bubbles?: boolean) {
     this.__dispatchEvent(
-      new CustomEvent('this-array-changed', {
+      new CustomEvent("this-array-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
     this.__dispatchEvent(
-      new CustomEvent('this-field-value-changed', {
+      new CustomEvent("this-field-value-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
     if (bubbles) {
       this.__rootNode.__meta.isPristine = false;
@@ -125,41 +120,41 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       this.__meta.isPristine = false;
 
       this.__dispatchEvent(
-        new CustomEvent('array-changed', {
+        new CustomEvent("array-changed", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent("field-value-changed", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
     } else {
       this.__dispatchEvent(
-        new CustomEvent('array-changed', {
+        new CustomEvent("array-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent("field-value-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
   }
@@ -174,9 +169,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       return this.___Constructor;
     }
     // the __parentNode defines the type of the ARRAY<T,I>
-    const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
-      (f) => f.fieldName === this.__meta.fieldName,
-    );
+    const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
     return fieldDescriptor?.FieldConstructor as new () => T;
   }
 
@@ -188,10 +181,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    * @param {I[]} initData - Initial open-models
    * @returns {ARRAY<T, I>}
    */
-  static Builder<T extends FieldNode, I>(
-    Constructor: new () => T,
-    initData: I[],
-  ): ARRAY<T, I> {
+  static Builder<T extends FieldNode, I>(Constructor: new () => T, initData: I[]): ARRAY<T, I> {
     const a: ARRAY<T, I> = new ARRAY<T, I>();
     a.___Constructor = Constructor;
     a.initFromLiteral(initData);
@@ -200,10 +190,8 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   override toString(): string {
     // resolve parent
-    const innerType = this.__parentNode?.__meta.nodeFields.find(
-      (f) => f.fieldName === this.__meta.fieldName,
-    );
-    return `[object ARRAY<${innerType?.FieldConstructor.name}>]`;
+    const innerType = this.__parentNode?.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
+    return `[object ARRAY<${String((innerType?.FieldConstructor as { name: string } | undefined)?.name)}>]`;
   }
 
   // only used by direct invocation of the type
@@ -213,12 +201,12 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   // only used by direct invocation of the type
   override __toJson(): T[] {
-    return this.value.map((v: FieldNode) => v.__toJson());
+    return this.value.map((v: FieldNode) => v.__toJson() as T);
   }
 
   // only used by direct invocation of the type
   override __toLiteral(): I[] {
-    return this.value.map((v: FieldNode) => v.__toLiteral());
+    return this.value.map((v: FieldNode) => v.__toLiteral() as I);
   }
 
   override __clear() {
@@ -231,7 +219,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     const removed = this._value.splice(index, 1);
     this._rebuildIndexAndFieldName();
     this.__notifyArrayChanges(true);
-    return removed[0].__toLiteral();
+    return removed[0].__toLiteral() as I;
   }
 
   deleteT(index: number): T {
@@ -294,7 +282,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    * The entries() method of Array instances returns a new array iterator  object that contains the key/ value pairs for each index in the array.
    */
   entries(): IterableIterator<[number, I]> {
-    return this._value.map((t) => t.__toLiteral()).entries();
+    return this._value.map(t => t.__toLiteral() as I).entries();
   }
 
   /**
@@ -309,20 +297,14 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    *
    * The map() method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.
    */
-  mapI<U>(
-    callbackfn: (value: I, index: number, array: I[]) => U,
-    thisArg?: unknown,
-  ): U[] {
-    return this._value.map((t) => t.__toLiteral()).map(callbackfn, thisArg);
+  mapI<U>(callbackfn: (value: I, index: number, array: I[]) => U, thisArg?: unknown): U[] {
+    return this._value.map(t => t.__toLiteral() as I).map(callbackfn, thisArg);
   }
 
   /**
    * The map() method of Array instances creates a new array populated with the results of calling a provided function on every element in the calling array.
    */
-  map<U>(
-    callbackfn: (value: T, index: number, array: T[]) => U,
-    thisArg?: unknown,
-  ): U[] {
+  map<U>(callbackfn: (value: T, index: number, array: T[]) => U, thisArg?: unknown): U[] {
     return this._value.map(callbackfn, thisArg);
   }
 
@@ -331,24 +313,15 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    * @param callbackfn
    * @param thisArg
    */
-  filter(
-    callbackfn: (value: T, index: number, array: T[]) => boolean,
-    thisArg?: unknown,
-  ): T[] {
+  filter(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: unknown): T[] {
     return this._value.filter(callbackfn, thisArg);
   }
 
-  find(
-    callbackfn: (value: T, index: number, array: T[]) => boolean,
-    thisArg?: unknown,
-  ): T | undefined {
+  find(callbackfn: (value: T, index: number, array: T[]) => boolean, thisArg?: unknown): T | undefined {
     return this._value.find(callbackfn, thisArg);
   }
 
-  forEach(
-    callbackfn: (value: T, index: number, array: T[]) => void,
-    thisArg?: unknown,
-  ): void {
+  forEach(callbackfn: (value: T, index: number, array: T[]) => void, thisArg?: unknown): void {
     this._value.forEach(callbackfn, thisArg);
   }
 
@@ -447,7 +420,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   shift(): I | undefined {
     const t = this._value.shift();
     this.__notifyArrayChanges(true);
-    return t?.__toLiteral();
+    return t?.__toLiteral() as I | undefined;
   }
 
   /**
@@ -467,7 +440,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    */
   slice(start?: number, end?: number): I[] {
     const tar = this._value.slice(start, end);
-    const ret = tar.map((t) => t.__toLiteral());
+    const ret = tar.map(t => t.__toLiteral() as I);
     this.__notifyArrayChanges(true);
     return ret;
   }
@@ -490,14 +463,14 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
             fn.__parentNode = this;
             fn.__meta.isArrayNode = true;
             return fn;
-          }),
+          })
         )
-        .map((item) => item.__toLiteral());
+        .map(item => item.__toLiteral() as I);
       this._rebuildIndexAndFieldName();
       this.__notifyArrayChanges(true);
       return i;
     }
-    const ret = this._value.splice(start).map((item) => item.__toLiteral());
+    const ret = this._value.splice(start).map(item => item.__toLiteral() as I);
     this.__notifyArrayChanges(true);
     return ret;
   }
@@ -507,12 +480,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   spliceT(start: number, deleteCount: number, ...items: T[]): T[];
 
   spliceT(start: number, deleteCount?: number, ...items: T[]): T[] {
-    let ret: T[] = [];
-    if (deleteCount !== undefined) {
-      ret = this.value.splice(start, deleteCount, ...items);
-    } else {
-      ret = this.value.splice(start);
-    }
+    const ret: T[] = deleteCount !== undefined ? this.value.splice(start, deleteCount, ...items) : this.value.splice(start);
 
     this._rebuildIndexAndFieldName();
     this.__notifyArrayChanges(true);
@@ -541,8 +509,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   private _rebuildIndexAndFieldName() {
     this._value.forEach((fn: T, i) => {
-
-      fn.__meta.fieldName = `[${i}]`;
+      fn.__meta.fieldName = `[${String(i)}]`;
 
       fn.__meta.index = i;
 

@@ -1,5 +1,5 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
+import { FieldNode } from "../FieldNode";
+import { Registry } from "../Registry";
 
 /**
  * K can only be a 'string' or 'number' because in JSON UseProtoNames you can only set a string or a number.
@@ -7,35 +7,24 @@ import { Registry } from '../Registry';
  * Even https://protobuf.dev/programming-guides/proto3/#maps defines another structure,
  * we use https://protobuf.dev/programming-guides/proto3/#json
  */
-export class MAP<
-  K extends string | number,
-  T extends FieldNode,
-  I,
-> extends FieldNode {
+export class MAP<K extends string | number, T extends FieldNode, I> extends FieldNode {
   // ev. private machen
   public value: Map<K, T> = new Map<K, T>();
 
-  constructor(
-    initData?: Record<string | number, I>,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: Record<string | number, I>, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
     if (initData !== undefined) {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (initData !== undefined) {
-         
-        console.error('Use the MAP.Builder()');
+        console.error("Use the MAP.Builder()");
       }
     }
 
     this.__isPrimitive = true;
   }
 
-  static Builder<K extends string | number, T extends FieldNode, I>(
-    TConstructor: new () => T,
-    initData: Record<string | number, I>,
-  ): MAP<K, T, I> {
+  static Builder<K extends string | number, T extends FieldNode, I>(TConstructor: new () => T, initData: Record<string | number, I>): MAP<K, T, I> {
     const m = new MAP<K, T, I>();
     m.initFromLiteral(TConstructor, initData);
     return m;
@@ -52,14 +41,11 @@ export class MAP<
    * @param Constructor - type constructor for T
    * @param {{ [key: string | number]: I }} initData - initial map interface type
    */
-  initFromLiteral(
-    Constructor: new () => T,
-    initData: Record<string | number, I>,
-  ) {
+  initFromLiteral(Constructor: new () => T, initData: Record<string | number, I>) {
     // empty the map but keep the ref.
     this.value.clear();
 
-    Object.keys(initData).forEach((k) => {
+    Object.keys(initData).forEach(k => {
       const fieldnode = new Constructor();
       fieldnode.__updateWithLiteral(initData[k]);
       fieldnode.__parentNode = this;
@@ -70,19 +56,16 @@ export class MAP<
     this.__notifyMapChanges(false);
   }
 
-  override __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
-    const path = deepPath.split('.');
-    if (path.length > 0 && path[0] !== '') {
-       
-      deepPath = path.slice(1).join('.');
-      if (deepPath === '') {
+  override __getFieldNodeByPath(deepPath = ""): FieldNode | undefined {
+    const path = deepPath.split(".");
+    if (path.length > 0 && path[0] !== "") {
+      deepPath = path.slice(1).join(".");
+      if (deepPath === "") {
         if (this.value.has(path[0] as K)) {
           return this.value.get(path[0] as K) as FieldNode;
         }
       } else if (this.value.has(path[0] as K)) {
-        return (this.value.get(path[0] as K) as FieldNode).__getFieldNodeByPath(
-          deepPath,
-        );
+        return (this.value.get(path[0] as K) as FieldNode).__getFieldNodeByPath(deepPath);
       }
       return undefined;
     }
@@ -91,62 +74,62 @@ export class MAP<
 
   public override get __childNodes(): T[] {
     const children: T[] = [];
-    this.value.forEach((v) => children.push(v));
+    this.value.forEach(v => children.push(v));
     return children;
   }
 
   private __notifyMapChanges(bubbles?: boolean) {
     this.__dispatchEvent(
-      new CustomEvent('this-map-changed', {
+      new CustomEvent("this-map-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
     this.__dispatchEvent(
-      new CustomEvent('this-field-value-changed', {
+      new CustomEvent("this-field-value-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
     if (bubbles) {
       this.__dispatchEvent(
-        new CustomEvent('map-changed', {
+        new CustomEvent("map-changed", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
 
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
 
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent("field-value-changed", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
     } else {
       this.__dispatchEvent(
-        new CustomEvent('map-changed', {
+        new CustomEvent("map-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent("field-value-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
   }
@@ -160,9 +143,7 @@ export class MAP<
     this.value.clear();
     this.__meta.initialValue = initData;
     if (this.__parentNode !== undefined) {
-      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
-        (f) => f.fieldName === this.__meta.fieldName,
-      );
+      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
       const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       this.initFromLiteral(Constructor, initData);
     }
@@ -173,14 +154,12 @@ export class MAP<
     const literal: Record<string | number, I> = {};
 
     if (this.__parentNode !== undefined) {
-      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
-        (f) => f.fieldName === this.__meta.fieldName,
-      );
+      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
       const Constructor = fieldDescriptor!.ValueConstructor as new () => T;
       const dummy = new Constructor();
-       
-      Object.entries(data).forEach((v) => {
-        literal[v[0]] = dummy.__mapProtoNameJsonToJson(v[1]);
+
+      Object.entries(data as Record<string, unknown>).forEach((v: [string, unknown]) => {
+        literal[v[0]] = dummy.__mapProtoNameJsonToJson(v[1]) as I;
       });
     }
 
@@ -194,7 +173,7 @@ export class MAP<
   override __toLiteral(): Record<string | number, I> {
     const d: Record<string | number, I> = {};
     this.value.forEach((item: T, k: K) => {
-      d[k] = item.__toLiteral();
+      d[k] = item.__toLiteral() as I;
     });
     return d;
   }
@@ -251,10 +230,7 @@ export class MAP<
    *   - **map:** The map being iterated.
    * - **thisArg:** A value to use as this when executing callbackFn.
    */
-  public forEach(
-    callbackfn: (value: T, key: K, map: Map<K, T>) => void,
-    thisArg?: unknown,
-  ): void {
+  public forEach(callbackfn: (value: T, key: K, map: Map<K, T>) => void, thisArg?: unknown): void {
     this.value.forEach(callbackfn, thisArg);
   }
 
@@ -297,4 +273,4 @@ export class MAP<
   }
 }
 
-Registry.register('map', MAP);
+Registry.register("map", MAP);

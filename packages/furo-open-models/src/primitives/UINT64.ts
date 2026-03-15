@@ -1,7 +1,7 @@
-import type { FieldConstraints } from '../FieldConstraints';
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
-import { Registry } from '../Registry';
+import type { FieldConstraints } from "../FieldConstraints";
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
+import { Registry } from "../Registry";
 
 export class UINT64 extends FieldNode {
   get value(): bigint {
@@ -17,15 +17,11 @@ export class UINT64 extends FieldNode {
 
   public _value: bigint;
 
-  constructor(
-    initData?: string,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: string, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = BigInt(initData ?? '0');
-    this.__meta.typeName = 'primitives.UINT64';
+    this._value = BigInt(initData ?? "0");
+    this.__meta.typeName = "primitives.UINT64";
   }
 
   override __updateWithLiteral(v: string) {
@@ -36,10 +32,7 @@ export class UINT64 extends FieldNode {
 
   protected override ___updateNotEmptyPath() {
     if (this._value === 0n) {
-      this.___isEmpty = !(
-        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-        OPEN_MODELS_OPTIONS.EmitUnpopulated
-      );
+      this.___isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     } else {
       this.___isEmpty = false;
       super.___updateNotEmptyPath();
@@ -53,40 +46,37 @@ export class UINT64 extends FieldNode {
 
   protected override __checkTypeBoundaries(): string[] | undefined {
     if (this._value < 0n) {
-      return ['constraint.violation.range.uint64.min', '0'];
+      return ["constraint.violation.range.uint64.min", "0"];
     }
     return undefined;
   }
 
-  protected override __checkConstraints(
-    fieldConstraints: FieldConstraints,
-  ): string[] | undefined {
-     
+  protected override __checkConstraints(fieldConstraints: FieldConstraints): string[] | undefined {
     for (const [constraint, value] of Object.entries(fieldConstraints)) {
       // An uint64 has always a value if (constraint === 'required') {}
-      if (constraint === 'maximum') {
+      if (constraint === "maximum") {
         // By default, the minimum and maximum values are included in the range. ">" is used to check.
         if (fieldConstraints.exclusive_maximum && this._value >= value) {
-          return ['constraint.violation.exclusive_maximum', String(value), String(this._value)];
+          return ["constraint.violation.exclusive_maximum", String(value), String(this._value)];
         }
         if (this._value > value) {
-          return ['constraint.violation.maximum', String(value), String(this._value)];
+          return ["constraint.violation.maximum", String(value), String(this._value)];
         }
       }
-      if (constraint === 'minimum') {
+      if (constraint === "minimum") {
         // By default, the minimum and maximum values are included in the range. "<" is used to check.
         if (fieldConstraints.exclusive_minimum && this._value <= value) {
-          return ['constraint.violation.exclusive_minimum', String(value), String(this._value)];
+          return ["constraint.violation.exclusive_minimum", String(value), String(this._value)];
         }
         if (this._value < value) {
-          return ['constraint.violation.minimum', String(value), String(this._value)];
+          return ["constraint.violation.minimum", String(value), String(this._value)];
         }
       }
-      if (constraint === 'multiple_of') {
+      if (constraint === "multiple_of") {
         // Use the multiple_of keyword to specify that a number must be the multiple of another number
         // use this to define the step ??
-        if (this._value % BigInt(value) !== 0n) {
-          return ['constraint.violation.multiple_of', String(value), String(this._value)];
+        if (this._value % BigInt(value as string | number | bigint | boolean) !== 0n) {
+          return ["constraint.violation.multiple_of", String(value), String(this._value)];
         }
       }
     }
@@ -120,4 +110,4 @@ export class UINT64 extends FieldNode {
   }
 }
 
-Registry.register('uint64', UINT64);
+Registry.register("uint64", UINT64);

@@ -1,9 +1,4 @@
-import {
-  deepJsonNameToProtoName,
-  deepProtoNameToJsonName,
-  jsonNameToProtoName,
-  protoNameToJsonName,
-} from './Mapper';
+import { deepJsonNameToProtoName, deepProtoNameToJsonName, jsonNameToProtoName, protoNameToJsonName } from "./Mapper";
 
 export interface IApiOptions {
   // leave empty to connect to the same host which delivers your files, otherwise set something like http://localhost:3000
@@ -80,10 +75,7 @@ interface Handlers<REQ, RES> {
    * @param error
    * @param serverResponse
    */
-  onResponseErrorParseError?: (
-    error: unknown,
-    serverResponse: Response,
-  ) => void;
+  onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
 
   /**
    * The `onFatalError` handler is triggered when nothing could be caught with the cather.
@@ -112,16 +104,13 @@ export class Fetcher<REQ, RES> {
 
   private method: string;
 
-  private responseHandler: Map<string, (r: Response) => void> = new Map<
-    string,
-    (r: Response) => void
-  >();
+  private responseHandler: Map<string, (r: Response) => void> = new Map<string, (r: Response) => void>();
 
   private abortController: AbortController;
 
   private timeoutId: ReturnType<typeof setTimeout> | number | undefined;
 
-  private bodyField: keyof REQ | '*' | undefined;
+  private bodyField: keyof REQ | "*" | undefined;
 
   private API_OPTIONS: IApiOptions;
 
@@ -138,7 +127,7 @@ export class Fetcher<REQ, RES> {
     method: string,
     // options path
     path: string,
-    bodyField?: keyof REQ | '*',
+    bodyField?: keyof REQ | "*"
   ) {
     this.API_OPTIONS = options;
     this.path = path;
@@ -151,7 +140,7 @@ export class Fetcher<REQ, RES> {
       method: this.method,
       signal,
       headers: this.API_OPTIONS.headers,
-      redirect: 'follow',
+      redirect: "follow",
     };
 
     this.timeout = this.API_OPTIONS.timeout ?? 300000; // chrome default timeout
@@ -194,7 +183,7 @@ export class Fetcher<REQ, RES> {
     this.abortController.abort(reason);
 
     if (this.onRequestAborted) {
-      this.onRequestAborted(reason);
+      this.onRequestAborted(reason as REQ);
     }
   }
 
@@ -202,7 +191,7 @@ export class Fetcher<REQ, RES> {
     return new Promise((resolve, reject) => {
       // abort old request if it is still running
       if (this.isLoading) {
-        this.abortPendingRequest('invoke triggered before response');
+        this.abortPendingRequest("invoke triggered before response");
       }
 
       this.abortController = new AbortController();
@@ -220,11 +209,7 @@ export class Fetcher<REQ, RES> {
 
       this.isLoading = true;
 
-      const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(
-        this.path,
-        this.bodyField,
-        rqo,
-      );
+      const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(this.path, this.bodyField, rqo);
       if (evaluatedBody) {
         this.requestInit.body = evaluatedBody;
       }
@@ -232,14 +217,13 @@ export class Fetcher<REQ, RES> {
       clearTimeout(this.timeoutId);
       const request = new Request(evaluatedPath, this.requestInit);
       this.timeoutId = setTimeout(() => {
-        this.abortController.abort(`Timeout of ${this.timeout}ms reached`);
+        this.abortController.abort(`Timeout of ${String(this.timeout)}ms reached`);
         if (this.onRequestAborted) {
           this.onRequestAborted(rqo);
         }
 
-        console.error(
-          `RequestService fetch aborted: Timeout of ${this.timeout}ms reached`,
-        );
+        console.error(`RequestService fetch aborted: Timeout of ${String(this.timeout)}ms reached`);
+        // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
         reject(rqo);
       }, this.timeout);
 
@@ -248,9 +232,9 @@ export class Fetcher<REQ, RES> {
       }
 
       fetch(request)
-        .then((response) => {
+        .then(response => {
           this._reworkRequest(response)
-            .then((data) => {
+            .then(data => {
               resolve(data);
             })
             .catch(reject);
@@ -258,10 +242,10 @@ export class Fetcher<REQ, RES> {
             this.onRequestFinished(rqo);
           }
         })
-        .catch((err) => {
+        .catch((err: unknown) => {
           this.isLoading = false;
 
-          if (err.name === 'AbortError') {
+          if (err instanceof Error && err.name === "AbortError") {
             if (this.onRequestAborted) {
               this.onRequestAborted(rqo);
             }
@@ -269,7 +253,7 @@ export class Fetcher<REQ, RES> {
               this.onRequestFinished(rqo);
             }
 
-            console.error('RequestService fetch aborted: ', err);
+            console.error("RequestService fetch aborted: ", err);
           } else {
             if (this.onRequestFinished) {
               this.onRequestFinished(rqo);
@@ -279,6 +263,7 @@ export class Fetcher<REQ, RES> {
               this.onFatalError(err);
             }
           }
+          // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
           reject(err);
         });
     });
@@ -323,13 +308,14 @@ export class Fetcher<REQ, RES> {
          */
 
         this._parseResponse(response)
-          .then((r) => {
+          .then(r => {
             resolve(r as RES);
             if (this.onResponse) {
               this.onResponse(r as RES, response);
             }
           })
-          .catch((error) => {
+          .catch((error: unknown) => {
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
             reject(error);
             if (this.onResponseParseError) {
               this.onResponseParseError(error, response);
@@ -348,7 +334,8 @@ export class Fetcher<REQ, RES> {
          * parses response object according to response heaader `content-type`
          */
         this._parseResponse(response)
-          .then((r) => {
+          .then(r => {
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
             reject(r);
             if (this.onResponseError) {
               this.onResponseError(r, response);
@@ -358,7 +345,8 @@ export class Fetcher<REQ, RES> {
            * error parsing is not possible, empty response
            * the dispatched event will have the raw error object in the event detail
            */
-          .catch((error) => {
+          .catch((error: unknown) => {
+            // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
             reject(error);
             if (this.onResponseErrorParseError) {
               this.onResponseErrorParseError(error, response);
@@ -379,70 +367,69 @@ export class Fetcher<REQ, RES> {
 
   _parseResponse(response: Response) {
     return new Promise((resolve, reject) => {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (response) {
-        this.responseHandler.set('text/plain', (r) => {
+        this.responseHandler.set("text/plain", r => {
           r.text()
-            .then((text) => {
+            .then(text => {
               resolve(text);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
 
-        this.responseHandler.set('text/html', (r) => {
+        this.responseHandler.set("text/html", r => {
           r.text()
-            .then((text) => {
+            .then(text => {
               resolve(text);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
-        this.responseHandler.set('application/json', (r) => {
+        this.responseHandler.set("application/json", r => {
           r.json()
-            .then((json) => {
+            .then(json => {
               // convert to literal type when needed
-              resolve(
-                this.API_OPTIONS.PreserveProtoNames
-                  ? deepProtoNameToJsonName(json)
-                  : json,
-              );
+              resolve(this.API_OPTIONS.PreserveProtoNames ? deepProtoNameToJsonName(json) : json);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
 
-        this.responseHandler.set('application/x-ndjson', (r) => {
+        this.responseHandler.set("application/x-ndjson", r => {
           const preserveProtoNames = this.API_OPTIONS.PreserveProtoNames;
 
           const reader = r.body?.getReader();
           if (!reader) {
-            throw new Error('NDJSON response has no readable body');
+            throw new Error("NDJSON response has no readable body");
           }
 
           const decoder = new TextDecoder();
-          let buffer = '';
+          let buffer = "";
 
           // Async generator that yields parsed NDJSON objects.
           const iterator = {
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- loop exits via break on done
               while (true) {
-
                 const { done, value } = await reader.read();
                 if (done) break;
 
                 buffer += decoder.decode(value, { stream: true });
 
                 // Split the buffer into lines. The last line may be incomplete.
-                const lines = buffer.split('\n');
-                buffer = lines.pop() ?? '';
+                const lines = buffer.split("\n");
+                buffer = lines.pop() ?? "";
 
                 for (const line of lines) {
                   const trimmed = line.trim();
-                  if (trimmed === '') {
-
+                  if (trimmed === "") {
                     continue; // skip empty lines
                   }
 
@@ -450,26 +437,22 @@ export class Fetcher<REQ, RES> {
                   let parsed: RES;
                   try {
                     parsed = JSON.parse(trimmed) as RES;
-                  } catch (e) {
+                  } catch {
                     // If parsing fails, we can choose to throw, skip, or yield an error object.
                     // Here we simply rethrow to fail fast.
                     throw new Error(`Failed to parse NDJSON line: ${trimmed}`);
                   }
 
-                  yield preserveProtoNames
-                    ? (deepProtoNameToJsonName(parsed) as RES)
-                    : parsed;
+                  yield preserveProtoNames ? (deepProtoNameToJsonName(parsed) as RES) : parsed;
                 }
               }
 
               // Emit any remaining data after the last chunk.
-              if (buffer.trim() !== '') {
+              if (buffer.trim() !== "") {
                 try {
                   yield JSON.parse(buffer.trim()) as RES;
-                } catch (e) {
-                  throw new Error(
-                    `Failed to parse final NDJSON line: ${buffer.trim()}`,
-                  );
+                } catch {
+                  throw new Error(`Failed to parse final NDJSON line: ${buffer.trim()}`);
                 }
               }
             },
@@ -480,58 +463,60 @@ export class Fetcher<REQ, RES> {
           resolve(iterator);
         });
 
-        this.responseHandler.set('application/octet-stream', (r) => {
+        this.responseHandler.set("application/octet-stream", r => {
           r.arrayBuffer()
-            .then((buffer) => {
+            .then(buffer => {
               resolve(buffer);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
-        this.responseHandler.set('application/pdf', (r) => {
+        this.responseHandler.set("application/pdf", r => {
           r.blob()
-            .then((blob) => {
+            .then(blob => {
               resolve(blob);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
-        this.responseHandler.set('image/jpeg', (r) => {
+        this.responseHandler.set("image/jpeg", r => {
           r.blob()
-            .then((blob) => {
+            .then(blob => {
               resolve(blob);
             })
-            .catch((err) => {
+            .catch((err: unknown) => {
+              // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
               reject(err);
             });
         });
 
-        const contentType = response.headers.get('content-type');
-        let handler = contentType?.split(';')[0].trim();
-        handler ??= 'application/json';
+        const contentType = response.headers.get("content-type");
+        let handler = contentType?.split(";")[0].trim();
+        handler ??= "application/json";
         let typeHandler = this.responseHandler.get(handler);
 
         if (typeHandler === undefined) {
-
-          console.error('No parser for', handler);
-          typeHandler = this.responseHandler.get('application/json');
+          console.error("No parser for", handler);
+          typeHandler = this.responseHandler.get("application/json");
         }
 
         if (typeHandler) {
           typeHandler(response);
         }
       } else {
-        reject(new Error('no response'));
+        reject(new Error("no response"));
       }
     });
   }
 
   private buildPathAndBodyfield(
     path: string,
-    bodyField: keyof REQ | '*' | undefined,
-    rqo: REQ,
+    bodyField: keyof REQ | "*" | undefined,
+    rqo: REQ
   ): {
     evaluatedPath: string;
     evaluatedBody: string | undefined;
@@ -542,24 +527,24 @@ export class Fetcher<REQ, RES> {
     let evaluatedBody;
 
     const keysForBodyOrQueryParams = new Map<string, keyof REQ>();
-    Object.keys(rqo as object).forEach((key) => {
+    Object.keys(rqo as object).forEach(key => {
       keysForBodyOrQueryParams.set(key, key as keyof REQ);
     });
 
     const fields = [...path.matchAll(/\{([^}]+)}/g)];
     // replace url templates with values
     // /v1/cube/{id} => /v1/cube/12
-    fields.forEach((field) => {
+    fields.forEach(field => {
       const rqoKey = protoNameToJsonName(field[1]) as keyof REQ;
       const rqoValue = rqo[rqoKey];
-      evaluatedPath = evaluatedPath.replace(field[0], `${rqoValue}`);
+      evaluatedPath = evaluatedPath.replace(field[0], String(rqoValue));
       keysForBodyOrQueryParams.delete(rqoKey as string);
     });
 
-    if (bodyField === '*') {
+    if (bodyField === "*") {
       // build body object
       const body: Record<string, unknown> = {};
-      keysForBodyOrQueryParams.forEach((key) => {
+      keysForBodyOrQueryParams.forEach(key => {
         body[key as string] = rqo[key];
       });
       evaluatedBody = JSON.stringify(body);
@@ -569,29 +554,21 @@ export class Fetcher<REQ, RES> {
       if (bodyField !== undefined) {
         keysForBodyOrQueryParams.delete(bodyField as string);
       }
-      keysForBodyOrQueryParams.forEach((key) => {
+      keysForBodyOrQueryParams.forEach(key => {
         if (Array.isArray(rqo[key])) {
-          (rqo[key] as unknown[]).forEach((e) => {
-            params.push(
-              `${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${e}`,
-            );
+          (rqo[key] as unknown[]).forEach(e => {
+            params.push(`${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${String(e)}`);
           });
         } else {
-          params.push(
-            `${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${rqo[key]}`,
-          );
+          params.push(`${this.API_OPTIONS.PreserveProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${String(rqo[key])}`);
         }
       });
       if (params.length) {
-        evaluatedPath = `${evaluatedPath}?${params.join('&')}`;
+        evaluatedPath = `${evaluatedPath}?${params.join("&")}`;
       }
 
       if (bodyField !== undefined) {
-        evaluatedBody = JSON.stringify(
-          this.API_OPTIONS.PreserveProtoNames
-            ? deepJsonNameToProtoName(rqo[bodyField])
-            : rqo[bodyField],
-        );
+        evaluatedBody = JSON.stringify(this.API_OPTIONS.PreserveProtoNames ? deepJsonNameToProtoName(rqo[bodyField]) : rqo[bodyField]);
       }
     }
 
@@ -669,10 +646,7 @@ export class Fetcher<REQ, RES> {
    * @param error
    * @param serverResponse
    */
-  onResponseErrorParseError?: (
-    error: unknown,
-    serverResponse: Response,
-  ) => void;
+  onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
 
   /**
    * The `onFatalError` handler is triggered when nothing could be caught with the cather.

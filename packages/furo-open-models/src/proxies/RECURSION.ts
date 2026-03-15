@@ -1,5 +1,5 @@
 // scalar and recursion typeName
-import { FieldNode } from '../FieldNode';
+import { FieldNode } from "../FieldNode";
 
 export class RECURSION<T extends FieldNode, I> extends FieldNode {
   private _value: T | undefined;
@@ -19,27 +19,29 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
     return this._value;
   }
 
-  set value(a: T) {
+  set value(a: T | undefined) {
     this._value = a;
   }
 
   override __toJson(): object | null {
     if (this._value !== undefined) {
-      return this._value?.__toJson();
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
+      return this._value?.__toJson() as object | null;
     }
     return null;
   }
 
   override __toLiteral(): object | null {
     if (this._value !== undefined) {
-      return this._value?.__toLiteral();
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
+      return this._value?.__toLiteral() as object | null;
     }
     return null;
   }
 
   override ___pathBuilder(parts: string[]): string[] {
     // pass to parents
-    return (this.__parentNode!).___pathBuilder(parts);
+    return this.__parentNode!.___pathBuilder(parts);
   }
 
   override __updateWithLiteral(initData: I[]) {
@@ -55,9 +57,7 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
   }
 
   private __getConstructor(): new () => T {
-    const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(
-      (f) => f.fieldName === this.__meta.fieldName,
-    );
+    const fieldDescriptor = this.__parentNode!.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
 
     return fieldDescriptor?.FieldConstructor as new () => T;
   }

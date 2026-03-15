@@ -1,9 +1,9 @@
-import { css, LitElement } from 'lit';
-import { property, state } from 'lit/decorators.js';
+import { css, LitElement } from "lit";
+import { property, state } from "lit/decorators.js";
 
-import { FieldNode } from '@/FieldNode';
-import { ARRAY } from '@/proxies/ARRAY';
-import { ANY } from '@/well_known/ANY';
+import { FieldNode } from "@/FieldNode";
+import { ARRAY } from "@/proxies/ARRAY";
+import { ANY } from "@/well_known/ANY";
 
 interface Bindable<T = FieldNode> extends HTMLElement {
   /**
@@ -23,10 +23,7 @@ interface Bindable<T = FieldNode> extends HTMLElement {
  * @returns True if the element is bindable
  */
 function isBindable(elem: unknown): elem is Bindable {
-  return (
-    elem instanceof HTMLElement &&
-    typeof (elem as Bindable).bindData === 'function'
-  );
+  return elem instanceof HTMLElement && typeof (elem as Bindable).bindData === "function";
 }
 
 /**
@@ -105,8 +102,7 @@ export class TypeRenderer extends LitElement {
    * @default "display"
    */
   @property()
-  context: 'display' | 'form' | 'edit' | 'cell-display' | 'cell-edit' | (string & {}) =
-    'display';
+  context: "display" | "form" | "edit" | "cell-display" | "cell-edit" | (string & {}) = "display";
 
   @property({ type: Boolean })
   disabled = false;
@@ -114,7 +110,7 @@ export class TypeRenderer extends LitElement {
   @state()
   _field: FieldNode | null = null;
 
-  private renderName = '';
+  private renderName = "";
 
   /**
    * Reference to the element that was inserted into the DOM.
@@ -159,6 +155,7 @@ export class TypeRenderer extends LitElement {
 
     this._field = fieldNode;
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (this._field) {
       if (this._field instanceof ANY) {
         this.isAnyType = true;
@@ -167,10 +164,10 @@ export class TypeRenderer extends LitElement {
       let typename = this._field.__meta.typeName;
       if (this.isAnyType) {
         // any types are fully available when it has data with the type information
-        typename = (this._field as ANY).typeName.replace(/.*\//, '');
+        typename = (this._field as ANY).typeName.replace(/.*\//, "");
         if (!(this._field as ANY).value) {
-          this._field.__addEventListener('field-value-updated', () => {
-            typename = (this._field as ANY).typeName.replace(/.*\//, '');
+          this._field.__addEventListener("field-value-updated", () => {
+            typename = (this._field as ANY).typeName.replace(/.*\//, "");
             this._setRenderNameFromTypeName(typename);
             this._createDisplay();
           });
@@ -178,7 +175,7 @@ export class TypeRenderer extends LitElement {
       }
       this._setRenderNameFromTypeName(typename);
 
-      if (this._field.__meta.typeName !== 'primitives.ARRAY<>') {
+      if (this._field.__meta.typeName !== "primitives.ARRAY<>") {
         this._createDisplay();
       } else {
         this._createRepeatedDisplay();
@@ -189,13 +186,10 @@ export class TypeRenderer extends LitElement {
   private _setRenderNameFromTypeName(typename: string) {
     // Todo: add handling for MAP types
     this.renderName = `${this.context}-${typename
-      .replaceAll('primitives.', '')
-      .replaceAll('.', '-')
-      .replaceAll('_', '-')
-      .replaceAll(
-        /([a-z0-9])([A-Z])/g,
-        (_, p1, p2) => `${p1}-${p2.toLowerCase()}`,
-      )
+      .replaceAll("primitives.", "")
+      .replaceAll(".", "-")
+      .replaceAll("_", "-")
+      .replaceAll(/([a-z0-9])([A-Z])/g, (_, p1: string, p2: string) => `${p1}-${p2.toLowerCase()}`)
       .toLocaleLowerCase()}`;
   }
 
@@ -208,7 +202,9 @@ export class TypeRenderer extends LitElement {
     Promise.race([
       window.customElements.whenDefined(this.renderName),
       new Promise((_, reject) => {
-        setTimeout(() => { reject(new Error('Timeout')); }, 1500);
+        setTimeout(() => {
+          reject(new Error("Timeout"));
+        }, 1500);
       }),
     ])
       .then(() => {
@@ -232,46 +228,39 @@ export class TypeRenderer extends LitElement {
    * @private
    */
   _createRepeatedDisplay() {
-    const fieldDescriptor = this._field!.__parentNode!.__meta.nodeFields.find(
-      (f) => f.fieldName === this._field!.__meta.fieldName,
-    );
-    const Constructor: new () => unknown = fieldDescriptor?.FieldConstructor;
+    const fieldDescriptor = this._field!.__parentNode!.__meta.nodeFields.find(f => f.fieldName === this._field!.__meta.fieldName);
+    const Constructor: new () => unknown = fieldDescriptor?.FieldConstructor as new () => unknown;
     const fn = new Constructor() as FieldNode;
     this._setRenderNameFromTypeName(fn.__meta.typeName);
 
-    const repeatRenderer = document.createElement(
-      `${this.renderName}-repeated`,
-    );
+    const repeatRenderer = document.createElement(`${this.renderName}-repeated`);
     if (isBindable(repeatRenderer)) {
       this._addElement(repeatRenderer);
     } else {
       Promise.race([
         window.customElements.whenDefined(this.renderName),
         new Promise((_, reject) => {
-          setTimeout(() => { reject(new Error('Timeout')); }, 1500);
+          setTimeout(() => {
+            reject(new Error("Timeout"));
+          }, 1500);
         }),
       ])
         .then(() => {
           const renderComponent = document.createElement(this.renderName);
           if (isBindable(renderComponent)) {
             // fallback , display the display-[type] component repeatedly
-            const container = document.createElement('div');
+            const container = document.createElement("div");
             // add classes for styling
-            container.classList.add('repeated', 'ftr');
+            container.classList.add("repeated", "ftr");
 
-            (this._field as ARRAY<FieldNode, unknown>).forEach(
-              (field: FieldNode) => {
-                const el = document.createElement(this.renderName) as Bindable;
-                if (this.isAnyType) {
-                  el.bindData((field as ANY).value!);
-                }
-                el.bindData(field);
-                this.insertedElementRef = this.parentNode!.insertBefore(
-                  el,
-                  this,
-                );
-              },
-            );
+            (this._field as ARRAY<FieldNode, unknown>).forEach((field: FieldNode) => {
+              const el = document.createElement(this.renderName) as Bindable;
+              if (this.isAnyType) {
+                el.bindData((field as ANY).value!);
+              }
+              el.bindData(field);
+              this.insertedElementRef = this.parentNode!.insertBefore(el, this);
+            });
           } else {
             this._warningUnbindableRenderer(renderComponent);
           }
@@ -294,14 +283,8 @@ export class TypeRenderer extends LitElement {
     for (let i = 0; i < l; i += 1) {
       const nodeName = this.attributes.item(i)!.nodeName;
       const nodeValue = this.attributes.item(i)?.nodeValue;
-      if (
-        !(
-          nodeName.startsWith('fn-') ||
-          nodeName.startsWith('at-') ||
-          nodeName === 'context'
-        )
-      ) {
-        el.setAttribute(nodeName, nodeValue ?? '');
+      if (!(nodeName.startsWith("fn-") || nodeName.startsWith("at-") || nodeName === "context")) {
+        el.setAttribute(nodeName, nodeValue ?? "");
       }
     }
     this.insertedElementRef = this.parentNode!.insertBefore(el, this);
@@ -333,7 +316,7 @@ export class TypeRenderer extends LitElement {
     if (this.insertedElementRef) {
       this.insertedElementRef.remove();
     }
-     
+
     super.disconnectedCallback();
   }
 
@@ -345,22 +328,15 @@ export class TypeRenderer extends LitElement {
     if (this.insertedElementRef) {
       this.parentNode!.insertBefore(this.insertedElementRef, this);
     }
-     
+
     super.connectedCallback();
   }
 
   private _warningUnbindableRenderer(renderComponent: HTMLElement) {
-    console.error(
-      renderComponent,
-      `is not bindable. Fieldname:${this._field!.__fieldPath}`,
-    );
+    console.error(renderComponent, `is not bindable. Fieldname:${this._field!.__fieldPath}`);
   }
 
   private _warningNoSpecificRendererAvailable() {
-    console.warn(
-      `No type specific renderer ${this.renderName} loaded \n. Check your imports.\n`,
-      this._field?.__meta.typeName,
-      this._field!.__fieldPath,
-    );
+    console.warn(`No type specific renderer ${this.renderName} loaded \n. Check your imports.\n`, this._field?.__meta.typeName, this._field!.__fieldPath);
   }
 }

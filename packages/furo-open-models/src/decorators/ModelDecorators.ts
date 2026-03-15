@@ -1,7 +1,6 @@
- 
 import { LitElement, ReactiveElement } from "lit";
 
-import type { ModelEventType } from '@/FieldNode';
+import type { ModelEventType } from "@/FieldNode";
 
 /**
  * Event map for FieldNode model events.
@@ -52,7 +51,7 @@ interface EventBindingMeta {
   model: FieldNodeLike;
   path: string | null;
   eventType: ModelEventType;
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type, @typescript-eslint/ban-types
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
   method: Function;
 }
 
@@ -136,12 +135,14 @@ export function ModelBindings<TEventMap extends ModelEventMap = ModelEventMap>(m
      *
      * @param eventType - The event type to listen for
      */
-    onEvent<K extends keyof TEventMap & ModelEventType>(eventType: K) {
+    onEvent(eventType: keyof TEventMap & ModelEventType) {
       return function onEventDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- descriptor.value is untyped by design
+        const originalMethod: EventBindingMeta["method"] = descriptor.value;
         const ctor = target.constructor as typeof ReactiveElement;
 
-        let methods = (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS];
+        let methods: EventBindingMeta[] = (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS];
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
         if (!methods) {
           methods = [];
           (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS] = methods;
@@ -159,12 +160,14 @@ export function ModelBindings<TEventMap extends ModelEventMap = ModelEventMap>(m
      * @param path - Path to the field (e.g., "cube.length")
      * @param eventType - The event type to listen for
      */
-    onFieldEvent<K extends keyof TEventMap & ModelEventType>(path: string, eventType: K) {
+    onFieldEvent(path: string, eventType: keyof TEventMap & ModelEventType) {
       return function onFieldEventDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
-        const originalMethod = descriptor.value;
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- descriptor.value is untyped by design
+        const originalMethod: EventBindingMeta["method"] = descriptor.value;
         const ctor = target.constructor as typeof ReactiveElement;
 
-        let methods = (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS];
+        let methods: EventBindingMeta[] = (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS];
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
         if (!methods) {
           methods = [];
           (ctor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS] = methods;
@@ -226,15 +229,18 @@ function patchBindLifecycle(ctor: typeof ReactiveElement): void {
   }
   (ctor as unknown as Record<symbol, boolean>)[MODEL_BIND_PATCHED] = true;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalConnected = ctor.prototype.connectedCallback;
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalDisconnected = ctor.prototype.disconnectedCallback;
 
   ctor.prototype.connectedCallback = function connectedCallback(
     this: LitElement & Record<symbol, Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>>
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
-    const metadata = bindingsMetadata.get(Object.getPrototypeOf(this));
+    const metadata = bindingsMetadata.get(Object.getPrototypeOf(this) as object);
     if (!metadata) return;
 
     const listeners = new Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>();
@@ -259,6 +265,7 @@ function patchBindLifecycle(ctor: typeof ReactiveElement): void {
     this: LitElement & Record<symbol, Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>>
   ) {
     const listeners = this[MODEL_BIND_LISTENERS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (listeners) {
       listeners.forEach(({ listener, field, eventType }) => {
         field.__removeEventListener(eventType, listener);
@@ -266,6 +273,7 @@ function patchBindLifecycle(ctor: typeof ReactiveElement): void {
       listeners.clear();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalDisconnected?.call(this);
   };
 }
@@ -279,15 +287,19 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
   }
   (ctor as unknown as Record<symbol, boolean>)[MODEL_EVENT_PATCHED] = true;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalConnected = ctor.prototype.connectedCallback;
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalDisconnected = ctor.prototype.disconnectedCallback;
 
   ctor.prototype.connectedCallback = function connectedCallback(
     this: LitElement & Record<symbol, Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>>
   ) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
     const methods = (this.constructor as unknown as Record<symbol, EventBindingMeta[]>)[MODEL_EVENT_METHODS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (!methods) return;
 
     const listeners = new Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>();
@@ -310,6 +322,7 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
     this: LitElement & Record<symbol, Map<string, { listener: (e: CustomEvent) => void; field: FieldNodeLike; eventType: string }>>
   ) {
     const listeners = this[MODEL_EVENT_LISTENERS];
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (listeners) {
       listeners.forEach(({ listener, field, eventType }) => {
         field.__removeEventListener(eventType, listener);
@@ -317,6 +330,7 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
       listeners.clear();
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalDisconnected?.call(this);
   };
 }

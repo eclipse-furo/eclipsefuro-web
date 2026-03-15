@@ -27,6 +27,7 @@ interface FieldNodeSchema {
   [key: string]: unknown;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class -- converting to functions changes public API
 export class SchemaBuilder {
   public static generate(model: FieldNode): JSONSchema7 {
     const schema: JSONSchema7 = {
@@ -48,8 +49,9 @@ export class SchemaBuilder {
   }
 
   private static getProps(model: FieldNode): Record<string, JSONSchema7Definition> {
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
     return Object.fromEntries(
-      model.__meta.nodeFields.map((fieldDescriptor) => {
+      model.__meta.nodeFields.map(fieldDescriptor => {
         const field = model.__getFieldNodeByPath(fieldDescriptor.fieldName)!;
 
         if (field.__isPrimitive && field.__meta.typeName !== "primitives.ENUM") {
@@ -93,7 +95,7 @@ export class SchemaBuilder {
 
   private static getRequiredFields(descriptors: FieldDescriptor[]): string[] {
     const req: string[] = [];
-    descriptors.forEach((descriptor) => {
+    descriptors.forEach(descriptor => {
       if (descriptor.constraints?.required) {
         req.push(descriptor.fieldName);
       }

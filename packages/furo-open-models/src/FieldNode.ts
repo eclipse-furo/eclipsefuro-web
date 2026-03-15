@@ -1,30 +1,29 @@
-
 /**
  * notes: i18n is not part of the api anymore
  */
-import { ToString, ValueOf } from './CustomPrototypes';
-import type { FieldConstraints } from './FieldConstraints';
-import { OPEN_MODELS_OPTIONS } from './OPEN_MODELS_OPTIONS';
-import { CustomConstraints, Validators } from './Validator';
-import { ValueState } from './ValueState';
+import { ToString, ValueOf } from "./CustomPrototypes";
+import type { FieldConstraints } from "./FieldConstraints";
+import { OPEN_MODELS_OPTIONS } from "./OPEN_MODELS_OPTIONS";
+import { CustomConstraints, Validators } from "./Validator";
+import { ValueState } from "./ValueState";
 
 export type ModelEventType =
-  | 'update' // triggered on any change,update,array changes, map changes, reset, model injections, from literal. Listen to this if you do not need specialized update notifications.
-  | 'field-value-changed' // triggered on change or value assignment
-  | 'this-field-value-changed' // triggered on every direct change on the field, not from children
-  | 'field-value-updated' // triggered on clear or fromLiteral => model-injected
-  | 'this-state-changed' // triggered when value states are changed
-  | 'state-changed' // triggered when value states are changed
-  | 'validity-changed'
-  | 'array-changed'
-  | 'this-array-changed'
-  | 'map-changed'
-  | 'this-map-changed'
-  | 'parent-readonly-set' // fired when a parent was set to *ro*, listen to this event to make your UI element readonly.
-  | 'parent-readonly-unset' // fired when a parent was set to *rw*, listen to this event to make your UI element writable, but you have to check for your own *ro state* and any *ro* parent.
+  | "update" // triggered on any change,update,array changes, map changes, reset, model injections, from literal. Listen to this if you do not need specialized update notifications.
+  | "field-value-changed" // triggered on change or value assignment
+  | "this-field-value-changed" // triggered on every direct change on the field, not from children
+  | "field-value-updated" // triggered on clear or fromLiteral => model-injected
+  | "this-state-changed" // triggered when value states are changed
+  | "state-changed" // triggered when value states are changed
+  | "validity-changed"
+  | "array-changed"
+  | "this-array-changed"
+  | "map-changed"
+  | "this-map-changed"
+  | "parent-readonly-set" // fired when a parent was set to *ro*, listen to this event to make your UI element readonly.
+  | "parent-readonly-unset" // fired when a parent was set to *rw*, listen to this event to make your UI element writable, but you have to check for your own *ro state* and any *ro* parent.
   // | 'child-readonly-set'  implement this when @maltenorstroem asks for it
   // | 'child-readonly-unset'  implement this when @maltenorstroem asks for it
-  | 'model-injected'; // fired on the injection node before field-value-updated and this-field-value-changed
+  | "model-injected"; // fired on the injection node before field-value-updated and this-field-value-changed
 
 interface Meta {
   businessVaueState: ValueState;
@@ -115,8 +114,8 @@ export abstract class FieldNode {
     isPristine: true,
     isValid: true,
     valueState: ValueState.None,
-    stateMessage: '',
-    typeName: '',
+    stateMessage: "",
+    typeName: "",
     nodeFields: [],
     isArrayNode: false,
     isRecursionNode: false,
@@ -127,10 +126,7 @@ export abstract class FieldNode {
   private ___rootNode: FieldNode;
 
   // @ts-expect-error Todo: implement the readonly behaviour correctly. They are 2 failing tests
-  private ___readonlyState: Map<FieldNode, boolean> = new Map<
-    FieldNode,
-    boolean
-  >();
+  private ___readonlyState: Map<FieldNode, boolean> = new Map<FieldNode, boolean>();
 
   /**
    * Root node of a node
@@ -166,11 +162,7 @@ export abstract class FieldNode {
     }
   }
 
-  constructor(
-    _initData: undefined,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(_initData: undefined, parent?: FieldNode, parentAttributeName?: string) {
     this.__parentNode = parent;
 
     if (parent) {
@@ -192,17 +184,17 @@ export abstract class FieldNode {
    *
    * @param {string} deepPath - Path of the field.
    */
-  __getFieldNodeByPath(deepPath = ''): FieldNode | undefined {
+  __getFieldNodeByPath(deepPath = ""): FieldNode | undefined {
     // replace array paths
-    const path = deepPath.replaceAll(/[[\]]/g, '.').split('.');
-    if (path.length > 0 && path[0] !== '') {
+    const path = deepPath.replaceAll(/[[\]]/g, ".").split(".");
+    if (path.length > 0 && path[0] !== "") {
       // rest wieder in error reinwerfen
 
-      deepPath = path.slice(1).join('.');
+      deepPath = path.slice(1).join(".");
       // convert to camel
       const fieldName = this.__toLowerCamelCase(path[0]) as keyof FieldNode;
 
-      if (deepPath === '') {
+      if (deepPath === "") {
         if (this[fieldName]) {
           return this[fieldName] as FieldNode;
         }
@@ -239,10 +231,10 @@ export abstract class FieldNode {
     this.__meta.readonly = v;
     // dispatch to children
     this.__broadcastEvent(
-      new CustomEvent(v ? 'parent-readonly-set' : 'parent-readonly-unset', {
+      new CustomEvent(v ? "parent-readonly-set" : "parent-readonly-unset", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
   }
 
@@ -260,11 +252,11 @@ export abstract class FieldNode {
     this.__setModelValidStateTrue();
 
     this.__dispatchEvent(
-      new CustomEvent('model-injected', {
+      new CustomEvent("model-injected", {
         composed: true,
         bubbles: false,
         detail: this,
-      }),
+      })
     );
 
     this.__meta.isPristine = true;
@@ -273,8 +265,8 @@ export abstract class FieldNode {
 
   private __setModelValidStateTrue() {
     this.__meta.isValid = true;
-    this.__setValueState(ValueState.None, ['']);
-    this.__childNodes.forEach((child) => {
+    this.__setValueState(ValueState.None, [""]);
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         child.__setModelValidStateTrue();
       }
@@ -295,31 +287,21 @@ export abstract class FieldNode {
     const data = structuredClone(literal);
 
     // go through available fields
-    this.__meta.nodeFields.forEach((field) => {
+    this.__meta.nodeFields.forEach(field => {
       // __clear fields which are not available in literal
       // if the field does not exist on the incoming literal, reset or __clear the value on the fieldNode
       // make an undefined on complex types
-      if (
-        (data as FieldNode)[field.fieldName as keyof FieldNode] === undefined
-      ) {
+      if ((data as FieldNode)[field.fieldName as keyof FieldNode] === undefined) {
         if (this[`_${field.fieldName}` as keyof FieldNode] !== undefined) {
           // primitives go to their default values
-          (
-            this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
-          ).__clear();
+          (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__clear();
         }
         return;
       }
 
-      (
-        this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
-      ).__updateWithLiteral(
-        (data as FieldNode)[field.fieldName as keyof FieldNode],
-      );
+      (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__updateWithLiteral((data as FieldNode)[field.fieldName as keyof FieldNode]);
 
-      (
-        this[`_${field.fieldName}` as keyof FieldNode] as FieldNode
-      ).__meta.isPristine = false;
+      (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__meta.isPristine = false;
     });
     // set the object itself to pristine on root nodes
 
@@ -339,37 +321,23 @@ export abstract class FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __toJson(): any {
     const d: Record<string, unknown> = {};
-    this.__meta.nodeFields.forEach((f) => {
+    this.__meta.nodeFields.forEach(f => {
       // use jsonName if UseProtoNames is set, otherwise convert to lowerCamel without X prefix
-      const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames
-        ? f.protoName
-        : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
+      const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames ? f.protoName : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
 
       if (OPEN_MODELS_OPTIONS.EmitUnpopulated) {
-        if (
-          (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty &&
-          !(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode)
-            .__isPrimitive
-        ) {
+        if ((this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty && !(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isPrimitive) {
           d[jsonName] = null;
         } else {
-          d[jsonName] = (
-            this[`_${f.fieldName}` as keyof FieldNode] as FieldNode
-          ).__toJson();
+          d[jsonName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__toJson();
         }
       } else if (
         ((this as FieldNode)[`_${f.fieldName}` as keyof FieldNode] &&
-          (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode)
-            .__isEmpty ||
-            (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta
-              .required)) ||
-        ((this[`_${f.fieldName}` as keyof FieldNode] as FieldNode)
-          .__isPrimitive &&
-          OPEN_MODELS_OPTIONS.EmitDefaultValues)
+          (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty ||
+            (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta.required)) ||
+        ((this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isPrimitive && OPEN_MODELS_OPTIONS.EmitDefaultValues)
       ) {
-        d[jsonName] = (
-          this[`_${f.fieldName}` as keyof FieldNode] as FieldNode
-        ).__toJson();
+        d[jsonName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__toJson();
       }
 
       return null;
@@ -384,7 +352,7 @@ export abstract class FieldNode {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public __fromProtoNameJson(data: any) {
-    const l = this.__mapProtoNameJsonToJson(data);
+    const l: unknown = this.__mapProtoNameJsonToJson(data);
     this.__fromLiteral(l);
   }
 
@@ -396,15 +364,11 @@ export abstract class FieldNode {
   __mapProtoNameJsonToJson(data: any): any {
     const literal: Record<string, unknown> = {};
     // map json to literal
-    this.__meta.nodeFields.forEach((f) => {
-      const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames
-        ? f.protoName
-        : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
+    this.__meta.nodeFields.forEach(f => {
+      const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames ? f.protoName : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
 
-      if (data[jsonName] !== undefined) {
-        literal[f.fieldName] = (
-          this[`_${f.fieldName}` as keyof FieldNode] as FieldNode
-        ).__mapProtoNameJsonToJson(data[jsonName]);
+      if ((data as Record<string, unknown>)[jsonName] !== undefined) {
+        literal[f.fieldName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__mapProtoNameJsonToJson((data as Record<string, unknown>)[jsonName]);
       }
     });
     return literal;
@@ -416,16 +380,12 @@ export abstract class FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public __toLiteral(): any {
     const d: Record<string, unknown> = {};
-    this.__meta.nodeFields.forEach((f) => {
+    this.__meta.nodeFields.forEach(f => {
       if (
         this[`_${f.fieldName}` as keyof FieldNode] &&
-        (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty ||
-          (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta
-            .required)
+        (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty || (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta.required)
       ) {
-        d[f.fieldName] = (
-          this[`_${f.fieldName}` as keyof FieldNode] as FieldNode
-        ).__toLiteral();
+        d[f.fieldName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__toLiteral();
       }
       return null;
     });
@@ -435,17 +395,13 @@ export abstract class FieldNode {
   get __fieldPath(): string {
     const parts: string[] = [];
     this.___pathBuilder(parts);
-    return parts.join('.').replaceAll('.[', '['); // replace for array paths
+    return parts.join(".").replaceAll(".[", "["); // replace for array paths
   }
 
   ___pathBuilder(parts: string[]): string[] {
     // the root node does not have a fieldName
     if (this.__meta.fieldName !== undefined) {
-      parts.unshift(
-        OPEN_MODELS_OPTIONS.UseProtoNames
-          ? this.__toSnakeCase(this.__meta.fieldName)
-          : this.__meta.fieldName,
-      );
+      parts.unshift(OPEN_MODELS_OPTIONS.UseProtoNames ? this.__toSnakeCase(this.__meta.fieldName) : this.__meta.fieldName);
       this.__parentNode?.___pathBuilder(parts);
     }
     return parts;
@@ -471,18 +427,14 @@ export abstract class FieldNode {
    * Returns the placeholder label using the `OPEN_MODELS_OPTIONS.labelFormatter`
    */
   get __placeholder(): string {
-    return OPEN_MODELS_OPTIONS.labelFormatter(
-      `${this.__getBaseName()}.placeholder`,
-    );
+    return OPEN_MODELS_OPTIONS.labelFormatter(`${this.__getBaseName()}.placeholder`);
   }
 
   /**
    * Returns the formated aria description using the `OPEN_MODELS_OPTIONS.labelFormatter`
    */
   get __ariaDescription(): string {
-    return OPEN_MODELS_OPTIONS.labelFormatter(
-      `${this.__getBaseName()}.description`,
-    );
+    return OPEN_MODELS_OPTIONS.labelFormatter(`${this.__getBaseName()}.description`);
   }
 
   /**
@@ -515,7 +467,7 @@ export abstract class FieldNode {
         message: this.__meta.stateMessage,
       });
     }
-    this.__childNodes.forEach((child) => {
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         child.___getAllStates(carrier);
       }
@@ -528,18 +480,18 @@ export abstract class FieldNode {
    */
   public __clearAllValueStates() {
     this.__meta.valueState = ValueState.None;
-    this.__meta.stateMessage = '';
-    this.__childNodes.forEach((child) => {
+    this.__meta.stateMessage = "";
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         child.__clearAllValueStates();
       }
     });
 
     this.__dispatchEvent(
-      new CustomEvent('state-changed', {
+      new CustomEvent("state-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
   }
 
@@ -559,7 +511,7 @@ export abstract class FieldNode {
    *
    */
   public __applyValueStates(...states: ValueStateSummary[]) {
-    states.forEach((state) => {
+    states.forEach(state => {
       const fn = this.__getFieldNodeByPath(state.field);
       if (fn !== undefined) {
         const validStateBefore = fn.__meta.isValid;
@@ -569,18 +521,18 @@ export abstract class FieldNode {
         fn.__meta.businessVaueState = state.state;
         if (fn.__meta.isValid !== validStateBefore) {
           fn.__dispatchEvent(
-            new CustomEvent('validity-changed', {
+            new CustomEvent("validity-changed", {
               detail: fn,
               bubbles: true,
-            }),
+            })
           );
         }
 
         fn.__dispatchEvent(
-          new CustomEvent('state-changed', {
+          new CustomEvent("state-changed", {
             detail: fn,
             bubbles: false,
-          }),
+          })
         );
       }
     });
@@ -625,19 +577,14 @@ export abstract class FieldNode {
    * If there is no display_name `[object TypeName]` is returned.
    */
   public toString(): string {
-    const ts = ToString.get(this.__meta.typeName ?? '');
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
+    const ts = ToString.get(this.__meta.typeName ?? "");
     if (ts) {
       return ts(this);
     }
-    const found = this.__meta.nodeFields.find(
-      (fieldDescriptor) => fieldDescriptor.fieldName === 'displayName',
-    );
-    if (
-      found &&
-      (this['displayName' as keyof FieldNode] as FieldNode).__meta.typeName ===
-        'primitives.STRING'
-    ) {
-      return (this['displayName' as keyof FieldNode] as FieldNode).toString();
+    const found = this.__meta.nodeFields.find(fieldDescriptor => fieldDescriptor.fieldName === "displayName");
+    if (found && (this["displayName" as keyof FieldNode] as FieldNode).__meta.typeName === "primitives.STRING") {
+      return (this["displayName" as keyof FieldNode] as FieldNode).toString();
     }
     return `[object ${this.__meta.typeName}]`;
   }
@@ -647,7 +594,8 @@ export abstract class FieldNode {
    * This method is meant to be overridden by derived objects for custom type conversion logic.
    */
   public valueOf(): number | bigint {
-    const ts = ValueOf.get(this.__meta.typeName ?? '');
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
+    const ts = ValueOf.get(this.__meta.typeName ?? "");
     if (ts) {
       return ts(this);
     }
@@ -661,7 +609,7 @@ export abstract class FieldNode {
   protected __getBaseName(): string {
     const parts: string[] = [];
     this.___fieldNameBuilder(parts);
-    return parts.join('.');
+    return parts.join(".");
   }
 
   /**
@@ -678,12 +626,12 @@ export abstract class FieldNode {
       if (!this.__meta.isArrayNode) {
         // the root node does not have a fieldName, so we use the typeName
         parts.unshift(
-
           this.__meta.fieldName
             ? OPEN_MODELS_OPTIONS.UseProtoNames
               ? this.__toSnakeCase(this.__meta.fieldName)
               : this.__meta.fieldName
-            : this.__meta.typeName ?? '',
+            : // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
+              (this.__meta.typeName ?? "")
         );
       }
       this.__parentNode?.___fieldNameBuilder(parts);
@@ -703,7 +651,7 @@ export abstract class FieldNode {
     // do not go deeper if node is invalid, because business validators can set sub fields
 
     // dispatch to children
-    this.__childNodes.forEach((child) => {
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         if (child.__meta.businessVaueState === ValueState.None) {
           // this only check constraints, but business errors are higher order
@@ -716,13 +664,14 @@ export abstract class FieldNode {
       }
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     this.__meta.isValid = allChildrenValid && this.__isValid;
     if (this.__meta.isValid !== validStateBefore) {
       this.__dispatchEvent(
-        new CustomEvent('validity-changed', {
+        new CustomEvent("validity-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
   }
@@ -747,7 +696,7 @@ export abstract class FieldNode {
     this.__validationExecuter(this);
 
     let allChildrenValid = true;
-    this.__childNodes.forEach((child) => {
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         if (!child.__isValid) {
           allChildrenValid = false;
@@ -755,13 +704,14 @@ export abstract class FieldNode {
       }
     });
     // if any child is not valid, this is also not valid
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     this.__meta.isValid = allChildrenValid && this.__isValid;
     if (this.__meta.isValid !== validStateBefore) {
       this.__dispatchEvent(
-        new CustomEvent('validity-changed', {
+        new CustomEvent("validity-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
 
@@ -793,12 +743,7 @@ export abstract class FieldNode {
 
     constraintMessage = this.__checkTypeBoundaries();
 
-    if (
-      validatorFunc ||
-      fieldConstraints ||
-      customConstraintsFunc ||
-      constraintMessage
-    ) {
+    if (validatorFunc || fieldConstraints || customConstraintsFunc || constraintMessage) {
       if (fieldConstraints && !customConstraintsFunc) {
         constraintMessage = node.__checkConstraints(fieldConstraints);
       }
@@ -808,13 +753,13 @@ export abstract class FieldNode {
       if (validatorFunc) {
         validatorFunc(node);
       } else if (constraintMessage === undefined) {
-        node.__setValueState(ValueState.None, ['']);
+        node.__setValueState(ValueState.None, [""]);
       }
       if (constraintMessage !== undefined) {
         node.__setValueState(ValueState.Negative, constraintMessage);
       }
     } else {
-      node.__setValueState(ValueState.None, ['']);
+      node.__setValueState(ValueState.None, [""]);
     }
   }
 
@@ -823,17 +768,12 @@ export abstract class FieldNode {
    */
   public __getConstraints(): FieldConstraints | undefined {
     if (this.__meta.isArrayNode && this.__parentNode?.__parentNode) {
-      const fieldDescriptor =
-        this.__parentNode.__parentNode.__meta.nodeFields.find(
-          (f) => f.fieldName === this.__parentNode!.__meta.fieldName,
-        );
+      const fieldDescriptor = this.__parentNode.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__parentNode!.__meta.fieldName);
       return fieldDescriptor?.constraints;
     }
 
     if (this.__parentNode) {
-      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(
-        (f) => f.fieldName === this.__meta.fieldName,
-      );
+      const fieldDescriptor = this.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
       return fieldDescriptor?.constraints;
     }
     return undefined;
@@ -847,20 +787,17 @@ export abstract class FieldNode {
   __setValueState(state: ValueState, messageAndParams: string[]) {
     const shouldNotify = this.__meta.valueState !== state;
     this.__meta.valueState = state;
-    this.__meta.stateMessage = OPEN_MODELS_OPTIONS.valueStateMessageFormatter(
-      messageAndParams[0],
-      ...messageAndParams.slice(1),
-    );
+    this.__meta.stateMessage = OPEN_MODELS_OPTIONS.valueStateMessageFormatter(messageAndParams[0], ...messageAndParams.slice(1));
     // set invalid on error state
     // the event is sent from ...
     this.__meta.isValid = state !== ValueState.Negative;
 
     if (shouldNotify) {
       this.__dispatchEvent(
-        new CustomEvent('state-changed', {
+        new CustomEvent("state-changed", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
   }
@@ -889,10 +826,8 @@ export abstract class FieldNode {
     this.__isEmpty = true;
 
     // __clear every childNode too
-    this.__meta.nodeFields.forEach((descriptor) => {
-      (
-        this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode
-      ).__clear(withoutNotification);
+    this.__meta.nodeFields.forEach(descriptor => {
+      (this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode).__clear(withoutNotification);
     });
     if (!withoutNotification) {
       this.__notifyFieldValueChange(false);
@@ -931,10 +866,7 @@ export abstract class FieldNode {
    * @protected
    */
 
-  protected __TypeSetter(
-    targetNode: FieldNode,
-    literalData: unknown | undefined | null,
-  ) {
+  protected __TypeSetter(targetNode: FieldNode, literalData: unknown) {
     if (literalData === undefined || literalData === null) {
       targetNode.__clear();
       this.__validateBottomUp(targetNode);
@@ -956,10 +888,10 @@ export abstract class FieldNode {
    */
   protected __notifyFieldValueChange(bubbles?: boolean) {
     this.__dispatchEvent(
-      new CustomEvent('this-field-value-changed', {
+      new CustomEvent("this-field-value-changed", {
         detail: this,
         bubbles: false,
-      }),
+      })
     );
 
     if (bubbles) {
@@ -970,31 +902,31 @@ export abstract class FieldNode {
 
       //    console.log('bubble', this.__meta.typeName)
       this.__dispatchEvent(
-        new CustomEvent('field-value-changed', {
+        new CustomEvent("field-value-changed", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: true,
-        }),
+        })
       );
     } else {
       // triggered on clear or fromLiteral
       this.__dispatchEvent(
-        new CustomEvent('field-value-updated', {
+        new CustomEvent("field-value-updated", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
 
       this.__dispatchEvent(
-        new CustomEvent('update', {
+        new CustomEvent("update", {
           detail: this,
           bubbles: false,
-        }),
+        })
       );
     }
   }
@@ -1004,9 +936,7 @@ export abstract class FieldNode {
    */
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public get __childNodes(): any[] {
-    return this.__meta.nodeFields.map(
-      (field) => this[field.fieldName as keyof FieldNode],
-    );
+    return this.__meta.nodeFields.map(field => this[field.fieldName as keyof FieldNode]);
   }
 
   /**
@@ -1015,10 +945,10 @@ export abstract class FieldNode {
    */
   __broadcastEvent(event: CustomEvent) {
     // trigger the local listeners
-    this.__triggerNodeEvents(event);
+    this.__triggerNodeEvents(event as CustomEvent<FieldNode>);
 
     // dispatch to children
-    this.__childNodes.forEach((child) => {
+    this.__childNodes.forEach(child => {
       if (child instanceof FieldNode) {
         child.__broadcastEvent(event);
       }
@@ -1031,7 +961,7 @@ export abstract class FieldNode {
    */
   __dispatchEvent(event: CustomEvent): CustomEvent {
     // trigger the events on current node
-    this.__triggerNodeEvents(event);
+    this.__triggerNodeEvents(event as CustomEvent<FieldNode>);
 
     // go to parent
     if (event.bubbles && this.__parentNode !== undefined) {
@@ -1046,23 +976,13 @@ export abstract class FieldNode {
    * @protected
    */
   protected __triggerNodeEvents(event: CustomEvent<FieldNode>) {
-    if (
-      this.__meta.eventListener.has(event.type) &&
-      this.__meta.eventListener.get(event.type)!.length > 0
-    ) {
-      this.__meta.eventListener
-        .get(event.type)!
-        .forEach((t, i, listenerArray) => {
-          t.callbackfn(event);
-          if (
-            t.options !== undefined &&
-            typeof t.options !== 'boolean' &&
-            t.options.once
-          ) {
-
-            delete listenerArray[i];
-          }
-        });
+    if (this.__meta.eventListener.has(event.type) && this.__meta.eventListener.get(event.type)!.length > 0) {
+      this.__meta.eventListener.get(event.type)!.forEach((t, i, listenerArray) => {
+        t.callbackfn(event);
+        if (t.options !== undefined && typeof t.options !== "boolean" && t.options.once) {
+          listenerArray.splice(i, 1);
+        }
+      });
     }
   }
 
@@ -1072,26 +992,16 @@ export abstract class FieldNode {
    * @param {function} listener - The object that receives a notification (an object that implements the Event interface) when an event of the specified type occurs. This must be null, an object with a handleEvent() method, or a JavaScript function. See The event listener callback for details on the callback itself.
    * @param {} options - An object that specifies characteristics about the event listener. \n\nThe available option is `once:boolean`
    */
-  public __addEventListener(
-    type: ModelEventType,
-    listener: CustomEventListener,
-    options?: boolean | AddEventListenerOptions,
-  ): void {
+  public __addEventListener(type: ModelEventType, listener: CustomEventListener, options?: boolean | AddEventListenerOptions): void {
     if (!this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(type, []);
     }
-    this.__meta.eventListener
-      .get(type)!
-      .push({ callbackfn: listener, options });
+    this.__meta.eventListener.get(type)!.push({ callbackfn: listener, options });
   }
 
   // add a listener for a custom event, defined and triggered by yourself
   // this could be something like 'focus-requested'
-  public __addCustomEventListener(
-    type: string,
-    handler: CustomEventListener,
-    options?: boolean | AddEventListenerOptions,
-  ): void {
+  public __addCustomEventListener(type: string, handler: CustomEventListener, options?: boolean | AddEventListenerOptions): void {
     if (!this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(type, []);
     }
@@ -1104,17 +1014,11 @@ export abstract class FieldNode {
    * @param handler
    * @param _options
    */
-  public __removeEventListener(
-    type: ModelEventType,
-    handler: CustomEventListener,
-    _options?: boolean | EventListenerOptions,
-  ): void {
+  public __removeEventListener(type: ModelEventType, handler: CustomEventListener, _options?: boolean | EventListenerOptions): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
         type,
-        this.__meta.eventListener
-          .get(type)!
-          .filter((e) => e.callbackfn !== handler),
+        this.__meta.eventListener.get(type)!.filter(e => e.callbackfn !== handler)
       );
     }
   }
@@ -1125,17 +1029,11 @@ export abstract class FieldNode {
    * @param handler
    * @param _options
    */
-  public __removeCustomEventListener(
-    type: string,
-    handler: CustomEventListener,
-    _options?: boolean | EventListenerOptions,
-  ): void {
+  public __removeCustomEventListener(type: string, handler: CustomEventListener, _options?: boolean | EventListenerOptions): void {
     if (this.__meta.eventListener.has(type)) {
       this.__meta.eventListener.set(
         type,
-        this.__meta.eventListener
-          .get(type)!
-          .filter((e) => e.callbackfn !== handler),
+        this.__meta.eventListener.get(type)!.filter(e => e.callbackfn !== handler)
       );
     }
   }
@@ -1146,17 +1044,15 @@ export abstract class FieldNode {
    */
   protected ___updateNotEmptyPath() {
     this.___isEmpty = false;
-    if (this.__parentNode !== undefined && this.__parentNode.__isEmpty) {
+    if (this.__parentNode?.__isEmpty) {
       this.__parentNode.___updateNotEmptyPath();
     }
   }
 
-  protected __checkConstraints(
-    fieldConstraints: FieldConstraints,
-  ): string[] | undefined {
+  protected __checkConstraints(fieldConstraints: FieldConstraints): string[] | undefined {
     if (fieldConstraints.required) {
       if (this.__isEmpty) {
-        return ['constraint.violation.required'];
+        return ["constraint.violation.required"];
       }
     }
     return undefined;
@@ -1165,17 +1061,15 @@ export abstract class FieldNode {
   // eslint-disable-next-line class-methods-use-this
   private __toLowerCamelCase(string: string) {
     if (OPEN_MODELS_OPTIONS.UseProtoNames) {
-      const [start, ...rest] = (
-        string.startsWith('_') ? string.replace('_', 'X') : string
-      ).split('_');
+      const [start, ...rest] = (string.startsWith("_") ? string.replace("_", "X") : string).split("_");
       return (
         start +
         rest
-          .map((s) => {
-            if (s.length === 0) return '';
+          .map(s => {
+            if (s.length === 0) return "";
             return s[0].toUpperCase() + s.slice(1);
           })
-          .join('')
+          .join("")
       );
     }
     return string;
@@ -1184,17 +1078,15 @@ export abstract class FieldNode {
   // eslint-disable-next-line class-methods-use-this
   protected __toLowerCamelCaseWithoutXPrefix(string: string) {
     if (OPEN_MODELS_OPTIONS.UseProtoNames) {
-      const [start, ...rest] = (
-        string.startsWith('_') ? string.replace('_', 'X') : string
-      ).split('_');
+      const [start, ...rest] = (string.startsWith("_") ? string.replace("_", "X") : string).split("_");
       return (
         start +
         rest
-          .map((s) => {
-            if (s.length === 0) return '';
+          .map(s => {
+            if (s.length === 0) return "";
             return s[0].toUpperCase() + s.slice(1);
           })
-          .join('')
+          .join("")
       );
     }
     return string;
@@ -1204,7 +1096,7 @@ export abstract class FieldNode {
   private __toSnakeCase(string: string): string {
     return string
       .split(/(?=[A-Z])/)
-      .map((word) => word.toLowerCase())
-      .join('_');
+      .map(word => word.toLowerCase())
+      .join("_");
   }
 }

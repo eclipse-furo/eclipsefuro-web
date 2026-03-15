@@ -1,5 +1,5 @@
-import { FieldNode } from '../FieldNode';
-import { Registry } from '../Registry';
+import { FieldNode } from "../FieldNode";
+import { Registry } from "../Registry";
 
 export class EMPTY extends FieldNode {
   get value(): Record<string, never> {
@@ -12,15 +12,11 @@ export class EMPTY extends FieldNode {
 
   public _value: Record<string, never> = {};
 
-  constructor(
-    _initData?: Record<string, never>,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(_initData?: Record<string, never>, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
     this.__isEmpty = true;
-    this.__meta.typeName = 'google.protobuf.Empty';
+    this.__meta.typeName = "google.protobuf.Empty";
   }
 
   override __updateWithLiteral(_: Record<string, never>) {
@@ -37,6 +33,7 @@ export class EMPTY extends FieldNode {
   }
 
   override valueOf(): number {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     return this._value ? 1 : 0;
   }
 
@@ -45,10 +42,11 @@ export class EMPTY extends FieldNode {
   }
 
   override toString(): string {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (this._value !== null) {
-      return this._value.toString();
+      return JSON.stringify(this._value);
     }
-    return '';
+    return "";
   }
 
   public override __clear() {
@@ -58,4 +56,4 @@ export class EMPTY extends FieldNode {
   }
 }
 
-Registry.register('google.protobuf.Empty', EMPTY);
+Registry.register("google.protobuf.Empty", EMPTY);

@@ -1,7 +1,6 @@
- 
 import { LitElement, ReactiveElement } from "lit";
 
-import type { ModelEventType } from '@/FieldNode';
+import type { ModelEventType } from "@/FieldNode";
 
 // ─────────────────────────────────────────────────────────────────
 // Types
@@ -130,7 +129,7 @@ export const fieldBindings = {
    * - Providing `writeToModel()` method
    */
   model() {
-    return function modelDecorator<T extends FieldNodeLike>(target: object, propertyKey: string) {
+    return function modelDecorator(target: object, propertyKey: string) {
       const ctor = target.constructor as typeof ReactiveElement;
 
       // Patch lifecycle
@@ -145,7 +144,6 @@ export const fieldBindings = {
               try {
                 writeFn();
               } catch (e) {
-                 
                 console.error("Failed to write to model:", e);
               }
             }
@@ -158,11 +156,11 @@ export const fieldBindings = {
 
       // Create getter/setter for the model property
       Object.defineProperty(target, propertyKey, {
-        get(this: LitElement & Record<symbol, T | undefined>): T | undefined {
+        get(this: LitElement & Record<symbol, FieldNodeLike | undefined>): FieldNodeLike | undefined {
           return this[CURRENT_MODEL];
         },
-        set(this: LitElement & BindableComponent & Record<symbol, T | (() => void) | undefined>, value: T | undefined) {
-          const oldModel = this[CURRENT_MODEL] as T | undefined;
+        set(this: LitElement & BindableComponent & Record<symbol, FieldNodeLike | (() => void) | undefined>, value: FieldNodeLike | undefined) {
+          const oldModel = this[CURRENT_MODEL] as FieldNodeLike | undefined;
           if (value === oldModel) return;
 
           // Unbind from old model
@@ -178,21 +176,23 @@ export const fieldBindings = {
             const typeName = value.__meta?.typeName ?? "primitives.STRING";
 
             // Resolve reader
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
             const reader = this.modelReaders?.get(typeName);
             if (reader) {
               this[MODEL_READ_FN] = reader.bind(this);
             } else {
-               
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
               console.warn(`No modelReader for type "${typeName}". Available: ${[...(this.modelReaders?.keys() ?? [])].join(", ")}`);
               this[MODEL_READ_FN] = undefined;
             }
 
             // Resolve writer
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
             const writer = this.modelWriters?.get(typeName);
             if (writer) {
               this[MODEL_WRITE_FN] = writer.bind(this);
             } else {
-               
+              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
               console.warn(`No modelWriter for type "${typeName}". Available: ${[...(this.modelWriters?.keys() ?? [])].join(", ")}`);
               this[MODEL_WRITE_FN] = undefined;
             }
@@ -223,14 +223,17 @@ export const fieldBindings = {
    */
   onEvent(eventType: ModelEventType) {
     return function onEventDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const originalMethod = descriptor.value;
       const ctor = target.constructor as typeof ReactiveElement;
 
       let events = (ctor as unknown as Record<symbol, FieldEventMeta[]>)[FIELD_EVENTS];
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (!events) {
         events = [];
         (ctor as unknown as Record<symbol, FieldEventMeta[]>)[FIELD_EVENTS] = events;
       }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       events.push({ propertyKey, eventType, method: originalMethod });
 
       patchLifecycle(ctor);
@@ -259,6 +262,7 @@ export const fieldBindings = {
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
       let inits = (ctor as unknown as Record<symbol, { propertyKey: string; method: Function }[]>)[FIELD_INIT_METHODS];
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (!inits) {
         inits = [];
         // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
@@ -288,6 +292,7 @@ type ComponentWithListeners = LitElement & BindableComponent & Record<symbol, Ma
  */
 function bindToModel(component: ComponentWithListeners, model: FieldNodeLike): void {
   const ctor = component.constructor as typeof ReactiveElement;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
   const events = (ctor as unknown as Record<symbol, FieldEventMeta[]>)[FIELD_EVENTS] ?? [];
 
   const listeners = new Map<string, ListenerEntry>();
@@ -310,7 +315,7 @@ function bindToModel(component: ComponentWithListeners, model: FieldNodeLike): v
   }
 
   // Call @fieldBindings.onInit() methods
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition, @typescript-eslint/no-unsafe-function-type -- runtime data may not match types (REST API input)
   const inits = (ctor as unknown as Record<symbol, { propertyKey: string; method: Function }[]>)[FIELD_INIT_METHODS] ?? [];
   inits.forEach(({ method }) => {
     method.call(component);
@@ -353,10 +358,13 @@ function patchLifecycle(ctor: typeof ReactiveElement): void {
   }
   (ctor as unknown as Record<symbol, boolean>)[FIELD_PATCHED] = true;
 
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalConnected = ctor.prototype.connectedCallback;
+  // eslint-disable-next-line @typescript-eslint/unbound-method -- method is called with .call()
   const originalDisconnected = ctor.prototype.disconnectedCallback;
 
   ctor.prototype.connectedCallback = function connectedCallback(this: ComponentWithListeners) {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
     // Bind to model if already set
@@ -373,6 +381,7 @@ function patchLifecycle(ctor: typeof ReactiveElement): void {
       unbindFromModel(this, model);
     }
 
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalDisconnected?.call(this);
   };
 }

@@ -1,15 +1,9 @@
-import type { FieldConstraints } from '../FieldConstraints';
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
-import { Registry } from '../Registry';
+import type { FieldConstraints } from "../FieldConstraints";
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
+import { Registry } from "../Registry";
 
-export type JSONValue =
-  | string
-  | number
-  | boolean
-  | null
-  | { [x: string]: JSONValue }
-  | JSONValue[];
+export type JSONValue = string | number | boolean | null | { [x: string]: JSONValue } | JSONValue[];
 
 export type JSONObject = Record<string, JSONValue>;
 
@@ -27,12 +21,10 @@ export class Struct extends FieldNode {
 
   set value(value: JSONObject) {
     this._value = value;
-    if (
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    ) {
+    if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       this.__isEmpty = value === null;
     }
 
@@ -42,30 +34,21 @@ export class Struct extends FieldNode {
 
   public _value: JSONObject = {};
 
-  constructor(
-    initData?: JSONObject,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: JSONObject, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
 
     this._value = initData ?? {};
-    this.__meta.typeName = 'google.protobuf.Struct';
+    this.__meta.typeName = "google.protobuf.Struct";
   }
 
   override __updateWithLiteral(v: JSONObject) {
     this._value = v;
-    if (
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    ) {
+    if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;
     } else {
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       this.__isEmpty = v === null;
     }
     this.__notifyFieldValueChange(false);
@@ -84,14 +67,12 @@ export class Struct extends FieldNode {
     return this._value;
   }
 
-  protected override __checkConstraints(
-    fieldConstraints: FieldConstraints,
-  ): string[] | undefined {
-     
+  protected override __checkConstraints(fieldConstraints: FieldConstraints): string[] | undefined {
     for (const [constraint] of Object.entries(fieldConstraints)) {
-      if (constraint === 'required') {
+      if (constraint === "required") {
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
         if (this._value === null) {
-          return ['constraint.violation.required'];
+          return ["constraint.violation.required"];
         }
       }
     }
@@ -100,24 +81,22 @@ export class Struct extends FieldNode {
   }
 
   override toString(): string {
+    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     if (this._value !== null) {
       return JSON.stringify(this._value);
     }
-    return '';
+    return "";
   }
 
   public override __clear(withoutNotification = false) {
     // only notify when they are changes
-    const shouldNotify = JSON.stringify(this._value) !== '{}';
+    const shouldNotify = JSON.stringify(this._value) !== "{}";
     this._value = {};
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     if (shouldNotify && !withoutNotification) {
       this.__notifyFieldValueChange(false);
     }
   }
 }
 
-Registry.register('Struct', Struct);
+Registry.register("Struct", Struct);
