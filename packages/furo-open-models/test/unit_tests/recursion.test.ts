@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 import { Tree } from '../../protoc-gen-open-models/furo/type/Tree';
 import type { ITree } from '../../protoc-gen-open-models/furo/type/Tree';

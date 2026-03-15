@@ -1,9 +1,0 @@
-{
-  "extends": "../../../tsconfig-ts-base.json",
-  "compilerOptions": {
-    "outDir": "dist",
-    "declaration": false
-  },
-  "exclude": ["node_modules"],
-  "include": ["integration-tests/**/*", "../playwright.config.ts"]
-}

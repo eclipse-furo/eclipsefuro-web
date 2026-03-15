@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 
 import { type ValueStateSummary, ValueState } from '@furo/open-models';
@@ -32,7 +32,7 @@ describe('ValueStates', () => {
     ]);
   });
 
-  it('should apply value states', done => {
+  it('should apply value states', async () => {
     const defaults = new Defaults();
 
     const s: ValueStateSummary[] = [
@@ -57,6 +57,5 @@ describe('ValueStates', () => {
       'Negative',
     );
     expect(defaults.repeatedDecimal.at(0)!.__meta.stateMessage).to.eql('DEC');
-    done();
   });
 });

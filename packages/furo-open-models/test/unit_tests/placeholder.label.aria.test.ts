@@ -1,5 +1,5 @@
 import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 describe('Placeholders and labels', () => {
   it('should have deep labels (custom formater used)', async () => {

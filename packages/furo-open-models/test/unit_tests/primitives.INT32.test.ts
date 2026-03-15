@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import type { INumeric } from '../../protoc-gen-open-models/furo/type/Numeric';
 import { Numeric } from '../../protoc-gen-open-models/furo/type/Numeric';
 

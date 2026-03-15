@@ -1,8 +1,0 @@
-{
-  "extends": "../../../../tsconfig-ts-base.json",
-  "compilerOptions": {
-    "outDir": "../.unit_tests"
-  },
-  "exclude": [],
-  "include": ["./**/*.test.ts", "global.d.ts"]
-}

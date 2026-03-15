@@ -9,7 +9,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
     super(undefined, parent, parentATributeName);
     this.__isPrimitive = true;
     if (initData !== undefined) {
-       
+
       console.error('Use the ARRAY.Builder()');
     }
     this.__meta.typeName = `primitives.ARRAY<>`;
@@ -52,7 +52,8 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
    *
    * @param initData
    */
-  initFromLiteral(Constructor: new () => T, initData: I[]) {
+
+  initFromLiteral( initData: I[]) {
     this.__clear();
     this.__meta.initialValue = initData;
     this.__pushWithoutNotifications(initData);
@@ -78,7 +79,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   override __updateWithLiteral(initData: I[]) {
     if (this.__parentNode !== undefined) {
-      this.initFromLiteral(this.__getConstructor(), initData);
+      this.initFromLiteral( initData);
     }
   }
 
@@ -89,7 +90,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
       .filter((p) => p !== '');
 
     if (path.length > 0 && path[0] !== '') {
-       
+
       deepPath = path.slice(1).join('.');
       if (deepPath === '') {
         if (this.value[parseInt(path[0], 10)]) {
@@ -193,7 +194,7 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   ): ARRAY<T, I> {
     const a: ARRAY<T, I> = new ARRAY<T, I>();
     a.___Constructor = Constructor;
-    a.initFromLiteral(Constructor, initData);
+    a.initFromLiteral(initData);
     return a;
   }
 
@@ -540,11 +541,11 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
 
   private _rebuildIndexAndFieldName() {
     this._value.forEach((fn: T, i) => {
-       
+
       fn.__meta.fieldName = `[${i}]`;
-       
+
       fn.__meta.index = i;
-       
+
       fn.__meta.deleteArrayNode = () => {
         this.delete(i);
       };

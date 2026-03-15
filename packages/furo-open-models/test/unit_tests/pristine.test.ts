@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
 import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';

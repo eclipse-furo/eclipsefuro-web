@@ -4,7 +4,7 @@ import { FieldNode } from '../FieldNode';
 export class RECURSION<T extends FieldNode, I> extends FieldNode {
   private _value: T | undefined;
 
-  constructor(initData?: I, parent?: FieldNode, parentAttributeName?: string) {
+  constructor(_initData?: I, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
     this.__meta.typeName = `primitives.RECURSION`;

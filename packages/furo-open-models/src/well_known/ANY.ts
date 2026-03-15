@@ -16,7 +16,7 @@ export class ANY extends FieldNode {
   private _originalTypeName = '';
 
   constructor(
-    initData?: IAny,
+    _initData?: IAny, // Todo: any types with initData ??
     parent?: FieldNode,
     parentAttributeName?: string,
   ) {
@@ -75,7 +75,7 @@ export class ANY extends FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   override __mapProtoNameJsonToJson(data: any): any {
     if (data['@type'] === undefined) {
-       
+
       console.error(`@type is not defined: ${data['@type']}`, data);
       return undefined;
     }
@@ -97,7 +97,7 @@ export class ANY extends FieldNode {
 
   override __updateWithLiteral(data: IAny) {
     if (data['@type'] === undefined) {
-       
+
       console.error(`@type is not defined: ${data['@type']}`, data);
       return;
     }
@@ -116,13 +116,13 @@ export class ANY extends FieldNode {
         this.__isEmpty = false;
         this.__notifyFieldValueChange(false);
       } catch (err) {
-         
+
         console.error(err);
         this.__isEmpty = true;
         this.__notifyFieldValueChange(false);
       }
     } else {
-       
+
       console.error(
         `Could not resolve type from empty type field: ${data['@type']}`,
         data,

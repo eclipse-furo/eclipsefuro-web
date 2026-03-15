@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import { Decimal } from '../../protoc-gen-open-models/furo/type/Decimal';
 import { DecimalRange } from '../../protoc-gen-open-models/furo/type/DecimalRange';
 import '../../protoc-gen-open-models/CustomPrototypes';

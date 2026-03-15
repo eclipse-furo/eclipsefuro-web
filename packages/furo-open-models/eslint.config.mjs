@@ -7,9 +7,7 @@ export default createTsEslintConfig({
     "src/wc-type-renderer/**",
     "src/models/**",
     "src/x/models/**",
-    "lib/**",
-    "web-dev-server.config.mjs",
-    "web-test-runner.config.mjs",
+    "lib/**"
   ],
   overrides: [
     {

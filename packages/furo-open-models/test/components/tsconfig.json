@@ -1,9 +1,0 @@
-{
-  "extends": "../../../../tsconfig-ts-base.json",
-  "compilerOptions": {
-    "outDir": "../../dist/test_components",
-    "jsx": "react-jsx"
-  },
-  "exclude": ["dist", "src"],
-  "include": ["**/*", "global.d.ts"]
-}

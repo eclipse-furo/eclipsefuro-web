@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
 import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
 import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCenter';
@@ -72,15 +72,17 @@ describe('primitives ARRAY type', () => {
     ]); // a,b,c is from the default
   });
 
-  it('should error on direct init', done => {
-    const e = console.error;
-    console.error = () => {
-      console.error = e;
+  it('should error on direct init', () => {
+    return new Promise<void>(resolve => {
+      const e = console.error;
+      console.error = () => {
+        console.error = e;
 
-      done();
-    };
-    const arr = new ARRAY<Decimal, IDecimal>([{ value: '3' }]);
-    expect(arr.length).to.eql(0); // a,b,c is from the default
+        resolve();
+      };
+      const arr = new ARRAY<Decimal, IDecimal>([{ value: '3' }]);
+      expect(arr.length).to.eql(0); // a,b,c is from the default
+    });
   });
 
   it('should be possible to assign a literal data to an Array field', async () => {

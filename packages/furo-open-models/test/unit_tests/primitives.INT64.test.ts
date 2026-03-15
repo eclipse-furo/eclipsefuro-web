@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import type { INumeric64 } from '../../protoc-gen-open-models/furo/type/Numeric64';
 import { Numeric64 } from '../../protoc-gen-open-models/furo/type/Numeric64';
 

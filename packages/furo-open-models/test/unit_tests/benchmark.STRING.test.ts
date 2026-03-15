@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 import { STRING } from '@furo/open-models/dist/primitives/STRING';
 

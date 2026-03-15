@@ -4,7 +4,7 @@ import { BookingCenter } from '../../protoc-gen-open-models/furo/type/BookingCen
 import '../../protoc-gen-open-models/CustomPrototypes';
 import '../../protoc-gen-open-models/BusinessValidators';
 
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 const initData: IIdentifier = {
   id: 'events',

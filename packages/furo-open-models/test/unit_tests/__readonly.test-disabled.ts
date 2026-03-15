@@ -1,4 +1,5 @@
-import { expect } from '@open-wc/testing';
+// eslint-disable-next-line import-x/no-extraneous-dependencies
+import { expect } from 'vitest';
 
 import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 

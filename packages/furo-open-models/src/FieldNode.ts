@@ -126,6 +126,7 @@ export abstract class FieldNode {
 
   private ___rootNode: FieldNode;
 
+  // @ts-expect-error Todo: implement the readonly behaviour correctly. They are 2 failing tests
   private ___readonlyState: Map<FieldNode, boolean> = new Map<
     FieldNode,
     boolean

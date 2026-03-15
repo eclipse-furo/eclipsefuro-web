@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import { Defaults } from '../../protoc-gen-open-models/furo/type/Defaults';
 import '../../protoc-gen-open-models/CustomPrototypes.js';
 import '../../protoc-gen-open-models/BusinessValidators.js';

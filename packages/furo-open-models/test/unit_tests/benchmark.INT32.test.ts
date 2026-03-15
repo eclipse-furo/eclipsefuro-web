@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 
 import { INT32 } from '@furo/open-models/dist/primitives/INT32';
 

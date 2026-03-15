@@ -1,4 +1,4 @@
-import { expect } from '@open-wc/testing';
+import { expect } from 'vitest';
 import { MAP, STRING } from '@furo/open-models/dist/index';
 import type { IIdentifier } from '../../protoc-gen-open-models/furo/type/Identifier';
 import { Identifier } from '../../protoc-gen-open-models/furo/type/Identifier';
@@ -110,17 +110,19 @@ describe('primitives MAP type', () => {
     expect(m.size).equal(2);
   });
 
-  it('should have the regular map method "delete"', done => {
-    const initData = { key: 'value', other: 'name' };
-    const m = new MAP<string, STRING, string>();
-    m.initFromLiteral(STRING, initData);
-    m.__addEventListener('this-map-changed', () => {
-      done();
-    });
+  it('should have the regular map method "delete"', () => {
+    return new Promise<void>(resolve => {
+      const initData = { key: 'value', other: 'name' };
+      const m = new MAP<string, STRING, string>();
+      m.initFromLiteral(STRING, initData);
+      m.__addEventListener('this-map-changed', () => {
+        resolve();
+      });
 
-    expect(m.has('key')).to.eq(true);
-    m.delete('key');
-    expect(m.has('key')).to.eq(false);
+      expect(m.has('key')).to.eq(true);
+      m.delete('key');
+      expect(m.has('key')).to.eq(false);
+    });
   });
 
   it('should have the regular map method "__clear"', async () => {
