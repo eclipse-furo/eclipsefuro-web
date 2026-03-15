@@ -1,4 +1,4 @@
-import { FuroHorizontalFlex } from "./impl/FuroHorizontalFlex";
+import { FuroHorizontalFlex } from "./FuroHorizontalFlex";
 
 window.customElements.define("furo-horizontal-flex", FuroHorizontalFlex);
 

@@ -70,6 +70,7 @@ interface FieldEventMeta {
 
 // Symbol keys for class metadata
 const FIELD_EVENTS = Symbol.for("__fieldEvents__");
+const FIELD_INIT_METHODS = Symbol.for("__fieldInitMethods__");
 
 // Symbol keys for instance storage
 const FIELD_LISTENERS = Symbol.for("__fieldListeners__");
@@ -235,6 +236,40 @@ export const fieldBindings = {
       patchLifecycle(ctor);
     };
   },
+
+  /**
+   * Decorator that marks a method to be called once after a new model is assigned and bound.
+   *
+   * Useful for one-time setup like setting a11y attributes, placeholders, or constraints
+   * based on the model's type.
+   *
+   * @example
+   * ```typescript
+   * @fieldBindings.onInit()
+   * protected init() {
+   *   this.accessibleName = this.model?.__label ?? "Toggle";
+   * }
+   * ```
+   */
+  onInit() {
+    return function onInitDecorator(target: object, propertyKey: string, descriptor: PropertyDescriptor) {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      const originalMethod = descriptor.value;
+      const ctor = target.constructor as typeof ReactiveElement;
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+      let inits = (ctor as unknown as Record<symbol, { propertyKey: string; method: Function }[]>)[FIELD_INIT_METHODS];
+      if (!inits) {
+        inits = [];
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+        (ctor as unknown as Record<symbol, { propertyKey: string; method: Function }[]>)[FIELD_INIT_METHODS] = inits;
+      }
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      inits.push({ propertyKey, method: originalMethod });
+
+      patchLifecycle(ctor);
+    };
+  },
 };
 
 // ─────────────────────────────────────────────────────────────────
@@ -267,12 +302,20 @@ function bindToModel(component: ComponentWithListeners, model: FieldNodeLike): v
       readFn();
     };
 
-    listeners.set("value", { eventType: "this-field-value-changed", listener: valueListener });
-    model.__addEventListener("this-field-value-changed", valueListener);
+    // We listen to update, because it makes no speed difference on any literal type when using this-field-value-changed, and on complex types it is relevant to know if something in the type changed.
+    listeners.set("value", { eventType: "update", listener: valueListener });
+    model.__addEventListener("update", valueListener);
 
     // Initial read
     readFn();
   }
+
+  // Call @fieldBindings.onInit() methods
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
+  const inits = (ctor as unknown as Record<symbol, { propertyKey: string; method: Function }[]>)[FIELD_INIT_METHODS] ?? [];
+  inits.forEach(({ method }) => {
+    method.call(component);
+  });
 
   // Set up event bindings from @fieldBindings.onEvent decorators
   events.forEach(({ propertyKey, eventType, method }) => {

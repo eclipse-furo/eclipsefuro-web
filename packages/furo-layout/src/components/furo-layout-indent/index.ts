@@ -1,4 +1,4 @@
-import { FuroLayoutIndent } from "./impl/FuroLayoutIndent";
+import { FuroLayoutIndent } from "./FuroLayoutIndent";
 
 window.customElements.define("furo-layout-indent", FuroLayoutIndent);
 

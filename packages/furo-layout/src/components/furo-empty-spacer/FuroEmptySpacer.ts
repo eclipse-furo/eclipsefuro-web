@@ -53,5 +53,3 @@ export class FuroEmptySpacer extends LitElement {
   }
 
 }
-
-window.customElements.define('furo-empty-spacer', FuroEmptySpacer);

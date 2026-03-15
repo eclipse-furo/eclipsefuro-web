@@ -1,4 +1,4 @@
-import { FuroVerticalFlex } from "./impl/FuroVerticalFlex";
+import { FuroVerticalFlex } from "./FuroVerticalFlex";
 
 window.customElements.define("furo-vertical-flex", FuroVerticalFlex);
 

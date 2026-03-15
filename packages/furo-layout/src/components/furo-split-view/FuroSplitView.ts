@@ -94,5 +94,3 @@ export class FuroSplitView extends LitFBP(LitElement) {
     `;
   }
 }
-
-window.customElements.define("furo-split-view", FuroSplitView);

@@ -54,5 +54,3 @@ export class FuroVerticalScroller extends LitFBP(LitElement) {
     `;
   }
 }
-
-window.customElements.define('furo-vertical-scroller', FuroVerticalScroller);

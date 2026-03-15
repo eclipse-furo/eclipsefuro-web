@@ -356,6 +356,60 @@ class CubeEditorTab extends LitElement {
 
 ---
 
+## Field Bindings (Reusable Components)
+
+Field bindings are decorators for creating **reusable** components that bind to any FieldNode model via `modelReaders` and `modelWriters` maps.
+
+### @fieldBindings.model()
+
+Marks the `model` property. Handles binding/unbinding, reader/writer resolution by `__meta.typeName`, and automatic updates.
+
+```typescript
+import { fieldBindings, BindableComponent } from "@x/furo/open-models/FieldBindings";
+
+class MyBoolIcon extends LitElement implements BindableComponent {
+  @fieldBindings.model()
+  model: BOOLEAN | FuroFatBool | undefined;
+
+  declare writeToModel: () => void;
+
+  modelReaders = new Map([
+    ["primitives.BOOLEAN", () => { this.value = (this.model as BOOLEAN).value ?? false; }],
+    ["furo.fat.Bool",      () => { this.value = (this.model as FuroFatBool).value.value ?? false; }],
+  ]);
+
+  modelWriters = new Map([
+    ["primitives.BOOLEAN", () => { (this.model as BOOLEAN).value = this.value; }],
+    ["furo.fat.Bool",      () => { (this.model as FuroFatBool).value.value = this.value; }],
+  ]);
+}
+```
+
+### @fieldBindings.onEvent(eventType)
+
+Binds a method to an event on the bound model.
+
+```typescript
+@fieldBindings.onEvent("validity-changed")
+protected onValidityChanged(detail: unknown) {
+  console.log("Validity changed:", detail);
+}
+```
+
+### @fieldBindings.onInit()
+
+Marks a method to be called **once** after a new model is assigned and initially read. Useful for one-time setup like a11y attributes, placeholders, or constraints based on the model type.
+
+```typescript
+@fieldBindings.onInit()
+protected init() {
+  // Set accessible name based on the model's type
+  this.accessibleName = this.model?.__meta?.typeName ?? "Toggle";
+}
+```
+
+---
+
 ## Event Reference
 
 ### Service Events

@@ -4,97 +4,7 @@
   "modules": [
     {
       "kind": "javascript-module",
-      "path": "dist/furo-backdrop.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-backdrop",
-          "declaration": {
-            "name": "FuroBackdrop",
-            "module": "/src/impl/FuroBackdrop"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/furo-horizontal-flex.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-horizontal-flex",
-          "declaration": {
-            "name": "FuroHorizontalFlex",
-            "module": "/src/impl/FuroHorizontalFlex"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/furo-layout-indent.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-layout-indent",
-          "declaration": {
-            "name": "FuroLayoutIndent",
-            "module": "/src/impl/FuroLayoutIndent"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/furo-resizer.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-resizer",
-          "declaration": {
-            "name": "FuroResizer",
-            "module": "/src/impl/FuroResizer"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/furo-responsive-layout.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-responsive-layout",
-          "declaration": {
-            "name": "FuroResponsiveLayout",
-            "module": "/src/impl/FuroResponsiveLayout"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/furo-vertical-flex.js",
-      "declarations": [],
-      "exports": [
-        {
-          "kind": "custom-element-definition",
-          "name": "furo-vertical-flex",
-          "declaration": {
-            "name": "FuroVerticalFlex",
-            "module": "/src/impl/FuroVerticalFlex"
-          }
-        }
-      ]
-    },
-    {
-      "kind": "javascript-module",
-      "path": "dist/impl/FuroBackdrop.js",
+      "path": "dist/components/furo-backdrop/FuroBackdrop.js",
       "declarations": [
         {
           "kind": "class",
@@ -164,14 +74,14 @@
           "name": "FuroBackdrop",
           "declaration": {
             "name": "FuroBackdrop",
-            "module": "src/impl/FuroBackdrop.ts"
+            "module": "src/components/furo-backdrop/FuroBackdrop.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroBackdropDisplay.js",
+      "path": "dist/components/furo-backdrop/FuroBackdropDisplay.js",
       "declarations": [
         {
           "kind": "class",
@@ -284,26 +194,41 @@
       ],
       "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "furo-backdrop-display",
-          "declaration": {
-            "name": "FuroBackdropDisplay",
-            "module": "src/impl/FuroBackdropDisplay.ts"
-          }
-        },
-        {
           "kind": "js",
           "name": "FuroBackdropDisplay",
           "declaration": {
             "name": "FuroBackdropDisplay",
-            "module": "src/impl/FuroBackdropDisplay.ts"
+            "module": "src/components/furo-backdrop/FuroBackdropDisplay.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroEmptySpacer.js",
+      "path": "dist/components/furo-backdrop/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-backdrop",
+          "declaration": {
+            "name": "FuroBackdrop",
+            "module": "/src/components/furo-backdrop/FuroBackdrop"
+          }
+        },
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-backdrop-display",
+          "declaration": {
+            "name": "FuroBackdropDisplay",
+            "module": "/src/components/furo-backdrop/FuroBackdropDisplay"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-empty-spacer/FuroEmptySpacer.js",
       "declarations": [
         {
           "kind": "class",
@@ -340,26 +265,33 @@
       ],
       "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "furo-empty-spacer",
-          "declaration": {
-            "name": "FuroEmptySpacer",
-            "module": "src/impl/FuroEmptySpacer.ts"
-          }
-        },
-        {
           "kind": "js",
           "name": "FuroEmptySpacer",
           "declaration": {
             "name": "FuroEmptySpacer",
-            "module": "src/impl/FuroEmptySpacer.ts"
+            "module": "src/components/furo-empty-spacer/FuroEmptySpacer.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroHorizontalFlex.js",
+      "path": "dist/components/furo-empty-spacer/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-empty-spacer",
+          "declaration": {
+            "name": "FuroEmptySpacer",
+            "module": "/src/components/furo-empty-spacer/FuroEmptySpacer"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-horizontal-flex/FuroHorizontalFlex.js",
       "declarations": [
         {
           "kind": "class",
@@ -510,14 +442,29 @@
           "name": "FuroHorizontalFlex",
           "declaration": {
             "name": "FuroHorizontalFlex",
-            "module": "src/impl/FuroHorizontalFlex.ts"
+            "module": "src/components/furo-horizontal-flex/FuroHorizontalFlex.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroLayoutIndent.js",
+      "path": "dist/components/furo-horizontal-flex/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-horizontal-flex",
+          "declaration": {
+            "name": "FuroHorizontalFlex",
+            "module": "/src/components/furo-horizontal-flex/FuroHorizontalFlex"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-layout-indent/FuroLayoutIndent.js",
       "declarations": [
         {
           "kind": "class",
@@ -747,14 +694,29 @@
           "name": "FuroLayoutIndent",
           "declaration": {
             "name": "FuroLayoutIndent",
-            "module": "src/impl/FuroLayoutIndent.ts"
+            "module": "src/components/furo-layout-indent/FuroLayoutIndent.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroResizer.js",
+      "path": "dist/components/furo-layout-indent/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-layout-indent",
+          "declaration": {
+            "name": "FuroLayoutIndent",
+            "module": "/src/components/furo-layout-indent/FuroLayoutIndent"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-resizer/FuroResizer.js",
       "declarations": [
         {
           "kind": "class",
@@ -993,14 +955,29 @@
           "name": "FuroResizer",
           "declaration": {
             "name": "FuroResizer",
-            "module": "src/impl/FuroResizer.ts"
+            "module": "src/components/furo-resizer/FuroResizer.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroResponsiveLayout.js",
+      "path": "dist/components/furo-resizer/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-resizer",
+          "declaration": {
+            "name": "FuroResizer",
+            "module": "/src/components/furo-resizer/FuroResizer"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-responsive-layout/FuroResponsiveLayout.js",
       "declarations": [
         {
           "kind": "class",
@@ -1180,14 +1157,29 @@
           "name": "FuroResponsiveLayout",
           "declaration": {
             "name": "FuroResponsiveLayout",
-            "module": "src/impl/FuroResponsiveLayout.ts"
+            "module": "src/components/furo-responsive-layout/FuroResponsiveLayout.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroSplitView.js",
+      "path": "dist/components/furo-responsive-layout/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-responsive-layout",
+          "declaration": {
+            "name": "FuroResponsiveLayout",
+            "module": "/src/components/furo-responsive-layout/FuroResponsiveLayout"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-split-view/FuroSplitView.js",
       "declarations": [
         {
           "kind": "class",
@@ -1253,26 +1245,33 @@
       ],
       "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "furo-split-view",
-          "declaration": {
-            "name": "FuroSplitView",
-            "module": "src/impl/FuroSplitView.ts"
-          }
-        },
-        {
           "kind": "js",
           "name": "FuroSplitView",
           "declaration": {
             "name": "FuroSplitView",
-            "module": "src/impl/FuroSplitView.ts"
+            "module": "src/components/furo-split-view/FuroSplitView.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroVerticalFlex.js",
+      "path": "dist/components/furo-split-view/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-split-view",
+          "declaration": {
+            "name": "FuroSplitView",
+            "module": "/src/components/furo-split-view/FuroSplitView"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-vertical-flex/FuroVerticalFlex.js",
       "declarations": [
         {
           "kind": "class",
@@ -1314,14 +1313,29 @@
           "name": "FuroVerticalFlex",
           "declaration": {
             "name": "FuroVerticalFlex",
-            "module": "src/impl/FuroVerticalFlex.ts"
+            "module": "src/components/furo-vertical-flex/FuroVerticalFlex.ts"
           }
         }
       ]
     },
     {
       "kind": "javascript-module",
-      "path": "dist/impl/FuroVerticalScroller.js",
+      "path": "dist/components/furo-vertical-flex/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-vertical-flex",
+          "declaration": {
+            "name": "FuroVerticalFlex",
+            "module": "/src/components/furo-vertical-flex/FuroVerticalFlex"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-vertical-scroller/FuroVerticalScroller.js",
       "declarations": [
         {
           "kind": "class",
@@ -1368,19 +1382,26 @@
       ],
       "exports": [
         {
-          "kind": "custom-element-definition",
-          "name": "furo-vertical-scroller",
-          "declaration": {
-            "name": "FuroVerticalScroller",
-            "module": "src/impl/FuroVerticalScroller.ts"
-          }
-        },
-        {
           "kind": "js",
           "name": "FuroVerticalScroller",
           "declaration": {
             "name": "FuroVerticalScroller",
-            "module": "src/impl/FuroVerticalScroller.ts"
+            "module": "src/components/furo-vertical-scroller/FuroVerticalScroller.ts"
+          }
+        }
+      ]
+    },
+    {
+      "kind": "javascript-module",
+      "path": "dist/components/furo-vertical-scroller/index.js",
+      "declarations": [],
+      "exports": [
+        {
+          "kind": "custom-element-definition",
+          "name": "furo-vertical-scroller",
+          "declaration": {
+            "name": "FuroVerticalScroller",
+            "module": "/src/components/furo-vertical-scroller/FuroVerticalScroller"
           }
         }
       ]
@@ -1392,82 +1413,106 @@
       "exports": [
         {
           "kind": "js",
-          "name": "*",
+          "name": "BackdropEvent",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroBackdrop"
+            "name": "BackdropEvent",
+            "module": "@/components/furo-backdrop/FuroBackdrop"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "BackgroundDesign",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroBackdropDisplay"
+            "name": "BackgroundDesign",
+            "module": "@/types/BackgroundDesign"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroBackdrop",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroEmptySpacer"
+            "name": "FuroBackdrop",
+            "module": "@/components/furo-backdrop/FuroBackdrop"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroBackdropDisplay",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroHorizontalFlex"
+            "name": "FuroBackdropDisplay",
+            "module": "@/components/furo-backdrop/FuroBackdropDisplay"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroEmptySpacer",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroLayoutIndent"
+            "name": "FuroEmptySpacer",
+            "module": "@/components/furo-empty-spacer/FuroEmptySpacer"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroHorizontalFlex",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroResizer"
+            "name": "FuroHorizontalFlex",
+            "module": "@/components/furo-horizontal-flex/FuroHorizontalFlex"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroLayoutIndent",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroResponsiveLayout"
+            "name": "FuroLayoutIndent",
+            "module": "@/components/furo-layout-indent/FuroLayoutIndent"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroResizer",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroSplitView"
+            "name": "FuroResizer",
+            "module": "@/components/furo-resizer/FuroResizer"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroResponsiveLayout",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroVerticalFlex"
+            "name": "FuroResponsiveLayout",
+            "module": "@/components/furo-responsive-layout/FuroResponsiveLayout"
           }
         },
         {
           "kind": "js",
-          "name": "*",
+          "name": "FuroSplitView",
           "declaration": {
-            "name": "*",
-            "module": "src/impl/FuroVerticalScroller"
+            "name": "FuroSplitView",
+            "module": "@/components/furo-split-view/FuroSplitView"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FuroVerticalFlex",
+          "declaration": {
+            "name": "FuroVerticalFlex",
+            "module": "@/components/furo-vertical-flex/FuroVerticalFlex"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "FuroVerticalScroller",
+          "declaration": {
+            "name": "FuroVerticalScroller",
+            "module": "@/components/furo-vertical-scroller/FuroVerticalScroller"
+          }
+        },
+        {
+          "kind": "js",
+          "name": "ResponsiveLayoutSize",
+          "declaration": {
+            "name": "ResponsiveLayoutSize",
+            "module": "@/types/ResponsiveLayoutSize"
           }
         }
       ]

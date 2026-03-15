@@ -1,4 +1,4 @@
-import { FuroResponsiveLayout } from "./impl/FuroResponsiveLayout";
+import { FuroResponsiveLayout } from "./FuroResponsiveLayout";
 
 window.customElements.define("furo-responsive-layout", FuroResponsiveLayout);
 

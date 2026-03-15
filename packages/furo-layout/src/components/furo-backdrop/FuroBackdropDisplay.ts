@@ -216,5 +216,3 @@ export class FuroBackdropDisplay extends LitFBP(LitElement) {
     `
   }
 }
-
-window.customElements.define('furo-backdrop-display', FuroBackdropDisplay)

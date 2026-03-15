@@ -1,7 +1,62 @@
 {
   "name": "@furo/layout",
+  "version": "3.0.0-RC.10",
   "description": "Layout components for furo",
-  "version": "3.0.0-RC.7",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./dist/*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./custom-elements.json",
+    "./web-types.json": "./web-types.json",
+    "./furo-backdrop": {
+      "types": "./dist/components/furo-backdrop/FuroBackdrop.d.ts",
+      "default": "./dist/components/furo-backdrop/index.js"
+    },
+    "./furo-horizontal-flex": {
+      "types": "./dist/components/furo-horizontal-flex/FuroHorizontalFlex.d.ts",
+      "default": "./dist/components/furo-horizontal-flex/index.js"
+    },
+    "./furo-layout-indent": {
+      "types": "./dist/components/furo-layout-indent/FuroLayoutIndent.d.ts",
+      "default": "./dist/components/furo-layout-indent/index.js"
+    },
+    "./furo-resizer": {
+      "types": "./dist/components/furo-resizer/FuroResizer.d.ts",
+      "default": "./dist/components/furo-resizer/index.js"
+    },
+    "./furo-responsive-layout": {
+      "types": "./dist/components/furo-responsive-layout/FuroResponsiveLayout.d.ts",
+      "default": "./dist/components/furo-responsive-layout/index.js"
+    },
+    "./furo-vertical-flex": {
+      "types": "./dist/components/furo-vertical-flex/FuroVerticalFlex.d.ts",
+      "default": "./dist/components/furo-vertical-flex/index.js"
+    },
+    "./furo-split-view": {
+      "types": "./dist/components/furo-split-view/FuroSplitView.d.ts",
+      "default": "./dist/components/furo-split-view/index.js"
+    },
+    "./furo-empty-spacer": {
+      "types": "./dist/components/furo-empty-spacer/FuroEmptySpacer.d.ts",
+      "default": "./dist/components/furo-empty-spacer/index.js"
+    },
+    "./furo-vertical-scroller": {
+      "types": "./dist/components/furo-vertical-scroller/FuroVerticalScroller.d.ts",
+      "default": "./dist/components/furo-vertical-scroller/index.js"
+    }
+  },
+  "customElements": "custom-elements.json",
+  "web-types": "./web-types.json",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-layout",
   "repository": "git@github.com:eclipse/eclipsefuro-web.git",
   "author": {
@@ -14,9 +69,6 @@
     "flow based programming",
     "fbp"
   ],
-  "license": "MIT",
-  "main": "dist/index.js",
-  "type": "module",
   "files": [
     "./dist",
     "icon.svg",
@@ -48,8 +100,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "customElements": "custom-elements.json",
-  "web-types": "./web-types.json",
-  "gitHead": "b8ff9b3ddc4cc691d89607771feed0ac7e168c4b"
+  }
 }

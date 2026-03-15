@@ -1,6 +1,6 @@
 {
   "name": "@furo/open-models",
-  "description": "open-models  ",
+  "description": "open-models",
   "license": "MIT",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages",
   "repository": {
@@ -8,10 +8,22 @@
     "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
   },
   "author": "eclipse furo",
-  "version": "1.15.3",
+  "version": "1.16.0",
   "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./dist/*": {
+      "types": "./dist/*.d.ts",
+      "default": "./dist/*.js"
+    },
+    "./package.json": "./package.json",
+    "./custom-elements.json": "./custom-elements.json"
+  },
   "scripts": {
     "start": "npm run build && concurrently -k -r \"tsc --watch --preserveWatchOutput\" \"tsc  -p ./tsconfig.test.components.json --watch --preserveWatchOutput\" \"web-dev-server\"",
     "analyze": "cem analyze --litelement --globs ./dist/* --outdir ./",
@@ -32,18 +44,10 @@
     "bootstrap": "npm install && npm link && npm link @furo/open-models"
   },
   "files": [
-    "./dist/*.js",
-    "./dist/*.map",
-    "./dist/*.ts",
-    "./dist/primitives",
-    "./dist/proxies",
-    "./dist/decorators",
-    "./dist/well_known",
-    "tsconfig.json",
-    "icon.svg",
-    "README.md",
+    "dist",
     "custom-elements.json",
-    "web-types.json"
+    "web-types.json",
+    "icon.svg"
   ],
   "dependencies": {
     "@types/json-schema": "^7.0.15",
@@ -59,7 +63,6 @@
     "@open-wc/testing": "^4.0.0",
     "@rollup/plugin-json": "^6.1.0",
     "@rollup/plugin-replace": "^5.0.7",
-    "@types/json-schema": "^7.0.15",
     "@types/mocha": "^10.0.7",
     "@typescript-eslint/eslint-plugin": "^7.16.1",
     "@typescript-eslint/parser": "^7.16.0",
