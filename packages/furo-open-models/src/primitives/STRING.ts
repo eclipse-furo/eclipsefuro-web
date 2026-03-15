@@ -82,13 +82,13 @@ export class STRING extends FieldNode {
       if (constraint === 'max_length') {
         // String length can be restricted using minLength and maxLength. ">" is used to check.
         if (this._value.length > value) {
-          return ['constraint.violation.max_length', String(value), String(this._value)];
+          return ['constraint.violation.max_length', String(value), this._value];
         }
       }
       if (constraint === 'min_length') {
         // String length can be restricted using minLength and maxLength. "<" is used to check.
         if (this._value.length < value) {
-          return ['constraint.violation.min_length', String(value), String(this._value)];
+          return ['constraint.violation.min_length', String(value), this._value];
         }
       }
       if (constraint === 'pattern') {
@@ -96,7 +96,7 @@ export class STRING extends FieldNode {
 
         const re = new RegExp(value);
         if (!this._value.match(re)) {
-          return ['constraint.violation.pattern', String(value), String(this._value)];
+          return ['constraint.violation.pattern', String(value), this._value];
         }
       }
     }

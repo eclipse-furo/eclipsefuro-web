@@ -79,13 +79,13 @@ export class BytesValue extends FieldNode {
       if (constraint === 'max_length') {
         // String length can be restricted using minLength and maxLength. ">" is used to check.
         if (this._value !== null && this._value.length > value) {
-          return ['constraint.violation.max_length', String(value), String(this._value)];
+          return ['constraint.violation.max_length', String(value), this._value];
         }
       }
       if (constraint === 'min_length') {
         // String length can be restricted using minLength and maxLength. "<" is used to check.
         if (this._value !== null && this._value.length < value) {
-          return ['constraint.violation.min_length', String(value), String(this._value)];
+          return ['constraint.violation.min_length', String(value), this._value];
         }
       }
     }
