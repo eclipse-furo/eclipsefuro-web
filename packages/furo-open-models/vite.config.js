@@ -4,6 +4,8 @@ import {playwright} from "@vitest/browser-playwright";
 export default defineConfig({
   resolve: {
     alias: {
+      "@furo/open-models/dist": new URL("./src", import.meta.url).pathname,
+      "@furo/open-models": new URL("./src/index.ts", import.meta.url).pathname,
       "@": "/src",
     },
   },
@@ -32,12 +34,12 @@ export default defineConfig({
     },
     coverage: {
       include: ["src/**/*.{ts,tsx}"],
-      enabled: false,
+      enabled: true,
       thresholds: {
-        statements: 80,
-        branches: 80,
-        functions: 80,
-        lines: 80,
+        statements: 39,
+        branches: 34,
+        functions: 41,
+        lines: 39,
       },
       provider: "istanbul",
       reportsDirectory: "coverage/",
