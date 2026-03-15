@@ -305,7 +305,7 @@ export class Fetcher<REQ, RES> {
        */
       this.isLoading = false;
       clearTimeout(this.timeoutId);
-      const status = response.status || 0;
+      const status = response.status;
 
       if (status === 0 || (status >= 200 && status < 300)) {
         /**
@@ -510,9 +510,7 @@ export class Fetcher<REQ, RES> {
 
         const contentType = response.headers.get('content-type');
         let handler = contentType?.split(';')[0].trim();
-        if (handler === undefined) {
-          handler = 'application/json';
-        }
+        handler ??= 'application/json';
         let typeHandler = this.responseHandler.get(handler);
 
         if (typeHandler === undefined) {

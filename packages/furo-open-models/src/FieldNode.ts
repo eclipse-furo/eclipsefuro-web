@@ -625,7 +625,7 @@ export abstract class FieldNode {
    * If there is no display_name `[object TypeName]` is returned.
    */
   public toString(): string {
-    const ts = ToString.get(this.__meta.typeName || '');
+    const ts = ToString.get(this.__meta.typeName ?? '');
     if (ts) {
       return ts(this);
     }
@@ -647,7 +647,7 @@ export abstract class FieldNode {
    * This method is meant to be overridden by derived objects for custom type conversion logic.
    */
   public valueOf(): number | bigint {
-    const ts = ValueOf.get(this.__meta.typeName || '');
+    const ts = ValueOf.get(this.__meta.typeName ?? '');
     if (ts) {
       return ts(this);
     }
@@ -683,7 +683,7 @@ export abstract class FieldNode {
             ? OPEN_MODELS_OPTIONS.UseProtoNames
               ? this.__toSnakeCase(this.__meta.fieldName)
               : this.__meta.fieldName
-            : this.__meta.typeName || '',
+            : this.__meta.typeName ?? '',
         );
       }
       this.__parentNode?.___fieldNameBuilder(parts);

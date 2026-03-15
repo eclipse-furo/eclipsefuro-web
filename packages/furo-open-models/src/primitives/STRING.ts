@@ -31,7 +31,7 @@ export class STRING extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = initData || '';
+    this._value = initData ?? '';
     this.__meta.typeName = 'primitives.STRING';
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

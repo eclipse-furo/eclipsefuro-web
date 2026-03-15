@@ -24,7 +24,7 @@ export class UINT64 extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = BigInt(initData || '0');
+    this._value = BigInt(initData ?? '0');
     this.__meta.typeName = 'primitives.UINT64';
   }
 

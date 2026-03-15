@@ -48,7 +48,7 @@ export class ENUM<T> extends FieldNode {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
     this.__meta.typeName = 'primitives.ENUM';
-    this._value = initData !== undefined ? initData : defaultValue;
+    this._value = initData ?? defaultValue;
     this._initialValue = defaultValue;
     this._nullValue = defaultValue;
     this.enumArg = enumArg;

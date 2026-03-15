@@ -37,7 +37,7 @@ export class Duration extends FieldNode {
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
 
-    this._value = initData || '';
+    this._value = initData ?? '';
     this.__meta.typeName = 'google.protobuf.Duration';
   }
 

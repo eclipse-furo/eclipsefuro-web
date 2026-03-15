@@ -50,7 +50,7 @@ export class FloatValue extends FieldNode {
   }
 
   override valueOf(): number {
-    return this._value || NaN;
+    return this._value ?? NaN;
   }
 
   override __toLiteral() {

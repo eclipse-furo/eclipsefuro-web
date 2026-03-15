@@ -36,7 +36,7 @@ export class BoolValue extends FieldNode {
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
-    this._value = initData || false;
+    this._value = initData ?? false;
     this.__meta.typeName = 'google.protobuf.BoolValue';
   }
 

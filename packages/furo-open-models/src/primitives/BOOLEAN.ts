@@ -30,7 +30,7 @@ export class BOOLEAN extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = initData || false;
+    this._value = initData ?? false;
     this.__meta.typeName = 'primitives.BOOLEAN';
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

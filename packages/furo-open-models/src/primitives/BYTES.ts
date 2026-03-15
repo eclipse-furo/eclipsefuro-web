@@ -31,7 +31,7 @@ export class BYTES extends FieldNode {
   ) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this._value = initData || new Uint8Array();
+    this._value = initData ?? new Uint8Array();
     this.__meta.typeName = 'primitives.BYTES';
     this.__isEmpty = !(
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||

@@ -3,7 +3,6 @@
  * @param {number} delay
  */
 export default function DebounceBuilder(
-  // eslint-disable-next-line @typescript-eslint/ban-types
   func: Function,
   delay = 10,
   option = { leading: false, trailing: true },

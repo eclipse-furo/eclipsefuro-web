@@ -36,7 +36,7 @@ export class Int64Value extends FieldNode {
       OPEN_MODELS_OPTIONS.EmitDefaultValues ||
       OPEN_MODELS_OPTIONS.EmitUnpopulated
     );
-    this._value = BigInt(initData || '0');
+    this._value = BigInt(initData ?? '0');
     this.__meta.typeName = 'google.protobuf.Int64Value';
   }
 
@@ -63,7 +63,7 @@ export class Int64Value extends FieldNode {
   }
 
   override valueOf() {
-    return this._value || NaN;
+    return this._value ?? NaN;
   }
 
   override __toLiteral() {

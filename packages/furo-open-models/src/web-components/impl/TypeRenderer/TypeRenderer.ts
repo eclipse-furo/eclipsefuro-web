@@ -263,7 +263,7 @@ export class TypeRenderer extends LitElement {
               (field: FieldNode) => {
                 const el = document.createElement(this.renderName) as Bindable;
                 if (this.isAnyType) {
-                  el.bindData((field as ANY).value as FieldNode);
+                  el.bindData((field as ANY).value!);
                 }
                 el.bindData(field);
                 this.insertedElementRef = this.parentNode!.insertBefore(
@@ -301,16 +301,16 @@ export class TypeRenderer extends LitElement {
           nodeName === 'context'
         )
       ) {
-        el.setAttribute(nodeName, nodeValue || '');
+        el.setAttribute(nodeName, nodeValue ?? '');
       }
     }
     this.insertedElementRef = this.parentNode!.insertBefore(el, this);
 
     if (this.isAnyType) {
       // any types have the data in the field `value`
-      el.bindData((this._field as ANY).value as FieldNode);
+      el.bindData((this._field as ANY).value!);
     } else {
-      el.bindData(this._field as FieldNode);
+      el.bindData(this._field!);
     }
   }
 
