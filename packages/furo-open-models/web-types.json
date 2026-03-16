@@ -1,0 +1,59 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
+  "name": "@furo/open-models",
+  "version": "1.16.2",
+  "description-markup": "markdown",
+  "default-icon": "icon.svg",
+  "contributions": {
+    "html": {
+      "elements": [
+        {
+          "name": "furo-type-renderer",
+          "description": "dynamic type rendering\n---\n\n\n### **Methods:**\n - **bindData(fieldNode: _FieldNode_)** - Bind a fieldnode of any type\n- **focus()** - forward the focus to the created element",
+          "doc-url": "",
+          "attributes": [
+            {
+              "name": "context",
+              "description": "Set the context if you need another then display.\n\nDetermines how the component should render or behave.\n\nThe variable accepts one of several predefined context types\n(`\"display\"`, `\"form\"`, `\"edit\"`, `\"cell-display\"`, `\"cell-edit\"`),\nor any other string for having custom context.",
+              "value": {
+                "type": "\"display\" | \"form\" | \"edit\" | \"cell-display\" | \"cell-edit\"",
+                "default": "\"display\""
+              }
+            },
+            {
+              "name": "disabled",
+              "description": "A Boolean attribute which, if present, means this field is displayed in disabled state.",
+              "value": { "type": "boolean", "default": "false" }
+            }
+          ],
+          "events": [],
+          "js": {
+            "properties": [
+              {
+                "name": "context",
+                "description": "Set the context if you need another then display.\n\nDetermines how the component should render or behave.\n\nThe variable accepts one of several predefined context types\n(`\"display\"`, `\"form\"`, `\"edit\"`, `\"cell-display\"`, `\"cell-edit\"`),\nor any other string for having custom context.",
+                "type": "\"display\" | \"form\" | \"edit\" | \"cell-display\" | \"cell-edit\""
+              },
+              {
+                "name": "disabled",
+                "description": "A Boolean attribute which, if present, means this field is displayed in disabled state.",
+                "type": "boolean"
+              },
+              { "name": "_field", "type": "FieldNode | null" },
+              {
+                "name": "insertedElementRef",
+                "description": "Reference to the element that was inserted into the DOM.\n\nThis variable holds a reference to an HTMLElement that has been\nadded to the document, or `undefined` if no element has yet been inserted.",
+                "type": "HTMLElement | undefined"
+              }
+            ],
+            "events": []
+          }
+        }
+      ]
+    },
+    "css": {
+      "properties": [],
+      "pseudo-elements": []
+    }
+  }
+}

@@ -8,7 +8,7 @@
     "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
   },
   "author": "eclipse furo",
-  "version": "1.16.0",
+  "version": "1.16.2",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -26,9 +26,9 @@
   },
   "scripts": {
     "start": "vite dev",
-    "analyze": "cem analyze --litelement --globs ./dist/* --outdir ./",
+    "analyze": "cem analyze --litelement --globs ./dist/*/*.js  --exclude *.map.js --outdir ./",
     "analyze:deep": "cem analyze --config deep-cem.config.mjs",
-    "build": "npm run build:src && npm run analyze",
+    "build": "npm run build:src && npm run analyze:deep",
     "build:src": "tsc && tsc-alias -p ./tsconfig.json",
     "protoc:gen": "./scripts/protoc-gen-open-models.sh",
     "protoc:gen:lint": "npm run protoc:gen && eslint ./test/protoc-gen-open-models --fix && prettier \"**/*.ts\" --write --ignore-path .gitignore",
@@ -42,12 +42,7 @@
     "test:ui": "vitest --ui",
     "bootstrap": "npm install && npm link && npm link @furo/open-models"
   },
-  "files": [
-    "dist",
-    "custom-elements.json",
-    "web-types.json",
-    "icon.svg"
-  ],
+  "files": ["dist", "custom-elements.json", "web-types.json", "icon.svg"],
   "dependencies": {
     "@types/json-schema": "^7.0.15",
     "json-schema": "^0.4.0"
@@ -68,8 +63,9 @@
     "tslib": "^2.8.1",
     "typescript": "^5.7.2"
   },
-  "customElements": "custom-elements.json",
+  "customElements": "/custom-elements.json",
   "publishConfig": {
     "access": "public"
-  }
+  },
+  "web-types": "./web-types.json"
 }

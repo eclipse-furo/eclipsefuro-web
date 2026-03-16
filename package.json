@@ -80,8 +80,9 @@
   "scripts": {
     "prepare": "husky",
     "bootstrap": "yarn install && ./scripts/bootstrap.sh",
-    "test:all": "web-test-runner --files packages/**/*.test.js --coverage",
-    "test:all:watch": "web-test-runner --files packages/**/*.test.js --watch",
+    "test:all": "lerna run test",
+    "test:all:watch": "lerna run test:watch",
+    "lint:all": "lerna run lint",
     "docs:start": "cd hugo && hugo serve",
     "docs:generate": "./scripts/cem.sh",
     "docs:publish": "./scripts/publishDocs.sh"
