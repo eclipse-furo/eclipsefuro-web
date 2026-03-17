@@ -116,7 +116,7 @@ export function ModelBindings<TEventMap extends ModelEventMap = ModelEventMap>(m
      * @param path - Path to the field (e.g., "cube.length", "__isValid")
      * @param eventType - Event to listen for (defaults to "this-field-value-changed")
      */
-    bind(path: string, eventType: ModelEventType = "this-field-value-changed") {
+    bind(path: string, eventType: ModelEventType = "update") {
       return function bindDecorator(target: object, propertyKey: string) {
         let metadata = bindingsMetadata.get(target);
         if (!metadata) {
