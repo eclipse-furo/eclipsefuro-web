@@ -41,7 +41,7 @@ interface FieldNodeLike {
 
 interface BindingMeta {
   model: FieldNodeLike;
-  path: string;
+  path: string | undefined;
   eventType: ModelEventType;
 }
 const bindingsMetadata = new WeakMap<object, Map<string, BindingMeta>>();
@@ -80,15 +80,17 @@ const MODEL_EVENT_METHODS = Symbol.for("__modelEventMethods__");
  * const cubeModel = ModelBindings(CubeEntityModel.model);
  *
  * class MyComponent extends LitElement {
- *   // Bind to a nested field value - updates when cube.length changes
- *   @cubeModel.bind("cube.length")
- *   @state()
- *   private cubeLength: number = 0;
+ *   // Triggers re-render on any model update
+ *   @cubeModel.bind()
+ *   private _modelUpdated: unknown;
  *
- *   // Bind to model validity
+ *   // Triggers re-render when cube.length changes
+ *   @cubeModel.bind("cube.length")
+ *   private cubeLength: unknown;
+ *
+ *   // Triggers re-render on model validity changes
  *   @cubeModel.bind("__isValid", "validity-changed")
- *   @state()
- *   private isValid: boolean = true;
+ *   private isValid: unknown;
  *
  *   // React to any field value change on the model
  *   @cubeModel.onEvent("field-value-changed")
@@ -110,13 +112,13 @@ const MODEL_EVENT_METHODS = Symbol.for("__modelEventMethods__");
 export function ModelBindings<TEventMap extends ModelEventMap = ModelEventMap>(model: FieldNodeLike) {
   return {
     /**
-     * Binds a component property to a model field value.
-     * When the field changes, the property is automatically updated.
+     * Triggers a render update when a model event fires.
+     * When called without arguments, listens on the model root for the "update" event.
      *
-     * @param path - Path to the field (e.g., "cube.length", "__isValid")
-     * @param eventType - Event to listen for (defaults to "this-field-value-changed")
+     * @param path - Optional path to a field (e.g., "cube.length"). When omitted, listens on the model root.
+     * @param eventType - Event to listen for (defaults to "update")
      */
-    bind(path: string, eventType: ModelEventType = "update") {
+    bind(path?: string, eventType: ModelEventType = "update") {
       return function bindDecorator(target: object, propertyKey: string) {
         let metadata = bindingsMetadata.get(target);
         if (!metadata) {
@@ -200,27 +202,6 @@ function getFieldForPath(model: FieldNodeLike, path: string): FieldNodeLike {
 }
 
 /**
- * Get the value for a path from the model.
- */
-function getValueForPath(model: FieldNodeLike, path: string): unknown {
-  if (path.startsWith("__")) {
-    // Direct property access for internal properties
-    return (model as unknown as Record<string, unknown>)[path];
-  }
-  if (!path.includes(".")) {
-    // Direct child field
-    const field = (model as unknown as Record<string, unknown>)[path] as FieldNodeLike | undefined;
-    return field?.value ?? field;
-  }
-  // Nested path - get the field and return its value
-  if (model.__getFieldNodeByPath) {
-    const field = model.__getFieldNodeByPath(path);
-    return field?.value ?? field;
-  }
-  return undefined;
-}
-
-/**
  * Patch connectedCallback/disconnectedCallback for bind decorators.
  */
 function patchBindLifecycle(ctor: typeof ReactiveElement): void {
@@ -247,13 +228,10 @@ function patchBindLifecycle(ctor: typeof ReactiveElement): void {
     this[MODEL_BIND_LISTENERS] = listeners;
 
     metadata.forEach(({ model, path, eventType }, propKey) => {
-      const field = getFieldForPath(model, path);
-
-      // Set initial value
-      (this as unknown as Record<string, unknown>)[propKey] = getValueForPath(model, path);
+      const field = path ? getFieldForPath(model, path) : model;
 
       const listener = () => {
-        (this as unknown as Record<string, unknown>)[propKey] = getValueForPath(model, path);
+        this.requestUpdate();
       };
 
       listeners.set(propKey, { listener, field, eventType });
