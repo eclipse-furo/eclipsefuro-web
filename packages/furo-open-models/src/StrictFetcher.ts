@@ -1,139 +1,76 @@
-import { deepJsonNameToProtoName, deepProtoNameToJsonName, jsonNameToProtoName, protoNameToJsonName } from "./Mapper";
+import { FieldNode } from "./FieldNode";
 
 export interface IApiOptions {
-  // leave empty to connect to the same host which delivers your files, otherwise set something like http://localhost:3000
   serverAddr: string;
   ApiBaseURL: string;
   headers?: Headers;
   timeout?: number;
-  UseProtoNames: boolean; // server uses proto names on the transport layer
+  UseProtoNames: boolean;
   UseProtoNamesForQueryParams: boolean;
 }
 
 interface Handlers<REQ, RES> {
-  /**
-   * The `onResponse` handler is triggered, when we have a successful response.
-   * @param response
-   * @param serverResponse
-   */
   onResponse?: (response: RES, serverResponse: Response) => void;
-
-  /**
-   * The `onResponseError` handler is triggered on any received status >=400.
-   * @param parsedResponse - The parsed response body from the server.
-   * @param serverResponse
-   */
   onResponseError?: (parsedResponse: unknown, serverResponse: Response) => void;
-
-  /**
-   * The `onRequestStarted` handler is triggered, whenever a request is started.
-   * @param req - The request object
-   */
   onRequestStarted?: (req: REQ) => void;
-
-  /**
-   * The `onRequestFinished` handler is triggered, whenever a request is finished or aborted.
-   * @param req - The request object
-   */
   onRequestFinished?: (req: REQ) => void;
-
-  /**
-   * The `onRequestAborted` handler is triggered, whenever a request is aborted.
-   * An abort can be triggered by
-   *  - calling `abortPendingRequest`.
-   *  - triggering the request again, while you have a pending request.
-   *  - by reaching the request timeout.
-   *
-   *  The timeout can be set in the OPEN_MODELS_OPTIONS, the default is 600s aka 5min.
-   *
-   * @param req
-   */
   onRequestAborted?: (req: REQ) => void;
-
-  /**
-   * The `onResponseRaw` handler is triggered, when we have a successful response.
-   *
-   * @param serverResponse
-   */
   onResponseRaw?: (serverResponse: Response) => void;
-
-  /**
-   * The `onResponseErrorRaw` handler is triggered on any 400
-   * @param serverResponse
-   */
   onResponseErrorRaw?: (serverResponse: Response) => void;
-
-  /**
-   * The `onParseError` handler is triggered, when the content could not be parsed, according to the `content-type` header of the response.
-   *
-   * @param error
-   * @param serverResponse
-   */
   onResponseParseError?: (error: unknown, serverResponse: Response) => void;
-  /**
-   * The `onParseError` handler is triggered, when the content of the error could not be parsed, according to the `content-type` header of the response.
-   *
-   * @param error
-   * @param serverResponse
-   */
   onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
-
-  /**
-   * The `onFatalError` handler is triggered when nothing could be caught with the cather.
-   * This should not happen.
-   * @param error
-   */
   onFatalError?: (error: unknown) => void;
 }
 
-export class Fetcher<REQ, RES> {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type FieldNodeConstructor = new (initData?: any, parent?: FieldNode, parentAttributeName?: string) => FieldNode;
+
+export class StrictFetcher<REQ, RES> {
   public timeout: number;
-
-  /**
-   * Contains the response from the last request. Also on errors.
-   */
   public lastResponse: Response | undefined;
-
-  /**
-   * Indicator for a pending request. Maybe you are also interested on the `onRequestStarted` and `onRequestFinished` callback methods.
-   */
   public isLoading = false;
 
   private path: string;
-
   private requestInit: RequestInit;
-
   private method: string;
-
   private responseHandler: Map<string, (r: Response) => void> = new Map<string, (r: Response) => void>();
-
   private abortController: AbortController;
-
   private timeoutId: ReturnType<typeof setTimeout> | number | undefined;
-
   private bodyField: keyof REQ | "*" | undefined;
-
   private API_OPTIONS: IApiOptions;
 
-  /**
-   *
-   * @param options
-   * @param method
-   * @param path
-   * @param bodyField
-   */
+  private ReqType: FieldNodeConstructor;
+  private ResType: FieldNodeConstructor;
+
+  // Maps camelCase fieldName → protoName from the REQ type's field descriptors
+  private reqProtoNameMap: Map<string, string>;
+  // Maps camelCase fieldName → FieldConstructor from the REQ type's field descriptors
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private reqFieldConstructorMap: Map<string, any>;
+
   constructor(
     options: IApiOptions,
-    // method
     method: string,
-    // options path
     path: string,
-    bodyField?: keyof REQ | "*"
+    ReqType: FieldNodeConstructor,
+    ResType: FieldNodeConstructor,
+    bodyField?: keyof REQ | "*",
   ) {
     this.API_OPTIONS = options;
     this.path = path;
     this.bodyField = bodyField;
     this.method = method;
+    this.ReqType = ReqType;
+    this.ResType = ResType;
+
+    // Build the proto name map from the REQ type's field descriptors
+    this.reqProtoNameMap = new Map<string, string>();
+    this.reqFieldConstructorMap = new Map<string, FieldNodeConstructor>();
+    const tempReq = new ReqType();
+    tempReq.__meta.nodeFields.forEach(field => {
+      this.reqProtoNameMap.set(field.fieldName, field.protoName);
+      this.reqFieldConstructorMap.set(field.fieldName, field.FieldConstructor as FieldNodeConstructor);
+    });
 
     this.abortController = new AbortController();
     const { signal } = this.abortController;
@@ -144,7 +81,7 @@ export class Fetcher<REQ, RES> {
       redirect: "follow",
     };
 
-    this.timeout = this.API_OPTIONS.timeout ?? 300000; // chrome default timeout
+    this.timeout = this.API_OPTIONS.timeout ?? 300000;
   }
 
   public setRequestOptions(ri: RequestInit) {
@@ -157,10 +94,6 @@ export class Fetcher<REQ, RES> {
     };
   }
 
-  /**
-   * setHandlers let you bind all handlers at once.
-   * @param handlers
-   */
   public setHandlers(handlers: Handlers<REQ, RES>) {
     this.onResponse = handlers.onResponse;
     this.onResponseError = handlers.onResponseError;
@@ -190,7 +123,6 @@ export class Fetcher<REQ, RES> {
 
   public invoke(rqo: REQ, options?: RequestInit): Promise<RES> {
     return new Promise((resolve, reject) => {
-      // abort old request if it is still running
       if (this.isLoading) {
         this.abortPendingRequest("invoke triggered before response");
       }
@@ -270,43 +202,18 @@ export class Fetcher<REQ, RES> {
     });
   }
 
-  /**
-   * Succeeded is true if the request succeeded. The request succeeded if it
-   * loaded without error, wasn't aborted, and the status code is ≥ 200, and
-   * < 300, or if the status code is 0.
-   */
-
-  /**
-   * Errorhandling according to Google rest-api-v3 Status Codes
-   * (https://developers.google.com/maps-booking/reference/rest-api-v3/status_codes)
-   *
-   * Dispatches event `response-error` and a specific error event with status code
-   * @private
-   */
   _reworkRequest(response: Response): Promise<RES> {
     return new Promise((resolve, reject) => {
-      /**
-       * Status code 0 is accepted as a success because some schemes - e.g.,
-       * file:// - don't provide status codes.
-       */
       this.isLoading = false;
       clearTimeout(this.timeoutId);
       const status = response.status;
 
       if (status === 0 || (status >= 200 && status < 300)) {
-        /**
-         * Loaded without error, fires event `response` with full response object
-         */
         this.lastResponse = response;
 
         if (this.onResponseRaw) {
           this.onResponseRaw(response);
         }
-
-        /**
-         * parses response object according to response heaader informationen `content-type`
-         * you will find the supported content-types in the declaration area
-         */
 
         this._parseResponse(response)
           .then(r => {
@@ -323,17 +230,11 @@ export class Fetcher<REQ, RES> {
             }
           });
       } else {
-        /**
-         * Error detected
-         */
         this.lastResponse = response;
         if (this.onResponseErrorRaw) {
           this.onResponseErrorRaw(response);
         }
 
-        /**
-         * parses response object according to response heaader `content-type`
-         */
         this._parseResponse(response)
           .then(r => {
             // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
@@ -342,10 +243,6 @@ export class Fetcher<REQ, RES> {
               this.onResponseError(r, response);
             }
           })
-          /**
-           * error parsing is not possible, empty response
-           * the dispatched event will have the raw error object in the event detail
-           */
           .catch((error: unknown) => {
             // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
             reject(error);
@@ -356,15 +253,6 @@ export class Fetcher<REQ, RES> {
       }
     });
   }
-
-  /**
-   * parses response object according to lastRequest header informationen `content-type`
-   * you will find the supported content-types in the declaration area
-   * response Fetch API response object [https://developer.mozilla.org/en-US/docs/Web/API/Response]
-   * Default response handler is json!
-   * @param response
-   * @private
-   */
 
   _parseResponse(response: Response) {
     return new Promise((resolve, reject) => {
@@ -391,11 +279,18 @@ export class Fetcher<REQ, RES> {
               reject(err);
             });
         });
+
         this.responseHandler.set("application/json", r => {
           r.json()
             .then(json => {
-              // convert to literal type when needed
-              resolve(this.API_OPTIONS.UseProtoNames ? deepProtoNameToJsonName(json) : json);
+              if (this.API_OPTIONS.UseProtoNames) {
+                // Use FieldNode-based conversion instead of generic Mapper
+                const resNode = new this.ResType();
+                resNode.__fromProtoNameJson(json);
+                resolve(resNode.__toLiteral());
+              } else {
+                resolve(json);
+              }
             })
             .catch((err: unknown) => {
               // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
@@ -405,6 +300,7 @@ export class Fetcher<REQ, RES> {
 
         this.responseHandler.set("application/x-ndjson", r => {
           const preserveProtoNames = this.API_OPTIONS.UseProtoNames;
+          const ResTypeCtor = this.ResType;
 
           const reader = r.body?.getReader();
           if (!reader) {
@@ -414,7 +310,6 @@ export class Fetcher<REQ, RES> {
           const decoder = new TextDecoder();
           let buffer = "";
 
-          // Async generator that yields parsed NDJSON objects.
           const iterator = {
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
               // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- loop exits via break on done
@@ -424,34 +319,42 @@ export class Fetcher<REQ, RES> {
 
                 buffer += decoder.decode(value, { stream: true });
 
-                // Split the buffer into lines. The last line may be incomplete.
                 const lines = buffer.split("\n");
                 buffer = lines.pop() ?? "";
 
                 for (const line of lines) {
                   const trimmed = line.trim();
                   if (trimmed === "") {
-                    continue; // skip empty lines
+                    continue;
                   }
 
-                  // Parse the JSON line and yield the result.
                   let parsed: RES;
                   try {
                     parsed = JSON.parse(trimmed) as RES;
                   } catch {
-                    // If parsing fails, we can choose to throw, skip, or yield an error object.
-                    // Here we simply rethrow to fail fast.
                     throw new Error(`Failed to parse NDJSON line: ${trimmed}`);
                   }
 
-                  yield preserveProtoNames ? (deepProtoNameToJsonName(parsed) as RES) : parsed;
+                  if (preserveProtoNames) {
+                    const resNode = new ResTypeCtor();
+                    resNode.__fromProtoNameJson(parsed);
+                    yield resNode.__toLiteral() as RES;
+                  } else {
+                    yield parsed;
+                  }
                 }
               }
 
-              // Emit any remaining data after the last chunk.
               if (buffer.trim() !== "") {
                 try {
-                  yield JSON.parse(buffer.trim()) as RES;
+                  const parsed = JSON.parse(buffer.trim()) as RES;
+                  if (preserveProtoNames) {
+                    const resNode = new ResTypeCtor();
+                    resNode.__fromProtoNameJson(parsed);
+                    yield resNode.__toLiteral() as RES;
+                  } else {
+                    yield parsed;
+                  }
                 } catch {
                   throw new Error(`Failed to parse final NDJSON line: ${buffer.trim()}`);
                 }
@@ -459,8 +362,6 @@ export class Fetcher<REQ, RES> {
             },
           };
 
-          // Return the async iterator that satisfies the Symbol.asyncIterator contract.
-          // as unknown as AsyncIterable<RES>
           resolve(iterator);
         });
 
@@ -517,13 +418,11 @@ export class Fetcher<REQ, RES> {
   private buildPathAndBodyfield(
     path: string,
     bodyField: keyof REQ | "*" | undefined,
-    rqo: REQ
+    rqo: REQ,
   ): {
     evaluatedPath: string;
     evaluatedBody: string | undefined;
   } {
-    // use the rules specified here  https://docs.solo.io/gloo-edge/latest/reference/api/github.com/solo-io/solo-kit/api/external/google/api/http.proto.sk/
-    // find all fields in path
     let evaluatedPath = path;
     let evaluatedBody;
 
@@ -532,36 +431,56 @@ export class Fetcher<REQ, RES> {
       keysForBodyOrQueryParams.set(key, key as keyof REQ);
     });
 
+    // Build a reverse map: protoName → camelCase fieldName for path template resolution
+    const protoToFieldMap = new Map<string, string>();
+    this.reqProtoNameMap.forEach((protoName, fieldName) => {
+      protoToFieldMap.set(protoName, fieldName);
+    });
+
     const fields = [...path.matchAll(/\{([^}]+)}/g)];
-    // replace url templates with values
-    // /v1/cube/{id} => /v1/cube/12
+    // Replace URL templates with values: /v1/cube/{cube_id} => /v1/cube/12
+    // Path templates use proto names, but rqo uses camelCase keys
     fields.forEach(field => {
-      const rqoKey = protoNameToJsonName(field[1]) as keyof REQ;
-      const rqoValue = rqo[rqoKey];
+      const protoName = field[1];
+      const camelKey = (protoToFieldMap.get(protoName) ?? protoName) as keyof REQ;
+      const rqoValue = rqo[camelKey];
       evaluatedPath = evaluatedPath.replace(field[0], String(rqoValue));
-      keysForBodyOrQueryParams.delete(rqoKey as string);
+      keysForBodyOrQueryParams.delete(camelKey as string);
     });
 
     if (bodyField === "*") {
-      // build body object
-      const body: Record<string, unknown> = {};
-      keysForBodyOrQueryParams.forEach(key => {
-        body[key as string] = rqo[key];
-      });
-      evaluatedBody = JSON.stringify(body);
+      // Use FieldNode serialization for body when UseProtoNames is true
+      if (this.API_OPTIONS.UseProtoNames) {
+        const reqNode = new this.ReqType();
+        // Build a literal from remaining keys
+        const literalBody: Record<string, unknown> = {};
+        keysForBodyOrQueryParams.forEach(key => {
+          literalBody[key as string] = rqo[key];
+        });
+        reqNode.__fromLiteral(literalBody);
+        evaluatedBody = JSON.stringify(reqNode.__toJson());
+      } else {
+        const body: Record<string, unknown> = {};
+        keysForBodyOrQueryParams.forEach(key => {
+          body[key as string] = rqo[key];
+        });
+        evaluatedBody = JSON.stringify(body);
+      }
     } else {
-      // build query params
+      // Build query params
       const params: string[] = [];
       if (bodyField !== undefined) {
         keysForBodyOrQueryParams.delete(bodyField as string);
       }
       keysForBodyOrQueryParams.forEach(key => {
+        // Use the reqProtoNameMap for proto name lookup instead of generic conversion
+        const paramName = this.API_OPTIONS.UseProtoNamesForQueryParams ? (this.reqProtoNameMap.get(key as string) ?? (key as string)) : (key as string);
         if (Array.isArray(rqo[key])) {
           (rqo[key] as unknown[]).forEach(e => {
-            params.push(`${this.API_OPTIONS.UseProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${String(e)}`);
+            params.push(`${paramName}=${String(e)}`);
           });
         } else {
-          params.push(`${this.API_OPTIONS.UseProtoNames ? jsonNameToProtoName(key as string) : (key as string)}=${String(rqo[key])}`);
+          params.push(`${paramName}=${String(rqo[key])}`);
         }
       });
       if (params.length) {
@@ -569,7 +488,21 @@ export class Fetcher<REQ, RES> {
       }
 
       if (bodyField !== undefined) {
-        evaluatedBody = JSON.stringify(this.API_OPTIONS.UseProtoNames ? deepJsonNameToProtoName(rqo[bodyField]) : rqo[bodyField]);
+        // Use FieldNode serialization for the named body field when UseProtoNames is true
+        if (this.API_OPTIONS.UseProtoNames) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- FieldConstructor stored from meta is untyped
+          const FieldCtor = this.reqFieldConstructorMap.get(bodyField as string);
+          if (FieldCtor) {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- FieldConstructor is dynamically resolved from meta
+            const fieldNode = new FieldCtor(undefined) as FieldNode;
+            fieldNode.__fromLiteral(rqo[bodyField]);
+            evaluatedBody = JSON.stringify(fieldNode.__toJson());
+          } else {
+            evaluatedBody = JSON.stringify(rqo[bodyField]);
+          }
+        } else {
+          evaluatedBody = JSON.stringify(rqo[bodyField]);
+        }
       }
     }
 
@@ -581,78 +514,14 @@ export class Fetcher<REQ, RES> {
     };
   }
 
-  /**
-   * The `onResponse` handler is triggered, when we have a successful response.
-   * @param response
-   * @param serverResponse
-   */
   onResponse?: (response: RES, serverResponse: Response) => void;
-
-  /**
-   * The `onResponseError` handler is triggered on any received status >=400.
-   * @param parsedResponse - The parsed response body from the server.
-   * @param serverResponse
-   */
   onResponseError?: (parsedResponse: unknown, serverResponse: Response) => void;
-
-  /**
-   * The `onRequestStarted` handler is triggered, whenever a request is started.
-   * @param req - The request object
-   */
   onRequestStarted?: (req: REQ) => void;
-
-  /**
-   * The `onRequestFinished` handler is triggered, whenever a request is finished or aborted.
-   * @param req - The request object
-   */
   onRequestFinished?: (req: REQ) => void;
-
-  /**
-   * The `onRequestAborted` handler is triggered, whenever a request is aborted.
-   * An abort can be triggered by
-   *  - calling `abortPendingRequest`.
-   *  - triggering the request again, while you have a pending request.
-   *  - by reaching the request timeout.
-   *
-   *  The timeout can be set in the OPEN_MODELS_OPTIONS, the default is 600s aka 5min.
-   *
-   * @param req
-   */
   onRequestAborted?: (req: REQ) => void;
-
-  /**
-   * The `onResponseRaw` handler is triggered, when we have a successful response.
-   *
-   * @param serverResponse
-   */
   onResponseRaw?: (serverResponse: Response) => void;
-
-  /**
-   * The `onResponseErrorRaw` handler is triggered on any 400
-   * @param serverResponse
-   */
   onResponseErrorRaw?: (serverResponse: Response) => void;
-
-  /**
-   * The `onParseError` handler is triggered, when the content could not be parsed, according to the `content-type` header of the response.
-   *
-   * @param error
-   * @param serverResponse
-   */
   onResponseParseError?: (error: unknown, serverResponse: Response) => void;
-
-  /**
-   * The `onParseError` handler is triggered, when the content of the error could not be parsed, according to the `content-type` header of the response.
-   *
-   * @param error
-   * @param serverResponse
-   */
   onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
-
-  /**
-   * The `onFatalError` handler is triggered when nothing could be caught with the cather.
-   * This should not happen.
-   * @param error
-   */
   onFatalError?: (error: unknown) => void;
 }

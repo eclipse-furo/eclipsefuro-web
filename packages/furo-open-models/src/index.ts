@@ -54,6 +54,9 @@ export { DefaultServiceEventHandlers, CreateDispatch } from './decorators/Defaul
 export type { EntityServiceEventType, TypedEntityService } from './decorators/EntityServiceTypes';
 export type { EntityServiceEventMap } from './decorators/EntityServiceTypes';
 
+export { StrictFetcher } from './StrictFetcher';
+export type { IApiOptions as IStrictApiOptions } from './StrictFetcher';
+
 export interface IAny {
   '@type': string;
   [key: string]: unknown;

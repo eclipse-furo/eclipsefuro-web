@@ -2,19 +2,38 @@
 // protoc-gen-open-models version: ????
 
 import { Fetcher } from '@furo/open-models/dist/Fetcher';
+import { StrictFetcher } from '@furo/open-models/dist/StrictFetcher';
 import { API_OPTIONS } from '../../API_OPTIONS';
 
-import { type ICubeServiceGetListRequest as IFuroCubeCubeServiceGetListRequest } from './CubeServiceGetListRequest';
+import {
+  CubeServiceGetListRequest as FuroCubeCubeServiceGetListRequest,
+  type ICubeServiceGetListRequest as IFuroCubeCubeServiceGetListRequest,
+} from './CubeServiceGetListRequest';
 
-import { type ICubeServiceGetListResponse as IFuroCubeCubeServiceGetListResponse } from './CubeServiceGetListResponse';
+import {
+  CubeServiceGetListResponse as FuroCubeCubeServiceGetListResponse,
+  type ICubeServiceGetListResponse as IFuroCubeCubeServiceGetListResponse,
+} from './CubeServiceGetListResponse';
 
-import { type ICubeServiceGetRequest as IFuroCubeCubeServiceGetRequest } from './CubeServiceGetRequest';
+import {
+  CubeServiceGetRequest as FuroCubeCubeServiceGetRequest,
+  type ICubeServiceGetRequest as IFuroCubeCubeServiceGetRequest,
+} from './CubeServiceGetRequest';
 
-import { type ICubeServiceGetResponse as IFuroCubeCubeServiceGetResponse } from './CubeServiceGetResponse';
+import {
+  CubeServiceGetResponse as FuroCubeCubeServiceGetResponse,
+  type ICubeServiceGetResponse as IFuroCubeCubeServiceGetResponse,
+} from './CubeServiceGetResponse';
 
-import { type ICubeServiceUpdateRequest as IFuroCubeCubeServiceUpdateRequest } from './CubeServiceUpdateRequest';
+import {
+  CubeServiceUpdateRequest as FuroCubeCubeServiceUpdateRequest,
+  type ICubeServiceUpdateRequest as IFuroCubeCubeServiceUpdateRequest,
+} from './CubeServiceUpdateRequest';
 
-import { type ICubeServiceUpdateResponse as IFuroCubeCubeServiceUpdateResponse } from './CubeServiceUpdateResponse';
+import {
+  CubeServiceUpdateResponse as FuroCubeCubeServiceUpdateResponse,
+  type ICubeServiceUpdateResponse as IFuroCubeCubeServiceUpdateResponse,
+} from './CubeServiceUpdateResponse';
 
 //  cube services
 
@@ -43,4 +62,33 @@ export class CubeService {
     IFuroCubeCubeServiceUpdateRequest,
     IFuroCubeCubeServiceUpdateResponse
   >(API_OPTIONS, 'PUT', '/v1/cubes/{cube_id}', 'entity');
+}
+
+//  cube services with StrictFetcher (FieldNode-based conversion)
+
+export class StrictCubeService {
+  //  Get a list of cubes
+  public GetList: StrictFetcher<
+    IFuroCubeCubeServiceGetListRequest,
+    IFuroCubeCubeServiceGetListResponse
+  > = new StrictFetcher<
+    IFuroCubeCubeServiceGetListRequest,
+    IFuroCubeCubeServiceGetListResponse
+  >(API_OPTIONS, 'GET', '/v1/cubes', FuroCubeCubeServiceGetListRequest, FuroCubeCubeServiceGetListResponse);
+
+  public Get: StrictFetcher<
+    IFuroCubeCubeServiceGetRequest,
+    IFuroCubeCubeServiceGetResponse
+  > = new StrictFetcher<
+    IFuroCubeCubeServiceGetRequest,
+    IFuroCubeCubeServiceGetResponse
+  >(API_OPTIONS, 'GET', '/v1/cubes/{cube_id}', FuroCubeCubeServiceGetRequest, FuroCubeCubeServiceGetResponse);
+
+  public Update: StrictFetcher<
+    IFuroCubeCubeServiceUpdateRequest,
+    IFuroCubeCubeServiceUpdateResponse
+  > = new StrictFetcher<
+    IFuroCubeCubeServiceUpdateRequest,
+    IFuroCubeCubeServiceUpdateResponse
+  >(API_OPTIONS, 'PUT', '/v1/cubes/{cube_id}', FuroCubeCubeServiceUpdateRequest, FuroCubeCubeServiceUpdateResponse, 'entity');
 }

@@ -8,5 +8,5 @@ export const API_OPTIONS: IApiOptions = {
   ApiBaseURL: '/api',
   headers: new Headers({ 'Content-Type': 'application/json' }),
   timeout: 3000, // Timeout for requests.
-  PreserveProtoNames: false,
+  UseProtoNames: true,
 };

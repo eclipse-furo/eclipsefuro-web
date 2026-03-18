@@ -8,7 +8,7 @@
     "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
   },
   "author": "eclipse furo",
-  "version": "1.16.2",
+  "version": "1.17.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -51,17 +51,7 @@
     "@bufbuild/buf": "^1.38.0",
     "@bufbuild/protobuf": "^2.0.0",
     "@bufbuild/protoc-gen-es": "^2.0.0",
-    "@custom-elements-manifest/analyzer": "^0.10.3",
-    "@furo/fbp": "^6.15.0",
-    "cem-plugin-vs-code-custom-data-generator": "^1.4.2",
-    "concurrently": "^8.2.2",
-    "custom-element-jet-brains-integration": "^1.6.2",
-    "husky": "^9.0.11",
-    "lint-staged": "^15.2.7",
-    "lit": "^3.2.1",
-    "prettier": "^3.3.2",
-    "tslib": "^2.8.1",
-    "typescript": "^5.7.2"
+    "lit": "^3.2.1"
   },
   "customElements": "/custom-elements.json",
   "publishConfig": {
