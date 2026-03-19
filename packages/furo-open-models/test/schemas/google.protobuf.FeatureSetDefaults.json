@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSetDefaults.json",
+  "type": "object",
+  "description": "A compiled specification for the defaults of a set of features.  These\n messages are generated from FeatureSet extensions and can be used to seed\n feature resolution. The resolution with this object becomes a simple search\n for the closest matching edition, followed by proto merges.FeatureSetDefaults",
+  "properties": {
+    "defaults": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.json"
+      }
+    },
+    "maximumEdition": {
+      "$ref": "google.protobuf.Edition.json",
+      "description": "The maximum known edition (inclusive) when this was constructed. Editions\n after this will not have reliable defaults."
+    },
+    "minimumEdition": {
+      "$ref": "google.protobuf.Edition.json",
+      "description": "The minimum supported edition (inclusive) when this was constructed.\n Editions before this will not have defaults."
+    }
+  }
+}

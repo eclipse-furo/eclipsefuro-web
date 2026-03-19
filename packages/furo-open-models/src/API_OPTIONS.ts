@@ -1,4 +1,4 @@
-import type { IApiOptions } from './Fetcher';
+import type { IApiOptions } from "./Fetcher";
 
 /**
  * To set the API OPTIONS you should update this const, before you create new services

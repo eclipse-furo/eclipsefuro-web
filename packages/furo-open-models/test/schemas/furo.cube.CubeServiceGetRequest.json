@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeServiceGetRequest.json",
+  "type": "object",
+  "properties": {
+    "cubeId": {
+      "type": "string",
+      "description": "ID of the cube"
+    },
+    "fields": {
+      "type": "string",
+      "description": "Partial Response, https://cloud.google.com/apis/design/design_patterns#partial_response\n use wildcard * to get all fields",
+      "default": "*"
+    }
+  }
+}

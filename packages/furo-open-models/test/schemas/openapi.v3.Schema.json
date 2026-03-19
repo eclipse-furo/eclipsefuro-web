@@ -1,0 +1,134 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Schema.json",
+  "type": "object",
+  "description": "The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.  For more information about the properties, see JSON Schema Core and JSON Schema Validation. Unless stated otherwise, the property definitions follow the JSON Schema.Schema",
+  "properties": {
+    "additionalProperties": {
+      "$ref": "openapi.v3.AdditionalPropertiesItem.json"
+    },
+    "allOf": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SchemaOrReference.json"
+      }
+    },
+    "anyOf": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SchemaOrReference.json"
+      }
+    },
+    "default": {
+      "$ref": "openapi.v3.DefaultType.json"
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "discriminator": {
+      "$ref": "openapi.v3.Discriminator.json"
+    },
+    "enum": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.Any.json"
+      }
+    },
+    "example": {
+      "$ref": "openapi.v3.Any.json"
+    },
+    "exclusiveMaximum": {
+      "type": "boolean"
+    },
+    "exclusiveMinimum": {
+      "type": "boolean"
+    },
+    "externalDocs": {
+      "$ref": "openapi.v3.ExternalDocs.json"
+    },
+    "format": {
+      "type": "string"
+    },
+    "items": {
+      "$ref": "openapi.v3.ItemsItem.json"
+    },
+    "maxItems": {
+      "type": "integer"
+    },
+    "maxLength": {
+      "type": "integer"
+    },
+    "maxProperties": {
+      "type": "integer"
+    },
+    "maximum": {
+      "type": "number"
+    },
+    "minItems": {
+      "type": "integer"
+    },
+    "minLength": {
+      "type": "integer"
+    },
+    "minProperties": {
+      "type": "integer"
+    },
+    "minimum": {
+      "type": "number"
+    },
+    "multipleOf": {
+      "type": "number"
+    },
+    "not": {
+      "$ref": "openapi.v3.Schema.json"
+    },
+    "nullable": {
+      "type": "boolean"
+    },
+    "oneOf": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SchemaOrReference.json"
+      }
+    },
+    "pattern": {
+      "type": "string"
+    },
+    "properties": {
+      "$ref": "openapi.v3.Properties.json"
+    },
+    "readOnly": {
+      "type": "boolean"
+    },
+    "required": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "title": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "uniqueItems": {
+      "type": "boolean"
+    },
+    "writeOnly": {
+      "type": "boolean"
+    },
+    "xml": {
+      "$ref": "openapi.v3.Xml.json"
+    }
+  }
+}

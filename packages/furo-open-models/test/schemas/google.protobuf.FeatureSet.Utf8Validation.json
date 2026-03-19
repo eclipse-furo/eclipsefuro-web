@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.Utf8Validation.json",
+  "type": "string",
+  "enum": [
+    "UTF8_VALIDATION_UNKNOWN",
+    "NONE",
+    "VERIFY"
+  ]
+}

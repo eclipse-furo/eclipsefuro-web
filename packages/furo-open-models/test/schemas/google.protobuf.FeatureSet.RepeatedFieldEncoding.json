@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.RepeatedFieldEncoding.json",
+  "type": "string",
+  "enum": [
+    "REPEATED_FIELD_ENCODING_UNKNOWN",
+    "PACKED",
+    "EXPANDED"
+  ]
+}

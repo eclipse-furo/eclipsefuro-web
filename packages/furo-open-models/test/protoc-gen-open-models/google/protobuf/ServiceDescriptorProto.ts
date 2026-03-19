@@ -2,22 +2,18 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   MethodDescriptorProto as GoogleProtobufMethodDescriptorProto,
   type IMethodDescriptorProto as IGoogleProtobufMethodDescriptorProto,
   type TMethodDescriptorProto as TGoogleProtobufMethodDescriptorProto,
-} from './MethodDescriptorProto';
+} from "./MethodDescriptorProto";
 
 import {
   ServiceOptions as GoogleProtobufServiceOptions,
   type IServiceOptions as IGoogleProtobufServiceOptions,
   type TServiceOptions as TGoogleProtobufServiceOptions,
-} from './ServiceOptions';
+} from "./ServiceOptions";
+
+import { ARRAY, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IServiceDescriptorProto
@@ -44,69 +40,67 @@ export interface TServiceDescriptorProto {
  *  Describes a service.
  */
 export class ServiceDescriptorProto extends FieldNode {
+  /**
+   **/
   private _name: STRING;
 
-  private _method: ARRAY<
-    GoogleProtobufMethodDescriptorProto,
-    IGoogleProtobufMethodDescriptorProto
-  >;
+  /**
+   **/
+  private _method: ARRAY<GoogleProtobufMethodDescriptorProto, IGoogleProtobufMethodDescriptorProto>;
 
+  /**
+   **/
   private _options: GoogleProtobufServiceOptions;
 
   public __defaultValues: IServiceDescriptorProto;
 
-  constructor(
-    initData?: IServiceDescriptorProto,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IServiceDescriptorProto, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.ServiceDescriptorProto';
-    this.__meta.description = 'ServiceDescriptorProto Describes a service.';
+    this.__meta.typeName = "google.protobuf.ServiceDescriptorProto";
+    this.__meta.description = "ServiceDescriptorProto Describes a service.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'name',
-        protoName: 'name',
+        fieldName: "name",
+        protoName: "name",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'method',
-        protoName: 'method',
+        fieldName: "method",
+        protoName: "method",
         FieldConstructor: GoogleProtobufMethodDescriptorProto,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'options',
-        protoName: 'options',
+        fieldName: "options",
+        protoName: "options",
         FieldConstructor: GoogleProtobufServiceOptions,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._name = new STRING(undefined, this, 'name');
+    // ---------------------
 
-    this._method = new ARRAY<
-      GoogleProtobufMethodDescriptorProto,
-      IGoogleProtobufMethodDescriptorProto
-    >(undefined, this, 'method');
+    /**
+     **/
+    this._name = new STRING(undefined, this, "name");
 
-    this._options = new GoogleProtobufServiceOptions(
-      undefined,
-      this,
-      'options',
-    );
+    /**
+     **/
+    this._method = new ARRAY<GoogleProtobufMethodDescriptorProto, IGoogleProtobufMethodDescriptorProto>(undefined, this, "method");
+
+    /**
+     **/
+    this._options = new GoogleProtobufServiceOptions(undefined, this, "options");
 
     // Set required fields
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof ServiceDescriptorProto] as FieldNode
-      ).__meta.required = true;
+      (this[fieldName as keyof ServiceDescriptorProto] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -121,51 +115,61 @@ export class ServiceDescriptorProto extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof ServiceDescriptorProto] as FieldNode
-      ).__readonly = true;
+      (this[fieldName as keyof ServiceDescriptorProto] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get name(): STRING {
     return this._name;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set name(v: string) {
     this.__PrimitivesSetter(this._name, v);
   }
 
-  public get method(): ARRAY<
-    GoogleProtobufMethodDescriptorProto,
-    IGoogleProtobufMethodDescriptorProto
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get method(): ARRAY<GoogleProtobufMethodDescriptorProto, IGoogleProtobufMethodDescriptorProto> {
     return this._method;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufMethodDescriptorProto[]`
+   **/
   public set method(v: IGoogleProtobufMethodDescriptorProto[]) {
     this.__TypeSetter(this._method, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get options(): GoogleProtobufServiceOptions {
     return this._options;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufServiceOptions`
+   **/
   public set options(v: IGoogleProtobufServiceOptions) {
     this.__TypeSetter(this._options, v);
   }
 
-  fromLiteral(data: IServiceDescriptorProto) {
+  fromLiteral(data: IServiceDescriptorProto): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IServiceDescriptorProto {
-    return super.__toLiteral();
+    return super.__toLiteral() as IServiceDescriptorProto;
   }
 }
 
-Registry.register(
-  'google.protobuf.ServiceDescriptorProto',
-  ServiceDescriptorProto,
-);
+Registry.register("google.protobuf.ServiceDescriptorProto", ServiceDescriptorProto);

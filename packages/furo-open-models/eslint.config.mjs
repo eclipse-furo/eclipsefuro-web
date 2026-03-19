@@ -3,17 +3,14 @@ import { createTsEslintConfig } from "../../eslint-ts-base.config.mjs";
 export default createTsEslintConfig({
   tsconfigPath: ["./tsconfig.eslint.json"],
   ignores: [
-    "src/generated/**",
-    "src/wc-type-renderer/**",
-    "src/models/**",
-    "src/x/models/**",
-    "lib/**"
+
   ],
   overrides: [
     {
       files: ["**/*.ts"],
       rules: {
         "lit/no-classfield-shadowing": "warn",
+        "@typescript-eslint/related-getter-setter-pairs":"off",
         "lit/quoted-expressions": "off",
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": ["error"],

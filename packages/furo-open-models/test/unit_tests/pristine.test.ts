@@ -1,127 +1,127 @@
-import { expect } from 'vitest';
+import { expect } from "vitest";
 
-import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '../protoc-gen-open-models/furo/type/BookingCenter';
+import { Identifier } from "../protoc-gen-open-models/furo/type/Identifier";
+import { BookingCenter } from "../protoc-gen-open-models/furo/type/BookingCenter";
 
-describe('Pristine State', () => {
-  it('should create an empty object', async () => {
+describe("Pristine State", () => {
+  it("should create an empty object", async () => {
     const id = new Identifier();
     expect(id.__isPristine).equal(true);
   });
 
-  it('should have not be pristine after deep changes', async () => {
-    const id = new Identifier({ id: 'init' });
+  it("should have not be pristine after deep changes", async () => {
+    const id = new Identifier({ id: "init" });
     expect(id.__isPristine).equal(true);
-    id.decRange.start.value = '1234';
+    id.decRange.start.value = "1234";
     expect(id.__isPristine).equal(false);
     expect(id.__toLiteral()).to.eql({
-      id: 'init',
-      decRange: { start: { value: '1234' } },
-      stringArray: ['A', 'B', 'C'],
+      id: "init",
+      decRange: { start: { value: "1234" } },
+      stringArray: ["A", "B", "C"],
     });
     expect(id.__isPristine).equal(false);
   });
 
-  it('should have not be pristine after changes of children of an array', async () => {
-    const id = new Identifier({ id: 'init' });
+  it("should have not be pristine after changes of children of an array", async () => {
+    const id = new Identifier({ id: "init" });
     expect(id.__isPristine).equal(true);
-    id.stringArray.push('stringliteral');
+    id.stringArray.push("stringliteral");
     expect(id.__isPristine).equal(false);
     expect(id.__toLiteral()).to.eql({
-      id: 'init',
-      stringArray: ['A', 'B', 'C', 'stringliteral'],
+      id: "init",
+      stringArray: ["A", "B", "C", "stringliteral"],
     });
     expect(id.__isPristine).equal(false);
   });
 
-  it('should set pristine to true after a fromLiteral({})', async () => {
+  it("should set pristine to true after a fromLiteral({})", async () => {
     const id = new Identifier({
-      id: 'deep',
-      attributes: { key: 'BBBB', value: 'stand' },
-      stringArray: ['------', '++++++'],
+      id: "deep",
+      attributes: { key: "BBBB", value: "stand" },
+      stringArray: ["------", "++++++"],
       bookingCenter: BookingCenter.BBC_AT,
       decRange: {
-        start: { value: '123' },
-        end: { value: '12335' },
+        start: { value: "123" },
+        end: { value: "12335" },
       },
       any: {
-        '@type': 'x/furo.type.Identifier',
-        id: 'he',
+        "@type": "x/furo.type.Identifier",
+        id: "he",
         bookingCenter: BookingCenter.BBC_SG,
-        attributes: { key: 'BBBB', value: 'stand' },
+        attributes: { key: "BBBB", value: "stand" },
       },
-      repeatedDecimal: [{ value: '1234' }, { value: '12324' }],
+      repeatedDecimal: [{ value: "1234" }, { value: "12324" }],
       fatString: {
-        value: '123',
+        value: "123",
         labels: { aaa: true, xxxx: false },
-        attributes: { key: 'BBBB', value: 'stand.' },
+        attributes: { key: "BBBB", value: "stand." },
       },
     });
     expect(id.__isPristine).equal(true);
     // no changes, same value
-    id.decRange.start.value = '123';
+    id.decRange.start.value = "123";
     expect(id.__isPristine).equal(true);
 
-    id.decRange.start.value = '1234';
+    id.decRange.start.value = "1234";
     expect(id.__isPristine).equal(false);
 
-    id.fromLiteral({ id: 'other' });
+    id.fromLiteral({ id: "other" });
     expect(id.__isPristine).equal(true);
 
-    id.id = 'xxx';
+    id.id = "xxx";
     expect(id.__isPristine).equal(false);
   });
 
-  it('should set pristine to true after a reset', async () => {
-    const id = new Identifier({ id: 'init' });
+  it("should set pristine to true after a reset", async () => {
+    const id = new Identifier({ id: "init" });
     expect(id.__isPristine).equal(true);
     // no changes, same value
-    id.id = 'init';
+    id.id = "init";
     expect(id.__isPristine).equal(true);
 
-    id.id = 'xxx';
+    id.id = "xxx";
     expect(id.__isPristine).equal(false);
 
     id.__reset();
     expect(id.__isPristine).equal(true);
   });
 
-  it('should have a pristine object from start', async () => {
-    const id = new Identifier({ id: 'init' });
+  it("should have a pristine object from start", async () => {
+    const id = new Identifier({ id: "init" });
     expect(id.__isPristine).equal(true);
   });
 
-  it('should have a pristine object from start even with deep objects', async () => {
+  it("should have a pristine object from start even with deep objects", async () => {
     const id = new Identifier({
-      id: 'deep',
-      attributes: { key: 'BBBB', value: 'stand' },
-      stringArray: ['------', '++++++'],
+      id: "deep",
+      attributes: { key: "BBBB", value: "stand" },
+      stringArray: ["------", "++++++"],
       bookingCenter: BookingCenter.BBC_AT,
       decRange: {
-        start: { value: '123' },
-        end: { value: '12335' },
+        start: { value: "123" },
+        end: { value: "12335" },
       },
       any: {
-        '@type': 'x/furo.type.Identifier',
-        id: 'he',
+        "@type": "x/furo.type.Identifier",
+        id: "he",
         bookingCenter: BookingCenter.BBC_SG,
-        attributes: { key: 'BBBB', value: 'stand' },
+        attributes: { key: "BBBB", value: "stand" },
       },
-      repeatedDecimal: [{ value: '1234' }, { value: '12324' }],
+      repeatedDecimal: [{ value: "1234" }, { value: "12324" }],
       fatString: {
-        value: '123',
+        value: "123",
         labels: { aaa: true, xxxx: false },
-        attributes: { key: 'BBBB', value: 'stand.' },
+        attributes: { key: "BBBB", value: "stand." },
       },
     });
     expect(id.__isPristine).equal(true);
   });
 
-  it('should have not be pristine after changes', async () => {
-    const id = new Identifier({ id: 'init' });
-    id.id = 'stringliteral';
-    expect(id.id.value).to.eql('stringliteral');
-    expect(id.id.toString()).to.eql('stringliteral');
+  it("should have not be pristine after changes", async () => {
+    const id = new Identifier({ id: "init" });
+    id.id = "stringliteral";
+    expect(id.id.value).to.eql("stringliteral");
+    expect(id.id.toString()).to.eql("stringliteral");
     expect(id.__isPristine).equal(false);
   });
 });

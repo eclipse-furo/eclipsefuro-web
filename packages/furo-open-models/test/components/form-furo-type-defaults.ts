@@ -1,7 +1,7 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement } from "lit";
 // eslint-disable-next-line import/extensions
-import { property } from 'lit/decorators.js';
-import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import { property } from "lit/decorators.js";
+import { Defaults } from "../protoc-gen-open-models/furo/type/Defaults";
 
 /**
  * ### Description
@@ -16,7 +16,7 @@ import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
 export class formFuroTypeDefaults extends LitElement {
   set fieldNode(fn: Defaults) {
     this.data = fn;
-    this.data.__addEventListener('field-value-changed', () => {
+    this.data.__addEventListener("field-value-changed", () => {
       this.requestUpdate();
     });
     this.requestUpdate();
@@ -58,4 +58,4 @@ export class formFuroTypeDefaults extends LitElement {
   }
 }
 
-window.customElements.define('form-furo-type-defaults', formFuroTypeDefaults);
+window.customElements.define("form-furo-type-defaults", formFuroTypeDefaults);

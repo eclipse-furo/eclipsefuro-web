@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.fat.Uint64.json",
+  "type": "object",
+  "description": "Furo annotated type wrapper message for `uint64`.  The range constraints are set to Number.MAX_SAFE_INTEGER because of browser limitationsUint64",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "description": "Attributes for a value, something like confidential-msg: you are not allowed to see this value",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "value": {
+      "type": "integer",
+      "description": "The JSON representation for `Uint64Value` is JSON number, range is set to 0 - Number.MAX_SAFE_INTEGER",
+      "minimum": 0
+    }
+  }
+}

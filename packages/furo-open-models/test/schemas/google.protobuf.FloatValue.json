@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FloatValue.json",
+  "type": "object",
+  "description": "Wrapper message for `float`.\n\n The JSON representation for `FloatValue` is JSON number.FloatValue",
+  "properties": {
+    "value": {
+      "type": "number",
+      "description": "The float value."
+    }
+  }
+}

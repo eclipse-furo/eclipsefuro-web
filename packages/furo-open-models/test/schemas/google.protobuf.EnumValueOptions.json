@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.EnumValueOptions.json",
+  "type": "object",
+  "properties": {
+    "debugRedact": {
+      "type": "boolean",
+      "description": "Indicate that fields annotated with this enum value should not be printed\n out when using debug formats, e.g. when the field contains sensitive\n credentials."
+    },
+    "deprecated": {
+      "type": "boolean",
+      "description": "Is this enum value deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the enum value, or it will be completely ignored; in the very least,\n this is a formalization for deprecating enum values."
+    },
+    "features": {
+      "$ref": "google.protobuf.FeatureSet.json",
+      "description": "Any features defined in the specific edition."
+    },
+    "uninterpretedOption": {
+      "type": "array",
+      "description": "The parser stores options it doesn't recognize here. See above.",
+      "items": {
+        "$ref": "google.protobuf.UninterpretedOption.json"
+      }
+    }
+  }
+}

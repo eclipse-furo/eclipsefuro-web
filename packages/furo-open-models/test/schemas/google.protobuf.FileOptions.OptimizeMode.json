@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FileOptions.OptimizeMode.json",
+  "type": "string",
+  "description": "Generated classes can be optimized for speed or code size.",
+  "enum": [
+    "SPEED",
+    "CODE_SIZE",
+    "LITE_RUNTIME"
+  ]
+}

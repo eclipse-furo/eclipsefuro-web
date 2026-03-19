@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Discriminator.json",
+  "type": "object",
+  "description": "When request bodies or response payloads may be one of a number of different schemas, a `discriminator` object can be used to aid in serialization, deserialization, and validation.  The discriminator is a specific object in a schema which is used to inform the consumer of the specification of an alternative schema based on the value associated with it.  When using the discriminator, _inline_ schemas will not be considered.Discriminator",
+  "properties": {
+    "mapping": {
+      "$ref": "openapi.v3.Strings.json"
+    },
+    "propertyName": {
+      "type": "string"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

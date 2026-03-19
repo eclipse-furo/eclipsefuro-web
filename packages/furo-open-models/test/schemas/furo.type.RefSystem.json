@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.RefSystem.json",
+  "type": "string",
+  "enum": [
+    "REF_SYSTEM_UNSPECIFIED",
+    "ACP",
+    "ICM",
+    "DATAFACTORY",
+    "HEIMDALL",
+    "CRM",
+    "CLM",
+    "LOKI",
+    "DIGIMON",
+    "AD",
+    "MATRIX"
+  ]
+}

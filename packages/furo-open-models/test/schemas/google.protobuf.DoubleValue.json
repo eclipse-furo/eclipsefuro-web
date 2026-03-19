@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.DoubleValue.json",
+  "type": "object",
+  "description": "Wrapper message for `double`.\n\n The JSON representation for `DoubleValue` is JSON number.DoubleValue",
+  "properties": {
+    "value": {
+      "type": "number",
+      "description": "The double value."
+    }
+  }
+}

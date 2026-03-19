@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FileDescriptorProto.json",
+  "type": "object",
+  "description": "Describes a complete .proto file.FileDescriptorProto",
+  "properties": {
+    "dependency": {
+      "type": "array",
+      "description": "Names of files imported by this file.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "edition": {
+      "$ref": "google.protobuf.Edition.json",
+      "description": "The edition of the proto file."
+    },
+    "enumType": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.EnumDescriptorProto.json"
+      }
+    },
+    "extension": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.FieldDescriptorProto.json"
+      }
+    },
+    "messageType": {
+      "type": "array",
+      "description": "All top-level definitions in this file.",
+      "items": {
+        "$ref": "google.protobuf.DescriptorProto.json"
+      }
+    },
+    "name": {
+      "type": "string",
+      "description": "file name, relative to root of source tree"
+    },
+    "options": {
+      "$ref": "google.protobuf.FileOptions.json"
+    },
+    "package": {
+      "type": "string",
+      "description": "e.g. \"foo\", \"foo.bar\", etc."
+    },
+    "publicDependency": {
+      "type": "array",
+      "description": "Indexes of the public imported files in the dependency list above.",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "service": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.ServiceDescriptorProto.json"
+      }
+    },
+    "sourceCodeInfo": {
+      "$ref": "google.protobuf.SourceCodeInfo.json",
+      "description": "This field contains optional information about the original source code.\n You may safely remove this entire field without harming runtime\n functionality of the descriptors -- the information is needed only by\n development tools."
+    },
+    "syntax": {
+      "type": "string",
+      "description": "The syntax of the proto file.\n The supported values are \"proto2\", \"proto3\", and \"editions\".\n\n If `edition` is present, this value must be \"editions\"."
+    },
+    "weakDependency": {
+      "type": "array",
+      "description": "Indexes of the weak imported files in the dependency list.\n For Google-internal migration only. Do not use.",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

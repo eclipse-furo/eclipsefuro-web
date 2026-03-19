@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.Int64Value.json",
+  "type": "object",
+  "description": "Wrapper message for `int64`.\n\n The JSON representation for `Int64Value` is JSON string.Int64Value",
+  "properties": {
+    "value": {
+      "type": "integer",
+      "description": "The int64 value."
+    }
+  }
+}

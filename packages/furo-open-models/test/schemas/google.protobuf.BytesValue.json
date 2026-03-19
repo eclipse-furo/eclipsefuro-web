@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.BytesValue.json",
+  "type": "object",
+  "description": "Wrapper message for `bytes`.\n\n The JSON representation for `BytesValue` is JSON string.BytesValue",
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "The bytes value."
+    }
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSetDefaults.FeatureSetEditionDefault.json",
+  "type": "object",
+  "description": "A map from every known edition with a unique set of defaults to its\n defaults. Not all editions may be contained here.  For a given edition,\n the defaults at the closest matching edition ordered at or before it should\n be used.  This field must be in strict ascending order by edition.FeatureSetEditionDefault",
+  "properties": {
+    "edition": {
+      "$ref": "google.protobuf.Edition.json"
+    },
+    "features": {
+      "$ref": "google.protobuf.FeatureSet.json"
+    }
+  }
+}

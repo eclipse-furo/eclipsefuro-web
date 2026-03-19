@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.ConstraintWrappers.json",
+  "type": "object",
+  "properties": {
+    "boolValue": {
+      "$ref": "google.protobuf.BoolValue.json"
+    },
+    "bytesValue": {
+      "$ref": "google.protobuf.BytesValue.json"
+    },
+    "doubleValue": {
+      "$ref": "google.protobuf.DoubleValue.json"
+    },
+    "exclInt32Value": {
+      "$ref": "google.protobuf.Int32Value.json",
+      "maximum": 10,
+      "minimum": 3,
+      "default": 3
+    },
+    "exclInt64Value": {
+      "$ref": "google.protobuf.Int64Value.json",
+      "maximum": 10,
+      "minimum": 3,
+      "default": "3"
+    },
+    "floatValue": {
+      "$ref": "google.protobuf.FloatValue.json"
+    },
+    "int32Value": {
+      "$ref": "google.protobuf.Int32Value.json",
+      "maximum": 10,
+      "minimum": 3,
+      "default": 3
+    },
+    "int64Value": {
+      "$ref": "google.protobuf.Int64Value.json",
+      "maximum": 10,
+      "minimum": 3,
+      "default": "3"
+    },
+    "stringValue": {
+      "$ref": "google.protobuf.StringValue.json",
+      "default": "default"
+    },
+    "uint32Value": {
+      "$ref": "google.protobuf.UInt32Value.json"
+    },
+    "uint64Value": {
+      "$ref": "google.protobuf.UInt64Value.json"
+    }
+  },
+  "required": [
+    "string_value",
+    "int32_value",
+    "int64_value"
+  ]
+}

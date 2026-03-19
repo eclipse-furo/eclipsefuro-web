@@ -48,14 +48,7 @@ export class StrictFetcher<REQ, RES> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private reqFieldConstructorMap: Map<string, any>;
 
-  constructor(
-    options: IApiOptions,
-    method: string,
-    path: string,
-    ReqType: FieldNodeConstructor,
-    ResType: FieldNodeConstructor,
-    bodyField?: keyof REQ | "*",
-  ) {
+  constructor(options: IApiOptions, method: string, path: string, ReqType: FieldNodeConstructor, ResType: FieldNodeConstructor, bodyField?: keyof REQ | "*") {
     this.API_OPTIONS = options;
     this.path = path;
     this.bodyField = bodyField;
@@ -418,7 +411,7 @@ export class StrictFetcher<REQ, RES> {
   private buildPathAndBodyfield(
     path: string,
     bodyField: keyof REQ | "*" | undefined,
-    rqo: REQ,
+    rqo: REQ
   ): {
     evaluatedPath: string;
     evaluatedBody: string | undefined;

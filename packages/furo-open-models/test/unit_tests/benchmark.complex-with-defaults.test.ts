@@ -1,9 +1,9 @@
-import { expect } from 'vitest';
+import { expect } from "vitest";
 
-import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from "../protoc-gen-open-models/furo/type/Defaults";
 
-describe('Benchmark', () => {
-  it('should create 1000 COLD very complex deep object with default values and constraints set in less then 200ms', async () => {
+describe("Benchmark", () => {
+  it("should create 1000 COLD very complex deep object with default values and constraints set in less then 200ms", async () => {
     const ftdarr: Defaults[] = [];
     const t0 = performance.now();
 
@@ -16,7 +16,7 @@ describe('Benchmark', () => {
     // console.log('1.000 COLD Defaults', t1 - t0, 'ms');
   });
 
-  it('should create 1000 very complex deep object with default values and constraints set in less then 150ms', async () => {
+  it("should create 1000 very complex deep object with default values and constraints set in less then 150ms", async () => {
     const ftdarr: Defaults[] = [];
     const t0 = performance.now();
 

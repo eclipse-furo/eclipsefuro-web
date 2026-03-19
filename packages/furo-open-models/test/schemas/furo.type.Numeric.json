@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Numeric.json",
+  "type": "object",
+  "description": "Decimal numbers\n  Regex pattern: ^[\u0026#43;-]?(\\d*\\.)?\\d\u0026#43;$Numeric",
+  "properties": {
+    "primitiveInt32": {
+      "type": "integer",
+      "description": "Value is set as a quoted number, use your numeric parser of choice",
+      "maximum": 1000,
+      "minimum": 5
+    },
+    "repeatedPrimitiveInt32": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      }
+    }
+  }
+}

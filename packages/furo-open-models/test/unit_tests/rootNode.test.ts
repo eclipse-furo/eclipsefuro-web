@@ -1,30 +1,30 @@
-import { expect } from 'vitest';
-import type { IIdentifier } from '../protoc-gen-open-models/furo/type/Identifier';
-import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
-import { BookingCenter } from '../protoc-gen-open-models/furo/type/BookingCenter';
+import { expect } from "vitest";
+import type { IIdentifier } from "../protoc-gen-open-models/furo/type/Identifier";
+import { Identifier } from "../protoc-gen-open-models/furo/type/Identifier";
+import { BookingCenter } from "../protoc-gen-open-models/furo/type/BookingCenter";
 
-describe('root node', () => {
-  it('must have the correct root node', async () => {
+describe("root node", () => {
+  it("must have the correct root node", async () => {
     const initData: IIdentifier = {
-      id: 'hwe',
-      attributes: { key: 'BBBB', value: 'stand' },
-      stringArray: ['------', '++++++'],
+      id: "hwe",
+      attributes: { key: "BBBB", value: "stand" },
+      stringArray: ["------", "++++++"],
       bookingCenter: BookingCenter.BBC_AT,
       decRange: {
-        start: { value: '123' },
-        end: { value: '12335' },
+        start: { value: "123" },
+        end: { value: "12335" },
       },
       any: {
-        '@type': 'x/furo.type.Identifier',
-        id: 'he',
+        "@type": "x/furo.type.Identifier",
+        id: "he",
         bookingCenter: BookingCenter.BBC_SG,
-        attributes: { key: 'BBBB', value: 'stand' },
+        attributes: { key: "BBBB", value: "stand" },
       },
-      repeatedDecimal: [{ value: '1234' }, { value: '12324' }],
+      repeatedDecimal: [{ value: "1234" }, { value: "12324" }],
       fatString: {
-        value: '123',
+        value: "123",
         labels: { aaa: true, xxxx: false },
-        attributes: { key: 'BBBB', value: 'stand.' },
+        attributes: { key: "BBBB", value: "stand." },
       },
     };
 

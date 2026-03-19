@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.MethodOptions.IdempotencyLevel.json",
+  "type": "string",
+  "description": "Is this method side-effect-free (or safe in HTTP parlance), or idempotent,\n or neither? HTTP based RPC implementation may choose GET verb for safe\n methods, and PUT verb for idempotent methods instead of the default POST.",
+  "enum": [
+    "IDEMPOTENCY_UNKNOWN",
+    "NO_SIDE_EFFECTS",
+    "IDEMPOTENT"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.NamedStringArray.json",
+  "type": "object",
+  "description": "Automatically-generated message used to represent maps of StringArray as ordered (name,value) pairs.NamedStringArray",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Map key"
+    },
+    "value": {
+      "$ref": "openapi.v3.StringArray.json",
+      "description": "Mapped value"
+    }
+  }
+}

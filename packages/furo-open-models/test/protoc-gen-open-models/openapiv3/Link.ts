@@ -2,28 +2,16 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   AnyOrExpression as OpenapiV3AnyOrExpression,
   type IAnyOrExpression as IOpenapiV3AnyOrExpression,
   type TAnyOrExpression as TOpenapiV3AnyOrExpression,
-} from './AnyOrExpression';
+} from "./AnyOrExpression";
 
-import {
-  NamedAny as OpenapiV3NamedAny,
-  type INamedAny as IOpenapiV3NamedAny,
-  type TNamedAny as TOpenapiV3NamedAny,
-} from './NamedAny';
+import { NamedAny as OpenapiV3NamedAny, type INamedAny as IOpenapiV3NamedAny, type TNamedAny as TOpenapiV3NamedAny } from "./NamedAny";
 
-import {
-  Server as OpenapiV3Server,
-  type IServer as IOpenapiV3Server,
-  type TServer as TOpenapiV3Server,
-} from './Server';
+import { Server as OpenapiV3Server, type IServer as IOpenapiV3Server, type TServer as TOpenapiV3Server } from "./Server";
+
+import { ARRAY, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface ILink
@@ -58,109 +46,124 @@ export interface TLink {
  *  The `Link object` represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.  Unlike _dynamic_ links (i.e. links provided **in** the response payload), the OAS linking mechanism does not require link information in the runtime response.  For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them as parameters while invoking the linked operation.
  */
 export class Link extends FieldNode {
+  /**
+   **/
   private _operationRef: STRING;
 
+  /**
+   **/
   private _operationId: STRING;
 
+  /**
+   **/
   private _parameters: OpenapiV3AnyOrExpression;
 
+  /**
+   **/
   private _requestBody: OpenapiV3AnyOrExpression;
 
+  /**
+   **/
   private _description: STRING;
 
+  /**
+   **/
   private _server: OpenapiV3Server;
 
+  /**
+   **/
   private _specificationExtension: ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>;
 
   public __defaultValues: ILink;
 
-  constructor(
-    initData?: ILink,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: ILink, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'openapi.v3.Link';
+    this.__meta.typeName = "openapi.v3.Link";
     this.__meta.description =
       "Link The `Link object` represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.  Unlike _dynamic_ links (i.e. links provided **in** the response payload), the OAS linking mechanism does not require link information in the runtime response.  For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them as parameters while invoking the linked operation.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'operationRef',
-        protoName: 'operation_ref',
+        fieldName: "operationRef",
+        protoName: "operation_ref",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'operationId',
-        protoName: 'operation_id',
+        fieldName: "operationId",
+        protoName: "operation_id",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'parameters',
-        protoName: 'parameters',
+        fieldName: "parameters",
+        protoName: "parameters",
         FieldConstructor: OpenapiV3AnyOrExpression,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'requestBody',
-        protoName: 'request_body',
+        fieldName: "requestBody",
+        protoName: "request_body",
         FieldConstructor: OpenapiV3AnyOrExpression,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'description',
-        protoName: 'description',
+        fieldName: "description",
+        protoName: "description",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'server',
-        protoName: 'server',
+        fieldName: "server",
+        protoName: "server",
         FieldConstructor: OpenapiV3Server,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'specificationExtension',
-        protoName: 'specification_extension',
+        fieldName: "specificationExtension",
+        protoName: "specification_extension",
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._operationRef = new STRING(undefined, this, 'operationRef');
+    // ---------------------
 
-    this._operationId = new STRING(undefined, this, 'operationId');
+    /**
+     **/
+    this._operationRef = new STRING(undefined, this, "operationRef");
 
-    this._parameters = new OpenapiV3AnyOrExpression(
-      undefined,
-      this,
-      'parameters',
-    );
+    /**
+     **/
+    this._operationId = new STRING(undefined, this, "operationId");
 
-    this._requestBody = new OpenapiV3AnyOrExpression(
-      undefined,
-      this,
-      'requestBody',
-    );
+    /**
+     **/
+    this._parameters = new OpenapiV3AnyOrExpression(undefined, this, "parameters");
 
-    this._description = new STRING(undefined, this, 'description');
+    /**
+     **/
+    this._requestBody = new OpenapiV3AnyOrExpression(undefined, this, "requestBody");
 
-    this._server = new OpenapiV3Server(undefined, this, 'server');
+    /**
+     **/
+    this._description = new STRING(undefined, this, "description");
 
-    this._specificationExtension = new ARRAY<
-      OpenapiV3NamedAny,
-      IOpenapiV3NamedAny
-    >(undefined, this, 'specificationExtension');
+    /**
+     **/
+    this._server = new OpenapiV3Server(undefined, this, "server");
+
+    /**
+     **/
+    this._specificationExtension = new ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>(undefined, this, "specificationExtension");
 
     // Set required fields
     [].forEach(fieldName => {
@@ -185,72 +188,111 @@ export class Link extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get operationRef(): STRING {
     return this._operationRef;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set operationRef(v: string) {
     this.__PrimitivesSetter(this._operationRef, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get operationId(): STRING {
     return this._operationId;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set operationId(v: string) {
     this.__PrimitivesSetter(this._operationId, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get parameters(): OpenapiV3AnyOrExpression {
     return this._parameters;
   }
 
+  /**
+   * The setter receives `IOpenapiV3AnyOrExpression`
+   **/
   public set parameters(v: IOpenapiV3AnyOrExpression) {
     this.__TypeSetter(this._parameters, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get requestBody(): OpenapiV3AnyOrExpression {
     return this._requestBody;
   }
 
+  /**
+   * The setter receives `IOpenapiV3AnyOrExpression`
+   **/
   public set requestBody(v: IOpenapiV3AnyOrExpression) {
     this.__TypeSetter(this._requestBody, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get description(): STRING {
     return this._description;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set description(v: string) {
     this.__PrimitivesSetter(this._description, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get server(): OpenapiV3Server {
     return this._server;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Server`
+   **/
   public set server(v: IOpenapiV3Server) {
     this.__TypeSetter(this._server, v);
   }
 
-  public get specificationExtension(): ARRAY<
-    OpenapiV3NamedAny,
-    IOpenapiV3NamedAny
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get specificationExtension(): ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny> {
     return this._specificationExtension;
   }
 
+  /**
+   * The setter receives `IOpenapiV3NamedAny[]`
+   **/
   public set specificationExtension(v: IOpenapiV3NamedAny[]) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 
-  fromLiteral(data: ILink) {
+  fromLiteral(data: ILink): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): ILink {
-    return super.__toLiteral();
+    return super.__toLiteral() as ILink;
   }
 }
 
-Registry.register('openapi.v3.Link', Link);
+Registry.register("openapi.v3.Link", Link);

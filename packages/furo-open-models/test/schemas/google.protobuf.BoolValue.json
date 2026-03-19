@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.BoolValue.json",
+  "type": "object",
+  "description": "Wrapper message for `bool`.\n\n The JSON representation for `BoolValue` is JSON `true` and `false`.BoolValue",
+  "properties": {
+    "value": {
+      "type": "boolean",
+      "description": "The bool value."
+    }
+  }
+}

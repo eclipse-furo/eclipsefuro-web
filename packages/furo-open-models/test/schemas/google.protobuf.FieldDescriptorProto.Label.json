@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FieldDescriptorProto.Label.json",
+  "type": "string",
+  "enum": [
+    "LABEL_OPTIONAL",
+    "LABEL_REPEATED",
+    "LABEL_REQUIRED"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.OneofOptions.json",
+  "type": "object",
+  "properties": {
+    "features": {
+      "$ref": "google.protobuf.FeatureSet.json",
+      "description": "Any features defined in the specific edition."
+    },
+    "uninterpretedOption": {
+      "type": "array",
+      "description": "The parser stores options it doesn't recognize here. See above.",
+      "items": {
+        "$ref": "google.protobuf.UninterpretedOption.json"
+      }
+    }
+  }
+}

@@ -2,26 +2,20 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  ENUM,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   FeatureSet as GoogleProtobufFeatureSet,
   type IFeatureSet as IGoogleProtobufFeatureSet,
   type TFeatureSet as TGoogleProtobufFeatureSet,
-} from './FeatureSet';
+} from "./FeatureSet";
 
-import { FileOptionsOptimizeMode as GoogleProtobufFileOptionsOptimizeMode } from './FileOptions.OptimizeMode';
+import { FileOptionsOptimizeMode as GoogleProtobufFileOptionsOptimizeMode } from "./FileOptions.OptimizeMode";
 
 import {
   UninterpretedOption as GoogleProtobufUninterpretedOption,
   type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
   type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
-} from './UninterpretedOption';
+} from "./UninterpretedOption";
+
+import { ARRAY, BOOLEAN, ENUM, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IFileOptions
@@ -283,447 +277,497 @@ export interface TFileOptions {
  * FileOptions
  */
 export class FileOptions extends FieldNode {
-  //  Sets the Java package where classes generated from this .proto will be
-  //  placed.  By default, the proto package is used, but this is often
-  //  inappropriate because proto packages do not normally start with backwards
-  //  domain names.
+  /**
+   * Sets the Java package where classes generated from this .proto will be
+   * placed.  By default, the proto package is used, but this is often
+   * inappropriate because proto packages do not normally start with backwards
+   * domain names.
+   **/
   private _javaPackage: STRING;
 
-  //  Controls the name of the wrapper Java class generated for the .proto file.
-  //  That class will always contain the .proto file's getDescriptor() method as
-  //  well as any top-level extensions defined in the .proto file.
-  //  If java_multiple_files is disabled, then all the other classes from the
-  //  .proto file will be nested inside the single wrapper outer class.
+  /**
+   * Controls the name of the wrapper Java class generated for the .proto file.
+   * That class will always contain the .proto file's getDescriptor() method as
+   * well as any top-level extensions defined in the .proto file.
+   * If java_multiple_files is disabled, then all the other classes from the
+   * .proto file will be nested inside the single wrapper outer class.
+   **/
   private _javaOuterClassname: STRING;
 
-  //  If enabled, then the Java code generator will generate a separate .java
-  //  file for each top-level message, enum, and service defined in the .proto
-  //  file.  Thus, these types will *not* be nested inside the wrapper class
-  //  named by java_outer_classname.  However, the wrapper class will still be
-  //  generated to contain the file's getDescriptor() method as well as any
-  //  top-level extensions defined in the file.
+  /**
+   * If enabled, then the Java code generator will generate a separate .java
+   * file for each top-level message, enum, and service defined in the .proto
+   * file.  Thus, these types will *not* be nested inside the wrapper class
+   * named by java_outer_classname.  However, the wrapper class will still be
+   * generated to contain the file's getDescriptor() method as well as any
+   * top-level extensions defined in the file.
+   **/
   private _javaMultipleFiles: BOOLEAN;
 
-  //  This option does nothing.
+  /**
+   * This option does nothing.
+   **/
   private _javaGenerateEqualsAndHash: BOOLEAN;
 
-  //  If set true, then the Java2 code generator will generate code that
-  //  throws an exception whenever an attempt is made to assign a non-UTF-8
-  //  byte sequence to a string field.
-  //  Message reflection will do the same.
-  //  However, an extension field still accepts non-UTF-8 byte sequences.
-  //  This option has no effect on when used with the lite runtime.
+  /**
+   * If set true, then the Java2 code generator will generate code that
+   * throws an exception whenever an attempt is made to assign a non-UTF-8
+   * byte sequence to a string field.
+   * Message reflection will do the same.
+   * However, an extension field still accepts non-UTF-8 byte sequences.
+   * This option has no effect on when used with the lite runtime.
+   **/
   private _javaStringCheckUtf8: BOOLEAN;
 
+  /**
+   **/
   private _optimizeFor: ENUM<GoogleProtobufFileOptionsOptimizeMode>;
 
-  //  Sets the Go package where structs generated from this .proto will be
-  //  placed. If omitted, the Go package will be derived from the following:
-  //    - The basename of the package import path, if provided.
-  //    - Otherwise, the package statement in the .proto file, if present.
-  //    - Otherwise, the basename of the .proto file, without extension.
+  /**
+   * Sets the Go package where structs generated from this .proto will be
+   * placed. If omitted, the Go package will be derived from the following:
+   *   - The basename of the package import path, if provided.
+   *   - Otherwise, the package statement in the .proto file, if present.
+   *   - Otherwise, the basename of the .proto file, without extension.
+   **/
   private _goPackage: STRING;
 
-  //  Should generic services be generated in each language?  "Generic" services
-  //  are not specific to any particular RPC system.  They are generated by the
-  //  main code generators in each language (without additional plugins).
-  //  Generic services were the only kind of service generation supported by
-  //  early versions of google.protobuf.
-  //
-  //  Generic services are now considered deprecated in favor of using plugins
-  //  that generate code specific to your particular RPC system.  Therefore,
-  //  these default to false.  Old code which depends on generic services should
-  //  explicitly set them to true.
+  /**
+   * Should generic services be generated in each language?  "Generic" services
+   * are not specific to any particular RPC system.  They are generated by the
+   * main code generators in each language (without additional plugins).
+   * Generic services were the only kind of service generation supported by
+   * early versions of google.protobuf.
+   *
+   * Generic services are now considered deprecated in favor of using plugins
+   * that generate code specific to your particular RPC system.  Therefore,
+   * these default to false.  Old code which depends on generic services should
+   * explicitly set them to true.
+   **/
   private _ccGenericServices: BOOLEAN;
 
+  /**
+   **/
   private _javaGenericServices: BOOLEAN;
 
+  /**
+   **/
   private _pyGenericServices: BOOLEAN;
 
+  /**
+   **/
   private _phpGenericServices: BOOLEAN;
 
-  //  Is this file deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for everything in the file, or it will be completely ignored; in the very
-  //  least, this is a formalization for deprecating files.
+  /**
+   * Is this file deprecated?
+   * Depending on the target platform, this can emit Deprecated annotations
+   * for everything in the file, or it will be completely ignored; in the very
+   * least, this is a formalization for deprecating files.
+   **/
   private _deprecated: BOOLEAN;
 
-  //  Enables the use of arenas for the proto messages in this file. This applies
-  //  only to generated classes for C++.
+  /**
+   * Enables the use of arenas for the proto messages in this file. This applies
+   * only to generated classes for C++.
+   **/
   private _ccEnableArenas: BOOLEAN;
 
-  //  Sets the objective c class prefix which is prepended to all objective c
-  //  generated classes from this .proto. There is no default.
+  /**
+   * Sets the objective c class prefix which is prepended to all objective c
+   * generated classes from this .proto. There is no default.
+   **/
   private _objcClassPrefix: STRING;
 
-  //  Namespace for generated classes; defaults to the package.
+  /**
+   * Namespace for generated classes; defaults to the package.
+   **/
   private _csharpNamespace: STRING;
 
-  //  By default Swift generators will take the proto package and CamelCase it
-  //  replacing '.' with underscore and use that to prefix the types/symbols
-  //  defined. When this options is provided, they will use this value instead
-  //  to prefix the types/symbols defined.
+  /**
+   * By default Swift generators will take the proto package and CamelCase it
+   * replacing '.' with underscore and use that to prefix the types/symbols
+   * defined. When this options is provided, they will use this value instead
+   * to prefix the types/symbols defined.
+   **/
   private _swiftPrefix: STRING;
 
-  //  Sets the php class prefix which is prepended to all php generated classes
-  //  from this .proto. Default is empty.
+  /**
+   * Sets the php class prefix which is prepended to all php generated classes
+   * from this .proto. Default is empty.
+   **/
   private _phpClassPrefix: STRING;
 
-  //  Use this option to change the namespace of php generated classes. Default
-  //  is empty. When this option is empty, the package name will be used for
-  //  determining the namespace.
+  /**
+   * Use this option to change the namespace of php generated classes. Default
+   * is empty. When this option is empty, the package name will be used for
+   * determining the namespace.
+   **/
   private _phpNamespace: STRING;
 
-  //  Use this option to change the namespace of php generated metadata classes.
-  //  Default is empty. When this option is empty, the proto file name will be
-  //  used for determining the namespace.
+  /**
+   * Use this option to change the namespace of php generated metadata classes.
+   * Default is empty. When this option is empty, the proto file name will be
+   * used for determining the namespace.
+   **/
   private _phpMetadataNamespace: STRING;
 
-  //  Use this option to change the package of ruby generated classes. Default
-  //  is empty. When this option is not set, the package name will be used for
-  //  determining the ruby package.
+  /**
+   * Use this option to change the package of ruby generated classes. Default
+   * is empty. When this option is not set, the package name will be used for
+   * determining the ruby package.
+   **/
   private _rubyPackage: STRING;
 
-  //  Any features defined in the specific edition.
+  /**
+   * Any features defined in the specific edition.
+   **/
   private _features: GoogleProtobufFeatureSet;
 
-  //  The parser stores options it doesn't recognize here.
-  //  See the documentation for the "Options" section above.
-  private _uninterpretedOption: ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  >;
+  /**
+   * The parser stores options it doesn't recognize here.
+   * See the documentation for the "Options" section above.
+   **/
+  private _uninterpretedOption: ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>;
 
   public __defaultValues: IFileOptions;
 
-  constructor(
-    initData?: IFileOptions,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IFileOptions, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.FileOptions';
-    this.__meta.description = 'FileOptions';
+    this.__meta.typeName = "google.protobuf.FileOptions";
+    this.__meta.description = "FileOptions";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'javaPackage',
-        protoName: 'java_package',
+        fieldName: "javaPackage",
+        protoName: "java_package",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Sets the Java package where classes generated from this .proto will be\n placed.  By default, the proto package is used, but this is often\n inappropriate because proto packages do not normally start with backwards\n domain names.',
+          "Sets the Java package where classes generated from this .proto will be\n placed.  By default, the proto package is used, but this is often\n inappropriate because proto packages do not normally start with backwards\n domain names.",
       },
       {
-        fieldName: 'javaOuterClassname',
-        protoName: 'java_outer_classname',
+        fieldName: "javaOuterClassname",
+        protoName: "java_outer_classname",
         FieldConstructor: STRING,
         constraints: {},
         description:
           "Controls the name of the wrapper Java class generated for the .proto file.\n That class will always contain the .proto file's getDescriptor() method as\n well as any top-level extensions defined in the .proto file.\n If java_multiple_files is disabled, then all the other classes from the\n .proto file will be nested inside the single wrapper outer class.",
       },
       {
-        fieldName: 'javaMultipleFiles',
-        protoName: 'java_multiple_files',
+        fieldName: "javaMultipleFiles",
+        protoName: "java_multiple_files",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
           "If enabled, then the Java code generator will generate a separate .java\n file for each top-level message, enum, and service defined in the .proto\n file.  Thus, these types will *not* be nested inside the wrapper class\n named by java_outer_classname.  However, the wrapper class will still be\n generated to contain the file's getDescriptor() method as well as any\n top-level extensions defined in the file.",
       },
       {
-        fieldName: 'javaGenerateEqualsAndHash',
-        protoName: 'java_generate_equals_and_hash',
+        fieldName: "javaGenerateEqualsAndHash",
+        protoName: "java_generate_equals_and_hash",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: 'This option does nothing.',
+        description: "This option does nothing.",
       },
       {
-        fieldName: 'javaStringCheckUtf8',
-        protoName: 'java_string_check_utf8',
+        fieldName: "javaStringCheckUtf8",
+        protoName: "java_string_check_utf8",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'If set true, then the Java2 code generator will generate code that\n throws an exception whenever an attempt is made to assign a non-UTF-8\n byte sequence to a string field.\n Message reflection will do the same.\n However, an extension field still accepts non-UTF-8 byte sequences.\n This option has no effect on when used with the lite runtime.',
+          "If set true, then the Java2 code generator will generate code that\n throws an exception whenever an attempt is made to assign a non-UTF-8\n byte sequence to a string field.\n Message reflection will do the same.\n However, an extension field still accepts non-UTF-8 byte sequences.\n This option has no effect on when used with the lite runtime.",
       },
       {
-        fieldName: 'optimizeFor',
-        protoName: 'optimize_for',
+        fieldName: "optimizeFor",
+        protoName: "optimize_for",
         FieldConstructor: ENUM<GoogleProtobufFileOptionsOptimizeMode>,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'goPackage',
-        protoName: 'go_package',
+        fieldName: "goPackage",
+        protoName: "go_package",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Sets the Go package where structs generated from this .proto will be\n placed. If omitted, the Go package will be derived from the following:\n   - The basename of the package import path, if provided.\n   - Otherwise, the package statement in the .proto file, if present.\n   - Otherwise, the basename of the .proto file, without extension.',
+          "Sets the Go package where structs generated from this .proto will be\n placed. If omitted, the Go package will be derived from the following:\n   - The basename of the package import path, if provided.\n   - Otherwise, the package statement in the .proto file, if present.\n   - Otherwise, the basename of the .proto file, without extension.",
       },
       {
-        fieldName: 'ccGenericServices',
-        protoName: 'cc_generic_services',
+        fieldName: "ccGenericServices",
+        protoName: "cc_generic_services",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
           'Should generic services be generated in each language?  "Generic" services\n are not specific to any particular RPC system.  They are generated by the\n main code generators in each language (without additional plugins).\n Generic services were the only kind of service generation supported by\n early versions of google.protobuf.\n\n Generic services are now considered deprecated in favor of using plugins\n that generate code specific to your particular RPC system.  Therefore,\n these default to false.  Old code which depends on generic services should\n explicitly set them to true.',
       },
       {
-        fieldName: 'javaGenericServices',
-        protoName: 'java_generic_services',
+        fieldName: "javaGenericServices",
+        protoName: "java_generic_services",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'pyGenericServices',
-        protoName: 'py_generic_services',
+        fieldName: "pyGenericServices",
+        protoName: "py_generic_services",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'phpGenericServices',
-        protoName: 'php_generic_services',
+        fieldName: "phpGenericServices",
+        protoName: "php_generic_services",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'deprecated',
-        protoName: 'deprecated',
-        FieldConstructor: BOOLEAN,
-        constraints: {},
-        description:
-          'Is this file deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for everything in the file, or it will be completely ignored; in the very\n least, this is a formalization for deprecating files.',
-      },
-      {
-        fieldName: 'ccEnableArenas',
-        protoName: 'cc_enable_arenas',
+        fieldName: "deprecated",
+        protoName: "deprecated",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'Enables the use of arenas for the proto messages in this file. This applies\n only to generated classes for C++.',
+          "Is this file deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for everything in the file, or it will be completely ignored; in the very\n least, this is a formalization for deprecating files.",
       },
       {
-        fieldName: 'objcClassPrefix',
-        protoName: 'objc_class_prefix',
+        fieldName: "ccEnableArenas",
+        protoName: "cc_enable_arenas",
+        FieldConstructor: BOOLEAN,
+        constraints: {},
+        description: "Enables the use of arenas for the proto messages in this file. This applies\n only to generated classes for C++.",
+      },
+      {
+        fieldName: "objcClassPrefix",
+        protoName: "objc_class_prefix",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Sets the objective c class prefix which is prepended to all objective c\n generated classes from this .proto. There is no default.',
+        description: "Sets the objective c class prefix which is prepended to all objective c\n generated classes from this .proto. There is no default.",
       },
       {
-        fieldName: 'csharpNamespace',
-        protoName: 'csharp_namespace',
+        fieldName: "csharpNamespace",
+        protoName: "csharp_namespace",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Namespace for generated classes; defaults to the package.',
+        description: "Namespace for generated classes; defaults to the package.",
       },
       {
-        fieldName: 'swiftPrefix',
-        protoName: 'swift_prefix',
+        fieldName: "swiftPrefix",
+        protoName: "swift_prefix",
         FieldConstructor: STRING,
         constraints: {},
         description:
           "By default Swift generators will take the proto package and CamelCase it\n replacing '.' with underscore and use that to prefix the types/symbols\n defined. When this options is provided, they will use this value instead\n to prefix the types/symbols defined.",
       },
       {
-        fieldName: 'phpClassPrefix',
-        protoName: 'php_class_prefix',
+        fieldName: "phpClassPrefix",
+        protoName: "php_class_prefix",
+        FieldConstructor: STRING,
+        constraints: {},
+        description: "Sets the php class prefix which is prepended to all php generated classes\n from this .proto. Default is empty.",
+      },
+      {
+        fieldName: "phpNamespace",
+        protoName: "php_namespace",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Sets the php class prefix which is prepended to all php generated classes\n from this .proto. Default is empty.',
+          "Use this option to change the namespace of php generated classes. Default\n is empty. When this option is empty, the package name will be used for\n determining the namespace.",
       },
       {
-        fieldName: 'phpNamespace',
-        protoName: 'php_namespace',
+        fieldName: "phpMetadataNamespace",
+        protoName: "php_metadata_namespace",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Use this option to change the namespace of php generated classes. Default\n is empty. When this option is empty, the package name will be used for\n determining the namespace.',
+          "Use this option to change the namespace of php generated metadata classes.\n Default is empty. When this option is empty, the proto file name will be\n used for determining the namespace.",
       },
       {
-        fieldName: 'phpMetadataNamespace',
-        protoName: 'php_metadata_namespace',
+        fieldName: "rubyPackage",
+        protoName: "ruby_package",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Use this option to change the namespace of php generated metadata classes.\n Default is empty. When this option is empty, the proto file name will be\n used for determining the namespace.',
+          "Use this option to change the package of ruby generated classes. Default\n is empty. When this option is not set, the package name will be used for\n determining the ruby package.",
       },
       {
-        fieldName: 'rubyPackage',
-        protoName: 'ruby_package',
-        FieldConstructor: STRING,
-        constraints: {},
-        description:
-          'Use this option to change the package of ruby generated classes. Default\n is empty. When this option is not set, the package name will be used for\n determining the ruby package.',
-      },
-      {
-        fieldName: 'features',
-        protoName: 'features',
+        fieldName: "features",
+        protoName: "features",
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
-        description: 'Any features defined in the specific edition.',
+        description: "Any features defined in the specific edition.",
       },
       {
-        fieldName: 'uninterpretedOption',
-        protoName: 'uninterpreted_option',
+        fieldName: "uninterpretedOption",
+        protoName: "uninterpreted_option",
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
-        description:
-          'The parser stores options it doesn\'t recognize here.\n See the documentation for the "Options" section above.',
+        description: 'The parser stores options it doesn\'t recognize here.\n See the documentation for the "Options" section above.',
       },
     ];
 
     // Initialize the fields
-    //  Sets the Java package where classes generated from this .proto will be
-    //  placed.  By default, the proto package is used, but this is often
-    //  inappropriate because proto packages do not normally start with backwards
-    //  domain names.
-    this._javaPackage = new STRING(undefined, this, 'javaPackage');
+    // ---------------------
 
-    //  Controls the name of the wrapper Java class generated for the .proto file.
-    //  That class will always contain the .proto file's getDescriptor() method as
-    //  well as any top-level extensions defined in the .proto file.
-    //  If java_multiple_files is disabled, then all the other classes from the
-    //  .proto file will be nested inside the single wrapper outer class.
-    this._javaOuterClassname = new STRING(
-      undefined,
-      this,
-      'javaOuterClassname',
-    );
+    /**
+     *  Sets the Java package where classes generated from this .proto will be
+     *  placed.  By default, the proto package is used, but this is often
+     *  inappropriate because proto packages do not normally start with backwards
+     *  domain names.
+     **/
+    this._javaPackage = new STRING(undefined, this, "javaPackage");
 
-    //  If enabled, then the Java code generator will generate a separate .java
-    //  file for each top-level message, enum, and service defined in the .proto
-    //  file.  Thus, these types will *not* be nested inside the wrapper class
-    //  named by java_outer_classname.  However, the wrapper class will still be
-    //  generated to contain the file's getDescriptor() method as well as any
-    //  top-level extensions defined in the file.
-    this._javaMultipleFiles = new BOOLEAN(undefined, this, 'javaMultipleFiles');
+    /**
+     *  Controls the name of the wrapper Java class generated for the .proto file.
+     *  That class will always contain the .proto file's getDescriptor() method as
+     *  well as any top-level extensions defined in the .proto file.
+     *  If java_multiple_files is disabled, then all the other classes from the
+     *  .proto file will be nested inside the single wrapper outer class.
+     **/
+    this._javaOuterClassname = new STRING(undefined, this, "javaOuterClassname");
 
-    //  This option does nothing.
-    this._javaGenerateEqualsAndHash = new BOOLEAN(
-      undefined,
-      this,
-      'javaGenerateEqualsAndHash',
-    );
+    /**
+     *  If enabled, then the Java code generator will generate a separate .java
+     *  file for each top-level message, enum, and service defined in the .proto
+     *  file.  Thus, these types will *not* be nested inside the wrapper class
+     *  named by java_outer_classname.  However, the wrapper class will still be
+     *  generated to contain the file's getDescriptor() method as well as any
+     *  top-level extensions defined in the file.
+     **/
+    this._javaMultipleFiles = new BOOLEAN(undefined, this, "javaMultipleFiles");
 
-    //  If set true, then the Java2 code generator will generate code that
-    //  throws an exception whenever an attempt is made to assign a non-UTF-8
-    //  byte sequence to a string field.
-    //  Message reflection will do the same.
-    //  However, an extension field still accepts non-UTF-8 byte sequences.
-    //  This option has no effect on when used with the lite runtime.
-    this._javaStringCheckUtf8 = new BOOLEAN(
-      undefined,
-      this,
-      'javaStringCheckUtf8',
-    );
+    /**
+     *  This option does nothing.
+     **/
+    this._javaGenerateEqualsAndHash = new BOOLEAN(undefined, this, "javaGenerateEqualsAndHash");
 
+    /**
+     *  If set true, then the Java2 code generator will generate code that
+     *  throws an exception whenever an attempt is made to assign a non-UTF-8
+     *  byte sequence to a string field.
+     *  Message reflection will do the same.
+     *  However, an extension field still accepts non-UTF-8 byte sequences.
+     *  This option has no effect on when used with the lite runtime.
+     **/
+    this._javaStringCheckUtf8 = new BOOLEAN(undefined, this, "javaStringCheckUtf8");
+
+    /**
+     **/
     this._optimizeFor = new ENUM<GoogleProtobufFileOptionsOptimizeMode>(
       undefined,
       GoogleProtobufFileOptionsOptimizeMode,
       GoogleProtobufFileOptionsOptimizeMode.SPEED,
       this,
-      'optimizeFor',
+      "optimizeFor"
     );
 
-    //  Sets the Go package where structs generated from this .proto will be
-    //  placed. If omitted, the Go package will be derived from the following:
-    //    - The basename of the package import path, if provided.
-    //    - Otherwise, the package statement in the .proto file, if present.
-    //    - Otherwise, the basename of the .proto file, without extension.
-    this._goPackage = new STRING(undefined, this, 'goPackage');
+    /**
+     *  Sets the Go package where structs generated from this .proto will be
+     *  placed. If omitted, the Go package will be derived from the following:
+     *    - The basename of the package import path, if provided.
+     *    - Otherwise, the package statement in the .proto file, if present.
+     *    - Otherwise, the basename of the .proto file, without extension.
+     **/
+    this._goPackage = new STRING(undefined, this, "goPackage");
 
-    //  Should generic services be generated in each language?  "Generic" services
-    //  are not specific to any particular RPC system.  They are generated by the
-    //  main code generators in each language (without additional plugins).
-    //  Generic services were the only kind of service generation supported by
-    //  early versions of google.protobuf.
-    //
-    //  Generic services are now considered deprecated in favor of using plugins
-    //  that generate code specific to your particular RPC system.  Therefore,
-    //  these default to false.  Old code which depends on generic services should
-    //  explicitly set them to true.
-    this._ccGenericServices = new BOOLEAN(undefined, this, 'ccGenericServices');
+    /**
+     *  Should generic services be generated in each language?  "Generic" services
+     *  are not specific to any particular RPC system.  They are generated by the
+     *  main code generators in each language (without additional plugins).
+     *  Generic services were the only kind of service generation supported by
+     *  early versions of google.protobuf.
+     *
+     *  Generic services are now considered deprecated in favor of using plugins
+     *  that generate code specific to your particular RPC system.  Therefore,
+     *  these default to false.  Old code which depends on generic services should
+     *  explicitly set them to true.
+     **/
+    this._ccGenericServices = new BOOLEAN(undefined, this, "ccGenericServices");
 
-    this._javaGenericServices = new BOOLEAN(
-      undefined,
-      this,
-      'javaGenericServices',
-    );
+    /**
+     **/
+    this._javaGenericServices = new BOOLEAN(undefined, this, "javaGenericServices");
 
-    this._pyGenericServices = new BOOLEAN(undefined, this, 'pyGenericServices');
+    /**
+     **/
+    this._pyGenericServices = new BOOLEAN(undefined, this, "pyGenericServices");
 
-    this._phpGenericServices = new BOOLEAN(
-      undefined,
-      this,
-      'phpGenericServices',
-    );
+    /**
+     **/
+    this._phpGenericServices = new BOOLEAN(undefined, this, "phpGenericServices");
 
-    //  Is this file deprecated?
-    //  Depending on the target platform, this can emit Deprecated annotations
-    //  for everything in the file, or it will be completely ignored; in the very
-    //  least, this is a formalization for deprecating files.
-    this._deprecated = new BOOLEAN(undefined, this, 'deprecated');
+    /**
+     *  Is this file deprecated?
+     *  Depending on the target platform, this can emit Deprecated annotations
+     *  for everything in the file, or it will be completely ignored; in the very
+     *  least, this is a formalization for deprecating files.
+     **/
+    this._deprecated = new BOOLEAN(undefined, this, "deprecated");
 
-    //  Enables the use of arenas for the proto messages in this file. This applies
-    //  only to generated classes for C++.
-    this._ccEnableArenas = new BOOLEAN(undefined, this, 'ccEnableArenas');
+    /**
+     *  Enables the use of arenas for the proto messages in this file. This applies
+     *  only to generated classes for C++.
+     **/
+    this._ccEnableArenas = new BOOLEAN(undefined, this, "ccEnableArenas");
 
-    //  Sets the objective c class prefix which is prepended to all objective c
-    //  generated classes from this .proto. There is no default.
-    this._objcClassPrefix = new STRING(undefined, this, 'objcClassPrefix');
+    /**
+     *  Sets the objective c class prefix which is prepended to all objective c
+     *  generated classes from this .proto. There is no default.
+     **/
+    this._objcClassPrefix = new STRING(undefined, this, "objcClassPrefix");
 
-    //  Namespace for generated classes; defaults to the package.
-    this._csharpNamespace = new STRING(undefined, this, 'csharpNamespace');
+    /**
+     *  Namespace for generated classes; defaults to the package.
+     **/
+    this._csharpNamespace = new STRING(undefined, this, "csharpNamespace");
 
-    //  By default Swift generators will take the proto package and CamelCase it
-    //  replacing '.' with underscore and use that to prefix the types/symbols
-    //  defined. When this options is provided, they will use this value instead
-    //  to prefix the types/symbols defined.
-    this._swiftPrefix = new STRING(undefined, this, 'swiftPrefix');
+    /**
+     *  By default Swift generators will take the proto package and CamelCase it
+     *  replacing '.' with underscore and use that to prefix the types/symbols
+     *  defined. When this options is provided, they will use this value instead
+     *  to prefix the types/symbols defined.
+     **/
+    this._swiftPrefix = new STRING(undefined, this, "swiftPrefix");
 
-    //  Sets the php class prefix which is prepended to all php generated classes
-    //  from this .proto. Default is empty.
-    this._phpClassPrefix = new STRING(undefined, this, 'phpClassPrefix');
+    /**
+     *  Sets the php class prefix which is prepended to all php generated classes
+     *  from this .proto. Default is empty.
+     **/
+    this._phpClassPrefix = new STRING(undefined, this, "phpClassPrefix");
 
-    //  Use this option to change the namespace of php generated classes. Default
-    //  is empty. When this option is empty, the package name will be used for
-    //  determining the namespace.
-    this._phpNamespace = new STRING(undefined, this, 'phpNamespace');
+    /**
+     *  Use this option to change the namespace of php generated classes. Default
+     *  is empty. When this option is empty, the package name will be used for
+     *  determining the namespace.
+     **/
+    this._phpNamespace = new STRING(undefined, this, "phpNamespace");
 
-    //  Use this option to change the namespace of php generated metadata classes.
-    //  Default is empty. When this option is empty, the proto file name will be
-    //  used for determining the namespace.
-    this._phpMetadataNamespace = new STRING(
-      undefined,
-      this,
-      'phpMetadataNamespace',
-    );
+    /**
+     *  Use this option to change the namespace of php generated metadata classes.
+     *  Default is empty. When this option is empty, the proto file name will be
+     *  used for determining the namespace.
+     **/
+    this._phpMetadataNamespace = new STRING(undefined, this, "phpMetadataNamespace");
 
-    //  Use this option to change the package of ruby generated classes. Default
-    //  is empty. When this option is not set, the package name will be used for
-    //  determining the ruby package.
-    this._rubyPackage = new STRING(undefined, this, 'rubyPackage');
+    /**
+     *  Use this option to change the package of ruby generated classes. Default
+     *  is empty. When this option is not set, the package name will be used for
+     *  determining the ruby package.
+     **/
+    this._rubyPackage = new STRING(undefined, this, "rubyPackage");
 
-    //  Any features defined in the specific edition.
-    this._features = new GoogleProtobufFeatureSet(undefined, this, 'features');
+    /**
+     *  Any features defined in the specific edition.
+     **/
+    this._features = new GoogleProtobufFeatureSet(undefined, this, "features");
 
-    //  The parser stores options it doesn't recognize here.
-    //  See the documentation for the "Options" section above.
-    this._uninterpretedOption = new ARRAY<
-      GoogleProtobufUninterpretedOption,
-      IGoogleProtobufUninterpretedOption
-    >(undefined, this, 'uninterpretedOption');
+    /**
+     *  The parser stores options it doesn't recognize here.
+     *  See the documentation for the "Options" section above.
+     **/
+    this._uninterpretedOption = new ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>(undefined, this, "uninterpretedOption");
 
     // Set required fields
     [].forEach(fieldName => {
-      (this[fieldName as keyof FileOptions] as FieldNode).__meta.required =
-        true;
+      (this[fieldName as keyof FileOptions] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -744,256 +788,385 @@ export class FileOptions extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  Sets the Java package where classes generated from this .proto will be
-  //  placed.  By default, the proto package is used, but this is often
-  //  inappropriate because proto packages do not normally start with backwards
-  //  domain names.
+  /**
+   *  Sets the Java package where classes generated from this .proto will be
+   *  placed.  By default, the proto package is used, but this is often
+   *  inappropriate because proto packages do not normally start with backwards
+   *  domain names.
+   * The getter receives the FieldNode
+   **/
   public get javaPackage(): STRING {
     return this._javaPackage;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set javaPackage(v: string) {
     this.__PrimitivesSetter(this._javaPackage, v);
   }
 
-  //  Controls the name of the wrapper Java class generated for the .proto file.
-  //  That class will always contain the .proto file's getDescriptor() method as
-  //  well as any top-level extensions defined in the .proto file.
-  //  If java_multiple_files is disabled, then all the other classes from the
-  //  .proto file will be nested inside the single wrapper outer class.
+  /**
+   *  Controls the name of the wrapper Java class generated for the .proto file.
+   *  That class will always contain the .proto file's getDescriptor() method as
+   *  well as any top-level extensions defined in the .proto file.
+   *  If java_multiple_files is disabled, then all the other classes from the
+   *  .proto file will be nested inside the single wrapper outer class.
+   * The getter receives the FieldNode
+   **/
   public get javaOuterClassname(): STRING {
     return this._javaOuterClassname;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set javaOuterClassname(v: string) {
     this.__PrimitivesSetter(this._javaOuterClassname, v);
   }
 
-  //  If enabled, then the Java code generator will generate a separate .java
-  //  file for each top-level message, enum, and service defined in the .proto
-  //  file.  Thus, these types will *not* be nested inside the wrapper class
-  //  named by java_outer_classname.  However, the wrapper class will still be
-  //  generated to contain the file's getDescriptor() method as well as any
-  //  top-level extensions defined in the file.
+  /**
+   *  If enabled, then the Java code generator will generate a separate .java
+   *  file for each top-level message, enum, and service defined in the .proto
+   *  file.  Thus, these types will *not* be nested inside the wrapper class
+   *  named by java_outer_classname.  However, the wrapper class will still be
+   *  generated to contain the file's getDescriptor() method as well as any
+   *  top-level extensions defined in the file.
+   * The getter receives the FieldNode
+   **/
   public get javaMultipleFiles(): BOOLEAN {
     return this._javaMultipleFiles;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set javaMultipleFiles(v: boolean) {
     this.__PrimitivesSetter(this._javaMultipleFiles, v);
   }
 
-  //  This option does nothing.
+  /**
+   *  This option does nothing.
+   * The getter receives the FieldNode
+   **/
   public get javaGenerateEqualsAndHash(): BOOLEAN {
     return this._javaGenerateEqualsAndHash;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set javaGenerateEqualsAndHash(v: boolean) {
     this.__PrimitivesSetter(this._javaGenerateEqualsAndHash, v);
   }
 
-  //  If set true, then the Java2 code generator will generate code that
-  //  throws an exception whenever an attempt is made to assign a non-UTF-8
-  //  byte sequence to a string field.
-  //  Message reflection will do the same.
-  //  However, an extension field still accepts non-UTF-8 byte sequences.
-  //  This option has no effect on when used with the lite runtime.
+  /**
+   *  If set true, then the Java2 code generator will generate code that
+   *  throws an exception whenever an attempt is made to assign a non-UTF-8
+   *  byte sequence to a string field.
+   *  Message reflection will do the same.
+   *  However, an extension field still accepts non-UTF-8 byte sequences.
+   *  This option has no effect on when used with the lite runtime.
+   * The getter receives the FieldNode
+   **/
   public get javaStringCheckUtf8(): BOOLEAN {
     return this._javaStringCheckUtf8;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set javaStringCheckUtf8(v: boolean) {
     this.__PrimitivesSetter(this._javaStringCheckUtf8, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get optimizeFor(): ENUM<GoogleProtobufFileOptionsOptimizeMode> {
     return this._optimizeFor;
   }
 
+  /**
+   * The setter receives `GoogleProtobufFileOptionsOptimizeMode`
+   **/
   public set optimizeFor(v: GoogleProtobufFileOptionsOptimizeMode) {
     this.__TypeSetter(this._optimizeFor, v);
   }
 
-  //  Sets the Go package where structs generated from this .proto will be
-  //  placed. If omitted, the Go package will be derived from the following:
-  //    - The basename of the package import path, if provided.
-  //    - Otherwise, the package statement in the .proto file, if present.
-  //    - Otherwise, the basename of the .proto file, without extension.
+  /**
+   *  Sets the Go package where structs generated from this .proto will be
+   *  placed. If omitted, the Go package will be derived from the following:
+   *    - The basename of the package import path, if provided.
+   *    - Otherwise, the package statement in the .proto file, if present.
+   *    - Otherwise, the basename of the .proto file, without extension.
+   * The getter receives the FieldNode
+   **/
   public get goPackage(): STRING {
     return this._goPackage;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set goPackage(v: string) {
     this.__PrimitivesSetter(this._goPackage, v);
   }
 
-  //  Should generic services be generated in each language?  "Generic" services
-  //  are not specific to any particular RPC system.  They are generated by the
-  //  main code generators in each language (without additional plugins).
-  //  Generic services were the only kind of service generation supported by
-  //  early versions of google.protobuf.
-  //
-  //  Generic services are now considered deprecated in favor of using plugins
-  //  that generate code specific to your particular RPC system.  Therefore,
-  //  these default to false.  Old code which depends on generic services should
-  //  explicitly set them to true.
+  /**
+   *  Should generic services be generated in each language?  "Generic" services
+   *  are not specific to any particular RPC system.  They are generated by the
+   *  main code generators in each language (without additional plugins).
+   *  Generic services were the only kind of service generation supported by
+   *  early versions of google.protobuf.
+   *
+   *  Generic services are now considered deprecated in favor of using plugins
+   *  that generate code specific to your particular RPC system.  Therefore,
+   *  these default to false.  Old code which depends on generic services should
+   *  explicitly set them to true.
+   * The getter receives the FieldNode
+   **/
   public get ccGenericServices(): BOOLEAN {
     return this._ccGenericServices;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set ccGenericServices(v: boolean) {
     this.__PrimitivesSetter(this._ccGenericServices, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get javaGenericServices(): BOOLEAN {
     return this._javaGenericServices;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set javaGenericServices(v: boolean) {
     this.__PrimitivesSetter(this._javaGenericServices, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get pyGenericServices(): BOOLEAN {
     return this._pyGenericServices;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set pyGenericServices(v: boolean) {
     this.__PrimitivesSetter(this._pyGenericServices, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get phpGenericServices(): BOOLEAN {
     return this._phpGenericServices;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set phpGenericServices(v: boolean) {
     this.__PrimitivesSetter(this._phpGenericServices, v);
   }
 
-  //  Is this file deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for everything in the file, or it will be completely ignored; in the very
-  //  least, this is a formalization for deprecating files.
+  /**
+   *  Is this file deprecated?
+   *  Depending on the target platform, this can emit Deprecated annotations
+   *  for everything in the file, or it will be completely ignored; in the very
+   *  least, this is a formalization for deprecating files.
+   * The getter receives the FieldNode
+   **/
   public get deprecated(): BOOLEAN {
     return this._deprecated;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecated(v: boolean) {
     this.__PrimitivesSetter(this._deprecated, v);
   }
 
-  //  Enables the use of arenas for the proto messages in this file. This applies
-  //  only to generated classes for C++.
+  /**
+   *  Enables the use of arenas for the proto messages in this file. This applies
+   *  only to generated classes for C++.
+   * The getter receives the FieldNode
+   **/
   public get ccEnableArenas(): BOOLEAN {
     return this._ccEnableArenas;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set ccEnableArenas(v: boolean) {
     this.__PrimitivesSetter(this._ccEnableArenas, v);
   }
 
-  //  Sets the objective c class prefix which is prepended to all objective c
-  //  generated classes from this .proto. There is no default.
+  /**
+   *  Sets the objective c class prefix which is prepended to all objective c
+   *  generated classes from this .proto. There is no default.
+   * The getter receives the FieldNode
+   **/
   public get objcClassPrefix(): STRING {
     return this._objcClassPrefix;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set objcClassPrefix(v: string) {
     this.__PrimitivesSetter(this._objcClassPrefix, v);
   }
 
-  //  Namespace for generated classes; defaults to the package.
+  /**
+   *  Namespace for generated classes; defaults to the package.
+   * The getter receives the FieldNode
+   **/
   public get csharpNamespace(): STRING {
     return this._csharpNamespace;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set csharpNamespace(v: string) {
     this.__PrimitivesSetter(this._csharpNamespace, v);
   }
 
-  //  By default Swift generators will take the proto package and CamelCase it
-  //  replacing '.' with underscore and use that to prefix the types/symbols
-  //  defined. When this options is provided, they will use this value instead
-  //  to prefix the types/symbols defined.
+  /**
+   *  By default Swift generators will take the proto package and CamelCase it
+   *  replacing '.' with underscore and use that to prefix the types/symbols
+   *  defined. When this options is provided, they will use this value instead
+   *  to prefix the types/symbols defined.
+   * The getter receives the FieldNode
+   **/
   public get swiftPrefix(): STRING {
     return this._swiftPrefix;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set swiftPrefix(v: string) {
     this.__PrimitivesSetter(this._swiftPrefix, v);
   }
 
-  //  Sets the php class prefix which is prepended to all php generated classes
-  //  from this .proto. Default is empty.
+  /**
+   *  Sets the php class prefix which is prepended to all php generated classes
+   *  from this .proto. Default is empty.
+   * The getter receives the FieldNode
+   **/
   public get phpClassPrefix(): STRING {
     return this._phpClassPrefix;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set phpClassPrefix(v: string) {
     this.__PrimitivesSetter(this._phpClassPrefix, v);
   }
 
-  //  Use this option to change the namespace of php generated classes. Default
-  //  is empty. When this option is empty, the package name will be used for
-  //  determining the namespace.
+  /**
+   *  Use this option to change the namespace of php generated classes. Default
+   *  is empty. When this option is empty, the package name will be used for
+   *  determining the namespace.
+   * The getter receives the FieldNode
+   **/
   public get phpNamespace(): STRING {
     return this._phpNamespace;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set phpNamespace(v: string) {
     this.__PrimitivesSetter(this._phpNamespace, v);
   }
 
-  //  Use this option to change the namespace of php generated metadata classes.
-  //  Default is empty. When this option is empty, the proto file name will be
-  //  used for determining the namespace.
+  /**
+   *  Use this option to change the namespace of php generated metadata classes.
+   *  Default is empty. When this option is empty, the proto file name will be
+   *  used for determining the namespace.
+   * The getter receives the FieldNode
+   **/
   public get phpMetadataNamespace(): STRING {
     return this._phpMetadataNamespace;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set phpMetadataNamespace(v: string) {
     this.__PrimitivesSetter(this._phpMetadataNamespace, v);
   }
 
-  //  Use this option to change the package of ruby generated classes. Default
-  //  is empty. When this option is not set, the package name will be used for
-  //  determining the ruby package.
+  /**
+   *  Use this option to change the package of ruby generated classes. Default
+   *  is empty. When this option is not set, the package name will be used for
+   *  determining the ruby package.
+   * The getter receives the FieldNode
+   **/
   public get rubyPackage(): STRING {
     return this._rubyPackage;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set rubyPackage(v: string) {
     this.__PrimitivesSetter(this._rubyPackage, v);
   }
 
-  //  Any features defined in the specific edition.
+  /**
+   *  Any features defined in the specific edition.
+   * The getter receives the FieldNode
+   **/
   public get features(): GoogleProtobufFeatureSet {
     return this._features;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFeatureSet`
+   **/
   public set features(v: IGoogleProtobufFeatureSet) {
     this.__TypeSetter(this._features, v);
   }
 
-  //  The parser stores options it doesn't recognize here.
-  //  See the documentation for the "Options" section above.
-  public get uninterpretedOption(): ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  > {
+  /**
+   *  The parser stores options it doesn't recognize here.
+   *  See the documentation for the "Options" section above.
+   * The getter receives the FieldNode
+   **/
+  public get uninterpretedOption(): ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption> {
     return this._uninterpretedOption;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufUninterpretedOption[]`
+   **/
   public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[]) {
     this.__TypeSetter(this._uninterpretedOption, v);
   }
 
-  fromLiteral(data: IFileOptions) {
+  fromLiteral(data: IFileOptions): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IFileOptions {
-    return super.__toLiteral();
+    return super.__toLiteral() as IFileOptions;
   }
 }
 
-Registry.register('google.protobuf.FileOptions', FileOptions);
+Registry.register("google.protobuf.FileOptions", FileOptions);

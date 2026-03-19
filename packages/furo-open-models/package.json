@@ -8,7 +8,7 @@
     "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
   },
   "author": "eclipse furo",
-  "version": "1.17.0",
+  "version": "1.18.0",
   "type": "module",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,8 +30,8 @@
     "analyze:deep": "cem analyze --config deep-cem.config.mjs",
     "build": "npm run build:src && npm run analyze:deep",
     "build:src": "tsc && tsc-alias -p ./tsconfig.json",
-    "protoc:gen": "./scripts/protoc-gen-open-models.sh",
     "protoc:gen:lint": "npm run protoc:gen && eslint ./test/protoc-gen-open-models --fix && prettier \"**/*.ts\" --write --ignore-path .gitignore",
+    "protoc:gen": "./scripts/protoc-gen-open-models.sh",
     "protoc:lint": "eslint ./test/protoc-gen-open-models --fix && prettier \"**/*.ts\" --write --ignore-path .gitignore",
     "clean": "rm -rf ./dist && rm -rf ./coverage",
     "lint": "eslint ./src",

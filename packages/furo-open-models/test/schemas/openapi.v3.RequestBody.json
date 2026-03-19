@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.RequestBody.json",
+  "type": "object",
+  "description": "Describes a single request body.RequestBody",
+  "properties": {
+    "content": {
+      "$ref": "openapi.v3.MediaTypes.json"
+    },
+    "description": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

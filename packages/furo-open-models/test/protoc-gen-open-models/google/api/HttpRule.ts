@@ -2,16 +2,12 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   CustomHttpPattern as GoogleApiCustomHttpPattern,
   type ICustomHttpPattern as IGoogleApiCustomHttpPattern,
   type TCustomHttpPattern as TGoogleApiCustomHttpPattern,
-} from './CustomHttpPattern';
+} from "./CustomHttpPattern";
+
+import { ARRAY, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IHttpRule
@@ -963,200 +959,239 @@ export interface THttpRule {
  *  Transcoding implementations may not support this feature.
  */
 export class HttpRule extends FieldNode {
-  //  Selects a method to which this rule applies.
-  //
-  //  Refer to [selector][google.api.DocumentationRule.selector] for syntax
-  //  details.
+  /**
+   * Selects a method to which this rule applies.
+   *
+   * Refer to [selector][google.api.DocumentationRule.selector] for syntax
+   * details.
+   **/
   private _selector: STRING;
 
-  //  Maps to HTTP GET. Used for listing and getting information about
-  //  resources.
+  /**
+   * Maps to HTTP GET. Used for listing and getting information about
+   * resources.
+   **/
   private _get: STRING;
 
-  //  Maps to HTTP PUT. Used for replacing a resource.
+  /**
+   * Maps to HTTP PUT. Used for replacing a resource.
+   **/
   private _put: STRING;
 
-  //  Maps to HTTP POST. Used for creating a resource or performing an action.
+  /**
+   * Maps to HTTP POST. Used for creating a resource or performing an action.
+   **/
   private _post: STRING;
 
-  //  Maps to HTTP DELETE. Used for deleting a resource.
+  /**
+   * Maps to HTTP DELETE. Used for deleting a resource.
+   **/
   private _delete: STRING;
 
-  //  Maps to HTTP PATCH. Used for updating a resource.
+  /**
+   * Maps to HTTP PATCH. Used for updating a resource.
+   **/
   private _patch: STRING;
 
-  //  The custom pattern is used for specifying an HTTP method that is not
-  //  included in the `pattern` field, such as HEAD, or "*" to leave the
-  //  HTTP method unspecified for this rule. The wild-card rule is useful
-  //  for services that provide content to Web (HTML) clients.
+  /**
+   * The custom pattern is used for specifying an HTTP method that is not
+   * included in the `pattern` field, such as HEAD, or "*" to leave the
+   * HTTP method unspecified for this rule. The wild-card rule is useful
+   * for services that provide content to Web (HTML) clients.
+   **/
   private _custom: GoogleApiCustomHttpPattern;
 
-  //  The name of the request field whose value is mapped to the HTTP request
-  //  body, or `*` for mapping all request fields not captured by the path
-  //  pattern to the HTTP body, or omitted for not having any HTTP request body.
-  //
-  //  NOTE: the referred field must be present at the top-level of the request
-  //  message type.
+  /**
+   * The name of the request field whose value is mapped to the HTTP request
+   * body, or `*` for mapping all request fields not captured by the path
+   * pattern to the HTTP body, or omitted for not having any HTTP request body.
+   *
+   * NOTE: the referred field must be present at the top-level of the request
+   * message type.
+   **/
   private _body: STRING;
 
-  //  Optional. The name of the response field whose value is mapped to the HTTP
-  //  response body. When omitted, the entire response message will be used
-  //  as the HTTP response body.
-  //
-  //  NOTE: The referred field must be present at the top-level of the response
-  //  message type.
+  /**
+   * Optional. The name of the response field whose value is mapped to the HTTP
+   * response body. When omitted, the entire response message will be used
+   * as the HTTP response body.
+   *
+   * NOTE: The referred field must be present at the top-level of the response
+   * message type.
+   **/
   private _responseBody: STRING;
 
-  //  Additional HTTP bindings for the selector. Nested bindings must
-  //  not contain an `additional_bindings` field themselves (that is,
-  //  the nesting may only be one level deep).
+  /**
+   * Additional HTTP bindings for the selector. Nested bindings must
+   * not contain an `additional_bindings` field themselves (that is,
+   * the nesting may only be one level deep).
+   **/
   private _additionalBindings: ARRAY<HttpRule, IHttpRule>;
 
   public __defaultValues: IHttpRule;
 
-  constructor(
-    initData?: IHttpRule,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IHttpRule, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.api.HttpRule';
+    this.__meta.typeName = "google.api.HttpRule";
     this.__meta.description =
       'HttpRule # gRPC Transcoding\n\n gRPC Transcoding is a feature for mapping between a gRPC method and one or\n more HTTP REST endpoints. It allows developers to build a single API service\n that supports both gRPC APIs and REST APIs. Many systems, including [Google\n APIs](https://github.com/googleapis/googleapis),\n [Cloud Endpoints](https://cloud.google.com/endpoints), [gRPC\n Gateway](https://github.com/grpc-ecosystem/grpc-gateway),\n and [Envoy](https://github.com/envoyproxy/envoy) proxy support this feature\n and use it for large scale production services.\n\n `HttpRule` defines the schema of the gRPC/REST mapping. The mapping specifies\n how different portions of the gRPC request message are mapped to the URL\n path, URL query parameters, and HTTP request body. It also controls how the\n gRPC response message is mapped to the HTTP response body. `HttpRule` is\n typically specified as an `google.api.http` annotation on the gRPC method.\n\n Each mapping specifies a URL path template and an HTTP method. The path\n template may refer to one or more fields in the gRPC request message, as long\n as each field is a non-repeated field with a primitive (non-message) type.\n The path template controls how fields of the request message are mapped to\n the URL path.\n\n Example:\n\n     service Messaging {\n       rpc GetMessage(GetMessageRequest) returns (Message) {\n         option (google.api.http) = {\n             get: "/v1/{name=messages/*}"\n         };\n       }\n     }\n     message GetMessageRequest {\n       string name = 1; // Mapped to URL path.\n     }\n     message Message {\n       string text = 1; // The resource content.\n     }\n\n This enables an HTTP REST to gRPC mapping as below:\n\n HTTP | gRPC\n -----|-----\n `GET /v1/messages/123456`  | `GetMessage(name: "messages/123456")`\n\n Any fields in the request message which are not bound by the path template\n automatically become HTTP query parameters if there is no HTTP request body.\n For example:\n\n     service Messaging {\n       rpc GetMessage(GetMessageRequest) returns (Message) {\n         option (google.api.http) = {\n             get:"/v1/messages/{message_id}"\n         };\n       }\n     }\n     message GetMessageRequest {\n       message SubMessage {\n         string subfield = 1;\n       }\n       string message_id = 1; // Mapped to URL path.\n       int64 revision = 2;    // Mapped to URL query parameter `revision`.\n       SubMessage sub = 3;    // Mapped to URL query parameter `sub.subfield`.\n     }\n\n This enables a HTTP JSON to RPC mapping as below:\n\n HTTP | gRPC\n -----|-----\n `GET /v1/messages/123456?revision=2&sub.subfield=foo` |\n `GetMessage(message_id: "123456" revision: 2 sub: SubMessage(subfield:\n "foo"))`\n\n Note that fields which are mapped to URL query parameters must have a\n primitive type or a repeated primitive type or a non-repeated message type.\n In the case of a repeated type, the parameter can be repeated in the URL\n as `...?param=A&param=B`. In the case of a message type, each field of the\n message is mapped to a separate parameter, such as\n `...?foo.a=A&foo.b=B&foo.c=C`.\n\n For HTTP methods that allow a request body, the `body` field\n specifies the mapping. Consider a REST update method on the\n message resource collection:\n\n     service Messaging {\n       rpc UpdateMessage(UpdateMessageRequest) returns (Message) {\n         option (google.api.http) = {\n           patch: "/v1/messages/{message_id}"\n           body: "message"\n         };\n       }\n     }\n     message UpdateMessageRequest {\n       string message_id = 1; // mapped to the URL\n       Message message = 2;   // mapped to the body\n     }\n\n The following HTTP JSON to RPC mapping is enabled, where the\n representation of the JSON in the request body is determined by\n protos JSON encoding:\n\n HTTP | gRPC\n -----|-----\n `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:\n "123456" message { text: "Hi!" })`\n\n The special name `*` can be used in the body mapping to define that\n every field not bound by the path template should be mapped to the\n request body.  This enables the following alternative definition of\n the update method:\n\n     service Messaging {\n       rpc UpdateMessage(Message) returns (Message) {\n         option (google.api.http) = {\n           patch: "/v1/messages/{message_id}"\n           body: "*"\n         };\n       }\n     }\n     message Message {\n       string message_id = 1;\n       string text = 2;\n     }\n\n\n The following HTTP JSON to RPC mapping is enabled:\n\n HTTP | gRPC\n -----|-----\n `PATCH /v1/messages/123456 { "text": "Hi!" }` | `UpdateMessage(message_id:\n "123456" text: "Hi!")`\n\n Note that when using `*` in the body mapping, it is not possible to\n have HTTP parameters, as all fields not bound by the path end in\n the body. This makes this option more rarely used in practice when\n defining REST APIs. The common usage of `*` is in custom methods\n which don\'t use the URL at all for transferring data.\n\n It is possible to define multiple HTTP methods for one RPC by using\n the `additional_bindings` option. Example:\n\n     service Messaging {\n       rpc GetMessage(GetMessageRequest) returns (Message) {\n         option (google.api.http) = {\n           get: "/v1/messages/{message_id}"\n           additional_bindings {\n             get: "/v1/users/{user_id}/messages/{message_id}"\n           }\n         };\n       }\n     }\n     message GetMessageRequest {\n       string message_id = 1;\n       string user_id = 2;\n     }\n\n This enables the following two alternative HTTP JSON to RPC mappings:\n\n HTTP | gRPC\n -----|-----\n `GET /v1/messages/123456` | `GetMessage(message_id: "123456")`\n `GET /v1/users/me/messages/123456` | `GetMessage(user_id: "me" message_id:\n "123456")`\n\n ## Rules for HTTP mapping\n\n 1. Leaf request fields (recursive expansion nested messages in the request\n    message) are classified into three categories:\n    - Fields referred by the path template. They are passed via the URL path.\n    - Fields referred by the [HttpRule.body][google.api.HttpRule.body]. They\n    are passed via the HTTP\n      request body.\n    - All other fields are passed via the URL query parameters, and the\n      parameter name is the field path in the request message. A repeated\n      field can be represented as multiple query parameters under the same\n      name.\n  2. If [HttpRule.body][google.api.HttpRule.body] is "*", there is no URL\n  query parameter, all fields\n     are passed via URL path and HTTP request body.\n  3. If [HttpRule.body][google.api.HttpRule.body] is omitted, there is no HTTP\n  request body, all\n     fields are passed via URL path and URL query parameters.\n\n ### Path template syntax\n\n     Template = "/" Segments [ Verb ] ;\n     Segments = Segment { "/" Segment } ;\n     Segment  = "*" | "**" | LITERAL | Variable ;\n     Variable = "{" FieldPath [ "=" Segments ] "}" ;\n     FieldPath = IDENT { "." IDENT } ;\n     Verb     = ":" LITERAL ;\n\n The syntax `*` matches a single URL path segment. The syntax `**` matches\n zero or more URL path segments, which must be the last part of the URL path\n except the `Verb`.\n\n The syntax `Variable` matches part of the URL path as specified by its\n template. A variable template must not contain other variables. If a variable\n matches a single path segment, its template may be omitted, e.g. `{var}`\n is equivalent to `{var=*}`.\n\n The syntax `LITERAL` matches literal text in the URL path. If the `LITERAL`\n contains any reserved character, such characters should be percent-encoded\n before the matching.\n\n If a variable contains exactly one path segment, such as `"{var}"` or\n `"{var=*}"`, when such a variable is expanded into a URL path on the client\n side, all characters except `[-_.~0-9a-zA-Z]` are percent-encoded. The\n server side does the reverse decoding. Such variables show up in the\n [Discovery\n Document](https://developers.google.com/discovery/v1/reference/apis) as\n `{var}`.\n\n If a variable contains multiple path segments, such as `"{var=foo/*}"`\n or `"{var=**}"`, when such a variable is expanded into a URL path on the\n client side, all characters except `[-_.~/0-9a-zA-Z]` are percent-encoded.\n The server side does the reverse decoding, except "%2F" and "%2f" are left\n unchanged. Such variables show up in the\n [Discovery\n Document](https://developers.google.com/discovery/v1/reference/apis) as\n `{+var}`.\n\n ## Using gRPC API Service Configuration\n\n gRPC API Service Configuration (service config) is a configuration language\n for configuring a gRPC service to become a user-facing product. The\n service config is simply the YAML representation of the `google.api.Service`\n proto message.\n\n As an alternative to annotating your proto file, you can configure gRPC\n transcoding in your service config YAML files. You do this by specifying a\n `HttpRule` that maps the gRPC method to a REST endpoint, achieving the same\n effect as the proto annotation. This can be particularly useful if you\n have a proto that is reused in multiple services. Note that any transcoding\n specified in the service config will override any matching transcoding\n configuration in the proto.\n\n Example:\n\n     http:\n       rules:\n         # Selects a gRPC method and applies HttpRule to it.\n         - selector: example.v1.Messaging.GetMessage\n           get: /v1/messages/{message_id}/{sub.subfield}\n\n ## Special notes\n\n When gRPC Transcoding is used to map a gRPC to JSON REST endpoints, the\n proto to JSON conversion must follow the [proto3\n specification](https://developers.google.com/protocol-buffers/docs/proto3#json).\n\n While the single segment variable follows the semantics of\n [RFC 6570](https://tools.ietf.org/html/rfc6570) Section 3.2.2 Simple String\n Expansion, the multi segment variable **does not** follow RFC 6570 Section\n 3.2.3 Reserved Expansion. The reason is that the Reserved Expansion\n does not expand special characters like `?` and `#`, which would lead\n to invalid URLs. As the result, gRPC Transcoding uses a custom encoding\n for multi segment variables.\n\n The path variables **must not** refer to any repeated or mapped field,\n because client libraries are not capable of handling such variable expansion.\n\n The path variables **must not** capture the leading "/" character. The reason\n is that the most common use case "{var}" does not capture the leading "/"\n character. For consistency, all path variables must share the same behavior.\n\n Repeated message fields must not be mapped to URL query parameters, because\n no client library can support such complicated mapping.\n\n If an API needs to use a JSON array for request or response body, it can map\n the request or response body to a repeated field. However, some gRPC\n Transcoding implementations may not support this feature.';
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'selector',
-        protoName: 'selector',
+        fieldName: "selector",
+        protoName: "selector",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Selects a method to which this rule applies.\n\n Refer to [selector][google.api.DocumentationRule.selector] for syntax\n details.',
+        description: "Selects a method to which this rule applies.\n\n Refer to [selector][google.api.DocumentationRule.selector] for syntax\n details.",
       },
       {
-        fieldName: 'get',
-        protoName: 'get',
+        fieldName: "get",
+        protoName: "get",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Maps to HTTP GET. Used for listing and getting information about\n resources.',
+        description: "Maps to HTTP GET. Used for listing and getting information about\n resources.",
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'put',
-        protoName: 'put',
+        fieldName: "put",
+        protoName: "put",
         FieldConstructor: STRING,
         constraints: {},
-        description: 'Maps to HTTP PUT. Used for replacing a resource.',
+        description: "Maps to HTTP PUT. Used for replacing a resource.",
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'post',
-        protoName: 'post',
+        fieldName: "post",
+        protoName: "post",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Maps to HTTP POST. Used for creating a resource or performing an action.',
+        description: "Maps to HTTP POST. Used for creating a resource or performing an action.",
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'delete',
-        protoName: 'delete',
+        fieldName: "delete",
+        protoName: "delete",
         FieldConstructor: STRING,
         constraints: {},
-        description: 'Maps to HTTP DELETE. Used for deleting a resource.',
+        description: "Maps to HTTP DELETE. Used for deleting a resource.",
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'patch',
-        protoName: 'patch',
+        fieldName: "patch",
+        protoName: "patch",
         FieldConstructor: STRING,
         constraints: {},
-        description: 'Maps to HTTP PATCH. Used for updating a resource.',
+        description: "Maps to HTTP PATCH. Used for updating a resource.",
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'custom',
-        protoName: 'custom',
+        fieldName: "custom",
+        protoName: "custom",
         FieldConstructor: GoogleApiCustomHttpPattern,
         constraints: {},
         description:
           'The custom pattern is used for specifying an HTTP method that is not\n included in the `pattern` field, such as HEAD, or "*" to leave the\n HTTP method unspecified for this rule. The wild-card rule is useful\n for services that provide content to Web (HTML) clients.',
+        oneofGroup: "pattern",
       },
       {
-        fieldName: 'body',
-        protoName: 'body',
+        fieldName: "body",
+        protoName: "body",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'The name of the request field whose value is mapped to the HTTP request\n body, or `*` for mapping all request fields not captured by the path\n pattern to the HTTP body, or omitted for not having any HTTP request body.\n\n NOTE: the referred field must be present at the top-level of the request\n message type.',
+          "The name of the request field whose value is mapped to the HTTP request\n body, or `*` for mapping all request fields not captured by the path\n pattern to the HTTP body, or omitted for not having any HTTP request body.\n\n NOTE: the referred field must be present at the top-level of the request\n message type.",
       },
       {
-        fieldName: 'responseBody',
-        protoName: 'response_body',
+        fieldName: "responseBody",
+        protoName: "response_body",
         FieldConstructor: STRING,
         constraints: {},
         description:
-          'Optional. The name of the response field whose value is mapped to the HTTP\n response body. When omitted, the entire response message will be used\n as the HTTP response body.\n\n NOTE: The referred field must be present at the top-level of the response\n message type.',
+          "Optional. The name of the response field whose value is mapped to the HTTP\n response body. When omitted, the entire response message will be used\n as the HTTP response body.\n\n NOTE: The referred field must be present at the top-level of the response\n message type.",
       },
       {
-        fieldName: 'additionalBindings',
-        protoName: 'additional_bindings',
+        fieldName: "additionalBindings",
+        protoName: "additional_bindings",
         FieldConstructor: HttpRule,
         constraints: {},
         description:
-          'Additional HTTP bindings for the selector. Nested bindings must\n not contain an `additional_bindings` field themselves (that is,\n the nesting may only be one level deep).',
+          "Additional HTTP bindings for the selector. Nested bindings must\n not contain an `additional_bindings` field themselves (that is,\n the nesting may only be one level deep).",
       },
     ];
 
+    this.__meta.oneofGroups = new Map([["pattern", undefined]]);
+
     // Initialize the fields
-    //  Selects a method to which this rule applies.
-    //
-    //  Refer to [selector][google.api.DocumentationRule.selector] for syntax
-    //  details.
-    this._selector = new STRING(undefined, this, 'selector');
+    // ---------------------
 
-    //  Maps to HTTP GET. Used for listing and getting information about
-    //  resources.
-    this._get = new STRING(undefined, this, 'get');
+    /**
+     *  Selects a method to which this rule applies.
+     *
+     *  Refer to [selector][google.api.DocumentationRule.selector] for syntax
+     *  details.
+     **/
+    this._selector = new STRING(undefined, this, "selector");
 
-    //  Maps to HTTP PUT. Used for replacing a resource.
-    this._put = new STRING(undefined, this, 'put');
+    /**
+     *  Maps to HTTP GET. Used for listing and getting information about
+     *  resources.
+     **/
+    this._get = new STRING(undefined, this, "get");
 
-    //  Maps to HTTP POST. Used for creating a resource or performing an action.
-    this._post = new STRING(undefined, this, 'post');
+    /**
+     *  Maps to HTTP PUT. Used for replacing a resource.
+     **/
+    this._put = new STRING(undefined, this, "put");
 
-    //  Maps to HTTP DELETE. Used for deleting a resource.
-    this._delete = new STRING(undefined, this, 'delete');
+    /**
+     *  Maps to HTTP POST. Used for creating a resource or performing an action.
+     **/
+    this._post = new STRING(undefined, this, "post");
 
-    //  Maps to HTTP PATCH. Used for updating a resource.
-    this._patch = new STRING(undefined, this, 'patch');
+    /**
+     *  Maps to HTTP DELETE. Used for deleting a resource.
+     **/
+    this._delete = new STRING(undefined, this, "delete");
 
-    //  The custom pattern is used for specifying an HTTP method that is not
-    //  included in the `pattern` field, such as HEAD, or "*" to leave the
-    //  HTTP method unspecified for this rule. The wild-card rule is useful
-    //  for services that provide content to Web (HTML) clients.
-    this._custom = new GoogleApiCustomHttpPattern(undefined, this, 'custom');
+    /**
+     *  Maps to HTTP PATCH. Used for updating a resource.
+     **/
+    this._patch = new STRING(undefined, this, "patch");
 
-    //  The name of the request field whose value is mapped to the HTTP request
-    //  body, or `*` for mapping all request fields not captured by the path
-    //  pattern to the HTTP body, or omitted for not having any HTTP request body.
-    //
-    //  NOTE: the referred field must be present at the top-level of the request
-    //  message type.
-    this._body = new STRING(undefined, this, 'body');
+    /**
+     *  The custom pattern is used for specifying an HTTP method that is not
+     *  included in the `pattern` field, such as HEAD, or "*" to leave the
+     *  HTTP method unspecified for this rule. The wild-card rule is useful
+     *  for services that provide content to Web (HTML) clients.
+     **/
+    this._custom = new GoogleApiCustomHttpPattern(undefined, this, "custom");
 
-    //  Optional. The name of the response field whose value is mapped to the HTTP
-    //  response body. When omitted, the entire response message will be used
-    //  as the HTTP response body.
-    //
-    //  NOTE: The referred field must be present at the top-level of the response
-    //  message type.
-    this._responseBody = new STRING(undefined, this, 'responseBody');
+    /**
+     *  The name of the request field whose value is mapped to the HTTP request
+     *  body, or `*` for mapping all request fields not captured by the path
+     *  pattern to the HTTP body, or omitted for not having any HTTP request body.
+     *
+     *  NOTE: the referred field must be present at the top-level of the request
+     *  message type.
+     **/
+    this._body = new STRING(undefined, this, "body");
 
-    //  Additional HTTP bindings for the selector. Nested bindings must
-    //  not contain an `additional_bindings` field themselves (that is,
-    //  the nesting may only be one level deep).
-    this._additionalBindings = new ARRAY<HttpRule, IHttpRule>(
-      undefined,
-      this,
-      'additionalBindings',
-    );
+    /**
+     *  Optional. The name of the response field whose value is mapped to the HTTP
+     *  response body. When omitted, the entire response message will be used
+     *  as the HTTP response body.
+     *
+     *  NOTE: The referred field must be present at the top-level of the response
+     *  message type.
+     **/
+    this._responseBody = new STRING(undefined, this, "responseBody");
+
+    /**
+     *  Additional HTTP bindings for the selector. Nested bindings must
+     *  not contain an `additional_bindings` field themselves (that is,
+     *  the nesting may only be one level deep).
+     **/
+    this._additionalBindings = new ARRAY<HttpRule, IHttpRule>(undefined, this, "additionalBindings");
 
     // Set required fields
     [].forEach(fieldName => {
@@ -1181,122 +1216,182 @@ export class HttpRule extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  Selects a method to which this rule applies.
-  //
-  //  Refer to [selector][google.api.DocumentationRule.selector] for syntax
-  //  details.
+  /**
+   *  Selects a method to which this rule applies.
+   *
+   *  Refer to [selector][google.api.DocumentationRule.selector] for syntax
+   *  details.
+   * The getter receives the FieldNode
+   **/
   public get selector(): STRING {
     return this._selector;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set selector(v: string) {
     this.__PrimitivesSetter(this._selector, v);
   }
 
-  //  Maps to HTTP GET. Used for listing and getting information about
-  //  resources.
+  /**
+   *  Maps to HTTP GET. Used for listing and getting information about
+   *  resources.
+   * The getter receives the FieldNode
+   **/
   public get get(): STRING {
     return this._get;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set get(v: string) {
     this.__PrimitivesSetter(this._get, v);
   }
 
-  //  Maps to HTTP PUT. Used for replacing a resource.
+  /**
+   *  Maps to HTTP PUT. Used for replacing a resource.
+   * The getter receives the FieldNode
+   **/
   public get put(): STRING {
     return this._put;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set put(v: string) {
     this.__PrimitivesSetter(this._put, v);
   }
 
-  //  Maps to HTTP POST. Used for creating a resource or performing an action.
+  /**
+   *  Maps to HTTP POST. Used for creating a resource or performing an action.
+   * The getter receives the FieldNode
+   **/
   public get post(): STRING {
     return this._post;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set post(v: string) {
     this.__PrimitivesSetter(this._post, v);
   }
 
-  //  Maps to HTTP DELETE. Used for deleting a resource.
+  /**
+   *  Maps to HTTP DELETE. Used for deleting a resource.
+   * The getter receives the FieldNode
+   **/
   public get delete(): STRING {
     return this._delete;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set delete(v: string) {
     this.__PrimitivesSetter(this._delete, v);
   }
 
-  //  Maps to HTTP PATCH. Used for updating a resource.
+  /**
+   *  Maps to HTTP PATCH. Used for updating a resource.
+   * The getter receives the FieldNode
+   **/
   public get patch(): STRING {
     return this._patch;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set patch(v: string) {
     this.__PrimitivesSetter(this._patch, v);
   }
 
-  //  The custom pattern is used for specifying an HTTP method that is not
-  //  included in the `pattern` field, such as HEAD, or "*" to leave the
-  //  HTTP method unspecified for this rule. The wild-card rule is useful
-  //  for services that provide content to Web (HTML) clients.
+  /**
+   *  The custom pattern is used for specifying an HTTP method that is not
+   *  included in the `pattern` field, such as HEAD, or "*" to leave the
+   *  HTTP method unspecified for this rule. The wild-card rule is useful
+   *  for services that provide content to Web (HTML) clients.
+   * The getter receives the FieldNode
+   **/
   public get custom(): GoogleApiCustomHttpPattern {
     return this._custom;
   }
 
+  /**
+   * The setter receives `IGoogleApiCustomHttpPattern`
+   **/
   public set custom(v: IGoogleApiCustomHttpPattern) {
     this.__TypeSetter(this._custom, v);
   }
 
-  //  The name of the request field whose value is mapped to the HTTP request
-  //  body, or `*` for mapping all request fields not captured by the path
-  //  pattern to the HTTP body, or omitted for not having any HTTP request body.
-  //
-  //  NOTE: the referred field must be present at the top-level of the request
-  //  message type.
+  /**
+   *  The name of the request field whose value is mapped to the HTTP request
+   *  body, or `*` for mapping all request fields not captured by the path
+   *  pattern to the HTTP body, or omitted for not having any HTTP request body.
+   *
+   *  NOTE: the referred field must be present at the top-level of the request
+   *  message type.
+   * The getter receives the FieldNode
+   **/
   public get body(): STRING {
     return this._body;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set body(v: string) {
     this.__PrimitivesSetter(this._body, v);
   }
 
-  //  Optional. The name of the response field whose value is mapped to the HTTP
-  //  response body. When omitted, the entire response message will be used
-  //  as the HTTP response body.
-  //
-  //  NOTE: The referred field must be present at the top-level of the response
-  //  message type.
+  /**
+   *  Optional. The name of the response field whose value is mapped to the HTTP
+   *  response body. When omitted, the entire response message will be used
+   *  as the HTTP response body.
+   *
+   *  NOTE: The referred field must be present at the top-level of the response
+   *  message type.
+   * The getter receives the FieldNode
+   **/
   public get responseBody(): STRING {
     return this._responseBody;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set responseBody(v: string) {
     this.__PrimitivesSetter(this._responseBody, v);
   }
 
-  //  Additional HTTP bindings for the selector. Nested bindings must
-  //  not contain an `additional_bindings` field themselves (that is,
-  //  the nesting may only be one level deep).
+  /**
+   *  Additional HTTP bindings for the selector. Nested bindings must
+   *  not contain an `additional_bindings` field themselves (that is,
+   *  the nesting may only be one level deep).
+   * The getter receives the FieldNode
+   **/
   public get additionalBindings(): ARRAY<HttpRule, IHttpRule> {
     return this._additionalBindings;
   }
 
+  /**
+   * The setter receives `IHttpRule[]`
+   **/
   public set additionalBindings(v: IHttpRule[]) {
     this.__TypeSetter(this._additionalBindings, v);
   }
 
-  fromLiteral(data: IHttpRule) {
+  fromLiteral(data: IHttpRule): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IHttpRule {
-    return super.__toLiteral();
+    return super.__toLiteral() as IHttpRule;
   }
 }
 
-Registry.register('google.api.HttpRule', HttpRule);
+Registry.register("google.api.HttpRule", HttpRule);

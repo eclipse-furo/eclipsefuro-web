@@ -2,15 +2,15 @@
 // protoc-gen-open-models version: ????
 
 export enum RefSystem {
-  REF_SYSTEM_UNSPECIFIED = 'REF_SYSTEM_UNSPECIFIED',
-  ACP = 'ACP',
-  ICM = 'ICM',
-  DATAFACTORY = 'DATAFACTORY',
-  HEIMDALL = 'HEIMDALL',
-  CRM = 'CRM',
-  CLM = 'CLM',
-  LOKI = 'LOKI',
-  DIGIMON = 'DIGIMON',
-  AD = 'AD',
-  MATRIX = 'MATRIX',
+  REF_SYSTEM_UNSPECIFIED = "REF_SYSTEM_UNSPECIFIED",
+  ACP = "ACP",
+  ICM = "ICM",
+  DATAFACTORY = "DATAFACTORY",
+  HEIMDALL = "HEIMDALL",
+  CRM = "CRM",
+  CLM = "CLM",
+  LOKI = "LOKI",
+  DIGIMON = "DIGIMON",
+  AD = "AD",
+  MATRIX = "MATRIX",
 }

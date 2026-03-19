@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FieldOptions.CType.json",
+  "type": "string",
+  "enum": [
+    "STRING",
+    "CORD",
+    "STRING_PIECE"
+  ]
+}

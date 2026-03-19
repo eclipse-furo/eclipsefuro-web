@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Wrappers.json",
+  "type": "object",
+  "properties": {
+    "boolValue": {
+      "$ref": "google.protobuf.BoolValue.json"
+    },
+    "bytesValue": {
+      "$ref": "google.protobuf.BytesValue.json"
+    },
+    "doubleValue": {
+      "$ref": "google.protobuf.DoubleValue.json"
+    },
+    "floatValue": {
+      "$ref": "google.protobuf.FloatValue.json"
+    },
+    "int32Value": {
+      "$ref": "google.protobuf.Int32Value.json"
+    },
+    "int64Value": {
+      "$ref": "google.protobuf.Int64Value.json"
+    },
+    "stringValue": {
+      "$ref": "google.protobuf.StringValue.json"
+    },
+    "uint32Value": {
+      "$ref": "google.protobuf.UInt32Value.json"
+    },
+    "uint64Value": {
+      "$ref": "google.protobuf.UInt64Value.json"
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.MediaTypes.json",
+  "type": "object",
+  "properties": {
+    "additionalProperties": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedMediaType.json"
+      }
+    }
+  }
+}

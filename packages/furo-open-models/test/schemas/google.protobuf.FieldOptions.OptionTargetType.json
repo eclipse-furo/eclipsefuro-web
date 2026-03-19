@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FieldOptions.OptionTargetType.json",
+  "type": "string",
+  "description": "This indicates the types of entities that the field may apply to when used\n as an option. If it is unset, then the field may be freely used as an\n option on any kind of entity. Note: as of January 2023, support for this is\n in progress and does not yet have an effect (b/264593489).",
+  "enum": [
+    "TARGET_TYPE_UNKNOWN",
+    "TARGET_TYPE_FILE",
+    "TARGET_TYPE_EXTENSION_RANGE",
+    "TARGET_TYPE_MESSAGE",
+    "TARGET_TYPE_FIELD",
+    "TARGET_TYPE_ONEOF",
+    "TARGET_TYPE_ENUM",
+    "TARGET_TYPE_ENUM_ENTRY",
+    "TARGET_TYPE_SERVICE",
+    "TARGET_TYPE_METHOD"
+  ]
+}

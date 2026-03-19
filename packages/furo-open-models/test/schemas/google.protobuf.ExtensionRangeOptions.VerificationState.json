@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.ExtensionRangeOptions.VerificationState.json",
+  "type": "string",
+  "description": "The verification state of the extension range.",
+  "enum": [
+    "DECLARATION",
+    "UNVERIFIED"
+  ]
+}

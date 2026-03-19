@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.NamedParameterOrReference.json",
+  "type": "object",
+  "description": "Automatically-generated message used to represent maps of ParameterOrReference as ordered (name,value) pairs.NamedParameterOrReference",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Map key"
+    },
+    "value": {
+      "$ref": "openapi.v3.ParameterOrReference.json",
+      "description": "Mapped value"
+    }
+  }
+}

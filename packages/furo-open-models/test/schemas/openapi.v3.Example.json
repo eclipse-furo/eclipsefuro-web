@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Example.json",
+  "type": "object",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "externalValue": {
+      "type": "string"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "value": {
+      "$ref": "openapi.v3.Any.json"
+    }
+  }
+}

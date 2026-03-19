@@ -25,6 +25,15 @@ message CubeDefinition {
   cube.Colour colour = 4;
   // The material the cube is made of
   Materials material = 5;
+  oneof test_oneof {
+    string name = 6;
+    cube.Colour sub_message = 7;
+  }
+  oneof other_oneof {
+    string other_name = 8;
+    int64 int_number = 9;
+  }
+
 }
 
 // CubeEntity

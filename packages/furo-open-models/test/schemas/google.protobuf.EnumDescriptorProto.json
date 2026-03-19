@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.EnumDescriptorProto.json",
+  "type": "object",
+  "description": "Describes an enum type.EnumDescriptorProto",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "options": {
+      "$ref": "google.protobuf.EnumOptions.json"
+    },
+    "reservedName": {
+      "type": "array",
+      "description": "Reserved enum value names, which may not be reused. A given name may only\n be reserved once.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "reservedRange": {
+      "type": "array",
+      "description": "Range of reserved numeric values. Reserved numeric values may not be used\n by enum values in the same enum declaration. Reserved ranges may not\n overlap.",
+      "items": {
+        "$ref": "google.protobuf.EnumDescriptorProto.EnumReservedRange.json"
+      }
+    },
+    "value": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.EnumValueDescriptorProto.json"
+      }
+    }
+  }
+}

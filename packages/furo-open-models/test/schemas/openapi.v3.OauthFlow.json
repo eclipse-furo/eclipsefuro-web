@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.OauthFlow.json",
+  "type": "object",
+  "description": "Configuration details for a supported OAuth FlowOauthFlow",
+  "properties": {
+    "authorizationUrl": {
+      "type": "string"
+    },
+    "refreshUrl": {
+      "type": "string"
+    },
+    "scopes": {
+      "$ref": "openapi.v3.Strings.json"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "tokenUrl": {
+      "type": "string"
+    }
+  }
+}

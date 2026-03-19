@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.GeneratedCodeInfo.json",
+  "type": "object",
+  "description": "Describes the relationship between generated code and its original source\n file. A GeneratedCodeInfo message is associated with only one generated\n source file, but may contain references to different source .proto files.GeneratedCodeInfo",
+  "properties": {
+    "annotation": {
+      "type": "array",
+      "description": "An Annotation connects some span of text in generated code to an element\n of its generating .proto file.",
+      "items": {
+        "$ref": "google.protobuf.GeneratedCodeInfo.Annotation.json"
+      }
+    }
+  }
+}

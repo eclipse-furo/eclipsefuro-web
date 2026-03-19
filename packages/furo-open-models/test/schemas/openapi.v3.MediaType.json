@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.MediaType.json",
+  "type": "object",
+  "description": "Each Media Type Object provides schema and examples for the media type identified by its key.MediaType",
+  "properties": {
+    "encoding": {
+      "$ref": "openapi.v3.Encodings.json"
+    },
+    "example": {
+      "$ref": "openapi.v3.Any.json"
+    },
+    "examples": {
+      "$ref": "openapi.v3.ExamplesOrReferences.json"
+    },
+    "schema": {
+      "$ref": "openapi.v3.SchemaOrReference.json"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

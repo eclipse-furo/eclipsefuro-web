@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Tag.json",
+  "type": "object",
+  "description": "Adds metadata to a single tag that is used by the Operation Object. It is not mandatory to have a Tag Object per tag defined in the Operation Object instances.Tag",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "externalDocs": {
+      "$ref": "openapi.v3.ExternalDocs.json"
+    },
+    "name": {
+      "type": "string"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.SecurityScheme.json",
+  "type": "object",
+  "description": "Defines a security scheme that can be used by the operations. Supported schemes are HTTP authentication, an API key (either as a header, a cookie parameter or as a query parameter), mutual TLS (use of a client certificate), OAuth2's common flows (implicit, password, application and access code) as defined in RFC6749, and OpenID Connect.   Please note that currently (2019) the implicit flow is about to be deprecated OAuth 2.0 Security Best Current Practice. Recommended for most use case is Authorization Code Grant flow with PKCE.SecurityScheme",
+  "properties": {
+    "bearerFormat": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "flows": {
+      "$ref": "openapi.v3.OauthFlows.json"
+    },
+    "in": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "openIdConnectUrl": {
+      "type": "string"
+    },
+    "scheme": {
+      "type": "string"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

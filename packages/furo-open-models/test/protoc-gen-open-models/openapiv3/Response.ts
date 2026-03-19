@@ -2,34 +2,22 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   HeadersOrReferences as OpenapiV3HeadersOrReferences,
   type IHeadersOrReferences as IOpenapiV3HeadersOrReferences,
   type THeadersOrReferences as TOpenapiV3HeadersOrReferences,
-} from './HeadersOrReferences';
+} from "./HeadersOrReferences";
 
 import {
   LinksOrReferences as OpenapiV3LinksOrReferences,
   type ILinksOrReferences as IOpenapiV3LinksOrReferences,
   type TLinksOrReferences as TOpenapiV3LinksOrReferences,
-} from './LinksOrReferences';
+} from "./LinksOrReferences";
 
-import {
-  MediaTypes as OpenapiV3MediaTypes,
-  type IMediaTypes as IOpenapiV3MediaTypes,
-  type TMediaTypes as TOpenapiV3MediaTypes,
-} from './MediaTypes';
+import { MediaTypes as OpenapiV3MediaTypes, type IMediaTypes as IOpenapiV3MediaTypes, type TMediaTypes as TOpenapiV3MediaTypes } from "./MediaTypes";
 
-import {
-  NamedAny as OpenapiV3NamedAny,
-  type INamedAny as IOpenapiV3NamedAny,
-  type TNamedAny as TOpenapiV3NamedAny,
-} from './NamedAny';
+import { NamedAny as OpenapiV3NamedAny, type INamedAny as IOpenapiV3NamedAny, type TNamedAny as TOpenapiV3NamedAny } from "./NamedAny";
+
+import { ARRAY, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IResponse
@@ -60,83 +48,94 @@ export interface TResponse {
  *  Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response.
  */
 export class Response extends FieldNode {
+  /**
+   **/
   private _description: STRING;
 
+  /**
+   **/
   private _headers: OpenapiV3HeadersOrReferences;
 
+  /**
+   **/
   private _content: OpenapiV3MediaTypes;
 
+  /**
+   **/
   private _links: OpenapiV3LinksOrReferences;
 
+  /**
+   **/
   private _specificationExtension: ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>;
 
   public __defaultValues: IResponse;
 
-  constructor(
-    initData?: IResponse,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IResponse, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'openapi.v3.Response';
+    this.__meta.typeName = "openapi.v3.Response";
     this.__meta.description =
-      'Response Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response.';
+      "Response Describes a single response from an API Operation, including design-time, static  `links` to operations based on the response.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'description',
-        protoName: 'description',
+        fieldName: "description",
+        protoName: "description",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'headers',
-        protoName: 'headers',
+        fieldName: "headers",
+        protoName: "headers",
         FieldConstructor: OpenapiV3HeadersOrReferences,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'content',
-        protoName: 'content',
+        fieldName: "content",
+        protoName: "content",
         FieldConstructor: OpenapiV3MediaTypes,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'links',
-        protoName: 'links',
+        fieldName: "links",
+        protoName: "links",
         FieldConstructor: OpenapiV3LinksOrReferences,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'specificationExtension',
-        protoName: 'specification_extension',
+        fieldName: "specificationExtension",
+        protoName: "specification_extension",
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._description = new STRING(undefined, this, 'description');
+    // ---------------------
 
-    this._headers = new OpenapiV3HeadersOrReferences(
-      undefined,
-      this,
-      'headers',
-    );
+    /**
+     **/
+    this._description = new STRING(undefined, this, "description");
 
-    this._content = new OpenapiV3MediaTypes(undefined, this, 'content');
+    /**
+     **/
+    this._headers = new OpenapiV3HeadersOrReferences(undefined, this, "headers");
 
-    this._links = new OpenapiV3LinksOrReferences(undefined, this, 'links');
+    /**
+     **/
+    this._content = new OpenapiV3MediaTypes(undefined, this, "content");
 
-    this._specificationExtension = new ARRAY<
-      OpenapiV3NamedAny,
-      IOpenapiV3NamedAny
-    >(undefined, this, 'specificationExtension');
+    /**
+     **/
+    this._links = new OpenapiV3LinksOrReferences(undefined, this, "links");
+
+    /**
+     **/
+    this._specificationExtension = new ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>(undefined, this, "specificationExtension");
 
     // Set required fields
     [].forEach(fieldName => {
@@ -161,56 +160,83 @@ export class Response extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get description(): STRING {
     return this._description;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set description(v: string) {
     this.__PrimitivesSetter(this._description, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get headers(): OpenapiV3HeadersOrReferences {
     return this._headers;
   }
 
+  /**
+   * The setter receives `IOpenapiV3HeadersOrReferences`
+   **/
   public set headers(v: IOpenapiV3HeadersOrReferences) {
     this.__TypeSetter(this._headers, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get content(): OpenapiV3MediaTypes {
     return this._content;
   }
 
+  /**
+   * The setter receives `IOpenapiV3MediaTypes`
+   **/
   public set content(v: IOpenapiV3MediaTypes) {
     this.__TypeSetter(this._content, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get links(): OpenapiV3LinksOrReferences {
     return this._links;
   }
 
+  /**
+   * The setter receives `IOpenapiV3LinksOrReferences`
+   **/
   public set links(v: IOpenapiV3LinksOrReferences) {
     this.__TypeSetter(this._links, v);
   }
 
-  public get specificationExtension(): ARRAY<
-    OpenapiV3NamedAny,
-    IOpenapiV3NamedAny
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get specificationExtension(): ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny> {
     return this._specificationExtension;
   }
 
+  /**
+   * The setter receives `IOpenapiV3NamedAny[]`
+   **/
   public set specificationExtension(v: IOpenapiV3NamedAny[]) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 
-  fromLiteral(data: IResponse) {
+  fromLiteral(data: IResponse): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IResponse {
-    return super.__toLiteral();
+    return super.__toLiteral() as IResponse;
   }
 }
 
-Registry.register('openapi.v3.Response', Response);
+Registry.register("openapi.v3.Response", Response);

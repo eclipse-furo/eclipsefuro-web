@@ -2,22 +2,18 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  FieldNode,
-  Registry,
-} from '@furo/open-models/dist/index';
-import {
   FeatureSet as GoogleProtobufFeatureSet,
   type IFeatureSet as IGoogleProtobufFeatureSet,
   type TFeatureSet as TGoogleProtobufFeatureSet,
-} from './FeatureSet';
+} from "./FeatureSet";
 
 import {
   UninterpretedOption as GoogleProtobufUninterpretedOption,
   type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
   type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
-} from './UninterpretedOption';
+} from "./UninterpretedOption";
+
+import { ARRAY, BOOLEAN, FieldNode, Registry } from "@furo/open-models/dist/index";
 
 /**
  * @interface IMessageOptions
@@ -193,242 +189,248 @@ export interface TMessageOptions {
  * MessageOptions
  */
 export class MessageOptions extends FieldNode {
-  //  Set true to use the old proto1 MessageSet wire format for extensions.
-  //  This is provided for backwards-compatibility with the MessageSet wire
-  //  format.  You should not use this for any other reason:  It's less
-  //  efficient, has fewer features, and is more complicated.
-  //
-  //  The message must be defined exactly as follows:
-  //    message Foo {
-  //      option message_set_wire_format = true;
-  //      extensions 4 to max;
-  //    }
-  //  Note that the message cannot have any defined fields; MessageSets only
-  //  have extensions.
-  //
-  //  All extensions of your type must be singular messages; e.g. they cannot
-  //  be int32s, enums, or repeated messages.
-  //
-  //  Because this is an option, the above two restrictions are not enforced by
-  //  the protocol compiler.
+  /**
+   * Set true to use the old proto1 MessageSet wire format for extensions.
+   * This is provided for backwards-compatibility with the MessageSet wire
+   * format.  You should not use this for any other reason:  It's less
+   * efficient, has fewer features, and is more complicated.
+   *
+   * The message must be defined exactly as follows:
+   *   message Foo {
+   *     option message_set_wire_format = true;
+   *     extensions 4 to max;
+   *   }
+   * Note that the message cannot have any defined fields; MessageSets only
+   * have extensions.
+   *
+   * All extensions of your type must be singular messages; e.g. they cannot
+   * be int32s, enums, or repeated messages.
+   *
+   * Because this is an option, the above two restrictions are not enforced by
+   * the protocol compiler.
+   **/
   private _messageSetWireFormat: BOOLEAN;
 
-  //  Disables the generation of the standard "descriptor()" accessor, which can
-  //  conflict with a field of the same name.  This is meant to make migration
-  //  from proto1 easier; new code should avoid fields named "descriptor".
+  /**
+   * Disables the generation of the standard "descriptor()" accessor, which can
+   * conflict with a field of the same name.  This is meant to make migration
+   * from proto1 easier; new code should avoid fields named "descriptor".
+   **/
   private _noStandardDescriptorAccessor: BOOLEAN;
 
-  //  Is this message deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for the message, or it will be completely ignored; in the very least,
-  //  this is a formalization for deprecating messages.
+  /**
+   * Is this message deprecated?
+   * Depending on the target platform, this can emit Deprecated annotations
+   * for the message, or it will be completely ignored; in the very least,
+   * this is a formalization for deprecating messages.
+   **/
   private _deprecated: BOOLEAN;
 
-  //  NOTE: Do not set the option in .proto files. Always use the maps syntax
-  //  instead. The option should only be implicitly set by the proto compiler
-  //  parser.
-  //
-  //  Whether the message is an automatically generated map entry type for the
-  //  maps field.
-  //
-  //  For maps fields:
-  //      map<KeyType, ValueType> map_field = 1;
-  //  The parsed descriptor looks like:
-  //      message MapFieldEntry {
-  //          option map_entry = true;
-  //          optional KeyType key = 1;
-  //          optional ValueType value = 2;
-  //      }
-  //      repeated MapFieldEntry map_field = 1;
-  //
-  //  Implementations may choose not to generate the map_entry=true message, but
-  //  use a native map in the target language to hold the keys and values.
-  //  The reflection APIs in such implementations still need to work as
-  //  if the field is a repeated message field.
+  /**
+   * NOTE: Do not set the option in .proto files. Always use the maps syntax
+   * instead. The option should only be implicitly set by the proto compiler
+   * parser.
+   *
+   * Whether the message is an automatically generated map entry type for the
+   * maps field.
+   *
+   * For maps fields:
+   *     map<KeyType, ValueType> map_field = 1;
+   * The parsed descriptor looks like:
+   *     message MapFieldEntry {
+   *         option map_entry = true;
+   *         optional KeyType key = 1;
+   *         optional ValueType value = 2;
+   *     }
+   *     repeated MapFieldEntry map_field = 1;
+   *
+   * Implementations may choose not to generate the map_entry=true message, but
+   * use a native map in the target language to hold the keys and values.
+   * The reflection APIs in such implementations still need to work as
+   * if the field is a repeated message field.
+   **/
   private _mapEntry: BOOLEAN;
 
-  //  Enable the legacy handling of JSON field name conflicts.  This lowercases
-  //  and strips underscored from the fields before comparison in proto3 only.
-  //  The new behavior takes `json_name` into account and applies to proto2 as
-  //  well.
-  //
-  //  This should only be used as a temporary measure against broken builds due
-  //  to the change in behavior for JSON field name conflicts.
-  //
-  //  TODO This is legacy behavior we plan to remove once downstream
-  //  teams have had time to migrate.
+  /**
+   * Enable the legacy handling of JSON field name conflicts.  This lowercases
+   * and strips underscored from the fields before comparison in proto3 only.
+   * The new behavior takes `json_name` into account and applies to proto2 as
+   * well.
+   *
+   * This should only be used as a temporary measure against broken builds due
+   * to the change in behavior for JSON field name conflicts.
+   *
+   * TODO This is legacy behavior we plan to remove once downstream
+   * teams have had time to migrate.
+   **/
   private _deprecatedLegacyJsonFieldConflicts: BOOLEAN;
 
-  //  Any features defined in the specific edition.
+  /**
+   * Any features defined in the specific edition.
+   **/
   private _features: GoogleProtobufFeatureSet;
 
-  //  The parser stores options it doesn't recognize here. See above.
-  private _uninterpretedOption: ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  >;
+  /**
+   * The parser stores options it doesn't recognize here. See above.
+   **/
+  private _uninterpretedOption: ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>;
 
   public __defaultValues: IMessageOptions;
 
-  constructor(
-    initData?: IMessageOptions,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IMessageOptions, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.MessageOptions';
-    this.__meta.description = 'MessageOptions';
+    this.__meta.typeName = "google.protobuf.MessageOptions";
+    this.__meta.description = "MessageOptions";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'messageSetWireFormat',
-        protoName: 'message_set_wire_format',
+        fieldName: "messageSetWireFormat",
+        protoName: "message_set_wire_format",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
           "Set true to use the old proto1 MessageSet wire format for extensions.\n This is provided for backwards-compatibility with the MessageSet wire\n format.  You should not use this for any other reason:  It's less\n efficient, has fewer features, and is more complicated.\n\n The message must be defined exactly as follows:\n   message Foo {\n     option message_set_wire_format = true;\n     extensions 4 to max;\n   }\n Note that the message cannot have any defined fields; MessageSets only\n have extensions.\n\n All extensions of your type must be singular messages; e.g. they cannot\n be int32s, enums, or repeated messages.\n\n Because this is an option, the above two restrictions are not enforced by\n the protocol compiler.",
       },
       {
-        fieldName: 'noStandardDescriptorAccessor',
-        protoName: 'no_standard_descriptor_accessor',
+        fieldName: "noStandardDescriptorAccessor",
+        protoName: "no_standard_descriptor_accessor",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
           'Disables the generation of the standard "descriptor()" accessor, which can\n conflict with a field of the same name.  This is meant to make migration\n from proto1 easier; new code should avoid fields named "descriptor".',
       },
       {
-        fieldName: 'deprecated',
-        protoName: 'deprecated',
+        fieldName: "deprecated",
+        protoName: "deprecated",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'Is this message deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the message, or it will be completely ignored; in the very least,\n this is a formalization for deprecating messages.',
+          "Is this message deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the message, or it will be completely ignored; in the very least,\n this is a formalization for deprecating messages.",
       },
       {
-        fieldName: 'mapEntry',
-        protoName: 'map_entry',
+        fieldName: "mapEntry",
+        protoName: "map_entry",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'NOTE: Do not set the option in .proto files. Always use the maps syntax\n instead. The option should only be implicitly set by the proto compiler\n parser.\n\n Whether the message is an automatically generated map entry type for the\n maps field.\n\n For maps fields:\n     map<KeyType, ValueType> map_field = 1;\n The parsed descriptor looks like:\n     message MapFieldEntry {\n         option map_entry = true;\n         optional KeyType key = 1;\n         optional ValueType value = 2;\n     }\n     repeated MapFieldEntry map_field = 1;\n\n Implementations may choose not to generate the map_entry=true message, but\n use a native map in the target language to hold the keys and values.\n The reflection APIs in such implementations still need to work as\n if the field is a repeated message field.',
+          "NOTE: Do not set the option in .proto files. Always use the maps syntax\n instead. The option should only be implicitly set by the proto compiler\n parser.\n\n Whether the message is an automatically generated map entry type for the\n maps field.\n\n For maps fields:\n     map<KeyType, ValueType> map_field = 1;\n The parsed descriptor looks like:\n     message MapFieldEntry {\n         option map_entry = true;\n         optional KeyType key = 1;\n         optional ValueType value = 2;\n     }\n     repeated MapFieldEntry map_field = 1;\n\n Implementations may choose not to generate the map_entry=true message, but\n use a native map in the target language to hold the keys and values.\n The reflection APIs in such implementations still need to work as\n if the field is a repeated message field.",
       },
       {
-        fieldName: 'deprecatedLegacyJsonFieldConflicts',
-        protoName: 'deprecated_legacy_json_field_conflicts',
+        fieldName: "deprecatedLegacyJsonFieldConflicts",
+        protoName: "deprecated_legacy_json_field_conflicts",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'Enable the legacy handling of JSON field name conflicts.  This lowercases\n and strips underscored from the fields before comparison in proto3 only.\n The new behavior takes `json_name` into account and applies to proto2 as\n well.\n\n This should only be used as a temporary measure against broken builds due\n to the change in behavior for JSON field name conflicts.\n\n TODO This is legacy behavior we plan to remove once downstream\n teams have had time to migrate.',
+          "Enable the legacy handling of JSON field name conflicts.  This lowercases\n and strips underscored from the fields before comparison in proto3 only.\n The new behavior takes `json_name` into account and applies to proto2 as\n well.\n\n This should only be used as a temporary measure against broken builds due\n to the change in behavior for JSON field name conflicts.\n\n TODO This is legacy behavior we plan to remove once downstream\n teams have had time to migrate.",
       },
       {
-        fieldName: 'features',
-        protoName: 'features',
+        fieldName: "features",
+        protoName: "features",
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
-        description: 'Any features defined in the specific edition.',
+        description: "Any features defined in the specific edition.",
       },
       {
-        fieldName: 'uninterpretedOption',
-        protoName: 'uninterpreted_option',
+        fieldName: "uninterpretedOption",
+        protoName: "uninterpreted_option",
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
-        description:
-          "The parser stores options it doesn't recognize here. See above.",
+        description: "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 
     // Initialize the fields
-    //  Set true to use the old proto1 MessageSet wire format for extensions.
-    //  This is provided for backwards-compatibility with the MessageSet wire
-    //  format.  You should not use this for any other reason:  It's less
-    //  efficient, has fewer features, and is more complicated.
-    //
-    //  The message must be defined exactly as follows:
-    //    message Foo {
-    //      option message_set_wire_format = true;
-    //      extensions 4 to max;
-    //    }
-    //  Note that the message cannot have any defined fields; MessageSets only
-    //  have extensions.
-    //
-    //  All extensions of your type must be singular messages; e.g. they cannot
-    //  be int32s, enums, or repeated messages.
-    //
-    //  Because this is an option, the above two restrictions are not enforced by
-    //  the protocol compiler.
-    this._messageSetWireFormat = new BOOLEAN(
-      undefined,
-      this,
-      'messageSetWireFormat',
-    );
+    // ---------------------
 
-    //  Disables the generation of the standard "descriptor()" accessor, which can
-    //  conflict with a field of the same name.  This is meant to make migration
-    //  from proto1 easier; new code should avoid fields named "descriptor".
-    this._noStandardDescriptorAccessor = new BOOLEAN(
-      undefined,
-      this,
-      'noStandardDescriptorAccessor',
-    );
+    /**
+     *  Set true to use the old proto1 MessageSet wire format for extensions.
+     *  This is provided for backwards-compatibility with the MessageSet wire
+     *  format.  You should not use this for any other reason:  It's less
+     *  efficient, has fewer features, and is more complicated.
+     *
+     *  The message must be defined exactly as follows:
+     *    message Foo {
+     *      option message_set_wire_format = true;
+     *      extensions 4 to max;
+     *    }
+     *  Note that the message cannot have any defined fields; MessageSets only
+     *  have extensions.
+     *
+     *  All extensions of your type must be singular messages; e.g. they cannot
+     *  be int32s, enums, or repeated messages.
+     *
+     *  Because this is an option, the above two restrictions are not enforced by
+     *  the protocol compiler.
+     **/
+    this._messageSetWireFormat = new BOOLEAN(undefined, this, "messageSetWireFormat");
 
-    //  Is this message deprecated?
-    //  Depending on the target platform, this can emit Deprecated annotations
-    //  for the message, or it will be completely ignored; in the very least,
-    //  this is a formalization for deprecating messages.
-    this._deprecated = new BOOLEAN(undefined, this, 'deprecated');
+    /**
+     *  Disables the generation of the standard "descriptor()" accessor, which can
+     *  conflict with a field of the same name.  This is meant to make migration
+     *  from proto1 easier; new code should avoid fields named "descriptor".
+     **/
+    this._noStandardDescriptorAccessor = new BOOLEAN(undefined, this, "noStandardDescriptorAccessor");
 
-    //  NOTE: Do not set the option in .proto files. Always use the maps syntax
-    //  instead. The option should only be implicitly set by the proto compiler
-    //  parser.
-    //
-    //  Whether the message is an automatically generated map entry type for the
-    //  maps field.
-    //
-    //  For maps fields:
-    //      map<KeyType, ValueType> map_field = 1;
-    //  The parsed descriptor looks like:
-    //      message MapFieldEntry {
-    //          option map_entry = true;
-    //          optional KeyType key = 1;
-    //          optional ValueType value = 2;
-    //      }
-    //      repeated MapFieldEntry map_field = 1;
-    //
-    //  Implementations may choose not to generate the map_entry=true message, but
-    //  use a native map in the target language to hold the keys and values.
-    //  The reflection APIs in such implementations still need to work as
-    //  if the field is a repeated message field.
-    this._mapEntry = new BOOLEAN(undefined, this, 'mapEntry');
+    /**
+     *  Is this message deprecated?
+     *  Depending on the target platform, this can emit Deprecated annotations
+     *  for the message, or it will be completely ignored; in the very least,
+     *  this is a formalization for deprecating messages.
+     **/
+    this._deprecated = new BOOLEAN(undefined, this, "deprecated");
 
-    //  Enable the legacy handling of JSON field name conflicts.  This lowercases
-    //  and strips underscored from the fields before comparison in proto3 only.
-    //  The new behavior takes `json_name` into account and applies to proto2 as
-    //  well.
-    //
-    //  This should only be used as a temporary measure against broken builds due
-    //  to the change in behavior for JSON field name conflicts.
-    //
-    //  TODO This is legacy behavior we plan to remove once downstream
-    //  teams have had time to migrate.
-    this._deprecatedLegacyJsonFieldConflicts = new BOOLEAN(
-      undefined,
-      this,
-      'deprecatedLegacyJsonFieldConflicts',
-    );
+    /**
+     *  NOTE: Do not set the option in .proto files. Always use the maps syntax
+     *  instead. The option should only be implicitly set by the proto compiler
+     *  parser.
+     *
+     *  Whether the message is an automatically generated map entry type for the
+     *  maps field.
+     *
+     *  For maps fields:
+     *      map<KeyType, ValueType> map_field = 1;
+     *  The parsed descriptor looks like:
+     *      message MapFieldEntry {
+     *          option map_entry = true;
+     *          optional KeyType key = 1;
+     *          optional ValueType value = 2;
+     *      }
+     *      repeated MapFieldEntry map_field = 1;
+     *
+     *  Implementations may choose not to generate the map_entry=true message, but
+     *  use a native map in the target language to hold the keys and values.
+     *  The reflection APIs in such implementations still need to work as
+     *  if the field is a repeated message field.
+     **/
+    this._mapEntry = new BOOLEAN(undefined, this, "mapEntry");
 
-    //  Any features defined in the specific edition.
-    this._features = new GoogleProtobufFeatureSet(undefined, this, 'features');
+    /**
+     *  Enable the legacy handling of JSON field name conflicts.  This lowercases
+     *  and strips underscored from the fields before comparison in proto3 only.
+     *  The new behavior takes `json_name` into account and applies to proto2 as
+     *  well.
+     *
+     *  This should only be used as a temporary measure against broken builds due
+     *  to the change in behavior for JSON field name conflicts.
+     *
+     *  TODO This is legacy behavior we plan to remove once downstream
+     *  teams have had time to migrate.
+     **/
+    this._deprecatedLegacyJsonFieldConflicts = new BOOLEAN(undefined, this, "deprecatedLegacyJsonFieldConflicts");
 
-    //  The parser stores options it doesn't recognize here. See above.
-    this._uninterpretedOption = new ARRAY<
-      GoogleProtobufUninterpretedOption,
-      IGoogleProtobufUninterpretedOption
-    >(undefined, this, 'uninterpretedOption');
+    /**
+     *  Any features defined in the specific edition.
+     **/
+    this._features = new GoogleProtobufFeatureSet(undefined, this, "features");
+
+    /**
+     *  The parser stores options it doesn't recognize here. See above.
+     **/
+    this._uninterpretedOption = new ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>(undefined, this, "uninterpretedOption");
 
     // Set required fields
     [].forEach(fieldName => {
-      (this[fieldName as keyof MessageOptions] as FieldNode).__meta.required =
-        true;
+      (this[fieldName as keyof MessageOptions] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -449,130 +451,169 @@ export class MessageOptions extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  Set true to use the old proto1 MessageSet wire format for extensions.
-  //  This is provided for backwards-compatibility with the MessageSet wire
-  //  format.  You should not use this for any other reason:  It's less
-  //  efficient, has fewer features, and is more complicated.
-  //
-  //  The message must be defined exactly as follows:
-  //    message Foo {
-  //      option message_set_wire_format = true;
-  //      extensions 4 to max;
-  //    }
-  //  Note that the message cannot have any defined fields; MessageSets only
-  //  have extensions.
-  //
-  //  All extensions of your type must be singular messages; e.g. they cannot
-  //  be int32s, enums, or repeated messages.
-  //
-  //  Because this is an option, the above two restrictions are not enforced by
-  //  the protocol compiler.
+  /**
+   *  Set true to use the old proto1 MessageSet wire format for extensions.
+   *  This is provided for backwards-compatibility with the MessageSet wire
+   *  format.  You should not use this for any other reason:  It's less
+   *  efficient, has fewer features, and is more complicated.
+   *
+   *  The message must be defined exactly as follows:
+   *    message Foo {
+   *      option message_set_wire_format = true;
+   *      extensions 4 to max;
+   *    }
+   *  Note that the message cannot have any defined fields; MessageSets only
+   *  have extensions.
+   *
+   *  All extensions of your type must be singular messages; e.g. they cannot
+   *  be int32s, enums, or repeated messages.
+   *
+   *  Because this is an option, the above two restrictions are not enforced by
+   *  the protocol compiler.
+   * The getter receives the FieldNode
+   **/
   public get messageSetWireFormat(): BOOLEAN {
     return this._messageSetWireFormat;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set messageSetWireFormat(v: boolean) {
     this.__PrimitivesSetter(this._messageSetWireFormat, v);
   }
 
-  //  Disables the generation of the standard "descriptor()" accessor, which can
-  //  conflict with a field of the same name.  This is meant to make migration
-  //  from proto1 easier; new code should avoid fields named "descriptor".
+  /**
+   *  Disables the generation of the standard "descriptor()" accessor, which can
+   *  conflict with a field of the same name.  This is meant to make migration
+   *  from proto1 easier; new code should avoid fields named "descriptor".
+   * The getter receives the FieldNode
+   **/
   public get noStandardDescriptorAccessor(): BOOLEAN {
     return this._noStandardDescriptorAccessor;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set noStandardDescriptorAccessor(v: boolean) {
     this.__PrimitivesSetter(this._noStandardDescriptorAccessor, v);
   }
 
-  //  Is this message deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for the message, or it will be completely ignored; in the very least,
-  //  this is a formalization for deprecating messages.
+  /**
+   *  Is this message deprecated?
+   *  Depending on the target platform, this can emit Deprecated annotations
+   *  for the message, or it will be completely ignored; in the very least,
+   *  this is a formalization for deprecating messages.
+   * The getter receives the FieldNode
+   **/
   public get deprecated(): BOOLEAN {
     return this._deprecated;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecated(v: boolean) {
     this.__PrimitivesSetter(this._deprecated, v);
   }
 
-  //  NOTE: Do not set the option in .proto files. Always use the maps syntax
-  //  instead. The option should only be implicitly set by the proto compiler
-  //  parser.
-  //
-  //  Whether the message is an automatically generated map entry type for the
-  //  maps field.
-  //
-  //  For maps fields:
-  //      map<KeyType, ValueType> map_field = 1;
-  //  The parsed descriptor looks like:
-  //      message MapFieldEntry {
-  //          option map_entry = true;
-  //          optional KeyType key = 1;
-  //          optional ValueType value = 2;
-  //      }
-  //      repeated MapFieldEntry map_field = 1;
-  //
-  //  Implementations may choose not to generate the map_entry=true message, but
-  //  use a native map in the target language to hold the keys and values.
-  //  The reflection APIs in such implementations still need to work as
-  //  if the field is a repeated message field.
+  /**
+   *  NOTE: Do not set the option in .proto files. Always use the maps syntax
+   *  instead. The option should only be implicitly set by the proto compiler
+   *  parser.
+   *
+   *  Whether the message is an automatically generated map entry type for the
+   *  maps field.
+   *
+   *  For maps fields:
+   *      map<KeyType, ValueType> map_field = 1;
+   *  The parsed descriptor looks like:
+   *      message MapFieldEntry {
+   *          option map_entry = true;
+   *          optional KeyType key = 1;
+   *          optional ValueType value = 2;
+   *      }
+   *      repeated MapFieldEntry map_field = 1;
+   *
+   *  Implementations may choose not to generate the map_entry=true message, but
+   *  use a native map in the target language to hold the keys and values.
+   *  The reflection APIs in such implementations still need to work as
+   *  if the field is a repeated message field.
+   * The getter receives the FieldNode
+   **/
   public get mapEntry(): BOOLEAN {
     return this._mapEntry;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set mapEntry(v: boolean) {
     this.__PrimitivesSetter(this._mapEntry, v);
   }
 
-  //  Enable the legacy handling of JSON field name conflicts.  This lowercases
-  //  and strips underscored from the fields before comparison in proto3 only.
-  //  The new behavior takes `json_name` into account and applies to proto2 as
-  //  well.
-  //
-  //  This should only be used as a temporary measure against broken builds due
-  //  to the change in behavior for JSON field name conflicts.
-  //
-  //  TODO This is legacy behavior we plan to remove once downstream
-  //  teams have had time to migrate.
+  /**
+   *  Enable the legacy handling of JSON field name conflicts.  This lowercases
+   *  and strips underscored from the fields before comparison in proto3 only.
+   *  The new behavior takes `json_name` into account and applies to proto2 as
+   *  well.
+   *
+   *  This should only be used as a temporary measure against broken builds due
+   *  to the change in behavior for JSON field name conflicts.
+   *
+   *  TODO This is legacy behavior we plan to remove once downstream
+   *  teams have had time to migrate.
+   * The getter receives the FieldNode
+   **/
   public get deprecatedLegacyJsonFieldConflicts(): BOOLEAN {
     return this._deprecatedLegacyJsonFieldConflicts;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecatedLegacyJsonFieldConflicts(v: boolean) {
     this.__PrimitivesSetter(this._deprecatedLegacyJsonFieldConflicts, v);
   }
 
-  //  Any features defined in the specific edition.
+  /**
+   *  Any features defined in the specific edition.
+   * The getter receives the FieldNode
+   **/
   public get features(): GoogleProtobufFeatureSet {
     return this._features;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFeatureSet`
+   **/
   public set features(v: IGoogleProtobufFeatureSet) {
     this.__TypeSetter(this._features, v);
   }
 
-  //  The parser stores options it doesn't recognize here. See above.
-  public get uninterpretedOption(): ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  > {
+  /**
+   *  The parser stores options it doesn't recognize here. See above.
+   * The getter receives the FieldNode
+   **/
+  public get uninterpretedOption(): ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption> {
     return this._uninterpretedOption;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufUninterpretedOption[]`
+   **/
   public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[]) {
     this.__TypeSetter(this._uninterpretedOption, v);
   }
 
-  fromLiteral(data: IMessageOptions) {
+  fromLiteral(data: IMessageOptions): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IMessageOptions {
-    return super.__toLiteral();
+    return super.__toLiteral() as IMessageOptions;
   }
 }
 
-Registry.register('google.protobuf.MessageOptions', MessageOptions);
+Registry.register("google.protobuf.MessageOptions", MessageOptions);

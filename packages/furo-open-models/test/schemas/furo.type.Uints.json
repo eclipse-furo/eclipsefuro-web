@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Uints.json",
+  "type": "object",
+  "description": "Decimal numbers\n  Regex pattern: ^[\u0026#43;-]?(\\d*\\.)?\\d\u0026#43;$Uints",
+  "properties": {
+    "uint32": {
+      "type": "integer",
+      "maximum": 1000,
+      "minimum": 5
+    },
+    "uint32Excl": {
+      "type": "integer",
+      "maximum": 1000,
+      "minimum": 5
+    },
+    "uint64": {
+      "type": "integer",
+      "maximum": 1000,
+      "minimum": 5
+    },
+    "uint64Excl": {
+      "type": "integer",
+      "maximum": 1000,
+      "minimum": 5
+    }
+  }
+}

@@ -13,7 +13,7 @@ import {
   StringValue,
   UInt32Value,
   UInt64Value,
-} from '@furo/open-models/dist/index';
+} from "@furo/open-models/dist/index";
 
 /**
  * @interface IConstraintWrappers
@@ -53,183 +53,196 @@ export interface TConstraintWrappers {
  * ConstraintWrappers
  */
 export class ConstraintWrappers extends FieldNode {
+  /**
+   **/
   private _stringValue: StringValue;
 
+  /**
+   **/
   private _int32Value: Int32Value;
 
+  /**
+   **/
   private _int64Value: Int64Value;
 
+  /**
+   **/
   private _floatValue: FloatValue;
 
+  /**
+   **/
   private _doubleValue: DoubleValue;
 
+  /**
+   **/
   private _boolValue: BoolValue;
 
+  /**
+   **/
   private _uint32Value: UInt32Value;
 
+  /**
+   **/
   private _uint64Value: UInt64Value;
 
+  /**
+   **/
   private _bytesValue: BytesValue;
 
+  /**
+   **/
   private _exclInt32Value: Int32Value;
 
+  /**
+   **/
   private _exclInt64Value: Int64Value;
 
   public __defaultValues: IConstraintWrappers;
 
-  constructor(
-    initData?: IConstraintWrappers,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IConstraintWrappers, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'furo.type.ConstraintWrappers';
-    this.__meta.description = 'ConstraintWrappers';
+    this.__meta.typeName = "furo.type.ConstraintWrappers";
+    this.__meta.description = "ConstraintWrappers";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'stringValue',
-        protoName: 'string_value',
+        fieldName: "stringValue",
+        protoName: "string_value",
         FieldConstructor: StringValue,
-        constraints: {
-          max_length: 10,
-          min_length: 3,
-          pattern: '^-*$',
-          required: true,
-        },
-        description: '',
+        constraints: { max_length: 10, min_length: 3, pattern: "^-*$", required: true },
+        description: "",
       },
       {
-        fieldName: 'int32Value',
-        protoName: 'int32_value',
+        fieldName: "int32Value",
+        protoName: "int32_value",
         FieldConstructor: Int32Value,
-        constraints: {
-          maximum: 10,
-          minimum: 3,
-          multiple_of: 3,
-          required: true,
-        },
-        description: '',
+        constraints: { maximum: 10, minimum: 3, multiple_of: 3, required: true },
+        description: "",
       },
       {
-        fieldName: 'int64Value',
-        protoName: 'int64_value',
+        fieldName: "int64Value",
+        protoName: "int64_value",
         FieldConstructor: Int64Value,
-        constraints: {
-          maximum: 10,
-          minimum: 3,
-          multiple_of: 3,
-          required: true,
-        },
-        description: '',
+        constraints: { maximum: 10, minimum: 3, multiple_of: 3, required: true },
+        description: "",
       },
       {
-        fieldName: 'floatValue',
-        protoName: 'float_value',
+        fieldName: "floatValue",
+        protoName: "float_value",
         FieldConstructor: FloatValue,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'doubleValue',
-        protoName: 'double_value',
+        fieldName: "doubleValue",
+        protoName: "double_value",
         FieldConstructor: DoubleValue,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'boolValue',
-        protoName: 'bool_value',
+        fieldName: "boolValue",
+        protoName: "bool_value",
         FieldConstructor: BoolValue,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'uint32Value',
-        protoName: 'uint32_value',
+        fieldName: "uint32Value",
+        protoName: "uint32_value",
         FieldConstructor: UInt32Value,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'uint64Value',
-        protoName: 'uint64_value',
+        fieldName: "uint64Value",
+        protoName: "uint64_value",
         FieldConstructor: UInt64Value,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'bytesValue',
-        protoName: 'bytes_value',
+        fieldName: "bytesValue",
+        protoName: "bytes_value",
         FieldConstructor: BytesValue,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'exclInt32Value',
-        protoName: 'excl_int32_value',
+        fieldName: "exclInt32Value",
+        protoName: "excl_int32_value",
         FieldConstructor: Int32Value,
-        constraints: {
-          maximum: 10,
-          minimum: 3,
-          exclusive_maximum: true,
-          exclusive_minimum: true,
-          multiple_of: 3,
-        },
-        description: '',
+        constraints: { maximum: 10, minimum: 3, exclusive_maximum: true, exclusive_minimum: true, multiple_of: 3 },
+        description: "",
       },
       {
-        fieldName: 'exclInt64Value',
-        protoName: 'excl_int64_value',
+        fieldName: "exclInt64Value",
+        protoName: "excl_int64_value",
         FieldConstructor: Int64Value,
-        constraints: {
-          maximum: 10,
-          minimum: 3,
-          exclusive_maximum: true,
-          exclusive_minimum: true,
-          multiple_of: 3,
-        },
-        description: '',
+        constraints: { maximum: 10, minimum: 3, exclusive_maximum: true, exclusive_minimum: true, multiple_of: 3 },
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._stringValue = new StringValue(undefined, this, 'stringValue');
+    // ---------------------
 
-    this._int32Value = new Int32Value(undefined, this, 'int32Value');
+    /**
+     **/
+    this._stringValue = new StringValue(undefined, this, "stringValue");
 
-    this._int64Value = new Int64Value(undefined, this, 'int64Value');
+    /**
+     **/
+    this._int32Value = new Int32Value(undefined, this, "int32Value");
 
-    this._floatValue = new FloatValue(undefined, this, 'floatValue');
+    /**
+     **/
+    this._int64Value = new Int64Value(undefined, this, "int64Value");
 
-    this._doubleValue = new DoubleValue(undefined, this, 'doubleValue');
+    /**
+     **/
+    this._floatValue = new FloatValue(undefined, this, "floatValue");
 
-    this._boolValue = new BoolValue(undefined, this, 'boolValue');
+    /**
+     **/
+    this._doubleValue = new DoubleValue(undefined, this, "doubleValue");
 
-    this._uint32Value = new UInt32Value(undefined, this, 'uint32Value');
+    /**
+     **/
+    this._boolValue = new BoolValue(undefined, this, "boolValue");
 
-    this._uint64Value = new UInt64Value(undefined, this, 'uint64Value');
+    /**
+     **/
+    this._uint32Value = new UInt32Value(undefined, this, "uint32Value");
 
-    this._bytesValue = new BytesValue(undefined, this, 'bytesValue');
+    /**
+     **/
+    this._uint64Value = new UInt64Value(undefined, this, "uint64Value");
 
-    this._exclInt32Value = new Int32Value(undefined, this, 'exclInt32Value');
+    /**
+     **/
+    this._bytesValue = new BytesValue(undefined, this, "bytesValue");
 
-    this._exclInt64Value = new Int64Value(undefined, this, 'exclInt64Value');
+    /**
+     **/
+    this._exclInt32Value = new Int32Value(undefined, this, "exclInt32Value");
+
+    /**
+     **/
+    this._exclInt64Value = new Int64Value(undefined, this, "exclInt64Value");
 
     // Set required fields
-    ['stringValue', 'int32Value', 'int64Value'].forEach(fieldName => {
-      (
-        this[fieldName as keyof ConstraintWrappers] as FieldNode
-      ).__meta.required = true;
+    ["stringValue", "int32Value", "int64Value"].forEach(fieldName => {
+      (this[fieldName as keyof ConstraintWrappers] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
     this.__defaultValues = {
       exclInt32Value: 3.0,
-      exclInt64Value: '3',
+      exclInt64Value: "3",
       int32Value: 3.0,
-      int64Value: '3',
-      stringValue: 'default',
+      int64Value: "3",
+      stringValue: "default",
     };
 
     // Initialize the fields with init data
@@ -241,108 +254,173 @@ export class ConstraintWrappers extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (this[fieldName as keyof ConstraintWrappers] as FieldNode).__readonly =
-        true;
+      (this[fieldName as keyof ConstraintWrappers] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get stringValue(): StringValue {
     return this._stringValue;
   }
 
+  /**
+   * The setter receives `string| null`
+   **/
   public set stringValue(v: string | null) {
     this.__TypeSetter(this._stringValue, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get int32Value(): Int32Value {
     return this._int32Value;
   }
 
+  /**
+   * The setter receives `number| null`
+   **/
   public set int32Value(v: number | null) {
     this.__TypeSetter(this._int32Value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get int64Value(): Int64Value {
     return this._int64Value;
   }
 
+  /**
+   * The setter receives `bigint| null`
+   **/
   public set int64Value(v: bigint | null) {
     this.__TypeSetter(this._int64Value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get floatValue(): FloatValue {
     return this._floatValue;
   }
 
+  /**
+   * The setter receives `number| null`
+   **/
   public set floatValue(v: number | null) {
     this.__TypeSetter(this._floatValue, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get doubleValue(): DoubleValue {
     return this._doubleValue;
   }
 
+  /**
+   * The setter receives `number| null`
+   **/
   public set doubleValue(v: number | null) {
     this.__TypeSetter(this._doubleValue, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get boolValue(): BoolValue {
     return this._boolValue;
   }
 
+  /**
+   * The setter receives `boolean| null`
+   **/
   public set boolValue(v: boolean | null) {
     this.__TypeSetter(this._boolValue, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get uint32Value(): UInt32Value {
     return this._uint32Value;
   }
 
+  /**
+   * The setter receives `number| null`
+   **/
   public set uint32Value(v: number | null) {
     this.__TypeSetter(this._uint32Value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get uint64Value(): UInt64Value {
     return this._uint64Value;
   }
 
+  /**
+   * The setter receives `bigint| null`
+   **/
   public set uint64Value(v: bigint | null) {
     this.__TypeSetter(this._uint64Value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get bytesValue(): BytesValue {
     return this._bytesValue;
   }
 
+  /**
+   * The setter receives `string| null`
+   **/
   public set bytesValue(v: string | null) {
     this.__TypeSetter(this._bytesValue, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get exclInt32Value(): Int32Value {
     return this._exclInt32Value;
   }
 
+  /**
+   * The setter receives `number| null`
+   **/
   public set exclInt32Value(v: number | null) {
     this.__TypeSetter(this._exclInt32Value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get exclInt64Value(): Int64Value {
     return this._exclInt64Value;
   }
 
+  /**
+   * The setter receives `bigint| null`
+   **/
   public set exclInt64Value(v: bigint | null) {
     this.__TypeSetter(this._exclInt64Value, v);
   }
 
-  fromLiteral(data: IConstraintWrappers) {
+  fromLiteral(data: IConstraintWrappers): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IConstraintWrappers {
-    return super.__toLiteral();
+    return super.__toLiteral() as IConstraintWrappers;
   }
 }
 
-Registry.register('furo.type.ConstraintWrappers', ConstraintWrappers);
+Registry.register("furo.type.ConstraintWrappers", ConstraintWrappers);

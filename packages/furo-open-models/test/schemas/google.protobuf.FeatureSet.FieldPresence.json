@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.FieldPresence.json",
+  "type": "string",
+  "enum": [
+    "FIELD_PRESENCE_UNKNOWN",
+    "EXPLICIT",
+    "IMPLICIT",
+    "LEGACY_REQUIRED"
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Paths.json",
+  "type": "object",
+  "description": "Holds the relative paths to the individual endpoints and their operations. The path is appended to the URL from the `Server Object` in order to construct the full URL.  The Paths MAY be empty, due to ACL constraints.Paths",
+  "properties": {
+    "path": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedPathItem.json"
+      }
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

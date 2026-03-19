@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.ServiceOptions.json",
+  "type": "object",
+  "properties": {
+    "deprecated": {
+      "type": "boolean",
+      "description": "Is this service deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the service, or it will be completely ignored; in the very least,\n this is a formalization for deprecating services."
+    },
+    "features": {
+      "$ref": "google.protobuf.FeatureSet.json",
+      "description": "Any features defined in the specific edition."
+    },
+    "uninterpretedOption": {
+      "type": "array",
+      "description": "The parser stores options it doesn't recognize here. See above.",
+      "items": {
+        "$ref": "google.protobuf.UninterpretedOption.json"
+      }
+    }
+  }
+}

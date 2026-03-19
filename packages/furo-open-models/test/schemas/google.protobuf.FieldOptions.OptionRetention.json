@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FieldOptions.OptionRetention.json",
+  "type": "string",
+  "description": "If set to RETENTION_SOURCE, the option will be omitted from the binary.\n Note: as of January 2023, support for this is in progress and does not yet\n have an effect (b/264593489).",
+  "enum": [
+    "RETENTION_UNKNOWN",
+    "RETENTION_RUNTIME",
+    "RETENTION_SOURCE"
+  ]
+}

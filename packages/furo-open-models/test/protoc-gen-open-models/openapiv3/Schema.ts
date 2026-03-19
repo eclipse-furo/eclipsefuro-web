@@ -2,74 +2,42 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  DOUBLE,
-  FieldNode,
-  INT64,
-  RECURSION,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   AdditionalPropertiesItem as OpenapiV3AdditionalPropertiesItem,
   type IAdditionalPropertiesItem as IOpenapiV3AdditionalPropertiesItem,
   type TAdditionalPropertiesItem as TOpenapiV3AdditionalPropertiesItem,
-} from './AdditionalPropertiesItem';
+} from "./AdditionalPropertiesItem";
 
-import {
-  XAny as OpenapiV3Any,
-  type IXAny as IOpenapiV3Any,
-  type TXAny as TOpenapiV3Any,
-} from './Any';
+import { XAny as OpenapiV3Any, type IXAny as IOpenapiV3Any, type TXAny as TOpenapiV3Any } from "./Any";
 
-import {
-  DefaultType as OpenapiV3DefaultType,
-  type IDefaultType as IOpenapiV3DefaultType,
-  type TDefaultType as TOpenapiV3DefaultType,
-} from './DefaultType';
+import { DefaultType as OpenapiV3DefaultType, type IDefaultType as IOpenapiV3DefaultType, type TDefaultType as TOpenapiV3DefaultType } from "./DefaultType";
 
 import {
   Discriminator as OpenapiV3Discriminator,
   type IDiscriminator as IOpenapiV3Discriminator,
   type TDiscriminator as TOpenapiV3Discriminator,
-} from './Discriminator';
+} from "./Discriminator";
 
 import {
   ExternalDocs as OpenapiV3ExternalDocs,
   type IExternalDocs as IOpenapiV3ExternalDocs,
   type TExternalDocs as TOpenapiV3ExternalDocs,
-} from './ExternalDocs';
+} from "./ExternalDocs";
 
-import {
-  ItemsItem as OpenapiV3ItemsItem,
-  type IItemsItem as IOpenapiV3ItemsItem,
-  type TItemsItem as TOpenapiV3ItemsItem,
-} from './ItemsItem';
+import { ItemsItem as OpenapiV3ItemsItem, type IItemsItem as IOpenapiV3ItemsItem, type TItemsItem as TOpenapiV3ItemsItem } from "./ItemsItem";
 
-import {
-  NamedAny as OpenapiV3NamedAny,
-  type INamedAny as IOpenapiV3NamedAny,
-  type TNamedAny as TOpenapiV3NamedAny,
-} from './NamedAny';
+import { NamedAny as OpenapiV3NamedAny, type INamedAny as IOpenapiV3NamedAny, type TNamedAny as TOpenapiV3NamedAny } from "./NamedAny";
 
-import {
-  Properties as OpenapiV3Properties,
-  type IProperties as IOpenapiV3Properties,
-  type TProperties as TOpenapiV3Properties,
-} from './Properties';
+import { Properties as OpenapiV3Properties, type IProperties as IOpenapiV3Properties, type TProperties as TOpenapiV3Properties } from "./Properties";
 
 import {
   SchemaOrReference as OpenapiV3SchemaOrReference,
   type ISchemaOrReference as IOpenapiV3SchemaOrReference,
   type TSchemaOrReference as TOpenapiV3SchemaOrReference,
-} from './SchemaOrReference';
+} from "./SchemaOrReference";
 
-import {
-  Xml as OpenapiV3Xml,
-  type IXml as IOpenapiV3Xml,
-  type TXml as TOpenapiV3Xml,
-} from './Xml';
+import { Xml as OpenapiV3Xml, type IXml as IOpenapiV3Xml, type TXml as TOpenapiV3Xml } from "./Xml";
+
+import { ARRAY, BOOLEAN, DOUBLE, FieldNode, INT64, RECURSION, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface ISchema
@@ -162,454 +130,559 @@ export interface TSchema {
  *  The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.  For more information about the properties, see JSON Schema Core and JSON Schema Validation. Unless stated otherwise, the property definitions follow the JSON Schema.
  */
 export class Schema extends FieldNode {
+  /**
+   **/
   private _nullable: BOOLEAN;
 
+  /**
+   **/
   private _discriminator: OpenapiV3Discriminator;
 
+  /**
+   **/
   private _readOnly: BOOLEAN;
 
+  /**
+   **/
   private _writeOnly: BOOLEAN;
 
+  /**
+   **/
   private _xml: OpenapiV3Xml;
 
+  /**
+   **/
   private _externalDocs: OpenapiV3ExternalDocs;
 
+  /**
+   **/
   private _example: OpenapiV3Any;
 
+  /**
+   **/
   private _deprecated: BOOLEAN;
 
+  /**
+   **/
   private _title: STRING;
 
+  /**
+   **/
   private _multipleOf: DOUBLE;
 
+  /**
+   **/
   private _maximum: DOUBLE;
 
+  /**
+   **/
   private _exclusiveMaximum: BOOLEAN;
 
+  /**
+   **/
   private _minimum: DOUBLE;
 
+  /**
+   **/
   private _exclusiveMinimum: BOOLEAN;
 
+  /**
+   **/
   private _maxLength: INT64;
 
+  /**
+   **/
   private _minLength: INT64;
 
+  /**
+   **/
   private _pattern: STRING;
 
+  /**
+   **/
   private _maxItems: INT64;
 
+  /**
+   **/
   private _minItems: INT64;
 
+  /**
+   **/
   private _uniqueItems: BOOLEAN;
 
+  /**
+   **/
   private _maxProperties: INT64;
 
+  /**
+   **/
   private _minProperties: INT64;
 
+  /**
+   **/
   private _required: ARRAY<STRING, string>;
 
+  /**
+   **/
   private _enum: ARRAY<OpenapiV3Any, IOpenapiV3Any>;
 
+  /**
+   **/
   private _type: STRING;
 
-  private _allOf: ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  >;
+  /**
+   **/
+  private _allOf: ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>;
 
-  private _oneOf: ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  >;
+  /**
+   **/
+  private _oneOf: ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>;
 
-  private _anyOf: ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  >;
+  /**
+   **/
+  private _anyOf: ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>;
 
+  /**
+   **/
   private _not: RECURSION<Schema, ISchema>;
 
+  /**
+   **/
   private _items: OpenapiV3ItemsItem;
 
+  /**
+   **/
   private _properties: OpenapiV3Properties;
 
-  private _additionalProperties: OpenapiV3AdditionalPropertiesItem;
+  /**
+   **/
+  private _additionalProperties: RECURSION<OpenapiV3AdditionalPropertiesItem, IOpenapiV3AdditionalPropertiesItem>;
 
+  /**
+   **/
   private _default: OpenapiV3DefaultType;
 
+  /**
+   **/
   private _description: STRING;
 
+  /**
+   **/
   private _format: STRING;
 
+  /**
+   **/
   private _specificationExtension: ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>;
 
   public __defaultValues: ISchema;
 
-  constructor(
-    initData?: ISchema,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: ISchema, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'openapi.v3.Schema';
+    this.__meta.typeName = "openapi.v3.Schema";
     this.__meta.description =
-      'Schema The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.  For more information about the properties, see JSON Schema Core and JSON Schema Validation. Unless stated otherwise, the property definitions follow the JSON Schema.';
+      "Schema The Schema Object allows the definition of input and output data types. These types can be objects, but also primitives and arrays. This object is an extended subset of the JSON Schema Specification Wright Draft 00.  For more information about the properties, see JSON Schema Core and JSON Schema Validation. Unless stated otherwise, the property definitions follow the JSON Schema.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'nullable',
-        protoName: 'nullable',
+        fieldName: "nullable",
+        protoName: "nullable",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'discriminator',
-        protoName: 'discriminator',
+        fieldName: "discriminator",
+        protoName: "discriminator",
         FieldConstructor: OpenapiV3Discriminator,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'readOnly',
-        protoName: 'read_only',
+        fieldName: "readOnly",
+        protoName: "read_only",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'writeOnly',
-        protoName: 'write_only',
+        fieldName: "writeOnly",
+        protoName: "write_only",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'xml',
-        protoName: 'xml',
+        fieldName: "xml",
+        protoName: "xml",
         FieldConstructor: OpenapiV3Xml,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'externalDocs',
-        protoName: 'external_docs',
+        fieldName: "externalDocs",
+        protoName: "external_docs",
         FieldConstructor: OpenapiV3ExternalDocs,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'example',
-        protoName: 'example',
+        fieldName: "example",
+        protoName: "example",
         FieldConstructor: OpenapiV3Any,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'deprecated',
-        protoName: 'deprecated',
+        fieldName: "deprecated",
+        protoName: "deprecated",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'title',
-        protoName: 'title',
+        fieldName: "title",
+        protoName: "title",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'multipleOf',
-        protoName: 'multiple_of',
+        fieldName: "multipleOf",
+        protoName: "multiple_of",
         FieldConstructor: DOUBLE,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'maximum',
-        protoName: 'maximum',
+        fieldName: "maximum",
+        protoName: "maximum",
         FieldConstructor: DOUBLE,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'exclusiveMaximum',
-        protoName: 'exclusive_maximum',
+        fieldName: "exclusiveMaximum",
+        protoName: "exclusive_maximum",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'minimum',
-        protoName: 'minimum',
+        fieldName: "minimum",
+        protoName: "minimum",
         FieldConstructor: DOUBLE,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'exclusiveMinimum',
-        protoName: 'exclusive_minimum',
+        fieldName: "exclusiveMinimum",
+        protoName: "exclusive_minimum",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'maxLength',
-        protoName: 'max_length',
+        fieldName: "maxLength",
+        protoName: "max_length",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'minLength',
-        protoName: 'min_length',
+        fieldName: "minLength",
+        protoName: "min_length",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'pattern',
-        protoName: 'pattern',
+        fieldName: "pattern",
+        protoName: "pattern",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'maxItems',
-        protoName: 'max_items',
+        fieldName: "maxItems",
+        protoName: "max_items",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'minItems',
-        protoName: 'min_items',
+        fieldName: "minItems",
+        protoName: "min_items",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'uniqueItems',
-        protoName: 'unique_items',
+        fieldName: "uniqueItems",
+        protoName: "unique_items",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'maxProperties',
-        protoName: 'max_properties',
+        fieldName: "maxProperties",
+        protoName: "max_properties",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'minProperties',
-        protoName: 'min_properties',
+        fieldName: "minProperties",
+        protoName: "min_properties",
         FieldConstructor: INT64,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'required',
-        protoName: 'required',
+        fieldName: "required",
+        protoName: "required",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'enum',
-        protoName: 'enum',
+        fieldName: "enum",
+        protoName: "enum",
         FieldConstructor: OpenapiV3Any,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'type',
-        protoName: 'type',
+        fieldName: "type",
+        protoName: "type",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'allOf',
-        protoName: 'all_of',
+        fieldName: "allOf",
+        protoName: "all_of",
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'oneOf',
-        protoName: 'one_of',
+        fieldName: "oneOf",
+        protoName: "one_of",
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'anyOf',
-        protoName: 'any_of',
+        fieldName: "anyOf",
+        protoName: "any_of",
         FieldConstructor: OpenapiV3SchemaOrReference,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'not',
-        protoName: 'not',
+        fieldName: "not",
+        protoName: "not",
         FieldConstructor: Schema,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'items',
-        protoName: 'items',
+        fieldName: "items",
+        protoName: "items",
         FieldConstructor: OpenapiV3ItemsItem,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'properties',
-        protoName: 'properties',
+        fieldName: "properties",
+        protoName: "properties",
         FieldConstructor: OpenapiV3Properties,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'additionalProperties',
-        protoName: 'additional_properties',
+        fieldName: "additionalProperties",
+        protoName: "additional_properties",
         FieldConstructor: OpenapiV3AdditionalPropertiesItem,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'default',
-        protoName: 'default',
+        fieldName: "default",
+        protoName: "default",
         FieldConstructor: OpenapiV3DefaultType,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'description',
-        protoName: 'description',
+        fieldName: "description",
+        protoName: "description",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'format',
-        protoName: 'format',
+        fieldName: "format",
+        protoName: "format",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'specificationExtension',
-        protoName: 'specification_extension',
+        fieldName: "specificationExtension",
+        protoName: "specification_extension",
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._nullable = new BOOLEAN(undefined, this, 'nullable');
+    // ---------------------
 
-    this._discriminator = new OpenapiV3Discriminator(
-      undefined,
-      this,
-      'discriminator',
-    );
+    /**
+     **/
+    this._nullable = new BOOLEAN(undefined, this, "nullable");
 
-    this._readOnly = new BOOLEAN(undefined, this, 'readOnly');
+    /**
+     **/
+    this._discriminator = new OpenapiV3Discriminator(undefined, this, "discriminator");
 
-    this._writeOnly = new BOOLEAN(undefined, this, 'writeOnly');
+    /**
+     **/
+    this._readOnly = new BOOLEAN(undefined, this, "readOnly");
 
-    this._xml = new OpenapiV3Xml(undefined, this, 'xml');
+    /**
+     **/
+    this._writeOnly = new BOOLEAN(undefined, this, "writeOnly");
 
-    this._externalDocs = new OpenapiV3ExternalDocs(
-      undefined,
-      this,
-      'externalDocs',
-    );
+    /**
+     **/
+    this._xml = new OpenapiV3Xml(undefined, this, "xml");
 
-    this._example = new OpenapiV3Any(undefined, this, 'example');
+    /**
+     **/
+    this._externalDocs = new OpenapiV3ExternalDocs(undefined, this, "externalDocs");
 
-    this._deprecated = new BOOLEAN(undefined, this, 'deprecated');
+    /**
+     **/
+    this._example = new OpenapiV3Any(undefined, this, "example");
 
-    this._title = new STRING(undefined, this, 'title');
+    /**
+     **/
+    this._deprecated = new BOOLEAN(undefined, this, "deprecated");
 
-    this._multipleOf = new DOUBLE(undefined, this, 'multipleOf');
+    /**
+     **/
+    this._title = new STRING(undefined, this, "title");
 
-    this._maximum = new DOUBLE(undefined, this, 'maximum');
+    /**
+     **/
+    this._multipleOf = new DOUBLE(undefined, this, "multipleOf");
 
-    this._exclusiveMaximum = new BOOLEAN(undefined, this, 'exclusiveMaximum');
+    /**
+     **/
+    this._maximum = new DOUBLE(undefined, this, "maximum");
 
-    this._minimum = new DOUBLE(undefined, this, 'minimum');
+    /**
+     **/
+    this._exclusiveMaximum = new BOOLEAN(undefined, this, "exclusiveMaximum");
 
-    this._exclusiveMinimum = new BOOLEAN(undefined, this, 'exclusiveMinimum');
+    /**
+     **/
+    this._minimum = new DOUBLE(undefined, this, "minimum");
 
-    this._maxLength = new INT64(undefined, this, 'maxLength');
+    /**
+     **/
+    this._exclusiveMinimum = new BOOLEAN(undefined, this, "exclusiveMinimum");
 
-    this._minLength = new INT64(undefined, this, 'minLength');
+    /**
+     **/
+    this._maxLength = new INT64(undefined, this, "maxLength");
 
-    this._pattern = new STRING(undefined, this, 'pattern');
+    /**
+     **/
+    this._minLength = new INT64(undefined, this, "minLength");
 
-    this._maxItems = new INT64(undefined, this, 'maxItems');
+    /**
+     **/
+    this._pattern = new STRING(undefined, this, "pattern");
 
-    this._minItems = new INT64(undefined, this, 'minItems');
+    /**
+     **/
+    this._maxItems = new INT64(undefined, this, "maxItems");
 
-    this._uniqueItems = new BOOLEAN(undefined, this, 'uniqueItems');
+    /**
+     **/
+    this._minItems = new INT64(undefined, this, "minItems");
 
-    this._maxProperties = new INT64(undefined, this, 'maxProperties');
+    /**
+     **/
+    this._uniqueItems = new BOOLEAN(undefined, this, "uniqueItems");
 
-    this._minProperties = new INT64(undefined, this, 'minProperties');
+    /**
+     **/
+    this._maxProperties = new INT64(undefined, this, "maxProperties");
 
-    this._required = new ARRAY<STRING, string>(undefined, this, 'required');
+    /**
+     **/
+    this._minProperties = new INT64(undefined, this, "minProperties");
 
-    this._enum = new ARRAY<OpenapiV3Any, IOpenapiV3Any>(
-      undefined,
-      this,
-      'enum',
-    );
+    /**
+     **/
+    this._required = new ARRAY<STRING, string>(undefined, this, "required");
 
-    this._type = new STRING(undefined, this, 'type');
+    /**
+     **/
+    this._enum = new ARRAY<OpenapiV3Any, IOpenapiV3Any>(undefined, this, "enum");
 
-    this._allOf = new ARRAY<
-      OpenapiV3SchemaOrReference,
-      IOpenapiV3SchemaOrReference
-    >(undefined, this, 'allOf');
+    /**
+     **/
+    this._type = new STRING(undefined, this, "type");
 
-    this._oneOf = new ARRAY<
-      OpenapiV3SchemaOrReference,
-      IOpenapiV3SchemaOrReference
-    >(undefined, this, 'oneOf');
+    /**
+     **/
+    this._allOf = new ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>(undefined, this, "allOf");
 
-    this._anyOf = new ARRAY<
-      OpenapiV3SchemaOrReference,
-      IOpenapiV3SchemaOrReference
-    >(undefined, this, 'anyOf');
+    /**
+     **/
+    this._oneOf = new ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>(undefined, this, "oneOf");
 
-    this._not = new RECURSION<Schema, ISchema>(undefined, this, 'not');
+    /**
+     **/
+    this._anyOf = new ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference>(undefined, this, "anyOf");
 
-    this._items = new OpenapiV3ItemsItem(undefined, this, 'items');
+    /**
+     **/
+    this._not = new RECURSION<Schema, ISchema>(undefined, this, "not");
 
-    this._properties = new OpenapiV3Properties(undefined, this, 'properties');
+    /**
+     **/
+    this._items = new OpenapiV3ItemsItem(undefined, this, "items");
 
-    this._additionalProperties = new OpenapiV3AdditionalPropertiesItem(
-      undefined,
-      this,
-      'additionalProperties',
-    );
+    /**
+     **/
+    this._properties = new OpenapiV3Properties(undefined, this, "properties");
 
-    this._default = new OpenapiV3DefaultType(undefined, this, 'default');
+    /**
+     **/
+    this._additionalProperties = new RECURSION<OpenapiV3AdditionalPropertiesItem, IOpenapiV3AdditionalPropertiesItem>(undefined, this, "additionalProperties");
 
-    this._description = new STRING(undefined, this, 'description');
+    /**
+     **/
+    this._default = new OpenapiV3DefaultType(undefined, this, "default");
 
-    this._format = new STRING(undefined, this, 'format');
+    /**
+     **/
+    this._description = new STRING(undefined, this, "description");
 
-    this._specificationExtension = new ARRAY<
-      OpenapiV3NamedAny,
-      IOpenapiV3NamedAny
-    >(undefined, this, 'specificationExtension');
+    /**
+     **/
+    this._format = new STRING(undefined, this, "format");
+
+    /**
+     **/
+    this._specificationExtension = new ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>(undefined, this, "specificationExtension");
 
     // Set required fields
     [].forEach(fieldName => {
@@ -634,313 +707,517 @@ export class Schema extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get nullable(): BOOLEAN {
     return this._nullable;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set nullable(v: boolean) {
     this.__PrimitivesSetter(this._nullable, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get discriminator(): OpenapiV3Discriminator {
     return this._discriminator;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Discriminator`
+   **/
   public set discriminator(v: IOpenapiV3Discriminator) {
     this.__TypeSetter(this._discriminator, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get readOnly(): BOOLEAN {
     return this._readOnly;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set readOnly(v: boolean) {
     this.__PrimitivesSetter(this._readOnly, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get writeOnly(): BOOLEAN {
     return this._writeOnly;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set writeOnly(v: boolean) {
     this.__PrimitivesSetter(this._writeOnly, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get xml(): OpenapiV3Xml {
     return this._xml;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Xml`
+   **/
   public set xml(v: IOpenapiV3Xml) {
     this.__TypeSetter(this._xml, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get externalDocs(): OpenapiV3ExternalDocs {
     return this._externalDocs;
   }
 
+  /**
+   * The setter receives `IOpenapiV3ExternalDocs`
+   **/
   public set externalDocs(v: IOpenapiV3ExternalDocs) {
     this.__TypeSetter(this._externalDocs, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get example(): OpenapiV3Any {
     return this._example;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Any`
+   **/
   public set example(v: IOpenapiV3Any) {
     this.__TypeSetter(this._example, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get deprecated(): BOOLEAN {
     return this._deprecated;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecated(v: boolean) {
     this.__PrimitivesSetter(this._deprecated, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get title(): STRING {
     return this._title;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set title(v: string) {
     this.__PrimitivesSetter(this._title, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get multipleOf(): DOUBLE {
     return this._multipleOf;
   }
 
+  /**
+   * The setter receives `number`
+   **/
   public set multipleOf(v: number) {
     this.__PrimitivesSetter(this._multipleOf, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get maximum(): DOUBLE {
     return this._maximum;
   }
 
+  /**
+   * The setter receives `number`
+   **/
   public set maximum(v: number) {
     this.__PrimitivesSetter(this._maximum, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get exclusiveMaximum(): BOOLEAN {
     return this._exclusiveMaximum;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set exclusiveMaximum(v: boolean) {
     this.__PrimitivesSetter(this._exclusiveMaximum, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get minimum(): DOUBLE {
     return this._minimum;
   }
 
+  /**
+   * The setter receives `number`
+   **/
   public set minimum(v: number) {
     this.__PrimitivesSetter(this._minimum, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get exclusiveMinimum(): BOOLEAN {
     return this._exclusiveMinimum;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set exclusiveMinimum(v: boolean) {
     this.__PrimitivesSetter(this._exclusiveMinimum, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get maxLength(): INT64 {
     return this._maxLength;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set maxLength(v: bigint) {
     this.__PrimitivesSetter(this._maxLength, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get minLength(): INT64 {
     return this._minLength;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set minLength(v: bigint) {
     this.__PrimitivesSetter(this._minLength, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get pattern(): STRING {
     return this._pattern;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set pattern(v: string) {
     this.__PrimitivesSetter(this._pattern, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get maxItems(): INT64 {
     return this._maxItems;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set maxItems(v: bigint) {
     this.__PrimitivesSetter(this._maxItems, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get minItems(): INT64 {
     return this._minItems;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set minItems(v: bigint) {
     this.__PrimitivesSetter(this._minItems, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get uniqueItems(): BOOLEAN {
     return this._uniqueItems;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set uniqueItems(v: boolean) {
     this.__PrimitivesSetter(this._uniqueItems, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get maxProperties(): INT64 {
     return this._maxProperties;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set maxProperties(v: bigint) {
     this.__PrimitivesSetter(this._maxProperties, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get minProperties(): INT64 {
     return this._minProperties;
   }
 
+  /**
+   * The setter receives `bigint`
+   **/
   public set minProperties(v: bigint) {
     this.__PrimitivesSetter(this._minProperties, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get required(): ARRAY<STRING, string> {
     return this._required;
   }
 
+  /**
+   * The setter receives `string[]`
+   **/
   public set required(v: string[]) {
     this.__TypeSetter(this._required, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get enum(): ARRAY<OpenapiV3Any, IOpenapiV3Any> {
     return this._enum;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Any[]`
+   **/
   public set enum(v: IOpenapiV3Any[]) {
     this.__TypeSetter(this._enum, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get type(): STRING {
     return this._type;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set type(v: string) {
     this.__PrimitivesSetter(this._type, v);
   }
 
-  public get allOf(): ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get allOf(): ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference> {
     return this._allOf;
   }
 
+  /**
+   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   **/
   public set allOf(v: IOpenapiV3SchemaOrReference[]) {
     this.__TypeSetter(this._allOf, v);
   }
 
-  public get oneOf(): ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get oneOf(): ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference> {
     return this._oneOf;
   }
 
+  /**
+   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   **/
   public set oneOf(v: IOpenapiV3SchemaOrReference[]) {
     this.__TypeSetter(this._oneOf, v);
   }
 
-  public get anyOf(): ARRAY<
-    OpenapiV3SchemaOrReference,
-    IOpenapiV3SchemaOrReference
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get anyOf(): ARRAY<OpenapiV3SchemaOrReference, IOpenapiV3SchemaOrReference> {
     return this._anyOf;
   }
 
+  /**
+   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   **/
   public set anyOf(v: IOpenapiV3SchemaOrReference[]) {
     this.__TypeSetter(this._anyOf, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get not(): RECURSION<Schema, ISchema> {
     return this._not;
   }
 
+  /**
+   * The setter receives `ISchema`
+   **/
   public set not(v: ISchema) {
     this.__TypeSetter(this._not, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get items(): OpenapiV3ItemsItem {
     return this._items;
   }
 
+  /**
+   * The setter receives `IOpenapiV3ItemsItem`
+   **/
   public set items(v: IOpenapiV3ItemsItem) {
     this.__TypeSetter(this._items, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get properties(): OpenapiV3Properties {
     return this._properties;
   }
 
+  /**
+   * The setter receives `IOpenapiV3Properties`
+   **/
   public set properties(v: IOpenapiV3Properties) {
     this.__TypeSetter(this._properties, v);
   }
 
-  public get additionalProperties(): OpenapiV3AdditionalPropertiesItem {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get additionalProperties(): RECURSION<OpenapiV3AdditionalPropertiesItem, IOpenapiV3AdditionalPropertiesItem> {
     return this._additionalProperties;
   }
 
+  /**
+   * The setter receives `IOpenapiV3AdditionalPropertiesItem`
+   **/
   public set additionalProperties(v: IOpenapiV3AdditionalPropertiesItem) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get default(): OpenapiV3DefaultType {
     return this._default;
   }
 
+  /**
+   * The setter receives `IOpenapiV3DefaultType`
+   **/
   public set default(v: IOpenapiV3DefaultType) {
     this.__TypeSetter(this._default, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get description(): STRING {
     return this._description;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set description(v: string) {
     this.__PrimitivesSetter(this._description, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get format(): STRING {
     return this._format;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set format(v: string) {
     this.__PrimitivesSetter(this._format, v);
   }
 
-  public get specificationExtension(): ARRAY<
-    OpenapiV3NamedAny,
-    IOpenapiV3NamedAny
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get specificationExtension(): ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny> {
     return this._specificationExtension;
   }
 
+  /**
+   * The setter receives `IOpenapiV3NamedAny[]`
+   **/
   public set specificationExtension(v: IOpenapiV3NamedAny[]) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 
-  fromLiteral(data: ISchema) {
+  fromLiteral(data: ISchema): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): ISchema {
-    return super.__toLiteral();
+    return super.__toLiteral() as ISchema;
   }
 }
 
-Registry.register('openapi.v3.Schema', Schema);
+Registry.register("openapi.v3.Schema", Schema);

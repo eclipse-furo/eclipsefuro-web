@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.MethodDescriptorProto.json",
+  "type": "object",
+  "description": "Describes a method of a service.MethodDescriptorProto",
+  "properties": {
+    "clientStreaming": {
+      "type": "boolean",
+      "description": "Identifies if client streams multiple client messages"
+    },
+    "inputType": {
+      "type": "string",
+      "description": "Input and output type names.  These are resolved in the same way as\n FieldDescriptorProto.type_name, but must refer to a message type."
+    },
+    "name": {
+      "type": "string"
+    },
+    "options": {
+      "$ref": "google.protobuf.MethodOptions.json"
+    },
+    "outputType": {
+      "type": "string"
+    },
+    "serverStreaming": {
+      "type": "boolean",
+      "description": "Identifies if server streams multiple server messages"
+    }
+  }
+}

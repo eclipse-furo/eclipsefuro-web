@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.DefaultType.json",
+  "type": "object",
+  "description": "IMPORTANT: This message contains mutually exclusive field groups defined in x-oneof. Each x-oneof entry has a 'name' (the group name) and 'fields' (the field names). You must set exactly ONE field from each group, not multiple. Setting multiple fields from the same group will cause data loss.",
+  "properties": {
+    "boolean": {
+      "type": "boolean"
+    },
+    "number": {
+      "type": "number"
+    },
+    "string": {
+      "type": "string"
+    }
+  },
+  "x-oneof": [
+    {
+      "name": "oneof",
+      "fields": [
+        "number",
+        "boolean",
+        "string"
+      ]
+    }
+  ]
+}

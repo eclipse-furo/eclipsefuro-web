@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.BookingCenter.json",
+  "type": "string",
+  "enum": [
+    "BOOKING_CENTER_UNSPECIFIED",
+    "GLOBAL",
+    "REGION_EU",
+    "REGION_AS",
+    "BBC_LI",
+    "BBC_AT",
+    "BBC_CH",
+    "BBC_HK",
+    "BBC_SG"
+  ]
+}

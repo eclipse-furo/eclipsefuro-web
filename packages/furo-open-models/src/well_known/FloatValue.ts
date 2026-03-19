@@ -1,7 +1,7 @@
-import type { FieldConstraints } from '../FieldConstraints';
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
-import { Registry } from '../Registry';
+import type { FieldConstraints } from "../FieldConstraints";
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
+import { Registry } from "../Registry";
 
 export class FloatValue extends FieldNode {
   get value(): number {
@@ -119,4 +119,4 @@ export class FloatValue extends FieldNode {
   }
 }
 
-Registry.register('FloatValue', FloatValue);
+Registry.register("FloatValue", FloatValue);

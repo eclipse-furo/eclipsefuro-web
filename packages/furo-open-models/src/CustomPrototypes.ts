@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type str = (d: any) => string;
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

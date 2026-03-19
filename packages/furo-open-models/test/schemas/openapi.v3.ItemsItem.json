@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.ItemsItem.json",
+  "type": "object",
+  "properties": {
+    "schemaOrReference": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SchemaOrReference.json"
+      }
+    }
+  }
+}

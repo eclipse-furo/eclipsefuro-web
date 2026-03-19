@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Link.json",
+  "type": "object",
+  "description": "The `Link object` represents a possible design-time link for a response. The presence of a link does not guarantee the caller's ability to successfully invoke it, rather it provides a known relationship and traversal mechanism between responses and other operations.  Unlike _dynamic_ links (i.e. links provided **in** the response payload), the OAS linking mechanism does not require link information in the runtime response.  For computing links, and providing instructions to execute them, a runtime expression is used for accessing values in an operation and using them as parameters while invoking the linked operation.Link",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "operationId": {
+      "type": "string"
+    },
+    "operationRef": {
+      "type": "string"
+    },
+    "parameters": {
+      "$ref": "openapi.v3.AnyOrExpression.json"
+    },
+    "requestBody": {
+      "$ref": "openapi.v3.AnyOrExpression.json"
+    },
+    "server": {
+      "$ref": "openapi.v3.Server.json"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

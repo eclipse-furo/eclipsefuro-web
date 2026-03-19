@@ -1,7 +1,7 @@
-import type { FieldConstraints } from '../FieldConstraints';
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
-import { Registry } from '../Registry';
+import type { FieldConstraints } from "../FieldConstraints";
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
+import { Registry } from "../Registry";
 
 export class Duration extends FieldNode {
   get value(): string {
@@ -10,10 +10,7 @@ export class Duration extends FieldNode {
 
   set value(value: string | null) {
     this._value = value;
-    if (
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    ) {
+    if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;
     } else {
       this.__isEmpty = value === null;
@@ -23,30 +20,20 @@ export class Duration extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: string | null = '';
+  public _value: string | null = "";
 
-  constructor(
-    initData?: string,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: string, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
 
-    this._value = initData ?? '';
-    this.__meta.typeName = 'google.protobuf.Duration';
+    this._value = initData ?? "";
+    this.__meta.typeName = "google.protobuf.Duration";
   }
 
   override __updateWithLiteral(v: string | null) {
     this._value = v;
-    if (
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    ) {
+    if (OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated) {
       this.__isEmpty = false;
     } else {
       this.__isEmpty = v === null;
@@ -67,14 +54,11 @@ export class Duration extends FieldNode {
     return this._value;
   }
 
-  protected override __checkConstraints(
-    fieldConstraints: FieldConstraints,
-  ): string[] | undefined {
-     
+  protected override __checkConstraints(fieldConstraints: FieldConstraints): string[] | undefined {
     for (const [constraint] of Object.entries(fieldConstraints)) {
-      if (constraint === 'required') {
+      if (constraint === "required") {
         if (this._value === null) {
-          return ['constraint.violation.required'];
+          return ["constraint.violation.required"];
         }
       }
     }
@@ -86,21 +70,18 @@ export class Duration extends FieldNode {
     if (this._value !== null) {
       return this._value;
     }
-    return '';
+    return "";
   }
 
   public override __clear(withoutNotification = false) {
     // only notify when they are changes
     const shouldNotify = this._value?.length;
-    this._value = '';
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this._value = "";
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     if (shouldNotify && !withoutNotification) {
       this.__notifyFieldValueChange(false);
     }
   }
 }
 
-Registry.register('Duration', Duration);
+Registry.register("Duration", Duration);

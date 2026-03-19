@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Operation.json",
+  "type": "object",
+  "description": "Describes a single API operation on a path.Operation",
+  "properties": {
+    "callbacks": {
+      "$ref": "openapi.v3.CallbacksOrReferences.json"
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "externalDocs": {
+      "$ref": "openapi.v3.ExternalDocs.json"
+    },
+    "operationId": {
+      "type": "string"
+    },
+    "parameters": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.ParameterOrReference.json"
+      }
+    },
+    "requestBody": {
+      "$ref": "openapi.v3.RequestBodyOrReference.json"
+    },
+    "responses": {
+      "$ref": "openapi.v3.Responses.json"
+    },
+    "security": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SecurityRequirement.json"
+      }
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.Server.json"
+      }
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "summary": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

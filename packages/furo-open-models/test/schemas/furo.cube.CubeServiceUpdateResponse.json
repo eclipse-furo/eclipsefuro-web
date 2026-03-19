@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeServiceUpdateResponse.json",
+  "type": "object",
+  "properties": {
+    "entity": {
+      "$ref": "furo.cube.CubeEntity.json"
+    }
+  }
+}

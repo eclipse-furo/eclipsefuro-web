@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.ServerVariable.json",
+  "type": "object",
+  "description": "An object representing a Server Variable for server URL template substitution.ServerVariable",
+  "properties": {
+    "default": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "enum": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    }
+  }
+}

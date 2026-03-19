@@ -1,10 +1,10 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
-import { expect } from 'vitest';
+import { expect } from "vitest";
 
-import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
+import { Defaults } from "../protoc-gen-open-models/furo/type/Defaults";
 
-describe('Readonly', () => {
-  it('should set readonly deep on every child of a node', async () => {
+describe("Readonly", () => {
+  it("should set readonly deep on every child of a node", async () => {
     const t = new Defaults();
     expect(t.__readonly).to.be.false;
     expect(t.stringArray.__readonly).to.be.true;
@@ -17,7 +17,7 @@ describe('Readonly', () => {
     expect(t.stringArray.value[0].__readonly).to.be.true;
   });
 
-  it('should restore the readonly settings of child nodes', async () => {
+  it("should restore the readonly settings of child nodes", async () => {
     const t = new Defaults();
     expect(t.__readonly).to.be.false;
     expect(t.stringArray.__readonly).to.be.true;

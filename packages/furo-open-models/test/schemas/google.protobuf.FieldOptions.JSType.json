@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FieldOptions.JSType.json",
+  "type": "string",
+  "enum": [
+    "JS_NORMAL",
+    "JS_STRING",
+    "JS_NUMBER"
+  ]
+}

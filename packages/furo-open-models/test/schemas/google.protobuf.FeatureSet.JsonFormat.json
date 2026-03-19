@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.JsonFormat.json",
+  "type": "string",
+  "enum": [
+    "JSON_FORMAT_UNKNOWN",
+    "ALLOW",
+    "LEGACY_BEST_EFFORT"
+  ]
+}

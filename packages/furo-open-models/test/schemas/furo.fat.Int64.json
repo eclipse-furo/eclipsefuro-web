@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.fat.Int64.json",
+  "type": "object",
+  "description": "Furo annotated type wrapper message for `int64`. The range constraints are set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER because of browser limitationsInt64",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "description": "Attributes for a value, something like confidential-msg: you are not allowed to see this value",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "value": {
+      "type": "integer",
+      "description": "The JSON representation for `Int64Value` is JSON number, range is set to Number.MIN_SAFE_INTEGER - Number.MAX_SAFE_INTEGER"
+    }
+  }
+}

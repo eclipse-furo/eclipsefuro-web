@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Identifier.json",
+  "type": "object",
+  "properties": {
+    "any": {
+      "$ref": "google.protobuf.Any.json"
+    },
+    "attributes": {
+      "type": "object",
+      "description": "Attributes for a value, something like confidential-msg: you are not allowed to see this value",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "bookingCenter": {
+      "$ref": "furo.type.BookingCenter.json",
+      "description": "booking center"
+    },
+    "decRange": {
+      "$ref": "furo.type.DecimalRange.json"
+    },
+    "fatString": {
+      "$ref": "furo.fat.String.json"
+    },
+    "id": {
+      "type": "string",
+      "description": "for example obj_id or your own uuid - the unique id for the source system (together with type)"
+    },
+    "refSystem": {
+      "$ref": "furo.type.RefSystem.json",
+      "description": "related to the master of the object - who gives the id"
+    },
+    "refType": {
+      "$ref": "furo.type.RefType.json",
+      "description": "Type from the master objects system"
+    },
+    "repeatedDecimal": {
+      "type": "array",
+      "items": {
+        "$ref": "furo.type.Decimal.json"
+      }
+    },
+    "stringArray": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "default": "[\"A\",\"B\",\"C\"]",
+      "readOnly": true
+    },
+    "trueFalse": {
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "string_array"
+  ]
+}

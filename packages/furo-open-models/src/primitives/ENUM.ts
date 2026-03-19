@@ -1,10 +1,7 @@
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
 
-function isEnumMember<E>(
-  value: unknown,
-  enumArg: Record<string | number | symbol, E>,
-): value is E {
+function isEnumMember<E>(value: unknown, enumArg: Record<string | number | symbol, E>): value is E {
   return (Object.values(enumArg) as unknown[]).includes(value);
 }
 
@@ -21,10 +18,7 @@ export class ENUM<T> extends FieldNode {
   set value(value: T) {
     this._value = value;
     if (this._value === this._nullValue) {
-      this.__isEmpty = !(
-        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-        OPEN_MODELS_OPTIONS.EmitUnpopulated
-      );
+      this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     } else {
       this.__isEmpty = false;
     }
@@ -38,16 +32,10 @@ export class ENUM<T> extends FieldNode {
 
   enumArg: Record<string | number | symbol, T>;
 
-  constructor(
-    initData: T | undefined,
-    enumArg: Record<string | number | symbol, T>,
-    defaultValue: T,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData: T | undefined, enumArg: Record<string | number | symbol, T>, defaultValue: T, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
-    this.__meta.typeName = 'primitives.ENUM';
+    this.__meta.typeName = "primitives.ENUM";
     this._value = initData ?? defaultValue;
     this._initialValue = defaultValue;
     this._nullValue = defaultValue;
@@ -60,10 +48,7 @@ export class ENUM<T> extends FieldNode {
       this._value = v;
       this._initialValue = v;
       if (this._value === this._nullValue) {
-        this.__isEmpty = !(
-          OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-          OPEN_MODELS_OPTIONS.EmitUnpopulated
-        );
+        this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
       } else {
         this.__isEmpty = false;
       }
@@ -79,10 +64,7 @@ export class ENUM<T> extends FieldNode {
 
   protected override ___updateNotEmptyPath() {
     if (this._value === this._nullValue) {
-      this.___isEmpty = !(
-        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-        OPEN_MODELS_OPTIONS.EmitUnpopulated
-      );
+      this.___isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     } else {
       this.___isEmpty = false;
       super.___updateNotEmptyPath();

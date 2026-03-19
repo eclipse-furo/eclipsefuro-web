@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeEntity.json",
+  "type": "object",
+  "description": "CubeEntityCubeEntity",
+  "properties": {
+    "cube": {
+      "$ref": "furo.cube.CubeDefinition.json",
+      "description": "Definition of the cube",
+      "default": "{\"length\":222}"
+    },
+    "description": {
+      "type": "string",
+      "description": "short and nice description of the cube"
+    },
+    "displayName": {
+      "type": "string",
+      "description": "human-readable name for the cube entity",
+      "readOnly": true
+    }
+  }
+}

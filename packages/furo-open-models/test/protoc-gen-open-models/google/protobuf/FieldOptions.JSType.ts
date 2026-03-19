@@ -2,7 +2,10 @@
 // protoc-gen-open-models version: ????
 
 export enum FieldOptionsJSType {
-  JS_NORMAL = 'JS_NORMAL',
-  JS_STRING = 'JS_STRING',
-  JS_NUMBER = 'JS_NUMBER',
+  //  Use the default type.
+  JS_NORMAL = "JS_NORMAL",
+  //  Use JavaScript strings.
+  JS_STRING = "JS_STRING",
+  //  Use JavaScript numbers.
+  JS_NUMBER = "JS_NUMBER",
 }

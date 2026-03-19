@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.fat.Bool.json",
+  "type": "object",
+  "description": "Furo annotated type wrapper message for `bool`.Bool",
+  "properties": {
+    "attributes": {
+      "type": "object",
+      "description": "Attributes for a value, something like confidential-msg: you are not allowed to see this value",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "labels": {
+      "type": "object",
+      "description": "Labels / flags for the value, something like unspecified, empty, confidential, absent,... Can be used for AI, UI, Business Logic,...",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "value": {
+      "type": "boolean",
+      "description": "The JSON representation for `BoolValue` is a JSON boolean"
+    }
+  }
+}

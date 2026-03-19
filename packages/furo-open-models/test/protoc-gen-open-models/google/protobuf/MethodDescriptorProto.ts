@@ -2,16 +2,12 @@
 // protoc-gen-open-models version: ????
 
 import {
-  BOOLEAN,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   MethodOptions as GoogleProtobufMethodOptions,
   type IMethodOptions as IGoogleProtobufMethodOptions,
   type TMethodOptions as TGoogleProtobufMethodOptions,
-} from './MethodOptions';
+} from "./MethodOptions";
+
+import { BOOLEAN, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IMethodDescriptorProto
@@ -64,102 +60,120 @@ export interface TMethodDescriptorProto {
  *  Describes a method of a service.
  */
 export class MethodDescriptorProto extends FieldNode {
+  /**
+   **/
   private _name: STRING;
 
-  //  Input and output type names.  These are resolved in the same way as
-  //  FieldDescriptorProto.type_name, but must refer to a message type.
+  /**
+   * Input and output type names.  These are resolved in the same way as
+   * FieldDescriptorProto.type_name, but must refer to a message type.
+   **/
   private _inputType: STRING;
 
+  /**
+   **/
   private _outputType: STRING;
 
+  /**
+   **/
   private _options: GoogleProtobufMethodOptions;
 
-  //  Identifies if client streams multiple client messages
+  /**
+   * Identifies if client streams multiple client messages
+   **/
   private _clientStreaming: BOOLEAN;
 
-  //  Identifies if server streams multiple server messages
+  /**
+   * Identifies if server streams multiple server messages
+   **/
   private _serverStreaming: BOOLEAN;
 
   public __defaultValues: IMethodDescriptorProto;
 
-  constructor(
-    initData?: IMethodDescriptorProto,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IMethodDescriptorProto, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.MethodDescriptorProto';
-    this.__meta.description =
-      'MethodDescriptorProto Describes a method of a service.';
+    this.__meta.typeName = "google.protobuf.MethodDescriptorProto";
+    this.__meta.description = "MethodDescriptorProto Describes a method of a service.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'name',
-        protoName: 'name',
+        fieldName: "name",
+        protoName: "name",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'inputType',
-        protoName: 'input_type',
+        fieldName: "inputType",
+        protoName: "input_type",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Input and output type names.  These are resolved in the same way as\n FieldDescriptorProto.type_name, but must refer to a message type.',
+        description: "Input and output type names.  These are resolved in the same way as\n FieldDescriptorProto.type_name, but must refer to a message type.",
       },
       {
-        fieldName: 'outputType',
-        protoName: 'output_type',
+        fieldName: "outputType",
+        protoName: "output_type",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'options',
-        protoName: 'options',
+        fieldName: "options",
+        protoName: "options",
         FieldConstructor: GoogleProtobufMethodOptions,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'clientStreaming',
-        protoName: 'client_streaming',
+        fieldName: "clientStreaming",
+        protoName: "client_streaming",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: 'Identifies if client streams multiple client messages',
+        description: "Identifies if client streams multiple client messages",
       },
       {
-        fieldName: 'serverStreaming',
-        protoName: 'server_streaming',
+        fieldName: "serverStreaming",
+        protoName: "server_streaming",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: 'Identifies if server streams multiple server messages',
+        description: "Identifies if server streams multiple server messages",
       },
     ];
 
     // Initialize the fields
-    this._name = new STRING(undefined, this, 'name');
+    // ---------------------
 
-    //  Input and output type names.  These are resolved in the same way as
-    //  FieldDescriptorProto.type_name, but must refer to a message type.
-    this._inputType = new STRING(undefined, this, 'inputType');
+    /**
+     **/
+    this._name = new STRING(undefined, this, "name");
 
-    this._outputType = new STRING(undefined, this, 'outputType');
+    /**
+     *  Input and output type names.  These are resolved in the same way as
+     *  FieldDescriptorProto.type_name, but must refer to a message type.
+     **/
+    this._inputType = new STRING(undefined, this, "inputType");
 
-    this._options = new GoogleProtobufMethodOptions(undefined, this, 'options');
+    /**
+     **/
+    this._outputType = new STRING(undefined, this, "outputType");
 
-    //  Identifies if client streams multiple client messages
-    this._clientStreaming = new BOOLEAN(undefined, this, 'clientStreaming');
+    /**
+     **/
+    this._options = new GoogleProtobufMethodOptions(undefined, this, "options");
 
-    //  Identifies if server streams multiple server messages
-    this._serverStreaming = new BOOLEAN(undefined, this, 'serverStreaming');
+    /**
+     *  Identifies if client streams multiple client messages
+     **/
+    this._clientStreaming = new BOOLEAN(undefined, this, "clientStreaming");
+
+    /**
+     *  Identifies if server streams multiple server messages
+     **/
+    this._serverStreaming = new BOOLEAN(undefined, this, "serverStreaming");
 
     // Set required fields
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof MethodDescriptorProto] as FieldNode
-      ).__meta.required = true;
+      (this[fieldName as keyof MethodDescriptorProto] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -174,75 +188,107 @@ export class MethodDescriptorProto extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (this[fieldName as keyof MethodDescriptorProto] as FieldNode).__readonly =
-        true;
+      (this[fieldName as keyof MethodDescriptorProto] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get name(): STRING {
     return this._name;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set name(v: string) {
     this.__PrimitivesSetter(this._name, v);
   }
 
-  //  Input and output type names.  These are resolved in the same way as
-  //  FieldDescriptorProto.type_name, but must refer to a message type.
+  /**
+   *  Input and output type names.  These are resolved in the same way as
+   *  FieldDescriptorProto.type_name, but must refer to a message type.
+   * The getter receives the FieldNode
+   **/
   public get inputType(): STRING {
     return this._inputType;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set inputType(v: string) {
     this.__PrimitivesSetter(this._inputType, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get outputType(): STRING {
     return this._outputType;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set outputType(v: string) {
     this.__PrimitivesSetter(this._outputType, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get options(): GoogleProtobufMethodOptions {
     return this._options;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufMethodOptions`
+   **/
   public set options(v: IGoogleProtobufMethodOptions) {
     this.__TypeSetter(this._options, v);
   }
 
-  //  Identifies if client streams multiple client messages
+  /**
+   *  Identifies if client streams multiple client messages
+   * The getter receives the FieldNode
+   **/
   public get clientStreaming(): BOOLEAN {
     return this._clientStreaming;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set clientStreaming(v: boolean) {
     this.__PrimitivesSetter(this._clientStreaming, v);
   }
 
-  //  Identifies if server streams multiple server messages
+  /**
+   *  Identifies if server streams multiple server messages
+   * The getter receives the FieldNode
+   **/
   public get serverStreaming(): BOOLEAN {
     return this._serverStreaming;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set serverStreaming(v: boolean) {
     this.__PrimitivesSetter(this._serverStreaming, v);
   }
 
-  fromLiteral(data: IMethodDescriptorProto) {
+  fromLiteral(data: IMethodDescriptorProto): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IMethodDescriptorProto {
-    return super.__toLiteral();
+    return super.__toLiteral() as IMethodDescriptorProto;
   }
 }
 
-Registry.register(
-  'google.protobuf.MethodDescriptorProto',
-  MethodDescriptorProto,
-);
+Registry.register("google.protobuf.MethodDescriptorProto", MethodDescriptorProto);

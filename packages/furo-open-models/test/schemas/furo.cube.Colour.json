@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.Colour.json",
+  "type": "object",
+  "description": "Colour is a rgba colorColour",
+  "properties": {
+    "alpha": {
+      "type": "number",
+      "maximum": 1,
+      "default": 1
+    },
+    "blue": {
+      "type": "integer",
+      "description": "the blue part of the color",
+      "maximum": 255,
+      "default": 88
+    },
+    "green": {
+      "type": "integer",
+      "description": "the green part of the color",
+      "maximum": 255,
+      "default": 34
+    },
+    "red": {
+      "type": "integer",
+      "description": "the red part of the color",
+      "maximum": 255,
+      "default": 22
+    }
+  }
+}

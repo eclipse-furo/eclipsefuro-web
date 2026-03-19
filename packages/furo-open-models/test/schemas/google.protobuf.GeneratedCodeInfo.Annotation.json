@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.GeneratedCodeInfo.Annotation.json",
+  "type": "object",
+  "properties": {
+    "begin": {
+      "type": "integer",
+      "description": "Identifies the starting offset in bytes in the generated code\n that relates to the identified object."
+    },
+    "end": {
+      "type": "integer",
+      "description": "Identifies the ending offset in bytes in the generated code that\n relates to the identified object. The end offset should be one past\n the last relevant byte (so the length of the text = end - begin)."
+    },
+    "path": {
+      "type": "array",
+      "description": "Identifies the element in the original source .proto file. This field\n is formatted the same as SourceCodeInfo.Location.path.",
+      "items": {
+        "type": "integer"
+      }
+    },
+    "semantic": {
+      "$ref": "google.protobuf.GeneratedCodeInfo.Annotation.Semantic.json"
+    },
+    "sourceFile": {
+      "type": "string",
+      "description": "Identifies the filesystem path to the original source .proto."
+    }
+  }
+}

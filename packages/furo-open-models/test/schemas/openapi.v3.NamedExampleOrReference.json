@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.NamedExampleOrReference.json",
+  "type": "object",
+  "description": "Automatically-generated message used to represent maps of ExampleOrReference as ordered (name,value) pairs.NamedExampleOrReference",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Map key"
+    },
+    "value": {
+      "$ref": "openapi.v3.ExampleOrReference.json",
+      "description": "Mapped value"
+    }
+  }
+}

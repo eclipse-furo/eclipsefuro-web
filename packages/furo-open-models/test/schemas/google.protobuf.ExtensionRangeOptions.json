@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.ExtensionRangeOptions.json",
+  "type": "object",
+  "properties": {
+    "declaration": {
+      "type": "array",
+      "description": "For external users: DO NOT USE. We are in the process of open sourcing\n extension declaration and executing internal cleanups before it can be\n used externally.",
+      "items": {
+        "$ref": "google.protobuf.ExtensionRangeOptions.Declaration.json"
+      }
+    },
+    "features": {
+      "$ref": "google.protobuf.FeatureSet.json",
+      "description": "Any features defined in the specific edition."
+    },
+    "uninterpretedOption": {
+      "type": "array",
+      "description": "The parser stores options it doesn't recognize here. See above.",
+      "items": {
+        "$ref": "google.protobuf.UninterpretedOption.json"
+      }
+    },
+    "verification": {
+      "$ref": "google.protobuf.ExtensionRangeOptions.VerificationState.json",
+      "description": "The verification state of the range.\n TODO: flip the default to DECLARATION once all empty ranges\n are marked as UNVERIFIED."
+    }
+  }
+}

@@ -1,9 +1,9 @@
-import { expect } from 'vitest';
+import { expect } from "vitest";
 
-import { Identifier } from '../protoc-gen-open-models/furo/type/Identifier';
+import { Identifier } from "../protoc-gen-open-models/furo/type/Identifier";
 
-describe('Benchmark', () => {
-  it('should create COLD 1.000 complex deep object  in less then 200ms', async () => {
+describe("Benchmark", () => {
+  it("should create COLD 1.000 complex deep object  in less then 200ms", async () => {
     const ftdarr: Identifier[] = [];
     const t0 = performance.now();
     for (let i = 0; i < 1000; i += 1) {
@@ -14,7 +14,7 @@ describe('Benchmark', () => {
     // console.log('1.000 COLD Identifier', t1 - t0, 'ms');
   });
 
-  it('should create 1.000 complex deep object  in less then 200ms', async () => {
+  it("should create 1.000 complex deep object  in less then 200ms", async () => {
     const ftdarr: Identifier[] = [];
     const t0 = performance.now();
     for (let i = 0; i < 1000; i += 1) {

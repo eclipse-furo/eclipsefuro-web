@@ -2,50 +2,44 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  ENUM,
-  FieldNode,
-  INT32,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   DescriptorProto as GoogleProtobufDescriptorProto,
   type IDescriptorProto as IGoogleProtobufDescriptorProto,
   type TDescriptorProto as TGoogleProtobufDescriptorProto,
-} from './DescriptorProto';
+} from "./DescriptorProto";
 
-import { Edition as GoogleProtobufEdition } from './Edition';
+import { Edition as GoogleProtobufEdition } from "./Edition";
 
 import {
   EnumDescriptorProto as GoogleProtobufEnumDescriptorProto,
   type IEnumDescriptorProto as IGoogleProtobufEnumDescriptorProto,
   type TEnumDescriptorProto as TGoogleProtobufEnumDescriptorProto,
-} from './EnumDescriptorProto';
+} from "./EnumDescriptorProto";
 
 import {
   FieldDescriptorProto as GoogleProtobufFieldDescriptorProto,
   type IFieldDescriptorProto as IGoogleProtobufFieldDescriptorProto,
   type TFieldDescriptorProto as TGoogleProtobufFieldDescriptorProto,
-} from './FieldDescriptorProto';
+} from "./FieldDescriptorProto";
 
 import {
   FileOptions as GoogleProtobufFileOptions,
   type IFileOptions as IGoogleProtobufFileOptions,
   type TFileOptions as TGoogleProtobufFileOptions,
-} from './FileOptions';
+} from "./FileOptions";
 
 import {
   ServiceDescriptorProto as GoogleProtobufServiceDescriptorProto,
   type IServiceDescriptorProto as IGoogleProtobufServiceDescriptorProto,
   type TServiceDescriptorProto as TGoogleProtobufServiceDescriptorProto,
-} from './ServiceDescriptorProto';
+} from "./ServiceDescriptorProto";
 
 import {
   SourceCodeInfo as GoogleProtobufSourceCodeInfo,
   type ISourceCodeInfo as IGoogleProtobufSourceCodeInfo,
   type TSourceCodeInfo as TGoogleProtobufSourceCodeInfo,
-} from './SourceCodeInfo';
+} from "./SourceCodeInfo";
+
+import { ARRAY, ENUM, FieldNode, INT32, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IFileDescriptorProto
@@ -152,244 +146,247 @@ export interface TFileDescriptorProto {
  *  Describes a complete .proto file.
  */
 export class FileDescriptorProto extends FieldNode {
+  /**
+   **/
   private _name: STRING; //  file name, relative to root of source tree
 
+  /**
+   **/
   private _package: STRING; //  e.g. "foo", "foo.bar", etc.
 
-  //  Names of files imported by this file.
+  /**
+   * Names of files imported by this file.
+   **/
   private _dependency: ARRAY<STRING, string>;
 
-  //  Indexes of the public imported files in the dependency list above.
+  /**
+   * Indexes of the public imported files in the dependency list above.
+   **/
   private _publicDependency: ARRAY<INT32, number>;
 
-  //  Indexes of the weak imported files in the dependency list.
-  //  For Google-internal migration only. Do not use.
+  /**
+   * Indexes of the weak imported files in the dependency list.
+   * For Google-internal migration only. Do not use.
+   **/
   private _weakDependency: ARRAY<INT32, number>;
 
-  //  All top-level definitions in this file.
-  private _messageType: ARRAY<
-    GoogleProtobufDescriptorProto,
-    IGoogleProtobufDescriptorProto
-  >;
+  /**
+   * All top-level definitions in this file.
+   **/
+  private _messageType: ARRAY<GoogleProtobufDescriptorProto, IGoogleProtobufDescriptorProto>;
 
-  private _enumType: ARRAY<
-    GoogleProtobufEnumDescriptorProto,
-    IGoogleProtobufEnumDescriptorProto
-  >;
+  /**
+   **/
+  private _enumType: ARRAY<GoogleProtobufEnumDescriptorProto, IGoogleProtobufEnumDescriptorProto>;
 
-  private _service: ARRAY<
-    GoogleProtobufServiceDescriptorProto,
-    IGoogleProtobufServiceDescriptorProto
-  >;
+  /**
+   **/
+  private _service: ARRAY<GoogleProtobufServiceDescriptorProto, IGoogleProtobufServiceDescriptorProto>;
 
-  private _extension: ARRAY<
-    GoogleProtobufFieldDescriptorProto,
-    IGoogleProtobufFieldDescriptorProto
-  >;
+  /**
+   **/
+  private _extension: ARRAY<GoogleProtobufFieldDescriptorProto, IGoogleProtobufFieldDescriptorProto>;
 
+  /**
+   **/
   private _options: GoogleProtobufFileOptions;
 
-  //  This field contains optional information about the original source code.
-  //  You may safely remove this entire field without harming runtime
-  //  functionality of the descriptors -- the information is needed only by
-  //  development tools.
+  /**
+   * This field contains optional information about the original source code.
+   * You may safely remove this entire field without harming runtime
+   * functionality of the descriptors -- the information is needed only by
+   * development tools.
+   **/
   private _sourceCodeInfo: GoogleProtobufSourceCodeInfo;
 
-  //  The syntax of the proto file.
-  //  The supported values are "proto2", "proto3", and "editions".
-  //
-  //  If `edition` is present, this value must be "editions".
+  /**
+   * The syntax of the proto file.
+   * The supported values are "proto2", "proto3", and "editions".
+   *
+   * If `edition` is present, this value must be "editions".
+   **/
   private _syntax: STRING;
 
-  //  The edition of the proto file.
+  /**
+   * The edition of the proto file.
+   **/
   private _edition: ENUM<GoogleProtobufEdition>;
 
   public __defaultValues: IFileDescriptorProto;
 
-  constructor(
-    initData?: IFileDescriptorProto,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IFileDescriptorProto, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.FileDescriptorProto';
-    this.__meta.description =
-      'FileDescriptorProto Describes a complete .proto file.';
+    this.__meta.typeName = "google.protobuf.FileDescriptorProto";
+    this.__meta.description = "FileDescriptorProto Describes a complete .proto file.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'name',
-        protoName: 'name',
+        fieldName: "name",
+        protoName: "name",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'package',
-        protoName: 'package',
+        fieldName: "package",
+        protoName: "package",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'dependency',
-        protoName: 'dependency',
+        fieldName: "dependency",
+        protoName: "dependency",
         FieldConstructor: STRING,
         constraints: {},
-        description: 'Names of files imported by this file.',
+        description: "Names of files imported by this file.",
       },
       {
-        fieldName: 'publicDependency',
-        protoName: 'public_dependency',
+        fieldName: "publicDependency",
+        protoName: "public_dependency",
         FieldConstructor: INT32,
         constraints: {},
-        description:
-          'Indexes of the public imported files in the dependency list above.',
+        description: "Indexes of the public imported files in the dependency list above.",
       },
       {
-        fieldName: 'weakDependency',
-        protoName: 'weak_dependency',
+        fieldName: "weakDependency",
+        protoName: "weak_dependency",
         FieldConstructor: INT32,
         constraints: {},
-        description:
-          'Indexes of the weak imported files in the dependency list.\n For Google-internal migration only. Do not use.',
+        description: "Indexes of the weak imported files in the dependency list.\n For Google-internal migration only. Do not use.",
       },
       {
-        fieldName: 'messageType',
-        protoName: 'message_type',
+        fieldName: "messageType",
+        protoName: "message_type",
         FieldConstructor: GoogleProtobufDescriptorProto,
         constraints: {},
-        description: 'All top-level definitions in this file.',
+        description: "All top-level definitions in this file.",
       },
       {
-        fieldName: 'enumType',
-        protoName: 'enum_type',
+        fieldName: "enumType",
+        protoName: "enum_type",
         FieldConstructor: GoogleProtobufEnumDescriptorProto,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'service',
-        protoName: 'service',
+        fieldName: "service",
+        protoName: "service",
         FieldConstructor: GoogleProtobufServiceDescriptorProto,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'extension',
-        protoName: 'extension',
+        fieldName: "extension",
+        protoName: "extension",
         FieldConstructor: GoogleProtobufFieldDescriptorProto,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'options',
-        protoName: 'options',
+        fieldName: "options",
+        protoName: "options",
         FieldConstructor: GoogleProtobufFileOptions,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'sourceCodeInfo',
-        protoName: 'source_code_info',
+        fieldName: "sourceCodeInfo",
+        protoName: "source_code_info",
         FieldConstructor: GoogleProtobufSourceCodeInfo,
         constraints: {},
         description:
-          'This field contains optional information about the original source code.\n You may safely remove this entire field without harming runtime\n functionality of the descriptors -- the information is needed only by\n development tools.',
+          "This field contains optional information about the original source code.\n You may safely remove this entire field without harming runtime\n functionality of the descriptors -- the information is needed only by\n development tools.",
       },
       {
-        fieldName: 'syntax',
-        protoName: 'syntax',
+        fieldName: "syntax",
+        protoName: "syntax",
         FieldConstructor: STRING,
         constraints: {},
         description:
           'The syntax of the proto file.\n The supported values are "proto2", "proto3", and "editions".\n\n If `edition` is present, this value must be "editions".',
       },
       {
-        fieldName: 'edition',
-        protoName: 'edition',
+        fieldName: "edition",
+        protoName: "edition",
         FieldConstructor: ENUM<GoogleProtobufEdition>,
         constraints: {},
-        description: 'The edition of the proto file.',
+        description: "The edition of the proto file.",
       },
     ];
 
     // Initialize the fields
-    this._name = new STRING(undefined, this, 'name');
+    // ---------------------
 
-    this._package = new STRING(undefined, this, 'package');
+    /**
+     **/
+    this._name = new STRING(undefined, this, "name");
 
-    //  Names of files imported by this file.
-    this._dependency = new ARRAY<STRING, string>(undefined, this, 'dependency');
+    /**
+     **/
+    this._package = new STRING(undefined, this, "package");
 
-    //  Indexes of the public imported files in the dependency list above.
-    this._publicDependency = new ARRAY<INT32, number>(
-      undefined,
-      this,
-      'publicDependency',
-    );
+    /**
+     *  Names of files imported by this file.
+     **/
+    this._dependency = new ARRAY<STRING, string>(undefined, this, "dependency");
 
-    //  Indexes of the weak imported files in the dependency list.
-    //  For Google-internal migration only. Do not use.
-    this._weakDependency = new ARRAY<INT32, number>(
-      undefined,
-      this,
-      'weakDependency',
-    );
+    /**
+     *  Indexes of the public imported files in the dependency list above.
+     **/
+    this._publicDependency = new ARRAY<INT32, number>(undefined, this, "publicDependency");
 
-    //  All top-level definitions in this file.
-    this._messageType = new ARRAY<
-      GoogleProtobufDescriptorProto,
-      IGoogleProtobufDescriptorProto
-    >(undefined, this, 'messageType');
+    /**
+     *  Indexes of the weak imported files in the dependency list.
+     *  For Google-internal migration only. Do not use.
+     **/
+    this._weakDependency = new ARRAY<INT32, number>(undefined, this, "weakDependency");
 
-    this._enumType = new ARRAY<
-      GoogleProtobufEnumDescriptorProto,
-      IGoogleProtobufEnumDescriptorProto
-    >(undefined, this, 'enumType');
+    /**
+     *  All top-level definitions in this file.
+     **/
+    this._messageType = new ARRAY<GoogleProtobufDescriptorProto, IGoogleProtobufDescriptorProto>(undefined, this, "messageType");
 
-    this._service = new ARRAY<
-      GoogleProtobufServiceDescriptorProto,
-      IGoogleProtobufServiceDescriptorProto
-    >(undefined, this, 'service');
+    /**
+     **/
+    this._enumType = new ARRAY<GoogleProtobufEnumDescriptorProto, IGoogleProtobufEnumDescriptorProto>(undefined, this, "enumType");
 
-    this._extension = new ARRAY<
-      GoogleProtobufFieldDescriptorProto,
-      IGoogleProtobufFieldDescriptorProto
-    >(undefined, this, 'extension');
+    /**
+     **/
+    this._service = new ARRAY<GoogleProtobufServiceDescriptorProto, IGoogleProtobufServiceDescriptorProto>(undefined, this, "service");
 
-    this._options = new GoogleProtobufFileOptions(undefined, this, 'options');
+    /**
+     **/
+    this._extension = new ARRAY<GoogleProtobufFieldDescriptorProto, IGoogleProtobufFieldDescriptorProto>(undefined, this, "extension");
 
-    //  This field contains optional information about the original source code.
-    //  You may safely remove this entire field without harming runtime
-    //  functionality of the descriptors -- the information is needed only by
-    //  development tools.
-    this._sourceCodeInfo = new GoogleProtobufSourceCodeInfo(
-      undefined,
-      this,
-      'sourceCodeInfo',
-    );
+    /**
+     **/
+    this._options = new GoogleProtobufFileOptions(undefined, this, "options");
 
-    //  The syntax of the proto file.
-    //  The supported values are "proto2", "proto3", and "editions".
-    //
-    //  If `edition` is present, this value must be "editions".
-    this._syntax = new STRING(undefined, this, 'syntax');
+    /**
+     *  This field contains optional information about the original source code.
+     *  You may safely remove this entire field without harming runtime
+     *  functionality of the descriptors -- the information is needed only by
+     *  development tools.
+     **/
+    this._sourceCodeInfo = new GoogleProtobufSourceCodeInfo(undefined, this, "sourceCodeInfo");
 
-    //  The edition of the proto file.
-    this._edition = new ENUM<GoogleProtobufEdition>(
-      undefined,
-      GoogleProtobufEdition,
-      GoogleProtobufEdition.EDITION_UNKNOWN,
-      this,
-      'edition',
-    );
+    /**
+     *  The syntax of the proto file.
+     *  The supported values are "proto2", "proto3", and "editions".
+     *
+     *  If `edition` is present, this value must be "editions".
+     **/
+    this._syntax = new STRING(undefined, this, "syntax");
+
+    /**
+     *  The edition of the proto file.
+     **/
+    this._edition = new ENUM<GoogleProtobufEdition>(undefined, GoogleProtobufEdition, GoogleProtobufEdition.EDITION_UNKNOWN, this, "edition");
 
     // Set required fields
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof FileDescriptorProto] as FieldNode
-      ).__meta.required = true;
+      (this[fieldName as keyof FileDescriptorProto] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -404,150 +401,215 @@ export class FileDescriptorProto extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (this[fieldName as keyof FileDescriptorProto] as FieldNode).__readonly =
-        true;
+      (this[fieldName as keyof FileDescriptorProto] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get name(): STRING {
     return this._name;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set name(v: string) {
     this.__PrimitivesSetter(this._name, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get package(): STRING {
     return this._package;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set package(v: string) {
     this.__PrimitivesSetter(this._package, v);
   }
 
-  //  Names of files imported by this file.
+  /**
+   *  Names of files imported by this file.
+   * The getter receives the FieldNode
+   **/
   public get dependency(): ARRAY<STRING, string> {
     return this._dependency;
   }
 
+  /**
+   * The setter receives `string[]`
+   **/
   public set dependency(v: string[]) {
     this.__TypeSetter(this._dependency, v);
   }
 
-  //  Indexes of the public imported files in the dependency list above.
+  /**
+   *  Indexes of the public imported files in the dependency list above.
+   * The getter receives the FieldNode
+   **/
   public get publicDependency(): ARRAY<INT32, number> {
     return this._publicDependency;
   }
 
+  /**
+   * The setter receives `number[]`
+   **/
   public set publicDependency(v: number[]) {
     this.__TypeSetter(this._publicDependency, v);
   }
 
-  //  Indexes of the weak imported files in the dependency list.
-  //  For Google-internal migration only. Do not use.
+  /**
+   *  Indexes of the weak imported files in the dependency list.
+   *  For Google-internal migration only. Do not use.
+   * The getter receives the FieldNode
+   **/
   public get weakDependency(): ARRAY<INT32, number> {
     return this._weakDependency;
   }
 
+  /**
+   * The setter receives `number[]`
+   **/
   public set weakDependency(v: number[]) {
     this.__TypeSetter(this._weakDependency, v);
   }
 
-  //  All top-level definitions in this file.
-  public get messageType(): ARRAY<
-    GoogleProtobufDescriptorProto,
-    IGoogleProtobufDescriptorProto
-  > {
+  /**
+   *  All top-level definitions in this file.
+   * The getter receives the FieldNode
+   **/
+  public get messageType(): ARRAY<GoogleProtobufDescriptorProto, IGoogleProtobufDescriptorProto> {
     return this._messageType;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufDescriptorProto[]`
+   **/
   public set messageType(v: IGoogleProtobufDescriptorProto[]) {
     this.__TypeSetter(this._messageType, v);
   }
 
-  public get enumType(): ARRAY<
-    GoogleProtobufEnumDescriptorProto,
-    IGoogleProtobufEnumDescriptorProto
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get enumType(): ARRAY<GoogleProtobufEnumDescriptorProto, IGoogleProtobufEnumDescriptorProto> {
     return this._enumType;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufEnumDescriptorProto[]`
+   **/
   public set enumType(v: IGoogleProtobufEnumDescriptorProto[]) {
     this.__TypeSetter(this._enumType, v);
   }
 
-  public get service(): ARRAY<
-    GoogleProtobufServiceDescriptorProto,
-    IGoogleProtobufServiceDescriptorProto
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get service(): ARRAY<GoogleProtobufServiceDescriptorProto, IGoogleProtobufServiceDescriptorProto> {
     return this._service;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufServiceDescriptorProto[]`
+   **/
   public set service(v: IGoogleProtobufServiceDescriptorProto[]) {
     this.__TypeSetter(this._service, v);
   }
 
-  public get extension(): ARRAY<
-    GoogleProtobufFieldDescriptorProto,
-    IGoogleProtobufFieldDescriptorProto
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get extension(): ARRAY<GoogleProtobufFieldDescriptorProto, IGoogleProtobufFieldDescriptorProto> {
     return this._extension;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFieldDescriptorProto[]`
+   **/
   public set extension(v: IGoogleProtobufFieldDescriptorProto[]) {
     this.__TypeSetter(this._extension, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get options(): GoogleProtobufFileOptions {
     return this._options;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFileOptions`
+   **/
   public set options(v: IGoogleProtobufFileOptions) {
     this.__TypeSetter(this._options, v);
   }
 
-  //  This field contains optional information about the original source code.
-  //  You may safely remove this entire field without harming runtime
-  //  functionality of the descriptors -- the information is needed only by
-  //  development tools.
+  /**
+   *  This field contains optional information about the original source code.
+   *  You may safely remove this entire field without harming runtime
+   *  functionality of the descriptors -- the information is needed only by
+   *  development tools.
+   * The getter receives the FieldNode
+   **/
   public get sourceCodeInfo(): GoogleProtobufSourceCodeInfo {
     return this._sourceCodeInfo;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufSourceCodeInfo`
+   **/
   public set sourceCodeInfo(v: IGoogleProtobufSourceCodeInfo) {
     this.__TypeSetter(this._sourceCodeInfo, v);
   }
 
-  //  The syntax of the proto file.
-  //  The supported values are "proto2", "proto3", and "editions".
-  //
-  //  If `edition` is present, this value must be "editions".
+  /**
+   *  The syntax of the proto file.
+   *  The supported values are "proto2", "proto3", and "editions".
+   *
+   *  If `edition` is present, this value must be "editions".
+   * The getter receives the FieldNode
+   **/
   public get syntax(): STRING {
     return this._syntax;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set syntax(v: string) {
     this.__PrimitivesSetter(this._syntax, v);
   }
 
-  //  The edition of the proto file.
+  /**
+   *  The edition of the proto file.
+   * The getter receives the FieldNode
+   **/
   public get edition(): ENUM<GoogleProtobufEdition> {
     return this._edition;
   }
 
+  /**
+   * The setter receives `GoogleProtobufEdition`
+   **/
   public set edition(v: GoogleProtobufEdition) {
     this.__TypeSetter(this._edition, v);
   }
 
-  fromLiteral(data: IFileDescriptorProto) {
+  fromLiteral(data: IFileDescriptorProto): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IFileDescriptorProto {
-    return super.__toLiteral();
+    return super.__toLiteral() as IFileDescriptorProto;
   }
 }
 
-Registry.register('google.protobuf.FileDescriptorProto', FileDescriptorProto);
+Registry.register("google.protobuf.FileDescriptorProto", FileDescriptorProto);

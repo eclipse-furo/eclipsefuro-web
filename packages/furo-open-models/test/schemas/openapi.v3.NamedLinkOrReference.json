@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.NamedLinkOrReference.json",
+  "type": "object",
+  "description": "Automatically-generated message used to represent maps of LinkOrReference as ordered (name,value) pairs.NamedLinkOrReference",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Map key"
+    },
+    "value": {
+      "$ref": "openapi.v3.LinkOrReference.json",
+      "description": "Mapped value"
+    }
+  }
+}

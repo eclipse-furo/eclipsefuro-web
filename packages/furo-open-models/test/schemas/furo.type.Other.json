@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Other.json",
+  "type": "object",
+  "properties": {
+    "recursion": {
+      "$ref": "furo.type.DeepRecursion.json"
+    }
+  }
+}

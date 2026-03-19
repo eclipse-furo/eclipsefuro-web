@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.ExternalDocs.json",
+  "type": "object",
+  "description": "Allows referencing an external resource for extended documentation.ExternalDocs",
+  "properties": {
+    "description": {
+      "type": "string"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "url": {
+      "type": "string"
+    }
+  }
+}

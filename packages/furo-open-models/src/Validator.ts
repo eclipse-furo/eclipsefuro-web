@@ -1,23 +1,17 @@
 // Full qualified type name
-import type { FieldConstraints } from './FieldConstraints';
+import type { FieldConstraints } from "./FieldConstraints";
 
 type typeName = string;
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type validationFunc = (node: any) => void;
 
-export const Validators: Map<typeName, validationFunc> = new Map<
-  typeName,
-  validationFunc
->();
+export const Validators: Map<typeName, validationFunc> = new Map<typeName, validationFunc>();
 
 type constraintFunc = (
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   node: any,
-  constraints?: FieldConstraints,
+  constraints?: FieldConstraints
 ) => string[] | undefined; // return undefined if everything is OK
 
-export const CustomConstraints: Map<typeName, constraintFunc> = new Map<
-  typeName,
-  constraintFunc
->();
+export const CustomConstraints: Map<typeName, constraintFunc> = new Map<typeName, constraintFunc>();

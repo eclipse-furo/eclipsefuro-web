@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.MessageEncoding.json",
+  "type": "string",
+  "enum": [
+    "MESSAGE_ENCODING_UNKNOWN",
+    "LENGTH_PREFIXED",
+    "DELIMITED"
+  ]
+}

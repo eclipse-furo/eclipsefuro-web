@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.UInt32Value.json",
+  "type": "object",
+  "description": "Wrapper message for `uint32`.\n\n The JSON representation for `UInt32Value` is JSON number.UInt32Value",
+  "properties": {
+    "value": {
+      "type": "integer",
+      "description": "The uint32 value.",
+      "minimum": 0
+    }
+  }
+}

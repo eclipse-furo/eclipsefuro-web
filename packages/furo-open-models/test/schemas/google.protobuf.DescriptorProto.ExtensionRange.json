@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.DescriptorProto.ExtensionRange.json",
+  "type": "object",
+  "properties": {
+    "end": {
+      "type": "integer",
+      "description": "Exclusive."
+    },
+    "options": {
+      "$ref": "google.protobuf.ExtensionRangeOptions.json"
+    },
+    "start": {
+      "type": "integer",
+      "description": "Inclusive."
+    }
+  }
+}

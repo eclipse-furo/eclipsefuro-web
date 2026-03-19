@@ -1,10 +1,10 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement } from "lit";
 // eslint-disable-next-line import/extensions
-import { property } from 'lit/decorators.js';
+import { property } from "lit/decorators.js";
 
-import { LitFBP } from '@furo/fbp/dist/LitFBP';
-import { Decimal } from '../protoc-gen-open-models/furo/type/Decimal';
-import { INT32 } from '@furo/open-models';
+import { LitFBP } from "@furo/fbp/dist/LitFBP";
+import { Decimal } from "../protoc-gen-open-models/furo/type/Decimal";
+import { INT32 } from "@furo/open-models";
 
 /**
  * ### Description
@@ -21,13 +21,13 @@ export class formNumber extends LitFBP(LitElement) {
    */
   @property({ type: String })
   // eslint-disable-next-line lit/no-classfield-shadowing
-  public value: string = '';
+  public value: string = "";
 
   private _fieldNode: Decimal | INT32 | undefined;
 
   @property({ type: String })
   // eslint-disable-next-line lit/no-classfield-shadowing
-  private stateMessage: string = '';
+  private stateMessage: string = "";
 
   get fieldNode(): Decimal | INT32 | undefined {
     return this._fieldNode;
@@ -40,13 +40,13 @@ export class formNumber extends LitFBP(LitElement) {
   private bindData(value: Decimal | INT32) {
     this._fieldNode = value;
 
-    this._fieldNode.__addEventListener('field-value-changed', () => {
+    this._fieldNode.__addEventListener("field-value-changed", () => {
       this.assignValue();
       this.requestUpdate();
     });
 
-    this._fieldNode.__addEventListener('state-changed', e => {
-      this.setAttribute('value-state', e.detail.__meta.valueState);
+    this._fieldNode.__addEventListener("state-changed", e => {
+      this.setAttribute("value-state", e.detail.__meta.valueState);
       this.stateMessage = e.detail.__meta.stateMessage;
     });
 
@@ -57,35 +57,30 @@ export class formNumber extends LitFBP(LitElement) {
 
   private assignValue() {
     switch (this._fieldNode!.__meta.typeName) {
-      case 'furo.type.Decimal':
+      case "furo.type.Decimal":
         this.value = (this._fieldNode as Decimal).value.value;
         break;
-      case 'primitives.INT32':
+      case "primitives.INT32":
         this.value = (this._fieldNode as INT32).value.toString();
         break;
 
       default:
-        console.warn(
-          'Unsupported field node type',
-          this._fieldNode!.__meta.typeName,
-        );
+        console.warn("Unsupported field node type", this._fieldNode!.__meta.typeName);
     }
   }
 
   applyChanges(e: InputEvent) {
     if (this._fieldNode === undefined) {
-      console.warn('No bindings');
+      console.warn("No bindings");
     }
 
     const v = parseInt((e.target as HTMLInputElement).value, 10);
     switch (this._fieldNode!.__meta.typeName) {
-      case 'furo.type.Decimal':
-        (this._fieldNode as Decimal).value = (
-          e.target as HTMLInputElement
-        ).value;
+      case "furo.type.Decimal":
+        (this._fieldNode as Decimal).value = (e.target as HTMLInputElement).value;
         break;
 
-      case 'primitives.INT32':
+      case "primitives.INT32":
         if (Number.isNaN(v)) {
           (this._fieldNode as INT32).value = 0;
         } else {
@@ -95,10 +90,7 @@ export class formNumber extends LitFBP(LitElement) {
         break;
 
       default:
-        console.warn(
-          'Unsupported field node type',
-          this._fieldNode!.__meta.typeName,
-        );
+        console.warn("Unsupported field node type", this._fieldNode!.__meta.typeName);
     }
   }
 
@@ -123,7 +115,7 @@ export class formNumber extends LitFBP(LitElement) {
       display: none;
     }
 
-    :host([value-state='Error']) {
+    :host([value-state="Error"]) {
       border-bottom: 2px solid red;
     }
   `;
@@ -133,13 +125,9 @@ export class formNumber extends LitFBP(LitElement) {
    * @private
    */
   render() {
-    return html` <input
-        type="number"
-        .value="${this.value}"
-        @input="${this.applyChanges}"
-      />
+    return html` <input type="number" .value="${this.value}" @input="${this.applyChanges}" />
       ${this.stateMessage}`;
   }
 }
 
-window.customElements.define('form-number', formNumber);
+window.customElements.define("form-number", formNumber);

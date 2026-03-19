@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.UninterpretedOption.json",
+  "type": "object",
+  "description": "A message representing a option the parser does not recognize. This only\n appears in options protos created by the compiler::Parser class.\n DescriptorPool resolves these when building Descriptor objects. Therefore,\n options protos in descriptor objects (e.g. returned by Descriptor::options(),\n or produced by Descriptor::CopyTo()) will never have UninterpretedOptions\n in them.UninterpretedOption",
+  "properties": {
+    "aggregateValue": {
+      "type": "string"
+    },
+    "doubleValue": {
+      "type": "number"
+    },
+    "identifierValue": {
+      "type": "string",
+      "description": "The value of the uninterpreted option, in whatever type the tokenizer\n identified it as during parsing. Exactly one of these should be set."
+    },
+    "name": {
+      "type": "array",
+      "items": {
+        "$ref": "google.protobuf.UninterpretedOption.NamePart.json"
+      }
+    },
+    "negativeIntValue": {
+      "type": "integer"
+    },
+    "positiveIntValue": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "stringValue": {
+      "type": "string"
+    }
+  }
+}

@@ -2,25 +2,20 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  ENUM,
-  FieldNode,
-  Registry,
-} from '@furo/open-models/dist/index';
-import {
   FeatureSet as GoogleProtobufFeatureSet,
   type IFeatureSet as IGoogleProtobufFeatureSet,
   type TFeatureSet as TGoogleProtobufFeatureSet,
-} from './FeatureSet';
+} from "./FeatureSet";
 
-import { MethodOptionsIdempotencyLevel as GoogleProtobufMethodOptionsIdempotencyLevel } from './MethodOptions.IdempotencyLevel';
+import { MethodOptionsIdempotencyLevel as GoogleProtobufMethodOptionsIdempotencyLevel } from "./MethodOptions.IdempotencyLevel";
 
 import {
   UninterpretedOption as GoogleProtobufUninterpretedOption,
   type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
   type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
-} from './UninterpretedOption';
+} from "./UninterpretedOption";
+
+import { ARRAY, BOOLEAN, ENUM, FieldNode, Registry } from "@furo/open-models/dist/index";
 
 /**
  * @interface IMethodOptions
@@ -70,96 +65,101 @@ export interface TMethodOptions {
  * MethodOptions
  */
 export class MethodOptions extends FieldNode {
-  //  Is this method deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for the method, or it will be completely ignored; in the very least,
-  //  this is a formalization for deprecating methods.
+  /**
+   * Is this method deprecated?
+   * Depending on the target platform, this can emit Deprecated annotations
+   * for the method, or it will be completely ignored; in the very least,
+   * this is a formalization for deprecating methods.
+   **/
   private _deprecated: BOOLEAN;
 
+  /**
+   **/
   private _idempotencyLevel: ENUM<GoogleProtobufMethodOptionsIdempotencyLevel>;
 
-  //  Any features defined in the specific edition.
+  /**
+   * Any features defined in the specific edition.
+   **/
   private _features: GoogleProtobufFeatureSet;
 
-  //  The parser stores options it doesn't recognize here. See above.
-  private _uninterpretedOption: ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  >;
+  /**
+   * The parser stores options it doesn't recognize here. See above.
+   **/
+  private _uninterpretedOption: ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>;
 
   public __defaultValues: IMethodOptions;
 
-  constructor(
-    initData?: IMethodOptions,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IMethodOptions, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.MethodOptions';
-    this.__meta.description = 'MethodOptions';
+    this.__meta.typeName = "google.protobuf.MethodOptions";
+    this.__meta.description = "MethodOptions";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'deprecated',
-        protoName: 'deprecated',
+        fieldName: "deprecated",
+        protoName: "deprecated",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'Is this method deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the method, or it will be completely ignored; in the very least,\n this is a formalization for deprecating methods.',
+          "Is this method deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for the method, or it will be completely ignored; in the very least,\n this is a formalization for deprecating methods.",
       },
       {
-        fieldName: 'idempotencyLevel',
-        protoName: 'idempotency_level',
+        fieldName: "idempotencyLevel",
+        protoName: "idempotency_level",
         FieldConstructor: ENUM<GoogleProtobufMethodOptionsIdempotencyLevel>,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'features',
-        protoName: 'features',
+        fieldName: "features",
+        protoName: "features",
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
-        description: 'Any features defined in the specific edition.',
+        description: "Any features defined in the specific edition.",
       },
       {
-        fieldName: 'uninterpretedOption',
-        protoName: 'uninterpreted_option',
+        fieldName: "uninterpretedOption",
+        protoName: "uninterpreted_option",
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
-        description:
-          "The parser stores options it doesn't recognize here. See above.",
+        description: "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 
     // Initialize the fields
-    //  Is this method deprecated?
-    //  Depending on the target platform, this can emit Deprecated annotations
-    //  for the method, or it will be completely ignored; in the very least,
-    //  this is a formalization for deprecating methods.
-    this._deprecated = new BOOLEAN(undefined, this, 'deprecated');
+    // ---------------------
 
-    this._idempotencyLevel =
-      new ENUM<GoogleProtobufMethodOptionsIdempotencyLevel>(
-        undefined,
-        GoogleProtobufMethodOptionsIdempotencyLevel,
-        GoogleProtobufMethodOptionsIdempotencyLevel.IDEMPOTENCY_UNKNOWN,
-        this,
-        'idempotencyLevel',
-      );
+    /**
+     *  Is this method deprecated?
+     *  Depending on the target platform, this can emit Deprecated annotations
+     *  for the method, or it will be completely ignored; in the very least,
+     *  this is a formalization for deprecating methods.
+     **/
+    this._deprecated = new BOOLEAN(undefined, this, "deprecated");
 
-    //  Any features defined in the specific edition.
-    this._features = new GoogleProtobufFeatureSet(undefined, this, 'features');
+    /**
+     **/
+    this._idempotencyLevel = new ENUM<GoogleProtobufMethodOptionsIdempotencyLevel>(
+      undefined,
+      GoogleProtobufMethodOptionsIdempotencyLevel,
+      GoogleProtobufMethodOptionsIdempotencyLevel.IDEMPOTENCY_UNKNOWN,
+      this,
+      "idempotencyLevel"
+    );
 
-    //  The parser stores options it doesn't recognize here. See above.
-    this._uninterpretedOption = new ARRAY<
-      GoogleProtobufUninterpretedOption,
-      IGoogleProtobufUninterpretedOption
-    >(undefined, this, 'uninterpretedOption');
+    /**
+     *  Any features defined in the specific edition.
+     **/
+    this._features = new GoogleProtobufFeatureSet(undefined, this, "features");
+
+    /**
+     *  The parser stores options it doesn't recognize here. See above.
+     **/
+    this._uninterpretedOption = new ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>(undefined, this, "uninterpretedOption");
 
     // Set required fields
     [].forEach(fieldName => {
-      (this[fieldName as keyof MethodOptions] as FieldNode).__meta.required =
-        true;
+      (this[fieldName as keyof MethodOptions] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -180,54 +180,75 @@ export class MethodOptions extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  Is this method deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for the method, or it will be completely ignored; in the very least,
-  //  this is a formalization for deprecating methods.
+  /**
+   *  Is this method deprecated?
+   *  Depending on the target platform, this can emit Deprecated annotations
+   *  for the method, or it will be completely ignored; in the very least,
+   *  this is a formalization for deprecating methods.
+   * The getter receives the FieldNode
+   **/
   public get deprecated(): BOOLEAN {
     return this._deprecated;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecated(v: boolean) {
     this.__PrimitivesSetter(this._deprecated, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get idempotencyLevel(): ENUM<GoogleProtobufMethodOptionsIdempotencyLevel> {
     return this._idempotencyLevel;
   }
 
+  /**
+   * The setter receives `GoogleProtobufMethodOptionsIdempotencyLevel`
+   **/
   public set idempotencyLevel(v: GoogleProtobufMethodOptionsIdempotencyLevel) {
     this.__TypeSetter(this._idempotencyLevel, v);
   }
 
-  //  Any features defined in the specific edition.
+  /**
+   *  Any features defined in the specific edition.
+   * The getter receives the FieldNode
+   **/
   public get features(): GoogleProtobufFeatureSet {
     return this._features;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFeatureSet`
+   **/
   public set features(v: IGoogleProtobufFeatureSet) {
     this.__TypeSetter(this._features, v);
   }
 
-  //  The parser stores options it doesn't recognize here. See above.
-  public get uninterpretedOption(): ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  > {
+  /**
+   *  The parser stores options it doesn't recognize here. See above.
+   * The getter receives the FieldNode
+   **/
+  public get uninterpretedOption(): ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption> {
     return this._uninterpretedOption;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufUninterpretedOption[]`
+   **/
   public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[]) {
     this.__TypeSetter(this._uninterpretedOption, v);
   }
 
-  fromLiteral(data: IMethodOptions) {
+  fromLiteral(data: IMethodOptions): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IMethodOptions {
-    return super.__toLiteral();
+    return super.__toLiteral() as IMethodOptions;
   }
 }
 
-Registry.register('google.protobuf.MethodOptions', MethodOptions);
+Registry.register("google.protobuf.MethodOptions", MethodOptions);

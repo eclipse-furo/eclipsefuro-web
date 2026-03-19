@@ -23,7 +23,8 @@ export type ModelEventType =
   | "parent-readonly-unset" // fired when a parent was set to *rw*, listen to this event to make your UI element writable, but you have to check for your own *ro state* and any *ro* parent.
   // | 'child-readonly-set'  implement this when @maltenorstroem asks for it
   // | 'child-readonly-unset'  implement this when @maltenorstroem asks for it
-  | "model-injected"; // fired on the injection node before field-value-updated and this-field-value-changed
+  | "model-injected" // fired on the injection node before field-value-updated and this-field-value-changed
+  | "oneof-changed"; // fired when the active field in a oneof group changes
 
 interface Meta {
   businessVaueState: ValueState;
@@ -35,6 +36,7 @@ interface Meta {
   valueState: ValueState;
   stateMessage: string;
   nodeFields: FieldDescriptor[];
+  oneofGroups: Map<string, string | undefined>;
   readonly: boolean;
   required: boolean;
   isArrayNode: boolean; // set by array and used by baseName resolver to omit the index in the names
@@ -75,6 +77,8 @@ export interface FieldDescriptor {
   constraints?: FieldConstraints;
   // Optional description to generate AI friendly jsonschema
   description?: string;
+  // name of the oneof group this field belongs to
+  oneofGroup?: string;
 }
 
 export interface ValueStateSummary {
@@ -120,6 +124,7 @@ export abstract class FieldNode {
     stateMessage: "",
     typeName: "",
     nodeFields: [],
+    oneofGroups: new Map(),
     isArrayNode: false,
     isRecursionNode: false,
     isAnyNode: false,
@@ -302,6 +307,11 @@ export abstract class FieldNode {
         return;
       }
 
+      // track oneof group state from incoming data
+      if (field.oneofGroup) {
+        this.__meta.oneofGroups.set(field.oneofGroup, field.fieldName);
+      }
+
       (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__updateWithLiteral((data as FieldNode)[field.fieldName as keyof FieldNode]);
 
       (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__meta.isPristine = false;
@@ -325,6 +335,11 @@ export abstract class FieldNode {
   __toJson(): any {
     const d: Record<string, unknown> = {};
     this.__meta.nodeFields.forEach(f => {
+      // skip inactive oneof fields (proto3 JSON spec: only active member is serialized)
+      if (f.oneofGroup && this.__meta.oneofGroups.get(f.oneofGroup) !== f.fieldName) {
+        return null;
+      }
+
       // use jsonName if UseProtoNames is set, otherwise convert to lowerCamel without X prefix
       const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames ? f.protoName : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
 
@@ -384,6 +399,11 @@ export abstract class FieldNode {
   public __toLiteral(): any {
     const d: Record<string, unknown> = {};
     this.__meta.nodeFields.forEach(f => {
+      // skip inactive oneof fields (proto3 JSON spec: only active member is serialized)
+      if (f.oneofGroup && this.__meta.oneofGroups.get(f.oneofGroup) !== f.fieldName) {
+        return null;
+      }
+
       if (
         this[`_${f.fieldName}` as keyof FieldNode] &&
         (!(this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__isEmpty || (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__meta.required)
@@ -828,6 +848,11 @@ export abstract class FieldNode {
   public __clear(withoutNotification = false) {
     this.__isEmpty = true;
 
+    // reset oneof group state
+    this.__meta.oneofGroups.forEach((_v, key) => {
+      this.__meta.oneofGroups.set(key, undefined);
+    });
+
     // __clear every childNode too
     this.__meta.nodeFields.forEach(descriptor => {
       (this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode).__clear(withoutNotification);
@@ -841,6 +866,92 @@ export abstract class FieldNode {
   }
 
   /**
+   * Clears sibling fields in the same oneof group when a field is set.
+   * @param targetNode - The field being set
+   */
+  private __clearOneofSiblings(targetNode: FieldNode): void {
+    const fieldName = targetNode.__meta.fieldName;
+    if (!fieldName) return;
+
+    const descriptor = this.__meta.nodeFields.find(f => f.fieldName === fieldName);
+    if (!descriptor?.oneofGroup) return;
+
+    const groupName = descriptor.oneofGroup;
+    const previousActive = this.__meta.oneofGroups.get(groupName);
+
+    // Clear all OTHER fields in the same oneof group (silently)
+    this.__meta.nodeFields
+      .filter(f => f.oneofGroup === groupName && f.fieldName !== fieldName)
+      .forEach(f => {
+        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear(true);
+      });
+
+    // Mark this field as active
+    this.__meta.oneofGroups.set(groupName, fieldName);
+    targetNode.__isEmpty = false;
+
+    // Emit event if active field changed
+    if (previousActive !== fieldName) {
+      this.__dispatchEvent(
+        new CustomEvent("oneof-changed", {
+          detail: { group: groupName, activeField: fieldName, previousField: previousActive },
+          bubbles: true,
+        })
+      );
+    }
+  }
+
+  /**
+   * Returns the active field name in a oneof group.
+   * @param groupName - The name of the oneof group
+   */
+  public __whichOneof(groupName: string): string | undefined {
+    return this.__meta.oneofGroups.get(groupName);
+  }
+
+  /**
+   * Returns the FieldNode of the active oneof field.
+   * @param groupName - The name of the oneof group
+   */
+  public __getOneofFieldNode(groupName: string): FieldNode | undefined {
+    const activeField = this.__meta.oneofGroups.get(groupName);
+    if (!activeField) return undefined;
+    return this[`_${activeField}` as keyof FieldNode] as FieldNode | undefined;
+  }
+
+  /**
+   * Explicitly clears a oneof group so no field is active.
+   * @param groupName - The name of the oneof group
+   */
+  public __clearOneof(groupName: string): void {
+    this.__meta.nodeFields
+      .filter(f => f.oneofGroup === groupName)
+      .forEach(f => {
+        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear(true);
+      });
+    this.__meta.oneofGroups.set(groupName, undefined);
+  }
+
+  /**
+   * Returns the oneof group name this field belongs to, if any.
+   */
+  public get __oneofGroup(): string | undefined {
+    if (!this.__meta.fieldName || !this.__parentNode) return undefined;
+    const descriptor = this.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
+    return descriptor?.oneofGroup;
+  }
+
+  /**
+   * Returns true if this field is the active member of its oneof group.
+   */
+  public get __isActiveOneofField(): boolean {
+    if (!this.__meta.fieldName || !this.__parentNode) return false;
+    const descriptor = this.__parentNode.__meta.nodeFields.find(f => f.fieldName === this.__meta.fieldName);
+    if (!descriptor?.oneofGroup) return false;
+    return this.__parentNode.__meta.oneofGroups.get(descriptor.oneofGroup) === this.__meta.fieldName;
+  }
+
+  /**
    * Helper method to update a skalar / primitive field of a type. Used by the generated models.
    * Triggers also the validation and clearance, if needed.
    *
@@ -850,6 +961,7 @@ export abstract class FieldNode {
    */
 
   protected __PrimitivesSetter(targetNode: IPrimitive, value: unknown) {
+    this.__clearOneofSiblings(targetNode);
     // do not do anything if current value equals val
     if (targetNode._value !== value) {
       targetNode._value = value;
@@ -870,6 +982,7 @@ export abstract class FieldNode {
    */
 
   protected __TypeSetter(targetNode: FieldNode, literalData: unknown) {
+    this.__clearOneofSiblings(targetNode);
     if (literalData === undefined || literalData === null) {
       targetNode.__clear();
       this.__validateBottomUp(targetNode);

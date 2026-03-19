@@ -2,16 +2,12 @@
 // protoc-gen-open-models version: ????
 
 import {
-  FieldNode,
-  INT32,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   EnumValueOptions as GoogleProtobufEnumValueOptions,
   type IEnumValueOptions as IGoogleProtobufEnumValueOptions,
   type TEnumValueOptions as TGoogleProtobufEnumValueOptions,
-} from './EnumValueOptions';
+} from "./EnumValueOptions";
+
+import { FieldNode, INT32, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IEnumValueDescriptorProto
@@ -38,64 +34,67 @@ export interface TEnumValueDescriptorProto {
  *  Describes a value within an enum.
  */
 export class EnumValueDescriptorProto extends FieldNode {
+  /**
+   **/
   private _name: STRING;
 
+  /**
+   **/
   private _number: INT32;
 
+  /**
+   **/
   private _options: GoogleProtobufEnumValueOptions;
 
   public __defaultValues: IEnumValueDescriptorProto;
 
-  constructor(
-    initData?: IEnumValueDescriptorProto,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IEnumValueDescriptorProto, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.EnumValueDescriptorProto';
-    this.__meta.description =
-      'EnumValueDescriptorProto Describes a value within an enum.';
+    this.__meta.typeName = "google.protobuf.EnumValueDescriptorProto";
+    this.__meta.description = "EnumValueDescriptorProto Describes a value within an enum.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'name',
-        protoName: 'name',
+        fieldName: "name",
+        protoName: "name",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'number',
-        protoName: 'number',
+        fieldName: "number",
+        protoName: "number",
         FieldConstructor: INT32,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'options',
-        protoName: 'options',
+        fieldName: "options",
+        protoName: "options",
         FieldConstructor: GoogleProtobufEnumValueOptions,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._name = new STRING(undefined, this, 'name');
+    // ---------------------
 
-    this._number = new INT32(undefined, this, 'number');
+    /**
+     **/
+    this._name = new STRING(undefined, this, "name");
 
-    this._options = new GoogleProtobufEnumValueOptions(
-      undefined,
-      this,
-      'options',
-    );
+    /**
+     **/
+    this._number = new INT32(undefined, this, "number");
+
+    /**
+     **/
+    this._options = new GoogleProtobufEnumValueOptions(undefined, this, "options");
 
     // Set required fields
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof EnumValueDescriptorProto] as FieldNode
-      ).__meta.required = true;
+      (this[fieldName as keyof EnumValueDescriptorProto] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -110,48 +109,61 @@ export class EnumValueDescriptorProto extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof EnumValueDescriptorProto] as FieldNode
-      ).__readonly = true;
+      (this[fieldName as keyof EnumValueDescriptorProto] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get name(): STRING {
     return this._name;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set name(v: string) {
     this.__PrimitivesSetter(this._name, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get number(): INT32 {
     return this._number;
   }
 
+  /**
+   * The setter receives `number`
+   **/
   public set number(v: number) {
     this.__PrimitivesSetter(this._number, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get options(): GoogleProtobufEnumValueOptions {
     return this._options;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufEnumValueOptions`
+   **/
   public set options(v: IGoogleProtobufEnumValueOptions) {
     this.__TypeSetter(this._options, v);
   }
 
-  fromLiteral(data: IEnumValueDescriptorProto) {
+  fromLiteral(data: IEnumValueDescriptorProto): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IEnumValueDescriptorProto {
-    return super.__toLiteral();
+    return super.__toLiteral() as IEnumValueDescriptorProto;
   }
 }
 
-Registry.register(
-  'google.protobuf.EnumValueDescriptorProto',
-  EnumValueDescriptorProto,
-);
+Registry.register("google.protobuf.EnumValueDescriptorProto", EnumValueDescriptorProto);

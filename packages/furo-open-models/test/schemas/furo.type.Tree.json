@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.Tree.json",
+  "type": "object",
+  "description": "*\n Tree is for checking recursive typesTree",
+  "properties": {
+    "displayName": {
+      "type": "string"
+    },
+    "nodes": {
+      "type": "array",
+      "description": "Array recursion",
+      "items": {
+        "$ref": "furo.type.Tree.json"
+      }
+    },
+    "recursion": {
+      "$ref": "furo.type.Tree.json",
+      "description": "direct recursion"
+    }
+  }
+}

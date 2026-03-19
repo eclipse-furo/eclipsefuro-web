@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.EnumValueDescriptorProto.json",
+  "type": "object",
+  "description": "Describes a value within an enum.EnumValueDescriptorProto",
+  "properties": {
+    "name": {
+      "type": "string"
+    },
+    "number": {
+      "type": "integer"
+    },
+    "options": {
+      "$ref": "google.protobuf.EnumValueOptions.json"
+    }
+  }
+}

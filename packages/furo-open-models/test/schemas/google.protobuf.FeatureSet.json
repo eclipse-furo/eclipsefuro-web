@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.json",
+  "type": "object",
+  "description": "TODO Enums in C++ gencode (and potentially other languages) are\n not well scoped.  This means that each of the feature enums below can clash\n with each other.  The short names we've chosen maximize call-site\n readability, but leave us very open to this scenario.  A future feature will\n be designed and implemented to handle this, hopefully before we ever hit a\n conflict here.FeatureSet",
+  "properties": {
+    "enumType": {
+      "$ref": "google.protobuf.FeatureSet.EnumType.json"
+    },
+    "fieldPresence": {
+      "$ref": "google.protobuf.FeatureSet.FieldPresence.json"
+    },
+    "jsonFormat": {
+      "$ref": "google.protobuf.FeatureSet.JsonFormat.json"
+    },
+    "messageEncoding": {
+      "$ref": "google.protobuf.FeatureSet.MessageEncoding.json"
+    },
+    "repeatedFieldEncoding": {
+      "$ref": "google.protobuf.FeatureSet.RepeatedFieldEncoding.json"
+    },
+    "utf8Validation": {
+      "$ref": "google.protobuf.FeatureSet.Utf8Validation.json"
+    }
+  }
+}

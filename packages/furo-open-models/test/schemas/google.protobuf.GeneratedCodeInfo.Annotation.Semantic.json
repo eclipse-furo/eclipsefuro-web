@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.GeneratedCodeInfo.Annotation.Semantic.json",
+  "type": "string",
+  "description": "Represents the identified object's effect on the element in the original\n .proto file.",
+  "enum": [
+    "NONE",
+    "SET",
+    "ALIAS"
+  ]
+}

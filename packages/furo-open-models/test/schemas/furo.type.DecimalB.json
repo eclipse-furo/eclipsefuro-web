@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.type.DecimalB.json",
+  "type": "object",
+  "description": "Decimal numbers\n  Regex pattern: ^[+-]?(\\d*\\.)?\\d+$DecimalB",
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "Value is set as a quoted number, use your numeric parser of choice"
+    }
+  }
+}

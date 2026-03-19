@@ -2,28 +2,24 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   EnumDescriptorProtoEnumReservedRange as GoogleProtobufEnumDescriptorProtoEnumReservedRange,
   type IEnumDescriptorProtoEnumReservedRange as IGoogleProtobufEnumDescriptorProtoEnumReservedRange,
   type TEnumDescriptorProtoEnumReservedRange as TGoogleProtobufEnumDescriptorProtoEnumReservedRange,
-} from './EnumDescriptorProto.EnumReservedRange';
+} from "./EnumDescriptorProto.EnumReservedRange";
 
 import {
   EnumOptions as GoogleProtobufEnumOptions,
   type IEnumOptions as IGoogleProtobufEnumOptions,
   type TEnumOptions as TGoogleProtobufEnumOptions,
-} from './EnumOptions';
+} from "./EnumOptions";
 
 import {
   EnumValueDescriptorProto as GoogleProtobufEnumValueDescriptorProto,
   type IEnumValueDescriptorProto as IGoogleProtobufEnumValueDescriptorProto,
   type TEnumValueDescriptorProto as TGoogleProtobufEnumValueDescriptorProto,
-} from './EnumValueDescriptorProto';
+} from "./EnumValueDescriptorProto";
+
+import { ARRAY, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IEnumDescriptorProto
@@ -72,109 +68,112 @@ export interface TEnumDescriptorProto {
  *  Describes an enum type.
  */
 export class EnumDescriptorProto extends FieldNode {
+  /**
+   **/
   private _name: STRING;
 
-  private _value: ARRAY<
-    GoogleProtobufEnumValueDescriptorProto,
-    IGoogleProtobufEnumValueDescriptorProto
-  >;
+  /**
+   **/
+  private _value: ARRAY<GoogleProtobufEnumValueDescriptorProto, IGoogleProtobufEnumValueDescriptorProto>;
 
+  /**
+   **/
   private _options: GoogleProtobufEnumOptions;
 
-  //  Range of reserved numeric values. Reserved numeric values may not be used
-  //  by enum values in the same enum declaration. Reserved ranges may not
-  //  overlap.
-  private _reservedRange: ARRAY<
-    GoogleProtobufEnumDescriptorProtoEnumReservedRange,
-    IGoogleProtobufEnumDescriptorProtoEnumReservedRange
-  >;
+  /**
+   * Range of reserved numeric values. Reserved numeric values may not be used
+   * by enum values in the same enum declaration. Reserved ranges may not
+   * overlap.
+   **/
+  private _reservedRange: ARRAY<GoogleProtobufEnumDescriptorProtoEnumReservedRange, IGoogleProtobufEnumDescriptorProtoEnumReservedRange>;
 
-  //  Reserved enum value names, which may not be reused. A given name may only
-  //  be reserved once.
+  /**
+   * Reserved enum value names, which may not be reused. A given name may only
+   * be reserved once.
+   **/
   private _reservedName: ARRAY<STRING, string>;
 
   public __defaultValues: IEnumDescriptorProto;
 
-  constructor(
-    initData?: IEnumDescriptorProto,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IEnumDescriptorProto, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.EnumDescriptorProto';
-    this.__meta.description = 'EnumDescriptorProto Describes an enum type.';
+    this.__meta.typeName = "google.protobuf.EnumDescriptorProto";
+    this.__meta.description = "EnumDescriptorProto Describes an enum type.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'name',
-        protoName: 'name',
+        fieldName: "name",
+        protoName: "name",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'value',
-        protoName: 'value',
+        fieldName: "value",
+        protoName: "value",
         FieldConstructor: GoogleProtobufEnumValueDescriptorProto,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'options',
-        protoName: 'options',
+        fieldName: "options",
+        protoName: "options",
         FieldConstructor: GoogleProtobufEnumOptions,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'reservedRange',
-        protoName: 'reserved_range',
+        fieldName: "reservedRange",
+        protoName: "reserved_range",
         FieldConstructor: GoogleProtobufEnumDescriptorProtoEnumReservedRange,
         constraints: {},
         description:
-          'Range of reserved numeric values. Reserved numeric values may not be used\n by enum values in the same enum declaration. Reserved ranges may not\n overlap.',
+          "Range of reserved numeric values. Reserved numeric values may not be used\n by enum values in the same enum declaration. Reserved ranges may not\n overlap.",
       },
       {
-        fieldName: 'reservedName',
-        protoName: 'reserved_name',
+        fieldName: "reservedName",
+        protoName: "reserved_name",
         FieldConstructor: STRING,
         constraints: {},
-        description:
-          'Reserved enum value names, which may not be reused. A given name may only\n be reserved once.',
+        description: "Reserved enum value names, which may not be reused. A given name may only\n be reserved once.",
       },
     ];
 
     // Initialize the fields
-    this._name = new STRING(undefined, this, 'name');
+    // ---------------------
 
-    this._value = new ARRAY<
-      GoogleProtobufEnumValueDescriptorProto,
-      IGoogleProtobufEnumValueDescriptorProto
-    >(undefined, this, 'value');
+    /**
+     **/
+    this._name = new STRING(undefined, this, "name");
 
-    this._options = new GoogleProtobufEnumOptions(undefined, this, 'options');
+    /**
+     **/
+    this._value = new ARRAY<GoogleProtobufEnumValueDescriptorProto, IGoogleProtobufEnumValueDescriptorProto>(undefined, this, "value");
 
-    //  Range of reserved numeric values. Reserved numeric values may not be used
-    //  by enum values in the same enum declaration. Reserved ranges may not
-    //  overlap.
-    this._reservedRange = new ARRAY<
-      GoogleProtobufEnumDescriptorProtoEnumReservedRange,
-      IGoogleProtobufEnumDescriptorProtoEnumReservedRange
-    >(undefined, this, 'reservedRange');
+    /**
+     **/
+    this._options = new GoogleProtobufEnumOptions(undefined, this, "options");
 
-    //  Reserved enum value names, which may not be reused. A given name may only
-    //  be reserved once.
-    this._reservedName = new ARRAY<STRING, string>(
+    /**
+     *  Range of reserved numeric values. Reserved numeric values may not be used
+     *  by enum values in the same enum declaration. Reserved ranges may not
+     *  overlap.
+     **/
+    this._reservedRange = new ARRAY<GoogleProtobufEnumDescriptorProtoEnumReservedRange, IGoogleProtobufEnumDescriptorProtoEnumReservedRange>(
       undefined,
       this,
-      'reservedName',
+      "reservedRange"
     );
+
+    /**
+     *  Reserved enum value names, which may not be reused. A given name may only
+     *  be reserved once.
+     **/
+    this._reservedName = new ARRAY<STRING, string>(undefined, this, "reservedName");
 
     // Set required fields
     [].forEach(fieldName => {
-      (
-        this[fieldName as keyof EnumDescriptorProto] as FieldNode
-      ).__meta.required = true;
+      (this[fieldName as keyof EnumDescriptorProto] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -189,73 +188,94 @@ export class EnumDescriptorProto extends FieldNode {
 
     // Set readonly fields after the init, so child nodes are readonly too
     [].forEach(fieldName => {
-      (this[fieldName as keyof EnumDescriptorProto] as FieldNode).__readonly =
-        true;
+      (this[fieldName as keyof EnumDescriptorProto] as FieldNode).__readonly = true;
     });
 
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get name(): STRING {
     return this._name;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set name(v: string) {
     this.__PrimitivesSetter(this._name, v);
   }
 
-  public get value(): ARRAY<
-    GoogleProtobufEnumValueDescriptorProto,
-    IGoogleProtobufEnumValueDescriptorProto
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get value(): ARRAY<GoogleProtobufEnumValueDescriptorProto, IGoogleProtobufEnumValueDescriptorProto> {
     return this._value;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufEnumValueDescriptorProto[]`
+   **/
   public set value(v: IGoogleProtobufEnumValueDescriptorProto[]) {
     this.__TypeSetter(this._value, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get options(): GoogleProtobufEnumOptions {
     return this._options;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufEnumOptions`
+   **/
   public set options(v: IGoogleProtobufEnumOptions) {
     this.__TypeSetter(this._options, v);
   }
 
-  //  Range of reserved numeric values. Reserved numeric values may not be used
-  //  by enum values in the same enum declaration. Reserved ranges may not
-  //  overlap.
-  public get reservedRange(): ARRAY<
-    GoogleProtobufEnumDescriptorProtoEnumReservedRange,
-    IGoogleProtobufEnumDescriptorProtoEnumReservedRange
-  > {
+  /**
+   *  Range of reserved numeric values. Reserved numeric values may not be used
+   *  by enum values in the same enum declaration. Reserved ranges may not
+   *  overlap.
+   * The getter receives the FieldNode
+   **/
+  public get reservedRange(): ARRAY<GoogleProtobufEnumDescriptorProtoEnumReservedRange, IGoogleProtobufEnumDescriptorProtoEnumReservedRange> {
     return this._reservedRange;
   }
 
-  public set reservedRange(
-    v: IGoogleProtobufEnumDescriptorProtoEnumReservedRange[],
-  ) {
+  /**
+   * The setter receives `IGoogleProtobufEnumDescriptorProtoEnumReservedRange[]`
+   **/
+  public set reservedRange(v: IGoogleProtobufEnumDescriptorProtoEnumReservedRange[]) {
     this.__TypeSetter(this._reservedRange, v);
   }
 
-  //  Reserved enum value names, which may not be reused. A given name may only
-  //  be reserved once.
+  /**
+   *  Reserved enum value names, which may not be reused. A given name may only
+   *  be reserved once.
+   * The getter receives the FieldNode
+   **/
   public get reservedName(): ARRAY<STRING, string> {
     return this._reservedName;
   }
 
+  /**
+   * The setter receives `string[]`
+   **/
   public set reservedName(v: string[]) {
     this.__TypeSetter(this._reservedName, v);
   }
 
-  fromLiteral(data: IEnumDescriptorProto) {
+  fromLiteral(data: IEnumDescriptorProto): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IEnumDescriptorProto {
-    return super.__toLiteral();
+    return super.__toLiteral() as IEnumDescriptorProto;
   }
 }
 
-Registry.register('google.protobuf.EnumDescriptorProto', EnumDescriptorProto);
+Registry.register("google.protobuf.EnumDescriptorProto", EnumDescriptorProto);

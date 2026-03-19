@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.Any.json",
+  "type": "object",
+  "description": "A container for any message type. The @type field identifies which message type is contained, and the remaining fields are the actual message data. Set @type to the $id of the target schema and include all fields from that schema.",
+  "properties": {
+    "@type": {
+      "type": "string",
+      "description": "The $id of the schema that describes the additional fields in this object."
+    }
+  },
+  "required": [
+    "@type"
+  ],
+  "additionalProperties": true
+}

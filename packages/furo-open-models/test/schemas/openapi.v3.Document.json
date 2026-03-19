@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Document.json",
+  "type": "object",
+  "properties": {
+    "components": {
+      "$ref": "openapi.v3.Components.json"
+    },
+    "externalDocs": {
+      "$ref": "openapi.v3.ExternalDocs.json"
+    },
+    "info": {
+      "$ref": "openapi.v3.Info.json"
+    },
+    "openapi": {
+      "type": "string"
+    },
+    "paths": {
+      "$ref": "openapi.v3.Paths.json"
+    },
+    "security": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.SecurityRequirement.json"
+      }
+    },
+    "servers": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.Server.json"
+      }
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.Tag.json"
+      }
+    }
+  }
+}

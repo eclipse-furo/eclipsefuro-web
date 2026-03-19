@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.api.CustomHttpPattern.json",
+  "type": "object",
+  "description": "A custom pattern is used for defining custom HTTP verb.CustomHttpPattern",
+  "properties": {
+    "kind": {
+      "type": "string",
+      "description": "The name of this custom HTTP verb."
+    },
+    "path": {
+      "type": "string",
+      "description": "The path matched by this custom verb."
+    }
+  }
+}

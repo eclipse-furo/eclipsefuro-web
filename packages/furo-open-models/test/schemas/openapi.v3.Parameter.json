@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Parameter.json",
+  "type": "object",
+  "description": "Describes a single operation parameter.  A unique parameter is defined by a combination of a name and location.Parameter",
+  "properties": {
+    "allowEmptyValue": {
+      "type": "boolean"
+    },
+    "allowReserved": {
+      "type": "boolean"
+    },
+    "content": {
+      "$ref": "openapi.v3.MediaTypes.json"
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "example": {
+      "$ref": "openapi.v3.Any.json"
+    },
+    "examples": {
+      "$ref": "openapi.v3.ExamplesOrReferences.json"
+    },
+    "explode": {
+      "type": "boolean"
+    },
+    "in": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "schema": {
+      "$ref": "openapi.v3.SchemaOrReference.json"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "style": {
+      "type": "string"
+    }
+  }
+}

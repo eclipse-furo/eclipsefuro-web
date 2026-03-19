@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.DescriptorProto.ReservedRange.json",
+  "type": "object",
+  "description": "Range of reserved tag numbers. Reserved tag numbers may not be used by\n fields or extension ranges in the same message. Reserved ranges may\n not overlap.ReservedRange",
+  "properties": {
+    "end": {
+      "type": "integer",
+      "description": "Exclusive."
+    },
+    "start": {
+      "type": "integer",
+      "description": "Inclusive."
+    }
+  }
+}

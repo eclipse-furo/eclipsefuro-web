@@ -2,7 +2,14 @@
 // protoc-gen-open-models version: ????
 
 export enum FieldOptionsCType {
-  STRING = 'STRING',
-  CORD = 'CORD',
-  STRING_PIECE = 'STRING_PIECE',
+  //  Default mode.
+  STRING = "STRING",
+  //  The option [ctype=CORD] may be applied to a non-repeated field of type
+  //  "bytes". It indicates that in C++, the data should be stored in a Cord
+  //  instead of a string.  For very large strings, this may reduce memory
+  //  fragmentation. It may also allow better performance when parsing from a
+  //  Cord, or when parsing with aliasing enabled, as the parsed Cord may then
+  //  alias the original buffer.
+  CORD = "CORD",
+  STRING_PIECE = "STRING_PIECE",
 }

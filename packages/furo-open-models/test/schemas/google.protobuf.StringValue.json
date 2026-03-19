@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.StringValue.json",
+  "type": "object",
+  "description": "Wrapper message for `string`.\n\n The JSON representation for `StringValue` is JSON string.StringValue",
+  "properties": {
+    "value": {
+      "type": "string",
+      "description": "The string value."
+    }
+  }
+}

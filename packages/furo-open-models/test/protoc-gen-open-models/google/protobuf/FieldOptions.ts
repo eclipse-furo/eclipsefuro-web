@@ -2,37 +2,32 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  ENUM,
-  FieldNode,
-  Registry,
-} from '@furo/open-models/dist/index';
-import {
   FeatureSet as GoogleProtobufFeatureSet,
   type IFeatureSet as IGoogleProtobufFeatureSet,
   type TFeatureSet as TGoogleProtobufFeatureSet,
-} from './FeatureSet';
+} from "./FeatureSet";
 
-import { FieldOptionsCType as GoogleProtobufFieldOptionsCType } from './FieldOptions.CType';
+import { FieldOptionsCType as GoogleProtobufFieldOptionsCType } from "./FieldOptions.CType";
 
 import {
   FieldOptionsEditionDefault as GoogleProtobufFieldOptionsEditionDefault,
   type IFieldOptionsEditionDefault as IGoogleProtobufFieldOptionsEditionDefault,
   type TFieldOptionsEditionDefault as TGoogleProtobufFieldOptionsEditionDefault,
-} from './FieldOptions.EditionDefault';
+} from "./FieldOptions.EditionDefault";
 
-import { FieldOptionsJSType as GoogleProtobufFieldOptionsJSType } from './FieldOptions.JSType';
+import { FieldOptionsJSType as GoogleProtobufFieldOptionsJSType } from "./FieldOptions.JSType";
 
-import { FieldOptionsOptionRetention as GoogleProtobufFieldOptionsOptionRetention } from './FieldOptions.OptionRetention';
+import { FieldOptionsOptionRetention as GoogleProtobufFieldOptionsOptionRetention } from "./FieldOptions.OptionRetention";
 
-import { FieldOptionsOptionTargetType as GoogleProtobufFieldOptionsOptionTargetType } from './FieldOptions.OptionTargetType';
+import { FieldOptionsOptionTargetType as GoogleProtobufFieldOptionsOptionTargetType } from "./FieldOptions.OptionTargetType";
 
 import {
   UninterpretedOption as GoogleProtobufUninterpretedOption,
   type IUninterpretedOption as IGoogleProtobufUninterpretedOption,
   type TUninterpretedOption as TGoogleProtobufUninterpretedOption,
-} from './UninterpretedOption';
+} from "./UninterpretedOption";
+
+import { ARRAY, BOOLEAN, ENUM, FieldNode, Registry } from "@furo/open-models/dist/index";
 
 /**
  * @interface IFieldOptions
@@ -248,344 +243,373 @@ export interface TFieldOptions {
  * FieldOptions
  */
 export class FieldOptions extends FieldNode {
-  //  The ctype option instructs the C++ code generator to use a different
-  //  representation of the field than it normally would.  See the specific
-  //  options below.  This option is only implemented to support use of
-  //  [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
-  //  type "bytes" in the open source release -- sorry, we'll try to include
-  //  other types in a future version!
+  /**
+   * The ctype option instructs the C++ code generator to use a different
+   * representation of the field than it normally would.  See the specific
+   * options below.  This option is only implemented to support use of
+   * [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+   * type "bytes" in the open source release -- sorry, we'll try to include
+   * other types in a future version!
+   **/
   private _ctype: ENUM<GoogleProtobufFieldOptionsCType>;
 
-  //  The packed option can be enabled for repeated primitive fields to enable
-  //  a more efficient representation on the wire. Rather than repeatedly
-  //  writing the tag and type for each element, the entire array is encoded as
-  //  a single length-delimited blob. In proto3, only explicit setting it to
-  //  false will avoid using packed encoding.  This option is prohibited in
-  //  Editions, but the `repeated_field_encoding` feature can be used to control
-  //  the behavior.
+  /**
+   * The packed option can be enabled for repeated primitive fields to enable
+   * a more efficient representation on the wire. Rather than repeatedly
+   * writing the tag and type for each element, the entire array is encoded as
+   * a single length-delimited blob. In proto3, only explicit setting it to
+   * false will avoid using packed encoding.  This option is prohibited in
+   * Editions, but the `repeated_field_encoding` feature can be used to control
+   * the behavior.
+   **/
   private _packed: BOOLEAN;
 
-  //  The jstype option determines the JavaScript type used for values of the
-  //  field.  The option is permitted only for 64 bit integral and fixed types
-  //  (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
-  //  is represented as JavaScript string, which avoids loss of precision that
-  //  can happen when a large value is converted to a floating point JavaScript.
-  //  Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
-  //  use the JavaScript "number" type.  The behavior of the default option
-  //  JS_NORMAL is implementation dependent.
-  //
-  //  This option is an enum to permit additional types to be added, e.g.
-  //  goog.math.Integer.
+  /**
+   * The jstype option determines the JavaScript type used for values of the
+   * field.  The option is permitted only for 64 bit integral and fixed types
+   * (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
+   * is represented as JavaScript string, which avoids loss of precision that
+   * can happen when a large value is converted to a floating point JavaScript.
+   * Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
+   * use the JavaScript "number" type.  The behavior of the default option
+   * JS_NORMAL is implementation dependent.
+   *
+   * This option is an enum to permit additional types to be added, e.g.
+   * goog.math.Integer.
+   **/
   private _jstype: ENUM<GoogleProtobufFieldOptionsJSType>;
 
-  //  Should this field be parsed lazily?  Lazy applies only to message-type
-  //  fields.  It means that when the outer message is initially parsed, the
-  //  inner message's contents will not be parsed but instead stored in encoded
-  //  form.  The inner message will actually be parsed when it is first accessed.
-  //
-  //  This is only a hint.  Implementations are free to choose whether to use
-  //  eager or lazy parsing regardless of the value of this option.  However,
-  //  setting this option true suggests that the protocol author believes that
-  //  using lazy parsing on this field is worth the additional bookkeeping
-  //  overhead typically needed to implement it.
-  //
-  //  This option does not affect the public interface of any generated code;
-  //  all method signatures remain the same.  Furthermore, thread-safety of the
-  //  interface is not affected by this option; const methods remain safe to
-  //  call from multiple threads concurrently, while non-const methods continue
-  //  to require exclusive access.
-  //
-  //  Note that implementations may choose not to check required fields within
-  //  a lazy sub-message.  That is, calling IsInitialized() on the outer message
-  //  may return true even if the inner message has missing required fields.
-  //  This is necessary because otherwise the inner message would have to be
-  //  parsed in order to perform the check, defeating the purpose of lazy
-  //  parsing.  An implementation which chooses not to check required fields
-  //  must be consistent about it.  That is, for any particular sub-message, the
-  //  implementation must either *always* check its required fields, or *never*
-  //  check its required fields, regardless of whether or not the message has
-  //  been parsed.
-  //
-  //  As of May 2022, lazy verifies the contents of the byte stream during
-  //  parsing.  An invalid byte stream will cause the overall parsing to fail.
+  /**
+   * Should this field be parsed lazily?  Lazy applies only to message-type
+   * fields.  It means that when the outer message is initially parsed, the
+   * inner message's contents will not be parsed but instead stored in encoded
+   * form.  The inner message will actually be parsed when it is first accessed.
+   *
+   * This is only a hint.  Implementations are free to choose whether to use
+   * eager or lazy parsing regardless of the value of this option.  However,
+   * setting this option true suggests that the protocol author believes that
+   * using lazy parsing on this field is worth the additional bookkeeping
+   * overhead typically needed to implement it.
+   *
+   * This option does not affect the public interface of any generated code;
+   * all method signatures remain the same.  Furthermore, thread-safety of the
+   * interface is not affected by this option; const methods remain safe to
+   * call from multiple threads concurrently, while non-const methods continue
+   * to require exclusive access.
+   *
+   * Note that implementations may choose not to check required fields within
+   * a lazy sub-message.  That is, calling IsInitialized() on the outer message
+   * may return true even if the inner message has missing required fields.
+   * This is necessary because otherwise the inner message would have to be
+   * parsed in order to perform the check, defeating the purpose of lazy
+   * parsing.  An implementation which chooses not to check required fields
+   * must be consistent about it.  That is, for any particular sub-message, the
+   * implementation must either *always* check its required fields, or *never*
+   * check its required fields, regardless of whether or not the message has
+   * been parsed.
+   *
+   * As of May 2022, lazy verifies the contents of the byte stream during
+   * parsing.  An invalid byte stream will cause the overall parsing to fail.
+   **/
   private _lazy: BOOLEAN;
 
-  //  unverified_lazy does no correctness checks on the byte stream. This should
-  //  only be used where lazy with verification is prohibitive for performance
-  //  reasons.
+  /**
+   * unverified_lazy does no correctness checks on the byte stream. This should
+   * only be used where lazy with verification is prohibitive for performance
+   * reasons.
+   **/
   private _unverifiedLazy: BOOLEAN;
 
-  //  Is this field deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for accessors, or it will be completely ignored; in the very least, this
-  //  is a formalization for deprecating fields.
+  /**
+   * Is this field deprecated?
+   * Depending on the target platform, this can emit Deprecated annotations
+   * for accessors, or it will be completely ignored; in the very least, this
+   * is a formalization for deprecating fields.
+   **/
   private _deprecated: BOOLEAN;
 
-  //  For Google-internal migration only. Do not use.
+  /**
+   * For Google-internal migration only. Do not use.
+   **/
   private _weak: BOOLEAN;
 
-  //  Indicate that the field value should not be printed out when using debug
-  //  formats, e.g. when the field contains sensitive credentials.
+  /**
+   * Indicate that the field value should not be printed out when using debug
+   * formats, e.g. when the field contains sensitive credentials.
+   **/
   private _debugRedact: BOOLEAN;
 
+  /**
+   **/
   private _retention: ENUM<GoogleProtobufFieldOptionsOptionRetention>;
 
+  /**
+   **/
   private _targets: ENUM<GoogleProtobufFieldOptionsOptionTargetType>;
 
-  private _editionDefaults: ARRAY<
-    GoogleProtobufFieldOptionsEditionDefault,
-    IGoogleProtobufFieldOptionsEditionDefault
-  >;
+  /**
+   **/
+  private _editionDefaults: ARRAY<GoogleProtobufFieldOptionsEditionDefault, IGoogleProtobufFieldOptionsEditionDefault>;
 
-  //  Any features defined in the specific edition.
+  /**
+   * Any features defined in the specific edition.
+   **/
   private _features: GoogleProtobufFeatureSet;
 
-  //  The parser stores options it doesn't recognize here. See above.
-  private _uninterpretedOption: ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  >;
+  /**
+   * The parser stores options it doesn't recognize here. See above.
+   **/
+  private _uninterpretedOption: ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>;
 
   public __defaultValues: IFieldOptions;
 
-  constructor(
-    initData?: IFieldOptions,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IFieldOptions, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'google.protobuf.FieldOptions';
-    this.__meta.description = 'FieldOptions';
+    this.__meta.typeName = "google.protobuf.FieldOptions";
+    this.__meta.description = "FieldOptions";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'ctype',
-        protoName: 'ctype',
+        fieldName: "ctype",
+        protoName: "ctype",
         FieldConstructor: ENUM<GoogleProtobufFieldOptionsCType>,
         constraints: {},
         description:
           'The ctype option instructs the C++ code generator to use a different\n representation of the field than it normally would.  See the specific\n options below.  This option is only implemented to support use of\n [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of\n type "bytes" in the open source release -- sorry, we\'ll try to include\n other types in a future version!',
       },
       {
-        fieldName: 'packed',
-        protoName: 'packed',
+        fieldName: "packed",
+        protoName: "packed",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'The packed option can be enabled for repeated primitive fields to enable\n a more efficient representation on the wire. Rather than repeatedly\n writing the tag and type for each element, the entire array is encoded as\n a single length-delimited blob. In proto3, only explicit setting it to\n false will avoid using packed encoding.  This option is prohibited in\n Editions, but the `repeated_field_encoding` feature can be used to control\n the behavior.',
+          "The packed option can be enabled for repeated primitive fields to enable\n a more efficient representation on the wire. Rather than repeatedly\n writing the tag and type for each element, the entire array is encoded as\n a single length-delimited blob. In proto3, only explicit setting it to\n false will avoid using packed encoding.  This option is prohibited in\n Editions, but the `repeated_field_encoding` feature can be used to control\n the behavior.",
       },
       {
-        fieldName: 'jstype',
-        protoName: 'jstype',
+        fieldName: "jstype",
+        protoName: "jstype",
         FieldConstructor: ENUM<GoogleProtobufFieldOptionsJSType>,
         constraints: {},
         description:
           'The jstype option determines the JavaScript type used for values of the\n field.  The option is permitted only for 64 bit integral and fixed types\n (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING\n is represented as JavaScript string, which avoids loss of precision that\n can happen when a large value is converted to a floating point JavaScript.\n Specifying JS_NUMBER for the jstype causes the generated JavaScript code to\n use the JavaScript "number" type.  The behavior of the default option\n JS_NORMAL is implementation dependent.\n\n This option is an enum to permit additional types to be added, e.g.\n goog.math.Integer.',
       },
       {
-        fieldName: 'lazy',
-        protoName: 'lazy',
+        fieldName: "lazy",
+        protoName: "lazy",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
           "Should this field be parsed lazily?  Lazy applies only to message-type\n fields.  It means that when the outer message is initially parsed, the\n inner message's contents will not be parsed but instead stored in encoded\n form.  The inner message will actually be parsed when it is first accessed.\n\n This is only a hint.  Implementations are free to choose whether to use\n eager or lazy parsing regardless of the value of this option.  However,\n setting this option true suggests that the protocol author believes that\n using lazy parsing on this field is worth the additional bookkeeping\n overhead typically needed to implement it.\n\n This option does not affect the public interface of any generated code;\n all method signatures remain the same.  Furthermore, thread-safety of the\n interface is not affected by this option; const methods remain safe to\n call from multiple threads concurrently, while non-const methods continue\n to require exclusive access.\n\n Note that implementations may choose not to check required fields within\n a lazy sub-message.  That is, calling IsInitialized() on the outer message\n may return true even if the inner message has missing required fields.\n This is necessary because otherwise the inner message would have to be\n parsed in order to perform the check, defeating the purpose of lazy\n parsing.  An implementation which chooses not to check required fields\n must be consistent about it.  That is, for any particular sub-message, the\n implementation must either *always* check its required fields, or *never*\n check its required fields, regardless of whether or not the message has\n been parsed.\n\n As of May 2022, lazy verifies the contents of the byte stream during\n parsing.  An invalid byte stream will cause the overall parsing to fail.",
       },
       {
-        fieldName: 'unverifiedLazy',
-        protoName: 'unverified_lazy',
+        fieldName: "unverifiedLazy",
+        protoName: "unverified_lazy",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'unverified_lazy does no correctness checks on the byte stream. This should\n only be used where lazy with verification is prohibitive for performance\n reasons.',
+          "unverified_lazy does no correctness checks on the byte stream. This should\n only be used where lazy with verification is prohibitive for performance\n reasons.",
       },
       {
-        fieldName: 'deprecated',
-        protoName: 'deprecated',
+        fieldName: "deprecated",
+        protoName: "deprecated",
         FieldConstructor: BOOLEAN,
         constraints: {},
         description:
-          'Is this field deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for accessors, or it will be completely ignored; in the very least, this\n is a formalization for deprecating fields.',
+          "Is this field deprecated?\n Depending on the target platform, this can emit Deprecated annotations\n for accessors, or it will be completely ignored; in the very least, this\n is a formalization for deprecating fields.",
       },
       {
-        fieldName: 'weak',
-        protoName: 'weak',
+        fieldName: "weak",
+        protoName: "weak",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: 'For Google-internal migration only. Do not use.',
+        description: "For Google-internal migration only. Do not use.",
       },
       {
-        fieldName: 'debugRedact',
-        protoName: 'debug_redact',
+        fieldName: "debugRedact",
+        protoName: "debug_redact",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description:
-          'Indicate that the field value should not be printed out when using debug\n formats, e.g. when the field contains sensitive credentials.',
+        description: "Indicate that the field value should not be printed out when using debug\n formats, e.g. when the field contains sensitive credentials.",
       },
       {
-        fieldName: 'retention',
-        protoName: 'retention',
+        fieldName: "retention",
+        protoName: "retention",
         FieldConstructor: ENUM<GoogleProtobufFieldOptionsOptionRetention>,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'targets',
-        protoName: 'targets',
+        fieldName: "targets",
+        protoName: "targets",
         FieldConstructor: ENUM<GoogleProtobufFieldOptionsOptionTargetType>,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'editionDefaults',
-        protoName: 'edition_defaults',
+        fieldName: "editionDefaults",
+        protoName: "edition_defaults",
         FieldConstructor: GoogleProtobufFieldOptionsEditionDefault,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'features',
-        protoName: 'features',
+        fieldName: "features",
+        protoName: "features",
         FieldConstructor: GoogleProtobufFeatureSet,
         constraints: {},
-        description: 'Any features defined in the specific edition.',
+        description: "Any features defined in the specific edition.",
       },
       {
-        fieldName: 'uninterpretedOption',
-        protoName: 'uninterpreted_option',
+        fieldName: "uninterpretedOption",
+        protoName: "uninterpreted_option",
         FieldConstructor: GoogleProtobufUninterpretedOption,
         constraints: {},
-        description:
-          "The parser stores options it doesn't recognize here. See above.",
+        description: "The parser stores options it doesn't recognize here. See above.",
       },
     ];
 
     // Initialize the fields
-    //  The ctype option instructs the C++ code generator to use a different
-    //  representation of the field than it normally would.  See the specific
-    //  options below.  This option is only implemented to support use of
-    //  [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
-    //  type "bytes" in the open source release -- sorry, we'll try to include
-    //  other types in a future version!
-    this._ctype = new ENUM<GoogleProtobufFieldOptionsCType>(
-      undefined,
-      GoogleProtobufFieldOptionsCType,
-      GoogleProtobufFieldOptionsCType.STRING,
-      this,
-      'ctype',
-    );
+    // ---------------------
 
-    //  The packed option can be enabled for repeated primitive fields to enable
-    //  a more efficient representation on the wire. Rather than repeatedly
-    //  writing the tag and type for each element, the entire array is encoded as
-    //  a single length-delimited blob. In proto3, only explicit setting it to
-    //  false will avoid using packed encoding.  This option is prohibited in
-    //  Editions, but the `repeated_field_encoding` feature can be used to control
-    //  the behavior.
-    this._packed = new BOOLEAN(undefined, this, 'packed');
+    /**
+     *  The ctype option instructs the C++ code generator to use a different
+     *  representation of the field than it normally would.  See the specific
+     *  options below.  This option is only implemented to support use of
+     *  [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+     *  type "bytes" in the open source release -- sorry, we'll try to include
+     *  other types in a future version!
+     **/
+    this._ctype = new ENUM<GoogleProtobufFieldOptionsCType>(undefined, GoogleProtobufFieldOptionsCType, GoogleProtobufFieldOptionsCType.STRING, this, "ctype");
 
-    //  The jstype option determines the JavaScript type used for values of the
-    //  field.  The option is permitted only for 64 bit integral and fixed types
-    //  (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
-    //  is represented as JavaScript string, which avoids loss of precision that
-    //  can happen when a large value is converted to a floating point JavaScript.
-    //  Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
-    //  use the JavaScript "number" type.  The behavior of the default option
-    //  JS_NORMAL is implementation dependent.
-    //
-    //  This option is an enum to permit additional types to be added, e.g.
-    //  goog.math.Integer.
+    /**
+     *  The packed option can be enabled for repeated primitive fields to enable
+     *  a more efficient representation on the wire. Rather than repeatedly
+     *  writing the tag and type for each element, the entire array is encoded as
+     *  a single length-delimited blob. In proto3, only explicit setting it to
+     *  false will avoid using packed encoding.  This option is prohibited in
+     *  Editions, but the `repeated_field_encoding` feature can be used to control
+     *  the behavior.
+     **/
+    this._packed = new BOOLEAN(undefined, this, "packed");
+
+    /**
+     *  The jstype option determines the JavaScript type used for values of the
+     *  field.  The option is permitted only for 64 bit integral and fixed types
+     *  (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
+     *  is represented as JavaScript string, which avoids loss of precision that
+     *  can happen when a large value is converted to a floating point JavaScript.
+     *  Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
+     *  use the JavaScript "number" type.  The behavior of the default option
+     *  JS_NORMAL is implementation dependent.
+     *
+     *  This option is an enum to permit additional types to be added, e.g.
+     *  goog.math.Integer.
+     **/
     this._jstype = new ENUM<GoogleProtobufFieldOptionsJSType>(
       undefined,
       GoogleProtobufFieldOptionsJSType,
       GoogleProtobufFieldOptionsJSType.JS_NORMAL,
       this,
-      'jstype',
+      "jstype"
     );
 
-    //  Should this field be parsed lazily?  Lazy applies only to message-type
-    //  fields.  It means that when the outer message is initially parsed, the
-    //  inner message's contents will not be parsed but instead stored in encoded
-    //  form.  The inner message will actually be parsed when it is first accessed.
-    //
-    //  This is only a hint.  Implementations are free to choose whether to use
-    //  eager or lazy parsing regardless of the value of this option.  However,
-    //  setting this option true suggests that the protocol author believes that
-    //  using lazy parsing on this field is worth the additional bookkeeping
-    //  overhead typically needed to implement it.
-    //
-    //  This option does not affect the public interface of any generated code;
-    //  all method signatures remain the same.  Furthermore, thread-safety of the
-    //  interface is not affected by this option; const methods remain safe to
-    //  call from multiple threads concurrently, while non-const methods continue
-    //  to require exclusive access.
-    //
-    //  Note that implementations may choose not to check required fields within
-    //  a lazy sub-message.  That is, calling IsInitialized() on the outer message
-    //  may return true even if the inner message has missing required fields.
-    //  This is necessary because otherwise the inner message would have to be
-    //  parsed in order to perform the check, defeating the purpose of lazy
-    //  parsing.  An implementation which chooses not to check required fields
-    //  must be consistent about it.  That is, for any particular sub-message, the
-    //  implementation must either *always* check its required fields, or *never*
-    //  check its required fields, regardless of whether or not the message has
-    //  been parsed.
-    //
-    //  As of May 2022, lazy verifies the contents of the byte stream during
-    //  parsing.  An invalid byte stream will cause the overall parsing to fail.
-    this._lazy = new BOOLEAN(undefined, this, 'lazy');
+    /**
+     *  Should this field be parsed lazily?  Lazy applies only to message-type
+     *  fields.  It means that when the outer message is initially parsed, the
+     *  inner message's contents will not be parsed but instead stored in encoded
+     *  form.  The inner message will actually be parsed when it is first accessed.
+     *
+     *  This is only a hint.  Implementations are free to choose whether to use
+     *  eager or lazy parsing regardless of the value of this option.  However,
+     *  setting this option true suggests that the protocol author believes that
+     *  using lazy parsing on this field is worth the additional bookkeeping
+     *  overhead typically needed to implement it.
+     *
+     *  This option does not affect the public interface of any generated code;
+     *  all method signatures remain the same.  Furthermore, thread-safety of the
+     *  interface is not affected by this option; const methods remain safe to
+     *  call from multiple threads concurrently, while non-const methods continue
+     *  to require exclusive access.
+     *
+     *  Note that implementations may choose not to check required fields within
+     *  a lazy sub-message.  That is, calling IsInitialized() on the outer message
+     *  may return true even if the inner message has missing required fields.
+     *  This is necessary because otherwise the inner message would have to be
+     *  parsed in order to perform the check, defeating the purpose of lazy
+     *  parsing.  An implementation which chooses not to check required fields
+     *  must be consistent about it.  That is, for any particular sub-message, the
+     *  implementation must either *always* check its required fields, or *never*
+     *  check its required fields, regardless of whether or not the message has
+     *  been parsed.
+     *
+     *  As of May 2022, lazy verifies the contents of the byte stream during
+     *  parsing.  An invalid byte stream will cause the overall parsing to fail.
+     **/
+    this._lazy = new BOOLEAN(undefined, this, "lazy");
 
-    //  unverified_lazy does no correctness checks on the byte stream. This should
-    //  only be used where lazy with verification is prohibitive for performance
-    //  reasons.
-    this._unverifiedLazy = new BOOLEAN(undefined, this, 'unverifiedLazy');
+    /**
+     *  unverified_lazy does no correctness checks on the byte stream. This should
+     *  only be used where lazy with verification is prohibitive for performance
+     *  reasons.
+     **/
+    this._unverifiedLazy = new BOOLEAN(undefined, this, "unverifiedLazy");
 
-    //  Is this field deprecated?
-    //  Depending on the target platform, this can emit Deprecated annotations
-    //  for accessors, or it will be completely ignored; in the very least, this
-    //  is a formalization for deprecating fields.
-    this._deprecated = new BOOLEAN(undefined, this, 'deprecated');
+    /**
+     *  Is this field deprecated?
+     *  Depending on the target platform, this can emit Deprecated annotations
+     *  for accessors, or it will be completely ignored; in the very least, this
+     *  is a formalization for deprecating fields.
+     **/
+    this._deprecated = new BOOLEAN(undefined, this, "deprecated");
 
-    //  For Google-internal migration only. Do not use.
-    this._weak = new BOOLEAN(undefined, this, 'weak');
+    /**
+     *  For Google-internal migration only. Do not use.
+     **/
+    this._weak = new BOOLEAN(undefined, this, "weak");
 
-    //  Indicate that the field value should not be printed out when using debug
-    //  formats, e.g. when the field contains sensitive credentials.
-    this._debugRedact = new BOOLEAN(undefined, this, 'debugRedact');
+    /**
+     *  Indicate that the field value should not be printed out when using debug
+     *  formats, e.g. when the field contains sensitive credentials.
+     **/
+    this._debugRedact = new BOOLEAN(undefined, this, "debugRedact");
 
+    /**
+     **/
     this._retention = new ENUM<GoogleProtobufFieldOptionsOptionRetention>(
       undefined,
       GoogleProtobufFieldOptionsOptionRetention,
       GoogleProtobufFieldOptionsOptionRetention.RETENTION_UNKNOWN,
       this,
-      'retention',
+      "retention"
     );
 
+    /**
+     **/
     this._targets = new ENUM<GoogleProtobufFieldOptionsOptionTargetType>(
       undefined,
       GoogleProtobufFieldOptionsOptionTargetType,
       GoogleProtobufFieldOptionsOptionTargetType.TARGET_TYPE_UNKNOWN,
       this,
-      'targets',
+      "targets"
     );
 
-    this._editionDefaults = new ARRAY<
-      GoogleProtobufFieldOptionsEditionDefault,
-      IGoogleProtobufFieldOptionsEditionDefault
-    >(undefined, this, 'editionDefaults');
+    /**
+     **/
+    this._editionDefaults = new ARRAY<GoogleProtobufFieldOptionsEditionDefault, IGoogleProtobufFieldOptionsEditionDefault>(undefined, this, "editionDefaults");
 
-    //  Any features defined in the specific edition.
-    this._features = new GoogleProtobufFeatureSet(undefined, this, 'features');
+    /**
+     *  Any features defined in the specific edition.
+     **/
+    this._features = new GoogleProtobufFeatureSet(undefined, this, "features");
 
-    //  The parser stores options it doesn't recognize here. See above.
-    this._uninterpretedOption = new ARRAY<
-      GoogleProtobufUninterpretedOption,
-      IGoogleProtobufUninterpretedOption
-    >(undefined, this, 'uninterpretedOption');
+    /**
+     *  The parser stores options it doesn't recognize here. See above.
+     **/
+    this._uninterpretedOption = new ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption>(undefined, this, "uninterpretedOption");
 
     // Set required fields
     [].forEach(fieldName => {
-      (this[fieldName as keyof FieldOptions] as FieldNode).__meta.required =
-        true;
+      (this[fieldName as keyof FieldOptions] as FieldNode).__meta.required = true;
     });
 
     // Default values from openAPI annotations
@@ -606,189 +630,261 @@ export class FieldOptions extends FieldNode {
     this.__meta.isPristine = true;
   }
 
-  //  The ctype option instructs the C++ code generator to use a different
-  //  representation of the field than it normally would.  See the specific
-  //  options below.  This option is only implemented to support use of
-  //  [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
-  //  type "bytes" in the open source release -- sorry, we'll try to include
-  //  other types in a future version!
+  /**
+   *  The ctype option instructs the C++ code generator to use a different
+   *  representation of the field than it normally would.  See the specific
+   *  options below.  This option is only implemented to support use of
+   *  [ctype=CORD] and [ctype=STRING] (the default) on non-repeated fields of
+   *  type "bytes" in the open source release -- sorry, we'll try to include
+   *  other types in a future version!
+   * The getter receives the FieldNode
+   **/
   public get ctype(): ENUM<GoogleProtobufFieldOptionsCType> {
     return this._ctype;
   }
 
+  /**
+   * The setter receives `GoogleProtobufFieldOptionsCType`
+   **/
   public set ctype(v: GoogleProtobufFieldOptionsCType) {
     this.__TypeSetter(this._ctype, v);
   }
 
-  //  The packed option can be enabled for repeated primitive fields to enable
-  //  a more efficient representation on the wire. Rather than repeatedly
-  //  writing the tag and type for each element, the entire array is encoded as
-  //  a single length-delimited blob. In proto3, only explicit setting it to
-  //  false will avoid using packed encoding.  This option is prohibited in
-  //  Editions, but the `repeated_field_encoding` feature can be used to control
-  //  the behavior.
+  /**
+   *  The packed option can be enabled for repeated primitive fields to enable
+   *  a more efficient representation on the wire. Rather than repeatedly
+   *  writing the tag and type for each element, the entire array is encoded as
+   *  a single length-delimited blob. In proto3, only explicit setting it to
+   *  false will avoid using packed encoding.  This option is prohibited in
+   *  Editions, but the `repeated_field_encoding` feature can be used to control
+   *  the behavior.
+   * The getter receives the FieldNode
+   **/
   public get packed(): BOOLEAN {
     return this._packed;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set packed(v: boolean) {
     this.__PrimitivesSetter(this._packed, v);
   }
 
-  //  The jstype option determines the JavaScript type used for values of the
-  //  field.  The option is permitted only for 64 bit integral and fixed types
-  //  (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
-  //  is represented as JavaScript string, which avoids loss of precision that
-  //  can happen when a large value is converted to a floating point JavaScript.
-  //  Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
-  //  use the JavaScript "number" type.  The behavior of the default option
-  //  JS_NORMAL is implementation dependent.
-  //
-  //  This option is an enum to permit additional types to be added, e.g.
-  //  goog.math.Integer.
+  /**
+   *  The jstype option determines the JavaScript type used for values of the
+   *  field.  The option is permitted only for 64 bit integral and fixed types
+   *  (int64, uint64, sint64, fixed64, sfixed64).  A field with jstype JS_STRING
+   *  is represented as JavaScript string, which avoids loss of precision that
+   *  can happen when a large value is converted to a floating point JavaScript.
+   *  Specifying JS_NUMBER for the jstype causes the generated JavaScript code to
+   *  use the JavaScript "number" type.  The behavior of the default option
+   *  JS_NORMAL is implementation dependent.
+   *
+   *  This option is an enum to permit additional types to be added, e.g.
+   *  goog.math.Integer.
+   * The getter receives the FieldNode
+   **/
   public get jstype(): ENUM<GoogleProtobufFieldOptionsJSType> {
     return this._jstype;
   }
 
+  /**
+   * The setter receives `GoogleProtobufFieldOptionsJSType`
+   **/
   public set jstype(v: GoogleProtobufFieldOptionsJSType) {
     this.__TypeSetter(this._jstype, v);
   }
 
-  //  Should this field be parsed lazily?  Lazy applies only to message-type
-  //  fields.  It means that when the outer message is initially parsed, the
-  //  inner message's contents will not be parsed but instead stored in encoded
-  //  form.  The inner message will actually be parsed when it is first accessed.
-  //
-  //  This is only a hint.  Implementations are free to choose whether to use
-  //  eager or lazy parsing regardless of the value of this option.  However,
-  //  setting this option true suggests that the protocol author believes that
-  //  using lazy parsing on this field is worth the additional bookkeeping
-  //  overhead typically needed to implement it.
-  //
-  //  This option does not affect the public interface of any generated code;
-  //  all method signatures remain the same.  Furthermore, thread-safety of the
-  //  interface is not affected by this option; const methods remain safe to
-  //  call from multiple threads concurrently, while non-const methods continue
-  //  to require exclusive access.
-  //
-  //  Note that implementations may choose not to check required fields within
-  //  a lazy sub-message.  That is, calling IsInitialized() on the outer message
-  //  may return true even if the inner message has missing required fields.
-  //  This is necessary because otherwise the inner message would have to be
-  //  parsed in order to perform the check, defeating the purpose of lazy
-  //  parsing.  An implementation which chooses not to check required fields
-  //  must be consistent about it.  That is, for any particular sub-message, the
-  //  implementation must either *always* check its required fields, or *never*
-  //  check its required fields, regardless of whether or not the message has
-  //  been parsed.
-  //
-  //  As of May 2022, lazy verifies the contents of the byte stream during
-  //  parsing.  An invalid byte stream will cause the overall parsing to fail.
+  /**
+   *  Should this field be parsed lazily?  Lazy applies only to message-type
+   *  fields.  It means that when the outer message is initially parsed, the
+   *  inner message's contents will not be parsed but instead stored in encoded
+   *  form.  The inner message will actually be parsed when it is first accessed.
+   *
+   *  This is only a hint.  Implementations are free to choose whether to use
+   *  eager or lazy parsing regardless of the value of this option.  However,
+   *  setting this option true suggests that the protocol author believes that
+   *  using lazy parsing on this field is worth the additional bookkeeping
+   *  overhead typically needed to implement it.
+   *
+   *  This option does not affect the public interface of any generated code;
+   *  all method signatures remain the same.  Furthermore, thread-safety of the
+   *  interface is not affected by this option; const methods remain safe to
+   *  call from multiple threads concurrently, while non-const methods continue
+   *  to require exclusive access.
+   *
+   *  Note that implementations may choose not to check required fields within
+   *  a lazy sub-message.  That is, calling IsInitialized() on the outer message
+   *  may return true even if the inner message has missing required fields.
+   *  This is necessary because otherwise the inner message would have to be
+   *  parsed in order to perform the check, defeating the purpose of lazy
+   *  parsing.  An implementation which chooses not to check required fields
+   *  must be consistent about it.  That is, for any particular sub-message, the
+   *  implementation must either *always* check its required fields, or *never*
+   *  check its required fields, regardless of whether or not the message has
+   *  been parsed.
+   *
+   *  As of May 2022, lazy verifies the contents of the byte stream during
+   *  parsing.  An invalid byte stream will cause the overall parsing to fail.
+   * The getter receives the FieldNode
+   **/
   public get lazy(): BOOLEAN {
     return this._lazy;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set lazy(v: boolean) {
     this.__PrimitivesSetter(this._lazy, v);
   }
 
-  //  unverified_lazy does no correctness checks on the byte stream. This should
-  //  only be used where lazy with verification is prohibitive for performance
-  //  reasons.
+  /**
+   *  unverified_lazy does no correctness checks on the byte stream. This should
+   *  only be used where lazy with verification is prohibitive for performance
+   *  reasons.
+   * The getter receives the FieldNode
+   **/
   public get unverifiedLazy(): BOOLEAN {
     return this._unverifiedLazy;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set unverifiedLazy(v: boolean) {
     this.__PrimitivesSetter(this._unverifiedLazy, v);
   }
 
-  //  Is this field deprecated?
-  //  Depending on the target platform, this can emit Deprecated annotations
-  //  for accessors, or it will be completely ignored; in the very least, this
-  //  is a formalization for deprecating fields.
+  /**
+   *  Is this field deprecated?
+   *  Depending on the target platform, this can emit Deprecated annotations
+   *  for accessors, or it will be completely ignored; in the very least, this
+   *  is a formalization for deprecating fields.
+   * The getter receives the FieldNode
+   **/
   public get deprecated(): BOOLEAN {
     return this._deprecated;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set deprecated(v: boolean) {
     this.__PrimitivesSetter(this._deprecated, v);
   }
 
-  //  For Google-internal migration only. Do not use.
+  /**
+   *  For Google-internal migration only. Do not use.
+   * The getter receives the FieldNode
+   **/
   public get weak(): BOOLEAN {
     return this._weak;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set weak(v: boolean) {
     this.__PrimitivesSetter(this._weak, v);
   }
 
-  //  Indicate that the field value should not be printed out when using debug
-  //  formats, e.g. when the field contains sensitive credentials.
+  /**
+   *  Indicate that the field value should not be printed out when using debug
+   *  formats, e.g. when the field contains sensitive credentials.
+   * The getter receives the FieldNode
+   **/
   public get debugRedact(): BOOLEAN {
     return this._debugRedact;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set debugRedact(v: boolean) {
     this.__PrimitivesSetter(this._debugRedact, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get retention(): ENUM<GoogleProtobufFieldOptionsOptionRetention> {
     return this._retention;
   }
 
+  /**
+   * The setter receives `GoogleProtobufFieldOptionsOptionRetention`
+   **/
   public set retention(v: GoogleProtobufFieldOptionsOptionRetention) {
     this.__TypeSetter(this._retention, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get targets(): ENUM<GoogleProtobufFieldOptionsOptionTargetType> {
     return this._targets;
   }
 
+  /**
+   * The setter receives `GoogleProtobufFieldOptionsOptionTargetType`
+   **/
   public set targets(v: GoogleProtobufFieldOptionsOptionTargetType) {
     this.__TypeSetter(this._targets, v);
   }
 
-  public get editionDefaults(): ARRAY<
-    GoogleProtobufFieldOptionsEditionDefault,
-    IGoogleProtobufFieldOptionsEditionDefault
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get editionDefaults(): ARRAY<GoogleProtobufFieldOptionsEditionDefault, IGoogleProtobufFieldOptionsEditionDefault> {
     return this._editionDefaults;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFieldOptionsEditionDefault[]`
+   **/
   public set editionDefaults(v: IGoogleProtobufFieldOptionsEditionDefault[]) {
     this.__TypeSetter(this._editionDefaults, v);
   }
 
-  //  Any features defined in the specific edition.
+  /**
+   *  Any features defined in the specific edition.
+   * The getter receives the FieldNode
+   **/
   public get features(): GoogleProtobufFeatureSet {
     return this._features;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufFeatureSet`
+   **/
   public set features(v: IGoogleProtobufFeatureSet) {
     this.__TypeSetter(this._features, v);
   }
 
-  //  The parser stores options it doesn't recognize here. See above.
-  public get uninterpretedOption(): ARRAY<
-    GoogleProtobufUninterpretedOption,
-    IGoogleProtobufUninterpretedOption
-  > {
+  /**
+   *  The parser stores options it doesn't recognize here. See above.
+   * The getter receives the FieldNode
+   **/
+  public get uninterpretedOption(): ARRAY<GoogleProtobufUninterpretedOption, IGoogleProtobufUninterpretedOption> {
     return this._uninterpretedOption;
   }
 
+  /**
+   * The setter receives `IGoogleProtobufUninterpretedOption[]`
+   **/
   public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[]) {
     this.__TypeSetter(this._uninterpretedOption, v);
   }
 
-  fromLiteral(data: IFieldOptions) {
+  fromLiteral(data: IFieldOptions): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IFieldOptions {
-    return super.__toLiteral();
+    return super.__toLiteral() as IFieldOptions;
   }
 }
 
-Registry.register('google.protobuf.FieldOptions', FieldOptions);
+Registry.register("google.protobuf.FieldOptions", FieldOptions);

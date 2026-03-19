@@ -1,15 +1,15 @@
-import { html, css, LitElement } from 'lit';
+import { html, css, LitElement } from "lit";
 // eslint-disable-next-line import/extensions
-import { property } from 'lit/decorators.js';
-import { LitFBP } from '@furo/fbp/dist/LitFBP';
+import { property } from "lit/decorators.js";
+import { LitFBP } from "@furo/fbp/dist/LitFBP";
 
-import '../protoc-gen-open-models/init';
+import "../protoc-gen-open-models/init";
 
-import './form-string.js';
-import './form-furo-type-defaults';
-import './form-number';
-import { Defaults } from '../protoc-gen-open-models/furo/type/Defaults';
-import { Numeric } from '../protoc-gen-open-models/furo/type/Numeric';
+import "./form-string.js";
+import "./form-furo-type-defaults";
+import "./form-number";
+import { Defaults } from "../protoc-gen-open-models/furo/type/Defaults";
+import { Numeric } from "../protoc-gen-open-models/furo/type/Numeric";
 
 /**
  * ### Description
@@ -25,7 +25,7 @@ export class pageIndex extends LitFBP(LitElement) {
 
   private ftn: Numeric;
 
-  @property({ type: Boolean, attribute: 'invalid', reflect: true })
+  @property({ type: Boolean, attribute: "invalid", reflect: true })
   // eslint-disable-next-line lit/no-classfield-shadowing
   invalid: boolean = false;
 
@@ -34,25 +34,15 @@ export class pageIndex extends LitFBP(LitElement) {
 
     this.ftd = new Defaults();
 
-    this.ftd.repeatedDecimal = [
-      { value: '12' },
-      { value: '14' },
-      { value: '33' },
-    ];
+    this.ftd.repeatedDecimal = [{ value: "12" }, { value: "14" }, { value: "33" }];
 
-    this.ftd.decRange = { start: { value: '12' }, end: { value: '13' } };
-    this.ftd.__addEventListener('field-value-changed', () => {
+    this.ftd.decRange = { start: { value: "12" }, end: { value: "13" } };
+    this.ftd.__addEventListener("field-value-changed", () => {
       this.requestUpdate();
     });
 
-    this.ftd.__addEventListener('validity-changed', e => {
-      console.log(
-        this.ftd.__isValid,
-        e.detail.__isValid,
-        e.detail.__meta.valueState,
-        e.detail.__meta.stateMessage,
-        e.detail.__meta.typeName,
-      );
+    this.ftd.__addEventListener("validity-changed", e => {
+      console.log(this.ftd.__isValid, e.detail.__isValid, e.detail.__meta.valueState, e.detail.__meta.stateMessage, e.detail.__meta.typeName);
       this.invalid = !this.ftd.__isValid;
     });
 
@@ -60,13 +50,13 @@ export class pageIndex extends LitFBP(LitElement) {
     // numeric
     this.ftn = new Numeric();
 
-    this.ftn.__addEventListener('field-value-changed', () => {
+    this.ftn.__addEventListener("field-value-changed", () => {
       this.requestUpdate();
     });
   }
 
   addRepeatedDecimal() {
-    this.ftd.repeatedDecimal.add({ value: '0' });
+    this.ftd.repeatedDecimal.add({ value: "0" });
   }
 
   validateAll() {
@@ -128,13 +118,9 @@ export class pageIndex extends LitFBP(LitElement) {
       <form-number .fieldNode="${this.ftn.primitiveInt32}"></form-number>
       <form-number .fieldNode="${this.ftn.primitiveInt32}"></form-number>
 
-      ${this.ftn.repeatedPrimitiveInt32.map(
-        v => html` <form-number .fieldNode="${v}"></form-number> `,
-      )}
+      ${this.ftn.repeatedPrimitiveInt32.map(v => html` <form-number .fieldNode="${v}"></form-number> `)}
 
-      ${this.ftn.repeatedPrimitiveInt32.map(
-        v => html` <form-number .fieldNode="${v}"></form-number> `,
-      )}
+      ${this.ftn.repeatedPrimitiveInt32.map(v => html` <form-number .fieldNode="${v}"></form-number> `)}
 
       <button @click="${() => {
         this.ftn.repeatedPrimitiveInt32.add(0);
@@ -158,7 +144,7 @@ export class pageIndex extends LitFBP(LitElement) {
                   <li>
                     <form-number .fieldNode="${v}"></form-number>
                   </li>
-                `,
+                `
               )}
             </ul>
           </td>
@@ -168,7 +154,7 @@ export class pageIndex extends LitFBP(LitElement) {
                 v =>
                   html` <li>
                     <form-number .fieldNode="${v}"></form-number>
-                  </li>`,
+                  </li>`
               )}</li>
             </ul>
           </td>
@@ -180,4 +166,4 @@ export class pageIndex extends LitFBP(LitElement) {
   }
 }
 
-window.customElements.define('page-index', pageIndex);
+window.customElements.define("page-index", pageIndex);

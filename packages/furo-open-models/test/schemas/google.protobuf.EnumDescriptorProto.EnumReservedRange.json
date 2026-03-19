@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.EnumDescriptorProto.EnumReservedRange.json",
+  "type": "object",
+  "description": "Range of reserved numeric values. Reserved values may not be used by\n entries in the same enum. Reserved ranges may not overlap.\n\n Note that this is distinct from DescriptorProto.ReservedRange in that it\n is inclusive such that it can appropriately represent the entire int32\n domain.EnumReservedRange",
+  "properties": {
+    "end": {
+      "type": "integer",
+      "description": "Inclusive."
+    },
+    "start": {
+      "type": "integer",
+      "description": "Inclusive."
+    }
+  }
+}

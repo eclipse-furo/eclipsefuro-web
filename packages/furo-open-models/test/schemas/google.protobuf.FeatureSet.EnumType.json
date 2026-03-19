@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "google.protobuf.FeatureSet.EnumType.json",
+  "type": "string",
+  "enum": [
+    "ENUM_TYPE_UNKNOWN",
+    "OPEN",
+    "CLOSED"
+  ]
+}

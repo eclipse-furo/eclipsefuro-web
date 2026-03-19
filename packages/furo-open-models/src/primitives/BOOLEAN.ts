@@ -1,6 +1,6 @@
-import { FieldNode } from '../FieldNode';
-import { OPEN_MODELS_OPTIONS } from '../OPEN_MODELS_OPTIONS';
-import { Registry } from '../Registry';
+import { FieldNode } from "../FieldNode";
+import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
+import { Registry } from "../Registry";
 
 export class BOOLEAN extends FieldNode {
   get value(): boolean {
@@ -23,28 +23,18 @@ export class BOOLEAN extends FieldNode {
 
   public _value: boolean;
 
-  constructor(
-    initData?: boolean,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: boolean, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
     this.__isPrimitive = true;
     this._value = initData ?? false;
-    this.__meta.typeName = 'primitives.BOOLEAN';
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this.__meta.typeName = "primitives.BOOLEAN";
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
   }
 
   override __updateWithLiteral(v: boolean) {
     this._value = v;
     if (!this._value) {
-      this.__isEmpty = !(
-        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-        OPEN_MODELS_OPTIONS.EmitUnpopulated
-      );
+      this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     } else {
       this.__isEmpty = false;
     }
@@ -53,10 +43,7 @@ export class BOOLEAN extends FieldNode {
 
   protected override ___updateNotEmptyPath() {
     if (!this._value) {
-      this.___isEmpty = !(
-        OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-        OPEN_MODELS_OPTIONS.EmitUnpopulated
-      );
+      this.___isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     } else {
       this.___isEmpty = false;
       super.___updateNotEmptyPath();
@@ -84,14 +71,11 @@ export class BOOLEAN extends FieldNode {
     // only notify when they are changes
     const shouldNotify = this._value;
     this._value = false;
-    this.__isEmpty = !(
-      OPEN_MODELS_OPTIONS.EmitDefaultValues ||
-      OPEN_MODELS_OPTIONS.EmitUnpopulated
-    );
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
     if (shouldNotify && !withoutNotification) {
       this.__notifyFieldValueChange(false);
     }
   }
 }
 
-Registry.register('boolean', BOOLEAN);
+Registry.register("boolean", BOOLEAN);

@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.Header.json",
+  "type": "object",
+  "description": "The Header Object follows the structure of the Parameter Object with the following changes:  1. `name` MUST NOT be specified, it is given in the corresponding `headers` map. 1. `in` MUST NOT be specified, it is implicitly in `header`. 1. All traits that are affected by the location MUST be applicable to a location of `header` (for example, `style`).Header",
+  "properties": {
+    "allowEmptyValue": {
+      "type": "boolean"
+    },
+    "allowReserved": {
+      "type": "boolean"
+    },
+    "content": {
+      "$ref": "openapi.v3.MediaTypes.json"
+    },
+    "deprecated": {
+      "type": "boolean"
+    },
+    "description": {
+      "type": "string"
+    },
+    "example": {
+      "$ref": "openapi.v3.Any.json"
+    },
+    "examples": {
+      "$ref": "openapi.v3.ExamplesOrReferences.json"
+    },
+    "explode": {
+      "type": "boolean"
+    },
+    "required": {
+      "type": "boolean"
+    },
+    "schema": {
+      "$ref": "openapi.v3.SchemaOrReference.json"
+    },
+    "specificationExtension": {
+      "type": "array",
+      "items": {
+        "$ref": "openapi.v3.NamedAny.json"
+      }
+    },
+    "style": {
+      "type": "string"
+    }
+  }
+}

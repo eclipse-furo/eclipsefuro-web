@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "openapi.v3.NamedRequestBodyOrReference.json",
+  "type": "object",
+  "description": "Automatically-generated message used to represent maps of RequestBodyOrReference as ordered (name,value) pairs.NamedRequestBodyOrReference",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Map key"
+    },
+    "value": {
+      "$ref": "openapi.v3.RequestBodyOrReference.json",
+      "description": "Mapped value"
+    }
+  }
+}

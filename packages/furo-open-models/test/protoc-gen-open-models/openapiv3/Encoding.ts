@@ -2,23 +2,14 @@
 // protoc-gen-open-models version: ????
 
 import {
-  ARRAY,
-  BOOLEAN,
-  FieldNode,
-  Registry,
-  STRING,
-} from '@furo/open-models/dist/index';
-import {
   HeadersOrReferences as OpenapiV3HeadersOrReferences,
   type IHeadersOrReferences as IOpenapiV3HeadersOrReferences,
   type THeadersOrReferences as TOpenapiV3HeadersOrReferences,
-} from './HeadersOrReferences';
+} from "./HeadersOrReferences";
 
-import {
-  NamedAny as OpenapiV3NamedAny,
-  type INamedAny as IOpenapiV3NamedAny,
-  type TNamedAny as TOpenapiV3NamedAny,
-} from './NamedAny';
+import { NamedAny as OpenapiV3NamedAny, type INamedAny as IOpenapiV3NamedAny, type TNamedAny as TOpenapiV3NamedAny } from "./NamedAny";
+
+import { ARRAY, BOOLEAN, FieldNode, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface IEncoding
@@ -51,94 +42,108 @@ export interface TEncoding {
  *  A single encoding definition applied to a single schema property.
  */
 export class Encoding extends FieldNode {
+  /**
+   **/
   private _contentType: STRING;
 
+  /**
+   **/
   private _headers: OpenapiV3HeadersOrReferences;
 
+  /**
+   **/
   private _style: STRING;
 
+  /**
+   **/
   private _explode: BOOLEAN;
 
+  /**
+   **/
   private _allowReserved: BOOLEAN;
 
+  /**
+   **/
   private _specificationExtension: ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>;
 
   public __defaultValues: IEncoding;
 
-  constructor(
-    initData?: IEncoding,
-    parent?: FieldNode,
-    parentAttributeName?: string,
-  ) {
+  constructor(initData?: IEncoding, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
-    this.__meta.typeName = 'openapi.v3.Encoding';
-    this.__meta.description =
-      'Encoding A single encoding definition applied to a single schema property.';
+    this.__meta.typeName = "openapi.v3.Encoding";
+    this.__meta.description = "Encoding A single encoding definition applied to a single schema property.";
 
     this.__meta.nodeFields = [
       {
-        fieldName: 'contentType',
-        protoName: 'content_type',
+        fieldName: "contentType",
+        protoName: "content_type",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'headers',
-        protoName: 'headers',
+        fieldName: "headers",
+        protoName: "headers",
         FieldConstructor: OpenapiV3HeadersOrReferences,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'style',
-        protoName: 'style',
+        fieldName: "style",
+        protoName: "style",
         FieldConstructor: STRING,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'explode',
-        protoName: 'explode',
+        fieldName: "explode",
+        protoName: "explode",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'allowReserved',
-        protoName: 'allow_reserved',
+        fieldName: "allowReserved",
+        protoName: "allow_reserved",
         FieldConstructor: BOOLEAN,
         constraints: {},
-        description: '',
+        description: "",
       },
       {
-        fieldName: 'specificationExtension',
-        protoName: 'specification_extension',
+        fieldName: "specificationExtension",
+        protoName: "specification_extension",
         FieldConstructor: OpenapiV3NamedAny,
         constraints: {},
-        description: '',
+        description: "",
       },
     ];
 
     // Initialize the fields
-    this._contentType = new STRING(undefined, this, 'contentType');
+    // ---------------------
 
-    this._headers = new OpenapiV3HeadersOrReferences(
-      undefined,
-      this,
-      'headers',
-    );
+    /**
+     **/
+    this._contentType = new STRING(undefined, this, "contentType");
 
-    this._style = new STRING(undefined, this, 'style');
+    /**
+     **/
+    this._headers = new OpenapiV3HeadersOrReferences(undefined, this, "headers");
 
-    this._explode = new BOOLEAN(undefined, this, 'explode');
+    /**
+     **/
+    this._style = new STRING(undefined, this, "style");
 
-    this._allowReserved = new BOOLEAN(undefined, this, 'allowReserved');
+    /**
+     **/
+    this._explode = new BOOLEAN(undefined, this, "explode");
 
-    this._specificationExtension = new ARRAY<
-      OpenapiV3NamedAny,
-      IOpenapiV3NamedAny
-    >(undefined, this, 'specificationExtension');
+    /**
+     **/
+    this._allowReserved = new BOOLEAN(undefined, this, "allowReserved");
+
+    /**
+     **/
+    this._specificationExtension = new ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny>(undefined, this, "specificationExtension");
 
     // Set required fields
     [].forEach(fieldName => {
@@ -163,64 +168,97 @@ export class Encoding extends FieldNode {
     this.__meta.isPristine = true;
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get contentType(): STRING {
     return this._contentType;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set contentType(v: string) {
     this.__PrimitivesSetter(this._contentType, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get headers(): OpenapiV3HeadersOrReferences {
     return this._headers;
   }
 
+  /**
+   * The setter receives `IOpenapiV3HeadersOrReferences`
+   **/
   public set headers(v: IOpenapiV3HeadersOrReferences) {
     this.__TypeSetter(this._headers, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get style(): STRING {
     return this._style;
   }
 
+  /**
+   * The setter receives `string`
+   **/
   public set style(v: string) {
     this.__PrimitivesSetter(this._style, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get explode(): BOOLEAN {
     return this._explode;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set explode(v: boolean) {
     this.__PrimitivesSetter(this._explode, v);
   }
 
+  /**
+   * The getter receives the FieldNode
+   **/
   public get allowReserved(): BOOLEAN {
     return this._allowReserved;
   }
 
+  /**
+   * The setter receives `boolean`
+   **/
   public set allowReserved(v: boolean) {
     this.__PrimitivesSetter(this._allowReserved, v);
   }
 
-  public get specificationExtension(): ARRAY<
-    OpenapiV3NamedAny,
-    IOpenapiV3NamedAny
-  > {
+  /**
+   * The getter receives the FieldNode
+   **/
+  public get specificationExtension(): ARRAY<OpenapiV3NamedAny, IOpenapiV3NamedAny> {
     return this._specificationExtension;
   }
 
+  /**
+   * The setter receives `IOpenapiV3NamedAny[]`
+   **/
   public set specificationExtension(v: IOpenapiV3NamedAny[]) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 
-  fromLiteral(data: IEncoding) {
+  fromLiteral(data: IEncoding): void {
     super.__fromLiteral(data);
   }
 
   toLiteral(): IEncoding {
-    return super.__toLiteral();
+    return super.__toLiteral() as IEncoding;
   }
 }
 
-Registry.register('openapi.v3.Encoding', Encoding);
+Registry.register("openapi.v3.Encoding", Encoding);
