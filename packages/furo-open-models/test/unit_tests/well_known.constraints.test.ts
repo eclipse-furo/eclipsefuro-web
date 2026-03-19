@@ -1,4 +1,5 @@
-import { expect } from "vitest";
+// eslint-disable-next-line import-x/no-extraneous-dependencies
+import { expect , it, describe } from "vitest";
 
 import { Int32Value } from "@furo/open-models/dist/well_known/Int32Value";
 import { ConstraintWrappers } from "../protoc-gen-open-models/furo/type/ConstraintWrappers";
