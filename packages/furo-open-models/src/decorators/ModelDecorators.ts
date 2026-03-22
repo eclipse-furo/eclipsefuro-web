@@ -231,11 +231,26 @@ function patchBindLifecycle(ctor: typeof ReactiveElement): void {
       const field = path ? getFieldForPath(model, path) : model;
 
       const listener = () => {
+        if (path) {
+          if (path.startsWith("__")) {
+            // Meta properties like __isValid
+            (this as unknown as Record<string, unknown>)[propKey] = (model as unknown as Record<string, unknown>)[path];
+          } else {
+            // Field paths - navigate to the field and read its value
+            const targetField = path.includes(".")
+              ? model.__getFieldNodeByPath?.(path)
+              : (model as unknown as Record<string, FieldNodeLike>)[path];
+            if (targetField && "value" in targetField) {
+              (this as unknown as Record<string, unknown>)[propKey] = targetField.value;
+            }
+          }
+        }
         this.requestUpdate();
       };
 
       listeners.set(propKey, { listener, field, eventType });
       field.__addEventListener(eventType, listener);
+      listener(); // sync initial value
     });
   };
 

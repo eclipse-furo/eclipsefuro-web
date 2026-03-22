@@ -33,6 +33,7 @@ export { BytesValue } from "./well_known/BytesValue";
 export { StringValue } from "./well_known/StringValue";
 export { Timestamp } from "./well_known/Timestamp";
 export { Struct } from "./well_known/Struct";
+export { ListValue } from "./well_known/ListValue";
 
 export type { JSONValue } from "./well_known/Struct";
 export type { JSONObject } from "./well_known/Struct";
