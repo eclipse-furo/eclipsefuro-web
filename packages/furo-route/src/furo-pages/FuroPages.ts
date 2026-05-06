@@ -8,7 +8,9 @@ interface FBPElement extends LitElement {
 }
 
 function isFuroPage(object: unknown): object is FuroPage {
-  return typeof object === "object" && object !== null && "onPageActivated" in object;
+  return typeof object === "object"
+    && object !== null
+    && "onPageActivated" in object;
 }
 
 /**
@@ -226,7 +228,11 @@ export class FuroPages extends LitElement {
       if (this.isWebComponent(this._lastPage.localName) && isFuroPage(this._lastPage)) {
         const lp = this._lastPage as FuroPage;
         void customElements.whenDefined(this._lastPage.localName).then(() => {
-          lp.onPageDeactivated(location);
+          // sometimes users only define onPageActivated without implements FuroPage
+          // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+          if(lp.onPageDeactivated !== undefined){
+            lp.onPageDeactivated(location);
+          }
         });
       }
 

@@ -1,70 +1,106 @@
-{
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "furo.cube.CubeDefinition.json",
-  "type": "object",
-  "description": "CubeDefinition is a definition of a cube.CubeDefinition | IMPORTANT: This message contains mutually exclusive field groups defined in x-oneof. Each x-oneof entry has a 'name' (the group name) and 'fields' (the field names). You must set exactly ONE field from each group, not multiple. Setting multiple fields from the same group will cause data loss.",
-  "properties": {
-    "breadth": {
-      "type": "number",
-      "description": "the breadth / width of the cube in cm",
-      "maximum": 1000,
-      "minimum": 100,
-      "default": 100
+  {
+    "$schema": "https://json-schema.org/draft/2020-12/schema",
+    "$id": "furo.cube.CubeDefinition.json",
+    "type": "object",
+    "description": "CubeDefinition is a definition of a cube.CubeDefinition | IMPORTANT: This message contains mutually exclusive field groups defined in x-oneof. Each x-oneof entry has a 'name' (the group name) and 'fields' (the field names). You must set exactly ONE field from each group, not multiple. Setting multiple fields from the same group will cause data loss.",
+    "properties": {
+      "breadth": {
+        "type": "number",
+        "description": "the breadth / width of the cube in cm",
+        "maximum": 1000,
+        "minimum": 100,
+        "default": 100
+      },
+      "colour": {
+        "description": "the color of the cube",
+        "properties": {
+          "alpha": {
+            "type": "number",
+            "maximum": 1,
+            "default": 1
+          },
+          "blue": {
+            "type": "integer",
+            "description": "the blue part of the color",
+            "maximum": 255,
+            "default": 88
+          },
+          "green": {
+            "type": "integer",
+            "description": "the green part of the color",
+            "maximum": 255,
+            "default": 34
+          },
+          "red": {
+            "type": "integer",
+            "description": "the red part of the color",
+            "maximum": 255,
+            "default": 22
+          }
+        }
+      },
+      "height": {
+        "type": "number",
+        "description": "the height of the cube in cm",
+        "maximum": 1000,
+        "minimum": 100,
+        "default": 100
+      },
+      "intNumber": {
+        "type": "integer"
+      },
+      "length": {
+        "type": "number",
+        "description": "the length of the cube in cm",
+        "maximum": 1000,
+        "minimum": 100,
+        "default": 100
+      },
+      "material": {
+        "type": "string",
+        "description": "The material the cube is made of" ,
+        "enum": [
+          "MATERIALS_UNSPECIFIED",
+          "MATERIALS_GLASS",
+          "MATERIALS_WOOD",
+          "MATERIALS_CERAMICS",
+          "MATERIALS_METALS",
+          "MATERIALS_PLASTICS",
+          "MATERIALS_TEXTILES",
+          "MATERIALS_LEATHER",
+          "MATERIALS_PAPER",
+          "MATERIALS_RUBBER"
+        ]
+      },
+      "name": {
+        "type": "string"
+      },
+      "otherName": {
+        "type": "string"
+      },
+      "subMessage": {
+        "$ref": "furo.cube.Colour.json"
+      }
     },
-    "colour": {
-      "$ref": "furo.cube.Colour.json",
-      "description": "the color of the cube"
-    },
-    "height": {
-      "type": "number",
-      "description": "the height of the cube in cm",
-      "maximum": 1000,
-      "minimum": 100,
-      "default": 100
-    },
-    "intNumber": {
-      "type": "integer"
-    },
-    "length": {
-      "type": "number",
-      "description": "the length of the cube in cm",
-      "maximum": 1000,
-      "minimum": 100,
-      "default": 100
-    },
-    "material": {
-      "$ref": "furo.cube.Materials.json",
-      "description": "The material the cube is made of"
-    },
-    "name": {
-      "type": "string"
-    },
-    "otherName": {
-      "type": "string"
-    },
-    "subMessage": {
-      "$ref": "furo.cube.Colour.json"
-    }
-  },
-  "required": [
-    "length",
-    "breadth",
-    "height"
-  ],
-  "x-oneof": [
-    {
-      "name": "test_oneof",
-      "fields": [
-        "name",
-        "subMessage"
-      ]
-    },
-    {
-      "name": "other_oneof",
-      "fields": [
-        "otherName",
-        "intNumber"
-      ]
-    }
-  ]
-}
+    "required": [
+      "length",
+      "breadth",
+      "height"
+    ],
+    "x-oneof": [
+      {
+        "name": "test_oneof",
+        "fields": [
+          "name",
+          "subMessage"
+        ]
+      },
+      {
+        "name": "other_oneof",
+        "fields": [
+          "otherName",
+          "intNumber"
+        ]
+      }
+    ]
+  }

@@ -2,7 +2,8 @@
  * Prevents users from leaving the page when they have unsaved changes.
  *
  * When locked, it intercepts in-app navigation events (`__beforeReplaceState`,
- * `__beforeHistoryBack`) and the browser's `beforeunload` event. A confirmation
+ * `__beforeHistoryBack`), native browser history traversals (`popstate`),
+ * and the browser's `beforeunload` event. A confirmation
  * dialog is shown — if the user confirms, the lock auto-unlocks and navigation
  * proceeds. If the user cancels, navigation is blocked.
  *
@@ -45,6 +46,10 @@ export class FuroNavigationLock {
 
   private lockPathChangesOnly = false;
 
+  private _currentHref = "";
+
+  private _currentPath = "";
+
   constructor(message?: string) {
     if (message) {
       this.message = message;
@@ -56,8 +61,11 @@ export class FuroNavigationLock {
    */
   public lock() {
     if (!this._locked) {
+      this._currentHref = window.location.href;
+      this._currentPath = window.location.pathname;
       window.addEventListener("__beforeReplaceState", this._lockHandler, true);
       window.addEventListener("__beforeHistoryBack", this._lockHandler, true);
+      window.addEventListener("popstate", this._popstateHandler, true);
       window.addEventListener("beforeunload", this._unloadHandler, true);
       this._locked = true;
     }
@@ -77,8 +85,11 @@ export class FuroNavigationLock {
   public lockPath() {
     this.lockPathChangesOnly = true;
     if (!this._locked) {
+      this._currentHref = window.location.href;
+      this._currentPath = window.location.pathname;
       window.addEventListener("__beforeReplaceState", this._lockHandler, true);
       window.addEventListener("__beforeHistoryBack", this._lockHandler, true);
+      window.addEventListener("popstate", this._popstateHandler, true);
       window.addEventListener("beforeunload", this._unloadHandler, true);
       this._locked = true;
     }
@@ -92,6 +103,7 @@ export class FuroNavigationLock {
     if (this._locked) {
       window.removeEventListener("__beforeReplaceState", this._lockHandler, true);
       window.removeEventListener("__beforeHistoryBack", this._lockHandler, true);
+      window.removeEventListener("popstate", this._popstateHandler, true);
       window.removeEventListener("beforeunload", this._unloadHandler, true);
       this._locked = false;
       this.lockPathChangesOnly = false;
@@ -110,6 +122,21 @@ export class FuroNavigationLock {
 
     if (!window.confirm(this.message)) {
       e.detail.cancel = true;
+    } else {
+      this.unlock();
+    }
+  };
+
+  private _popstateHandler = () => {
+    // In lockPathChangesOnly mode, allow if path didn't change
+    if (this.lockPathChangesOnly && window.location.pathname === this._currentPath) {
+      this._currentHref = window.location.href;
+      return;
+    }
+
+    if (!window.confirm(this.message)) {
+      // Undo the popstate by pushing the saved URL back
+      window.history.pushState(null, "", this._currentHref);
     } else {
       this.unlock();
     }
