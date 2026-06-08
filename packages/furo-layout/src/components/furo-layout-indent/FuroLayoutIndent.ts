@@ -1,5 +1,4 @@
 import { css, html, LitElement } from "lit";
-// eslint-disable-next-line import/extensions
 import { property } from "lit/decorators.js";
 
 import { BackgroundDesign} from "@/types/BackgroundDesign";
@@ -38,56 +37,56 @@ export class FuroLayoutIndent extends LitElement {
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "block" })
-  public block: boolean = false;
+  public block = false;
 
   /**
    * Adds indentation on block-start  only.
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "block-start" })
-  public blockStart: boolean = false;
+  public blockStart = false;
 
   /**
    * Adds indentation on block-end  only.
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "block-end" })
-  public blockEnd: boolean = false;
+  public blockEnd = false;
 
   /**
    * Adds indentation on inline (left/right) only.
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "inline" })
-  public inline: boolean = false;
+  public inline = false;
 
   /**
    * Adds indentation on inline-start only.
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "inline-start" })
-  public inlineStart: boolean = false;
+  public inlineStart = false;
 
   /**
    * Adds indentation on inline-start only.
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "inline-end" })
-  public inlineEnd: boolean = false;
+  public inlineEnd = false;
 
   /**
    * Adds scrolling behaviour if used inside a `furo-vertical-flex`
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "scroll" })
-  public scrolls: boolean = false;
+  public scrolls = false;
 
   /**
    * Set flex behaviour if used inside a `furo-vertical-flex` / `furo-horizontal-flex`
    * @public
    */
   @property({ type: Boolean, reflect: true, attribute: "flex" })
-  public flex: boolean = false;
+  public flex = false;
 
   override render() {
     return html` <slot></slot>`;

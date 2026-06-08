@@ -1,6 +1,6 @@
 {
   "name": "@furo/layout",
-  "version": "3.0.0-RC.10",
+  "version": "3.0.0-RC.11",
   "description": "Layout components for furo",
   "license": "MIT",
   "type": "module",

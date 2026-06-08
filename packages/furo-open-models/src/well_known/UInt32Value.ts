@@ -4,7 +4,7 @@ import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
 import { Registry } from "../Registry";
 
 export class UInt32Value extends FieldNode {
-  get value(): number {
+  get value(): number | null {
     return this._value!;
   }
 
@@ -20,13 +20,13 @@ export class UInt32Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: number | null = 0;
+  public _value: number | null = null;
 
   constructor(initData?: number, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    this._value = Number.isInteger(initData) ? initData! : 0;
+    this._value = Number.isInteger(initData) ? initData! : null;
     this.__meta.typeName = "google.protobuf.UInt32Value";
   }
 

@@ -4,7 +4,7 @@ import { OPEN_MODELS_OPTIONS } from "../OPEN_MODELS_OPTIONS";
 import { Registry } from "../Registry";
 
 export class Int64Value extends FieldNode {
-  get value(): bigint {
+  get value(): bigint | null {
     return this._value!;
   }
 
@@ -20,13 +20,16 @@ export class Int64Value extends FieldNode {
     this.__notifyFieldValueChange(true);
   }
 
-  public _value: bigint | null = 0n;
+  public _value: bigint | null = null;
 
   constructor(initData?: string, parent?: FieldNode, parentAttributeName?: string) {
     super(undefined, parent, parentAttributeName);
 
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    this._value = BigInt(initData ?? "0");
+    if(initData !== undefined){
+      this._value = BigInt(initData);
+    }
+
     this.__meta.typeName = "google.protobuf.Int64Value";
   }
 
