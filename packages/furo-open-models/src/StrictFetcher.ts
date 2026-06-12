@@ -1,4 +1,5 @@
 import { FieldNode } from "./FieldNode";
+import type { JSONObject } from "@/well_known/Struct";
 
 export interface IApiOptions {
   serverAddr: string;
@@ -20,6 +21,7 @@ interface Handlers<REQ, RES> {
   onResponseParseError?: (error: unknown, serverResponse: Response) => void;
   onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
   onFatalError?: (error: unknown) => void;
+  onRawJsonResponse?: (json: JSONObject) => void;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -98,6 +100,7 @@ export class StrictFetcher<REQ, RES> {
     this.onResponseParseError = handlers.onResponseParseError;
     this.onResponseErrorParseError = handlers.onResponseErrorParseError;
     this.onFatalError = handlers.onFatalError;
+    this.onRawJsonResponse = handlers.onRawJsonResponse;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -276,6 +279,10 @@ export class StrictFetcher<REQ, RES> {
         this.responseHandler.set("application/json", r => {
           r.json()
             .then(json => {
+              if (this.onRawJsonResponse) {
+                this.onRawJsonResponse(json as JSONObject);
+              }
+
               if (this.API_OPTIONS.UseProtoNames) {
                 // Use FieldNode-based conversion instead of generic Mapper
                 const resNode = new this.ResType();
@@ -517,4 +524,5 @@ export class StrictFetcher<REQ, RES> {
   onResponseParseError?: (error: unknown, serverResponse: Response) => void;
   onResponseErrorParseError?: (error: unknown, serverResponse: Response) => void;
   onFatalError?: (error: unknown) => void;
+  onRawJsonResponse?: (json: JSONObject) => void;
 }

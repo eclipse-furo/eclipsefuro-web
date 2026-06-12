@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/JetBrains/web-types/master/schema/web-types.json",
   "name": "@furo/open-models",
-  "version": "1.20.1",
+  "version": "1.20.2",
   "description-markup": "markdown",
   "default-icon": "icon.svg",
   "contributions": {
