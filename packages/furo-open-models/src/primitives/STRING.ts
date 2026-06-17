@@ -9,6 +9,11 @@ export class STRING extends FieldNode {
   }
 
   set value(value: string) {
+    // guard for API responses which sometimes send a null instead of an empty string
+    if (typeof value !== "string") {
+      value = "";
+    }
+
     this._value = value;
     if (this._value === "") {
       this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
@@ -30,6 +35,10 @@ export class STRING extends FieldNode {
   }
 
   override __updateWithLiteral(v: string) {
+    // guard for API responses which sometimes send a null instead of an empty string
+    if (typeof v !== "string") {
+      v = "";
+    }
     this._value = v;
     if (this._value === "") {
       this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);

@@ -8,6 +8,10 @@ export class BOOLEAN extends FieldNode {
   }
 
   set value(value: boolean) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof value !== "boolean") {
+      value = false;
+    }
     this._value = value;
     this.__isEmpty = false;
     this.__climbUpValidation();
@@ -32,6 +36,10 @@ export class BOOLEAN extends FieldNode {
   }
 
   override __updateWithLiteral(v: boolean) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof v !== "boolean") {
+      v = false;
+    }
     this._value = v;
     if (!this._value) {
       this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);

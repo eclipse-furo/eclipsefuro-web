@@ -9,6 +9,10 @@ export class DOUBLE extends FieldNode {
   }
 
   set value(value: number) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof value !== "number") {
+      value = 0;
+    }
     this._value = value;
     this.__isEmpty = false;
     this.__climbUpValidation();
@@ -25,6 +29,10 @@ export class DOUBLE extends FieldNode {
   }
 
   override __updateWithLiteral(v: number) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof v !== "number") {
+      v = 0;
+    }
     this._value = v;
     this.__isEmpty = false;
     this.__notifyFieldValueChange(false);

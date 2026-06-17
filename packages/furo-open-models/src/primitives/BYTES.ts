@@ -9,6 +9,10 @@ export class BYTES extends FieldNode {
   }
 
   set value(value: Uint8Array) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (!(value instanceof Uint8Array)) {
+      value = new Uint8Array();
+    }
     this._value = value;
     if (this._value.length === 0) {
       this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
@@ -30,6 +34,10 @@ export class BYTES extends FieldNode {
   }
 
   override __updateWithLiteral(v: Uint8Array) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (!(v instanceof Uint8Array)) {
+      v = new Uint8Array();
+    }
     this._value = v;
     if (this._value.length === 0) {
       this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);

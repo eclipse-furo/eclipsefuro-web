@@ -9,6 +9,10 @@ export class INT64 extends FieldNode {
   }
 
   set value(value: bigint) {
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof value !== "bigint") {
+      value = 0n;
+    }
     this._value = value;
     this.__isEmpty = false;
     this.__climbUpValidation();
@@ -25,7 +29,12 @@ export class INT64 extends FieldNode {
   }
 
   override __updateWithLiteral(v: string) {
-    this._value = BigInt(v);
+    // guard for API responses which sometimes send a null instead of a value
+    if (typeof v !== "string" && typeof v !== "number" && typeof v !== "bigint") {
+      this._value = 0n;
+    } else {
+      this._value = BigInt(v);
+    }
     this.__isEmpty = false;
     this.__notifyFieldValueChange(false);
   }
