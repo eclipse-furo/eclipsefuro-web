@@ -370,6 +370,13 @@ export class Fetcher<REQ, RES> {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (response) {
+        // No Content / Reset Content carry no body by definition; resolve as an empty
+        // message ({}) without touching the body to avoid parse errors.
+        if (response.status === 204 || response.status === 205) {
+          resolve({});
+          return;
+        }
+
         this.responseHandler.set("text/plain", r => {
           r.text()
             .then(text => {
@@ -392,8 +399,12 @@ export class Fetcher<REQ, RES> {
             });
         });
         this.responseHandler.set("application/json", r => {
-          r.json()
-            .then(json => {
+          r.text()
+            .then(text => {
+              // An empty body is the proto3 JSON representation of google.protobuf.Empty ({}).
+              // r.json() would reject on an empty body, so read text and only parse when non-empty.
+              const trimmed = text.trim();
+              const json = trimmed === "" ? {} : (JSON.parse(trimmed) as unknown);
               // convert to literal type when needed
               resolve(this.API_OPTIONS.UseProtoNames ? deepProtoNameToJsonName(json) : json);
             })
