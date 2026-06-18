@@ -274,6 +274,50 @@ describe("StrictFetcher", () => {
     expect(handlerCalled).toBe(true);
   });
 
+  it("should resolve to {} on 204 No Content with empty body", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(new Response(null, { status: 204 })))
+    );
+
+    const service = new CubeService();
+    const result = await service.Get.invoke({ cubeId: "123" });
+    expect(result).toEqual({});
+  });
+
+  it("should resolve to {} on 200 with no content-type and empty body", async () => {
+    // A string body would auto-set content-type: text/plain; use null to leave it absent.
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(new Response(null, { status: 200 })))
+    );
+
+    const service = new CubeService();
+    const result = await service.Get.invoke({ cubeId: "123" });
+    expect(result).toEqual({});
+  });
+
+  it("should resolve to {} on 200 with application/json content-type and empty body", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(new Response("", { status: 200, headers: { "content-type": "application/json" } })))
+    );
+
+    const service = new CubeService();
+    const result = await service.Get.invoke({ cubeId: "123" });
+    expect(result).toEqual({});
+  });
+
+  it("should still reject on 200 with application/json content-type and malformed body", async () => {
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() => Promise.resolve(new Response("{not json", { status: 200, headers: { "content-type": "application/json" } })))
+    );
+
+    const service = new CubeService();
+    await expect(service.Get.invoke({ cubeId: "123" })).rejects.toBeDefined();
+  });
+
   it("should reject and call onResponseError on 4xx response", async () => {
     API_OPTIONS.UseProtoNames = true;
     OPEN_MODELS_OPTIONS.UseProtoNames = true;
