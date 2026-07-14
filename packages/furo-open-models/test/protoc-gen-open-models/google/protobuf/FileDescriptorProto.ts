@@ -490,9 +490,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufDescriptorProto[]`
+   * The setter receives `IGoogleProtobufDescriptorProto[] | null`
    **/
-  public set messageType(v: IGoogleProtobufDescriptorProto[]) {
+  public set messageType(v: IGoogleProtobufDescriptorProto[] | null) {
     this.__TypeSetter(this._messageType, v);
   }
 
@@ -504,9 +504,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumDescriptorProto[]`
+   * The setter receives `IGoogleProtobufEnumDescriptorProto[] | null`
    **/
-  public set enumType(v: IGoogleProtobufEnumDescriptorProto[]) {
+  public set enumType(v: IGoogleProtobufEnumDescriptorProto[] | null) {
     this.__TypeSetter(this._enumType, v);
   }
 
@@ -518,9 +518,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufServiceDescriptorProto[]`
+   * The setter receives `IGoogleProtobufServiceDescriptorProto[] | null`
    **/
-  public set service(v: IGoogleProtobufServiceDescriptorProto[]) {
+  public set service(v: IGoogleProtobufServiceDescriptorProto[] | null) {
     this.__TypeSetter(this._service, v);
   }
 
@@ -532,9 +532,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFieldDescriptorProto[]`
+   * The setter receives `IGoogleProtobufFieldDescriptorProto[] | null`
    **/
-  public set extension(v: IGoogleProtobufFieldDescriptorProto[]) {
+  public set extension(v: IGoogleProtobufFieldDescriptorProto[] | null) {
     this.__TypeSetter(this._extension, v);
   }
 
@@ -546,9 +546,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFileOptions`
+   * The setter receives `IGoogleProtobufFileOptions | null`
    **/
-  public set options(v: IGoogleProtobufFileOptions) {
+  public set options(v: IGoogleProtobufFileOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 
@@ -564,9 +564,9 @@ export class FileDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufSourceCodeInfo`
+   * The setter receives `IGoogleProtobufSourceCodeInfo | null`
    **/
-  public set sourceCodeInfo(v: IGoogleProtobufSourceCodeInfo) {
+  public set sourceCodeInfo(v: IGoogleProtobufSourceCodeInfo | null) {
     this.__TypeSetter(this._sourceCodeInfo, v);
   }
 

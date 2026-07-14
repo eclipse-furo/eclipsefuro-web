@@ -395,9 +395,9 @@ export class Defaults extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeDecimal[]`
+   * The setter receives `IFuroTypeDecimal[] | null`
    **/
-  public set repeatedDecimal(v: IFuroTypeDecimal[]) {
+  public set repeatedDecimal(v: IFuroTypeDecimal[] | null) {
     this.__TypeSetter(this._repeatedDecimal, v);
   }
 
@@ -409,9 +409,9 @@ export class Defaults extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeDecimalRange`
+   * The setter receives `IFuroTypeDecimalRange | null`
    **/
-  public set decRange(v: IFuroTypeDecimalRange) {
+  public set decRange(v: IFuroTypeDecimalRange | null) {
     this.__TypeSetter(this._decRange, v);
   }
 
@@ -423,9 +423,9 @@ export class Defaults extends FieldNode {
   }
 
   /**
-   * The setter receives `IAny`
+   * The setter receives `IAny | null`
    **/
-  public set any(v: IAny) {
+  public set any(v: IAny | null) {
     this.__TypeSetter(this._any, v);
   }
 
@@ -437,9 +437,9 @@ export class Defaults extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroFatString`
+   * The setter receives `IFuroFatString | null`
    **/
-  public set fatString(v: IFuroFatString) {
+  public set fatString(v: IFuroFatString | null) {
     this.__TypeSetter(this._fatString, v);
   }
 

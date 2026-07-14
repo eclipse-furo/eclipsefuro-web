@@ -86,9 +86,9 @@ export class LinksOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedLinkOrReference[]`
+   * The setter receives `IOpenapiV3NamedLinkOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedLinkOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedLinkOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

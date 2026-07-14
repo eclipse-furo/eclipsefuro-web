@@ -138,9 +138,9 @@ export class NamedServerVariable extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ServerVariable`
+   * The setter receives `IOpenapiV3ServerVariable | null`
    **/
-  public set value(v: IOpenapiV3ServerVariable) {
+  public set value(v: IOpenapiV3ServerVariable | null) {
     this.__TypeSetter(this._value, v);
   }
 

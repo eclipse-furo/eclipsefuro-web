@@ -302,9 +302,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFieldDescriptorProto[]`
+   * The setter receives `IGoogleProtobufFieldDescriptorProto[] | null`
    **/
-  public set field(v: IGoogleProtobufFieldDescriptorProto[]) {
+  public set field(v: IGoogleProtobufFieldDescriptorProto[] | null) {
     this.__TypeSetter(this._field, v);
   }
 
@@ -316,9 +316,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFieldDescriptorProto[]`
+   * The setter receives `IGoogleProtobufFieldDescriptorProto[] | null`
    **/
-  public set extension(v: IGoogleProtobufFieldDescriptorProto[]) {
+  public set extension(v: IGoogleProtobufFieldDescriptorProto[] | null) {
     this.__TypeSetter(this._extension, v);
   }
 
@@ -330,9 +330,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IDescriptorProto[]`
+   * The setter receives `IDescriptorProto[] | null`
    **/
-  public set nestedType(v: IDescriptorProto[]) {
+  public set nestedType(v: IDescriptorProto[] | null) {
     this.__TypeSetter(this._nestedType, v);
   }
 
@@ -344,9 +344,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumDescriptorProto[]`
+   * The setter receives `IGoogleProtobufEnumDescriptorProto[] | null`
    **/
-  public set enumType(v: IGoogleProtobufEnumDescriptorProto[]) {
+  public set enumType(v: IGoogleProtobufEnumDescriptorProto[] | null) {
     this.__TypeSetter(this._enumType, v);
   }
 
@@ -358,9 +358,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufDescriptorProtoExtensionRange[]`
+   * The setter receives `IGoogleProtobufDescriptorProtoExtensionRange[] | null`
    **/
-  public set extensionRange(v: IGoogleProtobufDescriptorProtoExtensionRange[]) {
+  public set extensionRange(v: IGoogleProtobufDescriptorProtoExtensionRange[] | null) {
     this.__TypeSetter(this._extensionRange, v);
   }
 
@@ -372,9 +372,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufOneofDescriptorProto[]`
+   * The setter receives `IGoogleProtobufOneofDescriptorProto[] | null`
    **/
-  public set oneofDecl(v: IGoogleProtobufOneofDescriptorProto[]) {
+  public set oneofDecl(v: IGoogleProtobufOneofDescriptorProto[] | null) {
     this.__TypeSetter(this._oneofDecl, v);
   }
 
@@ -386,9 +386,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufMessageOptions`
+   * The setter receives `IGoogleProtobufMessageOptions | null`
    **/
-  public set options(v: IGoogleProtobufMessageOptions) {
+  public set options(v: IGoogleProtobufMessageOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 
@@ -400,9 +400,9 @@ export class DescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufDescriptorProtoReservedRange[]`
+   * The setter receives `IGoogleProtobufDescriptorProtoReservedRange[] | null`
    **/
-  public set reservedRange(v: IGoogleProtobufDescriptorProtoReservedRange[]) {
+  public set reservedRange(v: IGoogleProtobufDescriptorProtoReservedRange[] | null) {
     this.__TypeSetter(this._reservedRange, v);
   }
 

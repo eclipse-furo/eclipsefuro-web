@@ -105,9 +105,9 @@ export class RequestBodyOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3RequestBody`
+   * The setter receives `IOpenapiV3RequestBody | null`
    **/
-  public set requestBody(v: IOpenapiV3RequestBody) {
+  public set requestBody(v: IOpenapiV3RequestBody | null) {
     this.__TypeSetter(this._requestBody, v);
   }
 
@@ -119,9 +119,9 @@ export class RequestBodyOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Reference`
+   * The setter receives `IOpenapiV3Reference | null`
    **/
-  public set reference(v: IOpenapiV3Reference) {
+  public set reference(v: IOpenapiV3Reference | null) {
     this.__TypeSetter(this._reference, v);
   }
 

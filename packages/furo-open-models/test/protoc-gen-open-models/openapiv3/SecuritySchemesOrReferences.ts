@@ -90,9 +90,9 @@ export class SecuritySchemesOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedSecuritySchemeOrReference[]`
+   * The setter receives `IOpenapiV3NamedSecuritySchemeOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedSecuritySchemeOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedSecuritySchemeOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

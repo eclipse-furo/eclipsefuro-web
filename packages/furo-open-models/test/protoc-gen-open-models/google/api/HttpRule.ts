@@ -1322,9 +1322,9 @@ export class HttpRule extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleApiCustomHttpPattern`
+   * The setter receives `IGoogleApiCustomHttpPattern | null`
    **/
-  public set custom(v: IGoogleApiCustomHttpPattern) {
+  public set custom(v: IGoogleApiCustomHttpPattern | null) {
     this.__TypeSetter(this._custom, v);
   }
 
@@ -1379,9 +1379,9 @@ export class HttpRule extends FieldNode {
   }
 
   /**
-   * The setter receives `IHttpRule[]`
+   * The setter receives `IHttpRule[] | null`
    **/
-  public set additionalBindings(v: IHttpRule[]) {
+  public set additionalBindings(v: IHttpRule[] | null) {
     this.__TypeSetter(this._additionalBindings, v);
   }
 

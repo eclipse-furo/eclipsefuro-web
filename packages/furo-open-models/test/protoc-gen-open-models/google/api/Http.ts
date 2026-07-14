@@ -158,9 +158,9 @@ export class Http extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleApiHttpRule[]`
+   * The setter receives `IGoogleApiHttpRule[] | null`
    **/
-  public set rules(v: IGoogleApiHttpRule[]) {
+  public set rules(v: IGoogleApiHttpRule[] | null) {
     this.__TypeSetter(this._rules, v);
   }
 

@@ -308,9 +308,9 @@ export class SecurityScheme extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3OauthFlows`
+   * The setter receives `IOpenapiV3OauthFlows | null`
    **/
-  public set flows(v: IOpenapiV3OauthFlows) {
+  public set flows(v: IOpenapiV3OauthFlows | null) {
     this.__TypeSetter(this._flows, v);
   }
 
@@ -336,9 +336,9 @@ export class SecurityScheme extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

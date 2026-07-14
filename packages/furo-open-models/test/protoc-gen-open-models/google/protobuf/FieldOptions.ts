@@ -842,9 +842,9 @@ export class FieldOptions extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFieldOptionsEditionDefault[]`
+   * The setter receives `IGoogleProtobufFieldOptionsEditionDefault[] | null`
    **/
-  public set editionDefaults(v: IGoogleProtobufFieldOptionsEditionDefault[]) {
+  public set editionDefaults(v: IGoogleProtobufFieldOptionsEditionDefault[] | null) {
     this.__TypeSetter(this._editionDefaults, v);
   }
 
@@ -857,9 +857,9 @@ export class FieldOptions extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFeatureSet`
+   * The setter receives `IGoogleProtobufFeatureSet | null`
    **/
-  public set features(v: IGoogleProtobufFeatureSet) {
+  public set features(v: IGoogleProtobufFeatureSet | null) {
     this.__TypeSetter(this._features, v);
   }
 
@@ -872,9 +872,9 @@ export class FieldOptions extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufUninterpretedOption[]`
+   * The setter receives `IGoogleProtobufUninterpretedOption[] | null`
    **/
-  public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[]) {
+  public set uninterpretedOption(v: IGoogleProtobufUninterpretedOption[] | null) {
     this.__TypeSetter(this._uninterpretedOption, v);
   }
 

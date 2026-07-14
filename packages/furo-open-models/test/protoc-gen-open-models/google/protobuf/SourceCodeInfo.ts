@@ -312,9 +312,9 @@ export class SourceCodeInfo extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufSourceCodeInfoLocation[]`
+   * The setter receives `IGoogleProtobufSourceCodeInfoLocation[] | null`
    **/
-  public set location(v: IGoogleProtobufSourceCodeInfoLocation[]) {
+  public set location(v: IGoogleProtobufSourceCodeInfoLocation[] | null) {
     this.__TypeSetter(this._location, v);
   }
 

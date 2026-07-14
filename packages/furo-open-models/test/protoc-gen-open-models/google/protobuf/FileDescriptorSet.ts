@@ -92,9 +92,9 @@ export class FileDescriptorSet extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFileDescriptorProto[]`
+   * The setter receives `IGoogleProtobufFileDescriptorProto[] | null`
    **/
-  public set file(v: IGoogleProtobufFileDescriptorProto[]) {
+  public set file(v: IGoogleProtobufFileDescriptorProto[] | null) {
     this.__TypeSetter(this._file, v);
   }
 

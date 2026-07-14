@@ -90,9 +90,9 @@ export class RequestBodiesOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedRequestBodyOrReference[]`
+   * The setter receives `IOpenapiV3NamedRequestBodyOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedRequestBodyOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedRequestBodyOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

@@ -26,7 +26,7 @@ export class Int64Value extends FieldNode {
     super(undefined, parent, parentAttributeName);
 
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    if(initData !== undefined){
+    if (initData !== undefined) {
       this._value = BigInt(initData);
     }
 

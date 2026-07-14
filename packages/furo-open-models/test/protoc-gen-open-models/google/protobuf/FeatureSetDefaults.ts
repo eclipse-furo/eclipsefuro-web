@@ -163,9 +163,9 @@ export class FeatureSetDefaults extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault[]`
+   * The setter receives `IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault[] | null`
    **/
-  public set defaults(v: IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault[]) {
+  public set defaults(v: IGoogleProtobufFeatureSetDefaultsFeatureSetEditionDefault[] | null) {
     this.__TypeSetter(this._defaults, v);
   }
 

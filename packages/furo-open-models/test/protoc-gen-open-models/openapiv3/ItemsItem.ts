@@ -86,9 +86,9 @@ export class ItemsItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   * The setter receives `IOpenapiV3SchemaOrReference[] | null`
    **/
-  public set schemaOrReference(v: IOpenapiV3SchemaOrReference[]) {
+  public set schemaOrReference(v: IOpenapiV3SchemaOrReference[] | null) {
     this.__TypeSetter(this._schemaOrReference, v);
   }
 

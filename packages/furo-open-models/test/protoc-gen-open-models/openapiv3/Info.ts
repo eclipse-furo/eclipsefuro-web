@@ -251,9 +251,9 @@ export class Info extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Contact`
+   * The setter receives `IOpenapiV3Contact | null`
    **/
-  public set contact(v: IOpenapiV3Contact) {
+  public set contact(v: IOpenapiV3Contact | null) {
     this.__TypeSetter(this._contact, v);
   }
 
@@ -265,9 +265,9 @@ export class Info extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3License`
+   * The setter receives `IOpenapiV3License | null`
    **/
-  public set license(v: IOpenapiV3License) {
+  public set license(v: IOpenapiV3License | null) {
     this.__TypeSetter(this._license, v);
   }
 
@@ -293,9 +293,9 @@ export class Info extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

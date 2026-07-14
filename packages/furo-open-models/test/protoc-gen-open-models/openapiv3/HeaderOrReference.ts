@@ -105,9 +105,9 @@ export class HeaderOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Header`
+   * The setter receives `IOpenapiV3Header | null`
    **/
-  public set header(v: IOpenapiV3Header) {
+  public set header(v: IOpenapiV3Header | null) {
     this.__TypeSetter(this._header, v);
   }
 
@@ -119,9 +119,9 @@ export class HeaderOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Reference`
+   * The setter receives `IOpenapiV3Reference | null`
    **/
-  public set reference(v: IOpenapiV3Reference) {
+  public set reference(v: IOpenapiV3Reference | null) {
     this.__TypeSetter(this._reference, v);
   }
 

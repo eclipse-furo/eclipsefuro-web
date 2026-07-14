@@ -246,9 +246,9 @@ export class MethodDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufMethodOptions`
+   * The setter receives `IGoogleProtobufMethodOptions | null`
    **/
-  public set options(v: IGoogleProtobufMethodOptions) {
+  public set options(v: IGoogleProtobufMethodOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 

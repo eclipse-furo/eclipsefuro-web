@@ -139,9 +139,9 @@ export class NamedExampleOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ExampleOrReference`
+   * The setter receives `IOpenapiV3ExampleOrReference | null`
    **/
-  public set value(v: IOpenapiV3ExampleOrReference) {
+  public set value(v: IOpenapiV3ExampleOrReference | null) {
     this.__TypeSetter(this._value, v);
   }
 

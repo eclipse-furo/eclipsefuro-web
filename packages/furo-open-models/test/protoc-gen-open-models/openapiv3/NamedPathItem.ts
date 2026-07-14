@@ -134,9 +134,9 @@ export class NamedPathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3PathItem`
+   * The setter receives `IOpenapiV3PathItem | null`
    **/
-  public set value(v: IOpenapiV3PathItem) {
+  public set value(v: IOpenapiV3PathItem | null) {
     this.__TypeSetter(this._value, v);
   }
 

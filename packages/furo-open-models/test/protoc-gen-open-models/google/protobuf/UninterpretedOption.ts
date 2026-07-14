@@ -220,9 +220,9 @@ export class UninterpretedOption extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufUninterpretedOptionNamePart[]`
+   * The setter receives `IGoogleProtobufUninterpretedOptionNamePart[] | null`
    **/
-  public set name(v: IGoogleProtobufUninterpretedOptionNamePart[]) {
+  public set name(v: IGoogleProtobufUninterpretedOptionNamePart[] | null) {
     this.__TypeSetter(this._name, v);
   }
 

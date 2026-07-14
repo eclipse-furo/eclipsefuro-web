@@ -86,9 +86,9 @@ export class HeadersOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedHeaderOrReference[]`
+   * The setter receives `IOpenapiV3NamedHeaderOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedHeaderOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedHeaderOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

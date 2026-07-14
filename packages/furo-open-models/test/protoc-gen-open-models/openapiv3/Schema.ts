@@ -729,9 +729,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Discriminator`
+   * The setter receives `IOpenapiV3Discriminator | null`
    **/
-  public set discriminator(v: IOpenapiV3Discriminator) {
+  public set discriminator(v: IOpenapiV3Discriminator | null) {
     this.__TypeSetter(this._discriminator, v);
   }
 
@@ -771,9 +771,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Xml`
+   * The setter receives `IOpenapiV3Xml | null`
    **/
-  public set xml(v: IOpenapiV3Xml) {
+  public set xml(v: IOpenapiV3Xml | null) {
     this.__TypeSetter(this._xml, v);
   }
 
@@ -785,9 +785,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ExternalDocs`
+   * The setter receives `IOpenapiV3ExternalDocs | null`
    **/
-  public set externalDocs(v: IOpenapiV3ExternalDocs) {
+  public set externalDocs(v: IOpenapiV3ExternalDocs | null) {
     this.__TypeSetter(this._externalDocs, v);
   }
 
@@ -799,9 +799,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Any`
+   * The setter receives `IOpenapiV3Any | null`
    **/
-  public set example(v: IOpenapiV3Any) {
+  public set example(v: IOpenapiV3Any | null) {
     this.__TypeSetter(this._example, v);
   }
 
@@ -1037,9 +1037,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Any[]`
+   * The setter receives `IOpenapiV3Any[] | null`
    **/
-  public set enum(v: IOpenapiV3Any[]) {
+  public set enum(v: IOpenapiV3Any[] | null) {
     this.__TypeSetter(this._enum, v);
   }
 
@@ -1065,9 +1065,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   * The setter receives `IOpenapiV3SchemaOrReference[] | null`
    **/
-  public set allOf(v: IOpenapiV3SchemaOrReference[]) {
+  public set allOf(v: IOpenapiV3SchemaOrReference[] | null) {
     this.__TypeSetter(this._allOf, v);
   }
 
@@ -1079,9 +1079,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   * The setter receives `IOpenapiV3SchemaOrReference[] | null`
    **/
-  public set oneOf(v: IOpenapiV3SchemaOrReference[]) {
+  public set oneOf(v: IOpenapiV3SchemaOrReference[] | null) {
     this.__TypeSetter(this._oneOf, v);
   }
 
@@ -1093,9 +1093,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference[]`
+   * The setter receives `IOpenapiV3SchemaOrReference[] | null`
    **/
-  public set anyOf(v: IOpenapiV3SchemaOrReference[]) {
+  public set anyOf(v: IOpenapiV3SchemaOrReference[] | null) {
     this.__TypeSetter(this._anyOf, v);
   }
 
@@ -1107,9 +1107,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `ISchema`
+   * The setter receives `ISchema | null`
    **/
-  public set not(v: ISchema) {
+  public set not(v: ISchema | null) {
     this.__TypeSetter(this._not, v);
   }
 
@@ -1121,9 +1121,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ItemsItem`
+   * The setter receives `IOpenapiV3ItemsItem | null`
    **/
-  public set items(v: IOpenapiV3ItemsItem) {
+  public set items(v: IOpenapiV3ItemsItem | null) {
     this.__TypeSetter(this._items, v);
   }
 
@@ -1135,9 +1135,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Properties`
+   * The setter receives `IOpenapiV3Properties | null`
    **/
-  public set properties(v: IOpenapiV3Properties) {
+  public set properties(v: IOpenapiV3Properties | null) {
     this.__TypeSetter(this._properties, v);
   }
 
@@ -1149,9 +1149,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3AdditionalPropertiesItem`
+   * The setter receives `IOpenapiV3AdditionalPropertiesItem | null`
    **/
-  public set additionalProperties(v: IOpenapiV3AdditionalPropertiesItem) {
+  public set additionalProperties(v: IOpenapiV3AdditionalPropertiesItem | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 
@@ -1163,9 +1163,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3DefaultType`
+   * The setter receives `IOpenapiV3DefaultType | null`
    **/
-  public set default(v: IOpenapiV3DefaultType) {
+  public set default(v: IOpenapiV3DefaultType | null) {
     this.__TypeSetter(this._default, v);
   }
 
@@ -1205,9 +1205,9 @@ export class Schema extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

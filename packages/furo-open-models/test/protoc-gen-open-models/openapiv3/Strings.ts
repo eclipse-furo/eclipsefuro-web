@@ -82,9 +82,9 @@ export class Strings extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedString[]`
+   * The setter receives `IOpenapiV3NamedString[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedString[]) {
+  public set additionalProperties(v: IOpenapiV3NamedString[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

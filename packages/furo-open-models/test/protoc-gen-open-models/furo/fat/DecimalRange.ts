@@ -132,9 +132,9 @@ export class DecimalRange extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeDecimal`
+   * The setter receives `IFuroTypeDecimal | null`
    **/
-  public set start(v: IFuroTypeDecimal) {
+  public set start(v: IFuroTypeDecimal | null) {
     this.__TypeSetter(this._start, v);
   }
 
@@ -147,9 +147,9 @@ export class DecimalRange extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeDecimal`
+   * The setter receives `IFuroTypeDecimal | null`
    **/
-  public set end(v: IFuroTypeDecimal) {
+  public set end(v: IFuroTypeDecimal | null) {
     this.__TypeSetter(this._end, v);
   }
 

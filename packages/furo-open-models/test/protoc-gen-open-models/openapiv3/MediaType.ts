@@ -169,9 +169,9 @@ export class MediaType extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference`
+   * The setter receives `IOpenapiV3SchemaOrReference | null`
    **/
-  public set schema(v: IOpenapiV3SchemaOrReference) {
+  public set schema(v: IOpenapiV3SchemaOrReference | null) {
     this.__TypeSetter(this._schema, v);
   }
 
@@ -183,9 +183,9 @@ export class MediaType extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Any`
+   * The setter receives `IOpenapiV3Any | null`
    **/
-  public set example(v: IOpenapiV3Any) {
+  public set example(v: IOpenapiV3Any | null) {
     this.__TypeSetter(this._example, v);
   }
 
@@ -197,9 +197,9 @@ export class MediaType extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ExamplesOrReferences`
+   * The setter receives `IOpenapiV3ExamplesOrReferences | null`
    **/
-  public set examples(v: IOpenapiV3ExamplesOrReferences) {
+  public set examples(v: IOpenapiV3ExamplesOrReferences | null) {
     this.__TypeSetter(this._examples, v);
   }
 
@@ -211,9 +211,9 @@ export class MediaType extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Encodings`
+   * The setter receives `IOpenapiV3Encodings | null`
    **/
-  public set encoding(v: IOpenapiV3Encodings) {
+  public set encoding(v: IOpenapiV3Encodings | null) {
     this.__TypeSetter(this._encoding, v);
   }
 
@@ -225,9 +225,9 @@ export class MediaType extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

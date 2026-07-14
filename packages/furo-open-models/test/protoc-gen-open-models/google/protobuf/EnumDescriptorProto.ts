@@ -216,9 +216,9 @@ export class EnumDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumValueDescriptorProto[]`
+   * The setter receives `IGoogleProtobufEnumValueDescriptorProto[] | null`
    **/
-  public set value(v: IGoogleProtobufEnumValueDescriptorProto[]) {
+  public set value(v: IGoogleProtobufEnumValueDescriptorProto[] | null) {
     this.__TypeSetter(this._value, v);
   }
 
@@ -230,9 +230,9 @@ export class EnumDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumOptions`
+   * The setter receives `IGoogleProtobufEnumOptions | null`
    **/
-  public set options(v: IGoogleProtobufEnumOptions) {
+  public set options(v: IGoogleProtobufEnumOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 
@@ -247,9 +247,9 @@ export class EnumDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumDescriptorProtoEnumReservedRange[]`
+   * The setter receives `IGoogleProtobufEnumDescriptorProtoEnumReservedRange[] | null`
    **/
-  public set reservedRange(v: IGoogleProtobufEnumDescriptorProtoEnumReservedRange[]) {
+  public set reservedRange(v: IGoogleProtobufEnumDescriptorProtoEnumReservedRange[] | null) {
     this.__TypeSetter(this._reservedRange, v);
   }
 

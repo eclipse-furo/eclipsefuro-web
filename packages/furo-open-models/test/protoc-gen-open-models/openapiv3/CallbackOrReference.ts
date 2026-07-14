@@ -105,9 +105,9 @@ export class CallbackOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Callback`
+   * The setter receives `IOpenapiV3Callback | null`
    **/
-  public set callback(v: IOpenapiV3Callback) {
+  public set callback(v: IOpenapiV3Callback | null) {
     this.__TypeSetter(this._callback, v);
   }
 
@@ -119,9 +119,9 @@ export class CallbackOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Reference`
+   * The setter receives `IOpenapiV3Reference | null`
    **/
-  public set reference(v: IOpenapiV3Reference) {
+  public set reference(v: IOpenapiV3Reference | null) {
     this.__TypeSetter(this._reference, v);
   }
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
-import { expect, describe,it } from "vitest";
+import { expect, describe, it } from "vitest";
 
 import { Defaults } from "../protoc-gen-open-models/furo/type/Defaults";
 

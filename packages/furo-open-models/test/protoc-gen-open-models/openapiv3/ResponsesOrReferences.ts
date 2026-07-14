@@ -86,9 +86,9 @@ export class ResponsesOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedResponseOrReference[]`
+   * The setter receives `IOpenapiV3NamedResponseOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedResponseOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedResponseOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

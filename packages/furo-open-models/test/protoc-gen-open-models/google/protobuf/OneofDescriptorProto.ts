@@ -120,9 +120,9 @@ export class OneofDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufOneofOptions`
+   * The setter receives `IGoogleProtobufOneofOptions | null`
    **/
-  public set options(v: IGoogleProtobufOneofOptions) {
+  public set options(v: IGoogleProtobufOneofOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 

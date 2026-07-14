@@ -170,9 +170,9 @@ export class Server extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ServerVariables`
+   * The setter receives `IOpenapiV3ServerVariables | null`
    **/
-  public set variables(v: IOpenapiV3ServerVariables) {
+  public set variables(v: IOpenapiV3ServerVariables | null) {
     this.__TypeSetter(this._variables, v);
   }
 
@@ -184,9 +184,9 @@ export class Server extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

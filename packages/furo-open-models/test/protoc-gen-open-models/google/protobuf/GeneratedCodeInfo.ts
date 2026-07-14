@@ -110,9 +110,9 @@ export class GeneratedCodeInfo extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufGeneratedCodeInfoAnnotation[]`
+   * The setter receives `IGoogleProtobufGeneratedCodeInfoAnnotation[] | null`
    **/
-  public set annotation(v: IGoogleProtobufGeneratedCodeInfoAnnotation[]) {
+  public set annotation(v: IGoogleProtobufGeneratedCodeInfoAnnotation[] | null) {
     this.__TypeSetter(this._annotation, v);
   }
 

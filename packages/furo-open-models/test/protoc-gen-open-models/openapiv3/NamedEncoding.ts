@@ -134,9 +134,9 @@ export class NamedEncoding extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Encoding`
+   * The setter receives `IOpenapiV3Encoding | null`
    **/
-  public set value(v: IOpenapiV3Encoding) {
+  public set value(v: IOpenapiV3Encoding | null) {
     this.__TypeSetter(this._value, v);
   }
 

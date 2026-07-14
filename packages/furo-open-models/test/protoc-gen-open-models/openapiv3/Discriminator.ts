@@ -136,9 +136,9 @@ export class Discriminator extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Strings`
+   * The setter receives `IOpenapiV3Strings | null`
    **/
-  public set mapping(v: IOpenapiV3Strings) {
+  public set mapping(v: IOpenapiV3Strings | null) {
     this.__TypeSetter(this._mapping, v);
   }
 
@@ -150,9 +150,9 @@ export class Discriminator extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

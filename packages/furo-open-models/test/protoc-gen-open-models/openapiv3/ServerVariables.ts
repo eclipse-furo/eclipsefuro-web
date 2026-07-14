@@ -86,9 +86,9 @@ export class ServerVariables extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedServerVariable[]`
+   * The setter receives `IOpenapiV3NamedServerVariable[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedServerVariable[]) {
+  public set additionalProperties(v: IOpenapiV3NamedServerVariable[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

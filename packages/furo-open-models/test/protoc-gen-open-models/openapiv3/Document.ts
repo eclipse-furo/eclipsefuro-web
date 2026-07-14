@@ -254,9 +254,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Info`
+   * The setter receives `IOpenapiV3Info | null`
    **/
-  public set info(v: IOpenapiV3Info) {
+  public set info(v: IOpenapiV3Info | null) {
     this.__TypeSetter(this._info, v);
   }
 
@@ -268,9 +268,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Server[]`
+   * The setter receives `IOpenapiV3Server[] | null`
    **/
-  public set servers(v: IOpenapiV3Server[]) {
+  public set servers(v: IOpenapiV3Server[] | null) {
     this.__TypeSetter(this._servers, v);
   }
 
@@ -282,9 +282,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Paths`
+   * The setter receives `IOpenapiV3Paths | null`
    **/
-  public set paths(v: IOpenapiV3Paths) {
+  public set paths(v: IOpenapiV3Paths | null) {
     this.__TypeSetter(this._paths, v);
   }
 
@@ -296,9 +296,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Components`
+   * The setter receives `IOpenapiV3Components | null`
    **/
-  public set components(v: IOpenapiV3Components) {
+  public set components(v: IOpenapiV3Components | null) {
     this.__TypeSetter(this._components, v);
   }
 
@@ -310,9 +310,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SecurityRequirement[]`
+   * The setter receives `IOpenapiV3SecurityRequirement[] | null`
    **/
-  public set security(v: IOpenapiV3SecurityRequirement[]) {
+  public set security(v: IOpenapiV3SecurityRequirement[] | null) {
     this.__TypeSetter(this._security, v);
   }
 
@@ -324,9 +324,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Tag[]`
+   * The setter receives `IOpenapiV3Tag[] | null`
    **/
-  public set tags(v: IOpenapiV3Tag[]) {
+  public set tags(v: IOpenapiV3Tag[] | null) {
     this.__TypeSetter(this._tags, v);
   }
 
@@ -338,9 +338,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ExternalDocs`
+   * The setter receives `IOpenapiV3ExternalDocs | null`
    **/
-  public set externalDocs(v: IOpenapiV3ExternalDocs) {
+  public set externalDocs(v: IOpenapiV3ExternalDocs | null) {
     this.__TypeSetter(this._externalDocs, v);
   }
 
@@ -352,9 +352,9 @@ export class Document extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

@@ -113,9 +113,9 @@ export class DeepRecursion extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeOther`
+   * The setter receives `IFuroTypeOther | null`
    **/
-  public set field(v: IFuroTypeOther) {
+  public set field(v: IFuroTypeOther | null) {
     this.__TypeSetter(this._field, v);
   }
 

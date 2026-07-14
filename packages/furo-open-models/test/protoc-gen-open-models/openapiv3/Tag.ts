@@ -171,9 +171,9 @@ export class Tag extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ExternalDocs`
+   * The setter receives `IOpenapiV3ExternalDocs | null`
    **/
-  public set externalDocs(v: IOpenapiV3ExternalDocs) {
+  public set externalDocs(v: IOpenapiV3ExternalDocs | null) {
     this.__TypeSetter(this._externalDocs, v);
   }
 
@@ -185,9 +185,9 @@ export class Tag extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

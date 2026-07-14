@@ -109,9 +109,9 @@ export class SecuritySchemeOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SecurityScheme`
+   * The setter receives `IOpenapiV3SecurityScheme | null`
    **/
-  public set securityScheme(v: IOpenapiV3SecurityScheme) {
+  public set securityScheme(v: IOpenapiV3SecurityScheme | null) {
     this.__TypeSetter(this._securityScheme, v);
   }
 
@@ -123,9 +123,9 @@ export class SecuritySchemeOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Reference`
+   * The setter receives `IOpenapiV3Reference | null`
    **/
-  public set reference(v: IOpenapiV3Reference) {
+  public set reference(v: IOpenapiV3Reference | null) {
     this.__TypeSetter(this._reference, v);
   }
 

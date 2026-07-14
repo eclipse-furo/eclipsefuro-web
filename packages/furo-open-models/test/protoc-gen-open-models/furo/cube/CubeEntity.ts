@@ -180,9 +180,9 @@ export class CubeEntity extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroCubeCubeDefinition`
+   * The setter receives `IFuroCubeCubeDefinition | null`
    **/
-  public set cube(v: IFuroCubeCubeDefinition) {
+  public set cube(v: IFuroCubeCubeDefinition | null) {
     this.__TypeSetter(this._cube, v);
   }
 

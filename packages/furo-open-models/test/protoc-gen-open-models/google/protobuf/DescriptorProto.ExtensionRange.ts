@@ -152,9 +152,9 @@ export class DescriptorProtoExtensionRange extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufExtensionRangeOptions`
+   * The setter receives `IGoogleProtobufExtensionRangeOptions | null`
    **/
-  public set options(v: IGoogleProtobufExtensionRangeOptions) {
+  public set options(v: IGoogleProtobufExtensionRangeOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 

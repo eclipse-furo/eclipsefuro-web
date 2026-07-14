@@ -613,9 +613,9 @@ export class FieldDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufFieldOptions`
+   * The setter receives `IGoogleProtobufFieldOptions | null`
    **/
-  public set options(v: IGoogleProtobufFieldOptions) {
+  public set options(v: IGoogleProtobufFieldOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 

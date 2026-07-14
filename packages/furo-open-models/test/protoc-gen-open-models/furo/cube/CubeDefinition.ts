@@ -322,9 +322,9 @@ export class CubeDefinition extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroCubeColour`
+   * The setter receives `IFuroCubeColour | null`
    **/
-  public set colour(v: IFuroCubeColour) {
+  public set colour(v: IFuroCubeColour | null) {
     this.__TypeSetter(this._colour, v);
   }
 
@@ -365,9 +365,9 @@ export class CubeDefinition extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroCubeColour`
+   * The setter receives `IFuroCubeColour | null`
    **/
-  public set subMessage(v: IFuroCubeColour) {
+  public set subMessage(v: IFuroCubeColour | null) {
     this.__TypeSetter(this._subMessage, v);
   }
 

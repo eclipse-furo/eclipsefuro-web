@@ -86,9 +86,9 @@ export class ExamplesOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedExampleOrReference[]`
+   * The setter receives `IOpenapiV3NamedExampleOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedExampleOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedExampleOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

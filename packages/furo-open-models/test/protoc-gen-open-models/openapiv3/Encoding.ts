@@ -190,9 +190,9 @@ export class Encoding extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3HeadersOrReferences`
+   * The setter receives `IOpenapiV3HeadersOrReferences | null`
    **/
-  public set headers(v: IOpenapiV3HeadersOrReferences) {
+  public set headers(v: IOpenapiV3HeadersOrReferences | null) {
     this.__TypeSetter(this._headers, v);
   }
 
@@ -246,9 +246,9 @@ export class Encoding extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

@@ -86,9 +86,9 @@ export class SchemasOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedSchemaOrReference[]`
+   * The setter receives `IOpenapiV3NamedSchemaOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedSchemaOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedSchemaOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

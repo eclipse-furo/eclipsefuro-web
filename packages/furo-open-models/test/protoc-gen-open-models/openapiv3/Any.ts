@@ -97,9 +97,9 @@ export class XAny extends FieldNode {
   }
 
   /**
-   * The setter receives `IAny`
+   * The setter receives `IAny | null`
    **/
-  public set value(v: IAny) {
+  public set value(v: IAny | null) {
     this.__TypeSetter(this._value, v);
   }
 

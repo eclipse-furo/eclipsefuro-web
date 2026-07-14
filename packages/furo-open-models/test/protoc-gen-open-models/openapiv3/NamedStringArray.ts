@@ -134,9 +134,9 @@ export class NamedStringArray extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3StringArray`
+   * The setter receives `IOpenapiV3StringArray | null`
    **/
-  public set value(v: IOpenapiV3StringArray) {
+  public set value(v: IOpenapiV3StringArray | null) {
     this.__TypeSetter(this._value, v);
   }
 

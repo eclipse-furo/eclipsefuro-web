@@ -139,9 +139,9 @@ export class NamedSchemaOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3SchemaOrReference`
+   * The setter receives `IOpenapiV3SchemaOrReference | null`
    **/
-  public set value(v: IOpenapiV3SchemaOrReference) {
+  public set value(v: IOpenapiV3SchemaOrReference | null) {
     this.__TypeSetter(this._value, v);
   }
 

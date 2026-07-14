@@ -151,9 +151,9 @@ export class Tree extends FieldNode {
   }
 
   /**
-   * The setter receives `ITree[]`
+   * The setter receives `ITree[] | null`
    **/
-  public set nodes(v: ITree[]) {
+  public set nodes(v: ITree[] | null) {
     this.__TypeSetter(this._nodes, v);
   }
 
@@ -166,9 +166,9 @@ export class Tree extends FieldNode {
   }
 
   /**
-   * The setter receives `ITree`
+   * The setter receives `ITree | null`
    **/
-  public set recursion(v: ITree) {
+  public set recursion(v: ITree | null) {
     this.__TypeSetter(this._recursion, v);
   }
 

@@ -90,9 +90,9 @@ export class SecurityRequirement extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedStringArray[]`
+   * The setter receives `IOpenapiV3NamedStringArray[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedStringArray[]) {
+  public set additionalProperties(v: IOpenapiV3NamedStringArray[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

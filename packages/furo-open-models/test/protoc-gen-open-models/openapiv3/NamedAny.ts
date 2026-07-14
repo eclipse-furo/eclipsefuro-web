@@ -134,9 +134,9 @@ export class NamedAny extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Any`
+   * The setter receives `IOpenapiV3Any | null`
    **/
-  public set value(v: IOpenapiV3Any) {
+  public set value(v: IOpenapiV3Any | null) {
     this.__TypeSetter(this._value, v);
   }
 

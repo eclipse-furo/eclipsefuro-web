@@ -109,9 +109,9 @@ export class Callback extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedPathItem[]`
+   * The setter receives `IOpenapiV3NamedPathItem[] | null`
    **/
-  public set path(v: IOpenapiV3NamedPathItem[]) {
+  public set path(v: IOpenapiV3NamedPathItem[] | null) {
     this.__TypeSetter(this._path, v);
   }
 
@@ -123,9 +123,9 @@ export class Callback extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 

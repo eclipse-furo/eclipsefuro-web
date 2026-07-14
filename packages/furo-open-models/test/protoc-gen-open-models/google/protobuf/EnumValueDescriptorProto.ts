@@ -151,9 +151,9 @@ export class EnumValueDescriptorProto extends FieldNode {
   }
 
   /**
-   * The setter receives `IGoogleProtobufEnumValueOptions`
+   * The setter receives `IGoogleProtobufEnumValueOptions | null`
    **/
-  public set options(v: IGoogleProtobufEnumValueOptions) {
+  public set options(v: IGoogleProtobufEnumValueOptions | null) {
     this.__TypeSetter(this._options, v);
   }
 

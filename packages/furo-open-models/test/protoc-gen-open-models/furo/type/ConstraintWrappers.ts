@@ -268,7 +268,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `string| null`
+   * The setter receives `string | null`
    **/
   public set stringValue(v: string | null) {
     this.__TypeSetter(this._stringValue, v);
@@ -282,7 +282,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `number| null`
+   * The setter receives `number | null`
    **/
   public set int32Value(v: number | null) {
     this.__TypeSetter(this._int32Value, v);
@@ -296,7 +296,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `bigint| null`
+   * The setter receives `bigint | null`
    **/
   public set int64Value(v: bigint | null) {
     this.__TypeSetter(this._int64Value, v);
@@ -310,7 +310,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `number| null`
+   * The setter receives `number | null`
    **/
   public set floatValue(v: number | null) {
     this.__TypeSetter(this._floatValue, v);
@@ -324,7 +324,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `number| null`
+   * The setter receives `number | null`
    **/
   public set doubleValue(v: number | null) {
     this.__TypeSetter(this._doubleValue, v);
@@ -338,7 +338,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `boolean| null`
+   * The setter receives `boolean | null`
    **/
   public set boolValue(v: boolean | null) {
     this.__TypeSetter(this._boolValue, v);
@@ -352,7 +352,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `number| null`
+   * The setter receives `number | null`
    **/
   public set uint32Value(v: number | null) {
     this.__TypeSetter(this._uint32Value, v);
@@ -366,7 +366,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `bigint| null`
+   * The setter receives `bigint | null`
    **/
   public set uint64Value(v: bigint | null) {
     this.__TypeSetter(this._uint64Value, v);
@@ -380,7 +380,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `string| null`
+   * The setter receives `string | null`
    **/
   public set bytesValue(v: string | null) {
     this.__TypeSetter(this._bytesValue, v);
@@ -394,7 +394,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `number| null`
+   * The setter receives `number | null`
    **/
   public set exclInt32Value(v: number | null) {
     this.__TypeSetter(this._exclInt32Value, v);
@@ -408,7 +408,7 @@ export class ConstraintWrappers extends FieldNode {
   }
 
   /**
-   * The setter receives `bigint| null`
+   * The setter receives `bigint | null`
    **/
   public set exclInt64Value(v: bigint | null) {
     this.__TypeSetter(this._exclInt64Value, v);

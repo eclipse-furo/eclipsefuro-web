@@ -86,9 +86,9 @@ export class MediaTypes extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedMediaType[]`
+   * The setter receives `IOpenapiV3NamedMediaType[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedMediaType[]) {
+  public set additionalProperties(v: IOpenapiV3NamedMediaType[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

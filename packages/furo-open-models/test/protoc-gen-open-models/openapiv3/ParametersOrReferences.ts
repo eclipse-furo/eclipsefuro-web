@@ -86,9 +86,9 @@ export class ParametersOrReferences extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedParameterOrReference[]`
+   * The setter receives `IOpenapiV3NamedParameterOrReference[] | null`
    **/
-  public set additionalProperties(v: IOpenapiV3NamedParameterOrReference[]) {
+  public set additionalProperties(v: IOpenapiV3NamedParameterOrReference[] | null) {
     this.__TypeSetter(this._additionalProperties, v);
   }
 

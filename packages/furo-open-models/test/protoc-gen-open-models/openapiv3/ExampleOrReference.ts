@@ -105,9 +105,9 @@ export class ExampleOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Example`
+   * The setter receives `IOpenapiV3Example | null`
    **/
-  public set example(v: IOpenapiV3Example) {
+  public set example(v: IOpenapiV3Example | null) {
     this.__TypeSetter(this._example, v);
   }
 
@@ -119,9 +119,9 @@ export class ExampleOrReference extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Reference`
+   * The setter receives `IOpenapiV3Reference | null`
    **/
-  public set reference(v: IOpenapiV3Reference) {
+  public set reference(v: IOpenapiV3Reference | null) {
     this.__TypeSetter(this._reference, v);
   }
 

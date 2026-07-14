@@ -86,9 +86,9 @@ export class Other extends FieldNode {
   }
 
   /**
-   * The setter receives `IFuroTypeDeepRecursion`
+   * The setter receives `IFuroTypeDeepRecursion | null`
    **/
-  public set recursion(v: IFuroTypeDeepRecursion) {
+  public set recursion(v: IFuroTypeDeepRecursion | null) {
     this.__TypeSetter(this._recursion, v);
   }
 

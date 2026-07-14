@@ -359,9 +359,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set get(v: IOpenapiV3Operation) {
+  public set get(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._get, v);
   }
 
@@ -373,9 +373,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set put(v: IOpenapiV3Operation) {
+  public set put(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._put, v);
   }
 
@@ -387,9 +387,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set post(v: IOpenapiV3Operation) {
+  public set post(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._post, v);
   }
 
@@ -401,9 +401,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set delete(v: IOpenapiV3Operation) {
+  public set delete(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._delete, v);
   }
 
@@ -415,9 +415,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set options(v: IOpenapiV3Operation) {
+  public set options(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._options, v);
   }
 
@@ -429,9 +429,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set head(v: IOpenapiV3Operation) {
+  public set head(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._head, v);
   }
 
@@ -443,9 +443,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set patch(v: IOpenapiV3Operation) {
+  public set patch(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._patch, v);
   }
 
@@ -457,9 +457,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Operation`
+   * The setter receives `IOpenapiV3Operation | null`
    **/
-  public set trace(v: IOpenapiV3Operation) {
+  public set trace(v: IOpenapiV3Operation | null) {
     this.__TypeSetter(this._trace, v);
   }
 
@@ -471,9 +471,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3Server[]`
+   * The setter receives `IOpenapiV3Server[] | null`
    **/
-  public set servers(v: IOpenapiV3Server[]) {
+  public set servers(v: IOpenapiV3Server[] | null) {
     this.__TypeSetter(this._servers, v);
   }
 
@@ -485,9 +485,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3ParameterOrReference[]`
+   * The setter receives `IOpenapiV3ParameterOrReference[] | null`
    **/
-  public set parameters(v: IOpenapiV3ParameterOrReference[]) {
+  public set parameters(v: IOpenapiV3ParameterOrReference[] | null) {
     this.__TypeSetter(this._parameters, v);
   }
 
@@ -499,9 +499,9 @@ export class PathItem extends FieldNode {
   }
 
   /**
-   * The setter receives `IOpenapiV3NamedAny[]`
+   * The setter receives `IOpenapiV3NamedAny[] | null`
    **/
-  public set specificationExtension(v: IOpenapiV3NamedAny[]) {
+  public set specificationExtension(v: IOpenapiV3NamedAny[] | null) {
     this.__TypeSetter(this._specificationExtension, v);
   }
 
