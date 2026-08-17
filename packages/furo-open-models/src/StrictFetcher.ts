@@ -507,7 +507,7 @@ export class StrictFetcher<REQ, RES> {
           if (FieldCtor) {
             // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- FieldConstructor is dynamically resolved from meta
             const fieldNode = new FieldCtor(undefined) as FieldNode;
-            fieldNode.__fromLiteral(rqo[bodyField]);
+            fieldNode.__fromLiteral(rqo[bodyField] || {});
             evaluatedBody = JSON.stringify(fieldNode.__toJson());
           } else {
             evaluatedBody = JSON.stringify(rqo[bodyField]);

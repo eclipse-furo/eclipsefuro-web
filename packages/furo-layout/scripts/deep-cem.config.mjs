@@ -352,6 +352,7 @@ export default {
       outdir: 'dist',
       cssFileName: null,
       cssPropertiesDocs: true,
+      htmlFileName: 'furo-layout.html-data.json',
     }),
     customElementJetBrainsPlugin({
       outdir: './',

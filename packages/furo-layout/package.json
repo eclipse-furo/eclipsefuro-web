@@ -1,6 +1,6 @@
 {
   "name": "@furo/layout",
-  "version": "3.0.0-RC.11",
+  "version": "3.0.0-RC.13",
   "description": "Layout components for furo",
   "license": "MIT",
   "type": "module",
@@ -18,40 +18,41 @@
     "./package.json": "./package.json",
     "./custom-elements.json": "./custom-elements.json",
     "./web-types.json": "./web-types.json",
+    "./dist/furo-layout.html-data.json": "./dist/furo-layout.html-data.json",
     "./furo-backdrop": {
-      "types": "./dist/components/furo-backdrop/FuroBackdrop.d.ts",
+      "types": "./dist/components/furo-backdrop/index.d.ts",
       "default": "./dist/components/furo-backdrop/index.js"
     },
     "./furo-horizontal-flex": {
-      "types": "./dist/components/furo-horizontal-flex/FuroHorizontalFlex.d.ts",
+      "types": "./dist/components/furo-horizontal-flex/index.d.ts",
       "default": "./dist/components/furo-horizontal-flex/index.js"
     },
     "./furo-layout-indent": {
-      "types": "./dist/components/furo-layout-indent/FuroLayoutIndent.d.ts",
+      "types": "./dist/components/furo-layout-indent/index.d.ts",
       "default": "./dist/components/furo-layout-indent/index.js"
     },
     "./furo-resizer": {
-      "types": "./dist/components/furo-resizer/FuroResizer.d.ts",
+      "types": "./dist/components/furo-resizer/index.d.ts",
       "default": "./dist/components/furo-resizer/index.js"
     },
     "./furo-responsive-layout": {
-      "types": "./dist/components/furo-responsive-layout/FuroResponsiveLayout.d.ts",
+      "types": "./dist/components/furo-responsive-layout/index.d.ts",
       "default": "./dist/components/furo-responsive-layout/index.js"
     },
     "./furo-vertical-flex": {
-      "types": "./dist/components/furo-vertical-flex/FuroVerticalFlex.d.ts",
+      "types": "./dist/components/furo-vertical-flex/index.d.ts",
       "default": "./dist/components/furo-vertical-flex/index.js"
     },
     "./furo-split-view": {
-      "types": "./dist/components/furo-split-view/FuroSplitView.d.ts",
+      "types": "./dist/components/furo-split-view/index.d.ts",
       "default": "./dist/components/furo-split-view/index.js"
     },
     "./furo-empty-spacer": {
-      "types": "./dist/components/furo-empty-spacer/FuroEmptySpacer.d.ts",
+      "types": "./dist/components/furo-empty-spacer/index.d.ts",
       "default": "./dist/components/furo-empty-spacer/index.js"
     },
     "./furo-vertical-scroller": {
-      "types": "./dist/components/furo-vertical-scroller/FuroVerticalScroller.d.ts",
+      "types": "./dist/components/furo-vertical-scroller/index.d.ts",
       "default": "./dist/components/furo-vertical-scroller/index.js"
     }
   },
@@ -91,7 +92,7 @@
     "format:tests": "prettier './test/**/*.ts' --write --ignore-path .gitignore",
     "analyze": "cem analyze --litelement --globs ./src/* --outdir ./dist",
     "analyze:internal": "cem analyze --config scripts/internal-cem.config.mjs && mv tmp/custom-elements.json dist/custom-elements-internal.json",
-    "analyze:deep": "cem analyze --config ./scripts/deep-cem.config.mjs &&  ./scripts/WebtypesPostprocessor.mjs && ./scripts/CheckWebtypes.mjs",
+    "analyze:deep": "cem analyze --config ./scripts/deep-cem.config.mjs &&  ./scripts/WebtypesPostprocessor.mjs && ./scripts/HtmlDataPostprocessor.mjs && ./scripts/CheckWebtypes.mjs",
     "prepare": "husky install"
   },
   "dependencies": {
