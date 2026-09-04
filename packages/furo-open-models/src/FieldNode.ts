@@ -296,14 +296,9 @@ export abstract class FieldNode {
 
     // go through available fields
     this.__meta.nodeFields.forEach(field => {
-      // __clear fields which are not available in literal
-      // if the field does not exist on the incoming literal, reset or __clear the value on the fieldNode
-      // make an undefined on complex types
+      // do nothing on fields which are not set in the literal
+      // these fields are cleared already
       if ((data as FieldNode)[field.fieldName as keyof FieldNode] === undefined) {
-        if (this[`_${field.fieldName}` as keyof FieldNode] !== undefined) {
-          // primitives go to their default values
-          (this[`_${field.fieldName}` as keyof FieldNode] as FieldNode).__clear();
-        }
         return;
       }
 

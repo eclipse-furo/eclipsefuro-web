@@ -37,7 +37,8 @@
     "lint": "eslint ./src",
     "lint:fix": "eslint ./src --fix",
     "format": "prettier './src/**/*.ts' --write --ignore-path .gitignore",
-    "test": "vitest run --coverage",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
     "test:ui": "vitest --ui",
     "bootstrap": "npm install && npm link && npm link @furo/open-models"

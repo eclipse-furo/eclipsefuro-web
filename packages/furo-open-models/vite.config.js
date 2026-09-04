@@ -28,10 +28,8 @@ export default defineConfig({
       headless: true,
       instances: [{browser: "chromium"}],
     },
-    reporters: ["verbose", "junit"],
-    outputFile: {
-      junit: "test-results/junit.xml",
-    },
+    reporters: ["verbose"],
+
     coverage: {
       include: ["src/**/*.{ts,tsx}"],
       enabled: true,
@@ -43,8 +41,8 @@ export default defineConfig({
       },
       provider: "istanbul",
       reportsDirectory: "coverage/",
-      reporter: ["text", "json-summary", "lcov", "html"],
-      reportOnFailure: true,
+      reporter: ["html"],
+      reportOnFailure: false,
     },
     onConsoleLog(log, type) {
       if (type === "stderr" && log.includes("in dev mode")) {
