@@ -206,9 +206,13 @@ export class MAP<K extends string | number, T extends FieldNode, I> extends Fiel
    * @public
    */
   override __clear(): void {
+    // only notify when they are changes
+    const shouldNotify = this.value.size > 0;
     this.__isEmpty = true;
     this.value.clear();
-    this.__notifyMapChanges(false);
+    if (shouldNotify) {
+      this.__notifyMapChanges(false);
+    }
   }
 
   /**

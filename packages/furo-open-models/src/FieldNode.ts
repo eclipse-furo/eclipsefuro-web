@@ -287,7 +287,7 @@ export abstract class FieldNode {
    * @param literal
    */
   __updateWithLiteral(literal: unknown) {
-    this.__clear(true);
+    this.__clear();
     // store injected literal for reset()
     this.__meta.initialValue = literal;
     // a field which is set is not empty
@@ -840,7 +840,9 @@ export abstract class FieldNode {
    *
    * A cleared field is not populated on `__toLiteral` or `__toJson` when the option `EmitUnpopulated` or `EmitDefaultValues` is set to false.
    */
-  public __clear(withoutNotification = false) {
+  public __clear() {
+    // only notify when they are changes
+    const shouldNotify = !this.__isEmpty;
     this.__isEmpty = true;
 
     // reset oneof group state
@@ -850,9 +852,9 @@ export abstract class FieldNode {
 
     // __clear every childNode too
     this.__meta.nodeFields.forEach(descriptor => {
-      (this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode).__clear(withoutNotification);
+      (this[`_${descriptor.fieldName}` as keyof FieldNode] as FieldNode).__clear();
     });
-    if (!withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
     // todo: set to values to default value or initial
@@ -874,11 +876,11 @@ export abstract class FieldNode {
     const groupName = descriptor.oneofGroup;
     const previousActive = this.__meta.oneofGroups.get(groupName);
 
-    // Clear all OTHER fields in the same oneof group (silently)
+    // Clear all OTHER fields in the same oneof group
     this.__meta.nodeFields
       .filter(f => f.oneofGroup === groupName && f.fieldName !== fieldName)
       .forEach(f => {
-        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear(true);
+        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear();
       });
 
     // Mark this field as active
@@ -922,7 +924,7 @@ export abstract class FieldNode {
     this.__meta.nodeFields
       .filter(f => f.oneofGroup === groupName)
       .forEach(f => {
-        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear(true);
+        (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__clear();
       });
     this.__meta.oneofGroups.set(groupName, undefined);
   }

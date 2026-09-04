@@ -113,11 +113,12 @@ export class INT32 extends FieldNode {
     return this._value.toString();
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
     const shouldNotify = this._value !== 0;
     this._value = 0;
-    if (shouldNotify && !withoutNotification) {
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

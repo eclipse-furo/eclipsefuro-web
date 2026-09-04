@@ -105,12 +105,12 @@ export class BYTES extends FieldNode {
     return this._value.toString();
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
-    const shouldNotify = this._value.length;
+    const shouldNotify = this._value.length > 0;
     this._value = new Uint8Array();
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    if (shouldNotify && !withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

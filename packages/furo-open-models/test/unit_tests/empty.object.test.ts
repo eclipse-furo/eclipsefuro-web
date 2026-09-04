@@ -83,7 +83,7 @@ describe("empty objects", () => {
     id.id = "stringliteral";
     expect(id.__toLiteral()).to.eql({
       id: "stringliteral",
-      bookingCenter: BookingCenter.BOOKING_CENTER_UNSPECIFIED,
+      // bookingCenter is back to its unspecified default, so it is not emitted
       stringArray: [
         // from the default
         "A",
@@ -93,7 +93,7 @@ describe("empty objects", () => {
     });
     id.__reset();
     expect(id.__toLiteral()).to.eql({
-      bookingCenter: BookingCenter.BOOKING_CENTER_UNSPECIFIED,
+      // bookingCenter is back to its unspecified default, so it is not emitted
       stringArray: ["A", "B", "C"],
     });
   });

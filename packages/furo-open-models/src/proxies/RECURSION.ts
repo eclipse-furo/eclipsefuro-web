@@ -11,8 +11,13 @@ export class RECURSION<T extends FieldNode, I> extends FieldNode {
   }
 
   override __clear() {
+    // only notify when they are changes
+    const shouldNotify = this._value !== undefined;
     this.__isEmpty = true;
     this._value = undefined;
+    if (shouldNotify) {
+      this.__notifyFieldValueChange(false);
+    }
   }
 
   get value(): T | undefined {

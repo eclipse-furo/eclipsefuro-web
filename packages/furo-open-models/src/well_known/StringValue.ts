@@ -93,12 +93,12 @@ export class StringValue extends FieldNode {
     return "";
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
-    const shouldNotify = this._value?.length;
+    const shouldNotify = this._value !== null && this._value !== "";
     this._value = "";
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    if (shouldNotify && !withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

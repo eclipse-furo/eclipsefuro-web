@@ -84,11 +84,12 @@ export class ENUM<T> extends FieldNode {
     return this.msg(this._value as string);
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
     const shouldNotify = this._value !== this._nullValue;
     this._value = this._nullValue;
-    if (shouldNotify && !withoutNotification) {
+    this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

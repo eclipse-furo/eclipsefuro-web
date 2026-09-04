@@ -210,9 +210,13 @@ export class ARRAY<T extends FieldNode, I> extends FieldNode {
   }
 
   override __clear() {
+    // only notify when they are changes
+    const shouldNotify = this._value.length > 0;
     this._value.length = 0;
     this.__isEmpty = true;
-    this.__notifyArrayChanges(false);
+    if (shouldNotify) {
+      this.__notifyArrayChanges(false);
+    }
   }
 
   delete(index: number): I {

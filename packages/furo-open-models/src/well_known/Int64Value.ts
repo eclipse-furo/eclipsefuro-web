@@ -104,12 +104,12 @@ export class Int64Value extends FieldNode {
     return "";
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
     const shouldNotify = this._value !== 0n;
     this._value = 0n;
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    if (shouldNotify && !withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

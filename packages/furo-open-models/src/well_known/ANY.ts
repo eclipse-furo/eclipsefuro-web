@@ -24,12 +24,12 @@ export class ANY extends FieldNode {
     this.__meta.typeName = `google.protobuf.Any`;
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
     const shouldNotify = this._value !== undefined;
     this.__isEmpty = true;
     this._value = undefined;
-    if (shouldNotify && !withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }

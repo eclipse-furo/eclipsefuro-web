@@ -75,12 +75,12 @@ export class BOOLEAN extends FieldNode {
     return this._value.toString();
   }
 
-  public override __clear(withoutNotification = false) {
+  public override __clear() {
     // only notify when they are changes
     const shouldNotify = this._value;
     this._value = false;
     this.__isEmpty = !(OPEN_MODELS_OPTIONS.EmitDefaultValues || OPEN_MODELS_OPTIONS.EmitUnpopulated);
-    if (shouldNotify && !withoutNotification) {
+    if (shouldNotify) {
       this.__notifyFieldValueChange(false);
     }
   }
