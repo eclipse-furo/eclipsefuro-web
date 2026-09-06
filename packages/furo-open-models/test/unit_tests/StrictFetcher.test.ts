@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
-import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, vi,  afterEach } from "vitest";
 
 import { CubeService } from "../protoc-gen-open-models/furo/cube/CubeService";
 import { API_OPTIONS } from "../protoc-gen-open-models/API_OPTIONS";
@@ -342,5 +342,116 @@ describe("StrictFetcher", () => {
 
     await expect(service.Get.invoke({ cubeId: "missing" })).rejects.toBeDefined();
     expect(errorHandlerCalled).toBe(true);
+  });
+
+  it("should percent encode query param values", async () => {
+    API_OPTIONS.UseProtoNamesForQueryParams = true;
+    OPEN_MODELS_OPTIONS.UseProtoNames = true;
+
+    let capturedUrl = "";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((request: Request) => {
+        capturedUrl = request.url;
+        return Promise.resolve(
+          new Response(JSON.stringify({ entities: [] }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          })
+        );
+      })
+    );
+
+    const service = new CubeService();
+    // `&` and `=` are the characters that actually corrupt parsing - a raw space would be normalized
+    // to %20 by the Request constructor anyway, so it would pass even unencoded.
+    await service.GetList.invoke({ query: "a&b=c" });
+
+    expect(capturedUrl).toContain("?query=a%26b%3Dc");
+  });
+
+  it("should percent encode every entry of a repeated query param", async () => {
+    API_OPTIONS.UseProtoNamesForQueryParams = true;
+    OPEN_MODELS_OPTIONS.UseProtoNames = true;
+
+    let capturedUrl = "";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((request: Request) => {
+        capturedUrl = request.url;
+        return Promise.resolve(
+          new Response(JSON.stringify({ entities: [] }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          })
+        );
+      })
+    );
+
+    const service = new CubeService();
+    // No generated fixture carries a repeated field, but a repeated value is handled by shape.
+    await service.GetList.invoke({ query: ["a&b", "c=d"] } as unknown as { query: string });
+
+    expect(capturedUrl).toContain("?query=a%26b&query=c%3Dd");
+  });
+
+  it("should map a message typed query param to one parameter per field", async () => {
+    API_OPTIONS.UseProtoNamesForQueryParams = true;
+    OPEN_MODELS_OPTIONS.UseProtoNames = true;
+
+    let capturedUrl = "";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((request: Request) => {
+        capturedUrl = request.url;
+        return Promise.resolve(
+          new Response(JSON.stringify({ entity: { display_name: "Test" } }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          })
+        );
+      })
+    );
+
+    // No generated service binds a message as a query param, so build a fetcher without a bodyField.
+    const { StrictFetcher } = await import("@furo/open-models/dist/StrictFetcher");
+    const { CubeServiceUpdateRequest } = await import("../protoc-gen-open-models/furo/cube/CubeServiceUpdateRequest");
+    const { CubeServiceUpdateResponse } = await import("../protoc-gen-open-models/furo/cube/CubeServiceUpdateResponse");
+
+    const fetcher = new StrictFetcher(API_OPTIONS, "GET", "/v1/cubes/{cube_id}", CubeServiceUpdateRequest, CubeServiceUpdateResponse);
+    await fetcher.invoke({ cubeId: "1", entity: { description: "d&e" } });
+
+    // google/api/http.proto: each field of a message maps to its own dotted parameter.
+    expect(capturedUrl).toContain("/api/v1/cubes/1?");
+    expect(capturedUrl).toContain("entity.description=d%26e");
+    expect(capturedUrl).not.toContain("[object%20Object]");
+  });
+
+  it("should use camelCase leaves for a message typed query param when UseProtoNamesForQueryParams=false", async () => {
+    API_OPTIONS.UseProtoNamesForQueryParams = false;
+    OPEN_MODELS_OPTIONS.UseProtoNames = false;
+
+    let capturedUrl = "";
+    vi.stubGlobal(
+      "fetch",
+      vi.fn((request: Request) => {
+        capturedUrl = request.url;
+        return Promise.resolve(
+          new Response(JSON.stringify({ entity: { displayName: "Test" } }), {
+            status: 200,
+            headers: { "content-type": "application/json" },
+          })
+        );
+      })
+    );
+
+    const { StrictFetcher } = await import("@furo/open-models/dist/StrictFetcher");
+    const { CubeServiceUpdateRequest } = await import("../protoc-gen-open-models/furo/cube/CubeServiceUpdateRequest");
+    const { CubeServiceUpdateResponse } = await import("../protoc-gen-open-models/furo/cube/CubeServiceUpdateResponse");
+
+    const fetcher = new StrictFetcher(API_OPTIONS, "GET", "/v1/cubes/{cube_id}", CubeServiceUpdateRequest, CubeServiceUpdateResponse);
+    await fetcher.invoke({ cubeId: "1", entity: { displayName: "n", description: "d" } });
+
+    expect(capturedUrl).toContain("entity.description=d");
   });
 });

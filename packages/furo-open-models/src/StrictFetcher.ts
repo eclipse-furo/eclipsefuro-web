@@ -427,6 +427,41 @@ export class StrictFetcher<REQ, RES> {
     });
   }
 
+  /**
+   * Append one query parameter, percent encoded.
+   *
+   * Both halves are encoded: a value carrying `&` or `=` would otherwise be read by the server as
+   * additional parameters.
+   */
+  private static pushParam(params: string[], name: string, value: unknown): void {
+    params.push(`${encodeURIComponent(name)}=${encodeURIComponent(String(value))}`);
+  }
+
+  /**
+   * Flatten an already serialized message into dotted query parameters.
+   *
+   * `google/api/http.proto`: "In the case of a message type, each field of the message is mapped to
+   * a separate parameter, such as `...?foo.a=A&foo.b=B&foo.c=C`".
+   */
+  private static flattenParam(params: string[], prefix: string, value: unknown): void {
+    if (value === null || value === undefined) {
+      return;
+    }
+    if (Array.isArray(value)) {
+      value.forEach(entry => {
+        StrictFetcher.flattenParam(params, prefix, entry);
+      });
+      return;
+    }
+    if (typeof value === "object") {
+      Object.entries(value).forEach(([key, child]) => {
+        StrictFetcher.flattenParam(params, `${prefix}.${key}`, child);
+      });
+      return;
+    }
+    StrictFetcher.pushParam(params, prefix, value);
+  }
+
   private buildPathAndBodyfield(
     path: string,
     bodyField: keyof REQ | "*" | undefined,
@@ -487,12 +522,28 @@ export class StrictFetcher<REQ, RES> {
       keysForBodyOrQueryParams.forEach(key => {
         // Use the reqProtoNameMap for proto name lookup instead of generic conversion
         const paramName = this.API_OPTIONS.UseProtoNamesForQueryParams ? (this.reqProtoNameMap.get(key as string) ?? (key as string)) : (key as string);
-        if (Array.isArray(rqo[key])) {
-          (rqo[key] as unknown[]).forEach(e => {
-            params.push(`${paramName}=${String(e)}`);
+        const value = rqo[key];
+
+        // A non repeated message becomes one parameter per leaf. Serializing it through its own
+        // FieldNode first keeps enums, int64 and oneofs consistent with the body encoding, and lets
+        // EmitDefaultValues / EmitUnpopulated decide whether an unset field contributes at all.
+        // Primitives carry a FieldConstructor too, so the object check is what selects this branch.
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- FieldConstructor stored from meta is untyped
+        const FieldCtor = this.reqFieldConstructorMap.get(key as string);
+        if (FieldCtor && value !== null && typeof value === "object" && !Array.isArray(value)) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- FieldConstructor is dynamically resolved from meta
+          const fieldNode = new FieldCtor(undefined) as FieldNode;
+          fieldNode.__fromLiteral(value);
+          StrictFetcher.flattenParam(params, paramName, this.API_OPTIONS.UseProtoNamesForQueryParams ? fieldNode.__toJson() : fieldNode.__toLiteral());
+          return;
+        }
+
+        if (Array.isArray(value)) {
+          (value as unknown[]).forEach(e => {
+            StrictFetcher.pushParam(params, paramName, e);
           });
         } else {
-          params.push(`${paramName}=${String(rqo[key])}`);
+          StrictFetcher.pushParam(params, paramName, value);
         }
       });
       if (params.length) {
