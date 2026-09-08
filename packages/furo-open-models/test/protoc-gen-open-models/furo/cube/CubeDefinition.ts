@@ -3,9 +3,9 @@
 
 import { Colour as FuroCubeColour, type IColour as IFuroCubeColour, type TColour as TFuroCubeColour } from "./Colour";
 
-import { Materials as FuroCubeMaterials } from "./Materials";
+import { Materials as FuroCubeMaterials, MaterialsENUM as FuroCubeMaterialsENUM } from "./Materials";
 
-import { DOUBLE, ENUM, FieldNode, INT64, Registry, STRING } from "@furo/open-models/dist/index";
+import { ARRAY, DOUBLE, ENUM, FieldNode, INT64, MAP, Registry, STRING } from "@furo/open-models/dist/index";
 
 /**
  * @interface ICubeDefinition
@@ -32,6 +32,14 @@ export interface ICubeDefinition {
    *  The material the cube is made of
    */
   material?: FuroCubeMaterials | string;
+  /**
+   *  Every material the cube contains
+   */
+  materials?: FuroCubeMaterials[];
+  /**
+   *  The material of each named part
+   */
+  materialByPart?: Record<string, FuroCubeMaterials>;
   name?: string;
   subMessage?: IFuroCubeColour;
   otherName?: string;
@@ -63,6 +71,14 @@ export interface TCubeDefinition {
    *  The material the cube is made of
    */
   material?: FuroCubeMaterials | string;
+  /**
+   *  Every material the cube contains
+   */
+  materials?: FuroCubeMaterials[];
+  /**
+   *  The material of each named part
+   */
+  material_by_part?: Record<string, FuroCubeMaterials>;
   name?: string;
   sub_message?: TFuroCubeColour;
   other_name?: string;
@@ -98,6 +114,16 @@ export class CubeDefinition extends FieldNode {
    * The material the cube is made of
    **/
   private _material: ENUM<FuroCubeMaterials>;
+
+  /**
+   * Every material the cube contains
+   **/
+  private _materials: ARRAY<FuroCubeMaterialsENUM, FuroCubeMaterials>;
+
+  /**
+   * The material of each named part
+   **/
+  private _materialByPart: MAP<string, FuroCubeMaterialsENUM, FuroCubeMaterials>;
 
   /**
    **/
@@ -157,6 +183,21 @@ export class CubeDefinition extends FieldNode {
         FieldConstructor: ENUM<FuroCubeMaterials>,
         constraints: {},
         description: "The material the cube is made of",
+      },
+      {
+        fieldName: "materials",
+        protoName: "materials",
+        FieldConstructor: FuroCubeMaterialsENUM,
+        constraints: {},
+        description: "Every material the cube contains",
+      },
+      {
+        fieldName: "materialByPart",
+        protoName: "material_by_part",
+        FieldConstructor: MAP<string, FuroCubeMaterialsENUM, FuroCubeMaterials>,
+        ValueConstructor: FuroCubeMaterialsENUM,
+        constraints: {},
+        description: "The material of each named part",
       },
       {
         fieldName: "name",
@@ -224,6 +265,16 @@ export class CubeDefinition extends FieldNode {
      *  The material the cube is made of
      **/
     this._material = new ENUM<FuroCubeMaterials>(undefined, FuroCubeMaterials, FuroCubeMaterials.MATERIALS_UNSPECIFIED, this, "material");
+
+    /**
+     *  Every material the cube contains
+     **/
+    this._materials = new ARRAY<FuroCubeMaterialsENUM, FuroCubeMaterials>(undefined, this, "materials");
+
+    /**
+     *  The material of each named part
+     **/
+    this._materialByPart = new MAP<string, FuroCubeMaterialsENUM, FuroCubeMaterials>(undefined, this, "materialByPart");
 
     /**
      **/
@@ -341,6 +392,36 @@ export class CubeDefinition extends FieldNode {
    **/
   public set material(v: FuroCubeMaterials) {
     this.__TypeSetter(this._material, v);
+  }
+
+  /**
+   *  Every material the cube contains
+   * The getter receives the FieldNode
+   **/
+  public get materials(): ARRAY<FuroCubeMaterialsENUM, FuroCubeMaterials> {
+    return this._materials;
+  }
+
+  /**
+   * The setter receives `FuroCubeMaterials[]`
+   **/
+  public set materials(v: FuroCubeMaterials[]) {
+    this.__TypeSetter(this._materials, v);
+  }
+
+  /**
+   *  The material of each named part
+   * The getter receives the FieldNode
+   **/
+  public get materialByPart(): MAP<string, FuroCubeMaterialsENUM, FuroCubeMaterials> {
+    return this._materialByPart;
+  }
+
+  /**
+   * The setter receives `{ [key: string]: FuroCubeMaterials }`
+   **/
+  public set materialByPart(v: Record<string, FuroCubeMaterials>) {
+    this.__TypeSetter(this._materialByPart, v);
   }
 
   /**

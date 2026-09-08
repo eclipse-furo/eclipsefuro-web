@@ -25,6 +25,10 @@ message CubeDefinition {
   cube.Colour colour = 4;
   // The material the cube is made of
   Materials material = 5;
+  // Every material the cube contains
+  repeated Materials materials = 10;
+  // The material of each named part
+  map<string, Materials> material_by_part = 11;
   oneof test_oneof {
     string name = 6;
     cube.Colour sub_message = 7;

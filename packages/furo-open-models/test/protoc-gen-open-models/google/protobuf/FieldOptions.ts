@@ -19,7 +19,10 @@ import { FieldOptionsJSType as GoogleProtobufFieldOptionsJSType } from "./FieldO
 
 import { FieldOptionsOptionRetention as GoogleProtobufFieldOptionsOptionRetention } from "./FieldOptions.OptionRetention";
 
-import { FieldOptionsOptionTargetType as GoogleProtobufFieldOptionsOptionTargetType } from "./FieldOptions.OptionTargetType";
+import {
+  FieldOptionsOptionTargetType as GoogleProtobufFieldOptionsOptionTargetType,
+  FieldOptionsOptionTargetTypeENUM as GoogleProtobufFieldOptionsOptionTargetTypeENUM,
+} from "./FieldOptions.OptionTargetType";
 
 import {
   UninterpretedOption as GoogleProtobufUninterpretedOption,
@@ -345,7 +348,7 @@ export class FieldOptions extends FieldNode {
 
   /**
    **/
-  private _targets: ENUM<GoogleProtobufFieldOptionsOptionTargetType>;
+  private _targets: ARRAY<GoogleProtobufFieldOptionsOptionTargetTypeENUM, GoogleProtobufFieldOptionsOptionTargetType>;
 
   /**
    **/
@@ -441,7 +444,7 @@ export class FieldOptions extends FieldNode {
       {
         fieldName: "targets",
         protoName: "targets",
-        FieldConstructor: ENUM<GoogleProtobufFieldOptionsOptionTargetType>,
+        FieldConstructor: GoogleProtobufFieldOptionsOptionTargetTypeENUM,
         constraints: {},
         description: "",
       },
@@ -585,13 +588,7 @@ export class FieldOptions extends FieldNode {
 
     /**
      **/
-    this._targets = new ENUM<GoogleProtobufFieldOptionsOptionTargetType>(
-      undefined,
-      GoogleProtobufFieldOptionsOptionTargetType,
-      GoogleProtobufFieldOptionsOptionTargetType.TARGET_TYPE_UNKNOWN,
-      this,
-      "targets"
-    );
+    this._targets = new ARRAY<GoogleProtobufFieldOptionsOptionTargetTypeENUM, GoogleProtobufFieldOptionsOptionTargetType>(undefined, this, "targets");
 
     /**
      **/
@@ -823,14 +820,14 @@ export class FieldOptions extends FieldNode {
   /**
    * The getter receives the FieldNode
    **/
-  public get targets(): ENUM<GoogleProtobufFieldOptionsOptionTargetType> {
+  public get targets(): ARRAY<GoogleProtobufFieldOptionsOptionTargetTypeENUM, GoogleProtobufFieldOptionsOptionTargetType> {
     return this._targets;
   }
 
   /**
-   * The setter receives `GoogleProtobufFieldOptionsOptionTargetType`
+   * The setter receives `GoogleProtobufFieldOptionsOptionTargetType[]`
    **/
-  public set targets(v: GoogleProtobufFieldOptionsOptionTargetType) {
+  public set targets(v: GoogleProtobufFieldOptionsOptionTargetType[]) {
     this.__TypeSetter(this._targets, v);
   }
 

@@ -1,5 +1,5 @@
 // eslint-disable-next-line import-x/no-extraneous-dependencies
-import { describe, it, expect, vi,  afterEach } from "vitest";
+import { describe, it, expect, vi, afterEach } from "vitest";
 
 import { CubeService } from "../protoc-gen-open-models/furo/cube/CubeService";
 import { API_OPTIONS } from "../protoc-gen-open-models/API_OPTIONS";

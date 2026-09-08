@@ -36,6 +36,20 @@
       "$ref": "furo.cube.Materials.json",
       "description": "The material the cube is made of"
     },
+    "materialByPart": {
+      "type": "object",
+      "description": "The material of each named part",
+      "additionalProperties": {
+        "$ref": "furo.cube.Materials.json"
+      }
+    },
+    "materials": {
+      "type": "array",
+      "description": "Every material the cube contains",
+      "items": {
+        "$ref": "furo.cube.Materials.json"
+      }
+    },
     "name": {
       "type": "string"
     },
