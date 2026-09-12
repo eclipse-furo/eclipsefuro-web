@@ -38,6 +38,42 @@ service CubeService {
       body: "entity"
     };
   };
+
+  // Follow what happens to the cubes.
+  //
+  // Server streaming, so this one gets a StreamFetcher rather than a StrictFetcher. The framing is
+  // the server's choice: application/x-ndjson puts a whole CubeEvent on each line, text/event-stream
+  // names the oneof member in `event:` and carries that member's value in `data:`.
+  rpc Watch(CubeServiceWatchRequest) returns (stream CubeEvent) {
+    option(google.api.http) = {
+      get: "/v1/cubes:watch"
+    };
+  };
+}
+
+message CubeServiceWatchRequest {
+  // only report on this cube, all of them when empty
+  string cube_id = 1;
+}
+
+// One event of the cube stream. The name of the set `payload` member is the SSE event name.
+message CubeEvent {
+  oneof payload {
+    // a cube was created
+    CubeEntity cube_created = 1;
+    // a cube was deleted, the payload is its id
+    CubeDeleted cube_deleted = 2;
+    // the keepalive: it carries no `event:` name, so it arrives as the SSE default type `message`
+    CubeHeartbeat message = 3;
+  }
+}
+
+message CubeDeleted {
+  string cube_id = 1;
+}
+
+message CubeHeartbeat {
+  int32 count = 1;
 }
 
 message CubeServiceGetListRequest {

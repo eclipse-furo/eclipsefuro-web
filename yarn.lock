@@ -336,7 +336,7 @@
     lit "^3.2.1"
 
 "@furo/open-models@file:/Users/veith/Projects/theNorstroem/eclipsefuro-web/packages/furo-open-models":
-  version "1.21.2"
+  version "1.22.0"
   resolved "file:packages/furo-open-models"
   dependencies:
     "@types/json-schema" "^7.0.15"

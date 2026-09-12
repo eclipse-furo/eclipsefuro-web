@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeServiceWatchRequest.json",
+  "type": "object",
+  "properties": {
+    "cubeId": {
+      "type": "string",
+      "description": "only report on this cube, all of them when empty"
+    }
+  }
+}

@@ -58,6 +58,11 @@ export type { EntityServiceEventMap } from "./decorators/EntityServiceTypes";
 export { StrictFetcher } from "./StrictFetcher";
 export type { IApiOptions as IStrictApiOptions } from "./StrictFetcher";
 
+export { StreamFetcher } from "./StreamFetcher";
+export { StreamHttpError, StreamFramingError } from "./StreamErrors";
+export { parseSse, newSseState, type SseFrame, type SseState } from "./SseParser";
+export { parseNdjson } from "./NdjsonParser";
+
 export interface IAny {
   "@type": string;
   [key: string]: unknown;

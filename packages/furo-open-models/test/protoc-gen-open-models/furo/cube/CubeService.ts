@@ -3,6 +3,8 @@
 
 import { API_OPTIONS } from "../../API_OPTIONS";
 
+import { CubeEvent as FuroCubeCubeEvent, type ICubeEvent as IFuroCubeCubeEvent } from "./CubeEvent";
+
 import {
   CubeServiceGetListRequest as FuroCubeCubeServiceGetListRequest,
   type ICubeServiceGetListRequest as IFuroCubeCubeServiceGetListRequest,
@@ -29,6 +31,13 @@ import {
   CubeServiceUpdateResponse as FuroCubeCubeServiceUpdateResponse,
   type ICubeServiceUpdateResponse as IFuroCubeCubeServiceUpdateResponse,
 } from "./CubeServiceUpdateResponse";
+
+import {
+  CubeServiceWatchRequest as FuroCubeCubeServiceWatchRequest,
+  type ICubeServiceWatchRequest as IFuroCubeCubeServiceWatchRequest,
+} from "./CubeServiceWatchRequest";
+
+import { StreamFetcher } from "@furo/open-models/dist/StreamFetcher";
 
 import { StrictFetcher } from "@furo/open-models/dist/StrictFetcher";
 
@@ -57,4 +66,19 @@ export class CubeService {
     IFuroCubeCubeServiceUpdateRequest,
     IFuroCubeCubeServiceUpdateResponse
   >(API_OPTIONS, "PUT", "/v1/cubes/{cube_id}", FuroCubeCubeServiceUpdateRequest, FuroCubeCubeServiceUpdateResponse, "entity");
+
+  /**
+   *  Follow what happens to the cubes.
+   *
+   *  Server streaming, so this one gets a StreamFetcher rather than a StrictFetcher. The framing is
+   *  the server's choice: application/x-ndjson puts a whole CubeEvent on each line, text/event-stream
+   *  names the oneof member in `event:` and carries that member's value in `data:`.
+   */
+  public Watch: StreamFetcher<IFuroCubeCubeServiceWatchRequest, IFuroCubeCubeEvent> = new StreamFetcher<IFuroCubeCubeServiceWatchRequest, IFuroCubeCubeEvent>(
+    API_OPTIONS,
+    "GET",
+    "/v1/cubes:watch",
+    FuroCubeCubeServiceWatchRequest,
+    FuroCubeCubeEvent
+  );
 }

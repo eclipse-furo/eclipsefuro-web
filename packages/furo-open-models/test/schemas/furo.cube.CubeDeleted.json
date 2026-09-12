@@ -1,0 +1,10 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeDeleted.json",
+  "type": "object",
+  "properties": {
+    "cubeId": {
+      "type": "string"
+    }
+  }
+}

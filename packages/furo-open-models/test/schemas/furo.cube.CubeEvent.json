@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "furo.cube.CubeEvent.json",
+  "type": "object",
+  "description": "One event of the cube stream. The name of the set `payload` member is the SSE event name.CubeEvent | IMPORTANT: This message contains mutually exclusive field groups defined in x-oneof. Each x-oneof entry has a 'name' (the group name) and 'fields' (the field names). You must set exactly ONE field from each group, not multiple. Setting multiple fields from the same group will cause data loss.",
+  "properties": {
+    "cubeCreated": {
+      "$ref": "furo.cube.CubeEntity.json",
+      "description": "a cube was created"
+    },
+    "cubeDeleted": {
+      "$ref": "furo.cube.CubeDeleted.json",
+      "description": "a cube was deleted, the payload is its id"
+    },
+    "message": {
+      "$ref": "furo.cube.CubeHeartbeat.json",
+      "description": "the keepalive: it carries no `event:` name, so it arrives as the SSE default type `message`"
+    }
+  },
+  "x-oneof": [
+    {
+      "name": "payload",
+      "fields": [
+        "cubeCreated",
+        "cubeDeleted",
+        "message"
+      ]
+    }
+  ]
+}

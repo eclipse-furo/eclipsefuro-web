@@ -1,5 +1,8 @@
-import { FieldNode } from "./FieldNode";
 import type { JSONObject } from "@/well_known/Struct";
+import { buildPathAndBodyfield, describeRequest, type FieldNodeConstructor, type RequestDescriptors } from "./internal/HttpPath";
+import { createStreamMapper } from "./internal/StreamMapping";
+import { newSseState, parseSse } from "./SseParser";
+import { parseNdjson } from "./NdjsonParser";
 
 export interface IApiOptions {
   serverAddr: string;
@@ -24,9 +27,6 @@ interface Handlers<REQ, RES> {
   onRawJsonResponse?: (json: JSONObject) => void;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type FieldNodeConstructor = new (initData?: any, parent?: FieldNode, parentAttributeName?: string) => FieldNode;
-
 export class StrictFetcher<REQ, RES> {
   public timeout: number;
   public lastResponse: Response | undefined;
@@ -44,11 +44,8 @@ export class StrictFetcher<REQ, RES> {
   private ReqType: FieldNodeConstructor;
   private ResType: FieldNodeConstructor;
 
-  // Maps camelCase fieldName → protoName from the REQ type's field descriptors
-  private reqProtoNameMap: Map<string, string>;
-  // Maps camelCase fieldName → FieldConstructor from the REQ type's field descriptors
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private reqFieldConstructorMap: Map<string, any>;
+  // The REQ type's field descriptors: camelCase fieldName → protoName and → FieldConstructor
+  private descriptors: RequestDescriptors;
 
   constructor(options: IApiOptions, method: string, path: string, ReqType: FieldNodeConstructor, ResType: FieldNodeConstructor, bodyField?: keyof REQ | "*") {
     this.API_OPTIONS = options;
@@ -58,14 +55,7 @@ export class StrictFetcher<REQ, RES> {
     this.ReqType = ReqType;
     this.ResType = ResType;
 
-    // Build the proto name map from the REQ type's field descriptors
-    this.reqProtoNameMap = new Map<string, string>();
-    this.reqFieldConstructorMap = new Map<string, FieldNodeConstructor>();
-    const tempReq = new ReqType();
-    tempReq.__meta.nodeFields.forEach(field => {
-      this.reqProtoNameMap.set(field.fieldName, field.protoName);
-      this.reqFieldConstructorMap.set(field.fieldName, field.FieldConstructor as FieldNodeConstructor);
-    });
+    this.descriptors = describeRequest(ReqType);
 
     this.abortController = new AbortController();
     const { signal } = this.abortController;
@@ -310,71 +300,45 @@ export class StrictFetcher<REQ, RES> {
             });
         });
 
-        this.responseHandler.set("application/x-ndjson", r => {
-          const preserveProtoNames = this.API_OPTIONS.UseProtoNames;
-          const ResTypeCtor = this.ResType;
+        // Both streaming framings resolve with an AsyncIterable rather than a value. The framing
+        // and the mapping live in SseParser / NdjsonParser and StreamMapping, so StrictFetcher's
+        // one pass over a stream and StreamFetcher's reconnecting loop cannot drift apart.
+        const mapper = createStreamMapper<RES>(this.ResType, this.API_OPTIONS.UseProtoNames);
 
-          const reader = r.body?.getReader();
-          if (!reader) {
+        this.responseHandler.set("application/x-ndjson", r => {
+          const body = r.body;
+          if (!body) {
             throw new Error("NDJSON response has no readable body");
           }
 
-          const decoder = new TextDecoder();
-          let buffer = "";
-
-          const iterator = {
+          resolve({
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
-              // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- loop exits via break on done
-              while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                buffer += decoder.decode(value, { stream: true });
-
-                const lines = buffer.split("\n");
-                buffer = lines.pop() ?? "";
-
-                for (const line of lines) {
-                  const trimmed = line.trim();
-                  if (trimmed === "") {
-                    continue;
-                  }
-
-                  let parsed: RES;
-                  try {
-                    parsed = JSON.parse(trimmed) as RES;
-                  } catch {
-                    throw new Error(`Failed to parse NDJSON line: ${trimmed}`);
-                  }
-
-                  if (preserveProtoNames) {
-                    const resNode = new ResTypeCtor();
-                    resNode.__fromProtoNameJson(parsed);
-                    yield resNode.__toLiteral() as RES;
-                  } else {
-                    yield parsed;
-                  }
-                }
+              for await (const line of parseNdjson(body)) {
+                yield mapper.fromNdjsonLine(line);
               }
+            },
+          });
+        });
 
-              if (buffer.trim() !== "") {
-                try {
-                  const parsed = JSON.parse(buffer.trim()) as RES;
-                  if (preserveProtoNames) {
-                    const resNode = new ResTypeCtor();
-                    resNode.__fromProtoNameJson(parsed);
-                    yield resNode.__toLiteral() as RES;
-                  } else {
-                    yield parsed;
-                  }
-                } catch {
-                  throw new Error(`Failed to parse final NDJSON line: ${buffer.trim()}`);
+        // One pass, no reconnect: that is StreamFetcher's job. Registered so a StrictFetcher aimed
+        // at an event stream parses it instead of falling through to the json handler.
+        this.responseHandler.set("text/event-stream", r => {
+          const body = r.body;
+          if (!body) {
+            throw new Error("SSE response has no readable body");
+          }
+
+          const state = newSseState();
+          resolve({
+            async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
+              for await (const frame of parseSse(body, state)) {
+                const message = mapper.fromSseFrame(frame);
+                if (message !== undefined) {
+                  yield message;
                 }
               }
             },
-          };
-
-          resolve(iterator);
+          });
         });
 
         this.responseHandler.set("application/octet-stream", r => {
@@ -427,41 +391,6 @@ export class StrictFetcher<REQ, RES> {
     });
   }
 
-  /**
-   * Append one query parameter, percent encoded.
-   *
-   * Both halves are encoded: a value carrying `&` or `=` would otherwise be read by the server as
-   * additional parameters.
-   */
-  private static pushParam(params: string[], name: string, value: unknown): void {
-    params.push(`${encodeURIComponent(name)}=${encodeURIComponent(String(value))}`);
-  }
-
-  /**
-   * Flatten an already serialized message into dotted query parameters.
-   *
-   * `google/api/http.proto`: "In the case of a message type, each field of the message is mapped to
-   * a separate parameter, such as `...?foo.a=A&foo.b=B&foo.c=C`".
-   */
-  private static flattenParam(params: string[], prefix: string, value: unknown): void {
-    if (value === null || value === undefined) {
-      return;
-    }
-    if (Array.isArray(value)) {
-      value.forEach(entry => {
-        StrictFetcher.flattenParam(params, prefix, entry);
-      });
-      return;
-    }
-    if (typeof value === "object") {
-      Object.entries(value).forEach(([key, child]) => {
-        StrictFetcher.flattenParam(params, `${prefix}.${key}`, child);
-      });
-      return;
-    }
-    StrictFetcher.pushParam(params, prefix, value);
-  }
-
   private buildPathAndBodyfield(
     path: string,
     bodyField: keyof REQ | "*" | undefined,
@@ -470,111 +399,16 @@ export class StrictFetcher<REQ, RES> {
     evaluatedPath: string;
     evaluatedBody: string | undefined;
   } {
-    let evaluatedPath = path;
-    let evaluatedBody;
-
-    const keysForBodyOrQueryParams = new Map<string, keyof REQ>();
-    Object.keys(rqo as object).forEach(key => {
-      keysForBodyOrQueryParams.set(key, key as keyof REQ);
-    });
-
-    // Build a reverse map: protoName → camelCase fieldName for path template resolution
-    const protoToFieldMap = new Map<string, string>();
-    this.reqProtoNameMap.forEach((protoName, fieldName) => {
-      protoToFieldMap.set(protoName, fieldName);
-    });
-
-    const fields = [...path.matchAll(/\{([^}]+)}/g)];
-    // Replace URL templates with values: /v1/cube/{cube_id} => /v1/cube/12
-    // Path templates use proto names, but rqo uses camelCase keys
-    fields.forEach(field => {
-      const protoName = field[1];
-      const camelKey = (protoToFieldMap.get(protoName) ?? protoName) as keyof REQ;
-      const rqoValue = rqo[camelKey];
-      evaluatedPath = evaluatedPath.replace(field[0], String(rqoValue));
-      keysForBodyOrQueryParams.delete(camelKey as string);
-    });
-
-    if (bodyField === "*") {
-      // Use FieldNode serialization for body when UseProtoNames is true
-      if (this.API_OPTIONS.UseProtoNames) {
-        const reqNode = new this.ReqType();
-        // Build a literal from remaining keys
-        const literalBody: Record<string, unknown> = {};
-        keysForBodyOrQueryParams.forEach(key => {
-          literalBody[key as string] = rqo[key];
-        });
-        reqNode.__fromLiteral(literalBody);
-        evaluatedBody = JSON.stringify(reqNode.__toJson());
-      } else {
-        const body: Record<string, unknown> = {};
-        keysForBodyOrQueryParams.forEach(key => {
-          body[key as string] = rqo[key];
-        });
-        evaluatedBody = JSON.stringify(body);
-      }
-    } else {
-      // Build query params
-      const params: string[] = [];
-      if (bodyField !== undefined) {
-        keysForBodyOrQueryParams.delete(bodyField as string);
-      }
-      keysForBodyOrQueryParams.forEach(key => {
-        // Use the reqProtoNameMap for proto name lookup instead of generic conversion
-        const paramName = this.API_OPTIONS.UseProtoNamesForQueryParams ? (this.reqProtoNameMap.get(key as string) ?? (key as string)) : (key as string);
-        const value = rqo[key];
-
-        // A non repeated message becomes one parameter per leaf. Serializing it through its own
-        // FieldNode first keeps enums, int64 and oneofs consistent with the body encoding, and lets
-        // EmitDefaultValues / EmitUnpopulated decide whether an unset field contributes at all.
-        // Primitives carry a FieldConstructor too, so the object check is what selects this branch.
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- FieldConstructor stored from meta is untyped
-        const FieldCtor = this.reqFieldConstructorMap.get(key as string);
-        if (FieldCtor && value !== null && typeof value === "object" && !Array.isArray(value)) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- FieldConstructor is dynamically resolved from meta
-          const fieldNode = new FieldCtor(undefined) as FieldNode;
-          fieldNode.__fromLiteral(value);
-          StrictFetcher.flattenParam(params, paramName, this.API_OPTIONS.UseProtoNamesForQueryParams ? fieldNode.__toJson() : fieldNode.__toLiteral());
-          return;
-        }
-
-        if (Array.isArray(value)) {
-          (value as unknown[]).forEach(e => {
-            StrictFetcher.pushParam(params, paramName, e);
-          });
-        } else {
-          StrictFetcher.pushParam(params, paramName, value);
-        }
-      });
-      if (params.length) {
-        evaluatedPath = `${evaluatedPath}?${params.join("&")}`;
-      }
-
-      if (bodyField !== undefined) {
-        // Use FieldNode serialization for the named body field when UseProtoNames is true
-        if (this.API_OPTIONS.UseProtoNames) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment -- FieldConstructor stored from meta is untyped
-          const FieldCtor = this.reqFieldConstructorMap.get(bodyField as string);
-          if (FieldCtor) {
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-call -- FieldConstructor is dynamically resolved from meta
-            const fieldNode = new FieldCtor(undefined) as FieldNode;
-            fieldNode.__fromLiteral(rqo[bodyField] || {});
-            evaluatedBody = JSON.stringify(fieldNode.__toJson());
-          } else {
-            evaluatedBody = JSON.stringify(rqo[bodyField]);
-          }
-        } else {
-          evaluatedBody = JSON.stringify(rqo[bodyField]);
-        }
-      }
-    }
-
-    evaluatedPath = `${this.API_OPTIONS.serverAddr}${this.API_OPTIONS.ApiBaseURL}${evaluatedPath}`;
-
-    return {
-      evaluatedPath,
-      evaluatedBody,
-    };
+    return buildPathAndBodyfield<REQ>(
+      {
+        apiOptions: this.API_OPTIONS,
+        ReqType: this.ReqType,
+        descriptors: this.descriptors,
+      },
+      path,
+      bodyField,
+      rqo
+    );
   }
 
   onResponse?: (response: RES, serverResponse: Response) => void;
