@@ -218,6 +218,72 @@ describe("StreamFetcher", () => {
     });
   });
 
+  describe("finished streams", () => {
+    it("ends at data: [DONE] without parsing it, and does not reconnect", async () => {
+      const { calls } = stubFetch([
+        () =>
+          streamResponse(
+            ['event: cube_deleted\ndata: {"cube_id":"a"}\n\n', "data: [DONE]\n\n", 'event: cube_deleted\ndata: {"cube_id":"after"}\n\n'],
+            "text/event-stream"
+          ),
+      ]);
+
+      const fetcher = newFetcher();
+      let closed = 0;
+      fetcher.setHandlers({
+        onClosed: () => {
+          closed += 1;
+        },
+      });
+
+      const seen: ICubeEvent[] = [];
+      // No break and no close(): the loop has to end by itself.
+      for await (const message of await fetcher.invoke({})) {
+        seen.push(message);
+      }
+
+      expect(seen.map(m => m.cubeDeleted?.cubeId)).to.eql(["a"]);
+      expect(calls).to.have.lengthOf(1);
+      expect(closed).to.equal(1);
+    });
+
+    it("never reconnects a POST: the body ending ends the stream", async () => {
+      const { calls } = stubFetch([() => streamResponse(['event: cube_deleted\ndata: {"cube_id":"p"}\n\nretry: 1\n\n'], "text/event-stream")]);
+
+      const fetcher = new StreamFetcher<Record<string, never>, ICubeEvent>(API_OPTIONS, "POST", "/v1/cubes:watch", CubeServiceWatchRequest, CubeEvent, "*");
+      const seen: ICubeEvent[] = [];
+      for await (const message of await fetcher.invoke({})) {
+        seen.push(message);
+      }
+
+      expect(seen).to.have.lengthOf(1);
+      // A second call would have sent the request, and its side effect, again.
+      expect(calls).to.have.lengthOf(1);
+      expect(calls[0].method).to.equal("POST");
+    });
+
+    it("throws instead of retrying a POST the server could not be reached for", async () => {
+      let calls = 0;
+      vi.stubGlobal("fetch", () => {
+        calls += 1;
+        return Promise.reject(new TypeError("Failed to fetch"));
+      });
+
+      const fetcher = new StreamFetcher<Record<string, never>, ICubeEvent>(API_OPTIONS, "POST", "/v1/cubes:watch", CubeServiceWatchRequest, CubeEvent, "*");
+      let error: unknown;
+      try {
+        for await (const message of await fetcher.invoke({})) {
+          expect.fail(`unexpected message ${JSON.stringify(message)}`);
+        }
+      } catch (e) {
+        error = e;
+      }
+
+      expect(error).to.be.instanceOf(TypeError);
+      expect(calls).to.equal(1);
+    });
+  });
+
   describe("request building", () => {
     it("puts request fields on the query string, like a unary GET", async () => {
       const { calls } = stubFetch([() => streamResponse(['event: cube_deleted\ndata: {"cube_id":"x"}\n\n'], "text/event-stream")]);

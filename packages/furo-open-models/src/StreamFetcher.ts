@@ -1,6 +1,6 @@
 import type { IApiOptions } from "./StrictFetcher";
 import { buildPathAndBodyfield, describeRequest, type FieldNodeConstructor, type RequestDescriptors } from "./internal/HttpPath";
-import { createStreamMapper, type StreamMapper } from "./internal/StreamMapping";
+import { createStreamMapper, isDoneFrame, type StreamMapper } from "./internal/StreamMapping";
 import { newSseState, parseSse, type SseState } from "./SseParser";
 import { parseNdjson } from "./NdjsonParser";
 import { StreamFramingError, StreamHttpError } from "./StreamErrors";
@@ -17,7 +17,7 @@ interface Handlers {
   onReconnect?: (response: Response) => void;
   /** The stream ended with an error rather than simply dropping. */
   onStreamError?: (error: unknown, response: Response | undefined) => void;
-  /** close() was called and the loop has stopped. */
+  /** The loop has stopped: close() was called, or a stream that does not reconnect finished. */
   onClosed?: () => void;
 }
 
@@ -33,6 +33,11 @@ interface Handlers {
  *   which means the first connect and every reconnect fail the same way.
  * - **It reconnects.** A dropped body is retried on the server's `retry:` delay. A non-2xx is not:
  *   that is how a dead session surfaces, and retrying it would spin.
+ *
+ * Only a GET reconnects. Any other method is a one-shot stream, like an LLM completion answered with
+ * `stream: true`: sending it again would repeat its side effect (the prompt, and its cost), so the
+ * loop ends with the body and a failure is thrown instead of retried. A `data: [DONE]` frame also
+ * ends the loop, whatever the method: the server has said it is finished.
  *
  * The stream is **not resumed**. A reconnect starts a fresh stream and does not replay what was
  * missed, so a consumer whose events are cache invalidations should refetch on `onReconnect`.
@@ -58,6 +63,8 @@ export class StreamFetcher<REQ, RES> {
 
   private abortController: AbortController | undefined;
   private closed = false;
+  /** Whether a dropped or finished stream is opened again, see the class comment. */
+  private reconnects: boolean;
   /**
    * Read `closed` through a call, not the field.
    *
@@ -77,6 +84,7 @@ export class StreamFetcher<REQ, RES> {
     this.method = method;
     this.path = path;
     this.bodyField = bodyField;
+    this.reconnects = method.toUpperCase() === "GET";
     this.ReqType = ReqType;
     this.descriptors = describeRequest(ReqType);
     this.mapper = createStreamMapper<RES>(ResType, options.UseProtoNames);
@@ -132,6 +140,9 @@ export class StreamFetcher<REQ, RES> {
           // The server is unreachable. There is no status to act on, so this is a drop, not a
           // refusal: back off and try again.
           this.onStreamError?.(error, undefined);
+          if (!this.reconnects) {
+            throw error;
+          }
           consecutiveFailures += 1;
           await this.pause(state, consecutiveFailures);
           continue;
@@ -157,15 +168,16 @@ export class StreamFetcher<REQ, RES> {
         }
         connectedBefore = true;
 
+        let done = false;
         try {
-          yield* this.readBody(response, state);
+          done = yield* this.readBody(response, state);
         } catch (error) {
           if (this.isClosed()) {
             return;
           }
           this.onStreamError?.(error, response);
-          if (error instanceof StreamFramingError) {
-            // Nothing about this response will change on a retry.
+          if (error instanceof StreamFramingError || !this.reconnects) {
+            // Nothing about this response will change on a retry, or a retry would repeat the request.
             throw error;
           }
           // Anything else failed mid stream: treated as a drop, like a clean end, because the
@@ -175,6 +187,12 @@ export class StreamFetcher<REQ, RES> {
         }
 
         if (this.isClosed()) {
+          return;
+        }
+
+        if (done || !this.reconnects) {
+          // Finished, not dropped. Closing makes the finally report it through onClosed.
+          this.closed = true;
           return;
         }
 
@@ -234,8 +252,10 @@ export class StreamFetcher<REQ, RES> {
 
   /**
    * Read one open body to its end, mapping whichever framing the server chose.
+   *
+   * @return true when the server sent `data: [DONE]`, so the stream is complete.
    */
-  private async *readBody(response: Response, state: SseState): AsyncGenerator<RES> {
+  private async *readBody(response: Response, state: SseState): AsyncGenerator<RES, boolean> {
     if (!response.body) {
       throw new StreamFramingError("Stream response has no readable body");
     }
@@ -246,7 +266,7 @@ export class StreamFetcher<REQ, RES> {
       for await (const line of parseNdjson(response.body)) {
         yield this.mapper.fromNdjsonLine(line);
       }
-      return;
+      return false;
     }
 
     // An absent Content-Type is read as SSE, which is what a server that forgot it almost always
@@ -256,11 +276,15 @@ export class StreamFetcher<REQ, RES> {
     }
 
     for await (const frame of parseSse(response.body, state)) {
+      if (isDoneFrame(frame)) {
+        return true;
+      }
       const message = this.mapper.fromSseFrame(frame);
       if (message !== undefined) {
         yield message;
       }
     }
+    return false;
   }
 
   /**

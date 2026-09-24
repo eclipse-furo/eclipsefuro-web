@@ -1,6 +1,6 @@
 import type { JSONObject } from "@/well_known/Struct";
 import { buildPathAndBodyfield, describeRequest, type FieldNodeConstructor, type RequestDescriptors } from "./internal/HttpPath";
-import { createStreamMapper } from "./internal/StreamMapping";
+import { createStreamMapper, isDoneFrame } from "./internal/StreamMapping";
 import { newSseState, parseSse } from "./SseParser";
 import { parseNdjson } from "./NdjsonParser";
 
@@ -332,6 +332,9 @@ export class StrictFetcher<REQ, RES> {
           resolve({
             async *[Symbol.asyncIterator](): AsyncGenerator<RES> {
               for await (const frame of parseSse(body, state)) {
+                if (isDoneFrame(frame)) {
+                  return;
+                }
                 const message = mapper.fromSseFrame(frame);
                 if (message !== undefined) {
                   yield message;

@@ -19,6 +19,14 @@ export interface StreamMapper<RES> {
   fromNdjsonLine(line: string): RES;
 }
 
+/**
+ * The `data: [DONE]` frame that OpenAI-compatible servers send as the last event of a stream. It is
+ * not JSON and carries no message: it only says the stream is complete.
+ */
+export function isDoneFrame(frame: SseFrame): boolean {
+  return frame.data === "[DONE]";
+}
+
 export function createStreamMapper<RES>(ResType: FieldNodeConstructor, useProtoNames: boolean): StreamMapper<RES> {
   // protoName → the oneof member it names, read once.
   const oneofMembers = new Map<string, string>();

@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package furo.type;
+
+option go_package = "furo/type;typepb";
+
+import "google/protobuf/struct.proto";
+
+// Fields whose JSON shape is not fixed by the proto.
+message Dynamic {
+  // Any JSON value: a string, a number, a bool, null, an object or an array.
+  google.protobuf.Value value = 1;
+
+  // A JSON array.
+  google.protobuf.ListValue list_value = 2;
+
+  // A JSON object.
+  google.protobuf.Struct struct_value = 3;
+
+  // A plain field next to them, to see its name mapped while theirs are not.
+  string display_name = 4;
+}

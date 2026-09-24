@@ -34,6 +34,7 @@ export { StringValue } from "./well_known/StringValue";
 export { Timestamp } from "./well_known/Timestamp";
 export { Struct } from "./well_known/Struct";
 export { ListValue } from "./well_known/ListValue";
+export { Value } from "./well_known/Value";
 
 export type { JSONValue } from "./well_known/Struct";
 export type { JSONObject } from "./well_known/Struct";

@@ -376,12 +376,18 @@ export abstract class FieldNode {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   __mapProtoNameJsonToJson(data: any): any {
     const literal: Record<string, unknown> = {};
+    // proto3 json: null on a message field means the field is absent (OpenAI sends `"logprobs": null`)
+    if (data === null || typeof data !== "object") {
+      return literal;
+    }
     // map json to literal
     this.__meta.nodeFields.forEach(f => {
       const jsonName = OPEN_MODELS_OPTIONS.UseProtoNames ? f.protoName : this.__toLowerCamelCaseWithoutXPrefix(f.protoName);
+      const value = (data as Record<string, unknown>)[jsonName];
 
-      if ((data as Record<string, unknown>)[jsonName] !== undefined) {
-        literal[f.fieldName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__mapProtoNameJsonToJson((data as Record<string, unknown>)[jsonName]);
+      // null reads as absent, like a missing key, for every field type
+      if (value !== undefined && value !== null) {
+        literal[f.fieldName] = (this[`_${f.fieldName}` as keyof FieldNode] as FieldNode).__mapProtoNameJsonToJson(value);
       }
     });
     return literal;
