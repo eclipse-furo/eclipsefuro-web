@@ -17,6 +17,8 @@ export interface StreamMapper<RES> {
   fromSseFrame(frame: SseFrame): RES | undefined;
   /** Map one ndjson line. */
   fromNdjsonLine(line: string): RES;
+  /** Map a whole `application/json` body: the server answered the stream with one message. */
+  fromJson(body: string): RES;
 }
 
 /**
@@ -76,6 +78,16 @@ export function createStreamMapper<RES>(ResType: FieldNodeConstructor, useProtoN
         parsed = JSON.parse(line);
       } catch {
         throw new Error(`Failed to parse NDJSON line: ${line}`);
+      }
+      return toLiteral(parsed);
+    },
+
+    fromJson(body: string): RES {
+      let parsed: unknown;
+      try {
+        parsed = JSON.parse(body);
+      } catch {
+        throw new Error(`Failed to parse JSON body: ${body}`);
       }
       return toLiteral(parsed);
     },

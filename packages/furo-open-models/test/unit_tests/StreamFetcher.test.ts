@@ -143,7 +143,8 @@ describe("StreamFetcher", () => {
     });
 
     it("names a Content-Type it cannot stream instead of guessing", async () => {
-      stubFetch([() => streamResponse(['{"cube_deleted":{}}'], "application/json")]);
+      // An html error page from a proxy is the realistic case.
+      stubFetch([() => streamResponse(["<html>Bad Gateway</html>"], "text/html")]);
 
       const fetcher = newFetcher();
       let caught: unknown;
@@ -153,7 +154,7 @@ describe("StreamFetcher", () => {
         caught = error;
       }
 
-      expect((caught as Error).message).to.contain("application/json");
+      expect((caught as Error).message).to.contain("text/html");
     });
   });
 
@@ -281,6 +282,43 @@ describe("StreamFetcher", () => {
 
       expect(error).to.be.instanceOf(TypeError);
       expect(calls).to.equal(1);
+    });
+  });
+
+  describe("a single JSON message", () => {
+    it("yields an application/json body once and ends, even for a GET", async () => {
+      const { calls } = stubFetch([() => streamResponse(['{"cube_deleted":{"cube_id":"whole"}}'], "application/json; charset=utf-8")]);
+
+      const fetcher = newFetcher();
+      let closed = 0;
+      fetcher.setHandlers({
+        onClosed: () => {
+          closed += 1;
+        },
+      });
+
+      const seen: ICubeEvent[] = [];
+      // No break and no close(): the loop has to end by itself.
+      for await (const message of await fetcher.invoke({})) {
+        seen.push(message);
+      }
+
+      expect(seen.map(m => m.cubeDeleted?.cubeId)).to.eql(["whole"]);
+      expect(calls).to.have.lengthOf(1);
+      expect(closed).to.equal(1);
+    });
+
+    it("yields nothing for an empty JSON body and ends", async () => {
+      const { calls } = stubFetch([() => streamResponse([" \n"], "application/json")]);
+
+      const fetcher = newFetcher();
+      const seen: ICubeEvent[] = [];
+      for await (const message of await fetcher.invoke({})) {
+        seen.push(message);
+      }
+
+      expect(seen).to.have.lengthOf(0);
+      expect(calls).to.have.lengthOf(1);
     });
   });
 

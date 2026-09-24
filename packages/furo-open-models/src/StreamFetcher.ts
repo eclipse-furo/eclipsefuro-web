@@ -43,7 +43,10 @@ interface Handlers {
  * missed, so a consumer whose events are cache invalidations should refetch on `onReconnect`.
  * SseParser does track `id:`, so adding resume later is a change here rather than a rewrite.
  *
- * Either framing works, chosen by the server through Content-Type, see {@link StreamMapper}.
+ * The server chooses the framing through Content-Type, see {@link StreamMapper}: SSE, ndjson, or a
+ * single `application/json` message. The last one is a stream the server answered in one piece, as an
+ * OpenAI-compatible server does for `stream: false`. It yields that message and ends, without
+ * reconnecting, whatever the method.
  */
 export class StreamFetcher<REQ, RES> {
   /** How long the *headers* may take. Once a stream is open it runs without a deadline. */
@@ -253,7 +256,8 @@ export class StreamFetcher<REQ, RES> {
   /**
    * Read one open body to its end, mapping whichever framing the server chose.
    *
-   * @return true when the server sent `data: [DONE]`, so the stream is complete.
+   * @return true when the server said the stream is complete: a `data: [DONE]` frame, or a whole
+   * `application/json` body.
    */
   private async *readBody(response: Response, state: SseState): AsyncGenerator<RES, boolean> {
     if (!response.body) {
@@ -261,6 +265,14 @@ export class StreamFetcher<REQ, RES> {
     }
 
     const contentType = (response.headers.get("content-type") ?? "").split(";")[0].trim().toLowerCase();
+
+    if (contentType === "application/json") {
+      const body = await response.text();
+      if (body.trim() !== "") {
+        yield this.mapper.fromJson(body);
+      }
+      return true;
+    }
 
     if (contentType === "application/x-ndjson") {
       for await (const line of parseNdjson(response.body)) {
@@ -272,7 +284,7 @@ export class StreamFetcher<REQ, RES> {
     // An absent Content-Type is read as SSE, which is what a server that forgot it almost always
     // meant. A type we do know we cannot stream is named rather than guessed at.
     if (contentType !== "" && contentType !== "text/event-stream") {
-      throw new StreamFramingError(`Cannot stream Content-Type '${contentType}', expected text/event-stream or application/x-ndjson`);
+      throw new StreamFramingError(`Cannot stream Content-Type '${contentType}', expected text/event-stream, application/x-ndjson or application/json`);
     }
 
     for await (const frame of parseSse(response.body, state)) {
