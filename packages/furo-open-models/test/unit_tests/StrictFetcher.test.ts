@@ -122,7 +122,7 @@ describe("StrictFetcher", () => {
 
     await fetcher.invoke({ cubeId: "123", fields: "name" });
 
-    const body = JSON.parse(capturedBody);
+    const body = JSON.parse(capturedBody) as Record<string, unknown>;
     // With UseProtoNames=true, body keys should be proto names via FieldNode serialization
     expect(body).toHaveProperty("cube_id");
     expect(body).toHaveProperty("fields");
@@ -153,7 +153,7 @@ describe("StrictFetcher", () => {
       entity: { displayName: "My Cube", description: "A test cube" },
     });
 
-    const body = JSON.parse(capturedBody);
+    const body = JSON.parse(capturedBody) as Record<string, unknown>;
     // The entity body should have proto names from FieldNode serialization
     expect(body).toHaveProperty("display_name", "My Cube");
     expect(body).toHaveProperty("description", "A test cube");
@@ -243,7 +243,7 @@ describe("StrictFetcher", () => {
       entity: { displayName: "My Cube" },
     });
 
-    const body = JSON.parse(capturedBody);
+    const body = JSON.parse(capturedBody) as Record<string, unknown>;
     // With UseProtoNames=false, body should pass through as-is (camelCase)
     expect(body).toHaveProperty("displayName", "My Cube");
   });
@@ -342,6 +342,65 @@ describe("StrictFetcher", () => {
 
     await expect(service.Get.invoke({ cubeId: "missing" })).rejects.toBeDefined();
     expect(errorHandlerCalled).toBe(true);
+  });
+
+  it("should reject with the error body as sent, not mapped through the response type", async () => {
+    API_OPTIONS.UseProtoNames = true;
+    OPEN_MODELS_OPTIONS.UseProtoNames = true;
+
+    const status = {
+      error: "failed_precondition",
+      message: "cube is still in use",
+      code: 9,
+      details: [
+        {
+          "@type": "type.googleapis.com/google.rpc.PreconditionFailure",
+          violations: [{ type: "IN_USE", subject: "cube", description: "The cube is referenced by an open order" }],
+        },
+      ],
+    };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve(
+          new Response(JSON.stringify(status), {
+            status: 400,
+            headers: { "content-type": "application/json" },
+          })
+        )
+      )
+    );
+
+    const service = new CubeService();
+    let handed: unknown;
+    service.Get.onResponseError = parsedResponse => {
+      handed = parsedResponse;
+    };
+
+    await expect(service.Get.invoke({ cubeId: "c1" })).rejects.toEqual(status);
+    expect(handed).toEqual(status);
+  });
+
+  it("should reject with an error body of any shape as sent, not only a google.rpc Status", async () => {
+    API_OPTIONS.UseProtoNames = true;
+    OPEN_MODELS_OPTIONS.UseProtoNames = true;
+
+    // a custom server, no transcoder: its own error shape
+    const body = { reason: "locked", retry_after: 30 };
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(() =>
+        Promise.resolve(
+          new Response(JSON.stringify(body), {
+            status: 423,
+            headers: { "content-type": "application/json" },
+          })
+        )
+      )
+    );
+
+    const service = new CubeService();
+    await expect(service.Get.invoke({ cubeId: "c1" })).rejects.toEqual(body);
   });
 
   it("should percent encode query param values", async () => {

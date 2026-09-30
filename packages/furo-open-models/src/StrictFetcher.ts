@@ -221,7 +221,11 @@ export class StrictFetcher<REQ, RES> {
           this.onResponseErrorRaw(response);
         }
 
-        this._parseResponse(response)
+        // An error body is whatever the server sends: a google.rpc.Status behind a gRPC transcoder,
+        // any other shape from a custom server. It is not the response type, and mapped through
+        // ResType it would lose every field ResType does not have - all of them for
+        // google.protobuf.Empty. So it is handed on as parsed.
+        this._parseResponse(response, false)
           .then(r => {
             // eslint-disable-next-line @typescript-eslint/prefer-promise-reject-errors -- changing rejection types would break downstream error handlers
             reject(r);
@@ -240,7 +244,12 @@ export class StrictFetcher<REQ, RES> {
     });
   }
 
-  _parseResponse(response: Response) {
+  /**
+   * Reads the body by its content type. A JSON body is mapped through the response type when
+   * `asResponseType` is set (with `UseProtoNames`), and handed on as parsed otherwise - which is
+   * what an error body needs, see `_reworkRequest`.
+   */
+  _parseResponse(response: Response, asResponseType = true) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
       if (response) {
@@ -285,7 +294,7 @@ export class StrictFetcher<REQ, RES> {
                 this.onRawJsonResponse(json);
               }
 
-              if (this.API_OPTIONS.UseProtoNames) {
+              if (asResponseType && this.API_OPTIONS.UseProtoNames) {
                 // Use FieldNode-based conversion instead of generic Mapper
                 const resNode = new this.ResType();
                 resNode.__fromProtoNameJson(json);
