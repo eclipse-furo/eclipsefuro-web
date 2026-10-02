@@ -15,7 +15,7 @@ const propertyBindingsMetadata = new WeakMap<object, Map<string, PropertyBinding
 
 /**
  * Metadata storage for event method bindings
- * Maps: class constructor -> Array<{ propertyKey, service, eventType, method }>
+ * Maps: class constructor -> Array<{ propertyKey, service, eventType, method }>, own to each class
  */
 interface EventBindingMeta {
   propertyKey: string;
@@ -171,12 +171,7 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
         const ctor = target.constructor as typeof ReactiveElement;
 
         // Store method metadata on the constructor
-        let methods = (ctor as unknown as Record<symbol, EventBindingMeta[] | undefined>)[EVENT_METHODS];
-        if (!methods) {
-          methods = [];
-          (ctor as unknown as Record<symbol, EventBindingMeta[]>)[EVENT_METHODS] = methods;
-        }
-        methods.push({ propertyKey, service, eventType, method: originalMethod });
+        ownEventMethods(ctor).push({ propertyKey, service, eventType, method: originalMethod });
 
         // Patch lifecycle methods (only once per class)
         patchEventLifecycle(ctor);
@@ -199,6 +194,73 @@ function inferDetailKey(eventType: string, propertyKey: string): string {
 }
 
 /**
+ * The registrations of one class, never a base class's.
+ *
+ * `ctor[EVENT_METHODS]` is found through the prototype chain, so reading it and pushing would append
+ * a subclass's methods to its base's array - and every base instance would then call them. This
+ * creates an own array the first time a class registers anything.
+ */
+function ownEventMethods(ctor: object): EventBindingMeta[] {
+  const record = ctor as Record<symbol, EventBindingMeta[] | undefined>;
+  const own = Object.prototype.hasOwnProperty.call(ctor, EVENT_METHODS) ? record[EVENT_METHODS] : undefined;
+  if (own) {
+    return own;
+  }
+  const created: EventBindingMeta[] = [];
+  record[EVENT_METHODS] = created;
+  return created;
+}
+
+/**
+ * Every `@onEvent` registration that applies to this instance, its base classes included. A
+ * subclass that redeclares a method wins, and the base's version is not bound twice.
+ */
+function collectEventMethods(instance: object): EventBindingMeta[] {
+  const collected: EventBindingMeta[] = [];
+  const seen = new Set<string>();
+
+  // walked subclass first, so the nearest declaration of a method is the one that binds
+  for (let ctor: unknown = instance.constructor; typeof ctor === "function"; ctor = Object.getPrototypeOf(ctor)) {
+    if (!Object.prototype.hasOwnProperty.call(ctor, EVENT_METHODS)) {
+      continue;
+    }
+    const methods = (ctor as unknown as Record<symbol, EventBindingMeta[] | undefined>)[EVENT_METHODS];
+    methods?.forEach(meta => {
+      if (seen.has(meta.propertyKey)) {
+        return;
+      }
+      seen.add(meta.propertyKey);
+      collected.push(meta);
+    });
+  }
+
+  return collected;
+}
+
+/**
+ * Every `@bindToEvent` registration that applies to this instance.
+ *
+ * `propertyBindingsMetadata` is keyed by the exact prototype a decorator ran on, so a lookup on the
+ * instance's own prototype alone would silently drop everything a base class declared.
+ */
+function collectPropertyBindings(instance: object): Map<string, PropertyBindingMeta> {
+  const chain: object[] = [];
+  for (let proto: unknown = Object.getPrototypeOf(instance); proto !== null && proto !== undefined; proto = Object.getPrototypeOf(proto)) {
+    chain.push(proto);
+  }
+
+  // base first, so a subclass redeclaring the same property overwrites it
+  const merged = new Map<string, PropertyBindingMeta>();
+  chain.reverse().forEach(proto => {
+    propertyBindingsMetadata.get(proto)?.forEach((meta, propKey) => {
+      merged.set(propKey, meta);
+    });
+  });
+
+  return merged;
+}
+
+/**
  * Patch connectedCallback/disconnectedCallback for property bindings
  */
 function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
@@ -218,8 +280,8 @@ function patchPropertyLifecycle(ctor: typeof ReactiveElement): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
-    const metadata = propertyBindingsMetadata.get(Object.getPrototypeOf(this) as object);
-    if (!metadata) return;
+    const metadata = collectPropertyBindings(this);
+    if (metadata.size === 0) return;
 
     const listeners = new Map<string, { listener: EventListener; service: EventTarget; eventType: string }>();
     this[PROPERTY_LISTENERS] = listeners;
@@ -273,9 +335,8 @@ function patchEventLifecycle(ctor: typeof ReactiveElement): void {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
     originalConnected?.call(this);
 
-    const methods = (this.constructor as unknown as Record<symbol, EventBindingMeta[]>)[EVENT_METHODS];
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition -- runtime data may not match types (REST API input)
-    if (!methods) return;
+    const methods = collectEventMethods(this);
+    if (methods.length === 0) return;
 
     const listeners = new Map<string, { listener: EventListener; service: EventTarget; eventType: string }>();
     this[EVENT_LISTENERS] = listeners;

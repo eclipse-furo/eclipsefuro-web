@@ -242,7 +242,7 @@ or for a model without a typed `toLiteral()`, such as an `ARRAY`.
 
 ### Inheritance
 
-Bindings declared on a base class apply to its subclasses. A subclass that redeclares a property or an
+Model and service bindings declared on a base class apply to its subclasses. A subclass that redeclares a property or an
 `@onEvent` method wins, and the base version is not bound twice. A subclass's registrations never reach an
 instance of the base class.
 

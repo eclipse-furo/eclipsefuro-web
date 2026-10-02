@@ -156,4 +156,98 @@ describe("ServiceBindings", () => {
     // @ts-expect-error - not an X-changed event, the key must be named
     s.bindToEvent("response-received");
   });
+
+  describe("inheritance", () => {
+    afterEach(() => {
+      document.body.innerHTML = "";
+    });
+
+    const emit = (service: EventTarget, count: number) => {
+      service.dispatchEvent(new CustomEvent("count-changed", { detail: { count } }));
+    };
+
+    it("applies a base class's @bindToEvent to a subclass instance", () => {
+      const service = new EventTarget();
+      const s = ServiceBindings<TestEventMap>(service);
+
+      class Base extends LitElement {
+        @s.bindToEvent("count-changed")
+        count = 0;
+      }
+      class Sub extends Base {}
+
+      const el = mount(Sub) as Sub;
+      emit(service, 3);
+      expect(el.count).to.eql(3);
+    });
+
+    it("keeps both a base's and a subclass's @bindToEvent", () => {
+      const service = new EventTarget();
+      const s = ServiceBindings<TestEventMap>(service);
+
+      class Base extends LitElement {
+        @s.bindToEvent("count-changed")
+        count = 0;
+      }
+      class Sub extends Base {
+        @s.bindToEvent("renamed-changed", "count")
+        renamed = 0;
+      }
+
+      const el = mount(Sub) as Sub;
+      emit(service, 4);
+      service.dispatchEvent(new CustomEvent("renamed-changed", { detail: { count: 5 } }));
+      expect(el.count).to.eql(4);
+      expect(el.renamed).to.eql(5);
+    });
+
+    it("does not call a subclass's @onEvent on a base instance", () => {
+      const service = new EventTarget();
+      const s = ServiceBindings<TestEventMap>(service);
+
+      class Base extends LitElement {
+        calls: string[] = [];
+
+        @s.onEvent("count-changed")
+        onBase() {
+          this.calls.push("base");
+        }
+      }
+      class Sub extends Base {
+        @s.onEvent("count-changed")
+        onSub() {
+          this.calls.push("sub");
+        }
+      }
+      const base = mount(Base) as Base;
+      const sub = mount(Sub) as Sub;
+      emit(service, 1);
+      expect(base.calls).to.eql(["base"]);
+      expect(sub.calls.sort()).to.eql(["base", "sub"]);
+    });
+
+    it("binds a method a subclass redeclares once, to the subclass's version", () => {
+      const service = new EventTarget();
+      const s = ServiceBindings<TestEventMap>(service);
+
+      class Base extends LitElement {
+        calls: string[] = [];
+
+        @s.onEvent("count-changed")
+        onCount() {
+          this.calls.push("base");
+        }
+      }
+      class Sub extends Base {
+        @s.onEvent("count-changed")
+        override onCount() {
+          this.calls.push("sub");
+        }
+      }
+
+      const el = mount(Sub) as Sub;
+      emit(service, 1);
+      expect(el.calls).to.eql(["sub"]);
+    });
+  });
 });
