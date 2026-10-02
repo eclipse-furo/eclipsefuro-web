@@ -48,7 +48,10 @@ export { RECURSION } from "./proxies/RECURSION";
 
 // Decorators
 export { ServiceBindings } from "./decorators/ServiceDecorators";
+export type { BindableEvent, ServiceBindingDecorators } from "./decorators/ServiceDecorators";
 export { ModelBindings } from "./decorators/ModelDecorators";
+export type { BindableModel, ModelBindingDecorators, ModelPath, NestedKeyOf } from "./decorators/ModelDecorators";
+export { ModelContainer } from "./decorators/ModelContainer";
 export { fieldBindings } from "./decorators/FieldBindings";
 export type { BindableComponent, FieldNodeLike } from "./decorators/FieldBindings";
 export { SchemaBuilder } from "./decorators/SchemaBuilder";
@@ -58,6 +61,9 @@ export type { EntityServiceEventMap } from "./decorators/EntityServiceTypes";
 
 export { StrictFetcher } from "./StrictFetcher";
 export type { IApiOptions as IStrictApiOptions } from "./StrictFetcher";
+export { RpcStatusApplier } from "./RpcStatusApplier";
+export type { IStatus } from "./RpcStatusApplier";
+export { default as DebounceBuilder } from "./DebounceBuilder";
 
 export { StreamFetcher } from "./StreamFetcher";
 export { StreamHttpError, StreamFramingError } from "./StreamErrors";

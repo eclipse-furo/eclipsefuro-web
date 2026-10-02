@@ -26,8 +26,9 @@ Two naming conventions coexist:
 
 ### Decorator bindings for Lit components
 
-Three decorator systems in `src/decorators/`:
-- **ModelBindings** (`@model.bind(path, event)`, `@model.onEvent()`) — bind component properties to model fields
+Decorator systems in `src/decorators/`:
+- **ModelBindings** (`@model.bind(path, event)`, `@model.onEvent()`) — bind component properties to model fields — paths are typed from the literal interface (`ModelBindings<ILiteral>(model)`, `ModelPath`/`NestedKeyOf`), and bindings are inherited by subclasses
+- **ModelContainer** — base class for a singleton model holder; exposes `model` and its typed `decorators`
 - **ServiceBindings** (`@service.bindToEvent()`, `@service.onEvent()`) — bind to service lifecycle (request-started, response-received, etc.)
 - **fieldBindings** (`@fieldBindings.model()`, `@fieldBindings.onEvent()`) — reusable component bindings keyed by `typeName`
 
