@@ -6,7 +6,7 @@ import type { IApiOptions } from "./Fetcher";
 export const API_OPTIONS: IApiOptions = {
   serverAddr: "",
   ApiBaseURL: "/api",
-  headers: new Headers({ "Content-Type": "application/json" }),
+  headers: new Headers({ "Content-Type": "application/json", Accept: "application/json" }),
   // timeout: 3000
   UseProtoNames: true, // server uses proto names
   UseProtoNamesForQueryParams: true,
