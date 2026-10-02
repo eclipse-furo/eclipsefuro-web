@@ -1,4 +1,4 @@
-import { LitElement, ReactiveElement } from "lit";
+import type { LitElement, ReactiveElement } from "lit";
 
 import type { EntityServiceEventMap } from "./EntityServiceTypes";
 
@@ -32,6 +32,43 @@ const EVENT_PATCHED = Symbol.for("__serviceEventPatched__");
 const EVENT_METHODS = Symbol.for("__serviceEventMethods__");
 
 /**
+ * The key `bindToEvent` reads out of the detail when none is given: it is derived from the event
+ * name with `/^(.+)-changed$/`, so `busy-changed` reads `detail.busy`.
+ */
+type InferredDetailKey<K> = K extends `${infer Base}-changed` ? Base : never;
+
+/**
+ * The events a one-argument `bindToEvent` may name: those whose detail really carries the key the
+ * binding will look for.
+ *
+ * The runtime assigns only `if (detailKey in e.detail)`, so an event whose detail does not carry its
+ * inferred key binds nothing at all - silently, with no error at either compile time or runtime.
+ * Renaming `pagination-changed` to `page-changed` without renaming the detail key is exactly that
+ * kind of silence; with this type it does not compile.
+ *
+ * Events that are not `X-changed` are excluded on purpose: the runtime falls back to the *property*
+ * name as the detail key, which is a coincidence rather than a contract. Name the key explicitly
+ * with the two-argument form instead.
+ * @public
+ */
+export type BindableEvent<TEventMap> = {
+  [K in keyof TEventMap & string]: K extends `${string}-changed` ? (InferredDetailKey<K> extends keyof TEventMap[K] ? K : never) : never;
+}[keyof TEventMap & string];
+
+/**
+ * The decorators {@link ServiceBindings} hands out.
+ * @public
+ */
+export interface ServiceBindingDecorators<TEventMap extends EntityServiceEventMap> {
+  /** Binds a property to an explicitly named key of the event detail. */
+  bindToEvent<K extends keyof TEventMap & string>(eventType: K, detailKey: keyof TEventMap[K] & string): (target: object, propertyKey: string) => void;
+  /** Binds a property to the detail key the event name implies. */
+  bindToEvent(eventType: BindableEvent<TEventMap>): (target: object, propertyKey: string) => void;
+  /** Calls a method with the event detail. */
+  onEvent(eventType: keyof TEventMap & string): (target: object, propertyKey: string, descriptor: PropertyDescriptor) => void;
+}
+
+/**
  * ### ServiceBindings Factory
  *
  * Creates type-safe decorators bound to a specific service instance.
@@ -44,7 +81,7 @@ const EVENT_METHODS = Symbol.for("__serviceEventMethods__");
  * Usage:
  * ```typescript
  * import { cubeEntityService } from "./CubeEntityService";
- * import { ServiceBindings } from "./ServiceDecorators";
+ * import { ServiceBindings } from "@furo/open-models";
  *
  * const cube = ServiceBindings(cubeEntityService);
  *
@@ -85,7 +122,7 @@ const EVENT_METHODS = Symbol.for("__serviceEventMethods__");
  * @param service - The EventTarget service to bind to
  * @returns Object with `bindToEvent` and `onEvent` decorator factories
  */
-export function ServiceBindings<TEventMap extends EntityServiceEventMap = EntityServiceEventMap>(service: EventTarget) {
+export function ServiceBindings<TEventMap extends EntityServiceEventMap = EntityServiceEventMap>(service: EventTarget): ServiceBindingDecorators<TEventMap> {
   return {
     /**
      * Binds a property to a service event.
@@ -93,7 +130,8 @@ export function ServiceBindings<TEventMap extends EntityServiceEventMap = Entity
      *
      * @typeParam K - The event type (constrained to valid event names)
      * @param eventType - The event name to listen for
-     * @param detailKey - Optional key to extract from event.detail (defaults to inferring from event type)
+     * @param detailKey - Key to extract from event.detail. Omitted, it is inferred from an `X-changed`
+     *   event name, and only events whose detail carries `X` are accepted - see {@link BindableEvent}.
      */
     bindToEvent(eventType: keyof TEventMap & string, detailKey?: string) {
       return function bindToEventDecorator(target: object, propertyKey: string) {

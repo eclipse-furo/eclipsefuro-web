@@ -11,6 +11,9 @@ This module provides decorators and utilities for binding Lit components to serv
   - [bind](#bind)
   - [onEvent (Model)](#onevent-model)
   - [onFieldEvent](#onfieldevent)
+  - [Typed paths](#typed-paths)
+  - [ModelContainer](#modelcontainer)
+  - [Inheritance](#inheritance)
 - [Initial Render](#initial-render)
 - [Event Reference](#event-reference)
 
@@ -26,10 +29,10 @@ First, create service bindings for your entity service:
 
 ```typescript
 // ServiceDecorators.ts
-import { serviceBindings } from "@x/furo/open-models/ServiceDecorators";
+import { ServiceBindings } from "@furo/open-models";
 import { cubeEntityService, CubeServiceEventMap } from "./CubeEntityService";
 
-export const cubeService = serviceBindings<CubeServiceEventMap>(cubeEntityService);
+export const cubeService = ServiceBindings<CubeServiceEventMap>(cubeEntityService);
 ```
 
 ### bindToEvent
@@ -59,6 +62,16 @@ class MyComponent extends LitElement {
 - Listens to the specified event on the service
 - Extracts the value from `event.detail` (key is inferred from event name, e.g., `"busy-changed"` → `detail.busy`)
 - Updates the property, triggering a Lit re-render
+
+**The detail key is checked at compile time.** The one-argument form accepts only `X-changed` events whose
+detail really carries `X` (`BindableEvent<TEventMap>`). Anything else would bind nothing at runtime, silently,
+so it does not compile. Name the key explicitly for every other event:
+
+```typescript
+@cubeService.bindToEvent("response-received", "response")
+@state()
+private response?: ICubeEntity;
+```
 
 ### onEvent
 
@@ -98,12 +111,16 @@ Model bindings connect your component to a FieldNode model's data and events.
 Create model bindings for your entity model:
 
 ```typescript
-// ServiceDecorators.ts
-import { modelBindings } from "@x/furo/open-models/ModelDecorators";
+// ModelDecorators.ts
+import { ModelBindings } from "@furo/open-models";
+import type { ICubeEntity } from "./CubeEntity";
 import { CubeEntityModel } from "./CubeEntityModel";
 
-export const cubeModel = modelBindings(CubeEntityModel.model);
+// The type argument is the literal interface of the model; paths complete from it.
+export const cubeModel = ModelBindings<ICubeEntity>(CubeEntityModel.model);
 ```
+
+Most of the time a [`ModelContainer`](#modelcontainer) is shorter: it infers the literal for you.
 
 ### bind
 
@@ -140,7 +157,7 @@ class MyComponent extends LitElement {
 
 **Parameters:**
 - `path` - Path to the field (e.g., `"cube.length"`, `"__isValid"`, `"displayName"`)
-- `eventType` - Event to listen for (defaults to `"this-field-value-changed"`)
+- `eventType` - Event to listen for (defaults to `"update"`)
 
 ### onEvent (Model)
 
@@ -186,6 +203,48 @@ class MyComponent extends LitElement {
   }
 }
 ```
+
+A single-segment path (`"displayName"`) listens on that field, exactly like a nested one, so
+`this-field-value-changed` fires for it.
+
+### Typed paths
+
+`bind` and `onFieldEvent` take a `ModelPath<ILiteral>`: every dot path into the literal interface, five
+levels deep (`NestedKeyOf`), plus the model's meta properties (`__isValid`, ...). A typo or a renamed field is
+a compile error instead of a binding that never fires. Repeated fields stop at the field itself (`"tags"`, not
+`"tags.0"`), and an `ARRAY` model is bound by `"length"`.
+
+### ModelContainer
+
+A base class for a singleton model holder. It keeps the model and hands out its decorators under
+`decorators`, typed from the model's own `toLiteral()`:
+
+```typescript
+import { ModelContainer } from "@furo/open-models";
+import { CubeFilter } from "./CubeFilter";
+
+class CubeFilterContainer extends ModelContainer<CubeFilter> {
+  constructor() {
+    super(new CubeFilter());
+  }
+}
+
+export const CubeFilterModel = new CubeFilterContainer();
+
+// in a component
+@CubeFilterModel.decorators.bind("search")
+@state()
+private search = "";
+```
+
+Pass the literal as a second type argument (`ModelContainer<CubeFilter, ICubeFilter>`) only to pin the pairing,
+or for a model without a typed `toLiteral()`, such as an `ARRAY`.
+
+### Inheritance
+
+Bindings declared on a base class apply to its subclasses. A subclass that redeclares a property or an
+`@onEvent` method wins, and the base version is not bound twice. A subclass's registrations never reach an
+instance of the base class.
 
 ---
 
@@ -365,7 +424,7 @@ Field bindings are decorators for creating **reusable** components that bind to 
 Marks the `model` property. Handles binding/unbinding, reader/writer resolution by `__meta.typeName`, and automatic updates.
 
 ```typescript
-import { fieldBindings, BindableComponent } from "@x/furo/open-models/FieldBindings";
+import { fieldBindings, type BindableComponent } from "@furo/open-models";
 
 class MyBoolIcon extends LitElement implements BindableComponent {
   @fieldBindings.model()
