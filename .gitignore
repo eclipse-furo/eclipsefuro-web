@@ -8,3 +8,4 @@ tmp
 /packages/furo-open-models/test-results/
 /packages/furo-open-models/test/unit_tests/__screenshots__/
 /packages/furo-open-models/*.tgz
+/packages/furo-vite-pico-mock/*.tgz

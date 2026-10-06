@@ -1,0 +1,74 @@
+{
+  "name": "@furo/vite-pico-mock",
+  "version": "0.1.0",
+  "description": "A fixture server for vite projects: typed .ts fixtures mapped from the url, middleware, case sequences, a mock login gateway with users and api keys, push notifications and ndjson streams.",
+  "license": "MIT",
+  "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-vite-pico-mock",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/eclipse/eclipsefuro-web.git"
+  },
+  "author": "eclipse furo",
+  "type": "module",
+  "keywords": [
+    "vite",
+    "vite-plugin",
+    "mock",
+    "mock-server",
+    "fixtures"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./vite": {
+      "types": "./dist/vite.d.ts",
+      "default": "./dist/vite.js"
+    },
+    "./helpers": {
+      "types": "./dist/helpers/index.d.ts",
+      "default": "./dist/helpers/index.js"
+    },
+    "./types": {
+      "types": "./dist/types.d.ts",
+      "default": "./dist/types.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "skills",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
+    "clean": "rm -rf ./dist ./coverage",
+    "prepare": "npm run build",
+    "test": "vitest --run",
+    "test:coverage": "vitest --run --coverage",
+    "test:watch": "vitest watch",
+    "lint": "eslint ./src ./specs",
+    "lint:fix": "eslint ./src ./specs --fix",
+    "format": "prettier \"./{src,specs}/**/*.{ts,js}\" --write --ignore-path ../../.gitignore"
+  },
+  "dependencies": {
+    "koa": "^3.2.1",
+    "ulid": "^3.0.2"
+  },
+  "peerDependencies": {
+    "vite": ">=6.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@vitest/coverage-v8": "^5.0.3",
+    "vite": "^8.3.2",
+    "vitest": "^5.0.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

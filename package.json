@@ -60,6 +60,10 @@
     "packages/furo-{fbp,framework,data,util}/**/*.js": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "packages/furo-vite-pico-mock/{src,specs}/**/*.{ts,js}": [
+      "eslint --fix --config packages/furo-vite-pico-mock/eslint.config.mjs",
+      "prettier --write"
     ]
   },
   "scripts": {
