@@ -1,7 +1,9 @@
 # Fixture templates
 
 Nine shapes cover almost every endpoint. The examples use a `books` resource with types imported
-from `@/api/types`; replace both with the project's own resource and its generated wire types.
+from `@/api/types`; replace both with the project's own resource and its generated wire types. In an
+`@furo/open-models` project that is the generated `T<Name>` interface, `I<Name>` only when
+`API_OPTIONS.UseProtoNames` is false — see SKILL.md, step 3.
 
 Every fixture is the same skeleton: a `const data: MockData<[…]>` whose tuple types one body per
 case, and `export default data;` at the bottom.
@@ -254,7 +256,8 @@ const data: MockData<[StreamEventsResponse]> = {
 export default data;
 ```
 
-Type it with whatever the client's stream reader yields per message.
+Type it with whatever the client's stream reader yields per message; with open-models, the `T*` of
+the stream's response type.
 
 ## A fixture that is only an error
 

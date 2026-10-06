@@ -10,8 +10,14 @@ a typed TypeScript module that is re-read on every request. On top of that:
 - **Typed mock data, no stale fixtures.** `MockData<[TCube, IStatus]>` types every case's body
   against your api's own types — the ones your SDK or code generator emits. When the api changes,
   `npx tsc --noEmit` names every fixture that no longer fits, before the app runs into it. Fixtures
-  can't drift out of date without anyone noticing. Include the mock directory in your
-  `tsconfig.json` for this.
+  can't drift out of date without anyone noticing. For this, the mock directory must be in your
+  `tsconfig.json` — an `"include": ["src"]` leaves it out, and `tsc` passes without checking a
+  single fixture:
+
+  ```jsonc
+  // tsconfig.json
+  { "include": ["src", "mock"] }
+  ```
 - **Fixtures are programs, compiled by vite on demand.** A fixture is not a json file but a
   TypeScript module: it imports your app's types and shared helpers, runs
   [middleware](#middleware) that computes the answer from the request, and can keep state across

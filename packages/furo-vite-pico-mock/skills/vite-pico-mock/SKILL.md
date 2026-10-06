@@ -33,6 +33,29 @@ Read the `picoMock({...})` call in the vite config. Everything below is relative
 
 A `server.proxy` entry wins over the mock for the paths it claims.
 
+**No `picoMock()` call yet?** Register it, then look at the proxy:
+
+```ts
+// vite.config.ts  (npm i -D @furo/vite-pico-mock)
+import { picoMock } from "@furo/vite-pico-mock/vite";
+export default defineConfig({ plugins: [picoMock()] });
+```
+
+- **A `server.proxy` for `/api` wins silently.** An app built against a real backend usually has
+  one. It claims every path under the api prefix, so the mock never answers and every call fails
+  against the backend, with nothing that names the proxy. Remove it, or narrow it to the paths that
+  stay real (`"^/api/openai/.*"`).
+- **open-models needs no alias.** Generated models import `@furo/open-models/dist/index` and a
+  relative `API_OPTIONS`, and a type-only `T<Name>` import is erased. Only the project's own `@/…`
+  aliases have to be in `resolve.alias`.
+- **Include the mock dir in `tsconfig.json`**, or `npx tsc --noEmit` (step 5) passes without
+  checking a single fixture. An `"include": ["src"]` leaves it out silently:
+
+  ```jsonc
+  // tsconfig.json
+  { "include": ["src", "mock"] } // the `dir` option, default `mock`
+  ```
+
 ## 2. Map the url to a file
 
 | request | fixture file |
@@ -91,6 +114,20 @@ export default data;
 **Type the body with the wire shape** — the field names exactly as they travel in json. A camelCase
 client model typed against a snake_case api compiles and silently sends the wrong fields.
 
+**With an `@furo/open-models` SDK**, every generated message file exports two interfaces next to
+the class: `I<Name>`, the literal (camelCase, what the fetcher hands the app), and `T<Name>`, the
+transport (field names as written in the proto). The fixture types the wire, so one flag decides:
+
+| `API_OPTIONS.UseProtoNames` (the file the generated services import) | fixture type |
+|---|---|
+| `true` — the default | `MockData<[TBook]>` |
+| `false` | `MockData<[IBook]>` |
+
+Never the class: `Book` is a `FieldNode`, not json. The mismatch does not fail. `IBook` against a
+proto-names api typechecks and answers `displayName`, which the client's `__fromProtoNameJson`
+drops as an unknown key, so the app shows empty fields, not an error. A stream fixture's message is
+the `T*` of the stream's response type; with a oneof envelope, the member key is the proto name.
+
 ## 4. Declare `auth`
 
 Declare it unless the endpoint is genuinely public. A fixture without it works from curl and
@@ -146,6 +183,8 @@ file under `{book_id}/` to serve every id, under `42/` to override only that one
 - **Do NOT** put query params in a filename or add a directory per id. Middleware answers every
   combination from one file.
 - **Do NOT** use `1`, `2` style ids when the real api uses ULIDs or UUIDs. Mint them the same way.
+- **Do NOT** type a fixture with an open-models `I*` interface while `UseProtoNames` is on. The
+  compiler cannot see it; curl the fixture and compare the keys with the generated `T*` interface.
 - **Do NOT** add a path alias to `tsconfig.json` alone. Fixtures resolve imports through vite's
   `resolve.alias` (or the `aliases` option); a missed entry typechecks and fails at request time.
 - **Do NOT** give a response that depends on `req.user` a `max-age` — the url is the same for every
