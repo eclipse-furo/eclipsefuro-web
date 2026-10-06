@@ -143,8 +143,8 @@ export function createRouter({ dataDir, baseDir = dataDir, apiPrefix = "/api/" }
       .filter((s) => s !== "");
 
     // `ctx.path` arrives as it was sent - koa does not normalize it - so a `..` segment would walk
-    // out of the data directory, and whatever matched out there would be *executed* by runnerImport. Nothing
-    // above it is ours to serve.
+    // out of the data directory, and whatever matched out there would be *executed* by the fixture
+    // loader. Nothing above it is ours to serve.
     if (segments.some((s) => s === "." || s === "..")) {
       return { notFound: 'A "." or ".." segment is not routable.' };
     }

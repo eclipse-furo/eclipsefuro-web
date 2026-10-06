@@ -385,3 +385,51 @@ export default {
     expect((await fetch(`${url}/api/v1/cubes/8`)).status).toBe(404);
   });
 });
+
+describe("createPicoMock module loading", () => {
+  let root: string;
+  let server: Server;
+  let url: string;
+
+  beforeAll(async () => {
+    root = mkdtempSync(path.join(tmpdir(), "pico-mock-loading-"));
+    write(root, "mock/data/_shared.ts", `export const greeting = "hello";`);
+    write(root, "mock/data/_late.ts", `export const late = "loaded late";`);
+    write(root, "mock/data/greet/GET.ts", `import { greeting } from "../_shared"; export default { cases: [{ body: { greeting } }] };`);
+    write(
+      root,
+      "mock/data/lazy/GET.ts",
+      `export default { cases: [{ body: {}, middleware: [async (res) => { res.body = { late: (await import("../_late")).late }; }] }] };`
+    );
+    ({ server, url } = await serve({ root }));
+  });
+
+  afterAll(() => {
+    server.close();
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it("evaluates an edited module the fixture imports on the next request", async () => {
+    expect(await (await fetch(`${url}/api/greet`)).json()).toEqual({ greeting: "hello" });
+
+    write(root, "mock/data/_shared.ts", `export const greeting = "hi again";`);
+
+    expect(await (await fetch(`${url}/api/greet`)).json()).toEqual({ greeting: "hi again" });
+  });
+
+  it("lets middleware import a module at request time", async () => {
+    // a runner closed right after the fixture was loaded fails this with "module runner has been closed"
+    const res = await fetch(`${url}/api/lazy`);
+
+    expect(res.status).toBe(200);
+    expect(await res.json()).toEqual({ late: "loaded late" });
+  });
+
+  it("answers concurrent requests, each from its own fixture", async () => {
+    const answers = await Promise.all(Array.from({ length: 20 }, (_, i) => fetch(`${url}/api/${i % 2 ? "greet" : "lazy"}`).then((r) => r.json())));
+
+    answers.forEach((body, i) => {
+      expect(body).toEqual(i % 2 ? { greeting: "hi again" } : { late: "loaded late" });
+    });
+  });
+});

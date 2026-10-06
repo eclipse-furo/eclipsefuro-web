@@ -62,14 +62,18 @@ export function picoMock(options = {}) {
   /**
    * @param {import('vite').Connect.Server} middlewares
    * @param {Record<string, unknown> | undefined} proxy
+   * @param {import('http').Server | import('http2').Http2SecureServer | null} httpServer - Closing it
+   *   closes the mock's module environment.
    */
-  function mount(middlewares, proxy) {
+  function mount(middlewares, proxy, httpServer) {
     mock = createPicoMock({
       ...serverOptions,
       root: serverOptions.root ?? resolved?.root,
       // the plugin's own aliases first, so they win over a same named one of the config
       aliases: [...aliasList(serverOptions.aliases), ...configAliases],
     });
+    const { close } = mock;
+    httpServer?.once("close", () => void close());
     const handle = mock.callback();
     const handles = mock.handles;
     middlewares.use((req, res, next) => {
@@ -114,12 +118,12 @@ export function picoMock(options = {}) {
     },
 
     async configureServer(server) {
-      mount(server.middlewares, server.config.server.proxy);
+      mount(server.middlewares, server.config.server.proxy, server.httpServer);
       await standalone();
     },
 
     async configurePreviewServer(server) {
-      mount(server.middlewares, server.config.preview.proxy);
+      mount(server.middlewares, server.config.preview.proxy, server.httpServer);
       await standalone();
     },
   };

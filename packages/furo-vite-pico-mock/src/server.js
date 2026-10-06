@@ -20,7 +20,7 @@
 import { existsSync } from "fs";
 import Koa from "koa";
 import path from "path";
-import { runnerImport } from "vite";
+import { createRunnableDevEnvironment, mergeConfig, resolveConfig } from "vite";
 import { createRouter } from "./Router.js";
 import { readJsonBody, parseQuery } from "./Request.js";
 import { DEFAULT_AUTH_OPTIONS, canSignIn, clearedCookie, createSessions, renderPicker, returnFromReferer, safeReturn, sessionCookie } from "./Auth.js";
@@ -181,30 +181,87 @@ export function createPicoMock(options = {}) {
   // -------------------------------------------------------------------------------------------
 
   /**
-   * What the fixtures are imported with. runnerImport builds its config with a hardcoded
-   * `configFile: false` that wins the merge, so no config file is ever read - not even one passed
-   * explicitly. The aliases a fixture imports through therefore have to be handed over: the vite
-   * plugin passes the ones of the vite config. The `configFile: false` below is redundant, and kept
-   * only to say so out loud.
+   * What the fixtures are imported with: the config vite's own `runnerImport` builds. No config file
+   * is read, so the aliases a fixture imports through have to be handed over - the vite plugin passes
+   * the ones of the vite config.
    */
-  const loaderConfig = {
-    configFile: false,
-    root,
-    resolve: { alias: config.aliases },
-  };
+  const loaderConfig = mergeConfig(
+    { configFile: false, root, resolve: { alias: config.aliases } },
+    {
+      configFile: false,
+      envDir: false,
+      cacheDir: process.cwd(),
+      environments: {
+        inline: {
+          consumer: "server",
+          dev: { moduleRunnerTransform: true },
+          // `module-sync` is what vite adds where node can require an es module
+          resolve: { external: true, mainFields: [], conditions: ["node", ...(process.features.require_module ? ["module-sync"] : [])] },
+        },
+      },
+    }
+  );
 
   /**
-   * Import a fixture through vite, so its aliases resolve.
+   * The one module environment every import goes through, created on first use.
    *
-   * There is deliberately no cache: a fresh import per request costs a few milliseconds and is what
-   * makes an edited fixture show up on the next request without restarting the dev server.
+   * Not `runnerImport`: that resolves a config and builds a whole environment per call, then closes
+   * it. It costs ~12 ms and leaks ~1 MB per call, which a long-running dev server pays for every
+   * request, up to three times (fixture, users, api keys). A closed environment also breaks an
+   * `import()` that middleware makes after its fixture was loaded.
+   *
+   * @type {Promise<import('vite').RunnableDevEnvironment> | undefined}
+   */
+  let environment;
+
+  /** @type {Promise<unknown>} */
+  let importQueue = Promise.resolve();
+
+  /**
+   * Import a module through vite, so its aliases resolve, evaluated fresh.
+   *
+   * Every import drops what was evaluated and transformed before, which is what makes an edited
+   * fixture - or any module it imports - show up on the next request without restarting the dev
+   * server. The imports are queued, so one never drops the modules of another one still evaluating.
+   *
+   * @param {string} file - Absolute path of the module.
+   * @return {Promise<Record<string, any>>} The module's exports.
+   */
+  function importFresh(file) {
+    const imported = importQueue.then(async () => {
+      environment ??= resolveConfig(loaderConfig, "serve").then(async (resolved) => {
+        const env = createRunnableDevEnvironment("inline", resolved, { runnerOptions: { hmr: { logger: false } }, hot: false });
+        await env.init();
+        return env;
+      });
+      const env = await environment;
+      env.runner.evaluatedModules.clear();
+      env.moduleGraph.invalidateAll();
+      return env.runner.import(file);
+    });
+    importQueue = imported.catch(() => undefined);
+    return imported;
+  }
+
+  /**
+   * Close the module environment. The next import creates a new one.
+   *
+   * @return {Promise<void>}
+   */
+  async function close() {
+    const closing = environment;
+    environment = undefined;
+    if (closing) await (await closing).close();
+  }
+
+  /**
+   * Import a fixture and check its envelope.
    *
    * @param {string} file - Absolute path of the fixture.
    * @return {Promise<MockData>} The fixture's default export.
    */
   async function loadFixture(file) {
-    const { module } = await runnerImport(file, loaderConfig);
-    const data = module.default;
+    const data = (await importFresh(file)).default;
     if (!data) {
       throw new Error(`[pico-mock] ${shown(file)} has no default export`);
     }
@@ -250,7 +307,7 @@ export function createPicoMock(options = {}) {
     if (!existsSync(usersFile)) {
       return { users: [], options: { ...DEFAULT_AUTH_OPTIONS } };
     }
-    const { module } = await runnerImport(usersFile, loaderConfig);
+    const module = await importFresh(usersFile);
     return { users: module.USERS ?? [], options: { ...DEFAULT_AUTH_OPTIONS, ...module.AUTH_OPTIONS } };
   }
 
@@ -261,7 +318,7 @@ export function createPicoMock(options = {}) {
    */
   async function loadApiKeys() {
     if (!existsSync(apiKeysFile)) return [];
-    const { module } = await runnerImport(apiKeysFile, loaderConfig);
+    const module = await importFresh(apiKeysFile);
     return module.API_KEYS ?? [];
   }
 
@@ -692,7 +749,7 @@ export function createPicoMock(options = {}) {
     };
   }
 
-  return { app, config, handles, callback };
+  return { app, config, handles, callback, close };
 }
 
 /**
@@ -751,6 +808,7 @@ export async function startPicoMock({ port = 10000, host = "127.0.0.1", maxAttem
   for (let candidate = port; candidate < port + maxAttempts; candidate++) {
     try {
       const server = await listenOnce(handler, candidate, host);
+      server.once("close", () => void mock.close());
       globalThis[HANDLE] = server;
       console.log(`[pico-mock] serving ${path.relative(mock.config.root, mock.config.dataDir)} on http://localhost:${candidate}`);
       return { port: candidate, server };

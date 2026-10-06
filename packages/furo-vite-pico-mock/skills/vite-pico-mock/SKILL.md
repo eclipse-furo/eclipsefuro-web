@@ -179,6 +179,9 @@ file under `{book_id}/` to serve every id, under `42/` to override only that one
   client and worker. Let the request pick the failure (a query param or header the test sends).
 - **Do NOT** hold state in a plain module-level object. Fixtures *and their helpers* are re-imported
   per request; anchor stores on `globalThis` (see [Templates](references/templates.md#shared-data)).
+- **Do NOT** value-import a generated SDK or the app's own modules into a fixture for a constant or a
+  helper. Everything a fixture imports is compiled and evaluated again on every request; a type-only
+  import costs nothing. Keep fixture import graphs flat, the helpers under `data/_*.ts`.
 - **Do NOT** put `withEtag()` anywhere but **last** in `middleware`, and always call it: `withEtag()`.
 - **Do NOT** put query params in a filename or add a directory per id. Middleware answers every
   combination from one file.
