@@ -249,7 +249,9 @@ lock.lock();    // Block navigation with confirmation dialog
 lock.unlock();  // Allow navigation again
 ```
 
-Intercepts `__beforeReplaceState`, `__beforeHistoryBack`, and `beforeunload`. Shows `window.confirm()` — if the user confirms, the lock auto-unlocks.
+Intercepts `__beforeReplaceState`, `__beforeHistoryBack`, `__beforePopState` (the back and forward buttons of the browser) and `beforeunload`. Shows `window.confirm()` — if the user confirms, the lock auto-unlocks.
+
+A `popstate` can not be cancelled, the browser has already moved when it fires. The `FuroLocation` therefore installs a guard (once, before its own listener) that dispatches the cancelable `__beforePopState` first. When the lock cancels it, the guard hides the `popstate` from every later listener (`FuroLocation`, `FuroWaypoint`) and undoes it with `history.forward()`, so the page keeps its state. Every traversal is undone as a back navigation: a locked page is usually reached by a push, so there is no forward entry to leave it to.
 
 ### TabController
 
@@ -389,6 +391,18 @@ FuroPages.injectLocation()
                 │
                 ▼
 TabController.syncFromUrl() → host.requestUpdate() → render()
+
+
+── Browser Back / Forward ────────────────────────────────────
+
+popstate
+         │
+         ▼
+PopStateGuard → __beforePopState ←── FuroNavigationLock may cancel
+         │                            cancelled: stopImmediatePropagation()
+         │                            + history.forward(), its popstate is swallowed
+         ▼
+FuroLocation parses URL → same pipeline as above
 
 
 ── Browser-level Navigation (separate path) ──────────────────

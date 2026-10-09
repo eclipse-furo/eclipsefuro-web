@@ -1,6 +1,6 @@
 {
   "name": "@furo/vite-pico-mock",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "description": "A fixture server for vite projects: typed .ts fixtures mapped from the url, middleware, case sequences, a mock login gateway with users and api keys, push notifications and ndjson streams.",
   "license": "MIT",
   "homepage": "https://github.com/eclipse/eclipsefuro-web/tree/main/packages/furo-vite-pico-mock",

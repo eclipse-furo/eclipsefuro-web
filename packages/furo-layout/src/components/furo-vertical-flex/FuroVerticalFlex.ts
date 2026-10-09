@@ -38,13 +38,14 @@ export class FuroVerticalFlex extends LitElement {
    * @private
    * @return {CSSResult}
    */
-    // language=CSS
+  // language=CSS
   static override styles = css`
     :host {
       height: 100%;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
+      min-width: 0;
       -ms-flex-direction: column;
       -webkit-flex-direction: column;
       flex-direction: column;

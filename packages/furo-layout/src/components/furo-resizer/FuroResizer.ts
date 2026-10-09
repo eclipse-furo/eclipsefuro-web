@@ -13,7 +13,7 @@ import { property } from "lit/decorators.js";
  *   <furo-horizontal-flex>
  *     <div flex> the flexible part </div>
  *     <!-- you have to set at leas one handle to resize the content -->
- *     <furo-resizer righthandle remember="logv" minwidth="280" maxwidth="780">
+ *     <furo-resizer righthandle remember-id="logv" minwidth="280" maxwidth="780">
  *       <some-content></some-content>
  *     </furo-resizer>
  *   </furo-horizontal-flex>
@@ -88,14 +88,14 @@ export class FuroResizer extends LitElement {
         }, 200);
       }
 
-      this.style.width = `${width}px`;
+      this.style.width = `${width.toString()}px`;
       if (this.remember) {
-        localStorage.setItem(this.remember, `${width}`);
+        localStorage.setItem(this.remember, width.toString());
       }
     });
   };
 
-  private contentVisible: boolean = true;
+  private contentVisible = true;
 
   /**
    * register the left handler

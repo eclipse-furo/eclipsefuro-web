@@ -1,3 +1,4 @@
+import { installPopStateGuard } from "./PopStateGuard";
 import type { LocationObject } from "./types";
 
 type EventType = "location-path-changed" | "location-hash-changed" | "location-query-changed" | "location-changed" | "url-space-entered";
@@ -191,6 +192,8 @@ export class FuroLocation {
    * @private
    */
   private connect() {
+    // before the own popstate listener, so a FuroNavigationLock can keep the location on a browser back
+    installPopStateGuard();
     window.addEventListener("__furoLocationChanged", this.locationChangeNotifier, true);
     window.addEventListener("popstate", this.locationChangeNotifier, true);
 

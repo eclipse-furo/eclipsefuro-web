@@ -1,9 +1,11 @@
+import type { BeforePopStateDetail } from "./PopStateGuard";
+
 /**
  * Prevents users from leaving the page when they have unsaved changes.
  *
  * When locked, it intercepts in-app navigation events (`__beforeReplaceState`,
- * `__beforeHistoryBack`), native browser history traversals (`popstate`),
- * and the browser's `beforeunload` event. A confirmation
+ * `__beforeHistoryBack`), native browser history traversals like the back button (`__beforePopState`, dispatched
+ * by the `FuroLocation` before it handles a `popstate`), and the browser's `beforeunload` event. A confirmation
  * dialog is shown — if the user confirms, the lock auto-unlocks and navigation
  * proceeds. If the user cancels, navigation is blocked.
  *
@@ -15,7 +17,11 @@
  *
  * In both modes, `__beforeHistoryBack` always triggers the confirmation dialog
  * because browser history is opaque and the target path cannot be determined
- * in advance.
+ * in advance. A browser traversal (`__beforePopState`) knows its target: in path-only mode it passes when the
+ * path did not change.
+ *
+ * A cancelled browser traversal is undone with `history.forward()` before the router sees it, the page keeps
+ * its state.
  *
  * The `message` property is public and can be updated at any time to provide
  * context-specific confirmation text.
@@ -46,8 +52,6 @@ export class FuroNavigationLock {
 
   private lockPathChangesOnly = false;
 
-  private _currentHref = "";
-
   private _currentPath = "";
 
   constructor(message?: string) {
@@ -61,11 +65,10 @@ export class FuroNavigationLock {
    */
   public lock() {
     if (!this._locked) {
-      this._currentHref = window.location.href;
       this._currentPath = window.location.pathname;
       window.addEventListener("__beforeReplaceState", this._lockHandler, true);
       window.addEventListener("__beforeHistoryBack", this._lockHandler, true);
-      window.addEventListener("popstate", this._popstateHandler, true);
+      window.addEventListener("__beforePopState", this._popStateHandler, true);
       window.addEventListener("beforeunload", this._unloadHandler, true);
       this._locked = true;
     }
@@ -85,11 +88,10 @@ export class FuroNavigationLock {
   public lockPath() {
     this.lockPathChangesOnly = true;
     if (!this._locked) {
-      this._currentHref = window.location.href;
       this._currentPath = window.location.pathname;
       window.addEventListener("__beforeReplaceState", this._lockHandler, true);
       window.addEventListener("__beforeHistoryBack", this._lockHandler, true);
-      window.addEventListener("popstate", this._popstateHandler, true);
+      window.addEventListener("__beforePopState", this._popStateHandler, true);
       window.addEventListener("beforeunload", this._unloadHandler, true);
       this._locked = true;
     }
@@ -103,7 +105,7 @@ export class FuroNavigationLock {
     if (this._locked) {
       window.removeEventListener("__beforeReplaceState", this._lockHandler, true);
       window.removeEventListener("__beforeHistoryBack", this._lockHandler, true);
-      window.removeEventListener("popstate", this._popstateHandler, true);
+      window.removeEventListener("__beforePopState", this._popStateHandler, true);
       window.removeEventListener("beforeunload", this._unloadHandler, true);
       this._locked = false;
       this.lockPathChangesOnly = false;
@@ -127,16 +129,16 @@ export class FuroNavigationLock {
     }
   };
 
-  private _popstateHandler = () => {
-    // In lockPathChangesOnly mode, allow if path didn't change
-    if (this.lockPathChangesOnly && window.location.pathname === this._currentPath) {
-      this._currentHref = window.location.href;
+  private _popStateHandler = (event: Event) => {
+    const e = event as CustomEvent<BeforePopStateDetail>;
+
+    // In lockPathChangesOnly mode, allow if the path did not change
+    if (this.lockPathChangesOnly && e.detail.targetPath === this._currentPath) {
       return;
     }
 
     if (!window.confirm(this.message)) {
-      // Undo the popstate by pushing the saved URL back
-      window.history.pushState(null, "", this._currentHref);
+      e.detail.cancel = true;
     } else {
       this.unlock();
     }
