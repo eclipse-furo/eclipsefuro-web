@@ -1,4 +1,5 @@
 import { deepJsonNameToProtoName, deepProtoNameToJsonName, jsonNameToProtoName, protoNameToJsonName } from "./Mapper";
+import { evaluatePathTemplate } from "./internal/HttpPath";
 
 export interface IApiOptions {
   // leave empty to connect to the same host which delivers your files, otherwise set something like http://localhost:3000
@@ -208,9 +209,18 @@ export class Fetcher<REQ, RES> {
         this.setRequestOptions(options);
       }
 
+      // A path template the request does not satisfy rejects before anything is marked as loading.
+      let evaluatedPath: string;
+      let evaluatedBody: string | undefined;
+      try {
+        ({ evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(this.path, this.bodyField, rqo));
+      } catch (error) {
+        reject(error instanceof Error ? error : new Error(String(error)));
+        return;
+      }
+
       this.isLoading = true;
 
-      const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(this.path, this.bodyField, rqo);
       if (evaluatedBody) {
         this.requestInit.body = evaluatedBody;
       }
@@ -534,8 +544,6 @@ export class Fetcher<REQ, RES> {
     evaluatedBody: string | undefined;
   } {
     // use the rules specified here  https://docs.solo.io/gloo-edge/latest/reference/api/github.com/solo-io/solo-kit/api/external/google/api/http.proto.sk/
-    // find all fields in path
-    let evaluatedPath = path;
     let evaluatedBody;
 
     const keysForBodyOrQueryParams = new Map<string, keyof REQ>();
@@ -543,14 +551,13 @@ export class Fetcher<REQ, RES> {
       keysForBodyOrQueryParams.set(key, key as keyof REQ);
     });
 
-    const fields = [...path.matchAll(/\{([^}]+)}/g)];
     // replace url templates with values
-    // /v1/cube/{id} => /v1/cube/12
-    fields.forEach(field => {
-      const rqoKey = protoNameToJsonName(field[1]) as keyof REQ;
-      const rqoValue = rqo[rqoKey];
-      evaluatedPath = evaluatedPath.replace(field[0], String(rqoValue));
-      keysForBodyOrQueryParams.delete(rqoKey as string);
+    // /v1/cube/{id} => /v1/cube/12, /v1/{name=cubes/*} => /v1/cubes/12
+    // Without field descriptors, every level of a field path uses the generic proto name conversion.
+    const template = evaluatePathTemplate(path, rqo, (_level, protoName) => protoNameToJsonName(protoName));
+    let { evaluatedPath } = template;
+    template.consumedKeys.forEach(key => {
+      keysForBodyOrQueryParams.delete(key);
     });
 
     if (bodyField === "*") {

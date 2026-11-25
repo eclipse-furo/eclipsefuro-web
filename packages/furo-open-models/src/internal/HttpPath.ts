@@ -1,4 +1,5 @@
 import { FieldNode } from "../FieldNode";
+import { protoNameToJsonName } from "../Mapper";
 
 /**
  * The `google.api.http` url building shared by every fetcher.
@@ -86,6 +87,139 @@ export function flattenParam(params: string[], prefix: string, value: unknown): 
 }
 
 /**
+ * One `{...}` variable of a `google.api.http` path template.
+ *
+ * `google/api/http.proto`: `Variable = "{" FieldPath [ "=" Segments ] "}"`, `FieldPath = IDENT { "." IDENT }`.
+ * So `{name=clients/*}` binds the field `name` and constrains its value to `clients/*`, and
+ * `{client.name=clients/*}` binds the nested field `name` of the message field `client`.
+ */
+export interface PathVariable {
+  // proto names, outermost first
+  fieldPath: string[];
+  // the `Segments` after `=`, absent for a plain `{field}`
+  template?: string;
+}
+
+export function parsePathVariable(capture: string): PathVariable {
+  const eq = capture.indexOf("=");
+  const fieldPart = (eq === -1 ? capture : capture.slice(0, eq)).trim();
+  const template = eq === -1 ? undefined : capture.slice(eq + 1).trim();
+  return { fieldPath: fieldPart.split("."), template };
+}
+
+/**
+ * The anchored RegExp a value bound to a template variable has to match.
+ *
+ * `*` matches one segment, `**` one or more, a literal segment itself.
+ */
+export function templateToRegExp(template: string): RegExp {
+  const parts = template.split("/").map(segment => {
+    if (segment === "**") {
+      return ".+";
+    }
+    if (segment === "*") {
+      return "[^/]+";
+    }
+    return segment.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  });
+  return new RegExp(`^${parts.join("/")}$`);
+}
+
+/**
+ * Validate and encode the value of one path variable.
+ *
+ * A plain `{field}` is inserted as `String(value)`, as it always was. A template variable
+ * (`{name=clients/*}`) must match its template; each segment is percent encoded, the `/` between
+ * segments is kept, because the template is exactly what spans them.
+ */
+export function encodePathValue(variable: PathVariable, rawCapture: string, value: unknown): string {
+  if (variable.template === undefined) {
+    return String(value);
+  }
+  const str = typeof value === "string" || typeof value === "number" || typeof value === "bigint" ? String(value) : "";
+  if (str === "" || !templateToRegExp(variable.template).test(str)) {
+    throw new Error(`open-models: path variable {${rawCapture}} got '${str}', expected ${variable.template}`);
+  }
+  return str
+    .split("/")
+    .map(segment => encodeURIComponent(segment))
+    .join("/");
+}
+
+/**
+ * Look up the value a proto name field path points to.
+ *
+ * `protoToCamel` maps the proto name at one level of the path to the camelCase key of the literal.
+ * It is called outermost first, once per level.
+ */
+export function resolvePathValue(
+  rqo: unknown,
+  fieldPath: string[],
+  protoToCamel: (level: number, protoName: string) => string
+): { topKey: string; value: unknown } {
+  const keys: string[] = [];
+  let current: unknown = rqo;
+  fieldPath.forEach((protoName, level) => {
+    const key = protoToCamel(level, protoName);
+    keys.push(key);
+    current = current !== null && typeof current === "object" ? (current as Record<string, unknown>)[key] : undefined;
+  });
+  return { topKey: keys[0], value: current };
+}
+
+/**
+ * Resolve a field path through the request's field descriptors, level by level.
+ *
+ * Level 0 uses the request's protoName map, every deeper level the field descriptors of the message
+ * type the previous level reached. Without a descriptor the generic conversion is used.
+ */
+function descriptorResolver(descriptors: RequestDescriptors): (level: number, protoName: string) => string {
+  const topMap = new Map<string, string>();
+  descriptors.protoNames.forEach((protoName, fieldName) => {
+    topMap.set(protoName, fieldName);
+  });
+  // the message type reached by the previous level
+  let currentCtor: FieldNodeConstructor | undefined;
+  return (level, protoName) => {
+    if (level === 0) {
+      const key = topMap.get(protoName) ?? protoNameToJsonName(protoName);
+      currentCtor = descriptors.fieldConstructors.get(key);
+      return key;
+    }
+    const descriptor = currentCtor ? new currentCtor().__meta.nodeFields.find(f => f.protoName === protoName) : undefined;
+    currentCtor = descriptor?.FieldConstructor as FieldNodeConstructor | undefined;
+    return descriptor?.fieldName ?? protoNameToJsonName(protoName);
+  };
+}
+
+/**
+ * Replace every `{...}` variable of a path template.
+ *
+ * @return the path and the top level keys a single segment field path consumed. Those leave the
+ * query params and a `*` body. A nested path (`{client.name=...}`) consumes nothing: its parent
+ * message still goes to the body as a whole, which http.proto allows.
+ */
+export function evaluatePathTemplate(
+  path: string,
+  rqo: unknown,
+  protoToCamel: (level: number, protoName: string) => string
+): { evaluatedPath: string; consumedKeys: string[] } {
+  let evaluatedPath = path;
+  const consumedKeys: string[] = [];
+  [...path.matchAll(/\{([^}]+)}/g)].forEach(match => {
+    const variable = parsePathVariable(match[1]);
+    const { topKey, value } = resolvePathValue(rqo, variable.fieldPath, protoToCamel);
+    const encoded = encodePathValue(variable, match[1], value);
+    // a function replacer, so a `$` in the value is not read as a replacement pattern
+    evaluatedPath = evaluatedPath.replace(match[0], () => encoded);
+    if (variable.fieldPath.length === 1) {
+      consumedKeys.push(topKey);
+    }
+  });
+  return { evaluatedPath, consumedKeys };
+}
+
+/**
  * Everything a caller has to hand over to resolve a path template and its query parameters.
  */
 export interface UrlContext<REQ> {
@@ -108,7 +242,6 @@ export function buildPathAndBodyfield<REQ>(
   const reqProtoNameMap = descriptors.protoNames;
   const reqFieldConstructorMap = descriptors.fieldConstructors;
 
-  let evaluatedPath = path;
   let evaluatedBody;
 
   const keysForBodyOrQueryParams = new Map<string, keyof REQ>();
@@ -116,21 +249,12 @@ export function buildPathAndBodyfield<REQ>(
     keysForBodyOrQueryParams.set(key, key as keyof REQ);
   });
 
-  // Build a reverse map: protoName → camelCase fieldName for path template resolution
-  const protoToFieldMap = new Map<string, string>();
-  reqProtoNameMap.forEach((protoName, fieldName) => {
-    protoToFieldMap.set(protoName, fieldName);
-  });
-
-  const fields = [...path.matchAll(/\{([^}]+)}/g)];
-  // Replace URL templates with values: /v1/cube/{cube_id} => /v1/cube/12
+  // Replace URL templates with values: /v1/cube/{cube_id} => /v1/cube/12, /v1/{name=cubes/*} => /v1/cubes/12
   // Path templates use proto names, but rqo uses camelCase keys
-  fields.forEach(field => {
-    const protoName = field[1];
-    const camelKey = (protoToFieldMap.get(protoName) ?? protoName) as keyof REQ;
-    const rqoValue = rqo[camelKey];
-    evaluatedPath = evaluatedPath.replace(field[0], String(rqoValue));
-    keysForBodyOrQueryParams.delete(camelKey as string);
+  const template = evaluatePathTemplate(path, rqo, descriptorResolver(descriptors));
+  let { evaluatedPath } = template;
+  template.consumedKeys.forEach(key => {
+    keysForBodyOrQueryParams.delete(key);
   });
 
   if (bodyField === "*") {
@@ -166,10 +290,9 @@ export function buildPathAndBodyfield<REQ>(
       // FieldNode first keeps enums, int64 and oneofs consistent with the body encoding, and lets
       // EmitDefaultValues / EmitUnpopulated decide whether an unset field contributes at all.
       // Primitives carry a FieldConstructor too, so the object check is what selects this branch.
-       
+
       const FieldCtor = reqFieldConstructorMap.get(key as string);
       if (FieldCtor && value !== null && typeof value === "object" && !Array.isArray(value)) {
-         
         const fieldNode = new FieldCtor(undefined);
         fieldNode.__fromLiteral(value);
         flattenParam(params, paramName, apiOptions.UseProtoNamesForQueryParams ? fieldNode.__toJson() : fieldNode.__toLiteral());
@@ -191,10 +314,8 @@ export function buildPathAndBodyfield<REQ>(
     if (bodyField !== undefined) {
       // Use FieldNode serialization for the named body field when UseProtoNames is true
       if (apiOptions.UseProtoNames) {
-         
         const FieldCtor = reqFieldConstructorMap.get(bodyField as string);
         if (FieldCtor) {
-           
           const fieldNode = new FieldCtor(undefined);
           fieldNode.__fromLiteral(rqo[bodyField] || {});
           evaluatedBody = JSON.stringify(fieldNode.__toJson());

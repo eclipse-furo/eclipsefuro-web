@@ -126,9 +126,18 @@ export class StrictFetcher<REQ, RES> {
         this.setRequestOptions(options);
       }
 
+      // A path template the request does not satisfy rejects before anything is marked as loading.
+      let evaluatedPath: string;
+      let evaluatedBody: string | undefined;
+      try {
+        ({ evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(this.path, this.bodyField, rqo));
+      } catch (error) {
+        reject(error instanceof Error ? error : new Error(String(error)));
+        return;
+      }
+
       this.isLoading = true;
 
-      const { evaluatedPath, evaluatedBody } = this.buildPathAndBodyfield(this.path, this.bodyField, rqo);
       if (evaluatedBody) {
         this.requestInit.body = evaluatedBody;
       }

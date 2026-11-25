@@ -132,10 +132,23 @@ export class StreamFetcher<REQ, RES> {
     let consecutiveFailures = 0;
 
     try {
+      // Built once, outside the reconnect loop: a path template the request does not satisfy will
+      // not satisfy it on a retry either, so it throws instead of backing off.
+      const url = buildPathAndBodyfield<REQ>(
+        {
+          apiOptions: this.API_OPTIONS,
+          ReqType: this.ReqType,
+          descriptors: this.descriptors,
+        },
+        this.path,
+        this.bodyField,
+        rqo
+      );
+
       while (!this.isClosed()) {
         let response: Response;
         try {
-          response = await this.connect(rqo, options);
+          response = await this.connect(url, options);
         } catch (error) {
           if (this.isClosed()) {
             return;
@@ -216,20 +229,12 @@ export class StreamFetcher<REQ, RES> {
    * One request. The timeout bounds time to headers only, the way StrictFetcher's does: it clears
    * the moment a response arrives, so an open stream is never cut short by it.
    */
-  private async connect(rqo: REQ, options?: RequestInit): Promise<Response> {
+  private async connect(
+    { evaluatedPath, evaluatedBody }: { evaluatedPath: string; evaluatedBody: string | undefined },
+    options?: RequestInit
+  ): Promise<Response> {
     const controller = new AbortController();
     this.abortController = controller;
-
-    const { evaluatedPath, evaluatedBody } = buildPathAndBodyfield<REQ>(
-      {
-        apiOptions: this.API_OPTIONS,
-        ReqType: this.ReqType,
-        descriptors: this.descriptors,
-      },
-      this.path,
-      this.bodyField,
-      rqo
-    );
 
     const requestInit: RequestInit = {
       method: this.method,
