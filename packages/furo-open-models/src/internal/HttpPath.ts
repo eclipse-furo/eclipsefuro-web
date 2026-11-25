@@ -156,7 +156,7 @@ export function resolvePathValue(
   rqo: unknown,
   fieldPath: string[],
   protoToCamel: (level: number, protoName: string) => string
-): { topKey: string; value: unknown } {
+): { keys: string[]; value: unknown } {
   const keys: string[] = [];
   let current: unknown = rqo;
   fieldPath.forEach((protoName, level) => {
@@ -164,7 +164,7 @@ export function resolvePathValue(
     keys.push(key);
     current = current !== null && typeof current === "object" ? (current as Record<string, unknown>)[key] : undefined;
   });
-  return { topKey: keys[0], value: current };
+  return { keys, value: current };
 }
 
 /**
@@ -193,30 +193,61 @@ function descriptorResolver(descriptors: RequestDescriptors): (level: number, pr
 }
 
 /**
+ * A nested field path bound by a path template, in both namings.
+ */
+export interface NestedPathField {
+  protoPath: string[];
+  camelPath: string[];
+}
+
+/**
  * Replace every `{...}` variable of a path template.
  *
- * @return the path and the top level keys a single segment field path consumed. Those leave the
- * query params and a `*` body. A nested path (`{client.name=...}`) consumes nothing: its parent
- * message still goes to the body as a whole, which http.proto allows.
+ * @return the path, the top level keys a single segment field path consumed, and the nested field
+ * paths. Consumed keys leave the query params and a `*` body. A nested path (`{client.name=...}`)
+ * consumes nothing: its parent message still goes to the body as a whole, which http.proto allows.
+ * When that parent ends up in the query instead, only the bound leaf is left out, see {@link omitPath}.
  */
 export function evaluatePathTemplate(
   path: string,
   rqo: unknown,
   protoToCamel: (level: number, protoName: string) => string
-): { evaluatedPath: string; consumedKeys: string[] } {
+): { evaluatedPath: string; consumedKeys: string[]; nestedPaths: NestedPathField[] } {
   let evaluatedPath = path;
   const consumedKeys: string[] = [];
+  const nestedPaths: NestedPathField[] = [];
   [...path.matchAll(/\{([^}]+)}/g)].forEach(match => {
     const variable = parsePathVariable(match[1]);
-    const { topKey, value } = resolvePathValue(rqo, variable.fieldPath, protoToCamel);
+    const { keys, value } = resolvePathValue(rqo, variable.fieldPath, protoToCamel);
     const encoded = encodePathValue(variable, match[1], value);
     // a function replacer, so a `$` in the value is not read as a replacement pattern
     evaluatedPath = evaluatedPath.replace(match[0], () => encoded);
     if (variable.fieldPath.length === 1) {
-      consumedKeys.push(topKey);
+      consumedKeys.push(keys[0]);
+    } else {
+      nestedPaths.push({ protoPath: variable.fieldPath, camelPath: keys });
     }
   });
-  return { evaluatedPath, consumedKeys };
+  return { evaluatedPath, consumedKeys, nestedPaths };
+}
+
+/**
+ * A copy of a serialized message without the leaf a nested path field points to.
+ *
+ * `paths` are relative to the message, i.e. without the top level key. Each level is matched by its
+ * proto name or its camelCase name, because `__toJson` follows `OPEN_MODELS_OPTIONS.UseProtoNames`
+ * and `__toLiteral` is camelCase. The objects along the path are copied, nothing is mutated.
+ */
+export function omitPath(message: unknown, protoPath: string[], camelPath: string[]): unknown {
+  if (message === null || typeof message !== "object" || Array.isArray(message) || protoPath.length === 0) {
+    return message;
+  }
+  const entries = Object.entries(message as Record<string, unknown>);
+  const key = entries.some(([k]) => k === protoPath[0]) ? protoPath[0] : camelPath[0];
+  if (protoPath.length === 1) {
+    return Object.fromEntries(entries.filter(([k]) => k !== key));
+  }
+  return Object.fromEntries(entries.map(([k, v]) => [k, k === key ? omitPath(v, protoPath.slice(1), camelPath.slice(1)) : v]));
 }
 
 /**
@@ -295,7 +326,14 @@ export function buildPathAndBodyfield<REQ>(
       if (FieldCtor && value !== null && typeof value === "object" && !Array.isArray(value)) {
         const fieldNode = new FieldCtor(undefined);
         fieldNode.__fromLiteral(value);
-        flattenParam(params, paramName, apiOptions.UseProtoNamesForQueryParams ? fieldNode.__toJson() : fieldNode.__toLiteral());
+        let serialized: unknown = apiOptions.UseProtoNamesForQueryParams ? fieldNode.__toJson() : fieldNode.__toLiteral();
+        // http.proto: a field bound by the path template is not a query param, nested ones neither
+        template.nestedPaths
+          .filter(nested => nested.camelPath[0] === key)
+          .forEach(nested => {
+            serialized = omitPath(serialized, nested.protoPath.slice(1), nested.camelPath.slice(1));
+          });
+        flattenParam(params, paramName, serialized);
         return;
       }
 

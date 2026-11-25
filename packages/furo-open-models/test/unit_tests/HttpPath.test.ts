@@ -52,6 +52,7 @@ describe("HttpPath: google.api.http path templates", () => {
   afterEach(() => {
     globalThis.fetch = originalFetch;
     OPEN_MODELS_OPTIONS.UseProtoNames = true;
+    urlOptions.UseProtoNamesForQueryParams = true;
   });
 
   it("plain {cube_id} inserts the value as before, without encoding", () => {
@@ -88,6 +89,33 @@ describe("HttpPath: google.api.http path templates", () => {
     expect(evaluatedPath).toBe("/api/v1/cubes/x");
     const body = JSON.parse(evaluatedBody!) as Record<string, unknown>;
     expect(body).toEqual({ display_name: "cubes/x", description: "d" });
+  });
+
+  it("{entity.display_name=cubes/*} without body leaves the bound leaf out of the query", () => {
+    const rqo = { entity: { displayName: "cubes/x", description: "d" } };
+    const { evaluatedPath, evaluatedBody } = updateUrl("/v1/{entity.display_name=cubes/*}", undefined, rqo);
+    expect(evaluatedPath).toBe("/api/v1/cubes/x?entity.description=d");
+    expect(evaluatedBody).toBeUndefined();
+    // the request literal is not touched
+    expect(rqo.entity.displayName).toBe("cubes/x");
+  });
+
+  it("leaves the bound leaf out of the query with camelCase names too", () => {
+    urlOptions.UseProtoNamesForQueryParams = false;
+    OPEN_MODELS_OPTIONS.UseProtoNames = false;
+    const { evaluatedPath } = updateUrl("/v1/{entity.display_name=cubes/*}", undefined, {
+      entity: { displayName: "cubes/x", description: "d" },
+    });
+    expect(evaluatedPath).toBe("/api/v1/cubes/x?entity.description=d");
+  });
+
+  it("leaves the bound leaf out of the query when the body is another field", () => {
+    const { evaluatedPath, evaluatedBody } = updateUrl("/v1/{entity.display_name=cubes/*}", "cubeId", {
+      cubeId: "c1",
+      entity: { displayName: "cubes/x", description: "d" },
+    });
+    expect(evaluatedPath).toBe("/api/v1/cubes/x?entity.description=d");
+    expect(JSON.parse(evaluatedBody!)).toBe("c1");
   });
 
   it("a top level path field is not part of a * body", () => {
